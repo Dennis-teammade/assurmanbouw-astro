@@ -376,11 +376,8 @@ const schema = {
 <!-- ══════════════════════════════════════════════
      SECTIE 6: REVIEWS
      ══════════════════════════════════════════════ -->
-<section style="background:#FFFFFF;padding:0 0 100px;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;">
-    <BrandChevron color="#E5A524" height="80px" direction="down" />
-  </div>
-  <div class="ww-container" style="padding-top:100px;">
+<section style="background:#FFFFFF;padding:100px 0 100px;">
+  <div class="ww-container">
     <div style="text-align:center;margin-bottom:56px;">
       <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Klantervaringen</p>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.2vw,42px);line-height:1.1;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">
@@ -408,11 +405,8 @@ const schema = {
 <!-- ══════════════════════════════════════════════
      SECTIE 7: NA ACTIVATIE
      ══════════════════════════════════════════════ -->
-<section style="background:#F8F9FB;padding:0 0 100px;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;">
-    <BrandChevron color="#E5A524" height="80px" direction="down" />
-  </div>
-  <div class="ww-container" style="padding-top:100px;">
+<section style="background:#F8F9FB;padding:100px 0 100px;">
+  <div class="ww-container">
     <div class="ww-activatie-grid">
       <!-- Left: text -->
       <div>
@@ -451,11 +445,8 @@ const schema = {
 <!-- ══════════════════════════════════════════════
      SECTIE 8: FAQ
      ══════════════════════════════════════════════ -->
-<section style="background:#FFFFFF;padding:0 0 100px;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;">
-    <BrandChevron color="#E5A524" height="80px" direction="down" />
-  </div>
-  <div style="max-width:860px;margin:0 auto;padding:100px 32px 0;">
+<section style="background:#FFFFFF;padding:100px 0 0;">
+  <div style="max-width:860px;margin:0 auto;padding:0 32px;">
     <div style="text-align:center;margin-bottom:64px;">
       <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Veelgestelde vragen</p>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.2vw,42px);line-height:1.1;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">
@@ -465,8 +456,8 @@ const schema = {
         De vragen die we het vaakst krijgen van bouwondernemers die onze werkwijze overwegen.
       </p>
     </div>
-    <FaqAccordion client:visible items={faqItems} />
   </div>
+  <FaqAccordion client:visible items={faqItems} hideHeader={true} />
 </section>
 
 <!-- ══════════════════════════════════════════════

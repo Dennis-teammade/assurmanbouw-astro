@@ -12,6 +12,7 @@ interface Props {
   headline?: string;
   subheadline?: string;
   background?: string;
+  hideHeader?: boolean;
 }
 
 export default function FaqAccordion({
@@ -20,25 +21,28 @@ export default function FaqAccordion({
   headline = 'In mensentaal',
   subheadline,
   background = '#FFFFFF',
+  hideHeader = false,
 }: Props) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
     <section style={{ background, padding: '80px 0' }}>
       <div style={{ maxWidth: 768, margin: '0 auto', padding: '0 15px' }}>
-        <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <p style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: '1.4px', textTransform: 'uppercase', color: '#E5A524', marginBottom: 16 }}>
-            {sectionLabel}
-          </p>
-          <h2 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 3vw, 41px)', lineHeight: 1, color: '#001F3F' }}>
-            {headline}
-          </h2>
-          {subheadline && (
-            <p style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 400, fontSize: 18, lineHeight: 1.6, color: '#001F3F', marginTop: 16 }}>
-              {subheadline}
+        {!hideHeader && (
+          <div style={{ textAlign: 'center', marginBottom: 40 }}>
+            <p style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: '1.4px', textTransform: 'uppercase', color: '#E5A524', marginBottom: 16 }}>
+              {sectionLabel}
             </p>
-          )}
-        </div>
+            <h2 style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 800, fontSize: 'clamp(26px, 3vw, 41px)', lineHeight: 1, color: '#001F3F' }}>
+              {headline}
+            </h2>
+            {subheadline && (
+              <p style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 400, fontSize: 18, lineHeight: 1.6, color: '#001F3F', marginTop: 16 }}>
+                {subheadline}
+              </p>
+            )}
+          </div>
+        )}
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
           {items.map((item, idx) => (
