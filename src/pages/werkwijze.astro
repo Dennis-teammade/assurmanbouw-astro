@@ -7,54 +7,99 @@ import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../data/cta-labels';
 
 const steps = [
   {
-    nr: '01',
+    num: '01',
     title: 'Korte intake',
-    subtitle: '2 minuten',
-    desc: 'Je start met een korte vragenlijst over jouw bedrijf: welke activiteiten je uitvoert, hoeveel personeel je hebt, welke voertuigen en machines je gebruikt. Geen uitgebreide formulieren, geen tijdsverlies.',
-    bullets: [],
+    duration: '2 minuten',
+    align: 'left' as const,
+    what: 'Je geeft kort aan wie je bent en wat je doet: je beroep, het type werven waar je op staat, en wat je zeker wil verzekeren. Dat kan via ons online formulier of tijdens een eerste telefonisch contact.',
+    gainLabel: null,
+    bullets: null,
+    why: 'Geen papieren vragenlijsten, geen dikke dossiers. We starten met wat echt relevant is om te weten of en hoe we je kunnen helpen.',
   },
   {
-    nr: '02',
+    num: '02',
     title: 'Risico-scan op maat',
-    subtitle: 'Wij doen het werk',
-    desc: 'Op basis van jouw intake voert Assurman een grondige risico-analyse uit. We kijken naar wat je hebt, wat je mist en waar je mogelijk dubbel verzekerd bent.',
+    duration: 'Wij doen het werk',
+    align: 'right' as const,
+    what: "We bekijken jouw situatie grondig: type werven (renovatie, nieuwbouw, onderhoud), materiaalwaarde, bestelwagen, team, eventuele onderaannemers, en de typische risico's binnen jouw stiel. Heb je al lopende polissen? Dan nemen we die mee in de scan.",
+    gainLabel: 'Specifiek bekeken',
     bullets: [
-      'Analyse van bestaande polissen (indien beschikbaar)',
-      'Vergelijking met sectorspecifieke normen voor bouwbedrijven',
-      'Identificatie van blinde vlekken en onderverzekering',
-      'Screenen op dubbele dekkingen die kosten opleveren',
+      { b: 'Onderverzekering:', r: ' ben je voldoende gedekt voor wat er werkelijk op het spel staat?' },
+      { b: 'Dubbele dekking:', r: ' betaal je nu voor zaken die al in een andere polis zitten?' },
+      { b: 'Blinde vlekken:', r: " welke risico's vallen vandaag buiten je dekking?" },
+      { b: 'Wettelijke verplichtingen:', r: ' voldoe je aan alles wat in België vereist is?' },
     ],
+    why: "In de bouwsector zitten de grootste financiële risico's vaak in details: een onderaannemer die valt, materiaal dat gestolen wordt, een werf die stilligt na schade. Een generieke polis ziet die details niet. Wij wel.",
   },
   {
-    nr: '03',
+    num: '03',
     title: 'Voorstel met modules',
-    subtitle: 'Transparant & vergelijkbaar',
-    desc: 'Je ontvangt een helder voorstel in modules. Je ziet precies welke verzekeringen aanbevolen zijn, wat ze dekken en wat ze kosten. Jij kiest wat je wil activeren.',
+    duration: 'Transparant & vergelijkbaar',
+    align: 'left' as const,
+    what: "Je krijgt een helder voorstel opgebouwd uit modules die bij jouw situatie passen. Denk aan BA uitbating, alle bouwplaatsrisico's (ABR), dekking voor gereedschap en bestelwagen, rechtsbijstand, arbeidsongevallen. Je ziet per module wat het dekt, wat het kost en waarom het voor jou relevant is.",
+    gainLabel: 'Hoe we werken',
     bullets: [
-      'Modulair voorstel: jij kiest wat je wil',
-      'Prijs per module duidelijk weergegeven',
-      'Vergelijking van 20+ verzekeringsmaatschappijen',
-      'Schriftelijke toelichting per dekking',
+      { b: 'Enkel wat nuttig is:', r: ' geen opties die alleen de premie opdrijven' },
+      { b: 'Transparante opbouw:', r: ' je ziet wat elke module doet' },
+      { b: 'Onafhankelijk advies:', r: ' we vergelijken meerdere verzekeraars' },
+      { b: 'Modulair:', r: ' je start met een kernpakket en breidt uit wanneer nodig' },
     ],
+    why: 'Enkel wat nuttig is, geen opties die alleen de premie opdrijven. Onafhankelijk advies, we vergelijken meerdere verzekeraars. Een voorstel dat je rustig kan doornemen en waarover je vragen mag stellen zonder je ergens toe te verbinden.',
   },
   {
-    nr: '04',
+    num: '04',
     title: 'Afstemming & activatie',
-    subtitle: 'Actief binnen 24 tot 48u',
-    desc: 'Na jouw goedkeuring activeren we de polissen. Je ontvangt jouw attesten en polisnummers snel — zodat je zonder vertraging aan de slag kunt op jouw werf.',
-    bullets: [],
+    duration: 'Actief binnen 24 tot 48u',
+    align: 'right' as const,
+    what: 'We nemen het voorstel samen door, beantwoorden je vragen, en passen aan waar nodig. Eens alles klopt, zorgen wij voor de administratieve afhandeling met de verzekeraar. Jij hoeft niet zelf te bellen, geen formulieren te mailen, geen dossiers op te volgen.',
+    gainLabel: null,
+    bullets: null,
+    why: "Je bent verzekerd, met een dossier dat klopt. Je krijgt een helder overzicht van wat je hebt en bij wie je terecht kan bij schade. En je weet dat wij blijven meedenken, niet alleen op dag één.",
   },
 ];
 
+const proofpoints = [
+  {
+    stat: '15+ jaar',
+    title: 'Lokaal verankerd',
+    body: 'Assurman is geen anoniem online platform. We kennen de West- en Oost-Vlaamse bouwmarkt van binnenuit: de werven, de verzekeraars, de valkuilen. Korte lijnen, bereikbaar advies.',
+    iconPath: 'M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18ZM6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4',
+  },
+  {
+    stat: '500+',
+    title: 'Gespecialiseerd in bouw',
+    body: "Geen generalisten die ook bouw erbij doen. Onze expertise ligt specifiek in de bouwsector: dakwerkers, elektriciens, aannemers, loodgieters, schrijnwerkers, schilders.",
+    iconPath: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 8 0 4 4 0 0 0-8 0M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+  },
+  {
+    stat: '20+',
+    title: 'Onafhankelijk advies',
+    body: 'Wij zijn niet gebonden aan één maatschappij. We vergelijken het aanbod en kiezen wat bij jou past, op basis van dekking én prijs. Jij krijgt de polis die past, niet de polis die wij moeten verkopen.',
+    iconPath: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+  },
+  {
+    stat: 'Meegroeiend',
+    title: 'Modulair en meegroeiend',
+    body: 'Je start klein, je breidt uit wanneer je groeit. Meer personeel, grotere werven, meer materiaal? Je polis groeit mee zonder dat je telkens opnieuw van nul moet beginnen.',
+    iconPath: 'M22 7L13.5 15.5l-5-5L2 17M22 7h-6M22 7v6',
+  },
+];
+
+const naActivatieItems = [
+  { label: 'Jaarlijkse polis-check', desc: 'We controleren elk jaar of je dekking nog overeenkomt met je activiteiten en groei.' },
+  { label: 'Rechtstreeks contact bij schade', desc: 'Jij belt ons. Wij nemen het dossier op en begeleiden het contact met de verzekeraar.' },
+  { label: 'Polis groeit mee met je bedrijf', desc: 'Meer personeel, een tweede bestelwagen, grotere werven? We passen mee aan.' },
+];
+
 const faqItems = [
-  { title: 'Hoe lang duurt de intake?', content: 'De initiële intake duurt 2 tot 5 minuten via ons online formulier. Daarna contacteert Assurman je voor een persoonlijk gesprek van circa 20 minuten om de risico-analyse af te ronden.' },
-  { title: 'Is er een adviesgesprek verplicht?', content: 'Nee. Je kan starten via de online scan. Als je verkiest om meteen een gesprek in te plannen, kan dat via de afsprakentool. Assurman past zich aan jouw voorkeur aan.' },
-  { title: 'Hoe snel ontvang ik een voorstel?', content: 'Na de intake en risico-scan ontvang je doorgaans binnen 1 tot 2 werkdagen een voorstel op maat. Urgente dossiers (start van werken) worden prioritair behandeld.' },
-  { title: 'Kan ik bestaande polissen meenemen?', content: 'Ja. Assurman bekijkt jouw bestaande polissen en integreert ze in het overzicht. Waar verlenging of optimalisatie mogelijk is, adviseert Assurman proactief.' },
-  { title: 'Moet ik de bestaande verzekeraar zelf opzeggen?', content: 'Nee. Assurman regelt de opzegging van jouw bestaande polissen op het correcte moment — zodat je nooit zonder dekking zit en ook niet dubbel betaalt.' },
-  { title: 'Wat als ik maar één verzekering nodig heb?', content: 'Dat is helemaal in orde. Assurman werkt ook voor enkelvoudige polissen. De risico-scan geeft je een volledig beeld, maar jij beslist altijd zelf wat je activeert.' },
-  { title: 'Werkt Assurman enkel voor bouwbedrijven?', content: 'Ja. Assurman is uitsluitend gespecialiseerd in de bouwsector. Deze focus maakt dat Assurman de juiste risico\'s kent, de juiste polissen vergelijkt en de juiste vragen stelt.' },
-  { title: 'Wat na de activatie van mijn polissen?', content: 'Assurman blijft jouw aanspreekpunt voor schadeaangiften, poliswijzigingen, attesten en vragen. Je contacteert één persoon die jouw dossier kent — geen callcenter, geen tijdsverlies.' },
+  { title: 'Hoe lang duurt de intake echt?', content: 'De online intake duurt gemiddeld 2 tot 3 minuten. We vragen enkel wat nodig is om een eerste inschatting te maken. Dieper graven doen we pas in stap 2, de risico-scan, en dan doen wij het werk, niet jij.' },
+  { title: 'Moet ik al mijn huidige polissen al bij de hand hebben?', content: 'Niet voor de intake. Wel handig tijdens de risico-scan, zodat we kunnen kijken naar onderverzekering, dubbele dekking en verbetermogelijkheden. Heb je ze niet digitaal? Geen probleem, we vragen ze gericht op bij jou of rechtstreeks bij je huidige verzekeraar.' },
+  { title: 'Wat als ik nu al ergens verzekerd ben, moet ik meteen opzeggen?', content: 'Nee, absoluut niet. We kijken eerst wat je hebt, en wat eventueel beter kan. Als je huidige polis goed zit, zeggen we dat ook. Als er ruimte voor verbetering is, zorgen wij voor een vlotte overstap op het juiste moment, zodat je nooit zonder dekking zit.' },
+  { title: 'Wat kost deze aanpak? Reken ik extra kosten bovenop de premie?', content: 'Onze werkwijze, de intake, de risico-scan en het voorstel zijn gratis en vrijblijvend. Je betaalt enkel de premie van de verzekeraar waarvoor je uiteindelijk kiest. Geen verborgen dossierkosten, geen adviesfacturen achteraf.' },
+  { title: 'Ben ik verplicht om na de scan iets af te sluiten?', content: 'Nee. Je kan perfect de scan doorlopen, het voorstel ontvangen en beslissen om er niets mee te doen. Je blijft eigenaar van je keuze. Ons doel is dat je met kennis van zaken beslist, niet dat je ergens toe gedwongen wordt.' },
+  { title: 'Hoe snel ben ik verzekerd na de afstemming?', content: 'Zodra het voorstel goedgekeurd is, kan je dekking meestal binnen 24 tot 48 uur actief zijn. In spoedsituaties (bv. een nieuwe werf die morgen start) kunnen we vaak nog sneller schakelen. Dat stemmen we in stap 4 concreet af.' },
+  { title: 'Wat gebeurt er later als mijn bedrijf verandert?', content: 'Koop je een tweede bestelwagen, neem je personeel aan, verander je van type werven? Je neemt gewoon contact op met ons. We passen je polis aan zodat ze mee evolueert met je bedrijf. Je start niet telkens opnieuw van nul.' },
+  { title: 'Wat doen jullie bij schade, moet ik zelf met de verzekeraar bellen?', content: 'Nee. Je belt of mailt naar ons. Wij nemen het dossier op, begeleiden het contact met de verzekeraar, en zorgen dat jij je kan focussen op je werf in plaats van op administratie. Dat is net het verschil tussen een polis afsluiten en een makelaar hebben.' },
 ];
 
 const schema = {
@@ -70,7 +115,7 @@ const schema = {
 
 <BaseLayout
   title="Onze werkwijze — Zo verzekert Assurman bouwondernemers"
-  description="Ontdek hoe Assurman bouwondernemers verzekert: intake in 2 minuten, risico-scan op maat, modulair voorstel en persoonlijke afstemming."
+  description="Ontdek hoe Assurman bouwondernemers verzekert: intake in 2 minuten, risico-scan op maat, modulair voorstel en persoonlijke afstemming. Geen gedoe, wel controle."
   canonical="/werkwijze"
   schema={schema}
 >
@@ -81,38 +126,32 @@ const schema = {
   /* Hero */
   .ww-hero-img { position: absolute; top: 5%; right: -5px; height: 85%; width: auto; max-width: 48%; z-index: 1; pointer-events: none; }
   .ww-hero-content { max-width: 52%; padding-top: 40px; }
-  .ww-hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
-
-  /* CTA band image */
-  .ww-cta-img { position: absolute; top: 0; right: -60px; height: 90%; width: auto; pointer-events: none; z-index: 1; }
+  .ww-hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
 
   /* Steps */
-  .ww-steps-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
-  .ww-steps-grid--reverse { direction: rtl; }
-  .ww-steps-grid--reverse > * { direction: ltr; }
+  .ww-step-even { display: grid; grid-template-columns: 1fr 1.6fr; gap: 64px; align-items: center; }
+  .ww-step-odd  { display: grid; grid-template-columns: 1.6fr 1fr; gap: 64px; align-items: center; }
 
   /* Stats */
-  .ww-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; }
+  .ww-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 
   /* Na activatie */
-  .ww-activatie-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+  .ww-activatie-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
 
   /* Final CTA buttons */
-  .ww-final-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+  .ww-final-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
 
   @media (max-width: 1023px) {
     .ww-hero-img { display: none; }
     .ww-hero-content { max-width: 100%; }
-    .ww-steps-grid { grid-template-columns: 1fr; gap: 32px; }
-    .ww-steps-grid--reverse { direction: ltr; }
+    .ww-step-even, .ww-step-odd { grid-template-columns: 1fr; gap: 32px; }
     .ww-stats-grid { grid-template-columns: repeat(2, 1fr); }
     .ww-activatie-grid { grid-template-columns: 1fr; gap: 40px; }
-    .ww-cta-img { display: none; }
   }
   @media (max-width: 767px) {
     .ww-hero-btns { flex-direction: column; }
     .ww-hero-btns a { width: 100%; justify-content: center; }
-    .ww-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .ww-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
     .ww-final-btns { flex-direction: column; align-items: center; }
     .ww-final-btns a { width: 100%; max-width: 400px; justify-content: center; }
     .ww-container { padding: 0 15px; }
@@ -122,108 +161,149 @@ const schema = {
 <!-- ══════════════════════════════════════════════
      SECTIE 1: HERO
      ══════════════════════════════════════════════ -->
-<section style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:520px;">
+<section style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:600px;">
   <div class="ww-hero-img assurman-mask assurman-mask--hero">
     <img src="/verzekeringen-bouwsector-werkwijze-hero.jpg" alt="Assurman verzekeringsadviseur bespreekt bouwverzekering op locatie" />
   </div>
-  <div class="ww-container" style="padding-top:40px;padding-bottom:80px;position:relative;z-index:2;">
+  <div class="ww-container" style="padding-top:48px;padding-bottom:72px;position:relative;z-index:2;">
     <div class="ww-hero-content">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Onze aanpak</p>
-      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Onze Werkwijze</p>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(34px,4.5vw,60px);line-height:1.06;letter-spacing:-1px;color:#001F3F;margin:0 0 8px;">
         Een verzekering die past.
       </h1>
-      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,3vw,34px);line-height:1.1;letter-spacing:-0.5px;color:#E5A524;margin-bottom:24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(22px,3vw,38px);line-height:1.15;letter-spacing:-0.5px;color:#E5A524;margin:0 0 20px;">
         Zonder papierwerk, zonder verrassingen.
       </p>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#3F5767;margin-bottom:32px;max-width:500px;">
-        Assurman werkt uitsluitend voor bouwbedrijven. Onze aanpak is helder: korte intake, grondige analyse, modulair voorstel en snelle activatie. Geen jargon, geen tijdsverspilling.
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;max-width:520px;margin:0 0 32px;">
+        In 4 duidelijke stappen gaan we van eerste intake tot actieve dekking. Afgestemd op jouw werfrealiteit, niet op een standaardpakket. Ontdek hoe we werken, en waarom bouwondernemers in West- en Oost-Vlaanderen voor deze aanpak kiezen.
       </p>
       <div class="ww-hero-btns">
         <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
-          {CTA_SCAN.request}
-          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          Start je gratis scan (2 min)
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-        <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.advisory}</a>
+        <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">Plan adviesgesprek</a>
       </div>
-      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#001F3F;opacity:0.75;">
-        Geen verplichting. We finaliseren je pakket samen na je intake.
+      <p style="font-family:'Open Sans',sans-serif;font-size:13px;color:#64748B;margin:0;">
+        Geen verplichting. Geen verborgen kosten. Jij beslist.
       </p>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════
-     SECTIE 2: QUOTE BAND
+     SECTIE 2: QUOTE BAND (geen chevron)
      ══════════════════════════════════════════════ -->
-<section style="background:rgba(229,165,36,0.07);padding:0 0 72px;position:relative;overflow:hidden;border-top:1px solid rgba(229,165,36,0.15);border-bottom:1px solid rgba(229,165,36,0.15);">
-  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;">
-    <BrandChevron color="#E5A524" height="80px" direction="down" />
-  </div>
-  <div class="ww-container" style="max-width:860px;padding-top:100px;">
-    <div style="display:flex;gap:24px;align-items:flex-start;">
-      <svg style="flex-shrink:0;margin-top:4px;" width="32" height="32" viewBox="0 0 24 24" fill="#E5A524" opacity="0.4"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
-      <div>
-        <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:clamp(16px,2vw,20px);line-height:1.65;color:#001F3F;margin-bottom:16px;">
-          Een verzekering afsluiten mag geen gok zijn. Bij Assurman volgen we een vast proces dat ervoor zorgt dat jouw dekking klopt bij jouw werfrealiteit. Echt bij jou. Geen rollerpasdekking, geen luizen. Wij kijken heel naar jouw situatie, waarom je het nodig hebt en wat het je geeft.
-        </p>
-        <p style="font-family:'Open Sans',sans-serif;font-size:14px;font-weight:700;color:#E5A524;letter-spacing:0.5px;margin:0;">Assurman — specialist in bouwverzekeringen</p>
-      </div>
+<section style="background:rgba(229,165,36,0.07);padding:64px 32px;border-top:1px solid rgba(229,165,36,0.15);border-bottom:1px solid rgba(229,165,36,0.15);">
+  <div style="max-width:760px;margin:0 auto;">
+    <div style="display:flex;align-items:flex-start;gap:20px;">
+      <svg width="56" height="56" viewBox="0 0 24 24" fill="#E5A524" style="opacity:0.4;flex-shrink:0;margin-top:4px;">
+        <path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z" />
+        <path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z" />
+      </svg>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:20px;line-height:1.7;color:#001F3F;margin:0;">
+        Een verzekering afsluiten mag geen gok zijn. Bij Assurman werken we volgens een vast proces dat ervoor zorgt dat jouw dekking klopt bij jouw werfrealiteit, vanaf dag één. Geen standaardpakketten, geen ruis. Wel duidelijkheid over wat je hebt, waarom je het hebt, en wat het je oplevert.
+      </p>
     </div>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════
-     SECTIE 3: 4 STAPPEN
+     SECTIE 3: 4 STAPPEN (geen chevron bovenaan)
      ══════════════════════════════════════════════ -->
-<section style="background:#FFFFFF;padding:0 0 96px;position:relative;overflow:hidden;">
-  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;">
-    <BrandChevron color="#E5A524" height="80px" direction="down" />
-  </div>
-  <div class="ww-container" style="padding-top:100px;">
-    <div style="text-align:center;margin-bottom:64px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Onze aanpak</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;letter-spacing:-0.5px;color:#001F3F;margin-bottom:16px;">
+<section style="background:#FFFFFF;padding:100px 0 80px;">
+  <div class="ww-container">
+    <!-- Header -->
+    <div style="text-align:center;margin-bottom:72px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Onze Aanpak</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,46px);line-height:1.1;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">
         Van intake tot actieve dekking in 4 stappen
       </h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#3F5767;max-width:560px;margin:0 auto;">
-        Een helder traject van A tot Z. Jij kiest het tempo, wij zorgen voor de inhoud.
+      <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#64748B;max-width:560px;margin:0 auto;">
+        Je hoeft niet alles meteen perfect te weten. We begeleiden je stap voor stap en zorgen dat elke stap concreet iets oplevert.
       </p>
     </div>
 
-    <div style="display:flex;flex-direction:column;gap:0;">
-      {steps.map((step, i) => (
-        <>
-          <div class={`ww-steps-grid${i % 2 === 1 ? ' ww-steps-grid--reverse' : ''}`} style="padding:48px 0;">
-            <!-- Number + label -->
-            <div style="position:relative;">
-              <span style={`font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(100px,14vw,160px);line-height:1;color:#E5A524;opacity:0.08;position:absolute;top:-20px;${i % 2 === 1 ? 'right:0;' : 'left:-16px;'};user-select:none;pointer-events:none;`}>{step.nr}</span>
-              <div style="position:relative;z-index:1;padding-top:16px;">
-                <p style="font-family:'Outfit',sans-serif;font-weight:900;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:8px;">{step.nr}</p>
-                <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(24px,2.5vw,36px);line-height:1.1;color:#001F3F;margin-bottom:8px;">{step.title}</h3>
-                <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;color:#E5A524;margin:0;">{step.subtitle}</p>
+    <!-- Steps -->
+    <div style="display:flex;flex-direction:column;gap:48px;">
+      {steps.map((step) => (
+        <div class={step.align === 'left' ? 'ww-step-even' : 'ww-step-odd'}>
+
+          {/* Left slot: even=number, odd=content */}
+          {step.align === 'left' ? (
+            /* Step number — left aligned */
+            <div style="text-align:left;">
+              <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,8vw,110px);line-height:1;color:rgba(229,165,36,0.18);letter-spacing:-4px;">
+                {step.num}
+              </div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:#001F3F;margin-top:-16px;margin-bottom:8px;letter-spacing:-0.3px;">
+                {step.title}
+              </div>
+              <div style="display:inline-flex;align-items:center;background:rgba(229,165,36,0.10);border-radius:20px;padding:6px 14px;font-family:'Open Sans',sans-serif;font-weight:600;font-size:13px;color:#8B6A1A;">
+                {step.duration}
               </div>
             </div>
-            <!-- Content -->
-            <div>
-              <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,17px);line-height:1.7;color:#3F5767;margin-bottom:20px;">{step.desc}</p>
-              {step.bullets.length > 0 && (
-                <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
-                  {step.bullets.map((b) => (
-                    <li style="display:flex;align-items:flex-start;gap:12px;">
-                      <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
-                      <span style="font-family:'Outfit',sans-serif;font-size:15px;line-height:1.5;color:#001F3F;">{b}</span>
-                    </li>
-                  ))}
-                </ul>
+          ) : (
+            /* Content box — odd step, left position */
+            <div style="background:#F8F9FB;padding:40px 44px;border-right:4px solid #E5A524;">
+              <p style="font-family:'Open Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Wat gebeurt er?</p>
+              <p style="font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;color:#001F3F;margin:0 0 20px;">{step.what}</p>
+              {step.bullets && step.gainLabel && (
+                <>
+                  <p style="font-family:'Open Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">{step.gainLabel}</p>
+                  <ul style="list-style:none;padding:0;margin:0 0 20px;display:flex;flex-direction:column;gap:10px;">
+                    {step.bullets.map((b) => (
+                      <li style="display:flex;gap:10px;align-items:flex-start;">
+                        <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.55;"><strong>{b.b}</strong>{b.r}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
               )}
-            </div>
-          </div>
-          {i < steps.length - 1 && (
-            <div style="display:flex;justify-content:center;padding:8px 0;pointer-events:none;opacity:0.35;">
-              <svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+              <p style="font-family:'Open Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin:0 0 8px;">Waarom zo?</p>
+              <p style="font-family:'Outfit',sans-serif;font-size:15px;line-height:1.65;color:#64748B;margin:0;">{step.why}</p>
             </div>
           )}
-        </>
+
+          {/* Right slot: even=content, odd=number */}
+          {step.align === 'left' ? (
+            /* Content box — even step, right position */
+            <div style="background:#F8F9FB;padding:40px 44px;border-left:4px solid #E5A524;">
+              <p style="font-family:'Open Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Wat gebeurt er?</p>
+              <p style="font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;color:#001F3F;margin:0 0 20px;">{step.what}</p>
+              {step.bullets && step.gainLabel && (
+                <>
+                  <p style="font-family:'Open Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">{step.gainLabel}</p>
+                  <ul style="list-style:none;padding:0;margin:0 0 20px;display:flex;flex-direction:column;gap:10px;">
+                    {step.bullets.map((b) => (
+                      <li style="display:flex;gap:10px;align-items:flex-start;">
+                        <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.55;"><strong>{b.b}</strong>{b.r}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              )}
+              <p style="font-family:'Open Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin:0 0 8px;">Waarom zo?</p>
+              <p style="font-family:'Outfit',sans-serif;font-size:15px;line-height:1.65;color:#64748B;margin:0;">{step.why}</p>
+            </div>
+          ) : (
+            /* Step number — right aligned */
+            <div style="text-align:right;">
+              <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,8vw,110px);line-height:1;color:rgba(229,165,36,0.18);letter-spacing:-4px;">
+                {step.num}
+              </div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:#001F3F;margin-top:-16px;margin-bottom:8px;letter-spacing:-0.3px;">
+                {step.title}
+              </div>
+              <div style="display:inline-flex;align-items:center;background:rgba(229,165,36,0.10);border-radius:20px;padding:6px 14px;font-family:'Open Sans',sans-serif;font-weight:600;font-size:13px;color:#8B6A1A;">
+                {step.duration}
+              </div>
+            </div>
+          )}
+
+        </div>
       ))}
     </div>
   </div>
@@ -232,80 +312,61 @@ const schema = {
 <!-- ══════════════════════════════════════════════
      SECTIE 4: CTA BAND
      ══════════════════════════════════════════════ -->
-<section style="background:#E9C466;padding:80px 0 80px;position:relative;overflow:hidden;">
+<section style="background:#E9C466;padding:80px 0 100px;position:relative;overflow:hidden;">
   <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;">
     <BrandChevron color="white" height="100px" direction="down" />
   </div>
   <!-- Masked CTA image -->
-  <div class="ww-cta-img assurman-mask assurman-mask--cta" style="z-index:1;">
-    <img src="/verzekeringen-bouwsector-werkwijze-cta.jpg" alt="Bouwprofessionals aan het werk op de werf" />
+  <div class="assurman-mask assurman-mask--cta" style="position:absolute;top:0;right:-60px;height:90%;width:auto;pointer-events:none;z-index:1;">
+    <img src="/verzekeringen-bouwsector-werkwijze-cta.jpg" alt="Bouwprofessionals aan het werk" />
   </div>
   <!-- Decorative right chevron -->
   <div style="position:absolute;right:-130px;top:40%;transform:translateY(-50%);pointer-events:none;z-index:2;">
     <BrandChevron color="white" height="240px" direction="left" />
   </div>
   <div class="ww-container" style="text-align:center;position:relative;z-index:4;">
-    <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,4.5vw,56px);line-height:1.1;color:#FFFFFF;margin-bottom:16px;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">
       Geen gedoe.<br />Wel controle.
     </h2>
-    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,2vw,20px);line-height:1.5;color:rgba(0,31,63,0.75);margin-bottom:32px;">
-      Wij beheren jouw verzekeringen zodat jij je kan focussen op jouw werk.
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#3F5767;margin-bottom:40px;opacity:0.85;">
+      Jij beslist. Wij zorgen dat je verzekering past bij jouw stiel<br />
+      en blijft passen naarmate je bedrijf groeit.
     </p>
     <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">
-      {CTA_SCAN.requestNow}
+      Start je gratis scan (2 min)
       <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
     </a>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════
-     SECTIE 5: STATS / TRUST
+     SECTIE 5: TRUST / PROOFPOINTS
      ══════════════════════════════════════════════ -->
-<section style="background:#FFFFFF;padding:0 0 96px;position:relative;overflow:hidden;">
+<section style="background:#F8F9FB;padding:0 0 100px;position:relative;overflow:hidden;">
   <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;">
     <BrandChevron color="#E5A524" height="80px" direction="down" />
   </div>
   <div class="ww-container" style="padding-top:100px;">
-    <div style="text-align:center;margin-bottom:56px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Waarom Assurman</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,42px);line-height:1.1;color:#001F3F;margin:0;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Waarom deze aanpak werkt</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.2vw,42px);line-height:1.1;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">
         Zo weet je dat je bij ons goed zit
       </h2>
+      <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#64748B;max-width:560px;margin:0 auto;">
+        Een duidelijk proces is één ding. Maar vertrouwen komt uit wat er achter dat proces zit: kennis, ervaring en lokale verankering.
+      </p>
     </div>
     <div class="ww-stats-grid">
-      {[
-        {
-          stat: '15+',
-          label: 'Jaar',
-          sub: 'Lokaal verankerd in de bouwsector',
-          iconPath: 'M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20zM12 6v6l4 2',
-        },
-        {
-          stat: '500+',
-          label: 'Klanten',
-          sub: 'Gespecialiseerd in bouwbedrijven',
-          iconPath: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 8 0 4 4 0 0 0-8 0M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
-        },
-        {
-          stat: '20+',
-          label: 'Partners',
-          sub: 'Onafhankelijk vergelijken en adviseren',
-          iconPath: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM9 22V12h6v10',
-        },
-        {
-          stat: 'Meegroeiend',
-          label: '',
-          sub: 'Modulair pakket dat meeschaalt met jouw bedrijf',
-          iconPath: 'M22 7L13.5 15.5l-5-5L2 17M22 7h-6M22 7v6',
-        },
-      ].map((item) => (
-        <div style="text-align:center;padding:32px 24px;background:#F9FAFB;border-radius:12px;">
-          <div style="width:48px;height:48px;background:rgba(229,165,36,0.12);border-radius:10px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;">
-            <svg width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={item.iconPath}/></svg>
+      {proofpoints.map((p) => (
+        <div style="background:#FFFFFF;border-top:3px solid #E5A524;box-shadow:0 4px 20px rgba(0,31,63,0.10);clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 32px),calc(100% - 32px) 100%,0% 100%);transition:box-shadow 0.2s,transform 0.2s;">
+          <div style="padding:32px 28px 36px;">
+            <div style="margin-bottom:16px;">
+              <svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={p.iconPath}/></svg>
+            </div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:32px;color:#001F3F;line-height:1;margin-bottom:6px;letter-spacing:-0.5px;">{p.stat}</div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin-bottom:12px;">{p.title}</div>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#64748B;margin:0;">{p.body}</p>
           </div>
-          <p style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,3.5vw,44px);color:#001F3F;margin:0;line-height:1;">{item.stat}</p>
-          {item.label && <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:4px 0 8px;">{item.label}</p>}
-          <p style="font-family:'Open Sans',sans-serif;font-size:13px;line-height:1.5;color:#3F5767;margin:item.label ? '0' : '8px 0 0';">{item.sub}</p>
         </div>
       ))}
     </div>
@@ -313,20 +374,20 @@ const schema = {
 </section>
 
 <!-- ══════════════════════════════════════════════
-     SECTIE 6: TESTIMONIALS
+     SECTIE 6: REVIEWS
      ══════════════════════════════════════════════ -->
-<section style="background:#F8F9FA;padding:0 0 80px;position:relative;overflow:hidden;">
+<section style="background:#FFFFFF;padding:0 0 100px;position:relative;overflow:hidden;">
   <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;">
     <BrandChevron color="#E5A524" height="80px" direction="down" />
   </div>
   <div class="ww-container" style="padding-top:100px;">
-    <div style="text-align:center;margin-bottom:48px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Klantenervaringen</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,42px);line-height:1.1;color:#001F3F;margin-bottom:12px;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Klantervaringen</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.2vw,42px);line-height:1.1;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">
         Wat bouwondernemers over onze aanpak zeggen
       </h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.6;color:#3F5767;max-width:540px;margin:0 auto;">
-        Onze aanpak spreekt voor zich. Vraag het maar aan onze klanten.
+      <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#64748B;max-width:560px;margin:0 auto;">
+        Onze werkwijze staat of valt met de resultaten die klanten ervaren. Hieronder lees je hun eigen woorden.
       </p>
     </div>
     <iframe
@@ -338,13 +399,16 @@ const schema = {
       title="Klantreviews Assurman"
     ></iframe>
     <script src="https://reputationhub.site/reputation/assets/review-widget.js" async></script>
+    <p style="font-family:'Open Sans',sans-serif;font-size:13px;color:#94A3B8;text-align:center;margin-top:24px;">
+      Reviews worden rechtstreeks getoond vanuit Google. Onbewerkt en geverifieerd.
+    </p>
   </div>
 </section>
 
 <!-- ══════════════════════════════════════════════
      SECTIE 7: NA ACTIVATIE
      ══════════════════════════════════════════════ -->
-<section style="background:#FFFFFF;padding:0 0 96px;position:relative;overflow:hidden;">
+<section style="background:#F8F9FB;padding:0 0 100px;position:relative;overflow:hidden;">
   <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;">
     <BrandChevron color="#E5A524" height="80px" direction="down" />
   </div>
@@ -352,43 +416,30 @@ const schema = {
     <div class="ww-activatie-grid">
       <!-- Left: text -->
       <div>
-        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Na activatie</p>
-        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.5vw,44px);line-height:1.1;color:#001F3F;margin-bottom:24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Daarna houdt het niet op</p>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,40px);line-height:1.1;letter-spacing:-0.4px;color:#001F3F;margin:0 0 20px;">
           Na activatie? Dan begint het echte werk.
         </h2>
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,17px);line-height:1.7;color:#3F5767;margin-bottom:20px;">
-          Na de activatie van jouw polissen ben je niet meer alleen. Assurman blijft jouw aanspreekpunt voor schadeaangiften, poliswijzigingen, attesten en vragen.
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.75;color:#001F3F;margin-bottom:16px;">
+          Veel mensen denken dat contact met hun verzekering stopt zodra de handtekening er staat. Bij ons is het omgekeerd: vanaf dat moment ben je klant, en dat blijft zo.
         </p>
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,17px);line-height:1.7;color:#3F5767;margin-bottom:0;">
-          Bij schade begeleiden we je door de aangifte en de procedure. Wij verdedigen jouw belangen bij de verzekeraar en volgen het dossier op tot afsluiting. Geen callcenter, geen doorverwijzingen.
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.75;color:#001F3F;margin-bottom:16px;">
+          We doen een <strong>jaarlijkse check</strong> om te kijken of je dekking nog klopt bij je huidige activiteit. Groei je sneller dan verwacht, neem je personeel aan, koop je een tweede bestelwagen, of verandert het type werven? Dan passen we je polis aan.
+        </p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.75;color:#001F3F;margin:0;">
+          En wanneer er iets gebeurt: bel je rechtstreeks naar ons. Geen callcenter, geen ticketsysteem. Je krijgt iemand aan de lijn die je dossier kent.
         </p>
       </div>
-      <!-- Right: 3 cards -->
-      <div style="display:flex;flex-direction:column;gap:16px;">
-        {[
-          {
-            title: 'Eén aanspreekpunt, altijd',
-            text: 'Assurman kent jouw dossier en jouw bedrijf. Je belt of mailt met één persoon die weet waarover het gaat.',
-            iconPath: 'M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z',
-          },
-          {
-            title: 'Schadebegeleiding van A tot Z',
-            text: 'Bij een schadeaangifte staat Assurman je bij van begin tot einde. Je hoeft niet zelf te onderhandelen met de verzekeraar.',
-            iconPath: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
-          },
-          {
-            title: 'Jaarlijkse review inbegrepen',
-            text: 'Assurman bekijkt jaarlijks of jouw dekkingen nog aansluiten bij de groei en wijzigingen in jouw bedrijf.',
-            iconPath: 'M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM16 2v4M8 2v4M3 10h18',
-          },
-        ].map((card) => (
-          <div style="background:#F9FAFB;border-radius:10px;padding:24px;border-left:4px solid #E5A524;display:flex;gap:16px;align-items:flex-start;">
-            <div style="width:40px;height:40px;background:rgba(229,165,36,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
-              <svg width="18" height="18" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={card.iconPath}/></svg>
+      <!-- Right: cards -->
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        {naActivatieItems.map((item) => (
+          <div class="brand-why-card" style="padding:24px 28px;display:flex;gap:20px;align-items:flex-start;">
+            <div style="width:40px;height:40px;background:rgba(229,165,36,0.10);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+              <svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
             <div>
-              <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">{card.title}</p>
-              <p style="font-family:'Open Sans',sans-serif;font-size:14px;line-height:1.6;color:#3F5767;margin:0;">{card.text}</p>
+              <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin-bottom:4px;">{item.label}</div>
+              <div style="font-family:'Outfit',sans-serif;font-size:14px;line-height:1.6;color:#64748B;">{item.desc}</div>
             </div>
           </div>
         ))}
@@ -400,16 +451,19 @@ const schema = {
 <!-- ══════════════════════════════════════════════
      SECTIE 8: FAQ
      ══════════════════════════════════════════════ -->
-<section style="background:#F8F9FA;padding:0 0 96px;position:relative;overflow:hidden;">
+<section style="background:#FFFFFF;padding:0 0 100px;position:relative;overflow:hidden;">
   <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;">
     <BrandChevron color="#E5A524" height="80px" direction="down" />
   </div>
-  <div class="ww-container" style="max-width:900px;padding-top:100px;">
-    <div style="text-align:center;margin-bottom:56px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Vragen vóór je beslist</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0;">
+  <div style="max-width:860px;margin:0 auto;padding:100px 32px 0;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Veelgestelde vragen</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.2vw,42px);line-height:1.1;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">
         Antwoorden vóór je beslist
       </h2>
+      <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#64748B;margin:0;">
+        De vragen die we het vaakst krijgen van bouwondernemers die onze werkwijze overwegen.
+      </p>
     </div>
     <FaqAccordion client:visible items={faqItems} />
   </div>
@@ -430,30 +484,30 @@ const schema = {
 <!-- ══════════════════════════════════════════════
      SECTIE 10: FINAL CTA
      ══════════════════════════════════════════════ -->
-<section style="background:#3F5767;padding-top:96px;padding-bottom:0;position:relative;text-align:center;overflow:hidden;">
-  <!-- Decorative background chevrons -->
-  <div style="position:absolute;top:50%;right:-110px;transform:translateY(-50%);pointer-events:none;opacity:0.07;">
+<section style="background:#3F5767;padding:100px 0 0;text-align:center;position:relative;overflow:hidden;">
+  <div style="position:absolute;right:-40px;top:50%;transform:translateY(-50%);pointer-events:none;opacity:0.12;">
     <BrandChevron color="white" height="400px" direction="left" />
   </div>
-  <div class="ww-container" style="max-width:800px;position:relative;z-index:2;">
+  <div style="max-width:740px;margin:0 auto;padding:0 32px;position:relative;z-index:1;">
     <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Klaar om te starten?</p>
-    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,4vw,52px);line-height:1.1;color:#FFFFFF;margin-bottom:20px;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,4vw,50px);line-height:1.1;letter-spacing:-0.8px;color:#FFFFFF;margin:0 0 20px;">
       Klaar om te starten?
     </h2>
-    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,2vw,20px);line-height:1.6;color:#CBD5E1;max-width:560px;margin:0 auto 40px;">
-      In 2 minuten zie je waar jouw dekking staat. Gratis, vrijblijvend, zonder verplichtingen.
+    <p style="font-family:'Outfit',sans-serif;font-size:18px;line-height:1.65;color:#CBD5E1;max-width:560px;margin:0 auto 48px;">
+      Doe de gratis scan in 2 minuten, of plan een adviesgesprek als je eerst wil praten. Beide routes zijn vrijblijvend.
     </p>
     <div class="ww-final-btns">
-      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">
-        {CTA_SCAN.request}
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 36px;border-radius:8px;text-decoration:none;">
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        Start je gratis scan (2 min)
       </a>
-      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
-        {CTA_AFSPRAAK.advisory}
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 36px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM16 2v4M8 2v4M3 10h18"/></svg>
+        Plan adviesgesprek
       </a>
     </div>
-    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#CBD5E1;margin-bottom:64px;opacity:0.75;">
-      Geen verplichting. We helpen je kiezen wat écht nodig is.
+    <p style="font-family:'Open Sans',sans-serif;font-size:14px;color:#CBD5E1;opacity:0.75;margin-bottom:80px;">
+      Geen verplichting. We helpen je kiezen wat écht nodig is voor jouw stiel.
     </p>
   </div>
   <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;">
