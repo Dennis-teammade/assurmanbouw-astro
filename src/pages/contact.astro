@@ -156,10 +156,12 @@ import { CTA_DESTINATIONS } from '../data/cta-labels';
 
       <!-- Box 1: Gratis scan (goudgetint) -->
       <div style="flex:1;background:rgba(229,165,36,0.08);border:1px solid rgba(229,165,36,0.25);border-radius:8px;padding:22px;">
-        <div style="width:32px;height:32px;background:rgba(229,165,36,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
-          <svg width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:32px;height:32px;background:rgba(229,165,36,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#001F3F;margin:0;">Liever meteen een scan?</h3>
         </div>
-        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#001F3F;margin-bottom:8px;">Liever meteen een scan?</h3>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#3F5767;margin-bottom:18px;">Doe onze gratis verzekeringsscan in 2 minuten en ontdek waar u staat.</p>
         <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary" style="font-size:15px;padding:12px 20px;">
           Gratis scan starten
@@ -169,25 +171,31 @@ import { CTA_DESTINATIONS } from '../data/cta-labels';
 
       <!-- Box 2: Gesprek (grijsgetint) -->
       <div style="flex:1;background:rgba(0,31,63,0.04);border:1px solid rgba(0,31,63,0.10);border-radius:8px;padding:22px;">
-        <div style="width:32px;height:32px;background:rgba(0,31,63,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
-          <svg width="16" height="16" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM16 2v4M8 2v4M3 10h18"/></svg>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:32px;height:32px;background:rgba(0,31,63,0.08);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM16 2v4M8 2v4M3 10h18"/></svg>
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#001F3F;margin:0;">Liever een gesprek?</h3>
         </div>
-        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#001F3F;margin-bottom:8px;">Liever een gesprek?</h3>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#3F5767;margin-bottom:18px;">Plan een vrijblijvend adviesgesprek en kies zelf een moment dat past.</p>
         <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary" style="font-size:15px;padding:12px 20px;">
-          Plan een afspraak 📅
+          Plan een afspraak
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM16 2v4M8 2v4M3 10h18"/></svg>
         </a>
       </div>
 
       <!-- Box 3: Dringende vraag (goudgetint) -->
       <div style="flex:1;background:rgba(229,165,36,0.08);border:1px solid rgba(229,165,36,0.25);border-radius:8px;padding:22px;">
-        <div style="width:32px;height:32px;background:rgba(229,165,36,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:14px;">
-          <svg width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+          <div style="width:32px;height:32px;background:rgba(229,165,36,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#001F3F;margin:0;">Dringende vraag</h3>
         </div>
-        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:16px;color:#001F3F;margin-bottom:8px;">Dringende vraag</h3>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#3F5767;margin-bottom:18px;">Heb je een probleem of dringende vraag, bel ons dan op en krijg direct een antwoord.</p>
         <a href="tel:003250361693" class="brand-btn-primary" style="font-size:15px;padding:12px 20px;">
-          Bel ons op 📞
+          Bel ons op
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         </a>
       </div>
 
