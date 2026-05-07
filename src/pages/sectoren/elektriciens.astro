@@ -164,7 +164,7 @@ const schema = {
 <style>
   .dw-container { max-width: 1280px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
   .dw-hero-content { max-width: 52%; padding-top: 40px; }
-  .dw-hero-img { position: absolute; top: 0; right: 0; height: 100%; width: auto; max-width: 55%; object-fit: contain; object-position: top right; z-index: 1; pointer-events: none; }
+  .dw-hero-img { position: absolute; top: 5%; right: 0; height: 90%; width: auto; max-width: 48%; z-index: 1; pointer-events: none; }
   .dw-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .dw-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; align-items: flex-start; }
   .dw-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -201,11 +201,11 @@ const schema = {
     .dw-testimonials-grid { grid-template-columns: repeat(2, 1fr); }
     .dw-intro-grid { grid-template-columns: 1fr; }
     .dw-container { padding-left: 24px; padding-right: 24px; }
+    .dw-hero-img { display: none; }
   }
   @media (max-width: 767px) {
     .dw-container { padding-left: 15px; padding-right: 15px; }
     .dw-hero-content { max-width: 100%; padding-top: 16px; }
-    .dw-hero-img { position: static; width: 100%; max-width: 100%; height: auto; max-height: 260px; object-fit: cover; object-position: center top; display: block; margin-top: 24px; }
     .dw-features-grid { grid-template-columns: 1fr; gap: 12px; }
     .dw-intro-grid { grid-template-columns: 1fr; gap: 24px; }
     .dw-benefits-grid { grid-template-columns: 1fr; }
@@ -225,12 +225,16 @@ const schema = {
     .dw-final-btns a { width: 100%; max-width: 400px; justify-content: center; }
     .dw-step-number { font-size: 56px; }
     .dw-hero-section { display: flex; flex-direction: column; min-height: unset !important; }
+    .dw-waarom-mask-img,
+    .dw-cta-mask-img { width: 55% !important; opacity: 0.35 !important; }
   }
 </style>
 
 <!-- SECTION 1: HERO -->
 <section class="dw-hero-section" style="padding-top:120px;background:#FFFFFF;position:relative;overflow:hidden;min-height:480px;">
-  <img class="dw-hero-img" src="/dakwerker-assurman-1_3.png" alt="Elektricien aan het werk" />
+  <div class="dw-hero-img assurman-mask assurman-mask--hero">
+    <img src="/verzekeringen-bouwsector-elektriciens-hero.jpg" alt="Elektricien aan het werk" />
+  </div>
   <div class="dw-container" style="padding-top:40px;padding-bottom:64px;position:relative;z-index:2;">
     <div class="dw-hero-content">
       <div class="dw-badge-pill" style="margin-bottom:20px;">
@@ -268,13 +272,13 @@ const schema = {
     </p>
     <div class="dw-features-grid">
       {[
-        { text: 'Specialist in\nelektriciteitswerken' },
-        { text: 'Modulair pakket:\nenkel wat nodig is' },
-        { text: 'Duidelijke uitleg,\nsnelle service' },
-        { text: 'Dekking: installatie\n+ materiaal + mobiliteit' },
+        { text: 'Specialist in\nelektriciteitswerken', iconPath: 'M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z' },
+        { text: 'Modulair pakket:\nenkel wat nodig is', iconPath: 'm6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2' },
+        { text: 'Duidelijke uitleg,\nsnelle service', iconPath: 'M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z' },
+        { text: 'Dekking: installatie\n+ materiaal + mobiliteit', iconPath: 'M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2' },
       ].map((item) => (
         <div style="display:flex;align-items:center;gap:20px;background:#FFFFFF;border:1px solid rgba(229,165,36,0.18);border-radius:12px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
-          <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;"><path d={item.iconPath}/></svg>
           <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#001F3F;line-height:1.45;white-space:pre-line;">{item.text}</div>
         </div>
       ))}
@@ -306,13 +310,13 @@ const schema = {
 
       <div style="display:flex;flex-direction:column;gap:20px;padding-top:40px;">
         {[
-          { title: 'Aansprakelijkheid bij fouten', text: 'Brand, kortsluiting, schade aan installaties — BA Onderneming dekt de gevolgen van fouten in jouw werk.' },
-          { title: 'Diefstal van meetmateriaal', text: 'Gespecialiseerde meetapparatuur is duur en essentieel. Een gereedschapverzekering houdt je draaiende.' },
-          { title: 'Geschillen over conformiteit', text: 'Discussies over keuring, uitvoering of aansprakelijkheid — rechtsbijstand helpt je rechtdoor.' },
+          { title: 'Aansprakelijkheid bij fouten', text: 'Brand, kortsluiting, schade aan installaties — BA Onderneming dekt de gevolgen van fouten in jouw werk.', iconPath: 'M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01' },
+          { title: 'Diefstal van meetmateriaal', text: 'Gespecialiseerde meetapparatuur is duur en essentieel. Een gereedschapverzekering houdt je draaiende.', iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z' },
+          { title: 'Geschillen over conformiteit', text: 'Discussies over keuring, uitvoering of aansprakelijkheid — rechtsbijstand helpt je rechtdoor.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
         ].map((card) => (
           <div class="dw-why-card" style="padding:28px;display:flex;align-items:flex-start;gap:20px;">
             <div style="background:rgba(229,165,36,0.1);border-radius:8px;padding:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;min-width:48px;height:48px;">
-              <svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              <svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={card.iconPath}/></svg>
             </div>
             <div>
               <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#001F3F;margin-bottom:6px;">{card.title}</h3>
@@ -339,14 +343,14 @@ const schema = {
     </div>
     <div class="dw-benefits-grid">
       {[
-        { title: 'Heldere dekking', text: 'Geen wollige taal — je weet waarvoor je verzekerd bent.' },
-        { title: 'Slimme modules', text: 'BA, gereedschap, bestelwagen, rechtsbijstand — enkel wat jij nodig hebt.' },
-        { title: 'Snelle intake', text: 'Start in 2 minuten. Daarna stemmen we alles af op jouw activiteiten.' },
-        { title: 'Bouw-expertise', text: "We spreken jouw taal: installaties, conform verklaring, elektriciteitsrisico's." },
+        { title: 'Heldere dekking', text: 'Geen wollige taal — je weet waarvoor je verzekerd bent.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
+        { title: 'Slimme modules', text: 'BA, gereedschap, bestelwagen, rechtsbijstand — enkel wat jij nodig hebt.', iconPath: 'M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z' },
+        { title: 'Snelle intake', text: 'Start in 2 minuten. Daarna stemmen we alles af op jouw activiteiten.', iconPath: 'M10 2L14 2M12 14L15 11M4 14a8 8 0 1 0 16 0a8 8 0 1 0-16 0' },
+        { title: 'Bouw-expertise', text: "We spreken jouw taal: installaties, conform verklaring, elektriciteitsrisico's.", iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z' },
       ].map((item) => (
         <div class="dw-insurance-card" style="padding:32px;display:flex;flex-direction:column;align-items:center;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);">
           <div style="margin-bottom:20px;">
-            <svg width="44" height="44" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <svg width="44" height="44" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={item.iconPath}/></svg>
           </div>
           <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#FFFFFF;margin-bottom:10px;">{item.title}</h3>
           <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#CBD5E1;margin:0;">{item.text}</p>
@@ -368,6 +372,10 @@ const schema = {
 <!-- SECTION 6: WAAROM KIEZEN -->
 <section style="background:#3F5767;padding:80px 0;position:relative;overflow:hidden;">
   <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.07) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0;"></div>
+  <!-- right:-4px compenseert de speling in de mask-path; voorkomt zichtbare strook rechts -->
+  <div class="assurman-mask assurman-mask--why dw-waarom-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:0;">
+    <img src="/verzekeringen-bouwsector-elektriciens-why.jpg" alt="Elektricien controleert installatie">
+  </div>
   <div class="dw-container" style="position:relative;z-index:1;">
     <div style="text-align:center;margin-bottom:48px;">
       <p class="dw-section-label" style="margin-bottom:16px;">Waarom Assurman</p>
@@ -462,6 +470,10 @@ const schema = {
 </div>
 <!-- SECTION 10: TUSSEN-CTA BAND -->
 <section style="background:#E9C466;padding:80px 0 80px;position:relative;overflow:hidden;">
+  <!-- right:-4px compenseert de speling in de mask-path; voorkomt zichtbare strook rechts -->
+  <div class="assurman-mask assurman-mask--cta dw-cta-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:0;">
+    <img src="/verzekeringen-bouwsector-elektriciens-cta.jpg" alt="Elektricien op afgewerkte werf">
+  </div>
   <div class="dw-container" style="text-align:center;position:relative;z-index:1;">
     <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">
       Elektricien in Vlaanderen?<br />Wij maken jouw pakket op maat.
@@ -498,7 +510,7 @@ const schema = {
             {[1,2,3,4,5].map(_ => <svg width="20" height="20" fill="#E5A524" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
           </div>
           <div>
-            <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:#001F3F;line-height:1;">4,9/5</div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:#001F3F;line-height:1;">5/5</div>
             <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#001F3F;margin-top:4px;">op basis van klantfeedback</div>
           </div>
         </div>
@@ -544,7 +556,7 @@ const schema = {
 </section>
 
 <!-- PARTNERS -->
-<section style="background:#F7F4EF;padding:56px 0;">
+<section style="background:#FFFFFF;padding:56px 0;">
   <div class="dw-container">
     <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">
       Ondersteund door sterke verzekeringspartners
