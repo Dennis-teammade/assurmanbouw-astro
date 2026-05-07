@@ -72,6 +72,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
   .ao-stat-panel{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;margin-bottom:12px;}
   .ao-stat-btn{width:100%;display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;text-align:left;padding:20px 24px;}
   .ao-scan-btn:hover{background:#324554 !important;}
+  .ao-badge-pill { display: inline-flex; align-items: center; gap: 8px; background: #F5F2FF; border: 1px solid rgba(213, 196, 174, 0.2); border-radius: 9999px; padding: 6px 16px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #001F3F; }
 </style>
 
 <style>
@@ -188,13 +189,13 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
   </div>
   <div class="ao-hero-inner">
     <div class="ao-hero-content">
-      <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(229,165,36,0.1);border:1px solid rgba(229,165,36,0.25);border-radius:9999px;padding:6px 16px;">
+      <div class="ao-badge-pill" style="margin-bottom:20px;">
         <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
-        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#001F3F;">Assurman · Bouwverzekeringen op maat</span>
+        Assurman • Bouwverzekeringen op maat
       </div>
-      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;color:#001F3F;margin:20px 0 0;">Arbeidsongevallen&#x2011;<br />verzekering</h1>
-      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin:8px 0 0;">Verplicht. Essentieel. Op maat van de bouw.</p>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:20px;line-height:1.6;color:#001F3F;margin:24px 0 40px;max-width:540px;">Heb je personeel in dienst in de bouwsector? Dan is een arbeidsongevallenverzekering in België geen extra optie, maar een wettelijke verplichting vanaf je eerste werknemer.</p>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">Arbeidsongevallen&#x2011;<br />verzekering</h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(22px,3.5vw,52px);line-height:1.1;letter-spacing:-1px;color:#E5A524;margin-bottom:20px;">Verplicht. Essentieel. Op maat van de bouw.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#001F3F;margin-bottom:28px;max-width:520px;">Heb je personeel in dienst in de bouwsector? Dan is een arbeidsongevallenverzekering in België geen extra optie, maar een wettelijke verplichting vanaf je eerste werknemer.</p>
       <div class="ao-hero-btns">
         <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
           {CTA_SCAN.hero}
@@ -202,7 +203,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
         </a>
         <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.advisory}</a>
       </div>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;color:#7A6A55;line-height:1.6;">Geen verplichting. We finaliseren je pakket samen na je intake.</p>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#001F3F;opacity:0.75;">Geen verplichting. We finaliseren je pakket samen na je intake.</p>
     </div>
   </div>
 </section>
@@ -289,8 +290,8 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 </section>
 
 <!-- WANNEER ARBEIDSONGEVAL -->
-<section style="background:#FFFFFF;padding:0 32px 96px;position:relative;">
-  <div style="display:flex;justify-content:center;pointer-events:none;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+<section style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
   <div style="max-width:1280px;margin:0 auto;padding-top:48px;">
     <div style="max-width:640px;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">De 5 voorwaarden</span>
@@ -385,7 +386,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 
 <!-- AANVULLENDE WAARBORGEN -->
 <section id="ao-aanvulling" style="background:#3F5767;padding:0 0 96px;position:relative;overflow:hidden;">
-  <div style="display:flex;justify-content:center;pointer-events:none;"><BrandChevron color="white" height="80px" direction="down" /></div>
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="80px" direction="down" /></div>
   <div style="max-width:1280px;margin:0 auto;padding:32px 32px 0;position:relative;z-index:1;">
     <div style="max-width:640px;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Aanvullen</span>
@@ -425,8 +426,8 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 </section>
 
 <!-- PREMIE -->
-<section id="premie" style="background:#F7F4EF;padding:0 32px 96px;">
-  <div style="display:flex;justify-content:center;pointer-events:none;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+<section id="premie" style="background:#F7F4EF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
   <div style="max-width:1280px;margin:0 auto;padding-top:48px;">
     <div style="text-align:center;margin-bottom:56px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Prijs & berekening</span>
@@ -483,9 +484,9 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 </section>
 
 <!-- TUSSEN-CTA BAND -->
-<section id="ao-cta-band" style="background:#E9C466;padding:0 0 100px;position:relative;overflow:hidden;">
+<section id="ao-cta-band" style="background:#E9C466;padding:80px 0 100px;position:relative;overflow:hidden;">
   <img class="ao-cta-deco" src="/verzekeringen_arbeidsongevallen.png" alt="" style="position:absolute;top:0;right:-5px;height:100%;width:auto;max-width:40%;object-fit:contain;object-position:right top;z-index:1;pointer-events:none;" />
-  <div style="display:flex;justify-content:center;margin-bottom:60px;position:relative;z-index:3;pointer-events:none;"><BrandChevron color="white" height="100px" direction="down" /></div>
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="100px" direction="down" /></div>
   <div class="ao-cta-deco" style="position:absolute;right:-20px;top:30%;transform:translateY(-50%);pointer-events:none;z-index:2;"><BrandChevron color="white" height="240px" direction="left" /></div>
   <div style="max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:4;padding:0 32px;">
     <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">Bouwprofessional in Vlaanderen?<br />Wij maken jouw pakket op maat.</h2>
@@ -580,8 +581,8 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 </section>
 
 <!-- BIJ EEN ONGEVAL -->
-<section id="procedure" style="background:#FFFFFF;padding:0 32px 96px;">
-  <div style="display:flex;justify-content:center;pointer-events:none;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+<section id="procedure" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
   <div style="max-width:1280px;margin:0 auto;padding-top:48px;">
     <div style="text-align:center;margin-bottom:60px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Bij een ongeval</span>
