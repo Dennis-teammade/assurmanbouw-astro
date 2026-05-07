@@ -1,6 +1,5 @@
-﻿---
+---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ScrollProgress from '../components/islands/ScrollProgress';
 ---
 
 <BaseLayout
@@ -8,90 +7,44 @@ import ScrollProgress from '../components/islands/ScrollProgress';
   description="In 2 minuten een heldere scan van je bouwverzekeringen: onderverzekering, dubbele dekking en blinde vlekken. Gratis en vrijblijvend."
   canonical="/gratis-verzekeringsscan"
 >
-  <ScrollProgress client:load />
-
-  <!-- HERO -->
-  <section style="background:#001F3F;padding-top:140px;padding-bottom:60px;">
-    <div style="max-width:900px;margin:0 auto;padding:0 24px;text-align:center;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Gratis & Vrijblijvend</p>
-      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,64px);line-height:1.05;color:#FFFFFF;margin:0 0 24px;">Gratis verzekeringsscan</h1>
-      <p style="font-family:'Open Sans',sans-serif;font-size:20px;line-height:1.7;color:rgba(255,255,255,0.75);margin:0 0 16px;">In 2 minuten ziet u waar uw bouwverzekeringen tekortschieten.</p>
-      <div style="display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
-        {[
-          {icon:'⚡',text:'Resultaat in 2 minuten'},
-          {icon:'🔒',text:'Gratis en vrijblijvend'},
-          {icon:'🏗️',text:'Specifiek voor bouwsector'}
-        ].map((item) => (
-          <div style="display:flex;align-items:center;gap:8px;">
-            <span style="font-size:18px;">{item.icon}</span>
-            <span style="font-family:'Open Sans',sans-serif;font-size:15px;color:rgba(255,255,255,0.8);">{item.text}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- SCAN EMBED -->
-  <section style="background:#F8F9FA;padding:60px 0;">
-    <div style="max-width:1100px;margin:0 auto;padding:0 24px;">
-      <div class="bouw-risicoscan-embed">
-        <iframe
-          src="https://bouw-risicoscan.vibepreview.com"
-          title="Bouw Risicoscan"
-          loading="lazy"
-          scrolling="no"
-          frameborder="0"
-        ></iframe>
-      </div>
-    </div>
-  </section>
-
-  <!-- INFO BELOW -->
-  <section style="background:#FFFFFF;padding:80px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:32px;text-align:center;">
-        {[
-          {icon:'🔍',title:'Blinde vlekken',text:'Ontdek welke risicos u loopt maar nog niet gedekt heeft.'},
-          {icon:'💰',title:'Dubbele dekking',text:'Zie waar u mogelijk twee keer betaalt voor dezelfde bescherming.'},
-          {icon:'📋',title:'Volledig overzicht',text:'Een helder beeld van alle relevante dekkingen voor uw bouwbedrijf.'},
-          {icon:'🤝',title:'Persoonlijk vervolg',text:'Na de scan contacteert Assurman u voor een vrijblijvend adviesgesprek.'}
-        ].map((item) => (
-          <div style="padding:24px;">
-            <span style="font-size:36px;display:block;margin-bottom:16px;">{item.icon}</span>
-            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{item.title}</p>
-            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0;">{item.text}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section style="background:#001F3F;padding:100px 0 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px 80px;text-align:center;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Liever direct contact?</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4vw,48px);line-height:1.1;color:#FFFFFF;margin:0 0 20px;">Plan een afspraak</h2>
-      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto 40px;">Verkiest u een persoonlijk gesprek? Assurman plant een afspraak op uw timing.</p>
-      <a href="/maak-afspraak" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Afspraak plannen</a>
-    </div>
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
-  </section>
-</BaseLayout>
 
 <style>
-  .bouw-risicoscan-embed iframe {
+  .scan-iframe {
     width: 100%;
     height: 1400px;
-    min-height: 1400px;
     border: 0;
     display: block;
     overflow: hidden;
-    border-radius: 12px;
   }
   @media (max-width: 768px) {
-    .bouw-risicoscan-embed iframe {
-      height: 1800px;
-      min-height: 1800px;
-    }
+    .scan-iframe { height: 1800px; }
   }
 </style>
+
+<section style="background:#F9FAFB;padding-top:180px;padding-bottom:80px;min-height:100vh;">
+  <div style="max-width:720px;margin:0 auto;padding:0 32px;">
+
+    <!-- Label -->
+    <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;text-align:center;margin:0 0 20px;">
+      Gratis &amp; vrijblijvend
+    </p>
+
+    <!-- H1 -->
+    <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,56px);line-height:1.08;letter-spacing:-1px;color:#001F3F;text-align:center;margin:0 0 56px;">
+      Ontdek in 2 minuten<br />waar jouw dekking tekortschiet
+    </h1>
+
+    <!-- Iframe -->
+    <iframe
+      class="scan-iframe"
+      src="https://bouw-risicoscan.vibepreview.com"
+      title="Bouw Risicoscan"
+      loading="lazy"
+      scrolling="no"
+      frameborder="0"
+    ></iframe>
+
+  </div>
+</section>
+
+</BaseLayout>
