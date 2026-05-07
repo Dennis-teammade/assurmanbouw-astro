@@ -138,8 +138,8 @@ const faqItems = [
     content: 'Zeker als je werkt met spuitapparatuur of huurstellingen. Diefstal uit de bestelwagen is een reëel risico. De premie is doorgaans laag in verhouding tot de materiaalwaarde.',
   },
   {
-    title: 'Hoe snel ben ik verzekerd na de intake?',
-    content: 'Na goedkeuring van het voorstel kan je dekking binnen 24 tot 48 uur actief zijn. Bij een dringende situatie (morgen start een werf) kunnen we nog sneller schakelen.',
+    title: 'Wat als ik schade pas later ontdek?',
+    content: 'Veel schildersschade — vocht achter verf, schimmel, lekken na schraapwerk — komt pas weken of maanden later aan het licht. Een polis met nawerking blijft schade dekken die tot een aantal jaar na de uitvoering wordt gemeld. Wij raden altijd minstens 36 maanden nawerking aan en kijken samen welke termijn bij jouw activiteiten past.',
   },
 ];
 
@@ -310,9 +310,9 @@ const schema = {
 
       <div style="display:flex;flex-direction:column;gap:20px;padding-top:40px;">
         {[
-          { title: 'Verfschade en beschadigingen', text: 'BA Onderneming dekt verfspetters, krasschade en beschadigingen die optreden tijdens je werkzaamheden.', iconPath: 'M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01' },
-          { title: 'Valrisico en chemische blootstelling', text: "Ladders, stellingen en oplosmiddelen brengen risico's voor jou en je medewerkers. Arbeidsongevallen is essentieel.", iconPath: 'M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5M14 6a6 6 0 0 1 6 6v3M4 15v-3a6 6 0 0 1 6-6M3 15L21 15A1 1 0 0 1 22 16L22 18A1 1 0 0 1 21 19L3 19A1 1 0 0 1 2 18L2 16A1 1 0 0 1 3 15z' },
-          { title: 'Discussies over kleurkeuze', text: "Geschillen over kleur, kwaliteit of uitvoering komen voor. Rechtsbijstand helpt je positie te verdedigen.", iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
+          { title: 'Verfschade aan interieur en eigendom', text: 'Een gemorste pot op een nieuwe parketvloer, spuitnevel op meubels of beschadigde plinten — BA Onderneming dekt schade aan klanteneigendom tijdens je werkzaamheden.', iconPath: 'M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01' },
+          { title: 'Vocht- en schraapschade bij voorbereiding', text: 'Schrapen, schuren of strippen kan onverwachte schade aan onderliggende lagen veroorzaken: houtrot, gipsschade, lekken. Klachten komen vaak pas weken later — een polis met nawerking dekt dat.', iconPath: 'M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5M14 6a6 6 0 0 1 6 6v3M4 15v-3a6 6 0 0 1 6-6M3 15L21 15A1 1 0 0 1 22 16L22 18A1 1 0 0 1 21 19L3 19A1 1 0 0 1 2 18L2 16A1 1 0 0 1 3 15z' },
+          { title: 'Oplosmiddelen, brand en milieurisico', text: 'Verven, lakken en thinners zijn brandbaar en chemisch reactief. Bij brand of bodemvervuiling lopen aansprakelijkheid en saneringskosten snel op — BA Onderneming en ABR vangen die risico\'s op.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
         ].map((card) => (
           <div class="dw-why-card" style="padding:28px;display:flex;align-items:flex-start;gap:20px;">
             <div style="background:rgba(229,165,36,0.1);border-radius:8px;padding:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;min-width:48px;height:48px;">
