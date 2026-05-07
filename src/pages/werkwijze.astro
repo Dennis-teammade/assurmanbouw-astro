@@ -156,6 +156,16 @@ const schema = {
   .ww-step-even { display: grid; grid-template-columns: 1fr 1.6fr; gap: 64px; align-items: center; }
   .ww-step-odd  { display: grid; grid-template-columns: 1.6fr 1fr; gap: 64px; align-items: center; }
 
+  /* Step number animation */
+  .ww-step-num {
+    transition: color 0.9s ease, text-shadow 0.9s ease;
+    color: rgba(229,165,36,0.14);
+  }
+  .ww-step-num.ww-lit {
+    color: rgba(229,165,36,0.55);
+    text-shadow: 0 0 60px rgba(229,165,36,0.25);
+  }
+
   /* Stats */
   .ww-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
 
@@ -257,7 +267,7 @@ const schema = {
           {step.align === 'left' ? (
             /* Step number — left aligned */
             <div style="text-align:left;">
-              <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,8vw,110px);line-height:1;color:rgba(229,165,36,0.18);letter-spacing:-4px;">
+              <div class="ww-step-num" style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,8vw,110px);line-height:1;letter-spacing:-4px;">
                 {step.num}
               </div>
               <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:#001F3F;margin-top:-16px;margin-bottom:8px;letter-spacing:-0.3px;">
@@ -315,7 +325,7 @@ const schema = {
           ) : (
             /* Step number — right aligned */
             <div style="text-align:right;">
-              <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,8vw,110px);line-height:1;color:rgba(229,165,36,0.18);letter-spacing:-4px;">
+              <div class="ww-step-num" style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,8vw,110px);line-height:1;letter-spacing:-4px;">
                 {step.num}
               </div>
               <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:#001F3F;margin-top:-16px;margin-bottom:8px;letter-spacing:-0.3px;">
@@ -471,7 +481,7 @@ const schema = {
      ══════════════════════════════════════════════ -->
 <section style="background:#FFFFFF;padding:100px 0 0;">
   <div style="max-width:860px;margin:0 auto;padding:0 32px;">
-    <div style="text-align:center;margin-bottom:64px;">
+    <div style="text-align:center;margin-bottom:32px;">
       <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Veelgestelde vragen</p>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.2vw,42px);line-height:1.1;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">
         Antwoorden vóór je beslist
@@ -526,5 +536,22 @@ const schema = {
     <polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" />
   </svg>
 </section>
+
+<script>
+  const nums = document.querySelectorAll('.ww-step-num');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('ww-lit');
+        } else {
+          entry.target.classList.remove('ww-lit');
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+  nums.forEach((el) => observer.observe(el));
+</script>
 
 </BaseLayout>

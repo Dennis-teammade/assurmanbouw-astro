@@ -26,7 +26,7 @@ export default function FaqAccordion({
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section style={{ background, padding: '80px 0' }}>
+    <section style={{ background, padding: hideHeader ? '0 0 80px' : '80px 0' }}>
       <div style={{ maxWidth: 768, margin: '0 auto', padding: '0 15px' }}>
         {!hideHeader && (
           <div style={{ textAlign: 'center', marginBottom: 40 }}>
