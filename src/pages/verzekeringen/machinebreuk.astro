@@ -1,0 +1,174 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqAccordion from '../../components/islands/FaqAccordion';
+import ScrollProgress from '../../components/islands/ScrollProgress';
+import StickyNav from '../../components/islands/StickyNav';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+
+const navItems = [
+  {id:'watis',label:'Wat is het?'},
+  {id:'dekking',label:'Dekking'},
+  {id:'diefstal',label:'Diefstal'},
+  {id:'faq',label:'FAQ'}
+];
+
+const faqItems = [
+  {title:'Wat valt onder machinebreuk?',content:'Machinebreuk dekt onverwachte en plotse defecten aan machines door mechanische of elektrische oorzaken. Normale slijtage en onderhoud vallen buiten de dekking.'},
+  {title:'Is diefstal altijd inbegrepen?',content:'Niet automatisch. Diefstal is een apart risico dat je kunt toevoegen aan de polis. Gezien het hoge risico van gereedschapsdiefstal in de bouwsector is dit voor de meeste bedrijven sterk aanbevolen.'},
+  {title:'Dekt machinebreuk ook schade op de werf?',content:'Ja. Mobiel werfmaterieel en gereedschap zijn te verzekeren voor gebruik op de werf, in de bestelwagen en op het atelierterrein. De locatie en aard van het gebruik bepalen mee de premie.'},
+  {title:'Hoe wordt de waarde bepaald?',content:'U kiest tussen nieuwwaarde of dagwaarde (rekening houdend met afschrijving). Voor recent materieel is nieuwwaarde aanbevolen. Assurman helpt u de juiste dekkingswaarde te bepalen.'},
+  {title:'Kan ik gehuurde machines ook verzekeren?',content:'In principe is de eigenaar verantwoordelijk voor verzekering van zijn materieel. Maar als u gehuurde machines beschadigt, kunt u aansprakelijk worden gesteld. Dit kan opgenomen worden in uw BA-polis.'}
+];
+---
+
+<BaseLayout
+  title="Machinebreukverzekering voor de bouwsector | Assurman"
+  description="Dekking voor machines, gereedschap en materieel in de bouwsector. Bescherming bij defect, beschadiging en diefstal."
+  canonical="/verzekeringen/machinebreuk"
+>
+  <ScrollProgress client:load />
+
+  <!-- HERO -->
+  <section id="hero" style="background:#FFFFFF;padding-top:130px;padding-bottom:80px;overflow:hidden;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+      <div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Verzekering</p>
+        <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,4.5vw,64px);line-height:1.05;color:#001F3F;margin:0 0 24px;">Machinebreuk&shy;verzekering</h1>
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(18px,2vw,24px);color:#E5A524;margin:0 0 24px;line-height:1.3;">Uw machines beschermd. Van gereedschap tot zwaar materieel.</p>
+        <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 40px;">Professionele machines en gereedschap vertegenwoordigen een grote investering. Een plotse panne, breuk of diefstal kan uw productie stilleggen. De machinebreukverzekering dekt de kosten van herstelling of vervanging, zodat u snel weer operationeel bent.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;">Gratis scan aanvragen</a>
+          <a href="/maak-afspraak" style="display:inline-block;background:transparent;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;border:2px solid #001F3F;">Afspraak maken</a>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <img src="/foto-contact-35.png" alt="Machinebreuk verzekering bouw" style="width:100%;max-width:520px;border-radius:8px;object-fit:cover;" loading="eager" />
+      </div>
+    </div>
+  </section>
+
+  <StickyNav client:load navItems={navItems} heroSectionId="hero" />
+
+  <!-- WAT IS HET -->
+  <section id="watis" style="background:#F8F9FA;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Wat is het?</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">Bescherming voor uw machines en materieel</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
+        <div style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:40px;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 20px;">In het kort</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+            {[
+              'Dekt machines en gereedschap bij defect, beschadiging en vaak diefstal',
+              'Vast ateliermaterieel én mobiel werfmaterieel',
+              'Aanvulbaar met bedrijfsschade voor omzetverlies bij stilstand',
+              'Diefstal: op werf, in bestelwagen of thuis',
+              'Afgestemd op nieuw- of tweedehandswaarde'
+            ].map((item) => (
+              <li style="display:flex;align-items:flex-start;gap:12px;font-family:'Open Sans',sans-serif;font-size:16px;color:#FFFFFF;line-height:1.5;">
+                <span style="color:#E5A524;font-weight:700;flex-shrink:0;margin-top:2px;">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 24px;">De machinebreukverzekering dekt plotse en onverwachte beschadiging of defecten aan machines, gereedschap en apparatuur door mechanische, elektrische of andere externe oorzaken.</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 24px;">Ze is toepasbaar op vast ateliermaterieel (zaagmachines, compressoren, liften) maar ook op mobiel werfmaterieel (boormachines, trilplaten, kabels en handgereedschap).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPES MATERIEEL -->
+  <section id="dekking" style="background:#FFFFFF;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Dekking</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">Welk materieel is te verzekeren?</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+        {[
+          {title:'Vast ateliermaterieel',text:'Zaagmachines, freesmachines, compressoren, lasinstallaties en andere vaste machines op uw atelier of werkplaats.'},
+          {title:'Mobiel werfmaterieel',text:'Trilplaten, graafmachines, betonmixers, liftinstallaties, aggregaten en ander materieel dat u op de werf gebruikt.'},
+          {title:'Handgereedschap',text:'Boormachines, schuurmachines, haaksleutels, meetapparatuur en ander handheld gereedschap — in de bestelwagen of op de werf.'},
+          {title:'Elektronische apparatuur',text:'Meetinstrumenten, lasernivelleerapparaten, digitale detectietoestellen en andere elektronische professionele apparatuur.'}
+        ].map((item) => (
+          <div style="background:#FFFFFF;border:1px solid #E5E8ED;border-radius:8px;padding:32px;box-shadow:0 2px 16px rgba(0,31,63,0.06);">
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;margin:0 0 12px;">{item.title}</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0;">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DIEFSTAL -->
+  <section id="diefstal" style="background:#001F3F;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Diefstal</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#FFFFFF;margin:0 0 16px;">Gereedschapsdiefstal: een reëel risico</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);margin:0 0 48px;max-width:720px;">Gereedschapsdiefstal is een van de meest voorkomende schadegevallen in de bouwsector. Van een opengebroken bestelwagen tot diefstal op een verlaten werf — het risico is overal aanwezig.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;">
+        {[
+          {loc:'Op de werf',desc:'Diefstal van gereedschap en materieel dat achterblijft op de werf, ook buiten de werkuren.'},
+          {loc:'In de bestelwagen',desc:'Inbraak in bestelwagen op straat, parking of thuis. Een van de meest voorkomende schadeoorzaken.'},
+          {loc:'Op het atelier',desc:'Diefstal van machines en materieel uit uw werkplaats of opslagruimte.'},
+          {loc:'Onderweg',desc:'Verlies of diefstal van materieel dat u bij u draagt of transporteert.'}
+        ].map((item) => (
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:28px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#E5A524;margin:0 0 10px;">{item.loc}</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:14px;line-height:1.5;color:rgba(255,255,255,0.7);margin:0;">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div style="margin-top:40px;background:#E9C466;border-radius:8px;padding:28px 32px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 8px;">Aanvulling: bedrijfsschade</p>
+        <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#001F3F;margin:0;">Wanneer een machine defect raakt of gestolen wordt, staat uw productie stil. De aanvulling bedrijfsschade (ook wel bedrijfsstilstandverzekering) vergoedt het omzetverlies dat u lijdt zolang de machine niet operationeel is.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- GOLD CTA -->
+  <section style="background:#E9C466;padding:72px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;">
+      <div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(22px,3vw,36px);color:#001F3F;margin:0 0 8px;">Uw materieel correct gedekt</p>
+        <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.6;color:rgba(0,31,63,0.75);margin:0;">Assurman stelt een machinebreukpolis op maat samen.</p>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#001F3F;color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Gratis scan</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid #001F3F;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Afspraak</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="background:#FFFFFF;padding:100px 0;">
+    <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Veelgestelde vragen</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">FAQ machinebreuk</h2>
+      <FaqAccordion client:visible items={faqItems} />
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section style="background:#F8F9FA;padding:60px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin:0 0 32px;">Onze verzekeringspartners</p>
+      <PartnerSlider client:visible />
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="background:#001F3F;padding:100px 0 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px 80px;text-align:center;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Klaar om te starten?</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.1;color:#FFFFFF;margin:0 0 20px;">Uw machines en materieel verzekerd</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto 40px;">Defect, diefstal of breuk — Assurman zorgt voor de juiste dekking.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Gratis scan starten</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Afspraak maken</a>
+      </div>
+    </div>
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+  </section>
+</BaseLayout>

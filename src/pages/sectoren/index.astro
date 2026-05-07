@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const sectors = [
+  {
+    slug: 'dakwerkers',
+    title: 'Dakwerkers',
+    description: 'Werken op hoogte, wisselende werven en duur materiaal. Verzekeringen afgestemd op dakwerkers in Vlaanderen.',
+    icon: '🏠',
+    tags: ['BA Onderneming', 'ABR', 'Machinebreuk', 'Bedrijfsvoertuigen'],
+    color: '#001F3F',
+  },
+  {
+    slug: 'aannemers',
+    title: 'Algemene aannemers',
+    description: 'Eindverantwoordelijk op de werf. BA-10, arbeidsongevallen, voertuigen en machinebreuk op maat van bouwondernemers.',
+    icon: '🏗️',
+    tags: ['BA Onderneming', 'BA-10', 'Arbeidsongevallen', 'Rechtsbijstand'],
+    color: '#3F5767',
+  },
+  {
+    slug: 'elektriciens',
+    title: 'Elektriciens',
+    description: 'Elektrische risico\'s, valgevaar en aansprakelijkheid bij fouten in de installatie. Modulair pakket voor elektriciens.',
+    icon: '⚡',
+    tags: ['BA Onderneming', 'Gereedschap', 'ABR', 'Rechtsbijstand'],
+    color: '#001F3F',
+  },
+  {
+    slug: 'loodgieters',
+    title: 'Loodgieters',
+    description: 'Waterschade, gasincidenten en aansprakelijkheid bij sanitaire en thermische werken. Bescherming op maat.',
+    icon: '🔧',
+    tags: ['BA Onderneming', 'Machinebreuk', 'Bedrijfsvoertuigen', 'Rechtsbijstand'],
+    color: '#3F5767',
+  },
+  {
+    slug: 'schilders',
+    title: 'Schilders',
+    description: 'Verfspetters, valrisico op ladders en klachtenprocedures. Verzekeringen voor schilders en afwerkingsbedrijven.',
+    icon: '🎨',
+    tags: ['BA Onderneming', 'Arbeidsongevallen', 'Gereedschap', 'Rechtsbijstand'],
+    color: '#001F3F',
+  },
+  {
+    slug: 'schrijnwerkers',
+    title: 'Schrijnwerkers',
+    description: 'Dure machines, kostbaar hout en maatwerk voor klanten. Machinebreuk, BA en rechtsbijstand voor schrijnwerkers.',
+    icon: '🪚',
+    tags: ['BA Onderneming', 'Machinebreuk', 'Bedrijfsvoertuigen', 'Rechtsbijstand'],
+    color: '#3F5767',
+  },
+];
+---
+
+<BaseLayout
+  title="Sectoren — Bouwverzekeringen op maat | Assurman"
+  description="Assurman is gespecialiseerd in verzekeringen voor bouwondernemers: dakwerkers, aannemers, elektriciens, loodgieters, schilders en schrijnwerkers."
+  canonical="/sectoren"
+>
+
+<style>
+  .dw-container { max-width: 1280px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
+  .sectors-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+  .sector-card { background: #FFFFFF; border: 1px solid rgba(229,165,36,0.18); border-radius: 16px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: box-shadow 0.2s, transform 0.2s; text-decoration: none; display: flex; flex-direction: column; }
+  .sector-card:hover { box-shadow: 0 12px 32px rgba(0,0,0,0.12); transform: translateY(-4px); }
+  .sector-card-header { padding: 36px 32px 24px; border-bottom: 1px solid rgba(229,165,36,0.12); }
+  .sector-card-body { padding: 24px 32px 32px; flex: 1; display: flex; flex-direction: column; }
+  .sector-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 20px; }
+  .sector-tag { display: inline-flex; align-items: center; background: rgba(229,165,36,0.1); border: 1px solid rgba(229,165,36,0.2); border-radius: 9999px; padding: 4px 12px; font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 0.5px; color: #8B6A1A; }
+  .badge-pill { display: inline-flex; align-items: center; gap: 8px; background: #F5F2FF; border: 1px solid rgba(213,196,174,0.2); border-radius: 9999px; padding: 6px 16px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #001F3F; }
+
+  @media (max-width: 1023px) {
+    .sectors-grid { grid-template-columns: repeat(2, 1fr); }
+    .dw-container { padding-left: 24px; padding-right: 24px; }
+  }
+  @media (max-width: 639px) {
+    .sectors-grid { grid-template-columns: 1fr; gap: 20px; }
+    .dw-container { padding-left: 15px; padding-right: 15px; }
+    .sector-card-header { padding: 28px 24px 20px; }
+    .sector-card-body { padding: 20px 24px 28px; }
+  }
+</style>
+
+<!-- HERO -->
+<section style="background:#FFFFFF;padding-top:120px;padding-bottom:80px;border-bottom:1px solid rgba(229,165,36,0.12);">
+  <div class="dw-container" style="text-align:center;">
+    <div class="badge-pill" style="margin-bottom:24px;display:inline-flex;">
+      <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+      Assurman • Specialist bouwverzekeringen
+    </div>
+    <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-1.5px;color:#001F3F;margin-bottom:16px;">
+      Bouwverzekeringen op maat<br />van jouw sector
+    </h1>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,2vw,20px);line-height:1.6;color:#3F5767;max-width:640px;margin:0 auto 40px;">
+      Elke bouwsector heeft eigen risico's. Assurman is gespecialiseerd in verzekeringen voor bouwondernemers in Vlaanderen — van dakwerkers tot schrijnwerkers.
+    </p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href="/gratis-verzekeringsscan" style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 32px;border-radius:8px;text-decoration:none;">
+        Vraag een scan aan
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" style="display:inline-flex;align-items:center;gap:10px;background:transparent;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:16px 32px;border-radius:8px;border:2px solid rgba(213,196,174,0.5);text-decoration:none;">
+        Plan een adviesgesprek
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS GRID -->
+<section style="background:#FBF8FF;padding:80px 0;">
+  <div class="dw-container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Kies jouw sector</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.05;color:#001F3F;margin:0 auto;max-width:640px;">
+        Voor welke bouwprofessional zoek je informatie?
+      </h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#3F5767;margin:16px auto 0;max-width:560px;">
+        Klik op je sector voor alle informatie over verplichte en aanbevolen verzekeringen, cases en veelgestelde vragen.
+      </p>
+    </div>
+
+    <div class="sectors-grid">
+      {sectors.map((sector) => (
+        <a href={`/sectoren/${sector.slug}`} class="sector-card">
+          <div class="sector-card-header">
+            <div style="font-size:48px;margin-bottom:16px;line-height:1;">{sector.icon}</div>
+            <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:26px;line-height:1.2;color:#001F3F;margin:0 0 8px;">
+              {sector.title}
+            </h2>
+            <div style="width:48px;height:4px;background:#E5A524;"></div>
+          </div>
+          <div class="sector-card-body">
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#3F5767;margin:0;">
+              {sector.description}
+            </p>
+            <div class="sector-tags">
+              {sector.tags.map((tag) => (
+                <span class="sector-tag">{tag}</span>
+              ))}
+            </div>
+            <div style="margin-top:24px;display:inline-flex;align-items:center;gap:8px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;">
+              Bekijk verzekeringen
+              <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- USP STRIP -->
+<section style="background:#3F5767;padding:64px 0;">
+  <div class="dw-container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(24px,3vw,40px);line-height:1.1;color:#FFFFFF;margin:0;">
+        Waarom Assurman voor elke bouwsector werkt
+      </h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:20px;">
+      {[
+        { value: 'Bouwspecialist', label: 'Focus', text: 'Alleen de bouwsector. Geen algemene aanpak.' },
+        { value: 'Modulair pakket', label: 'Maatwerk', text: 'Enkel de verzekeringen die jij nodig hebt.' },
+        { value: '2 minuten', label: 'Offerte', text: 'Snel van start, volledig beschermd.' },
+        { value: 'FSMA 045920', label: 'Erkend', text: 'Onafhankelijk makelaar, alle maatschappijen.' },
+      ].map((item) => (
+        <div style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);padding:28px;text-align:center;clip-path:polygon(24px 0%,100% 0%,100% 100%,0% 100%,0% 24px);">
+          <div style="font-family:'Open Sans',sans-serif;font-weight:600;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#CBD5E1;margin-bottom:8px;">{item.label}</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:18px;color:#E5A524;margin-bottom:8px;">{item.value}</div>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:13px;line-height:1.5;color:#CBD5E1;margin:0;">{item.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:#001F3F;padding:80px 0;text-align:center;">
+  <div class="dw-container">
+    <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Klaar om te starten?</p>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.5vw,48px);line-height:1.1;color:#FFFFFF;max-width:720px;margin:0 auto 16px;">
+      Doe de gratis verzekeringsscan in 2 minuten
+    </h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,2vw,20px);line-height:1.6;color:#CBD5E1;max-width:640px;margin:0 auto 40px;">
+      Kies je sector, beantwoord enkele vragen en krijg een voorstel op maat van jouw activiteiten.
+    </p>
+    <div style="display:flex;gap:20px;justify-content:center;flex-wrap:wrap;">
+      <a href="/gratis-verzekeringsscan" style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.2);">
+        Start de scan
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
+        Plan adviesgesprek
+      </a>
+    </div>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#CBD5E1;margin-top:24px;opacity:0.7;">
+      Geen verplichting. We helpen je kiezen wat écht nodig is.
+    </p>
+  </div>
+</section>
+
+</BaseLayout>

@@ -1,0 +1,126 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ScrollProgress from '../components/islands/ScrollProgress';
+---
+
+<BaseLayout
+  title="Contact — Praat met een bouwverzekeringsexpert"
+  description="Bereik Assurman voor persoonlijk advies over verzekeringen voor bouwondernemers in West- en Oost-Vlaanderen."
+  canonical="/contact"
+>
+  <ScrollProgress client:load />
+
+  <!-- HERO -->
+  <section style="background:#001F3F;padding-top:140px;padding-bottom:80px;overflow:hidden;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+      <div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Contact</p>
+        <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,4.5vw,64px);line-height:1.05;color:#FFFFFF;margin:0 0 24px;">We helpen u graag verder</h1>
+        <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);margin:0 0 32px;">Heeft u een vraag over uw verzekering, wilt u een offerte aanvragen of zoekt u advies? Neem contact op met Assurman — wij reageren persoonlijk en snel.</p>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          {[
+            {icon:'📞',label:'Telefoon',value:'+32 56 00 00 00',href:'tel:+3256000000'},
+            {icon:'✉️',label:'E-mail',value:'info@assurman.be',href:'mailto:info@assurman.be'},
+            {icon:'📍',label:'Adres',value:'West- en Oost-Vlaanderen',href:null},
+            {icon:'🕐',label:'Openingsuren',value:'Ma–Vr: 8u30 – 17u30',href:null}
+          ].map((item) => (
+            <div style="display:flex;align-items:center;gap:16px;">
+              <span style="font-size:20px;width:28px;text-align:center;">{item.icon}</span>
+              <div>
+                <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:13px;color:#E5A524;margin:0;text-transform:uppercase;letter-spacing:0.8px;">{item.label}</p>
+                {item.href ? (
+                  <a href={item.href} style="font-family:'Open Sans',sans-serif;font-size:16px;color:#FFFFFF;text-decoration:none;">{item.value}</a>
+                ) : (
+                  <p style="font-family:'Open Sans',sans-serif;font-size:16px;color:#FFFFFF;margin:0;">{item.value}</p>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <img src="/verzekeringen-mobiliteit-41.png" alt="Contact Assurman" style="width:100%;max-width:500px;border-radius:8px;object-fit:cover;" loading="eager" />
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT: CONTACT FORM + DETAILS -->
+  <section style="background:#F8F9FA;padding:80px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1.4fr;gap:64px;align-items:start;">
+      <!-- Left: contact details -->
+      <div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Direct contact</p>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(24px,3vw,36px);line-height:1.1;color:#001F3F;margin:0 0 32px;">Assurman verzekeringsmakelaar</h2>
+        <div style="display:flex;flex-direction:column;gap:24px;margin-bottom:40px;">
+          {[
+            {icon:'📞',title:'Bel ons',text:'+32 56 00 00 00',sub:'Bereikbaar tijdens kantooruren',href:'tel:+3256000000'},
+            {icon:'✉️',title:'Stuur een e-mail',text:'info@assurman.be',sub:'We antwoorden binnen 24u',href:'mailto:info@assurman.be'},
+            {icon:'📍',title:'Werkgebied',text:'West- en Oost-Vlaanderen',sub:'Persoonlijk advies op locatie mogelijk',href:null},
+            {icon:'🕐',title:'Openingsuren',text:'Maandag tot vrijdag',sub:'8u30 – 17u30',href:null}
+          ].map((item) => (
+            <div style="display:flex;gap:16px;align-items:flex-start;background:#FFFFFF;border-radius:8px;padding:20px;border:1px solid #E5E8ED;">
+              <span style="font-size:24px;flex-shrink:0;">{item.icon}</span>
+              <div>
+                <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#001F3F;margin:0 0 4px;">{item.title}</p>
+                {item.href ? (
+                  <a href={item.href} style="font-family:'Open Sans',sans-serif;font-size:15px;color:#3F5767;display:block;text-decoration:none;">{item.text}</a>
+                ) : (
+                  <p style="font-family:'Open Sans',sans-serif;font-size:15px;color:#3F5767;margin:0;">{item.text}</p>
+                )}
+                <p style="font-family:'Open Sans',sans-serif;font-size:13px;color:#9AABB7;margin:2px 0 0;">{item.sub}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div style="background:#001F3F;border-radius:8px;padding:28px;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#E5A524;margin:0 0 10px;">FSMA-erkend makelaar</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:14px;line-height:1.6;color:rgba(255,255,255,0.75);margin:0;">Assurman is erkend door de FSMA (Autoriteit voor Financiële Diensten en Markten) als onafhankelijk verzekeringsmakelaar.</p>
+        </div>
+      </div>
+      <!-- Right: Teammade iframe -->
+      <div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Contactformulier</p>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(22px,3vw,32px);line-height:1.1;color:#001F3F;margin:0 0 24px;">Stuur ons een bericht</h2>
+        <iframe
+          src="https://api.teammade.ai/widget/form/e2zc8zxcyRKWB62Qz4M2"
+          style="width:100%;height:460px;border:none;display:block;"
+          title="Contactformulier assurman"
+        ></iframe>
+        <script src="https://api.teammade.ai/js/form_embed.js" async></script>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-COLUMN ACTION BOXES -->
+  <section style="background:#FFFFFF;padding:80px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+        {[
+          {title:'Gratis risicoscan',desc:'In 2 minuten een volledig beeld van uw bouwverzekeringen. Gratis en vrijblijvend.',cta:'Start scan',link:'/gratis-verzekeringsscan',bg:'#001F3F',color:'#FFFFFF',btn:'#E5A524',btnColor:'#001F3F'},
+          {title:'Maak een afspraak',desc:'Kies zelf een moment voor een vrijblijvend adviesgesprek. Persoonlijk en zonder verplichtingen.',cta:'Plan afspraak',link:'/maak-afspraak',bg:'#E5A524',color:'#001F3F',btn:'#001F3F',btnColor:'#FFFFFF'},
+          {title:'Bekijk onze werkwijze',desc:'Ontdek hoe Assurman u stap voor stap begeleidt van intake tot actieve polis.',cta:'Onze aanpak',link:'/werkwijze',bg:'#F8F9FA',color:'#001F3F',btn:'#001F3F',btnColor:'#FFFFFF'}
+        ].map((box) => (
+          <div style={`background:${box.bg};border-radius:10px;padding:36px;`}>
+            <h3 style={`font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:${box.color};margin:0 0 12px;`}>{box.title}</h3>
+            <p style={`font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:${box.color};opacity:0.8;margin:0 0 24px;`}>{box.desc}</p>
+            <a href={box.link} style={`display:inline-block;background:${box.btn};color:${box.btnColor};font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;padding:12px 24px;border-radius:4px;text-decoration:none;`}>{box.cta}</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="background:#001F3F;padding:100px 0 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px 80px;text-align:center;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Persoonlijk advies</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.1;color:#FFFFFF;margin:0 0 20px;">Wij zijn er voor u</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto 40px;">Geen geautomatiseerde antwoorden. Geen callcenter. Uw vraag wordt beantwoord door een specialist die de bouwsector kent.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Gratis scan starten</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Afspraak maken</a>
+      </div>
+    </div>
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+  </section>
+</BaseLayout>

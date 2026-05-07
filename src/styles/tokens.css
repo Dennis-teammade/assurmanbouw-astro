@@ -1,0 +1,114 @@
+/* ============================================================
+   ASSURMAN DESIGN TOKENS
+   Source of truth: Brandkit.tsx + dakwerkers-V3.1.tsx
+   ============================================================
+
+   COLOR PALETTE
+   ─────────────────────────────────────────────────────────── */
+
+:root {
+  /* Core brand */
+  --color-navy:       #001F3F;   /* primary text, h1–h6, button text on gold */
+  --color-gold:       #E5A524;   /* accent: icons, section labels, primary button bg, link hover */
+  --color-slate:      #3F5767;   /* dark section backgrounds, footer, final CTA */
+  --color-gold-light: #E9C466;   /* CTA section backgrounds, wave dividers — BACKGROUNDS ONLY */
+  --color-cream:      #F5F2FF;   /* light section backgrounds (testimonials, FAQ) */
+  --color-off-white:  #FBF8FF;   /* intro/positioning section backgrounds */
+  --color-gold-strip: rgba(229,165,36,0.08); /* ultra-light strip for feature rows */
+  --color-slate-text: #CBD5E1;   /* body text on dark (#3F5767) sections */
+  --color-muted:      #7A6A55;   /* secondary text on white/cream sections */
+  --color-red-alert:  #dc2626;   /* error states, not-covered indicators */
+
+  /* Section backgrounds — quick reference */
+  --bg-dark:   var(--color-slate);       /* DarkSection */
+  --bg-gold:   var(--color-gold-light);  /* GoldSection / CTA bands */
+  --bg-cream:  var(--color-cream);       /* LightSection cream */
+  --bg-light:  var(--color-off-white);   /* LightSection offwhite */
+  --bg-white:  #FFFFFF;                  /* HeroSection, cards */
+
+  /* Typography */
+  --font-display: 'Outfit', system-ui, sans-serif;
+  --font-body:    'Open Sans', system-ui, sans-serif;
+  --font-jakarta: 'Plus Jakarta Sans', system-ui, sans-serif;
+}
+
+/* ============================================================
+   USAGE RULES — violation checklist
+   ─────────────────────────────────────────────────────────── */
+
+/*
+  BACKGROUNDS
+  ──────────────────────────────────────────────────
+  ✅ background: #3F5767   → dark sections, footer, nav on scroll, final CTA
+  ✅ background: #E9C466   → gold CTA bands, "tussen-CTA" sections only
+  ✅ background: #F5F2FF   → testimonials, FAQ, light accent sections
+  ✅ background: #FBF8FF   → intro/positioning sections
+  ✅ background: #FFFFFF   → hero, cards, base body
+  ❌ background: #001F3F   → never (except for specific black elements)
+  ❌ background: #E5A524   → never as section bg; only as button bg
+  ❌ background: #E9C466   → NEVER as TEXT color
+
+  TEXT ON WHITE / CREAM / OFF-WHITE SECTIONS
+  ──────────────────────────────────────────────────
+  ✅ color: #001F3F   → headings h1–h3, body text
+  ✅ color: #E5A524   → section labels (uppercase, 14px, letter-spacing 1.4px)
+                         large display subtitles (Outfit 800+, ≥22px) — see hero
+                         icon colors, "Meer info" links, check bullets
+  ✅ color: #7A6A55   → muted/secondary body text
+  ✅ color: #3F5767   → secondary headings, strong body
+  ❌ color: #E9C466   → NEVER (low contrast on any background)
+  ❌ color: #E5A524   → never for small body text (<18px) on white
+                         (WCAG AA fails below 18px bold / 24px normal)
+
+  TEXT ON DARK (#3F5767) SECTIONS
+  ──────────────────────────────────────────────────
+  ✅ color: #FFFFFF   → all headings h1–h3
+  ✅ color: #CBD5E1   → all body text / paragraphs
+  ✅ color: #E5A524   → section labels, icon accents, stat values, step numbers
+  ❌ color: #001F3F   → never on dark bg (invisible)
+  ❌ color: #E9C466   → never (use #E5A524 instead)
+
+  TEXT ON GOLD-LIGHT (#E9C466) SECTIONS
+  ──────────────────────────────────────────────────
+  ✅ color: #FFFFFF   → all headings h1–h3
+  ✅ color: #3F5767   → body text, section labels
+  ❌ color: #E5A524   → never (gold-on-gold-light, no contrast)
+  ❌ color: #E9C466   → never (invisible on same background)
+  ❌ color: #001F3F   → never for headings (use white); ok for small inline text
+
+  BUTTONS
+  ──────────────────────────────────────────────────
+  White / Cream sections:
+    ✅ .brand-btn-primary    bg #E5A524, text #001F3F
+    ✅ .brand-btn-secondary  bg transparent, border rgba(213,196,174,0.5)
+
+  Dark (#3F5767) sections:
+    ✅ .brand-btn-primary    bg #E5A524, text #001F3F
+    ✅ .brand-btn-dark       bg rgba(255,255,255,0.1), text white
+
+  Gold (#E9C466) sections:
+    ✅ .brand-btn-dark-filled  bg #3F5767, text white
+
+  ❌ .brand-btn-secondary on dark sections (border is invisible)
+  ❌ .brand-btn-dark on light sections (text becomes invisible)
+
+  SECTION LABELS (uppercase gold micro-text)
+  ──────────────────────────────────────────────────
+  On any section:  color: #E5A524
+  On gold (#E9C466) sections only:  color: #3F5767
+  Never:  color: #E9C466 (this is gold-light, not gold)
+
+  BRAND ARROWS (decorative)
+  ──────────────────────────────────────────────────
+  On dark (#3F5767) bg:     vertical-white, opacity 0.07 (decorative)
+  On gold (#E9C466) bg:     horizontal-white, opacity 1 (divider top of section)
+  On light/cream bg:        vertical-gold,   opacity 0.18 (decorative)
+  On white → gold:          horizontal-gold, opacity 1 (page-level divider)
+
+  CLIP-PATH FOLDED CORNERS
+  ──────────────────────────────────────────────────
+  bottom-right 24px: polygon(0% 0%, 100% 0%, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0% 100%)
+  bottom-right 32px: polygon(0% 0%, 100% 0%, 100% calc(100% - 32px), calc(100% - 32px) 100%, 0% 100%)
+  top-left 32px:     polygon(32px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 32px)
+  both 32px:         polygon(32px 0%, 100% 0%, 100% calc(100% - 32px), calc(100% - 32px) 100%, 0% 100%, 0% 32px)
+*/

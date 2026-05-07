@@ -1,0 +1,160 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScrollProgress from '../../components/islands/ScrollProgress';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+
+const verzekeringen = [
+  {
+    title: 'Arbeidsongevallen',
+    subtitle: 'Verplicht vanaf de eerste werknemer',
+    desc: 'Wettelijk verplicht voor alle werkgevers. Dekt medische kosten, arbeidsongeschiktheid en overlijden bij arbeidsongevallen, ook op het woon-werktraject.',
+    link: '/verzekeringen/arbeidsongevallen',
+    badge: 'Verplicht',
+    color: '#DC2626'
+  },
+  {
+    title: 'BA Onderneming',
+    subtitle: 'Bescherming tegenover derden',
+    desc: 'Dekt schade die u tijdens uw beroepsactiviteit toebrengt aan klanten, passanten of buren. BA Uitbating en BA Na Levering in één polis.',
+    link: '/verzekeringen/ba-onderneming',
+    badge: 'Essentieel',
+    color: '#E5A524'
+  },
+  {
+    title: 'BA-10',
+    subtitle: 'Tienjarige aansprakelijkheid',
+    desc: 'Verplicht bij woningbouw. Dekt stabiliteits- en soliditeitsgebreken tot 10 jaar na oplevering. Werfpolis of jaarpolis.',
+    link: '/verzekeringen/ba-10',
+    badge: 'Verplicht bij woningbouw',
+    color: '#DC2626'
+  },
+  {
+    title: 'Bedrijfsvoertuigen',
+    subtitle: 'Uw vloot correct gedekt',
+    desc: 'BA verplicht voor alle voertuigen. Omnium, mini-omnium, pechbijstand en vlootpolis voor bestelwagens, vrachtwagens en aanhangwagens.',
+    link: '/verzekeringen/bedrijfsvoertuigen',
+    badge: 'Verplicht (BA)',
+    color: '#DC2626'
+  },
+  {
+    title: 'Machinebreuk',
+    subtitle: 'Machines en gereedschap',
+    desc: 'Dekt plotse defecten, beschadiging en diefstal van machines en gereedschap — op de werf, in de bestelwagen of op het atelier.',
+    link: '/verzekeringen/machinebreuk',
+    badge: 'Sterk aanbevolen',
+    color: '#3F5767'
+  },
+  {
+    title: 'Rechtsbijstand',
+    subtitle: 'Juridische bescherming',
+    desc: 'Dekt juridische kosten bij geschillen, factuurincasso, arbeidsrechtelijke problemen en contractbetwistingen. Vrije advocaatkeuze.',
+    link: '/verzekeringen/rechtsbijstand',
+    badge: 'Aanvulling',
+    color: '#3F5767'
+  },
+  {
+    title: "Alle Bouwplaats Risico's",
+    subtitle: "ABR: uw werf beschermd",
+    desc: "Dekt schade aan werken in uitvoering door brand, storm, diefstal, vandalisme en andere oorzaken. Werfpolis of jaarpolis.",
+    link: '/verzekeringen/alle-bouwplaats-risicos',
+    badge: 'Projectspecifiek',
+    color: '#3F5767'
+  }
+];
+---
+
+<BaseLayout
+  title="Verzekeringen voor de bouwsector | Assurman"
+  description="Overzicht van alle verzekeringen voor bouwprofessionals: BA Onderneming, BA-10, arbeidsongevallen, bedrijfsvoertuigen, machinebreuk en meer."
+  canonical="/verzekeringen"
+>
+  <ScrollProgress client:load />
+
+  <!-- HERO -->
+  <section style="background:#001F3F;padding-top:140px;padding-bottom:80px;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;text-align:center;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Verzekeringen</p>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,5vw,72px);line-height:1.05;color:#FFFFFF;margin:0 0 24px;">Alle verzekeringen voor bouwprofessionals</h1>
+      <p style="font-family:'Open Sans',sans-serif;font-size:20px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:680px;margin:0 auto 40px;">Van de wettelijke verplichten tot de slimme aanvullingen. Assurman brengt u in één overzicht welke dekkingen u nodig heeft en waarom.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;">Gratis scan aanvragen</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;">Afspraak maken</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERZEKERINGEN GRID -->
+  <section style="background:#F8F9FA;padding:80px 0 100px;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;">
+        {verzekeringen.map((v) => (
+          <a href={v.link} style="display:block;text-decoration:none;background:#FFFFFF;border:1px solid #E5E8ED;border-radius:10px;padding:36px;box-shadow:0 2px 20px rgba(0,31,63,0.06);transition:box-shadow 0.2s;">
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+              <p style={`font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;padding:4px 12px;border-radius:20px;letter-spacing:0.5px;margin:0;background:${v.color};color:#FFFFFF;`}>{v.badge}</p>
+            </div>
+            <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 6px;">{v.title}</h2>
+            <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;color:#E5A524;margin:0 0 16px;">{v.subtitle}</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0 0 24px;">{v.desc}</p>
+            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:#001F3F;display:flex;align-items:center;gap:6px;">Meer informatie <span style="color:#E5A524;">→</span></span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- INFO BAND -->
+  <section style="background:#FFFFFF;padding:80px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+        <div>
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Waarom Assurman?</p>
+          <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,44px);line-height:1.1;color:#001F3F;margin:0 0 24px;">Specialist in bouwverzekeringen</h2>
+          <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.7;color:#3F5767;margin:0 0 24px;">Assurman is een onafhankelijke verzekeringsmakelaar die uitsluitend werkt voor bouwprofessionals. Geen generalist, maar een specialist die de risico's van uw sector kent.</p>
+          <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px;">
+            {['20+ erkende verzekeringsmaatschappijen vergeleken','Persoonlijk advies op maat van uw bouwactiviteit','Snel attest bij de start van uw werken','Één aanspreekpunt voor al uw polissen'].map((item) => (
+              <li style="display:flex;align-items:flex-start;gap:10px;font-family:'Open Sans',sans-serif;font-size:16px;color:#001F3F;">
+                <span style="color:#E5A524;font-weight:700;flex-shrink:0;">✓</span>{item}
+              </li>
+            ))}
+          </ul>
+          <a href="/over-assurman" style="display:inline-block;background:#001F3F;color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;padding:14px 28px;border-radius:4px;text-decoration:none;">Meer over Assurman</a>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+          {[
+            {stat:'500+',label:'Bouwbedrijven verzekerd'},
+            {stat:'15+',label:'Jaar specialist in bouw'},
+            {stat:'20+',label:'Verzekeringspartners'},
+            {stat:'4.9/5',label:'Klanttevredenheid'}
+          ].map((item) => (
+            <div style="background:#F8F9FA;border-radius:8px;padding:28px;text-align:center;">
+              <p style="font-family:'Outfit',sans-serif;font-weight:900;font-size:36px;color:#001F3F;margin:0 0 6px;">{item.stat}</p>
+              <p style="font-family:'Open Sans',sans-serif;font-size:14px;color:#3F5767;margin:0;">{item.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section style="background:#F8F9FA;padding:60px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin:0 0 32px;">Onze verzekeringspartners</p>
+      <PartnerSlider client:visible />
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="background:#001F3F;padding:100px 0 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px 80px;text-align:center;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Gratis en vrijblijvend</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.1;color:#FFFFFF;margin:0 0 20px;">Ontdek uw blinde vlekken</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto 40px;">In 2 minuten ziet u waar uw dekking tekortschiet en welke verzekeringen u mist. Gratis, vrijblijvend en zonder verplichtingen.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Start gratis scan</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Afspraak maken</a>
+      </div>
+    </div>
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+  </section>
+</BaseLayout>

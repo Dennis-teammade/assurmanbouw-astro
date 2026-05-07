@@ -1,0 +1,583 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
+import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import FaqAccordion from '../../components/islands/FaqAccordion';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+import BrandChevron from '../../components/BrandChevron.astro';
+
+const insuranceCards = [
+  {
+    title: 'BA Onderneming (schrijnwerker)',
+    intro: 'Bescherming bij schade aan eigendom van klanten tijdens installatie of montage.',
+    bullets: [
+      'Beschadigingen tijdens transport of installatie',
+      'Schade aan aangrenzende ruimtes bij plaatsing',
+      'Claims over maatvoering of afwerking',
+      'Dekking voor zowel atelier als werf',
+    ],
+    cta: 'Check BA',
+    link: '/verzekeringen/ba-onderneming',
+    icon: 'shield',
+  },
+  {
+    title: 'Machinebreuk',
+    intro: 'Zaagmachines, freesmachines, CNC-apparatuur — een defect stopt je productie.',
+    bullets: [
+      'Dekking voor atelier- en werfmachines',
+      'Diefstal van gereedschap of machines',
+      'Vervanging of herstelling voor continuïteit',
+      'Op maat van jouw machinepark',
+    ],
+    cta: 'Check machinebreuk',
+    link: '/verzekeringen/machinebreuk',
+    icon: 'wrench',
+  },
+  {
+    title: 'Bedrijfsvoertuigen',
+    intro: 'Materiaal, machines en producten vervoer je in je bestelwagen of vrachtwagen.',
+    bullets: [
+      'Omnium voor recente voertuigen',
+      'Bescherming bij diefstal of schade',
+      'Verzekering vervoerde goederen',
+      'Vlootpolis bij meerdere voertuigen',
+    ],
+    cta: 'Check bedrijfsvoertuigen',
+    link: '/verzekeringen/bedrijfsvoertuigen',
+    icon: 'truck',
+  },
+  {
+    title: 'Rechtsbijstand',
+    intro: 'Discussies over maatvoering, kwaliteit of betalingsachterstand zijn geen uitzondering.',
+    bullets: [
+      'Juridische hulp bij geschillen met klanten',
+      'Incasso bij onbetaalde facturen',
+      'Tussenkomst bij advocaatkosten',
+      'Aanvulling op BA',
+    ],
+    cta: 'Check rechtsbijstand',
+    link: '/verzekeringen/rechtsbijstand',
+    icon: 'zap',
+  },
+  {
+    title: 'Arbeidsongevallen',
+    intro: 'Zaagmachines en zware materialen brengen risico mee voor jouw medewerkers.',
+    bullets: [
+      'Bescherming bij snijwonden en ander werkmateriaal',
+      'Verplicht vanaf eerste werknemer',
+      'Aanvulbaar voor hogere lonen',
+      'Dekt ook woon-werkverkeer',
+    ],
+    cta: 'Check arbeidsongevallen',
+    link: '/verzekeringen/arbeidsongevallen',
+    icon: 'users',
+  },
+  {
+    title: "Alle Bouwplaats Risico's",
+    intro: 'Extra dekking bij grotere werf- of renovatieprojecten.',
+    bullets: [
+      "Schade aan plaatsingswerken in uitvoering",
+      'Interessant bij projecten met meerdere partijen',
+      'Flexibel per project',
+      'Gecombineerd met BA',
+    ],
+    cta: 'Check ABR',
+    link: '/verzekeringen/alle-bouwplaats-risicos',
+    icon: 'layers',
+  },
+];
+
+const caseStudies = [
+  {
+    category: 'SCHRIJNWERK & TIMMERWERK',
+    title: 'Maatwerk keuken beschadigd tijdens levering: €18.000 schade',
+    businessName: 'Schrijnwerkerij Vandenberghe',
+    ownerName: 'Luc Vandenberghe',
+    cityName: 'Gent',
+    description: 'Een op maat gemaakte keuken werd beschadigd tijdens transport en installatie. Deuren en werkbladen moesten volledig vervangen worden.',
+    action: 'De BA-verzekering dekte de schade. Nieuwe onderdelen werden geproduceerd en de keuken werd heïnstalleerd. De klant werd volledig vergoed.',
+    image: 'https://images.pexels.com/photos/585419/pexels-photo-585419.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+  {
+    category: 'SCHRIJNWERK & TIMMERWERK',
+    title: 'CNC-machine defect midden in productie: €12.000 herstelling',
+    businessName: 'Timmerbedrijf Claeys',
+    ownerName: 'Rik Claeys',
+    cityName: 'Roeselare',
+    description: 'Een CNC-freesmachine viel uit vlak voor de deadline van een groot project. Herstelling was noodzakelijk maar duur en tijdrovend.',
+    action: 'De machinebreukverzekering dekte de herstellingskosten volledig. Een vervangingsmachine werd tijdelijk gehuurd. Het project liep minimale vertraging op.',
+    image: 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+  {
+    category: 'SCHRIJNWERK & TIMMERWERK',
+    title: 'Klant betwist maatvoering van inbouwkast',
+    businessName: 'Interior Wood bvba',
+    ownerName: 'Sara Puts',
+    cityName: 'Antwerpen',
+    description: 'Na levering van een inbouwkast beweerde de klant dat de maten niet overeenstemden met de bestelling en eiste volledig herstel of terugbetaling.',
+    action: 'Via rechtsbijstand werd een expert aangesteld. De expert bevestigde dat de kast conform de getekende plannen was gemaakt. De klant trok zijn eis in.',
+    image: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+];
+
+const faqItems = [
+  {
+    title: 'Heb ik als schrijnwerker BA Onderneming nodig?',
+    content: "Ja, sterk aanbevolen. Bij installatie bij klanten thuis zijn er altijd risico's op beschadigingen: vloeren, muren, aangrenzende ruimtes. Zonder BA ben je persoonlijk aansprakelijk voor alle schade.",
+  },
+  {
+    title: 'Wat als mijn CNC-machine of zaagmachine defect raakt?',
+    content: 'Zonder machinebreukverzekering sta je stil en draai je verlies. Een defect aan een CNC-machine kan snel 10.000 euro of meer kosten. Machinebreukverzekering dekt herstellingskosten en helpt je continuïteit te bewaren.',
+  },
+  {
+    title: 'Zijn diefstal en inbraak gedekt?',
+    content: 'Dat hangt af van de polis. Diefstal van machines en gereedschap kan opgenomen worden in de machinebreukverzekering. Het is belangrijk dit expliciet te bespreken bij de intake.',
+  },
+  {
+    title: 'Hoe bescherm ik mijn maatwerk tijdens transport?',
+    content: 'Via je BA-verzekering zijn beschadigingen bij transport en installatie doorgaans gedekt. Zorg dat jouw activiteiten correct omschreven staan in de polis — "fabricage en plaatsing" moet expliciet vermeld zijn.',
+  },
+  {
+    title: 'Kan ik mijn pakket uitbreiden als ik groei?',
+    content: 'Absoluut. Je start met een kernpakket en breidt uit wanneer je personeel aanneemt of met grotere projecten werkt. Assurman past je polis aan zonder dat je van nul moet beginnen.',
+  },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({
+    "@type": "Question",
+    "name": f.title,
+    "acceptedAnswer": { "@type": "Answer", "text": f.content.replace(/\n/g, ' ') }
+  }))
+};
+---
+
+<BaseLayout
+  title="Verzekeringen voor schrijnwerkers | Assurman"
+  description="Verzekeringen op maat voor schrijnwerkers en timmerlieden in Vlaanderen: BA, machinebreuk, bedrijfsvoertuigen en rechtsbijstand."
+  canonical="/sectoren/schrijnwerkers"
+  schema={schema}
+>
+
+<style>
+  .dw-container { max-width: 1280px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
+  .dw-hero-content { max-width: 52%; padding-top: 40px; }
+  .dw-hero-img { position: absolute; top: 0; right: 0; height: 100%; width: auto; max-width: 55%; object-fit: contain; object-position: top right; z-index: 1; pointer-events: none; }
+  .dw-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .dw-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; align-items: flex-start; }
+  .dw-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .dw-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 48px; }
+  .dw-cards3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .dw-process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 64px; }
+  .dw-testimonials-header { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-bottom: 64px; }
+  .dw-testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .dw-cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .dw-hero-btns { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+  .dw-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .dw-final-btns { display: flex; gap: 24px; justify-content: center; margin-bottom: 80px; flex-wrap: wrap; }
+
+  .dw-btn-primary { display: inline-flex; align-items: center; gap: 10px; background: #E5A524; color: #001F3F; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 18px; padding: 18px 32px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .dw-btn-primary:hover { background: #d4941a; transform: translateY(-1px); }
+  .dw-btn-secondary { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: #001F3F; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 18px; padding: 16px 32px; border-radius: 8px; border: 2px solid rgba(213, 196, 174, 0.5); cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s; white-space: nowrap; }
+  .dw-btn-secondary:hover { border-color: #E5A524; background: rgba(229, 165, 36, 0.05); }
+  .dw-badge-pill { display: inline-flex; align-items: center; gap: 8px; background: #F5F2FF; border: 1px solid rgba(213, 196, 174, 0.2); border-radius: 9999px; padding: 6px 16px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #001F3F; }
+  .dw-section-label { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 1.4px; text-transform: uppercase; color: #E5A524; }
+  .dw-step-number { font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 80px; line-height: 1; color: rgba(229, 165, 36, 0.18); position: absolute; top: 0; left: -4px; user-select: none; pointer-events: none; }
+  .dw-insurance-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(2px); transition: background 0.2s, transform 0.2s; }
+  .dw-insurance-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+  .dw-why-card { background: #FFFFFF; border-left: 4px solid #E5A524; box-shadow: 0px 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.2s, transform 0.2s; }
+  .dw-why-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .dw-testimonial-card { background: #FFFFFF; box-shadow: 0px 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.2s, transform 0.2s; }
+  .dw-testimonial-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+  @media (max-width: 1023px) {
+    .dw-features-grid { grid-template-columns: repeat(2, 1fr); }
+    .dw-benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    .dw-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .dw-process-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .dw-testimonials-header { grid-template-columns: 1fr; gap: 32px; }
+    .dw-testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .dw-intro-grid { grid-template-columns: 1fr; }
+    .dw-container { padding-left: 24px; padding-right: 24px; }
+  }
+  @media (max-width: 767px) {
+    .dw-container { padding-left: 15px; padding-right: 15px; }
+    .dw-hero-content { max-width: 100%; padding-top: 16px; }
+    .dw-hero-img { position: static; width: 100%; max-width: 100%; height: auto; max-height: 260px; object-fit: cover; object-position: center top; display: block; margin-top: 24px; }
+    .dw-features-grid { grid-template-columns: 1fr; gap: 12px; }
+    .dw-intro-grid { grid-template-columns: 1fr; gap: 24px; }
+    .dw-benefits-grid { grid-template-columns: 1fr; }
+    .dw-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .dw-cards3-grid { grid-template-columns: 1fr; }
+    .dw-process-grid { grid-template-columns: 1fr; gap: 32px; }
+    .dw-testimonials-header { grid-template-columns: 1fr; gap: 24px; }
+    .dw-testimonials-grid { grid-template-columns: 1fr; }
+    .dw-cert-grid { grid-template-columns: 1fr 1fr; }
+    .dw-btn-primary { font-size: 16px; padding: 16px 24px; }
+    .dw-btn-secondary { font-size: 16px; padding: 14px 24px; }
+    .dw-hero-btns { flex-direction: column; }
+    .dw-hero-btns a { width: 100%; justify-content: center; text-align: center; }
+    .dw-cta-btns { flex-direction: column; align-items: center; }
+    .dw-cta-btns a { width: 100%; max-width: 400px; justify-content: center; }
+    .dw-final-btns { flex-direction: column; align-items: center; }
+    .dw-final-btns a { width: 100%; max-width: 400px; justify-content: center; }
+    .dw-step-number { font-size: 56px; }
+    .dw-hero-section { display: flex; flex-direction: column; min-height: unset !important; }
+  }
+</style>
+
+<!-- SECTION 1: HERO -->
+<section class="dw-hero-section" style="padding-top:120px;background:#FFFFFF;position:relative;overflow:hidden;min-height:480px;">
+  <img class="dw-hero-img" src="/dakwerker-assurman-1_3.png" alt="Schrijnwerker aan het werk" />
+  <div class="dw-container" style="padding-top:40px;padding-bottom:64px;position:relative;z-index:2;">
+    <div class="dw-hero-content">
+      <div class="dw-badge-pill" style="margin-bottom:20px;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Assurman • Bouwverzekeringen op maat
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">
+        Verzekeringen voor schrijnwerkers
+      </h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(22px,3.5vw,52px);line-height:1.1;letter-spacing:-1px;color:#E5A524;margin-bottom:20px;">
+        Van maatwerk tot montage — volledig beschermd.
+      </p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#001F3F;margin-bottom:28px;max-width:520px;">
+        Als schrijnwerker werk je met dure machines, verwerk je kostbaar hout en sta je in voor installatie bij de klant thuis. Schade aan materiaal, discussies over uitvoering of arbeidsongevallen zijn reële risico's. Assurman verzekert schrijnwerkers op maat.
+      </p>
+      <div class="dw-hero-btns">
+        <a href="/gratis-verzekeringsscan" class="dw-btn-primary">
+          Vraag een scan aan
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="/contact" class="dw-btn-secondary">Plan een adviesgesprek</a>
+      </div>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#001F3F;opacity:0.75;">
+        Geen verplichting. We finaliseren je pakket samen na je intake.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: KEY FEATURES STRIP -->
+<section style="background:#e5a52414;padding:48px 0;">
+  <div class="dw-container">
+    <p style="font-family:'Open Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#8B6A1A;text-align:center;margin:0 0 32px 0;">
+      Een goede verzekering begint bij:
+    </p>
+    <div class="dw-features-grid">
+      {[
+        { text: 'Specialist in\nschrijfnwerk & timmerwerk' },
+        { text: 'Modulair pakket:\nenkel wat nodig is' },
+        { text: 'Duidelijke uitleg,\nsnelle service' },
+        { text: 'Dekking: atelier\n+ werf + transport' },
+      ].map((item) => (
+        <div style="display:flex;align-items:center;gap:20px;background:#FFFFFF;border:1px solid rgba(229,165,36,0.18);border-radius:12px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+          <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#001F3F;line-height:1.45;white-space:pre-line;">{item.text}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: INTRO + POSITIONERING -->
+<section style="background:#FBF8FF;padding:80px 0;">
+  <div class="dw-container" style="max-width:1110px;">
+    <div class="dw-intro-grid">
+      <div style="padding-top:40px;padding-right:0;">
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3vw,41px);line-height:1.1;color:#001F3F;margin-bottom:16px;">
+          Waarom een schrijnwerker een specialist nodig heeft
+        </h2>
+        <div style="width:96px;height:6px;background:#E5A524;margin-bottom:24px;"></div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:20px;">
+          Als schrijnwerker investeer je in dure machines en kostbaar hout om maatwerk te maken. Van de atelierproductie tot de installatie bij de klant thuis — elk moment brengt specifieke risico's: machinebreuk, transportschade, maatbetwistingen of arbeidsongevallen met zaagmachines.
+        </p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:32px;">
+          Assurman bouwt een pakket op maat: BA voor installatieschade, machinebreuk voor je atelier, gereedschapverzekering, en eventueel arbeidsongevallen voor je team.
+        </p>
+        <blockquote style="border-left:4px solid #E5A524;padding-left:24px;margin:0;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;line-height:1.55;color:#001F3F;margin:0;">
+            "Jij maakt meubels en interieurs op maat — wij zorgen voor de juiste bescherming."
+          </p>
+        </blockquote>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:20px;padding-top:40px;">
+        {[
+          { title: 'Machinebreuk en productiestilstand', text: 'Een defect aan een CNC-machine of zaagmachine stopt je productie en kost snel duizenden euro. Machinebreukverzekering is essentieel.' },
+          { title: 'Transportschade en installatierisico', text: "Maatwerk beschadigd tijdens levering of installatie is een reëel risico. BA dekt dit — als jouw activiteiten correct omschreven zijn." },
+          { title: 'Geschillen over maatvoering', text: 'Klanten die beweren dat maten niet kloppen, zijn een gekend risico. Rechtsbijstand helpt je positie te verdedigen met een expert.' },
+        ].map((card) => (
+          <div class="dw-why-card" style="padding:28px;display:flex;align-items:flex-start;gap:20px;">
+            <div style="background:rgba(229,165,36,0.1);border-radius:8px;padding:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;min-width:48px;height:48px;">
+              <svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#001F3F;margin-bottom:6px;">{card.title}</h3>
+              <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.4;color:#001F3F;margin:0;">{card.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: QUICK BENEFITS - Dark -->
+<section style="background:#3F5767;padding:80px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:50%;right:-200px;transform:translateY(-50%);pointer-events:none;">
+    <BrandChevron color="white" height="480px" direction="left" opacity={0.07} />
+  </div>
+  <div class="dw-container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <p class="dw-section-label" style="margin-bottom:16px;">Wat schrijnwerkers waarderen</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1;color:#FFFFFF;margin:0;">
+        Wat schrijnwerkers vooral waarderen aan Assurman
+      </h2>
+    </div>
+    <div class="dw-benefits-grid">
+      {[
+        { title: 'Heldere dekking', text: 'Geen wollige taal — je weet waarvoor je verzekerd bent.' },
+        { title: 'Slimme modules', text: 'BA, machinebreuk, voertuigen, rechtsbijstand — enkel wat jij nodig hebt.' },
+        { title: 'Snelle intake', text: 'Start in 2 minuten. Daarna stemmen we alles af op jouw activiteiten.' },
+        { title: 'Bouw-expertise', text: "We spreken jouw taal: CNC, houtbewerking, plaatsing, maatwerk." },
+      ].map((item) => (
+        <div class="dw-insurance-card" style="padding:32px;display:flex;flex-direction:column;align-items:center;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);">
+          <div style="margin-bottom:20px;">
+            <svg width="44" height="44" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#FFFFFF;margin-bottom:10px;">{item.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#CBD5E1;margin:0;">{item.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: INSURANCE CAROUSEL -->
+<InsuranceCarousel
+  client:visible
+  cards={insuranceCards}
+  sectionLabel="Het Schrijnwerkerspakket"
+  headline="Jouw schrijnwerkerspakket: de belangrijkste verzekeringen"
+  subheadline="Dit zijn de kernblokken voor de meeste schrijnwerkers. Daarna verfijnen we met extra modules waar nodig."
+/>
+
+<!-- SECTION 6: WAAROM KIEZEN -->
+<section style="background:#3F5767;padding:80px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.07) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0;"></div>
+  <div class="dw-container" style="position:relative;z-index:1;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <p class="dw-section-label" style="margin-bottom:16px;">Waarom Assurman</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.5vw,48px);line-height:1;color:#FFFFFF;margin:0 auto;max-width:762px;">
+        Waarom schrijnwerkers voor Assurman kiezen
+      </h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#CBD5E1;margin-top:16px;">
+        Omdat je een verzekeringspartner wil die de bouwsector begrijpt en snel schakelt.
+      </p>
+    </div>
+
+    <div class="dw-stats-grid">
+      {[
+        { label: 'Focus', value: 'Bouwsector', text: 'Geen algemene aanpak.' },
+        { label: 'Maatwerk', value: 'Modulair pakket', text: 'Jij kiest.' },
+        { label: 'Efficiënt', value: 'Offerte in 2 min', text: 'Start snel.' },
+        { label: 'Ondersteuning', value: 'Duidelijk contact', text: 'Uitleg die helpt.' },
+      ].map((stat) => (
+        <div class="dw-insurance-card" style="padding:24px;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);">
+          <div style="font-family:'Open Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#CBD5E1;margin-bottom:8px;">{stat.label}</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin-bottom:6px;">{stat.value}</div>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:13px;line-height:1.5;color:#CBD5E1;margin:0;">{stat.text}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="dw-cards3-grid">
+      {[
+        { title: 'Minder discussies, meer duidelijkheid', text: 'We leggen alles helder uit, geen verrassingen achteraf.' },
+        { title: 'Past bij ateliers én groeiende teams', text: 'Eénmanszaak? Meerdere timmerlieden? We schalen je pakket mee.' },
+        { title: 'Klaar voor echte werfrealiteit', text: "Van atelierproductie tot plaatsing bij de klant: we denken mee over risico's die typisch zijn voor schrijnwerkers." },
+      ].map((card) => (
+        <div class="dw-insurance-card" style="padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 32px),calc(100% - 32px) 100%,0% 100%);">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;color:#FFFFFF;margin-bottom:10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#CBD5E1;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: CASE CAROUSEL -->
+<CaseStudyCarousel client:visible cases={caseStudies} />
+
+<!-- SECTION 8: FAQ -->
+<FaqAccordion
+  client:visible
+  items={faqItems}
+  sectionLabel="Schrijnwerkersverzekeringen in mensentaal"
+  headline="In mensentaal"
+  subheadline="De vragen die schrijnwerkers het vaakst stellen, duidelijk beantwoord."
+/>
+
+<!-- SECTION 9: PROCESS -->
+<section style="background:#FFFFFF;padding:80px 0;">
+  <div class="dw-container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <p class="dw-section-label" style="margin-bottom:16px;">Onze aanpak</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,41px);line-height:1;color:#001F3F;margin:0 auto;max-width:720px;">
+        Onze aanpak: snel starten, slim verfijnen
+      </h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#001F3F;margin-top:16px;">
+        Je hoeft niet alles meteen perfect te weten. We begeleiden je stap voor stap.
+      </p>
+    </div>
+    <div class="dw-process-grid">
+      {[
+        { num: '01', title: '1) Korte intake (2 minuten)', text: "Je kiest je beroep, type werven en wat je zeker wil verzekeren." },
+        { num: '02', title: '2) Risico-scan op maat', text: "We bekijken jouw werfrealiteit grondig." },
+        { num: '03', title: '3) Voorstel met modules', text: 'Je krijgt een helder voorstel afgestemd op jouw activiteiten.' },
+        { num: '04', title: '4) Afstemming & activatie', text: 'We leggen alles helder uit en zetten je dekking correct actief.' },
+      ].map((step) => (
+        <div style="position:relative;padding-top:56px;">
+          <span class="dw-step-number">{step.num}</span>
+          <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;line-height:1.3;color:#001F3F;margin-bottom:10px;">{step.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#001F3F;margin:0;">{step.text}</p>
+        </div>
+      ))}
+    </div>
+    <div style="max-width:480px;margin:0 auto;background:rgba(229,165,36,0.08);border:1px solid rgba(229,165,36,0.25);padding:32px 24px;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% calc(100% - 32px),calc(100% - 32px) 100%,0% 100%,0% 32px);">
+      <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="opacity:0.4;margin-bottom:16px;display:block;margin-left:auto;margin-right:auto;"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+      <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin-bottom:10px;">Geen gedoe. Wel controle.</h3>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#001F3F;margin:0;">Jij beslist. Wij zorgen dat je verzekering past bij jouw stiel.</p>
+    </div>
+  </div>
+</section>
+
+<div style="position:relative;z-index:10;height:0;pointer-events:none;">
+  <div style="position:absolute;top:-40px;left:50%;transform:translateX(-50%);">
+    <BrandChevron color="white" height="80px" direction="down" />
+  </div>
+</div>
+<!-- SECTION 10: TUSSEN-CTA BAND -->
+<section style="background:#E9C466;padding:80px 0 80px;position:relative;overflow:hidden;">
+  <div class="dw-container" style="text-align:center;position:relative;z-index:1;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">
+      Schrijnwerker in Vlaanderen?<br />Wij maken jouw pakket op maat.
+    </h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,2vw,22px);line-height:1.4;color:#3F5767;margin-bottom:32px;opacity:0.85;">
+      Start nu in 2 minuten of kies meteen voor advies.
+    </p>
+    <div class="dw-cta-btns">
+      <a href="/gratis-verzekeringsscan" style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">
+        Vraag nu een scan aan
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.25);color:#3F5767;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;border:2px solid rgba(63,87,103,0.3);">
+        Plan een adviesgesprek
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 11: TESTIMONIALS -->
+<section style="background:#F5F2FF;padding:80px 0;">
+  <div class="dw-container">
+    <div class="dw-testimonials-header">
+      <div style="display:flex;flex-direction:column;gap:28px;">
+        <div>
+          <p class="dw-section-label" style="margin-bottom:16px;">Klantenervaringen</p>
+          <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,41px);line-height:1;color:#001F3F;margin:0 0 16px;">Wat schrijnwerkers zeggen</h2>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#001F3F;margin:0;">
+            Ervaringen van klanten helpen je om met meer vertrouwen de juiste keuze te maken.
+          </p>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:16px;background:#FFFFFF;padding:18px 28px;box-shadow:0px 1px 2px rgba(0,0,0,0.05);align-self:flex-start;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 16px),calc(100% - 16px) 100%,0% 100%);">
+          <div style="display:flex;gap:4px;">
+            {[1,2,3,4,5].map(_ => <svg width="20" height="20" fill="#E5A524" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
+          </div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:#001F3F;line-height:1;">4,9/5</div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#001F3F;margin-top:4px;">op basis van klantfeedback</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#E5A524;padding:36px 32px;display:flex;flex-direction:column;gap:20px;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:24px;line-height:1.23;color:#001F3F;margin:0;">Sector Gecertificeerd</h3>
+        <div class="dw-cert-grid">
+          {['FSMA 045920', 'BZB-FEDAF'].map((badge) => (
+            <div style="background:#3F5767;padding:14px;display:flex;align-items:center;justify-content:center;">
+              <span style="font-family:'Open Sans',sans-serif;font-weight:700;font-size:12px;color:#FFFFFF;">{badge}</span>
+            </div>
+          ))}
+        </div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.5;color:rgba(40,25,0,0.8);margin:0;">
+          Als onafhankelijk makelaar werken we met alle maatschappijen om voor jou de beste voorwaarden te onderhandelen.
+        </p>
+      </div>
+    </div>
+
+    <div class="dw-testimonials-grid">
+      {[
+        { quote: 'Machine defect vlak voor een deadline — machinebreukverzekering redde de situatie.', name: 'Schrijnwerkerij, Gent' },
+        { quote: 'Mijn keuken werd beschadigd bij levering. De BA regelde alles snel en professioneel.', name: 'Meubelmaker, Antwerpen' },
+        { quote: 'Eindelijk een pakket dat past bij mijn realiteit als schrijnwerker.', name: 'Timmerbedrijf, West-Vlaanderen' },
+      ].map((t) => (
+        <div class="dw-testimonial-card" style="padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);">
+          <div style="display:flex;gap:4px;margin-bottom:14px;">
+            {[1,2,3,4,5].map(_ => <svg width="16" height="16" fill="#E5A524" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
+          </div>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.55;color:#001F3F;margin-bottom:14px;font-style:italic;">"{t.quote}"</p>
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:#001F3F;margin:0;">{t.name}</p>
+        </div>
+      ))}
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:40px;">
+      {['Bouw-specialist', '100% op maat', 'Snel proces', 'Heldere voorwaarden'].map((badge) => (
+        <div class="dw-badge-pill">{badge}</div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section style="background:#F7F4EF;padding:56px 0;">
+  <div class="dw-container">
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">
+      Ondersteund door sterke verzekeringspartners
+    </p>
+    <PartnerSlider client:visible />
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:#3F5767;padding-top:96px;padding-bottom:0;position:relative;text-align:center;">
+  <div class="dw-container" style="position:relative;z-index:2;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.5vw,48px);line-height:1.1;color:#FFFFFF;max-width:727px;margin:0 auto 20px;">
+      Ondernemen in de bouwsector zonder zorgen? Het kan!
+    </h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,2vw,22px);line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 40px;">
+      Start nu en doe je verzekeringen scan in 2 minuten of plan meteen een adviesgesprek met onze expert.
+    </p>
+    <div class="dw-final-btns">
+      <a href="/gratis-verzekeringsscan" style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">
+        Vraag een scan aan
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
+        Plan adviesgesprek
+      </a>
+    </div>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#CBD5E1;margin-bottom:64px;opacity:0.75;">
+      Geen verplichting. We helpen je kiezen wat écht nodig is.
+    </p>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;">
+    <polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" />
+  </svg>
+</section>
+
+</BaseLayout>

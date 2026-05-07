@@ -1,0 +1,583 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
+import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import FaqAccordion from '../../components/islands/FaqAccordion';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+import BrandChevron from '../../components/BrandChevron.astro';
+
+const insuranceCards = [
+  {
+    title: 'BA Onderneming (elektricien)',
+    intro: 'Bescherming bij schade aan derden tijdens of na je werkzaamheden aan elektrische installaties.',
+    bullets: [
+      'Schade door fouten in de installatie (brand, kortsluiting)',
+      'Letselschade aan derden op de werf',
+      'Claims over gebrekkige uitvoering of verkeerd advies',
+      'Dekking voor zowel renovatie als nieuwbouw',
+    ],
+    cta: 'Check BA voor elektriciens',
+    link: '/verzekeringen/ba-onderneming',
+    icon: 'shield',
+  },
+  {
+    title: 'Bedrijfsvoertuigen',
+    intro: 'De bestelwagen is onmisbaar: materiaal en gereedschap van werf naar werf.',
+    bullets: [
+      'Schade aan bestelwagen door accident of diefstal',
+      'Omnium voor recente voertuigen',
+      'Bescherming buiten de standaard rijuren',
+      'Snelle afhandeling bij schade',
+    ],
+    cta: 'Check bedrijfsvoertuigen',
+    link: '/verzekeringen/bedrijfsvoertuigen',
+    icon: 'truck',
+  },
+  {
+    title: 'Machinebreukverzekering',
+    intro: 'Elektrisch meetmateriaal, gereedschap en kabeltrekkers zijn duur. Diefstal of defect stopt je werk.',
+    bullets: [
+      'Dekking voor gespecialiseerd meetmateriaal',
+      'Diefstal uit bestelwagen of op de werf',
+      'Vervanging zodat je snel terug aan de slag bent',
+      'Op maat van jouw materiaalwaarde',
+    ],
+    cta: 'Check machinebreuk',
+    link: '/verzekeringen/machinebreuk',
+    icon: 'wrench',
+  },
+  {
+    title: "ABR (Alle Bouwplaats Risico's)",
+    intro: "Extra werfdekking voor grotere projecten of renovaties met meerdere partijen.",
+    bullets: [
+      "Schade aan werken in uitvoering",
+      "Risico's bij samenwerking met andere aannemers",
+      "Interessant bij nieuwbouw of grote renovaties",
+      "Flexibel per project",
+    ],
+    cta: "Check ABR",
+    link: '/verzekeringen/alle-bouwplaats-risicos',
+    icon: 'layers',
+  },
+  {
+    title: 'Rechtsbijstand',
+    intro: 'Geschillen over installaties, facturen of aansprakelijkheid komen voor. Rechtsbijstand helpt.',
+    bullets: [
+      'Juridische hulp bij betwiste opdrachten',
+      'Ondersteuning bij geschillen met bouwheren',
+      'Tussenkomst bij advocaatkosten',
+      'Aanvulling op BA bij conflicten',
+    ],
+    cta: 'Check rechtsbijstand',
+    link: '/verzekeringen/rechtsbijstand',
+    icon: 'zap',
+  },
+  {
+    title: 'Arbeidsongevallenverzekering',
+    intro: 'Verplicht voor elektriciens met personeel. Werven en ladders brengen risico mee.',
+    bullets: [
+      "Bescherming bij elektrische risico's en valgevaar",
+      'Dekt werknemers op werf én onderweg',
+      'Verplicht vanaf eerste werknemer',
+      'Aanvulbaar voor hogere lonen',
+    ],
+    cta: 'Check arbeidsongevallen',
+    link: '/verzekeringen/arbeidsongevallen',
+    icon: 'users',
+  },
+];
+
+const caseStudies = [
+  {
+    category: 'ELEKTRICITEITSWERKEN',
+    title: 'Brand na elektrische fout kost €32.000 — wie is aansprakelijk?',
+    businessName: 'ElectroPro bvba',
+    ownerName: 'Stef Claes',
+    cityName: 'Gent',
+    description: 'Na renovatie van een appartement brak brand uit door een kortsluiting. De bewoner stelde de elektricien aansprakelijk voor de schade aan de inboedel en structurele schade.',
+    action: 'Via de BA-polis werd een expert aangesteld om de oorzaak te onderzoeken. Na analyse bleek een fabricagefout mee verantwoordelijk. De verzekeraar handelde de claim af en de elektricien werd slechts gedeeltelijk aangesproken.',
+    image: 'https://images.pexels.com/photos/585419/pexels-photo-585419.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+  {
+    category: 'ELEKTRICITEITSWERKEN',
+    title: 'Diefstal van meetapparatuur: €8.500 verlies op één nacht',
+    businessName: 'Voltec Services',
+    ownerName: 'Jonas Baert',
+    cityName: 'Brugge',
+    description: 'Een elektricien verloor al zijn gespecialiseerde meetapparatuur bij een inbraak in zijn bestelwagen. Het materiaal was essentieel voor zijn dagelijkse werkzaamheden.',
+    action: 'De gereedschapverzekering dekte de volledige schade. Nieuwe apparatuur werd besteld en geleverd binnen 3 werkdagen. De elektricien kon zijn planning grotendeels nakomen.',
+    image: 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+  {
+    category: 'ELEKTRICITEITSWERKEN',
+    title: 'Geschil over keuring bij nieuwbouwproject',
+    businessName: 'Elektro Verbeke',
+    ownerName: 'Pieter Verbeke',
+    cityName: 'Kortrijk',
+    description: 'Een bouwheer weigerde te betalen omdat hij beweerde dat de elektrische installatie niet conform was. De elektricien betwistte dit en moest juridische stappen overwegen.',
+    action: 'Rechtsbijstand dekte de kosten van een onafhankelijke expert en advocate. Na het expertiseverslag werd de elektricien grotendeels in het gelijk gesteld en ontving hij zijn openstaand saldo.',
+    image: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=800',
+  },
+];
+
+const faqItems = [
+  {
+    title: "Welke risico's heeft een elektricien het meest?",
+    content: "De grootste risico's voor elektriciens zijn: aansprakelijkheid bij fouten in de installatie (brand, kortsluiting), diefstal van duur meetmateriaal en gereedschap, en geschillen over uitgevoerde werken of conformiteit. Een degelijke BA + gereedschapsverzekering is de basis.",
+  },
+  {
+    title: 'Ben ik aansprakelijk als er brand uitbreekt door mijn installatie?',
+    content: 'In principe wel, tenzij je kunt aantonen dat de brand niet door een fout van jou werd veroorzaakt. BA Onderneming dekt dit risico en betaalt voor de schade-expert en eventuele vergoedingen aan de benadeelde partij.',
+  },
+  {
+    title: 'Is gereedschapverzekering verplicht voor elektriciens?',
+    content: 'Niet wettelijk verplicht, maar praktisch essentieel. Meetapparatuur, kabeltrekkers en gereedschap zijn duur. Bij diefstal of defect sta je stil. De premie is doorgaans relatief laag ten opzichte van de materiaalwaarde.',
+  },
+  {
+    title: 'Heb ik ABR nodig als elektricien?',
+    content: "ABR is interessant voor elektriciens die actief zijn op grotere werven of bij nieuwbouw, waar meerdere partijen samenwerken. Bij kleine renovatieopdrachten volstaat je BA vaak. Assurman bekijkt dit samen met jou tijdens de intake.",
+  },
+  {
+    title: 'Kan ik als zelfstandige elektricien alles in één pakket verzekeren?',
+    content: 'Ja. Assurman bouwt een modulair pakket: BA, gereedschap/bestelwagen, eventueel rechtsbijstand — enkel wat jij nodig hebt. Je start klein en breidt uit wanneer je groeit of personeel aanneemt.',
+  },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({
+    "@type": "Question",
+    "name": f.title,
+    "acceptedAnswer": { "@type": "Answer", "text": f.content.replace(/\n/g, ' ') }
+  }))
+};
+---
+
+<BaseLayout
+  title="Verzekeringen voor elektriciens | Assurman"
+  description="Verzekeringen op maat voor elektriciens in Vlaanderen: BA, ABR, machinebreuk, bedrijfsvoertuigen en rechtsbijstand. Specialist in de bouwsector."
+  canonical="/sectoren/elektriciens"
+  schema={schema}
+>
+
+<style>
+  .dw-container { max-width: 1280px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
+  .dw-hero-content { max-width: 52%; padding-top: 40px; }
+  .dw-hero-img { position: absolute; top: 0; right: 0; height: 100%; width: auto; max-width: 55%; object-fit: contain; object-position: top right; z-index: 1; pointer-events: none; }
+  .dw-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .dw-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; align-items: flex-start; }
+  .dw-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .dw-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 48px; }
+  .dw-cards3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .dw-process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 64px; }
+  .dw-testimonials-header { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-bottom: 64px; }
+  .dw-testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .dw-cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .dw-hero-btns { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+  .dw-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .dw-final-btns { display: flex; gap: 24px; justify-content: center; margin-bottom: 80px; flex-wrap: wrap; }
+
+  .dw-btn-primary { display: inline-flex; align-items: center; gap: 10px; background: #E5A524; color: #001F3F; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 18px; padding: 18px 32px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .dw-btn-primary:hover { background: #d4941a; transform: translateY(-1px); }
+  .dw-btn-secondary { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: #001F3F; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 18px; padding: 16px 32px; border-radius: 8px; border: 2px solid rgba(213, 196, 174, 0.5); cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s; white-space: nowrap; }
+  .dw-btn-secondary:hover { border-color: #E5A524; background: rgba(229, 165, 36, 0.05); }
+  .dw-badge-pill { display: inline-flex; align-items: center; gap: 8px; background: #F5F2FF; border: 1px solid rgba(213, 196, 174, 0.2); border-radius: 9999px; padding: 6px 16px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #001F3F; }
+  .dw-section-label { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 1.4px; text-transform: uppercase; color: #E5A524; }
+  .dw-step-number { font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 80px; line-height: 1; color: rgba(229, 165, 36, 0.18); position: absolute; top: 0; left: -4px; user-select: none; pointer-events: none; }
+  .dw-insurance-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(2px); transition: background 0.2s, transform 0.2s; }
+  .dw-insurance-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+  .dw-why-card { background: #FFFFFF; border-left: 4px solid #E5A524; box-shadow: 0px 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.2s, transform 0.2s; }
+  .dw-why-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .dw-testimonial-card { background: #FFFFFF; box-shadow: 0px 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.2s, transform 0.2s; }
+  .dw-testimonial-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+  @media (max-width: 1023px) {
+    .dw-features-grid { grid-template-columns: repeat(2, 1fr); }
+    .dw-benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    .dw-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .dw-process-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .dw-testimonials-header { grid-template-columns: 1fr; gap: 32px; }
+    .dw-testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .dw-intro-grid { grid-template-columns: 1fr; }
+    .dw-container { padding-left: 24px; padding-right: 24px; }
+  }
+  @media (max-width: 767px) {
+    .dw-container { padding-left: 15px; padding-right: 15px; }
+    .dw-hero-content { max-width: 100%; padding-top: 16px; }
+    .dw-hero-img { position: static; width: 100%; max-width: 100%; height: auto; max-height: 260px; object-fit: cover; object-position: center top; display: block; margin-top: 24px; }
+    .dw-features-grid { grid-template-columns: 1fr; gap: 12px; }
+    .dw-intro-grid { grid-template-columns: 1fr; gap: 24px; }
+    .dw-benefits-grid { grid-template-columns: 1fr; }
+    .dw-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .dw-cards3-grid { grid-template-columns: 1fr; }
+    .dw-process-grid { grid-template-columns: 1fr; gap: 32px; }
+    .dw-testimonials-header { grid-template-columns: 1fr; gap: 24px; }
+    .dw-testimonials-grid { grid-template-columns: 1fr; }
+    .dw-cert-grid { grid-template-columns: 1fr 1fr; }
+    .dw-btn-primary { font-size: 16px; padding: 16px 24px; }
+    .dw-btn-secondary { font-size: 16px; padding: 14px 24px; }
+    .dw-hero-btns { flex-direction: column; }
+    .dw-hero-btns a { width: 100%; justify-content: center; text-align: center; }
+    .dw-cta-btns { flex-direction: column; align-items: center; }
+    .dw-cta-btns a { width: 100%; max-width: 400px; justify-content: center; }
+    .dw-final-btns { flex-direction: column; align-items: center; }
+    .dw-final-btns a { width: 100%; max-width: 400px; justify-content: center; }
+    .dw-step-number { font-size: 56px; }
+    .dw-hero-section { display: flex; flex-direction: column; min-height: unset !important; }
+  }
+</style>
+
+<!-- SECTION 1: HERO -->
+<section class="dw-hero-section" style="padding-top:120px;background:#FFFFFF;position:relative;overflow:hidden;min-height:480px;">
+  <img class="dw-hero-img" src="/dakwerker-assurman-1_3.png" alt="Elektricien aan het werk" />
+  <div class="dw-container" style="padding-top:40px;padding-bottom:64px;position:relative;z-index:2;">
+    <div class="dw-hero-content">
+      <div class="dw-badge-pill" style="margin-bottom:20px;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Assurman • Bouwverzekeringen op maat
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">
+        Verzekeringen voor elektriciens
+      </h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(22px,3.5vw,52px);line-height:1.1;letter-spacing:-1px;color:#E5A524;margin-bottom:20px;">
+        Veilig aan het werk, van renovatie tot nieuwbouw.
+      </p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#001F3F;margin-bottom:28px;max-width:520px;">
+        Als elektricien werk je op wisselende werven, in bewoonde panden en met technische installaties. Elektrische risico's, valgevaar en aansprakelijkheid bij fouten in de installatie — Assurman verzekert elektriciens op maat.
+      </p>
+      <div class="dw-hero-btns">
+        <a href="/gratis-verzekeringsscan" class="dw-btn-primary">
+          Vraag een scan aan
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="/contact" class="dw-btn-secondary">Plan een adviesgesprek</a>
+      </div>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#001F3F;opacity:0.75;">
+        Geen verplichting. We finaliseren je pakket samen na je intake.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: KEY FEATURES STRIP -->
+<section style="background:#e5a52414;padding:48px 0;">
+  <div class="dw-container">
+    <p style="font-family:'Open Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#8B6A1A;text-align:center;margin:0 0 32px 0;">
+      Een goede verzekering begint bij:
+    </p>
+    <div class="dw-features-grid">
+      {[
+        { text: 'Specialist in\nelektriciteitswerken' },
+        { text: 'Modulair pakket:\nenkel wat nodig is' },
+        { text: 'Duidelijke uitleg,\nsnelle service' },
+        { text: 'Dekking: installatie\n+ materiaal + mobiliteit' },
+      ].map((item) => (
+        <div style="display:flex;align-items:center;gap:20px;background:#FFFFFF;border:1px solid rgba(229,165,36,0.18);border-radius:12px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+          <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#001F3F;line-height:1.45;white-space:pre-line;">{item.text}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: INTRO + POSITIONERING -->
+<section style="background:#FBF8FF;padding:80px 0;">
+  <div class="dw-container" style="max-width:1110px;">
+    <div class="dw-intro-grid">
+      <div style="padding-top:40px;padding-right:0;">
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3vw,41px);line-height:1.1;color:#001F3F;margin-bottom:16px;">
+          Waarom een elektricien een specialist nodig heeft
+        </h2>
+        <div style="width:96px;height:6px;background:#E5A524;margin-bottom:24px;"></div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:20px;">
+          Als elektricien installeer je complexe systemen in bewoonde panden en op werven. Eén fout in de bekabeling, een verkeerde aansluiting of een verwisselde fase — en de gevolgen kunnen ernstig zijn. Brandschade, schadeclaims van bewoners of geschillen over conformiteit zijn reële risico's.
+        </p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:32px;">
+          Assurman bouwt een pakket op maat: BA afgestemd op elektrische risico's, gereedschapverzekering voor je dure meetapparatuur, en eventueel rechtsbijstand bij geschillen over conformiteit of aansprakelijkheid.
+        </p>
+        <blockquote style="border-left:4px solid #E5A524;padding-left:24px;margin:0;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;line-height:1.55;color:#001F3F;margin:0;">
+            "Jij zorgt voor stroom — wij zorgen dat je beschermd bent als er iets misgaat."
+          </p>
+        </blockquote>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:20px;padding-top:40px;">
+        {[
+          { title: 'Aansprakelijkheid bij fouten', text: 'Brand, kortsluiting, schade aan installaties — BA Onderneming dekt de gevolgen van fouten in jouw werk.' },
+          { title: 'Diefstal van meetmateriaal', text: 'Gespecialiseerde meetapparatuur is duur en essentieel. Een gereedschapverzekering houdt je draaiende.' },
+          { title: 'Geschillen over conformiteit', text: 'Discussies over keuring, uitvoering of aansprakelijkheid — rechtsbijstand helpt je rechtdoor.' },
+        ].map((card) => (
+          <div class="dw-why-card" style="padding:28px;display:flex;align-items:flex-start;gap:20px;">
+            <div style="background:rgba(229,165,36,0.1);border-radius:8px;padding:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;min-width:48px;height:48px;">
+              <svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#001F3F;margin-bottom:6px;">{card.title}</h3>
+              <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.4;color:#001F3F;margin:0;">{card.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: QUICK BENEFITS - Dark -->
+<section style="background:#3F5767;padding:80px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:50%;right:-200px;transform:translateY(-50%);pointer-events:none;">
+    <BrandChevron color="white" height="480px" direction="left" opacity={0.07} />
+  </div>
+  <div class="dw-container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <p class="dw-section-label" style="margin-bottom:16px;">Wat elektriciens waarderen</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1;color:#FFFFFF;margin:0;">
+        Wat elektriciens vooral waarderen aan Assurman
+      </h2>
+    </div>
+    <div class="dw-benefits-grid">
+      {[
+        { title: 'Heldere dekking', text: 'Geen wollige taal — je weet waarvoor je verzekerd bent.' },
+        { title: 'Slimme modules', text: 'BA, gereedschap, bestelwagen, rechtsbijstand — enkel wat jij nodig hebt.' },
+        { title: 'Snelle intake', text: 'Start in 2 minuten. Daarna stemmen we alles af op jouw activiteiten.' },
+        { title: 'Bouw-expertise', text: "We spreken jouw taal: installaties, conform verklaring, elektriciteitsrisico's." },
+      ].map((item) => (
+        <div class="dw-insurance-card" style="padding:32px;display:flex;flex-direction:column;align-items:center;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);">
+          <div style="margin-bottom:20px;">
+            <svg width="44" height="44" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#FFFFFF;margin-bottom:10px;">{item.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#CBD5E1;margin:0;">{item.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: INSURANCE CAROUSEL -->
+<InsuranceCarousel
+  client:visible
+  cards={insuranceCards}
+  sectionLabel="Het Elektricienspakket"
+  headline="Jouw elektricienspakket: de belangrijkste verzekeringen"
+  subheadline="Dit zijn de kernblokken voor de meeste elektriciens. Daarna verfijnen we met extra modules waar nodig."
+/>
+
+<!-- SECTION 6: WAAROM KIEZEN -->
+<section style="background:#3F5767;padding:80px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.07) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0;"></div>
+  <div class="dw-container" style="position:relative;z-index:1;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <p class="dw-section-label" style="margin-bottom:16px;">Waarom Assurman</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.5vw,48px);line-height:1;color:#FFFFFF;margin:0 auto;max-width:762px;">
+        Waarom elektriciens voor Assurman kiezen
+      </h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#CBD5E1;margin-top:16px;">
+        Omdat je een verzekeringspartner wil die de bouwsector begrijpt en snel schakelt.
+      </p>
+    </div>
+
+    <div class="dw-stats-grid">
+      {[
+        { label: 'Focus', value: 'Bouwsector', text: 'Geen algemene aanpak.' },
+        { label: 'Maatwerk', value: 'Modulair pakket', text: 'Jij kiest.' },
+        { label: 'Efficiënt', value: 'Offerte in 2 min', text: 'Start snel.' },
+        { label: 'Ondersteuning', value: 'Duidelijk contact', text: 'Uitleg die helpt.' },
+      ].map((stat) => (
+        <div class="dw-insurance-card" style="padding:24px;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);">
+          <div style="font-family:'Open Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#CBD5E1;margin-bottom:8px;">{stat.label}</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin-bottom:6px;">{stat.value}</div>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:13px;line-height:1.5;color:#CBD5E1;margin:0;">{stat.text}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="dw-cards3-grid">
+      {[
+        { title: 'Minder discussies, meer duidelijkheid', text: 'We leggen alles helder uit, geen verrassingen achteraf.' },
+        { title: 'Past bij zelfstandigen én groeiende teams', text: 'Eénmanszaak? 3 medewerkers? We schalen je pakket mee met je bedrijf.' },
+        { title: 'Klaar voor echte werfrealiteit', text: "Van renovatie tot nieuwbouw: we denken mee over risico's die typisch zijn voor elektriciens." },
+      ].map((card) => (
+        <div class="dw-insurance-card" style="padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 32px),calc(100% - 32px) 100%,0% 100%);">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;color:#FFFFFF;margin-bottom:10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#CBD5E1;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: CASE CAROUSEL -->
+<CaseStudyCarousel client:visible cases={caseStudies} />
+
+<!-- SECTION 8: FAQ -->
+<FaqAccordion
+  client:visible
+  items={faqItems}
+  sectionLabel="Elektriciensverzekeringen in mensentaal"
+  headline="In mensentaal"
+  subheadline="De vragen die elektriciens het vaakst stellen, duidelijk beantwoord."
+/>
+
+<!-- SECTION 9: PROCESS -->
+<section style="background:#FFFFFF;padding:80px 0;">
+  <div class="dw-container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <p class="dw-section-label" style="margin-bottom:16px;">Onze aanpak</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,41px);line-height:1;color:#001F3F;margin:0 auto;max-width:720px;">
+        Onze aanpak: snel starten, slim verfijnen
+      </h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#001F3F;margin-top:16px;">
+        Je hoeft niet alles meteen perfect te weten. We begeleiden je stap voor stap.
+      </p>
+    </div>
+    <div class="dw-process-grid">
+      {[
+        { num: '01', title: '1) Korte intake (2 minuten)', text: "Je kiest je beroep, type werven en wat je zeker wil verzekeren." },
+        { num: '02', title: '2) Risico-scan op maat', text: "We bekijken jouw werfrealiteit grondig." },
+        { num: '03', title: '3) Voorstel met modules', text: 'Je krijgt een helder voorstel afgestemd op jouw activiteiten.' },
+        { num: '04', title: '4) Afstemming & activatie', text: 'We leggen alles helder uit en zetten je dekking correct actief.' },
+      ].map((step) => (
+        <div style="position:relative;padding-top:56px;">
+          <span class="dw-step-number">{step.num}</span>
+          <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;line-height:1.3;color:#001F3F;margin-bottom:10px;">{step.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#001F3F;margin:0;">{step.text}</p>
+        </div>
+      ))}
+    </div>
+    <div style="max-width:480px;margin:0 auto;background:rgba(229,165,36,0.08);border:1px solid rgba(229,165,36,0.25);padding:32px 24px;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% calc(100% - 32px),calc(100% - 32px) 100%,0% 100%,0% 32px);">
+      <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="opacity:0.4;margin-bottom:16px;display:block;margin-left:auto;margin-right:auto;"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+      <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin-bottom:10px;">Geen gedoe. Wel controle.</h3>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#001F3F;margin:0;">Jij beslist. Wij zorgen dat je verzekering past bij jouw stiel.</p>
+    </div>
+  </div>
+</section>
+
+<div style="position:relative;z-index:10;height:0;pointer-events:none;">
+  <div style="position:absolute;top:-40px;left:50%;transform:translateX(-50%);">
+    <BrandChevron color="white" height="80px" direction="down" />
+  </div>
+</div>
+<!-- SECTION 10: TUSSEN-CTA BAND -->
+<section style="background:#E9C466;padding:80px 0 80px;position:relative;overflow:hidden;">
+  <div class="dw-container" style="text-align:center;position:relative;z-index:1;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">
+      Elektricien in Vlaanderen?<br />Wij maken jouw pakket op maat.
+    </h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,2vw,22px);line-height:1.4;color:#3F5767;margin-bottom:32px;opacity:0.85;">
+      Start nu in 2 minuten of kies meteen voor advies.
+    </p>
+    <div class="dw-cta-btns">
+      <a href="/gratis-verzekeringsscan" style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">
+        Vraag nu een scan aan
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.25);color:#3F5767;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;border:2px solid rgba(63,87,103,0.3);">
+        Plan een adviesgesprek
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 11: TESTIMONIALS -->
+<section style="background:#F5F2FF;padding:80px 0;">
+  <div class="dw-container">
+    <div class="dw-testimonials-header">
+      <div style="display:flex;flex-direction:column;gap:28px;">
+        <div>
+          <p class="dw-section-label" style="margin-bottom:16px;">Klantenervaringen</p>
+          <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,41px);line-height:1;color:#001F3F;margin:0 0 16px;">Wat elektriciens zeggen</h2>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#001F3F;margin:0;">
+            Ervaringen van klanten helpen je om met meer vertrouwen de juiste keuze te maken.
+          </p>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:16px;background:#FFFFFF;padding:18px 28px;box-shadow:0px 1px 2px rgba(0,0,0,0.05);align-self:flex-start;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 16px),calc(100% - 16px) 100%,0% 100%);">
+          <div style="display:flex;gap:4px;">
+            {[1,2,3,4,5].map(_ => <svg width="20" height="20" fill="#E5A524" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
+          </div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:#001F3F;line-height:1;">4,9/5</div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#001F3F;margin-top:4px;">op basis van klantfeedback</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#E5A524;padding:36px 32px;display:flex;flex-direction:column;gap:20px;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:24px;line-height:1.23;color:#001F3F;margin:0;">Sector Gecertificeerd</h3>
+        <div class="dw-cert-grid">
+          {['FSMA 045920', 'BZB-FEDAF'].map((badge) => (
+            <div style="background:#3F5767;padding:14px;display:flex;align-items:center;justify-content:center;">
+              <span style="font-family:'Open Sans',sans-serif;font-weight:700;font-size:12px;color:#FFFFFF;">{badge}</span>
+            </div>
+          ))}
+        </div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.5;color:rgba(40,25,0,0.8);margin:0;">
+          Als onafhankelijk makelaar werken we met alle maatschappijen om voor jou de beste voorwaarden te onderhandelen.
+        </p>
+      </div>
+    </div>
+
+    <div class="dw-testimonials-grid">
+      {[
+        { quote: 'Mijn meetapparatuur werd gestolen — binnen 3 dagen was alles vervangen dankzij mijn gereedschapverzekering.', name: 'Zelfstandig elektricien, Gent' },
+        { quote: 'Eindelijk een makelaar die snapt wat een elektricien nodig heeft. Snel en helder.', name: 'Elektricien, West-Vlaanderen' },
+        { quote: 'Bij een klacht van een klant stond rechtsbijstand klaar. Dat geeft rust.', name: 'Elektriciensbedrijf, Antwerpen' },
+      ].map((t) => (
+        <div class="dw-testimonial-card" style="padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);">
+          <div style="display:flex;gap:4px;margin-bottom:14px;">
+            {[1,2,3,4,5].map(_ => <svg width="16" height="16" fill="#E5A524" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
+          </div>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.55;color:#001F3F;margin-bottom:14px;font-style:italic;">"{t.quote}"</p>
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:#001F3F;margin:0;">{t.name}</p>
+        </div>
+      ))}
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:40px;">
+      {['Bouw-specialist', '100% op maat', 'Snel proces', 'Heldere voorwaarden'].map((badge) => (
+        <div class="dw-badge-pill">{badge}</div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section style="background:#F7F4EF;padding:56px 0;">
+  <div class="dw-container">
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">
+      Ondersteund door sterke verzekeringspartners
+    </p>
+    <PartnerSlider client:visible />
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:#3F5767;padding-top:96px;padding-bottom:0;position:relative;text-align:center;">
+  <div class="dw-container" style="position:relative;z-index:2;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.5vw,48px);line-height:1.1;color:#FFFFFF;max-width:727px;margin:0 auto 20px;">
+      Ondernemen in de bouwsector zonder zorgen? Het kan!
+    </h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,2vw,22px);line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 40px;">
+      Start nu en doe je verzekeringen scan in 2 minuten of plan meteen een adviesgesprek met onze expert.
+    </p>
+    <div class="dw-final-btns">
+      <a href="/gratis-verzekeringsscan" style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">
+        Vraag een scan aan
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href="/contact" style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
+        Plan adviesgesprek
+      </a>
+    </div>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#CBD5E1;margin-bottom:64px;opacity:0.75;">
+      Geen verplichting. We helpen je kiezen wat écht nodig is.
+    </p>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;">
+    <polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" />
+  </svg>
+</section>
+
+</BaseLayout>

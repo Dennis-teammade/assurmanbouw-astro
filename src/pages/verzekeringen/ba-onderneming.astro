@@ -1,0 +1,244 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
+import FaqAccordion from '../../components/islands/FaqAccordion';
+import ScrollProgress from '../../components/islands/ScrollProgress';
+import StickyNav from '../../components/islands/StickyNav';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+
+const navItems = [
+  {id:'watis',label:'Wat is het?'},
+  {id:'dekking',label:'Dekking'},
+  {id:'wanneer',label:'Wanneer nodig?'},
+  {id:'premium',label:'Premie'},
+  {id:'faq',label:'FAQ'}
+];
+
+const faqItems = [
+  {title:'Is BA Onderneming verplicht?',content:'BA Onderneming is niet altijd wettelijk verplicht, maar is in de bouwsector vrijwel altijd een vereiste. Veel bouwheren en opdrachtgevers eisen een attest van BA-verzekering voor de start van werken.'},
+  {title:'Wat is het verschil tussen BA Uitbating en BA Beroepsaansprakelijkheid?',content:'BA Uitbating dekt schade die optreedt tijdens de normale uitbating of werken. BA Beroepsaansprakelijkheid dekt fouten in uw advies, ontwerp of uitvoering die pas later leiden tot schade. Voor bouwprofessionals zijn beide relevant.'},
+  {title:'Wat is BA Na Levering?',content:'BA Na Levering dekt schade die optreedt nadat de werken zijn opgeleverd of het product is geleverd. Denk aan een installatie die achteraf gebreken vertoont. Dit is een cruciale aanvulling op de gewone BA Uitbating.'},
+  {title:'Dekt BA Onderneming schade door onderaannemers?',content:'Doorgaans dekt uw BA Onderneming schade waarvoor u als hoofdaannemer aansprakelijk wordt gesteld, ook als die door een onderaannemer is veroorzaakt. Uw verzekeraar kan vervolgens verhaal halen op de onderaannemer.'},
+  {title:'Hoe hoog moet de dekking zijn?',content:'Er is geen wettelijk minimum voor BA Onderneming (in tegenstelling tot BA-10). De marktstandaard ligt tussen €1.000.000 en €5.000.000 per schadegeval. Assurman adviseert de juiste limieten op basis van uw activiteiten.'},
+  {title:'Kan ik een attest aanvragen voor mijn opdrachtgever?',content:'Ja. Zodra uw polis actief is, kan Assurman een verzekeringsattest opmaken dat u aan uw opdrachtgever of bouwheer bezorgt. Dit is standaard procedure bij de start van werven.'}
+];
+
+const insuranceCards = [
+  {title:'Arbeidsongevallen',intro:'Wettelijk verplicht vanaf de eerste werknemer.',bullets:['Medische kosten volledig gedekt','Vergoeding bij arbeidsongeschiktheid','Overlijdensvergoeding nabestaanden','Ook woon-werkverkeer gedekt'],link:'/verzekeringen/arbeidsongevallen',cta:'Meer over arbeidsongevallen',icon:'users'},
+  {title:'BA-10',intro:'Tienjarige aansprakelijkheid voor constructiegebreken.',bullets:['Verplicht voor aannemers','Dekt constructiegebreken 10 jaar','Bescherming na oplevering','Vereist bij nieuwbouw'],link:'/verzekeringen/ba-10',cta:'Meer over BA-10',icon:'building2'},
+  {title:'Bedrijfsvoertuigen',intro:'De bestelwagen is onmisbaar op de werf.',bullets:['BA en omnium voor bestelwagens','Bescherming bij diefstal of brand','Snelle afhandeling bij schade','Afstembaar op jouw wagenpark'],link:'/verzekeringen/bedrijfsvoertuigen',cta:'Meer over bedrijfsvoertuigen',icon:'truck'},
+  {title:'Machinebreuk',intro:'Professionele machines en gereedschap zijn duur.',bullets:['Machines en gereedschap bij breuk','Diefstal op werf of in bestelwagen','Vervanging of herstelling','Afstembaar op jouw materieel'],link:'/verzekeringen/machinebreuk',cta:'Meer over machinebreuk',icon:'wrench'},
+  {title:'Rechtsbijstand',intro:'Juridische bescherming bij geschillen.',bullets:['Hulp bij juridische conflicten','Ondersteuning bij betwiste aansprakelijkheid','Tussenkomst bij advocaatkosten','Aanvulling op BA'],link:'/verzekeringen/rechtsbijstand',cta:'Meer over rechtsbijstand',icon:'scale'},
+  {title:"Alle Bouwplaats Risico's",intro:"Allesomvattende dekking voor werken in uitvoering.",bullets:["Schade tijdens uitvoering","Risico's door weersinvloeden","Bescherming bij meerdere partijen","Flexibel per project"],link:'/verzekeringen/alle-bouwplaats-risicos',cta:"Meer over ABR",icon:'layers'}
+];
+---
+
+<BaseLayout
+  title="BA Onderneming voor bouwbedrijven | Assurman"
+  description="Burgerlijke aansprakelijkheidsverzekering voor aannemers, elektriciens, dakwerkers en andere bouwprofessionals. Ontdek wat gedekt is en hoe u een offerte aanvraagt."
+  canonical="/verzekeringen/ba-onderneming"
+>
+  <ScrollProgress client:load />
+
+  <!-- HERO -->
+  <section id="hero" style="background:#FFFFFF;padding-top:130px;padding-bottom:80px;overflow:hidden;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+      <div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Verzekering</p>
+        <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,4.5vw,64px);line-height:1.05;color:#001F3F;margin:0 0 24px;">BA Onderneming&shy;verzekering</h1>
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(18px,2vw,24px);color:#E5A524;margin:0 0 24px;line-height:1.3;">Beschermd bij elke werf, elke werkdag.</p>
+        <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 40px;">Als bouwprofessional bent u dagelijks actief in een omgeving waar schade aan derden een reëel risico vormt. Schade aan het eigendom van een klant, letsel bij een passant of burenhinderaanspraken kunnen uw bedrijf financieel treffen. De BA Ondernemingsverzekering dekt deze aansprakelijkheid — tijdens en na de werken.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;">Gratis scan aanvragen</a>
+          <a href="/maak-afspraak" style="display:inline-block;background:transparent;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;border:2px solid #001F3F;">Afspraak maken</a>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <img src="/foto-contact-35.png" alt="BA Onderneming voor bouwbedrijven" style="width:100%;max-width:520px;border-radius:8px;object-fit:cover;" loading="eager" />
+      </div>
+    </div>
+  </section>
+
+  <StickyNav client:load navItems={navItems} heroSectionId="hero" />
+
+  <!-- WAT IS HET -->
+  <section id="watis" style="background:#F8F9FA;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Wat is het?</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">Burgerlijke aansprakelijkheid voor uw bouwactiviteit</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
+        <div style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:40px;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 20px;">In het kort</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+            {[
+              'Dekt schade aan derden tijdens uw beroepsactiviteit',
+              'BA Uitbating: schade door de normale uitbating',
+              'BA Na Levering: schade na oplevering of levering',
+              'Burenhinder (stof, geluid, trillingen)',
+              'Letselschade en zaakschade aan derden'
+            ].map((item) => (
+              <li style="display:flex;align-items:flex-start;gap:12px;font-family:'Open Sans',sans-serif;font-size:16px;color:#FFFFFF;line-height:1.5;">
+                <span style="color:#E5A524;font-weight:700;flex-shrink:0;margin-top:2px;">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 24px;">De BA Ondernemingsverzekering — ook wel BA Uitbating en BA Na Levering — beschermt uw bedrijf wanneer u of uw medewerkers schade veroorzaken aan derden tijdens de normale uitoefening van uw beroepsactiviteit.</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 32px;">In de bouwsector zijn de risicos bijzonder divers: u werkt in bewoonde omgevingen, met zwaar materieel, op diverse locaties. Burenhinder, beschadiging van leidingen, letsel aan passanten — het kan allemaal leiden tot aansprakelijkheidsclaims.</p>
+          <div style="background:#FFF8E7;border-left:4px solid #E5A524;padding:24px;border-radius:0 4px 4px 0;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#001F3F;margin:0 0 8px;">BA Uitbating vs. BA Na Levering</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0;">BA Uitbating dekt schade die optreedt terwijl de werken aan de gang zijn. BA Na Levering dekt schade die pas na oplevering van de werken of levering van het product aan het licht komt. Voor bouwprofessionals is de combinatie van beide essentieel.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEKKING -->
+  <section id="dekking" style="background:#FFFFFF;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Dekking</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 16px;">Wat is wél en niet gedekt</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 48px;max-width:720px;">Elke polis BA Onderneming heeft zijn specificaties. Hieronder de typische scope voor bouwprofessionals.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+        <div style="background:#FFFFFF;border:2px solid #22C55E;border-radius:8px;padding:36px;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#15803D;margin:0 0 20px;display:flex;align-items:center;gap:10px;"><span>✓</span> Gedekt</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;">
+            {[
+              'Schade aan eigendom van klanten of derden',
+              'Letselschade aan passanten, bewoners, collega\'s',
+              'Schade door werfmachines of materieel',
+              'Burenhinder door werken (stof, geluid, trillingen)',
+              'BA Na Levering: gebreken ontdekt na oplevering',
+              'Claims over beroepsfouten en verkeerde uitvoering'
+            ].map((item) => (
+              <li style="display:flex;align-items:flex-start;gap:10px;font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.5;color:#001F3F;">
+                <span style="color:#22C55E;font-weight:700;flex-shrink:0;margin-top:2px;">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div style="background:#FFFFFF;border:2px solid #EF4444;border-radius:8px;padding:36px;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#DC2626;margin:0 0 20px;display:flex;align-items:center;gap:10px;"><span>✗</span> Niet gedekt</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;">
+            {[
+              'Schade aan uw eigen eigendom of werknemers',
+              'Contractuele verplichtingen zonder schadeoorzaak',
+              'Opzettelijk veroorzaakte schade',
+              'Schade gedekt door andere verplichte verzekeringen',
+              'Boetes en strafrechtelijke sancties'
+            ].map((item) => (
+              <li style="display:flex;align-items:flex-start;gap:10px;font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.5;color:#001F3F;">
+                <span style="color:#EF4444;font-weight:700;flex-shrink:0;margin-top:2px;">✗</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WANNEER NODIG -->
+  <section id="wanneer" style="background:#001F3F;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Wanneer nodig?</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#FFFFFF;margin:0 0 16px;">BA Onderneming per sector</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);margin:0 0 48px;max-width:720px;">Elke bouwberoepscategorie heeft specifieke risico's. Assurman stelt een BA-polis op die aansluit bij uw activiteitsprofiel.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
+        {[
+          {sector:'Dakwerker',desc:'Werken op hoogte, materiaal dat kan neerkomen, risico op beschadiging van daken, gevels en buren. BA Na Levering bij lekkages na uitvoering.'},
+          {sector:'Algemeen aannemer',desc:'Coördinatie van meerdere partijen op de werf. Aansprakelijkheid als hoofdaannemer voor schade door onderaannemers.'},
+          {sector:'Elektricien',desc:'Werk in bestaande panden met brand- en elektrische risicos. BA Na Levering bij installaties die achteraf defecten vertonen.'},
+          {sector:'Loodgieter',desc:'Waterschade door leidingwerk is een typisch BA Na Levering-risico. Hoog schadepotentieel in bewoonde woningen.'},
+          {sector:'Schilder',desc:'Schade aan inboedel van bewoners, morsen van verf, beschadiging van aangrenzende oppervlakken.'},
+          {sector:'Schrijnwerker',desc:'Stofoverlast, schade aan gevels en ramen, aansprakelijkheid voor gebreken aan geplaatste elementen.'}
+        ].map((item) => (
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:28px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#E5A524;margin:0 0 10px;">{item.sector}</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:14px;line-height:1.6;color:rgba(255,255,255,0.75);margin:0;">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMIE -->
+  <section id="premium" style="background:#F8F9FA;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Premie</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 16px;">Wat bepaalt de premie?</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 48px;max-width:720px;">De premie voor BA Onderneming wordt berekend op basis van meerdere factoren. Assurman vraagt offertes aan bij meerdere maatschappijen en vergelijkt.</p>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
+        {[
+          {title:'Activiteit & NACE-code',text:'De aard van uw activiteit bepaalt het risicoprofiel. Dakwerkers en aannemers hebben een ander risico dan schrijnwerkers.'},
+          {title:'Omzet of loonmassa',text:'De grondslag waarop de premie wordt berekend. Hogere omzet betekent meer activiteit en dus meer risico.'},
+          {title:'Aantal werknemers',text:'Meer mensen op de werf betekent meer kans op incidenten en een hogere premie.'},
+          {title:'Schadehistoriek',text:'Eerdere schadegevallen verhogen de premie. Een schadevrij verleden leidt tot kortingen.'}
+        ].map((item) => (
+          <div style="background:#FFFFFF;border:1px solid #E5E8ED;border-radius:8px;padding:32px;box-shadow:0 2px 16px rgba(0,31,63,0.06);">
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;margin:0 0 12px;">{item.title}</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0;">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GOLD CTA -->
+  <section style="background:#E9C466;padding:72px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;">
+      <div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(22px,3vw,36px);color:#001F3F;margin:0 0 8px;">Vraag uw BA-attest aan</p>
+        <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.6;color:rgba(0,31,63,0.75);margin:0;">Assurman bezorgt u snel een verzekeringsattest klaar voor uw opdrachtgever.</p>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#001F3F;color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Gratis scan</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid #001F3F;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Afspraak</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="background:#FFFFFF;padding:100px 0;">
+    <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Veelgestelde vragen</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">FAQ BA Onderneming</h2>
+      <FaqAccordion client:visible items={faqItems} />
+    </div>
+  </section>
+
+  <!-- INSURANCE CAROUSEL -->
+  <section style="background:#F8F9FA;padding:80px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Gerelateerde verzekeringen</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(24px,3vw,40px);line-height:1.1;color:#001F3F;margin:0 0 40px;">Combineer voor een volledig pakket</h2>
+      <InsuranceCarousel client:visible cards={insuranceCards} />
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section style="background:#FFFFFF;padding:60px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin:0 0 32px;">Onze verzekeringspartners</p>
+      <PartnerSlider client:visible />
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="background:#001F3F;padding:100px 0 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px 80px;text-align:center;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Klaar om te starten?</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.1;color:#FFFFFF;margin:0 0 20px;">Uw BA Onderneming in orde</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto 40px;">Assurman vergelijkt, adviseert en bezorgt u een BA-polis op maat van uw bouwactiviteiten.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Gratis scan starten</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Afspraak maken</a>
+      </div>
+    </div>
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+  </section>
+</BaseLayout>

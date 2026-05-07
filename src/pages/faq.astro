@@ -1,0 +1,117 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FaqAccordion from '../components/islands/FaqAccordion';
+import ScrollProgress from '../components/islands/ScrollProgress';
+
+const faqItems = [
+  {
+    title: 'Welke verzekeringen zijn verplicht voor bouwbedrijven?',
+    content: 'In België zijn de volgende verzekeringen verplicht voor bouwbedrijven: (1) Arbeidsongevallenverzekering: verplicht vanaf de eerste werknemer. (2) BA Auto: verplicht voor alle voertuigen op de openbare weg. (3) BA-10: verplicht voor aannemers bij werken aan de gesloten ruwbouw van vergunningsplichtige woningen. Naast deze verplichte verzekeringen zijn BA Onderneming en andere dekkingen sterk aanbevolen.'
+  },
+  {
+    title: 'Hoe vraag ik een offerte aan bij Assurman?',
+    content: 'U kunt starten via de gratis risicoscan op deze website. In 2 minuten geeft u ons de basisinformatie over uw bedrijf. Daarna contacteert Assurman u voor een gesprek en een voorstel op maat. U kunt ook rechtstreeks een afspraak plannen via de afsprakentool.'
+  },
+  {
+    title: 'Hoe lang duurt het voordat ik een polis heb?',
+    content: 'Na uw goedkeuring van het voorstel activeren we de polis doorgaans binnen 24 tot 48 uur. U ontvangt uw attest en polisnummer snel, zodat u tijdig kunt starten op uw werf.'
+  },
+  {
+    title: 'Kan Assurman ook mijn bestaande polissen bekijken?',
+    content: 'Ja. Assurman doet ook een analyse van uw bestaande polissen. We kijken waar u onderverzekerd bent, waar u dubbel betaalt en of er betere alternatieven zijn. Dit is onderdeel van de gratis risicoscan.'
+  },
+  {
+    title: 'Is Assurman gebonden aan een bepaalde verzekeraar?',
+    content: 'Nee. Assurman is een onafhankelijk verzekeringsmakelaar. We zijn niet gebonden aan één maatschappij en vergelijken meer dan 20 erkende verzekeraars. Dat geeft ons de vrijheid om altijd het beste product te kiezen voor uw situatie.'
+  },
+  {
+    title: 'Wat is het verschil tussen een makelaar en een verzekeringsagent?',
+    content: 'Een verzekeringsagent werkt voor één verzekeraar en vertegenwoordigt de belangen van die maatschappij. Een onafhankelijk makelaar zoals Assurman werkt voor u als klant en vergelijkt meerdere maatschappijen. U heeft recht op de beste prijs-kwaliteitverhouding — niet op wat het meest oplevert voor de verzekeraar.'
+  },
+  {
+    title: 'Wat gebeurt er bij een schadeaangifte?',
+    content: 'Bij schade contacteert u Assurman. Wij begeleiden u door de aangifte, communiceren met de verzekeraar en volgen het dossier op tot afsluiting. U hoeft niet zelf te onderhandelen of procedurele stappen te doorlopen.'
+  },
+  {
+    title: 'Werkt Assurman voor alle bouwsectoren?',
+    content: 'Ja. Assurman werkt voor alle bouwprofessionals: aannemers, dakwerkers, elektriciens, loodgieters, schilders, schrijnwerkers, metsers en meer. De risicoprofielen verschillen per sector; Assurman stelt een polis samen die past bij uw specifieke beroepsactiviteit.'
+  },
+  {
+    title: 'Wat is de gratis risicoscan?',
+    content: 'De gratis risicoscan is een online tool waarmee u in 2 minuten een overzicht krijgt van uw bouwverzekeringen: wat u al heeft, wat u mist en waar u dubbel betaalt. De scan is gratis, vrijblijvend en volledig zonder verplichtingen.'
+  },
+  {
+    title: 'Kan ik als zelfstandige ook terecht bij Assurman?',
+    content: 'Absoluut. Assurman werkt voor eenmanszaken, vennootschappen en grotere bouwbedrijven. De aanpak is modulair: u kiest welke dekkingen u nodig heeft, ook als dat maar één polis is.'
+  },
+  {
+    title: 'Is mijn premie fiscaal aftrekbaar?',
+    content: 'De meeste beroepsverzekeringspremies zijn volledig aftrekbaar als beroepskosten, waaronder de arbeidsongevallenverzekering, BA Onderneming, BA-10 en bedrijfsvoertuigen. Assurman geeft u bij de offerte een duidelijk overzicht.'
+  }
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.title,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.content
+    }
+  }))
+};
+---
+
+<BaseLayout
+  title="FAQ — Veelgestelde vragen over bouwverzekeringen | Assurman"
+  description="Antwoorden op de meest gestelde vragen over verzekeringen voor bouwprofessionals."
+  canonical="/faq"
+  schema={schema}
+>
+  <ScrollProgress client:load />
+
+  <!-- HERO -->
+  <section style="background:#001F3F;padding-top:140px;padding-bottom:80px;">
+    <div style="max-width:800px;margin:0 auto;padding:0 24px;text-align:center;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">FAQ</p>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,5vw,68px);line-height:1.05;color:#FFFFFF;margin:0 0 24px;">Veelgestelde vragen</h1>
+      <p style="font-family:'Open Sans',sans-serif;font-size:20px;line-height:1.7;color:rgba(255,255,255,0.75);margin:0;">Antwoorden op de meest gestelde vragen over bouwverzekeringen.</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="background:#FFFFFF;padding:80px 0 100px;">
+    <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+      <FaqAccordion client:visible items={faqItems} />
+    </div>
+  </section>
+
+  <!-- STILL QUESTIONS -->
+  <section style="background:#F8F9FA;padding:80px 0;">
+    <div style="max-width:800px;margin:0 auto;padding:0 24px;text-align:center;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Geen antwoord gevonden?</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,40px);line-height:1.1;color:#001F3F;margin:0 0 20px;">Stel uw vraag rechtstreeks</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.7;color:#3F5767;margin:0 0 32px;">Assurman beantwoordt persoonlijk elke vraag over uw bouwverzekeringen.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="/contact" style="display:inline-block;background:#001F3F;color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;">Contacteer ons</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid #001F3F;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;">Afspraak maken</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="background:#001F3F;padding:100px 0 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px 80px;text-align:center;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Klaar om te starten?</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.1;color:#FFFFFF;margin:0 0 20px;">Gratis scan of direct contact</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto 40px;">Assurman adviseert, vergelijkt en regelt uw bouwverzekeringen.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Gratis scan starten</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Afspraak maken</a>
+      </div>
+    </div>
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+  </section>
+</BaseLayout>

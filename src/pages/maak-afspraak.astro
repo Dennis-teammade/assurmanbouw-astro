@@ -1,0 +1,110 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ScrollProgress from '../components/islands/ScrollProgress';
+---
+
+<style>
+  .form-wrapper {
+    min-height: 800px;
+  }
+  .form-wrapper iframe {
+    min-height: 800px;
+  }
+  @media (max-width: 767px) {
+    .form-wrapper {
+      min-height: 600px;
+    }
+    .form-wrapper iframe {
+      min-height: 600px;
+    }
+  }
+  .contact-alt {
+    display: flex;
+    gap: 48px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .contact-alt-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: center;
+  }
+</style>
+
+<BaseLayout
+  title="Maak een afspraak — Assurmanbouw"
+  description="Wens je opgebeld te worden? We bellen altijd eerst: jouw tijd is kostbaar. Veel vragen lossen we telefonisch op, een afspraak indien zinvol."
+  canonical="/maak-afspraak"
+>
+  <ScrollProgress client:load />
+
+  <!-- HERO -->
+  <section style="background:#e5e7eb;padding-top:140px;padding-bottom:72px;">
+    <div style="max-width:1100px;margin:0 auto;padding:0 24px;text-align:center;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:50px 0 16px;">Vrijblijvend gesprek</p>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4.5vw,56px);line-height:1.1;color:#001F3F;margin:0 0 28px;">Wens je een afspraak?<br />Wens je opgebeld te worden?</h1>
+      <p style="font-family:'Open Sans',sans-serif;font-size:19px;line-height:1.75;color:#3F5767;margin:0 auto;max-width:1100px;">We bellen altijd eerst. Jouw tijd is kostbaar, en veel vragen lossen we telefonisch op. Is een afspraak toch zinvol, dan plannen we die samen op kantoor of op de werf. Vul je gegevens in en we bellen je terug binnen 2 werkdagen.</p>
+    </div>
+  </section>
+
+  <!-- FORMULIER -->
+  <section style="background:#FFFFFF;padding:72px 0;">
+    <div style="max-width:1000px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.7;color:#3F5767;margin:0 0 36px;text-align:center;">Laat je naam en telefoonnummer achter. We nemen contact op op een moment dat jou past.</p>
+
+      <div class="form-wrapper" style="background:#FFFFFF;border-radius:8px;overflow:hidden;">
+        <iframe
+          src="https://api.teammade.ai/widget/form/0LjvsQZOTGIqwPEjpyCd"
+          style="width:100%;height:100%;border:none;border-radius:8px"
+          id="inline-0LjvsQZOTGIqwPEjpyCd"
+          data-layout="{'id':'INLINE'}"
+          data-trigger-type="alwaysShow"
+          data-trigger-value=""
+          data-activation-type="alwaysActivated"
+          data-activation-value=""
+          data-deactivation-type="neverDeactivate"
+          data-deactivation-value=""
+          data-form-name="Gesprek aanvraag - assurman "
+          data-height="undefined"
+          data-layout-iframe-id="inline-0LjvsQZOTGIqwPEjpyCd"
+          data-form-id="0LjvsQZOTGIqwPEjpyCd"
+          title="Gesprek aanvraag - assurman "
+        ></iframe>
+      </div>
+      <script src="https://api.teammade.ai/js/form_embed.js" is:inline></script>
+    </div>
+  </section>
+
+  <!-- ALTERNATIEVE CONTACTOPTIES -->
+  <section style="background:#FFFFFF;padding:56px 0;">
+    <div style="max-width:760px;margin:0 auto;padding:0 24px;">
+      <div style="border:1px solid #E5E8ED;border-radius:8px;padding:32px 36px;text-align:center;">
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 24px;">Liever zelf bellen of mailen?</h2>
+        <div class="contact-alt">
+          <div class="contact-alt-item">
+            <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.8px;text-transform:uppercase;color:#9AABB7;">Telefoon</span>
+            <a href="tel:+3250361693" style="font-family:'Open Sans',sans-serif;font-size:17px;color:#001F3F;font-weight:600;text-decoration:none;">+32 50 36 16 93</a>
+            <span style="font-family:'Open Sans',sans-serif;font-size:13px;color:#9AABB7;">Ma. tot vr. &bull; 9u&ndash;12u en 13u&ndash;17u15</span>
+          </div>
+          <div class="contact-alt-item">
+            <span style="font-family:'Outfit',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.8px;text-transform:uppercase;color:#9AABB7;">E-mail</span>
+            <a href="mailto:info@assurman.be" style="font-family:'Open Sans',sans-serif;font-size:17px;color:#001F3F;font-weight:600;text-decoration:none;">info@assurman.be</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EIND-CTA BAND -->
+  <section style="background:#3F5767;padding:100px 0 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px 80px;text-align:center;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Gratis en vrijblijvend</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(26px,4vw,48px);line-height:1.15;color:#FFFFFF;margin:0 0 20px;">Nog niet zeker? Doe eerst de gratis verzekeringsscan</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:520px;margin:0 auto 40px;">In 2 minuten zie je waar je sterk staat en waar er ruimte is voor verbetering.</p>
+      <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Doe de gratis scan</a>
+    </div>
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+  </section>
+
+</BaseLayout>

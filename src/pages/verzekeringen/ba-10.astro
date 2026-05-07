@@ -1,0 +1,229 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqAccordion from '../../components/islands/FaqAccordion';
+import ScrollProgress from '../../components/islands/ScrollProgress';
+import StickyNav from '../../components/islands/StickyNav';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+
+const navItems = [
+  {id:'watis',label:'Wat is het?'},
+  {id:'verplicht',label:'Verplicht?'},
+  {id:'dekking',label:'Dekking'},
+  {id:'premie',label:'Premie'},
+  {id:'faq',label:'FAQ'}
+];
+
+const faqItems = [
+  {title:'Is BA-10 verplicht voor alle bouwwerken?',content:'Nee. BA-10 is verplicht voor werken aan de gesloten ruwbouw van vergunningsplichtige woningen, met architectentoezicht. Industriële gebouwen, appartementen en bepaalde renovatiewerken vallen onder andere regels.'},
+  {title:'Wat is het verschil tussen een werfpolis en een jaarpolis?',content:'Een werfpolis dekt één specifiek project voor de duur van de werken en 10 jaar daarna. Een jaarpolis dekt alle werven die u uitvoert gedurende het jaar en is voordeliger als u regelmatig actief bent.'},
+  {title:'Wat is een globale polis?',content:'Een globale BA-10-polis dekt alle bouwactoren op één werf samen: aannemer, architect, ingenieur en onderaannemers. Er is één aanspreekpunt bij schade. Voordeel: geen discussie over wie aansprakelijk is.'},
+  {title:'Wanneer moet het attest er liggen?',content:'Het verzekeringsattest moet aanwezig zijn vóór de start van de werken. Bouwheren en architecten controleren dit. Zonder attest mag u wettelijk niet starten.'},
+  {title:'Dekt BA-10 ook esthetische gebreken?',content:'Nee. BA-10 dekt specifiek stabiliteits- en soliditeitsgebreken die de stevigheid of de stabiliteit van het gebouw in gevaar brengen. Esthetische gebreken of slijtage vallen buiten de dekking.'}
+];
+---
+
+<BaseLayout
+  title="BA-10 Tienjarige aansprakelijkheid voor aannemers | Assurman"
+  description="BA-10 verzekering is verplicht voor aannemers bij woningbouw. Ontdek wat gedekt is, wanneer u verplicht bent en hoe u een polis afsluit."
+  canonical="/verzekeringen/ba-10"
+>
+  <ScrollProgress client:load />
+
+  <!-- HERO -->
+  <section id="hero" style="background:#FFFFFF;padding-top:130px;padding-bottom:80px;overflow:hidden;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+      <div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Verzekering</p>
+        <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,4.5vw,64px);line-height:1.05;color:#001F3F;margin:0 0 24px;">BA-10 Tienjarige aansprakelijkheid</h1>
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(18px,2vw,24px);color:#E5A524;margin:0 0 24px;line-height:1.3;">Verplicht bij woningbouw. Bescherming tot 10 jaar na oplevering.</p>
+        <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 40px;">Sinds 1 juli 2018 is de tienjarige aansprakelijkheidsverzekering verplicht voor alle bouwactoren bij werken aan de gesloten ruwbouw van vergunningsplichtige woningen. BA-10 beschermt u gedurende 10 jaar na oplevering tegen claims wegens stabiliteits- en soliditeitsgebreken.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;">Gratis scan aanvragen</a>
+          <a href="/maak-afspraak" style="display:inline-block;background:transparent;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;border:2px solid #001F3F;">Afspraak maken</a>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <img src="/foto-contact-35.png" alt="BA-10 tienjarige aansprakelijkheid" style="width:100%;max-width:520px;border-radius:8px;object-fit:cover;" loading="eager" />
+      </div>
+    </div>
+  </section>
+
+  <StickyNav client:load navItems={navItems} heroSectionId="hero" />
+
+  <!-- WAT IS HET -->
+  <section id="watis" style="background:#F8F9FA;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Wat is het?</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">Tienjarige aansprakelijkheid uitgelegd</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
+        <div style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:40px;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 20px;">In het kort</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+            {[
+              'Verplicht voor werken aan gesloten ruwbouw van vergunningsplichtige woningen',
+              'Geldt voor aannemer, architect en andere bouwactoren',
+              'Dekt stabiliteits- en soliditeitsgebreken tot 10 jaar na oplevering',
+              'Keuze tussen werfpolis (per project) of jaarpolis',
+              'Wettelijk minimum: €500.000 per schadegeval'
+            ].map((item) => (
+              <li style="display:flex;align-items:flex-start;gap:12px;font-family:'Open Sans',sans-serif;font-size:16px;color:#FFFFFF;line-height:1.5;">
+                <span style="color:#E5A524;font-weight:700;flex-shrink:0;margin-top:2px;">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 24px;">De BA-10 verzekering is ingevoerd door de Wet van 31 mei 2017 (ook wel de Wet Peeters-Borsus of de Wet Laruelle genoemd) en is van kracht sinds 1 juli 2018. Ze verplicht alle bouwactoren betrokken bij werken aan de gesloten ruwbouw van vergunningsplichtige woningen om een tienjarige aansprakelijkheidsverzekering af te sluiten.</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 32px;">De tienjarige aansprakelijkheid is geen nieuw principe — ze was al verankerd in het Burgerlijk Wetboek. Wat de wet nieuw toevoegt, is de verzekeringsplicht: u mag de aansprakelijkheid niet meer uitoefenen zonder dekking.</p>
+          <div style="background:#FFF8E7;border-left:4px solid #E5A524;padding:24px;border-radius:0 4px 4px 0;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#001F3F;margin:0 0 8px;">Wie valt onder de verplichting?</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0;">Aannemers, architecten, ingenieurs, studiebureau's en andere bouwprofessionals die betrokken zijn bij de gesloten ruwbouw van woningen moeten allen hun eigen BA-10-polis hebben. De globale polis is een alternatief waarbij alle actoren samen gedekt zijn.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VERPLICHT -->
+  <section id="verplicht" style="background:#FFFFFF;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <div style="text-align:center;margin-bottom:64px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Verplicht bij woningbouw?</p>
+        <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(72px,12vw,128px);line-height:0.9;color:#001F3F;margin:0 0 16px;">Ja.</div>
+        <p style="font-family:'Open Sans',sans-serif;font-size:20px;line-height:1.6;color:#3F5767;max-width:640px;margin:0 auto;">Voor werken aan de gesloten ruwbouw van vergunningsplichtige woningen is BA-10 wettelijk verplicht. Geen attest? Geen start.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+        {[
+          {title:'Wanneer verplicht',text:'Bij alle werken aan de gesloten ruwbouw (fundering, draagstructuur, dak) van vergunningsplichtige woningen die worden bewoond.'},
+          {title:'Voor wie',text:'Alle bouwactoren die intellectuele of uitvoerende diensten leveren: aannemer, architect, ingenieur, studiebureau.'},
+          {title:'Wettelijk minimum',text:'€500.000 per schadegeval. In de praktijk adviseren verzekeraars hogere dekkingsbedragen afhankelijk van de projectwaarde.'},
+          {title:'Attest vereist',text:'Het verzekeringsattest moet beschikbaar zijn vóór de start van de werken. De architect vraagt dit standaard op.'}
+        ].map((card) => (
+          <div style="background:#FFFFFF;border:1px solid #E5E8ED;border-radius:8px;padding:32px;box-shadow:0 2px 16px rgba(0,31,63,0.06);">
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 12px;">{card.title}</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:16px;line-height:1.6;color:#3F5767;margin:0;">{card.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- DEKKING -->
+  <section id="dekking" style="background:#F8F9FA;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Dekking</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 16px;">Wat dekt BA-10?</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:48px;">
+        <div style="background:#FFFFFF;border:2px solid #22C55E;border-radius:8px;padding:36px;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#15803D;margin:0 0 20px;">✓ Gedekt</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;">
+            {[
+              'Stabiliteitsgebreken aan de draagstructuur',
+              'Soliditeitsgebreken die de stevigheid in gevaar brengen',
+              'Gebreken in fundering en vloerplaat',
+              'Schade aan het dak die de stabiliteit raakt',
+              'Verzakkingen en scheuren met structurele impact',
+              'Gebreken ontdekt tot 10 jaar na oplevering'
+            ].map((item) => (
+              <li style="display:flex;align-items:flex-start;gap:10px;font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.5;color:#001F3F;">
+                <span style="color:#22C55E;font-weight:700;flex-shrink:0;margin-top:2px;">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div style="background:#FFFFFF;border:2px solid #EF4444;border-radius:8px;padding:36px;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#DC2626;margin:0 0 20px;">✗ Niet gedekt</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;">
+            {[
+              'Esthetische gebreken (kleur, afwerking)',
+              'Gewone slijtage en veroudering',
+              'Schade door gebrek aan onderhoud',
+              'Gebreken buiten de gesloten ruwbouw',
+              'Schade veroorzaakt na de oplevering door de bewoner'
+            ].map((item) => (
+              <li style="display:flex;align-items:flex-start;gap:10px;font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.5;color:#001F3F;">
+                <span style="color:#EF4444;font-weight:700;flex-shrink:0;margin-top:2px;">✗</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PREMIE / WERFPOLIS VS JAARPOLIS -->
+  <section id="premie" style="background:#001F3F;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Premie & Polistype</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#FFFFFF;margin:0 0 16px;">Werfpolis of jaarpolis?</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);margin:0 0 48px;max-width:720px;">Afhankelijk van hoe frequent u actief bent op werven met BA-10-plicht, kiest u het meest geschikte type polis.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+        {[
+          {type:'Werfpolis',desc:'Ideaal voor aannemers die occasioneel actief zijn bij woningbouw. De polis dekt één specifiek project, van start tot 10 jaar na oplevering. Premie wordt berekend op de projectwaarde.',pros:['Flexibel per project','Geen jaarlijkse verbintenis','Premie gebaseerd op projectwaarde']},
+          {type:'Jaarpolis',desc:'Voordeliger voor aannemers die regelmatig woningbouwprojecten uitvoeren. Één polis dekt alle projecten in een kalenderjaar, binnen de afgesproken grenzen.',pros:['Administratief eenvoudiger','Kostprijs per project lager','Één polis voor meerdere werven']}
+        ].map((item) => (
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:36px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#E5A524;margin:0 0 16px;">{item.type}</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:16px;line-height:1.6;color:rgba(255,255,255,0.75);margin:0 0 24px;">{item.desc}</p>
+            <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;">
+              {item.pros.map((pro) => (
+                <li style="display:flex;align-items:flex-start;gap:10px;font-family:'Open Sans',sans-serif;font-size:14px;color:rgba(255,255,255,0.85);">
+                  <span style="color:#E5A524;flex-shrink:0;">✓</span>
+                  {pro}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GOLD CTA -->
+  <section style="background:#E9C466;padding:72px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;">
+      <div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(22px,3vw,36px);color:#001F3F;margin:0 0 8px;">Uw BA-10 attest vóór de start</p>
+        <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.6;color:rgba(0,31,63,0.75);margin:0;">Assurman regelt uw polis snel zodat u tijdig kunt starten.</p>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#001F3F;color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Gratis scan</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid #001F3F;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Afspraak</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="background:#FFFFFF;padding:100px 0;">
+    <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Veelgestelde vragen</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">FAQ BA-10</h2>
+      <FaqAccordion client:visible items={faqItems} />
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section style="background:#F8F9FA;padding:60px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin:0 0 32px;">Onze verzekeringspartners</p>
+      <PartnerSlider client:visible />
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="background:#001F3F;padding:100px 0 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px 80px;text-align:center;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Klaar om te starten?</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.1;color:#FFFFFF;margin:0 0 20px;">Uw BA-10 polis in orde</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto 40px;">Snel een attest, correcte dekking, persoonlijk advies. Assurman regelt het voor u.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Gratis scan starten</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Afspraak maken</a>
+      </div>
+    </div>
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+  </section>
+</BaseLayout>

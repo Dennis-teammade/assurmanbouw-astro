@@ -1,0 +1,111 @@
+﻿---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ScrollProgress from '../components/islands/ScrollProgress';
+import PartnerSlider from '../components/ui/PartnerSlider';
+---
+
+<BaseLayout
+  title="Over Assurman — Uw specialist in bouwverzekeringen"
+  description="Assurman is een onafhankelijke verzekeringsmakelaar gespecialiseerd in de bouwsector in West- en Oost-Vlaanderen."
+  canonical="/over-assurman"
+>
+  <ScrollProgress client:load />
+
+  <!-- HERO -->
+  <section style="background:#001F3F;padding-top:140px;padding-bottom:80px;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+      <div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Over ons</p>
+        <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,4.5vw,64px);line-height:1.05;color:#FFFFFF;margin:0 0 24px;">Specialist in bouwverzekeringen</h1>
+        <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);margin:0 0 32px;">Assurman is een onafhankelijke verzekeringsmakelaar met meer dan 15 jaar ervaring in de bouwsector. We werken uitsluitend voor bouwprofessionals in West- en Oost-Vlaanderen — van zelfstandige dakwerker tot aannemersbedrijf met meerdere ploegen.</p>
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;">Start gratis scan</a>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        {[
+          {stat:'500+',label:'Bouwbedrijven verzekerd'},
+          {stat:'15+',label:'Jaar sectorervaring'},
+          {stat:'20+',label:'Verzekeringspartners'},
+          {stat:'4.9/5',label:'Klanttevredenheid'}
+        ].map((item) => (
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:28px;text-align:center;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:900;font-size:36px;color:#E5A524;margin:0 0 6px;">{item.stat}</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:14px;color:rgba(255,255,255,0.65);margin:0;">{item.label}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- BRAND STORY -->
+  <section style="background:#FFFFFF;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;">
+        <div>
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Ons verhaal</p>
+          <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,44px);line-height:1.1;color:#001F3F;margin:0 0 24px;">Geboren uit de bouwsector</h2>
+          <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.7;color:#3F5767;margin:0 0 20px;">Assurman is ontstaan vanuit een duidelijke vaststelling: de bouwsector heeft specifieke verzekeringsbehoeften die een generalist niet correct kan invullen. Een dakwerker heeft andere risicos dan een kantoorhouder. Een aannemer met meerdere ploegen heeft andere noden dan een zelfstandige loodgieter.</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.7;color:#3F5767;margin:0 0 20px;">Door uitsluitend te focussen op bouwprofessionals, kennen we de sector van binnenuit: de verplichte verzekeringen, de typische risicos, de meest competitieve maatschappijen en de valkuilen bij polissen die niet goed zijn afgestemd.</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.7;color:#3F5767;margin:0;">Assurman werkt als onafhankelijk makelaar — we zijn niet gebonden aan één verzekeraar. Dat geeft ons de vrijheid om altijd de beste optie te zoeken voor onze klanten.</p>
+        </div>
+        <div>
+          <div style="background:#F8F9FA;border-radius:12px;padding:40px;margin-bottom:24px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">FSMA-erkend makelaar</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:16px;line-height:1.6;color:#3F5767;margin:0 0 16px;">Assurman is erkend door de FSMA (Financiële Diensten en Markten Autoriteit) als verzekeringsmakelaar. Dit betekent dat we gebonden zijn aan strikte gedragsregels en dat uw belangen wettelijk beschermd zijn.</p>
+            <div style="background:#001F3F;border-radius:6px;padding:16px 20px;display:inline-block;">
+              <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:#E5A524;margin:0;">FSMA-erkenningsnummer</p>
+              <p style="font-family:'Open Sans',sans-serif;font-size:14px;color:rgba(255,255,255,0.8);margin:4px 0 0;">Beschikbaar op aanvraag</p>
+            </div>
+          </div>
+          <div style="background:#FFF8E7;border-left:4px solid #E5A524;padding:24px;border-radius:0 8px 8px 0;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#001F3F;margin:0 0 8px;">Onafhankelijk advies</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0;">Als onafhankelijk makelaar zijn we niet gebonden aan één verzekeraar. We vergelijken meer dan 20 erkende maatschappijen en kiezen altijd het product dat het best aansluit bij uw situatie.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAARDEN -->
+  <section style="background:#F8F9FA;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;text-align:center;">Onze waarden</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,44px);line-height:1.1;color:#001F3F;margin:0 0 48px;text-align:center;">Waarom bouwers kiezen voor Assurman</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
+        {[
+          {title:'Onafhankelijk',icon:'⚖️',text:'Geen binding met één verzekeraar. We vergelijken en kiezen altijd het beste aanbod voor uw situatie — niet het meest winstgevende voor ons.'},
+          {title:'Specialisatie bouw',icon:'🏗️',text:'Uitsluitend actief voor bouwprofessionals. We kennen de verplichte verzekeringen, de typische risicos en de beste polissen per sector.'},
+          {title:'Snel & helder',icon:'⚡',text:'Geen weken wachten op een offerte. Geen onbegrijpelijk jargon. Assurman werkt snel en communiceert helder.'},
+          {title:'Meegroeiend',icon:'📈',text:'Uw bouwbedrijf groeit. Uw verzekeringen groeien mee. Assurman reviewt jaarlijks of uw dekkingen nog passend zijn.'}
+        ].map((item) => (
+          <div style="background:#FFFFFF;border:1px solid #E5E8ED;border-radius:10px;padding:36px;text-align:center;box-shadow:0 2px 16px rgba(0,31,63,0.05);">
+            <span style="font-size:40px;display:block;margin-bottom:20px;">{item.icon}</span>
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;color:#001F3F;margin:0 0 12px;">{item.title}</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0;">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section style="background:#FFFFFF;padding:60px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin:0 0 32px;">Onze verzekeringspartners</p>
+      <PartnerSlider client:visible />
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="background:#001F3F;padding:100px 0 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px 80px;text-align:center;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Gratis en vrijblijvend</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.1;color:#FFFFFF;margin:0 0 20px;">Maak kennis met Assurman</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto 40px;">Start met de gratis risicoscan of plan een afspraak. Geen verplichtingen, wel expertise.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Gratis scan starten</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Afspraak maken</a>
+      </div>
+    </div>
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+  </section>
+</BaseLayout>

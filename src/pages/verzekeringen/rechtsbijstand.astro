@@ -1,0 +1,200 @@
+﻿---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FaqAccordion from '../../components/islands/FaqAccordion';
+import ScrollProgress from '../../components/islands/ScrollProgress';
+import StickyNav from '../../components/islands/StickyNav';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+
+const navItems = [
+  {id:'watis',label:'Wat is het?'},
+  {id:'dekking',label:'Dekking'},
+  {id:'geschillen',label:'Geschillen'},
+  {id:'faq',label:'FAQ'}
+];
+
+const faqItems = [
+  {title:'Is rechtsbijstand hetzelfde als BA?',content:'Nee. BA dekt de schade die u aan anderen toebrengt. Rechtsbijstand dekt de juridische kosten wanneer u in een geschil verzekeraar bent — als verweerder of eiser. Ze zijn complementair.'},
+  {title:'Wie kiest de advocaat?',content:'Dat doet u zelf. Artikel 156 van de Wet op de Verzekeringen garandeert vrije advocaatkeuze. De verzekeraar betaalt de kosten, maar u kiest zelf wie u vertegenwoordigt.'},
+  {title:'Dekt rechtsbijstand ook factuurincasso?',content:'Ja. Bij wanbetaling kunt u via rechtsbijstand een advocaat inschakelen om uw facturen te innen. Dit is bijzonder nuttig voor zelfstandigen en kleine bouwbedrijven.'},
+  {title:'Wat als de wederpartij ook bij dezelfde verzekeraar verzekerd is?',content:'Dan is er een belangenconflict en moet de verzekeraar een onafhankelijke advocaat aanwijzen of u volledig vrijlaten in uw keuze. Dit is wettelijk geregeld.'},
+  {title:'Zijn er wachttijden?',content:'Ja. Voor nieuw afgesloten polissen geldt doorgaans een wachttijd van 30 tot 90 dagen voor bepaalde gedekte risicos. Incidenten die al voor de inwerkingtreding bestonden, zijn uitgesloten.'}
+];
+---
+
+<BaseLayout
+  title="Rechtsbijstandsverzekering voor bouwbedrijven | Assurman"
+  description="Juridische bescherming voor aannemers, elektriciens, dakwerkers en andere bouwprofessionals. Geschillen, facturen, contracten."
+  canonical="/verzekeringen/rechtsbijstand"
+>
+  <ScrollProgress client:load />
+
+  <!-- HERO -->
+  <section id="hero" style="background:#FFFFFF;padding-top:130px;padding-bottom:80px;overflow:hidden;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+      <div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Verzekering</p>
+        <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,4.5vw,64px);line-height:1.05;color:#001F3F;margin:0 0 24px;">Rechtsbijstands&shy;verzekering</h1>
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(18px,2vw,24px);color:#E5A524;margin:0 0 24px;line-height:1.3;">Juridische bescherming bij geschillen, contracten en facturen.</p>
+        <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 40px;">In de bouwsector ontstaan conflicten: wanbetalende klanten, betwiste aansprakelijkheid, arbeidsrechtelijke geschillen of problemen met onderaannemers. Een rechtsbijstandsverzekering dekt uw juridische kosten en geeft u toegang tot een advocaat van uw keuze.</p>
+        <div style="display:flex;gap:16px;flex-wrap:wrap;">
+          <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;">Gratis scan aanvragen</a>
+          <a href="/maak-afspraak" style="display:inline-block;background:transparent;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;border:2px solid #001F3F;">Afspraak maken</a>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;justify-content:center;">
+        <img src="/foto-contact-35.png" alt="Rechtsbijstand bouwbedrijven" style="width:100%;max-width:520px;border-radius:8px;object-fit:cover;" loading="eager" />
+      </div>
+    </div>
+  </section>
+
+  <StickyNav client:load navItems={navItems} heroSectionId="hero" />
+
+  <!-- WAT IS HET -->
+  <section id="watis" style="background:#F8F9FA;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Wat is het?</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">Juridische bescherming voor bouwprofessionals</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
+        <div style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:40px;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 20px;">In het kort</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+            {[
+              'Dekt juridische kosten bij geschillen met klanten, leveranciers of overheid',
+              'Incasso bij wanbetalers en factuurgeschillen',
+              'Vrije keuze van advocaat (art. 156 Wet Verzekeringen)',
+              'Tussenkomst in advocaat-, expert- en gerechtskosten',
+              'Aanvulling op BA: rechtsbijstand gaat verder waar BA stopt'
+            ].map((item) => (
+              <li style="display:flex;align-items:flex-start;gap:12px;font-family:'Open Sans',sans-serif;font-size:16px;color:#FFFFFF;line-height:1.5;">
+                <span style="color:#E5A524;font-weight:700;flex-shrink:0;margin-top:2px;">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 24px;">De rechtsbijstandsverzekering is complementair aan uw BA-verzekering. Waar BA de schade van de tegenpartij vergoedt, dekt rechtsbijstand de kosten die u maakt om uw eigen belangen te verdedigen of uw rechten op te eisen.</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 32px;">Voor bouwbedrijven die te maken hebben met betwiste facturen, geschillen over kwaliteit van uitvoering of arbeidsrechtelijke problemen is rechtsbijstand bijzonder waardevol.</p>
+          <div style="background:#FFF8E7;border-left:4px solid #E5A524;padding:24px;border-radius:0 4px 4px 0;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#001F3F;margin:0 0 8px;">Vrije advocaatkeuze</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0;">Artikel 156 van de Belgische Wet op de Verzekeringen garandeert dat u altijd de advocaat van uw keuze mag aanstellen. De verzekeraar dekt de kosten maar legt u geen advocaat op.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEKKING -->
+  <section id="dekking" style="background:#FFFFFF;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Dekking</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 16px;">Wat is gedekt?</h2>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-bottom:48px;">
+        <div style="background:#FFFFFF;border:2px solid #22C55E;border-radius:8px;padding:36px;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#15803D;margin:0 0 20px;">✓ Gedekt</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;">
+            {[
+              'Advocaat- en gerechtskosten',
+              'Kosten voor deskundigen en experten',
+              'Incasso van onbetaalde facturen',
+              'Geschillen over contracten en aannemingsovereenkomsten',
+              'Arbeidsrechtelijke geschillen',
+              'Fiscale geschillen en bezwaren',
+              'Verhaal na een verkeersongeval als slachtoffer'
+            ].map((item) => (
+              <li style="display:flex;align-items:flex-start;gap:10px;font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.5;color:#001F3F;">
+                <span style="color:#22C55E;font-weight:700;flex-shrink:0;margin-top:2px;">✓</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div style="background:#FFFFFF;border:2px solid #EF4444;border-radius:8px;padding:36px;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#DC2626;margin:0 0 20px;">✗ Niet gedekt</p>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;">
+            {[
+              'Opzettelijk gepleegde inbreuken',
+              'Boetes en strafrechtelijke sancties',
+              'Geschillen voor de verzekeringsdatum (wachttijd)',
+              'Schade gedekt door BA (andere polis)',
+              'Geschillen met een te laag financieel belang'
+            ].map((item) => (
+              <li style="display:flex;align-items:flex-start;gap:10px;font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.5;color:#001F3F;">
+                <span style="color:#EF4444;font-weight:700;flex-shrink:0;margin-top:2px;">✗</span>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TYPES GESCHILLEN -->
+  <section id="geschillen" style="background:#001F3F;padding:100px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Geschillen</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#FFFFFF;margin:0 0 48px;">Typische geschillen in de bouw</h2>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+        {[
+          {title:'Factuurincasso',text:'Een klant betaalt niet. Via rechtsbijstand schakelt u een advocaat in voor incasso — zonder de kosten zelf te dragen.'},
+          {title:'Contractgeschillen',text:'Betwisting over de inhoud van een aannemingsovereenkomst, meerwerk, vertragingsboetes of garanties.'},
+          {title:'Kwaliteitsbetwisting',text:'Een klant beweert dat werken niet conform zijn en weigert betaling. U verdedigt uw uitvoering met juridische ondersteuning.'},
+          {title:'Arbeidsrecht',text:'Geschillen met personeel over loon, ontslag, arbeidsreglement of arbeidsongevallen waarbij aansprakelijkheid betwist wordt.'},
+          {title:'Fiscale geschillen',text:'Bezwaar bij belastingen, btw-correcties of sociale bijdragen. Rechtsbijstand dekt de kosten van fiscale bijstand.'},
+          {title:'Aansprakelijkheidsgeschillen',text:'Wanneer aansprakelijkheid betwist is en er naast de BA-verzekering ook juridische actie nodig is.'}
+        ].map((item) => (
+          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:28px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#E5A524;margin:0 0 10px;">{item.title}</p>
+            <p style="font-family:'Open Sans',sans-serif;font-size:14px;line-height:1.5;color:rgba(255,255,255,0.75);margin:0;">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- GOLD CTA -->
+  <section style="background:#E9C466;padding:72px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;">
+      <div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(22px,3vw,36px);color:#001F3F;margin:0 0 8px;">Juridisch beschermd</p>
+        <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.6;color:rgba(0,31,63,0.75);margin:0;">Assurman stelt een rechtsbijstandspolis op maat samen.</p>
+      </div>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#001F3F;color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Gratis scan</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid #001F3F;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Afspraak</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" style="background:#FFFFFF;padding:100px 0;">
+    <div style="max-width:900px;margin:0 auto;padding:0 24px;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Veelgestelde vragen</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">FAQ rechtsbijstand</h2>
+      <FaqAccordion client:visible items={faqItems} />
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section style="background:#F8F9FA;padding:60px 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
+      <p style="text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin:0 0 32px;">Onze verzekeringspartners</p>
+      <PartnerSlider client:visible />
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="background:#001F3F;padding:100px 0 0;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px 80px;text-align:center;">
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Klaar om te starten?</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.1;color:#FFFFFF;margin:0 0 20px;">Uw rechtsbijstand geregeld</h2>
+      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto 40px;">Juridische bescherming die werkt. Assurman regelt de juiste polis voor uw bouwbedrijf.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Gratis scan starten</a>
+        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Afspraak maken</a>
+      </div>
+    </div>
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+  </section>
+</BaseLayout>
