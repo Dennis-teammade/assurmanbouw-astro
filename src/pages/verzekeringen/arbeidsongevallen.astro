@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
+import BrandChevron from '../../components/BrandChevron.astro';
 
 const faqItems = [
   { q: 'Is een arbeidsongevallenverzekering verplicht vanaf mijn eerste werknemer?', a: 'Ja. In België moet je als werkgever in de privésector je eerste werknemer vanaf de eerste werkdag verzekeren tegen arbeidsongevallen.' },
@@ -77,8 +78,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
   /* ── Responsive layout classes — mirrors dakwerkers.astro / index.astro patterns ── */
 
   /* Hero — mirrors index.astro exactly */
-  .ao-hero-img { position:absolute; top:0; right:0; bottom:0; width:45%; display:flex; align-items:center; justify-content:flex-end; z-index:1; pointer-events:none; }
-  .ao-hero-img img { height:80%; width:80%; object-fit:contain; object-position:right center; }
+  .ao-hero-img { position:absolute; top:5%; right:0; height:90%; width:auto; max-width:48%; z-index:1; pointer-events:none; }
   .ao-hero-content { max-width:620px; }
   .ao-hero-inner { max-width:1280px; margin:0 auto; padding:64px 32px 80px; position:relative; z-index:2; }
   .ao-hero-btns { display:flex; gap:16px; flex-wrap:wrap; margin-bottom:32px; }
@@ -121,9 +121,8 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     .ao-sticky-inner    { padding:0 15px; }
     .ao-hero-content    { max-width:100%; }
 
-    /* Hero image: drops below text — mirrors index.astro mobile pattern */
-    .ao-hero-img { position:static; width:100%; height:auto; display:block; }
-    .ao-hero-img img { height:auto; width:100%; max-height:260px; object-fit:cover; object-position:center top; }
+    /* Hero image: hidden on mobile — mirrors sectorpagina's pattern */
+    .ao-hero-img { display:none; }
 
     /* Hero buttons: stack vertically */
     .ao-hero-btns { flex-direction:column; }
@@ -184,7 +183,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 
 <!-- HERO -->
 <section id="ao-hero" style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:100vh;">
-  <div class="ao-hero-img">
+  <div class="ao-hero-img assurman-mask assurman-mask--hero">
     <img src="/foto-contact-35.png" alt="Bouwprofessionals op de werf" />
   </div>
   <div class="ao-hero-inner">
@@ -291,7 +290,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 
 <!-- WANNEER ARBEIDSONGEVAL -->
 <section style="background:#FFFFFF;padding:0 32px 96px;position:relative;">
-  <div style="display:flex;justify-content:center;pointer-events:none;"><img src="/ASSURMAN_BRAND_ARROW-horizontal-GEEL.png" alt="" style="height:80px;width:auto;" /></div>
+  <div style="display:flex;justify-content:center;pointer-events:none;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
   <div style="max-width:1280px;margin:0 auto;padding-top:48px;">
     <div style="max-width:640px;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">De 5 voorwaarden</span>
@@ -386,7 +385,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 
 <!-- AANVULLENDE WAARBORGEN -->
 <section id="ao-aanvulling" style="background:#3F5767;padding:0 0 96px;position:relative;overflow:hidden;">
-  <div style="display:flex;justify-content:center;pointer-events:none;"><img src="/ASSURMAN_BRAND_ARROW-horizontal-WIT.png" alt="" style="height:80px;width:auto;" /></div>
+  <div style="display:flex;justify-content:center;pointer-events:none;"><BrandChevron color="white" height="80px" direction="down" /></div>
   <div style="max-width:1280px;margin:0 auto;padding:32px 32px 0;position:relative;z-index:1;">
     <div style="max-width:640px;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Aanvullen</span>
@@ -427,7 +426,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 
 <!-- PREMIE -->
 <section id="premie" style="background:#F7F4EF;padding:0 32px 96px;">
-  <div style="display:flex;justify-content:center;pointer-events:none;"><img src="/ASSURMAN_BRAND_ARROW-horizontal-GEEL.png" alt="" style="height:80px;width:auto;" /></div>
+  <div style="display:flex;justify-content:center;pointer-events:none;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
   <div style="max-width:1280px;margin:0 auto;padding-top:48px;">
     <div style="text-align:center;margin-bottom:56px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Prijs & berekening</span>
@@ -486,8 +485,8 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 <!-- TUSSEN-CTA BAND -->
 <section id="ao-cta-band" style="background:#E9C466;padding:0 0 100px;position:relative;overflow:hidden;">
   <img class="ao-cta-deco" src="/verzekeringen_arbeidsongevallen.png" alt="" style="position:absolute;top:0;right:-5px;height:100%;width:auto;max-width:40%;object-fit:contain;object-position:right top;z-index:1;pointer-events:none;" />
-  <div style="display:flex;justify-content:center;margin-bottom:60px;position:relative;z-index:3;pointer-events:none;"><img src="/ASSURMAN_BRAND_ARROW-horizontal-WIT.png" alt="" style="height:100px;width:auto;opacity:1;" /></div>
-  <div class="ao-cta-deco" style="position:absolute;right:-20px;top:30%;transform:translateY(-50%);pointer-events:none;z-index:2;"><img src="/ASSURMAN_BRAND_ARROW-WIT.png" alt="" style="height:240px;width:auto;" /></div>
+  <div style="display:flex;justify-content:center;margin-bottom:60px;position:relative;z-index:3;pointer-events:none;"><BrandChevron color="white" height="100px" direction="down" /></div>
+  <div class="ao-cta-deco" style="position:absolute;right:-20px;top:30%;transform:translateY(-50%);pointer-events:none;z-index:2;"><BrandChevron color="white" height="240px" direction="left" /></div>
   <div style="max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:4;padding:0 32px;">
     <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">Bouwprofessional in Vlaanderen?<br />Wij maken jouw pakket op maat.</h2>
     <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#3F5767;margin-bottom:40px;opacity:0.9;">Start nu in 2 minuten of kies meteen voor persoonlijk advies.</p>
@@ -582,7 +581,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 
 <!-- BIJ EEN ONGEVAL -->
 <section id="procedure" style="background:#FFFFFF;padding:0 32px 96px;">
-  <div style="display:flex;justify-content:center;pointer-events:none;"><img src="/ASSURMAN_BRAND_ARROW-horizontal-GEEL.png" alt="" style="height:80px;width:auto;" /></div>
+  <div style="display:flex;justify-content:center;pointer-events:none;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
   <div style="max-width:1280px;margin:0 auto;padding-top:48px;">
     <div style="text-align:center;margin-bottom:60px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Bij een ongeval</span>
