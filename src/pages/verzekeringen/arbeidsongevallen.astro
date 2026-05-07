@@ -169,6 +169,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 
     /* Decorative images: hide on mobile to save space */
     .ao-cta-deco { display:none; }
+    .ao-cta-mask-img { width: 55% !important; opacity: 0.35 !important; }
 
     /* Procedure connecting line: hide on mobile (grid is now 2-col, no single line) */
     .ao-procedure-line { display:none !important; }
@@ -185,7 +186,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 <!-- HERO -->
 <section id="ao-hero" style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:100vh;">
   <div class="ao-hero-img assurman-mask assurman-mask--hero">
-    <img src="/foto-contact-35.png" alt="Bouwprofessionals op de werf" />
+    <img src="/verzekeringen-bouwsector-arbeidsongevallenverzekering-hero.jpg" alt="Bouwprofessional bij arbeidsongeval op de werf" />
   </div>
   <div class="ao-hero-inner">
     <div class="ao-hero-content">
@@ -485,7 +486,10 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 
 <!-- TUSSEN-CTA BAND -->
 <section id="ao-cta-band" style="background:#E9C466;padding:80px 0 100px;position:relative;overflow:hidden;">
-  <img class="ao-cta-deco" src="/verzekeringen_arbeidsongevallen.png" alt="" style="position:absolute;top:0;right:-5px;height:100%;width:auto;max-width:40%;object-fit:contain;object-position:right top;z-index:1;pointer-events:none;" />
+  <!-- right:-4px compenseert de speling in de mask-path; voorkomt zichtbare strook rechts -->
+  <div class="assurman-mask assurman-mask--cta ao-cta-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:1;">
+    <img src="/verzekeringen-bouwsector-arbeidsongevallenverzekering-cta.jpg" alt="Bouwprofessional na arbeidsongeval">
+  </div>
   <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="100px" direction="down" /></div>
   <div class="ao-cta-deco" style="position:absolute;right:-130px;top:40%;transform:translateY(-50%);pointer-events:none;z-index:2;"><BrandChevron color="white" height="240px" direction="left" /></div>
   <div style="max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:4;padding:0 32px;">
