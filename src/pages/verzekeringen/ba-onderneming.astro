@@ -1,244 +1,701 @@
-﻿---
+---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
-import FaqAccordion from '../../components/islands/FaqAccordion';
-import ScrollProgress from '../../components/islands/ScrollProgress';
-import StickyNav from '../../components/islands/StickyNav';
 import PartnerSlider from '../../components/ui/PartnerSlider';
-
-const navItems = [
-  {id:'watis',label:'Wat is het?'},
-  {id:'dekking',label:'Dekking'},
-  {id:'wanneer',label:'Wanneer nodig?'},
-  {id:'premium',label:'Premie'},
-  {id:'faq',label:'FAQ'}
-];
+import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
+import BrandChevron from '../../components/BrandChevron.astro';
 
 const faqItems = [
-  {title:'Is BA Onderneming verplicht?',content:'BA Onderneming is niet altijd wettelijk verplicht, maar is in de bouwsector vrijwel altijd een vereiste. Veel bouwheren en opdrachtgevers eisen een attest van BA-verzekering voor de start van werken.'},
-  {title:'Wat is het verschil tussen BA Uitbating en BA Beroepsaansprakelijkheid?',content:'BA Uitbating dekt schade die optreedt tijdens de normale uitbating of werken. BA Beroepsaansprakelijkheid dekt fouten in uw advies, ontwerp of uitvoering die pas later leiden tot schade. Voor bouwprofessionals zijn beide relevant.'},
-  {title:'Wat is BA Na Levering?',content:'BA Na Levering dekt schade die optreedt nadat de werken zijn opgeleverd of het product is geleverd. Denk aan een installatie die achteraf gebreken vertoont. Dit is een cruciale aanvulling op de gewone BA Uitbating.'},
-  {title:'Dekt BA Onderneming schade door onderaannemers?',content:'Doorgaans dekt uw BA Onderneming schade waarvoor u als hoofdaannemer aansprakelijk wordt gesteld, ook als die door een onderaannemer is veroorzaakt. Uw verzekeraar kan vervolgens verhaal halen op de onderaannemer.'},
-  {title:'Hoe hoog moet de dekking zijn?',content:'Er is geen wettelijk minimum voor BA Onderneming (in tegenstelling tot BA-10). De marktstandaard ligt tussen €1.000.000 en €5.000.000 per schadegeval. Assurman adviseert de juiste limieten op basis van uw activiteiten.'},
-  {title:'Kan ik een attest aanvragen voor mijn opdrachtgever?',content:'Ja. Zodra uw polis actief is, kan Assurman een verzekeringsattest opmaken dat u aan uw opdrachtgever of bouwheer bezorgt. Dit is standaard procedure bij de start van werven.'}
+  { q: 'Is een BA Onderneming wettelijk verplicht voor een aannemer?', a: 'Voor de meeste aannemers niet, maar bouwheren en hoofdaannemers eisen het attest standaard. De facto werk je niet zonder. Voor woningbouw met architect geldt bovendien de afzonderlijke verplichting van BA-10 (tienjarige aansprakelijkheid).' },
+  { q: 'Wat is het verschil tussen BA Onderneming, BA Uitbating en BA Beroep?', a: 'BA Onderneming en BA Uitbating zijn doorgaans synoniem en dekken buitencontractuele schade aan derden tijdens je activiteit. BA Beroep is iets anders en dekt zuivere financiële schade door fouten in advies of dienst — typisch voor architecten, accountants, consultants.' },
+  { q: 'Wat verandert er door Boek 6 BW voor jouw polis?', a: 'Twee dingen: het samenloopverbod is weg — een derde kan je contractueel of buitencontractueel aanspreken — en de quasi-immuniteit van hulppersonen is opgeheven. Onderaannemers, werknemers en bestuurders kunnen rechtstreeks worden aangesproken. Reden om je polis te herzien op dekking van onderaannemers en bestuurders.' },
+  { q: 'Dekt BA Onderneming ook schade aan een toevertrouwd goed?', a: 'Niet standaard. Schade aan goederen die de klant aan jou heeft toevertrouwd — een meubel in renovatie, een installatie waaraan je werkt — valt onder de uitbreiding toevertrouwd goed. Aanrader voor schrijnwerkers, loodgieters en elektriciens.' },
+  { q: 'Wat kost een BA Onderneming voor een bouwbedrijf?', a: 'Voor een typisch klein bouwbedrijf doorgaans tussen € 350 en € 1.500 per jaar. Grotere bedrijven met meer omzet, meer personeel en hogere plafonds betalen enkele duizenden euro per jaar. De activiteit — dakwerk versus binnenafwerking — bepaalt mee de premievoet.' },
+  { q: 'Wat als mijn onderaannemer schade veroorzaakt?', a: 'Sinds Boek 6 BW kan jouw onderaannemer rechtstreeks worden aangesproken. Als hij onvoldoende verzekerd is, kom jij snel in beeld als hoofdaannemer. Eis bij elke onderaannemer een actueel attest BA Onderneming met voldoende plafond, of zorg dat je eigen polis hen mee dekt.' },
+  { q: 'Wat is het verschil met BA-10 (tienjarige aansprakelijkheid)?', a: 'BA-10 is een aparte, voor woningbouw verplichte polis die specifiek de zware structurele schade gedurende tien jaar na oplevering dekt. BA Onderneming dekt schade aan derden tijdens de werken. Beide zijn complementair.' },
+  { q: 'Hoe snel moet ik een schadegeval aangeven?', a: 'Standaard binnen 8 kalenderdagen na vaststelling. Te laat aangeven kan leiden tot vermindering of weigering van tussenkomst. Lees de exacte termijn altijd na in jouw polisvoorwaarden.' },
+  { q: 'Wat valt absoluut niet onder BA Onderneming?', a: 'Contractbreuk zonder schade aan derden, opzet, fraude, zware fout, schade aan toevertrouwd goed zonder uitbreiding, schade door bedrijfsvoertuigen via BA Auto, boetes en strafrechtelijke veroordelingen.' },
+  { q: 'Is de premie fiscaal aftrekbaar?', a: 'Ja, de premie is een aftrekbare beroepskost voor zowel eenmanszaken als vennootschappen. De premietaks van 9,25% maakt deel uit van de aftrekbare som.' },
+  { q: 'Heb ik BA Onderneming én BA Na Levering nodig?', a: 'Voor een aannemer: in de praktijk wel. BA Onderneming dekt schade tijdens het werk, BA Na Levering dekt schade die zich nadien manifesteert — lek, breuk, kortsluiting. Veel verzekeraars bundelen beide in één pakket.' },
+  { q: 'Kan ik mijn dekking verhogen na een grote opdracht?', a: 'Ja, plafonds zijn doorgaans aanpasbaar gedurende de looptijd. Voor projecten met grote risicoblootstelling — industrie, hoge gebouwen, gevoelige omgeving — is een tijdelijke verhoging gangbaar.' },
+  { q: 'Werkt mijn BA Onderneming ook als ik in het buitenland werk?', a: 'Standaard geldt de polis voor werven in België. Voor werken in Nederland, Frankrijk, Luxemburg of Duitsland kan dekking uitgebreid worden, doorgaans tegen bijpremie. Voor occasionele grensoverschrijdende werken altijd vooraf melden aan je verzekeraar.' },
+];
+
+const beroepTabs = [
+  { id: 'dakwerkers',    label: 'Dakwerkers',        link: '/sectoren/dakwerkers',    title: 'Voor dakwerkers',                    text: 'Hoogwerk betekent een hoge premievoet. Vallend materiaal en weersafhankelijke vertraging zijn de twee meest voorkomende oorzaken van schadeclaims. Standaard plafond € 2.500.000 volstaat zelden voor grote daken in stedelijke omgeving — overweeg € 5.000.000.' },
+  { id: 'metsers',       label: 'Metsers',            link: '/sectoren/aannemers',     title: 'Voor metsers en algemene aannemers', text: 'Sloop, ruwbouw en heipalen zijn klassieke schadegenerators door puin, trillingen en schade aan aanpalende gebouwen. Combineer BA Onderneming altijd met BA Na Levering en bij heipalen met dekking voor schade aan aanpalende constructies.' },
+  { id: 'loodgieters',   label: 'Loodgieters',        link: '/sectoren/loodgieters',   title: 'Voor loodgieters',                   text: 'Waterschade is het signaalrisico. Lekken duiken vaak pas dagen later op, dus BA Na Levering is geen luxe. Toevertrouwd goed — de installatie van de klant waaraan je werkt — hoort eveneens bij het basispakket.' },
+  { id: 'elektriciens',  label: 'Elektriciens',       link: '/sectoren/elektriciens',  title: 'Voor elektriciens',                  text: 'Brand- en kortsluitschade vormt het zwaarste risico. Een goed afgestemde BA Onderneming met BA Na Levering en voldoende plafond is essentieel. Industriële installaties vragen € 5.000.000 of meer.' },
+  { id: 'schilders',     label: 'Schilders',          link: '/sectoren/schilders',     title: 'Voor schilders',                     text: 'Frequente, kleinere schadegevallen zoals verf op tapijt, beschadigde meubelen en vlekken op parket. Toevertrouwd goed is hier essentieel — anders sta je voor elk niet-afgedekt meubelstuk zelf in.' },
+  { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Werk in het atelier én bij de klant. Toevertrouwd goed is voor schrijnwerkers vaak de duurste schadepost — beschadigde antieke kasten, verzaagde maatstukken. Stem je polis daarop af.' },
 ];
 
 const insuranceCards = [
-  {title:'Arbeidsongevallen',intro:'Wettelijk verplicht vanaf de eerste werknemer.',bullets:['Medische kosten volledig gedekt','Vergoeding bij arbeidsongeschiktheid','Overlijdensvergoeding nabestaanden','Ook woon-werkverkeer gedekt'],link:'/verzekeringen/arbeidsongevallen',cta:'Meer over arbeidsongevallen',icon:'users'},
-  {title:'BA-10',intro:'Tienjarige aansprakelijkheid voor constructiegebreken.',bullets:['Verplicht voor aannemers','Dekt constructiegebreken 10 jaar','Bescherming na oplevering','Vereist bij nieuwbouw'],link:'/verzekeringen/ba-10',cta:'Meer over BA-10',icon:'building2'},
-  {title:'Bedrijfsvoertuigen',intro:'De bestelwagen is onmisbaar op de werf.',bullets:['BA en omnium voor bestelwagens','Bescherming bij diefstal of brand','Snelle afhandeling bij schade','Afstembaar op jouw wagenpark'],link:'/verzekeringen/bedrijfsvoertuigen',cta:'Meer over bedrijfsvoertuigen',icon:'truck'},
-  {title:'Machinebreuk',intro:'Professionele machines en gereedschap zijn duur.',bullets:['Machines en gereedschap bij breuk','Diefstal op werf of in bestelwagen','Vervanging of herstelling','Afstembaar op jouw materieel'],link:'/verzekeringen/machinebreuk',cta:'Meer over machinebreuk',icon:'wrench'},
-  {title:'Rechtsbijstand',intro:'Juridische bescherming bij geschillen.',bullets:['Hulp bij juridische conflicten','Ondersteuning bij betwiste aansprakelijkheid','Tussenkomst bij advocaatkosten','Aanvulling op BA'],link:'/verzekeringen/rechtsbijstand',cta:'Meer over rechtsbijstand',icon:'scale'},
-  {title:"Alle Bouwplaats Risico's",intro:"Allesomvattende dekking voor werken in uitvoering.",bullets:["Schade tijdens uitvoering","Risico's door weersinvloeden","Bescherming bij meerdere partijen","Flexibel per project"],link:'/verzekeringen/alle-bouwplaats-risicos',cta:"Meer over ABR",icon:'layers'}
+  { title: 'Arbeidsongevallen',        icon: 'shield',    intro: 'Wettelijk verplicht vanaf je eerste werknemer. Dekt letsel op de werf en woon-werkverkeer.',             bullets: ['Verplicht vanaf dag 1','Medische kosten en arbeidsongeschiktheid','Woon-werkverkeer inbegrepen','Aangifte binnen 8 dagen'],                     link: '/verzekeringen/arbeidsongevallen',       cta: 'Meer over arbeidsongevallen' },
+  { title: 'BA-10',                    icon: 'building2', intro: 'Tienjarige aansprakelijkheid voor aannemers bij ernstige constructiegebreken na oplevering.',            bullets: ['Verplicht voor aannemers','Dekt constructiegebreken 10 jaar','Bescherming na oplevering','Vereist bij nieuwbouw'],                         link: '/verzekeringen/ba-10',                  cta: 'Meer over BA-10' },
+  { title: 'Rechtsbijstand',           icon: 'scale',     intro: 'Juridische bescherming bij geschillen met klanten, leveranciers of personeel. Je staat niet alleen.',    bullets: ['Hulp bij juridische conflicten','Vrije advocaatkeuze','Tussenkomst bij advocaatkosten','Aanvulling op BA'],                          link: '/verzekeringen/rechtsbijstand',         cta: 'Meer over rechtsbijstand' },
+  { title: "Alle Bouwplaats Risico's", icon: 'layers',    intro: "Allesomvattende dekking voor schade aan werken in uitvoering. Onmisbaar bij grotere werven.",            bullets: ["Schade tijdens uitvoering","Weersinvloeden gedekt","Bescherming bij meerdere partijen","Flexibel per project of jaarpolis"],        link: '/verzekeringen/alle-bouwplaats-risicos',cta: "Meer over ABR" },
 ];
+
+const schema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+
+const svgCheck16g = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+const svgX16r    = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
+const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
 ---
 
 <BaseLayout
-  title="BA Onderneming voor bouwbedrijven | Assurman"
-  description="Burgerlijke aansprakelijkheidsverzekering voor aannemers, elektriciens, dakwerkers en andere bouwprofessionals. Ontdek wat gedekt is en hoe u een offerte aanvraagt."
+  title="BA Onderneming voor aannemers — wat dekt het? | Assurman"
+  description="BA Onderneming dekt schade aan derden tijdens je bouwactiviteit. Wat is verplicht, wat kost het, wat verandert door Boek 6 BW. Vraag een scan aan."
   canonical="/verzekeringen/ba-onderneming"
+  schema={schema}
 >
-  <ScrollProgress client:load />
 
-  <!-- HERO -->
-  <section id="hero" style="background:#FFFFFF;padding-top:130px;padding-bottom:80px;overflow:hidden;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+<style is:global>
+  .bao-sticky-btn{background:#F7F4EF;border:1px solid rgba(229,165,36,0.2);cursor:pointer;padding:7px 16px;margin:10px 5px;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border-radius:9999px;transition:background 0.2s,border-color 0.2s;color:#001F3F;}
+  .bao-sticky-btn:hover,.bao-sticky-btn.active{background:rgba(229,165,36,0.18);border-color:#E5A524;}
+  .bao-sticky-btn .bao-check{color:#94a3b8;flex-shrink:0;transition:color 0.2s;}
+  .bao-sticky-btn:hover .bao-check,.bao-sticky-btn.active .bao-check{color:#E5A524;}
+  .bao-tab-btn{background:none;border:none;cursor:pointer;padding:14px 24px;white-space:nowrap;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.2s,border-color 0.2s;}
+  .bao-tab-btn:hover,.bao-tab-btn.active{color:#E5A524;border-bottom-color:#E5A524;}
+  .bao-ins-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);transition:background 0.2s,transform 0.2s;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);}
+  .bao-ins-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-4px);}
+  .bao-stat-panel{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+  .bao-stat-btn{width:100%;display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;text-align:left;padding:20px 24px;}
+  .bao-scan-btn:hover{background:#324554 !important;}
+  .bao-badge-pill{display:inline-flex;align-items:center;gap:8px;background:#F5F2FF;border:1px solid rgba(213,196,174,0.2);border-radius:9999px;padding:6px 16px;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#001F3F;}
+</style>
+
+<style>
+  .bao-hero-img{position:absolute;top:5%;right:-5px;height:85%;width:auto;max-width:48%;z-index:1;pointer-events:none;}
+  .bao-hero-content{max-width:620px;}
+  .bao-hero-inner{max-width:1280px;margin:0 auto;padding:64px 32px 80px;position:relative;z-index:2;}
+  .bao-hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+  .bao-watis-grid{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:flex-start;}
+  .bao-verplicht-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .bao-dekking-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
+  .bao-plafond-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;}
+  .bao-aanvulling-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .bao-formule{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:64px;flex-wrap:wrap;}
+  .bao-factors-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;margin:0 auto 40px;}
+  .bao-procedure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+  .bao-tab-inner{display:flex;gap:32px;align-items:flex-start;border-radius:12px;}
+  .bao-final-btns{display:flex;gap:24px;justify-content:center;margin-bottom:80px;flex-wrap:wrap;}
+  .bao-sticky-nav-bar{position:sticky;top:72px;z-index:90;background:#FFFFFF;border-bottom:1px solid rgba(0,31,63,0.08);overflow:auto;}
+  .bao-sticky-inner{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;gap:0;justify-content:center;flex-wrap:wrap;}
+  .bao-container{max-width:1280px;margin:0 auto;padding:0 32px;}
+  .brand-why-card{background:#FFFFFF;border-left:4px solid #E5A524;box-shadow:0px 1px 2px rgba(0,0,0,0.05);transition:box-shadow 0.2s,transform 0.2s;}
+  .brand-why-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.1);transform:translateY(-2px);}
+
+  @media (max-width:1023px){
+    .bao-container{padding:0 24px;}
+    .bao-sticky-inner{padding:0 24px;}
+    .bao-watis-grid{grid-template-columns:1fr;gap:32px;}
+    .bao-verplicht-grid{grid-template-columns:repeat(2,1fr);}
+    .bao-aanvulling-grid{grid-template-columns:repeat(2,1fr);}
+    .bao-procedure-grid{grid-template-columns:repeat(2,1fr);gap:32px;}
+    .bao-factors-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:767px){
+    .bao-sticky-nav-bar{display:none;}
+    .bao-container{padding:0 15px;}
+    .bao-hero-content{max-width:100%;}
+    .bao-hero-img{display:none;}
+    .bao-hero-btns{flex-direction:column;}
+    .bao-hero-btns a{width:100%;justify-content:center;text-align:center;}
+    #watis{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #verplicht{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #dekking{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #premie{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #procedure{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #faq{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #bao-beroep{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #bao-statuten{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #bao-aanvulling{padding-bottom:56px !important;}
+    #bao-cta-band{padding-left:15px !important;padding-right:15px !important;padding-bottom:64px !important;}
+    #bao-cta-band h2{font-size:clamp(28px,8vw,48px) !important;}
+    #bao-cta-band p{font-size:18px !important;}
+    .bao-watis-grid{grid-template-columns:1fr;gap:24px;}
+    .bao-verplicht-grid{grid-template-columns:1fr;}
+    .bao-dekking-grid{grid-template-columns:1fr;}
+    .bao-plafond-grid{grid-template-columns:1fr;}
+    .bao-plafond-grid>div:last-child{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.15);}
+    .bao-aanvulling-grid{grid-template-columns:1fr;}
+    .bao-formule{flex-direction:column;gap:8px;margin-bottom:40px;}
+    .bao-factors-grid{grid-template-columns:1fr;}
+    .bao-procedure-grid{grid-template-columns:1fr 1fr;gap:32px;}
+    .bao-tab-inner{flex-direction:column;gap:20px;padding:24px 20px;}
+    .bao-tabs-row{overflow-x:auto;justify-content:flex-start !important;padding-bottom:4px;-webkit-overflow-scrolling:touch;}
+    .bao-final-btns{flex-direction:column;align-items:center;}
+    .bao-final-btns a{width:100%;max-width:400px;justify-content:center;}
+    .bao-cta-deco{display:none;}
+    .bao-cta-mask-img{display:none;}
+    .bao-procedure-line{display:none !important;}
+  }
+</style>
+
+<div id="bao-progress-track" style="position:fixed;top:0;left:0;right:0;height:3px;z-index:9999;background:rgba(0,31,63,0.07);">
+  <div id="bao-progress-bar" style="height:100%;background:#E5A524;width:0%;transition:width 0.1s linear;"></div>
+</div>
+
+<div style="font-family:'Outfit',sans-serif;color:#001F3F;background:#FFFFFF;">
+
+<!-- HERO -->
+<section id="bao-hero" style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:100vh;">
+  <div class="bao-hero-img assurman-mask assurman-mask--hero">
+    <img src="/verzekeringen-bouwsector-BA Onderneming-hero.jpg" alt="Aannemer op de werf met BA Onderneming verzekering" />
+  </div>
+  <div class="bao-hero-inner">
+    <div class="bao-hero-content">
+      <div class="bao-badge-pill" style="margin-bottom:20px;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Assurman &middot; Bouwverzekeringen op maat
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">BA Onderneming<br />voor je bouwbedrijf</h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">De polis die schade aan derden dekt.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Een vallende dakpan op een geparkeerde wagen. Een verkeerd aangesloten leiding die het laminaat van je klant ruïneert. Voor een aannemer is de vraag niet of het ooit gebeurt, maar wanneer — en since Boek 6 BW kunnen ook je onderaannemers en bestuurders rechtstreeks worden aangesproken.</p>
+      <div class="bao-hero-btns">
+        <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
+          {CTA_SCAN.hero}
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.advisory}</a>
+      </div>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;">Geen verkooppraatjes — een scan op maat van jouw activiteit, omzet en personeelsbestand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY NAV -->
+<nav id="bao-sticky-nav" class="bao-sticky-nav-bar">
+  <div class="bao-sticky-inner">
+    {[{id:'watis',label:'Wat is het?'},{id:'verplicht',label:'Verplicht?'},{id:'dekking',label:'Dekking'},{id:'premie',label:'Premie'},{id:'procedure',label:'Schadegeval'},{id:'faq',label:'FAQ'}].map(item=>(
+      <button class="bao-sticky-btn" data-sticky-btn={item.id}>
+        <svg class="bao-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        {item.label}
+      </button>
+    ))}
+  </div>
+</nav>
+
+<!-- WAT IS HET -->
+<section id="watis" style="background:#FFFFFF;padding:96px 32px;">
+  <div class="bao-container">
+    <div class="bao-watis-grid">
+      <div style="background:#3F5767;padding:32px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);">
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In het kort</span>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+          {[
+            {t:'BA Onderneming dekt schade aan derden die je veroorzaakt tijdens de <strong style="color:#FFFFFF;">uitbating van je bouwbedrijf</strong>.'},
+            {t:'Het gaat om buitencontractuele aansprakelijkheid — schade aan iemand die <strong style="color:#FFFFFF;">geen partij is bij je contract</strong>.'},
+            {t:'Standaardkapitaal bij grote spelers ligt rond <strong style="color:#FFFFFF;">€ 2.500.000 per schadegeval</strong>.'},
+            {t:'Niet wettelijk verplicht, maar in de praktijk <strong style="color:#FFFFFF;">onmisbaar zodra je op werven werkt</strong>.'},
+            {t:'Depuis Boek 6 BW kunnen ook je <strong style="color:#FFFFFF;">onderaannemers en bestuurders rechtstreeks aangesproken</strong> worden.'},
+          ].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.55;color:#CBD5E1;" set:html={item.t}></span>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div>
-        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Verzekering</p>
-        <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,4.5vw,64px);line-height:1.05;color:#001F3F;margin:0 0 24px;">BA Onderneming&shy;verzekering</h1>
-        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(18px,2vw,24px);color:#E5A524;margin:0 0 24px;line-height:1.3;">Beschermd bij elke werf, elke werkdag.</p>
-        <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 40px;">Als bouwprofessional bent u dagelijks actief in een omgeving waar schade aan derden een reëel risico vormt. Schade aan het eigendom van een klant, letsel bij een passant of burenhinderaanspraken kunnen uw bedrijf financieel treffen. De BA Ondernemingsverzekering dekt deze aansprakelijkheid — tijdens en na de werken.</p>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;">
-          <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;">Gratis scan aanvragen</a>
-          <a href="/maak-afspraak" style="display:inline-block;background:transparent;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;border:2px solid #001F3F;">Afspraak maken</a>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:center;">
-        <img src="/foto-contact-35.png" alt="BA Onderneming voor bouwbedrijven" style="width:100%;max-width:520px;border-radius:8px;object-fit:cover;" loading="eager" />
-      </div>
-    </div>
-  </section>
-
-  <StickyNav client:load navItems={navItems} heroSectionId="hero" />
-
-  <!-- WAT IS HET -->
-  <section id="watis" style="background:#F8F9FA;padding:100px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Wat is het?</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">Burgerlijke aansprakelijkheid voor uw bouwactiviteit</h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
-        <div style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:40px;">
-          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 20px;">In het kort</p>
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
-            {[
-              'Dekt schade aan derden tijdens uw beroepsactiviteit',
-              'BA Uitbating: schade door de normale uitbating',
-              'BA Na Levering: schade na oplevering of levering',
-              'Burenhinder (stof, geluid, trillingen)',
-              'Letselschade en zaakschade aan derden'
-            ].map((item) => (
-              <li style="display:flex;align-items:flex-start;gap:12px;font-family:'Open Sans',sans-serif;font-size:16px;color:#FFFFFF;line-height:1.5;">
-                <span style="color:#E5A524;font-weight:700;flex-shrink:0;margin-top:2px;">✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 24px;">De BA Ondernemingsverzekering — ook wel BA Uitbating en BA Na Levering — beschermt uw bedrijf wanneer u of uw medewerkers schade veroorzaken aan derden tijdens de normale uitoefening van uw beroepsactiviteit.</p>
-          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 32px;">In de bouwsector zijn de risicos bijzonder divers: u werkt in bewoonde omgevingen, met zwaar materieel, op diverse locaties. Burenhinder, beschadiging van leidingen, letsel aan passanten — het kan allemaal leiden tot aansprakelijkheidsclaims.</p>
-          <div style="background:#FFF8E7;border-left:4px solid #E5A524;padding:24px;border-radius:0 4px 4px 0;">
-            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#001F3F;margin:0 0 8px;">BA Uitbating vs. BA Na Levering</p>
-            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0;">BA Uitbating dekt schade die optreedt terwijl de werken aan de gang zijn. BA Na Levering dekt schade die pas na oplevering van de werken of levering van het product aan het licht komt. Voor bouwprofessionals is de combinatie van beide essentieel.</p>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">De basisbescherming voor schade aan derden</h2>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">BA Onderneming — ook BA Uitbating genoemd — is de verzekering die tussenkomt wanneer jij of een medewerker tijdens de uitoefening van het beroep schade berokkent aan iemand die geen partij is bij je contract: een buurman, een passant, een onderaannemer-werknemer, een bezoeker op de werf. Lichamelijk, materieel en immaterieel zoals omzetverlies door een brand die jij veroorzaakt.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">Voor een bouwbedrijf is dit de fundering van je verzekeringsportefeuille. De polis vangt op wat in het civiel recht foutaansprakelijkheid heet: jij maakt een fout, een derde lijdt schade, jij vergoedt. Met BA Onderneming neemt de verzekeraar die rekening over tot de gekozen plafonds.</p>
+        <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div>
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">Wettelijke basis</p>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">De Belgische <strong>Wet van 4 april 2014</strong> regelt de verzekeringsovereenkomsten zelf. Het aansprakelijkheidsrecht zit since 1 januari 2025 in <strong>Boek 6 van het Burgerlijk Wetboek</strong>. De FSMA ziet toe op de verzekeraars en makelaars die deze polissen aanbieden.</p>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- DEKKING -->
-  <section id="dekking" style="background:#FFFFFF;padding:100px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Dekking</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 16px;">Wat is wél en niet gedekt</h2>
-      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 48px;max-width:720px;">Elke polis BA Onderneming heeft zijn specificaties. Hieronder de typische scope voor bouwprofessionals.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
-        <div style="background:#FFFFFF;border:2px solid #22C55E;border-radius:8px;padding:36px;">
-          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#15803D;margin:0 0 20px;display:flex;align-items:center;gap:10px;"><span>✓</span> Gedekt</p>
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;">
-            {[
-              'Schade aan eigendom van klanten of derden',
-              'Letselschade aan passanten, bewoners, collega\'s',
-              'Schade door werfmachines of materieel',
-              'Burenhinder door werken (stof, geluid, trillingen)',
-              'BA Na Levering: gebreken ontdekt na oplevering',
-              'Claims over beroepsfouten en verkeerde uitvoering'
-            ].map((item) => (
-              <li style="display:flex;align-items:flex-start;gap:10px;font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.5;color:#001F3F;">
-                <span style="color:#22C55E;font-weight:700;flex-shrink:0;margin-top:2px;">✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div style="background:#FFFFFF;border:2px solid #EF4444;border-radius:8px;padding:36px;">
-          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#DC2626;margin:0 0 20px;display:flex;align-items:center;gap:10px;"><span>✗</span> Niet gedekt</p>
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:14px;">
-            {[
-              'Schade aan uw eigen eigendom of werknemers',
-              'Contractuele verplichtingen zonder schadeoorzaak',
-              'Opzettelijk veroorzaakte schade',
-              'Schade gedekt door andere verplichte verzekeringen',
-              'Boetes en strafrechtelijke sancties'
-            ].map((item) => (
-              <li style="display:flex;align-items:flex-start;gap:10px;font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.5;color:#001F3F;">
-                <span style="color:#EF4444;font-weight:700;flex-shrink:0;margin-top:2px;">✗</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
+<!-- IS HET VERPLICHT -->
+<section id="verplicht" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Is het verplicht?</span>
+      <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#64748b;margin-bottom:8px;">Is een BA Onderneming wettelijk verplicht voor een aannemer?</p>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,10vw,112px);line-height:0.9;color:#001F3F;letter-spacing:-4px;">Nee.</div>
+      <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:20px;color:#3F5767;margin-top:12px;">Maar in de praktijk onmisbaar zodra je op werven werkt.</p>
     </div>
-  </section>
-
-  <!-- WANNEER NODIG -->
-  <section id="wanneer" style="background:#001F3F;padding:100px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Wanneer nodig?</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#FFFFFF;margin:0 0 16px;">BA Onderneming per sector</h2>
-      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);margin:0 0 48px;max-width:720px;">Elke bouwberoepscategorie heeft specifieke risico's. Assurman stelt een BA-polis op die aansluit bij uw activiteitsprofiel.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
-        {[
-          {sector:'Dakwerker',desc:'Werken op hoogte, materiaal dat kan neerkomen, risico op beschadiging van daken, gevels en buren. BA Na Levering bij lekkages na uitvoering.'},
-          {sector:'Algemeen aannemer',desc:'Coördinatie van meerdere partijen op de werf. Aansprakelijkheid als hoofdaannemer voor schade door onderaannemers.'},
-          {sector:'Elektricien',desc:'Werk in bestaande panden met brand- en elektrische risicos. BA Na Levering bij installaties die achteraf defecten vertonen.'},
-          {sector:'Loodgieter',desc:'Waterschade door leidingwerk is een typisch BA Na Levering-risico. Hoog schadepotentieel in bewoonde woningen.'},
-          {sector:'Schilder',desc:'Schade aan inboedel van bewoners, morsen van verf, beschadiging van aangrenzende oppervlakken.'},
-          {sector:'Schrijnwerker',desc:'Stofoverlast, schade aan gevels en ramen, aansprakelijkheid voor gebreken aan geplaatste elementen.'}
-        ].map((item) => (
-          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:28px;">
-            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#E5A524;margin:0 0 10px;">{item.sector}</p>
-            <p style="font-family:'Open Sans',sans-serif;font-size:14px;line-height:1.6;color:rgba(255,255,255,0.75);margin:0;">{item.desc}</p>
+    <div class="bao-verplicht-grid">
+      {[
+        {icon:'us', title:'Zelfstandig aannemer',           text:'Niet wettelijk verplicht. Maar bouwheren en hoofdaannemers eisen het attest vóór toegang tot de werf.'},
+        {icon:'ft', title:'Bedrijf met personeel',          text:'BA Onderneming is niet wettelijk verplicht, maar arbeidsongevallenverzekering wél. In praktijk is BA Onderneming standaard.'},
+        {icon:'sh', title:'Hoofdaannemer met onderaannemers',text:'Niet verplicht maar dringend aangewezen since Boek 6 BW: jij of je onderaannemer kan rechtstreeks aangesproken worden.'},
+        {icon:'cl', title:'Bouwbedrijf in woningbouw',      text:'BA Onderneming niet verplicht. BA-10 (tienjarige aansprakelijkheid) wél since 1 juli 2018. Beide zijn complementair.'},
+      ].map(card=>(
+        <div style="background:#FFFFFF;padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+          <div style="background:rgba(229,165,36,0.1);border-radius:10px;padding:12px;display:inline-flex;margin-bottom:18px;">
+            {card.icon==='us'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+            {card.icon==='ft'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>}
+            {card.icon==='sh'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
+            {card.icon==='cl'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>}
           </div>
-        ))}
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#64748b;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- VOORBEELDEN SECTIE -->
+<section style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Per beroep: wanneer is een BA Onderneming de facto verplicht?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">De wet legt het niet altijd op, maar de praktijk wel. Hieronder zie je per beroep hoe dat werkt.</p>
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <button id="bao-examples-btn" style="display:flex;align-items:center;gap:10px;background:rgba(0,31,63,0.04);border:1px solid rgba(0,31,63,0.1);border-radius:8px;padding:14px 24px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#001F3F;">
+        <span>Bekijk 6 concrete voorbeelden uit de bouw</span>
+        <svg id="bao-examples-chevron" width="18" height="18" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+    <ul id="bao-examples-list" style="list-style:none;padding:0;margin:16px 0 0;display:none;grid-template-columns:1fr 1fr;gap:10px;">
+      {[
+        'Dakwerker werkt voor een hoofdaannemer: hoofdaannemer eist BA Onderneming-attest vóór werfstart. De facto verplicht.',
+        'Metser solo-zelfstandig in renovatie: bouwheren vragen het bewijs steeds vaker, zonder BA val je uit shortlists.',
+        'Loodgieter werkt voor een vastgoedmakelaar: klant eist contractueel BA-dekking, zonder is er geen opdracht.',
+        'Elektricien doet residentiële installaties: wettelijk niet verplicht, maar één brand zonder dekking is einde verhaal.',
+        'Schilder met kleine schadegevallen zoals verf en beschadigde meubelen: BA Onderneming is goedkope bescherming.',
+        'Algemene aannemer werkt in onderaanneming: BA Onderneming plus uitbreidingen vormt het minimum-pakket.',
+      ].map(ex=>(
+        <li style="display:flex;gap:10px;align-items:flex-start;background:#F7F4EF;border-radius:8px;padding:12px 16px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{ex}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<!-- DEKKING -->
+<section id="dekking" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:1025px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Dekking</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat is wél en niet gedekt?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:580px;margin:0 auto;">Een BA Onderneming dekt buitencontractuele schade aan derden — lichamelijke, materiële en immateriële schade. Hieronder de hoofdlijnen.</p>
+    </div>
+    <div class="bao-dekking-grid">
+      <div style="background:#FFFFFF;border:2px solid rgba(34,197,94,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(34,197,94,0.08);border-bottom:1px solid rgba(34,197,94,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#15803d;">Wel gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Lichamelijk letsel aan derden door jouw fout of die van een werknemer','Materiële schade aan eigendom van derden zoals wagens, gebouwen of installaties van de buur','Immateriële gevolgschade zoals omzetverlies of gemiste huurinkomsten van een derde','Schade veroorzaakt door werknemers, leerlingen en stagiairs in functie','Schade door goederen en installaties die je voor je beroep gebruikt','Schade door brand, ontploffing en water die jij of je werknemer veroorzaakt op een werf'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgCheck16g} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:2px solid rgba(239,68,68,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(239,68,68,0.06);border-bottom:1px solid rgba(239,68,68,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#b91c1c;">Niet (of beperkt) gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Contractbreuk of slecht werk zonder schade aan derden','Schade aan toevertrouwd goed — enkel met aparte uitbreiding','Opzet, fraude en zware fout van de verzekerde of zijn aangestelde','Schade die na oplevering opduikt — valt onder BA Na Levering','Schade door bedrijfsvoertuigen — valt onder verplichte autoverzekering','Boetes, sancties en strafrechtelijke veroordelingen'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgX16r} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
-  </section>
-
-  <!-- PREMIE -->
-  <section id="premium" style="background:#F8F9FA;padding:100px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Premie</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 16px;">Wat bepaalt de premie?</h2>
-      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 48px;max-width:720px;">De premie voor BA Onderneming wordt berekend op basis van meerdere factoren. Assurman vraagt offertes aan bij meerdere maatschappijen en vergelijkt.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:24px;">
-        {[
-          {title:'Activiteit & NACE-code',text:'De aard van uw activiteit bepaalt het risicoprofiel. Dakwerkers en aannemers hebben een ander risico dan schrijnwerkers.'},
-          {title:'Omzet of loonmassa',text:'De grondslag waarop de premie wordt berekend. Hogere omzet betekent meer activiteit en dus meer risico.'},
-          {title:'Aantal werknemers',text:'Meer mensen op de werf betekent meer kans op incidenten en een hogere premie.'},
-          {title:'Schadehistoriek',text:'Eerdere schadegevallen verhogen de premie. Een schadevrij verleden leidt tot kortingen.'}
-        ].map((item) => (
-          <div style="background:#FFFFFF;border:1px solid #E5E8ED;border-radius:8px;padding:32px;box-shadow:0 2px 16px rgba(0,31,63,0.06);">
-            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;margin:0 0 12px;">{item.title}</p>
-            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0;">{item.text}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- GOLD CTA -->
-  <section style="background:#E9C466;padding:72px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;">
+    <div class="bao-plafond-grid" style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);padding:36px 40px;">
       <div>
-        <p style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(22px,3vw,36px);color:#001F3F;margin:0 0 8px;">Vraag uw BA-attest aan</p>
-        <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.6;color:rgba(0,31,63,0.75);margin:0;">Assurman bezorgt u snel een verzekeringsattest klaar voor uw opdrachtgever.</p>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Standaardplafond</span>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#FFFFFF;margin:0 0 12px;">Tot € 2.500.000 per schadegeval — keuze op maat</h3>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">Bij de meeste verzekeraars is het basiskapitaal € 2.500.000 voor lichamelijke en materiële schade samen. Voor bouwbedrijven met grote werven wordt vaak verhoogd naar € 5.000.000 of € 10.000.000. Het juiste plafond hangt af van je activiteit, omzet en de waarde van wat er rond je werf staat.</p>
       </div>
-      <div style="display:flex;gap:16px;flex-wrap:wrap;">
-        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#001F3F;color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Gratis scan</a>
-        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid #001F3F;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Afspraak</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" style="background:#FFFFFF;padding:100px 0;">
-    <div style="max-width:900px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Veelgestelde vragen</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">FAQ BA Onderneming</h2>
-      <FaqAccordion client:visible items={faqItems} />
-    </div>
-  </section>
-
-  <!-- INSURANCE CAROUSEL -->
-  <section style="background:#F8F9FA;padding:80px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Gerelateerde verzekeringen</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(24px,3vw,40px);line-height:1.1;color:#001F3F;margin:0 0 40px;">Combineer voor een volledig pakket</h2>
-      <InsuranceCarousel client:visible cards={insuranceCards} />
-    </div>
-  </section>
-
-  <!-- PARTNERS -->
-  <section style="background:#FFFFFF;padding:60px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin:0 0 32px;">Onze verzekeringspartners</p>
-      <PartnerSlider client:visible />
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section style="background:#001F3F;padding:100px 0 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px 80px;text-align:center;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Klaar om te starten?</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.1;color:#FFFFFF;margin:0 0 20px;">Uw BA Onderneming in orde</h2>
-      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto 40px;">Assurman vergelijkt, adviseert en bezorgt u een BA-polis op maat van uw bouwactiviteiten.</p>
-      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Gratis scan starten</a>
-        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Afspraak maken</a>
+      <div style="text-align:center;flex-shrink:0;">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:6px;">Marktstandaard 2026</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:44px;color:#FFFFFF;letter-spacing:-1px;line-height:1;">€ 2.500.000</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:14px;color:#94a3b8;margin-top:6px;">per schadegeval (basisdekking)</div>
       </div>
     </div>
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
-  </section>
+  </div>
+</section>
+
+<!-- AANVULLENDE WAARBORGEN -->
+<section id="bao-aanvulling" style="background:#3F5767;padding:0 0 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding:100px 32px 0;position:relative;z-index:1;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Aanvullen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Vijf uitbreidingen die je polis afmaken</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0;">De basis BA Onderneming dekt veel, maar niet alles. Voor een bouwbedrijf zijn dit de uitbreidingen die in de praktijk telkens terugkomen.</p>
+    </div>
+    <div class="bao-aanvulling-grid">
+      {[
+        {i:'ac',title:'BA Na Levering',        text:'Dekt schade die zich pas voordoet nadat je werk is opgeleverd. Een lekkage die drie weken later opduikt. Voor de meeste aannemers de eerste uitbreiding die je neemt.'},
+        {i:'sh',title:'Toevertrouwd goed',     text:'Dekt schade aan goederen die de klant aan jou heeft toevertrouwd — meubels in renovatie, een wagen in een werkplaats, een installatie die je verbouwt. Standaard uitgesloten van BA Onderneming.'},
+        {i:'us',title:'Onderaannemers',        text:'Since Boek 6 BW kan je onderaannemer rechtstreeks aangesproken worden. Met deze uitbreiding wordt zijn aansprakelijkheid mee verzekerd binnen jouw polis.'},
+        {i:'tr',title:'Rechtsbijstand',        text:'Vaak gekoppeld aan BA Onderneming: de verzekeraar betaalt advocaat- en expertisekosten wanneer je een schadeclaim moet betwisten of een eigen vordering moet instellen.'},
+        {i:'br',title:'Cross liability',       text:'Wanneer je in joint venture of tijdelijke vereniging werkt: schade veroorzaakt door één partner aan een andere partner wordt mee gedekt. Relevant voor grotere bouwprojecten.'},
+      ].map(card=>(
+        <div class="bao-ins-card" style="padding:28px;">
+          <div style="background:rgba(229,165,36,0.15);border-radius:10px;padding:10px;display:inline-flex;margin-bottom:16px;">
+            {card.i==='ac'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>}
+            {card.i==='sh'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
+            {card.i==='us'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+            {card.i==='tr'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>}
+            {card.i==='br'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#FFFFFF;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#94A3B8;margin:0;">{card.text}</p>
+        </div>
+      ))}
+      <div style="background:#E5A524;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:32px;display:flex;flex-direction:column;justify-content:center;">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">Niet zeker welke uitbreidingen je écht nodig hebt?</h3>
+        <p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(0,31,63,0.75);line-height:1.55;margin:0 0 20px;">Doe de scan — we vergelijken jouw activiteit, omzet en risicoprofiel met wat verzekeraars vandaag aanbieden.</p>
+        <a href={CTA_DESTINATIONS.scan} class="bao-scan-btn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.2s;width:100%;">
+          {CTA_SCAN.start} <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIE -->
+<section id="premie" style="background:#F7F4EF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Prijs &amp; berekening</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Hoe wordt je premie berekend?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:520px;margin:0 auto;">Geen vaste prijs: wat je betaalt hangt af van je activiteit, omzet, personeelsbestand en de gekozen plafonds. Voor een typisch klein bouwbedrijf landt de jaarpremie doorgaans tussen € 350 en € 1.500.</p>
+    </div>
+    <div class="bao-formule">
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">1. Basis</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Omzet of loonmassa</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#64748b;line-height:1.4;">jaarbasis, soms per activiteit gesegmenteerd</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">×</div>
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">2. Premievoet</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Activiteit x risicoprofiel</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#64748b;line-height:1.4;">dak en hoogte groter dan schilderwerk binnen</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">=</div>
+      <div style="background:#3F5767;border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 8px 32px rgba(63,87,103,0.3);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">Jaarpremie</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin-bottom:8px;">Jouw polis</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#94a3b8;line-height:1.4;">plus premietaks 9,25% en uitbreidingen</div>
+      </div>
+    </div>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:#001F3F;text-align:center;margin-bottom:32px;">4 factoren die je premievoet beïnvloeden</h3>
+    <div class="bao-factors-grid">
+      {[
+        {num:'1',title:'Activiteitsklasse',          text:'Werken op hoogte en met machines verhoogt het risico en dus de premievoet.'},
+        {num:'2',title:'Omzet of loonmassa',          text:'Hoe groter je bedrijf, hoe hoger de blootstelling en de premie.'},
+        {num:'3',title:'Personeel en onderaannemers', text:'Aantal werknemers en gebruik van wisselende onderaannemers zijn elk een risicocomponent.'},
+        {num:'4',title:'Schadeverleden',              text:'Eerdere schadeclaims wegen mee. Een schadevrij verleden levert bij vernieuwing vaak korting op.'},
+      ].map(f=>(
+        <div class="brand-why-card" style="padding:20px 24px;display:flex;gap:18px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:16px;color:#001F3F;">{f.num}</span></div>
+          <div>
+            <h4 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 4px;">{f.title}</h4>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#64748b;margin:0;">{f.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style="max-width:640px;margin:0 auto;">
+      <div style="background:rgba(229,165,36,0.10);padding:20px 28px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);border:1px solid rgba(229,165,36,0.3);">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="18" height="18" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#001F3F;margin:0;"><strong>Fiscaal:</strong> de premie is volledig aftrekbaar als beroepskost. Op de premie is een premietaks van <strong>9,25%</strong> verschuldigd, die ook aftrekbaar is.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section id="bao-cta-band" style="background:#E9C466;padding:80px 0 100px;position:relative;overflow:hidden;">
+  <div class="assurman-mask assurman-mask--cta bao-cta-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:1;">
+    <img src="/verzekeringen-bouwsector-BA Onderneming-cta.jpg" alt="Aannemer met BA Onderneming verzekering">
+  </div>
+  <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="100px" direction="down" /></div>
+  <div class="bao-cta-deco" style="position:absolute;right:-130px;top:40%;transform:translateY(-50%);pointer-events:none;z-index:2;"><BrandChevron color="white" height="240px" direction="left" /></div>
+  <div style="max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:4;padding:0 32px;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">Bouwprofessional in Vlaanderen?<br />Wij maken jouw pakket op maat.</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#3F5767;margin-bottom:40px;opacity:0.9;">Start nu in 2 minuten of kies meteen voor persoonlijk advies.</p>
+    <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">{CTA_SCAN.requestNow} <Fragment set:html={svgArr18} /></a>
+  </div>
+</section>
+
+<!-- PER BEROEP TABS -->
+<section id="bao-beroep" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Per beroep</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">BA Onderneming voor jouw discipline</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:520px;margin:0 auto;">Elk beroep heeft een eigen risicoprofiel. Hieronder de specifieke aandachtspunten per discipline.</p>
+    </div>
+    <div class="bao-tabs-row" style="display:flex;gap:0;border-bottom:2px solid rgba(0,31,63,0.12);margin-bottom:40px;justify-content:center;">
+      {beroepTabs.map((tab,i)=>(<button class={`bao-tab-btn${i===0?' active':''}`} data-tab-btn={tab.id}>{tab.label}</button>))}
+    </div>
+    {beroepTabs.map((tab,i)=>(
+      <div data-tab-content={tab.id} style={`display:${i===0?'block':'none'};max-width:860px;margin:0 auto;`}>
+      <div class="bao-tab-inner" style="background:#FFFFFF;border-radius:12px;padding:36px 40px;">
+        <div style="background:rgba(229,165,36,0.12);border-radius:12px;padding:18px;flex-shrink:0;">
+          <svg width="32" height="32" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a8 8 0 0 1 16 0v3"/></svg>
+        </div>
+        <div style="flex:1;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">{tab.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.65;color:#001F3F;margin:0 0 20px;">{tab.text}</p>
+          <a href={tab.link} style="display:inline-flex;align-items:center;gap:6px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;text-decoration:none;">Bekijk sectorpagina <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+      </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- MIJN SITUATIE ACCORDION -->
+<section id="bao-statuten" style="background:#3F5767;padding:96px 32px;position:relative;overflow:hidden;">
+  <div style="max-width:840px;margin:0 auto;position:relative;z-index:1;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Mijn situatie</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Welke setup past bij jouw bedrijf?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0 0 40px;">Drie typische situaties uit de Belgische bouwsector. Vind de jouwe en zie wat dat concreet betekent voor je BA Onderneming.</p>
+
+    <div class="bao-stat-panel" data-stat-panel>
+      <button class="bao-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik werk als hoofdaannemer met onderaannemers</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je leidt een bouwbedrijf en zet onderaannemers in voor specifieke loten. Since Boek 6 BW kan de bouwheer kiezen wie hij aanspreekt: jou via het contract, of jouw onderaannemer rechtstreeks. Onderaannemers, werknemers en bestuurders kunnen vandaag ook persoonlijk aangesproken worden voor schade aan derden.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 12px;">In de praktijk: zorg dat je BA Onderneming de onderaannemers mee dekt of eis bij elke onderaannemer een eigen attest met voldoende plafond. Vraag ook een actueel BA-10 attest indien woningbouw met architect. Een verlopen attest betekent dat jij opdraait voor de schade.</p>
+      </div>
+    </div>
+
+    <div class="bao-stat-panel" data-stat-panel>
+      <button class="bao-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik ben solo-zelfstandig en werk in onderaanneming</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je hebt geen personeel en werkt voor één of meerdere hoofdaannemers, soms rechtstreeks voor particulieren. Je bent niet wettelijk verplicht een BA Onderneming te nemen — maar de hoofdaannemer eist het attest, en zonder werk je niet.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Voor jou is een basispolis met plafond van € 2.500.000 doorgaans voldoende, eventueel uitgebreid met BA Na Levering en toevertrouwd goed als je in renovatie werkt. Premie ligt typisch tussen € 350 en € 750 per jaar voor lage-risico activiteiten en hoger voor dak- of gevelwerken.</p>
+      </div>
+    </div>
+
+    <div class="bao-stat-panel" data-stat-panel>
+      <button class="bao-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a8 8 0 0 1 16 0v3"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik doe enkel renovatie en kleine werken</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Renovatie heeft een eigen profiel: vaak werk in het huis van de klant, met toevertrouwde materialen, regelmatig schade aan bestaande afwerking — verf op tapijt, krassen op parket, lekken door bestaande leidingen. Drie aandachtspunten:</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
+          {['Neem altijd de uitbreiding toevertrouwd goed: zonder is schade aan een meubelstuk dat je verplaatst niet gedekt.','Overweeg BA Na Levering: lekken en breuken duiken vaak weken later op.','Documenteer de bestaande toestand vóór je begint met foto\'s. Bij betwisting maakt dat het verschil.'].map(item=>(
+            <li style="display:flex;gap:10px;align-items:flex-start;"><svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span style="font-family:'Outfit',sans-serif;font-size:15px;color:#CBD5E1;">{item}</span></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIJ EEN SCHADEGEVAL -->
+<section id="procedure" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:60px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Bij een schadegeval</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat moet je doen als er iets misgaat?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:520px;margin:0 auto;">Hoe sneller en correcter je aangeeft, hoe vlotter je dossier loopt. De standaard aangiftetermijn is 8 kalenderdagen.</p>
+    </div>
+    <div class="bao-procedure-grid">
+      <div class="bao-procedure-line" style="position:absolute;top:36px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(to right,#E5A524,rgba(229,165,36,0.2));z-index:0;"></div>
+      {[
+        {ic:'ph', title:'Direct documenteren',     text:'Maak foto\'s, noteer namen van getuigen, leg de tijdslijn vast vóór je iets verplaatst of opruimt.'},
+        {ic:'ac', title:'Aangifte binnen 8 dagen', text:'Verwittig je makelaar of verzekeraar via het standaardformulier. Vermeld alle feiten, ook wat in jouw nadeel lijkt.'},
+        {ic:'ft', title:'Expertise en onderzoek',  text:'De verzekeraar stuurt vaak een expert; werk volledig mee, lever facturen en contracten aan.'},
+        {ic:'at', title:'Vergoeding',              text:'Bij akkoord met het voorgestelde bedrag betaalt de verzekeraar doorgaans binnen 30 werkdagen uit.'},
+      ].map((s,i)=>(
+        <div style="padding:0 20px;text-align:center;position:relative;z-index:1;">
+          <div style="width:72px;height:72px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 4px 16px rgba(229,165,36,0.3);">
+            {s.ic==='ph'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>}
+            {s.ic==='ac'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>}
+            {s.ic==='ft'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>}
+            {s.ic==='at'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#E5A524;margin-bottom:8px;">Stap {i+1}</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{s.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#64748b;margin:0;">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:840px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over BA Onderneming</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">13 concrete vragen van bouwondernemers — klik open voor het antwoord.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      {faqItems.map((item,i)=>(
+        <div data-faq-item style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.08);border-radius:10px;overflow:hidden;">
+          <button data-faq-btn style="width:100%;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;text-align:left;gap:16px;">
+            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;line-height:1.35;">{item.q}</span>
+            <svg data-faq-chevron width="18" height="18" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div data-faq-answer style="display:none;padding:0 24px 20px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#3F5767;margin:0;">{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- GERELATEERDE VERZEKERINGEN -->
+<InsuranceCarousel
+  client:only="react"
+  cards={insuranceCards}
+  sectionLabel="Ook interessant"
+  headline="Gerelateerde verzekeringen"
+  subheadline="Deze verzekeringen vullen je BA Onderneming aan en worden vaak samen bekeken in een bouwpolis."
+  background="#F5F2FF"
+/>
+
+<!-- PARTNERS -->
+<section style="background:#F7F4EF;padding:64px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">Ondersteund door sterke verzekeringspartners</p>
+    <PartnerSlider client:only="react" />
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:#3F5767;padding-top:120px;padding-bottom:0;position:relative;text-align:center;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+  <div style="max-width:896px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;text-align:center;margin-bottom:20px;">Start met Assurman</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;color:#FFFFFF;max-width:727px;margin:0 auto 24px;">Is jouw bouwbedrijf correct verzekerd?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouwsector en wil je zeker zijn dat jouw BA Onderneming correct is afgestemd? Wij bekijken met jou wat echt nodig is — zonder verplichting.</p>
+    <div class="bao-final-btns">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">{CTA_SCAN.hero} <Fragment set:html={svgArr18} /></a>
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">{CTA_AFSPRAAK.advisory}</a>
+    </div>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+</section>
+
+</div>
+
+<script>
+  const progressBar = document.getElementById('bao-progress-bar') as HTMLElement | null;
+  const stickyBtns  = document.querySelectorAll<HTMLElement>('[data-sticky-btn]');
+  const sectionIds  = ['watis','verplicht','dekking','premie','procedure','faq'];
+
+  stickyBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.stickyBtn!;
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const total = doc.scrollHeight - doc.clientHeight;
+    if (progressBar) progressBar.style.width = total > 0 ? `${(doc.scrollTop / total) * 100}%` : '0%';
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sectionIds[i]);
+      if (el && el.getBoundingClientRect().top <= 120) {
+        stickyBtns.forEach(b => b.classList.toggle('active', b.dataset.stickyBtn === sectionIds[i]));
+        break;
+      }
+    }
+  }, { passive: true });
+
+  const exBtn  = document.getElementById('bao-examples-btn')     as HTMLElement | null;
+  const exList = document.getElementById('bao-examples-list')    as HTMLElement | null;
+  const exChev = document.getElementById('bao-examples-chevron') as HTMLElement | null;
+  if (exBtn && exList && exChev) {
+    exBtn.addEventListener('click', () => {
+      const open = exList.style.display !== 'none';
+      exList.style.display = open ? 'none' : 'grid';
+      exChev.style.transform = open ? '' : 'rotate(180deg)';
+    });
+  }
+
+  const tabBtns     = document.querySelectorAll<HTMLElement>('[data-tab-btn]');
+  const tabContents = document.querySelectorAll<HTMLElement>('[data-tab-content]');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tabBtn!;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      tabContents.forEach(el => { el.style.display = el.dataset.tabContent === t ? 'block' : 'none'; });
+    });
+  });
+
+  document.querySelectorAll('[data-stat-panel]').forEach(panel => {
+    const btn     = panel.querySelector<HTMLElement>('[data-stat-btn]');
+    const content = panel.querySelector<HTMLElement>('[data-stat-content]');
+    const chevron = panel.querySelector<HTMLElement>('[data-stat-chevron]');
+    if (!btn || !content || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = content.style.display !== 'none';
+      document.querySelectorAll('[data-stat-panel]').forEach(p => {
+        const c  = p.querySelector<HTMLElement>('[data-stat-content]');
+        const ch = p.querySelector<HTMLElement>('[data-stat-chevron]');
+        if (c)  c.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { content.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+
+  document.querySelectorAll('[data-faq-item]').forEach(item => {
+    const btn     = item.querySelector<HTMLElement>('[data-faq-btn]');
+    const answer  = item.querySelector<HTMLElement>('[data-faq-answer]');
+    const chevron = item.querySelector<HTMLElement>('[data-faq-chevron]');
+    if (!btn || !answer || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = answer.style.display !== 'none';
+      document.querySelectorAll('[data-faq-item]').forEach(fi => {
+        const a  = fi.querySelector<HTMLElement>('[data-faq-answer]');
+        const ch = fi.querySelector<HTMLElement>('[data-faq-chevron]');
+        if (a)  a.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { answer.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+</script>
+
 </BaseLayout>
