@@ -1,187 +1,719 @@
-﻿---
+---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import FaqAccordion from '../../components/islands/FaqAccordion';
-import ScrollProgress from '../../components/islands/ScrollProgress';
-import StickyNav from '../../components/islands/StickyNav';
+import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
-
-const navItems = [
-  {id:'watis',label:'Wat is het?'},
-  {id:'dekking',label:'Dekking'},
-  {id:'vloot',label:'Vlootpolis'},
-  {id:'faq',label:'FAQ'}
-];
+import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
+import BrandChevron from '../../components/BrandChevron.astro';
 
 const faqItems = [
-  {title:'Is omnium verplicht?',content:'Nee. Alleen BA Auto is verplicht. Omnium is een vrijwillige uitbreiding die uw eigen voertuig beschermt bij schade, diefstal of brand. Voor nieuwe of dure bestelwagens is omnium sterk aanbevolen.'},
-  {title:'Wat is mini-omnium?',content:'Mini-omnium dekt brand, diefstal, glasbreuk, natuurrampen en aanrijding met dieren — maar niet alle schade bij verkeersongevallen. Omnium dekt alle gevallen inclusief eigen fout.'},
-  {title:'Kan ik mijn gereedschap in de bestelwagen verzekeren?',content:'Niet via de voertuigverzekering. Gereedschap en materiaal in de bestelwagen zijn een apart risico en worden gedekt via machinebreuk- of gereedschapverzekering. Assurman combineert dit in één pakket.'},
-  {title:'Heb ik voor mijn aanhangwagen een aparte polis nodig?',content:'Aanhangwagens boven 750 kg MTM hebben een eigen nummerplaat en een aparte BA-verzekering nodig. Lichte aanhangwagens vallen onder de BA van het trekkende voertuig.'},
-  {title:'Wat is een vlootpolis?',content:'Een vlootpolis dekt al uw bedrijfsvoertuigen samen in één contract. Vanaf 5 voertuigen is dit doorgaans voordeliger en administratief eenvoudiger. U krijgt één polisdocument en één aanspreekpunt.'}
+  { q: 'Is een autoverzekering verplicht voor mijn bedrijfsvoertuig?', a: 'Ja. Elk motorrijtuig dat aan het verkeer deelneemt op de openbare weg moet wettelijk een BA-verzekering hebben. Dit is geregeld in de Wet van 21 november 1989. Niet verzekerd rijden is strafbaar en levert onmiddellijke immobilisatie op.' },
+  { q: 'Wat is het verschil tussen BA, Mini Omnium en Full Omnium?', a: 'BA dekt enkel schade aan derden. Mini Omnium voegt brand, diefstal, glasbreuk en natuurkrachten toe. Full Omnium dekt daarbovenop ook schade aan je eigen voertuig bij ongeval in fout.' },
+  { q: 'Ben ik als bestuurder zelf gedekt bij een ongeval in fout?', a: 'Niet automatisch. BA dekt enkel anderen. Voor jouw eigen lichamelijke letsels heb je een bestuurdersverzekering nodig — die wordt apart afgesloten en is bij ongeval in fout vaak het verschil tussen wel of niet vergoed worden.' },
+  { q: 'Is het gereedschap in mijn bestelwagen automatisch verzekerd?', a: 'Nee. Een gewone Omnium dekt het voertuig zelf, niet de inhoud van de laadruimte. Voor gereedschap, materiaal en koopwaar heb je een aparte dekking nodig — vaak aangeboden als pack koopwaar of materiaal-pack.' },
+  { q: 'Wat als mijn bestelwagen \'s nachts ingebroken wordt op de werf?', a: 'Voor de schade aan het voertuig zelf: gedekt vanaf Mini Omnium. Voor de gestolen inhoud: enkel gedekt mits pack koopwaar/materieel, en meestal op voorwaarde dat de laadruimte uit hard, afsluitbaar materiaal bestaat.' },
+  { q: 'Is mijn aanhangwagen automatisch verzekerd via mijn BA?', a: 'Aanhangwagens tot 750 kg MTM zijn meestal automatisch meeverzekerd via de BA van het trekkende voertuig. Boven 750 kg moet je dit expliciet aangeven aan je verzekeraar — anders ben je niet gedekt bij een schadegeval.' },
+  { q: 'Wat verandert er aan mijn premie als ik mijn wagen ook professioneel gebruik?', a: 'Professioneel gebruik weegt zwaarder in de premieberekening dan privégebruik. Op de bonus-malusschaal is er typisch een verschil van 3 punten tussen privé en gemengd/professioneel. Een jonge bestuurder die professioneel rijdt, start dus hoger op de schaal.' },
+  { q: 'Wat is bonus-malus en hoe werkt het voor een bedrijfsvoertuig?', a: 'Bonus-malus is een puntensysteem dat je premie aanpast op basis van je schadeverleden. Een ongeval in fout doet je premie typisch met 5 punten stijgen; een schadevrij jaar verlaagt met 1 punt. Voor individueel verzekerde bedrijfsvoertuigen werkt dit zoals voor privéwagens; bij grote vloten valt bonus-malus weg.' },
+  { q: 'Wat als een werknemer een ongeval in fout veroorzaakt — wat met de bonus-malus?', a: 'De bonus-malus is gekoppeld aan het voertuig, niet aan de bestuurder. Een ongeval door een werknemer werkt dus door op de polis van dat voertuig. In een vlootpolis kan je dit anders organiseren door geen vaste bestuurder aan te duiden.' },
+  { q: 'Vanaf hoeveel voertuigen wordt een vlootpolis interessant?', a: 'Dat verschilt per verzekeraar — sommige spreken van vloot vanaf 3 voertuigen, andere pas vanaf 5 of meer. Vlootpolissen bieden doorgaans één contract voor al je voertuigen, lagere globale premies en eenvoudiger beheer.' },
+  { q: 'Krijg ik een vervangwagen bij een ongeval of pech?', a: 'Dat hangt af van je polis. Sommige verzekeraars bieden gratis een vervangwagen tijdens herstelling bij een erkende garage; bij andere is het een betalende optie. De duur varieert van enkele dagen tot 30 dagen.' },
+  { q: 'Is mijn voertuig ook in het buitenland verzekerd?', a: 'Je BA Auto geldt in alle landen vermeld op je verzekeringsbewijs (groene kaart). Voor pechbijstand en omnium hangt de buitenlandse dekking af van de specifieke polis. Buitenland-bijstand is vaak een betalende uitbreiding.' },
+  { q: 'Wat dekt rechtsbijstand auto?', a: 'Rechtsbijstand dekt advocaat- en procedurekosten bij geschillen over je voertuigen — betwiste aansprakelijkheid, conflicten met je garagist na een ondeugdelijke herstelling, of strafrechtelijke vervolging na een verkeersovertreding. Plafonds variëren van € 25.000 tot € 40.000 per dossier.' },
+  { q: 'Wat als ik mijn bestelwagen uitleen aan een collega of familielid?', a: 'De BA dekt schade die de occasionele bestuurder aan derden toebrengt. Geef alle regelmatige bestuurders door bij het afsluiten van je polis. Verzwijgen kan leiden tot weigering van tussenkomst bij schadegeval.' },
 ];
+
+const beroepTabs = [
+  { id: 'dakwerkers',    label: 'Dakwerkers',        link: '/sectoren/dakwerkers',    title: 'Voor dakwerkers',            text: 'Dakwerkers gebruiken bestelwagens met materiaal op het dak — ladders, dakpannen, isolatie. Het risico op vallend materiaal richting derden is reëel. Een sterke BA Auto en omnium zijn niet optioneel.' },
+  { id: 'metsers',       label: 'Metsers',            link: '/sectoren/aannemers',     title: 'Voor metsers',               text: 'Zware materiaaltransporten, vaak met aanhangwagen. Hier wordt de aanhangwagen-dekking een belangrijk thema — boven 750 kg moet die expliciet aangegeven worden in je polis.' },
+  { id: 'loodgieters',   label: 'Loodgieters',        link: '/sectoren/loodgieters',   title: 'Voor loodgieters',           text: 'Veel verplaatsingen tussen klanten, vaak met dure interventietoestellen in de bestelwagen. Het materiaalpack is voor loodgieters bijna altijd zinvol, zeker bij overnachting van het voertuig op straat of werf.' },
+  { id: 'elektriciens',  label: 'Elektriciens',       link: '/sectoren/elektriciens',  title: 'Voor elektriciens',          text: 'Servicewagens vol met meet- en installatiemateriaal. Diefstal van gereedschap is een topprioriteit — een gewone omnium dekt dit niet, een pack koopwaar en materieel wel.' },
+  { id: 'schilders',     label: 'Schilders',          link: '/sectoren/schilders',     title: 'Voor schilders',             text: 'Bestelwagens vol met verfblikken, oplosmiddelen en stellingen. Brand- en explosierisico in de laadruimte vraagt extra aandacht — niet alle omniumformules dekken schade door vervoerde producten.' },
+  { id: 'aannemers',     label: 'Algemene aannemers', link: '/sectoren/aannemers',     title: 'Voor algemene aannemers',    text: 'Typisch een wagenpark met personenwagen, meerdere bestelwagens en aanhangwagens. Vanaf drie of meer voertuigen wordt een vlootpolis doorgaans interessanter dan losse contracten — zowel financieel als administratief.' },
+];
+
+const insuranceCards = [
+  { title: 'BA Onderneming',  icon: 'shield',  intro: 'Bescherming wanneer je bedrijf schade veroorzaakt aan derden tijdens de uitbating of beroepsactiviteit.',    bullets: ['Schade aan eigendommen van derden','Letselschade aan derden','Claims rond beroepsfouten','Aansprakelijkheid tijdens werken'],         link: '/verzekeringen/ba-onderneming',   cta: 'Meer over BA Onderneming' },
+  { title: 'Machinebreuk',    icon: 'wrench',  intro: 'Professionele machines en gereedschap zijn duur. Een defect of diefstal stopt je werk — deze dekking niet.', bullets: ['Machines bij breuk of diefstal','Diefstal op werf of in bestelwagen','Vervanging of herstelling','Op maat van je materieel'],            link: '/verzekeringen/machinebreuk',     cta: 'Meer over machinebreuk' },
+  { title: 'Arbeidsongevallen',icon: 'users',  intro: 'Wettelijk verplicht vanaf je eerste werknemer. Dekt letsel op de werf en woon-werkverkeer.',                  bullets: ['Verplicht vanaf dag 1','Medische kosten gedekt','Woon-werkverkeer inbegrepen','Aangifte binnen 8 dagen'],                              link: '/verzekeringen/arbeidsongevallen', cta: 'Meer over arbeidsongevallen' },
+  { title: 'Rechtsbijstand',  icon: 'scale',   intro: 'Juridische bescherming bij geschillen met klanten, leveranciers of personeel. Je staat niet alleen.',         bullets: ['Hulp bij juridische conflicten','Vrije advocaatkeuze','Tussenkomst bij advocaatkosten','Aanvulling op BA'],                          link: '/verzekeringen/rechtsbijstand',   cta: 'Meer over rechtsbijstand' },
+];
+
+const schema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+
+const svgCheck16g = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+const svgX16r    = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
+const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
 ---
 
 <BaseLayout
-  title="Bedrijfsvoertuigenverzekering voor bouwbedrijven | Assurman"
-  description="Verzekering voor bestelwagens, vrachtwagens en werktuigen in de bouwsector. BA, omnium en vlootpolis op maat."
+  title="Verzekering bedrijfsvoertuigen voor de bouw | Assurman"
+  description="Bestelwagen, aanhangwagen of vloot? Bescherm je voertuigen, je gereedschap en je bestuurder met de juiste polis op maat van jouw bouwbedrijf."
   canonical="/verzekeringen/bedrijfsvoertuigen"
+  schema={schema}
 >
-  <ScrollProgress client:load />
 
-  <!-- HERO -->
-  <section id="hero" style="background:#FFFFFF;padding-top:130px;padding-bottom:80px;overflow:hidden;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+<style is:global>
+  .bv-sticky-btn{background:#F7F4EF;border:1px solid rgba(229,165,36,0.2);cursor:pointer;padding:7px 16px;margin:10px 5px;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border-radius:9999px;transition:background 0.2s,border-color 0.2s;color:#001F3F;}
+  .bv-sticky-btn:hover,.bv-sticky-btn.active{background:rgba(229,165,36,0.18);border-color:#E5A524;}
+  .bv-sticky-btn .bv-check{color:#94a3b8;flex-shrink:0;transition:color 0.2s;}
+  .bv-sticky-btn:hover .bv-check,.bv-sticky-btn.active .bv-check{color:#E5A524;}
+  .bv-tab-btn{background:none;border:none;cursor:pointer;padding:14px 24px;white-space:nowrap;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.2s,border-color 0.2s;}
+  .bv-tab-btn:hover,.bv-tab-btn.active{color:#E5A524;border-bottom-color:#E5A524;}
+  .bv-ins-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);transition:background 0.2s,transform 0.2s;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);}
+  .bv-ins-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-4px);}
+  .bv-stat-panel{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+  .bv-stat-btn{width:100%;display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;text-align:left;padding:20px 24px;}
+  .bv-scan-btn:hover{background:#324554 !important;}
+  .bv-badge-pill{display:inline-flex;align-items:center;gap:8px;background:#F5F2FF;border:1px solid rgba(213,196,174,0.2);border-radius:9999px;padding:6px 16px;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#001F3F;}
+</style>
+
+<style>
+  .bv-hero-img{position:absolute;top:5%;right:-5px;height:85%;width:auto;max-width:48%;z-index:1;pointer-events:none;}
+  .bv-hero-content{max-width:620px;}
+  .bv-hero-inner{max-width:1280px;margin:0 auto;padding:64px 32px 80px;position:relative;z-index:2;}
+  .bv-hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+  .bv-watis-grid{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:flex-start;}
+  .bv-verplicht-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .bv-dekking-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
+  .bv-franchise-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;}
+  .bv-aanvulling-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .bv-formule{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:64px;flex-wrap:wrap;}
+  .bv-factors-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;margin:0 auto 40px;}
+  .bv-procedure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+  .bv-tab-inner{display:flex;gap:32px;align-items:flex-start;border-radius:12px;}
+  .bv-final-btns{display:flex;gap:24px;justify-content:center;margin-bottom:80px;flex-wrap:wrap;}
+  .bv-sticky-nav-bar{position:sticky;top:72px;z-index:90;background:#FFFFFF;border-bottom:1px solid rgba(0,31,63,0.08);overflow:auto;}
+  .bv-sticky-inner{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;gap:0;justify-content:center;flex-wrap:wrap;}
+  .bv-container{max-width:1280px;margin:0 auto;padding:0 32px;}
+  .brand-why-card{background:#FFFFFF;border-left:4px solid #E5A524;box-shadow:0px 1px 2px rgba(0,0,0,0.05);transition:box-shadow 0.2s,transform 0.2s;}
+  .brand-why-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.1);transform:translateY(-2px);}
+
+  @media (max-width:1023px){
+    .bv-container{padding:0 24px;}
+    .bv-sticky-inner{padding:0 24px;}
+    .bv-watis-grid{grid-template-columns:1fr;gap:32px;}
+    .bv-verplicht-grid{grid-template-columns:repeat(2,1fr);}
+    .bv-aanvulling-grid{grid-template-columns:repeat(2,1fr);}
+    .bv-procedure-grid{grid-template-columns:repeat(2,1fr);gap:32px;}
+    .bv-factors-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:767px){
+    .bv-sticky-nav-bar{display:none;}
+    .bv-container{padding:0 15px;}
+    .bv-hero-content{max-width:100%;}
+    .bv-hero-img{display:none;}
+    .bv-hero-btns{flex-direction:column;}
+    .bv-hero-btns a{width:100%;justify-content:center;text-align:center;}
+    #watis{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #verplicht{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #dekking{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #vloot{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #procedure{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #faq{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #bv-beroep{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #bv-statuten{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #bv-aanvulling{padding-bottom:56px !important;}
+    #bv-cta-band{padding-left:15px !important;padding-right:15px !important;padding-bottom:64px !important;}
+    #bv-cta-band h2{font-size:clamp(28px,8vw,48px) !important;}
+    #bv-cta-band p{font-size:18px !important;}
+    .bv-watis-grid{grid-template-columns:1fr;gap:24px;}
+    .bv-verplicht-grid{grid-template-columns:1fr;}
+    .bv-dekking-grid{grid-template-columns:1fr;}
+    .bv-franchise-grid{grid-template-columns:1fr;}
+    .bv-franchise-grid>div:last-child{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.15);}
+    .bv-aanvulling-grid{grid-template-columns:1fr;}
+    .bv-formule{flex-direction:column;gap:8px;margin-bottom:40px;}
+    .bv-factors-grid{grid-template-columns:1fr;}
+    .bv-procedure-grid{grid-template-columns:1fr 1fr;gap:32px;}
+    .bv-tab-inner{flex-direction:column;gap:20px;padding:24px 20px;}
+    .bv-tabs-row{overflow-x:auto;justify-content:flex-start !important;padding-bottom:4px;-webkit-overflow-scrolling:touch;}
+    .bv-final-btns{flex-direction:column;align-items:center;}
+    .bv-final-btns a{width:100%;max-width:400px;justify-content:center;}
+    .bv-cta-deco{display:none;}
+    .bv-cta-mask-img{display:none;}
+    .bv-procedure-line{display:none !important;}
+  }
+</style>
+
+<div id="bv-progress-track" style="position:fixed;top:0;left:0;right:0;height:3px;z-index:9999;background:rgba(0,31,63,0.07);">
+  <div id="bv-progress-bar" style="height:100%;background:#E5A524;width:0%;transition:width 0.1s linear;"></div>
+</div>
+
+<div style="font-family:'Outfit',sans-serif;color:#001F3F;background:#FFFFFF;">
+
+<!-- HERO -->
+<section id="bv-hero" style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:100vh;">
+  <div class="bv-hero-img assurman-mask assurman-mask--hero">
+    <img src="/verzekeringen-bouwsector-Bedrijfsvoertuigen­verzekering-hero.jpg" alt="Bestelwagen van bouwbedrijf met verzekering" />
+  </div>
+  <div class="bv-hero-inner">
+    <div class="bv-hero-content">
+      <div class="bv-badge-pill" style="margin-bottom:20px;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Assurman &middot; Bouwverzekeringen op maat
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">Verzekering bedrijfs&#x2011;<br />voertuigen</h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">Voor je bestelwagen, je vloot en alles wat erin zit.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Heb je een bestelwagen, lichte vracht of een volledig wagenpark in je bouwbedrijf? Dan heb je niet één, maar verschillende verzekeringen nodig. Eén polis dekt zelden alles — zeker niet je gereedschap, je bestuurder of je aanhangwagen.</p>
+      <div class="bv-hero-btns">
+        <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
+          {CTA_SCAN.hero}
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.advisory}</a>
+      </div>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;">Geen verplichting. We finaliseren je pakket samen na je intake.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY NAV -->
+<nav id="bv-sticky-nav" class="bv-sticky-nav-bar">
+  <div class="bv-sticky-inner">
+    {[{id:'watis',label:'Wat is het?'},{id:'verplicht',label:'Verplicht?'},{id:'dekking',label:'Dekking'},{id:'vloot',label:'Vloot'},{id:'procedure',label:'Bij een ongeval'},{id:'faq',label:'FAQ'}].map(item=>(
+      <button class="bv-sticky-btn" data-sticky-btn={item.id}>
+        <svg class="bv-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        {item.label}
+      </button>
+    ))}
+  </div>
+</nav>
+
+<!-- WAT IS HET -->
+<section id="watis" style="background:#FFFFFF;padding:96px 32px;">
+  <div class="bv-container">
+    <div class="bv-watis-grid">
+      <div style="background:#3F5767;padding:32px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);">
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In het kort</span>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+          {[
+            {t:'BA Auto is <strong style="color:#FFFFFF;">wettelijk verplicht</strong> vanaf elk voertuig dat de openbare weg op gaat.'},
+            {t:'BA dekt enkel schade aan derden — <strong style="color:#FFFFFF;">niet aan je eigen voertuig of bestuurder</strong>.'},
+            {t:'Gereedschap en materiaal in je bestelwagen vallen <strong style="color:#FFFFFF;">niet onder een gewone omnium</strong>.'},
+            {t:'Aanhangwagens tot 750 kg zitten <strong style="color:#FFFFFF;">meestal mee in je BA-polis</strong>.'},
+            {t:'Vanaf 3 tot 5 voertuigen wordt <strong style="color:#FFFFFF;">vlootverzekering doorgaans interessanter</strong>.'},
+          ].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.55;color:#CBD5E1;" set:html={item.t}></span>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div>
-        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Verzekering</p>
-        <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,4.5vw,64px);line-height:1.05;color:#001F3F;margin:0 0 24px;">Bedrijfsvoertuigen&shy;verzekering</h1>
-        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(18px,2vw,24px);color:#E5A524;margin:0 0 24px;line-height:1.3;">Uw vloot beschermd. Van bestelwagen tot vrachtwagen.</p>
-        <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 40px;">De bestelwagen is voor de meeste bouwbedrijven het verlengde van de werkplaats. Een accident, diefstal of schade legt uw activiteit stil. Assurman stelt een vlootpolis samen die past bij uw wagenpark — van één bestelwagen tot een volledige vloot.</p>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;">
-          <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;">Gratis scan aanvragen</a>
-          <a href="/maak-afspraak" style="display:inline-block;background:transparent;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;border:2px solid #001F3F;">Afspraak maken</a>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:center;">
-        <img src="/foto-contact-35.png" alt="Bedrijfsvoertuigen verzekering" style="width:100%;max-width:520px;border-radius:8px;object-fit:cover;" loading="eager" />
-      </div>
-    </div>
-  </section>
-
-  <StickyNav client:load navItems={navItems} heroSectionId="hero" />
-
-  <!-- WAT IS HET -->
-  <section id="watis" style="background:#F8F9FA;padding:100px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Wat is het?</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">Bescherming voor uw wagenpark</h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
-        <div style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:40px;">
-          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 20px;">In het kort</p>
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
-            {[
-              'BA Auto is wettelijk verplicht voor alle voertuigen op de openbare weg',
-              'Omnium of mini-omnium dekt eigen schade bij accident, diefstal of brand',
-              'Vlootpolis vanaf 5 voertuigen vaak voordeliger',
-              'Gereedschap en materiaal in de bestelwagen apart te verzekeren',
-              'Aanhangwagens boven 750 kg MTM apart te verzekeren'
-            ].map((item) => (
-              <li style="display:flex;align-items:flex-start;gap:12px;font-family:'Open Sans',sans-serif;font-size:16px;color:#FFFFFF;line-height:1.5;">
-                <span style="color:#E5A524;font-weight:700;flex-shrink:0;margin-top:2px;">✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 24px;">Bedrijfsvoertuigen vragen een specifieke benadering. Een particuliere autoverzekering volstaat niet: het professioneel gebruik, de laadruimte met gereedschap en de hogere kilometers per jaar vereisen een polis op maat.</p>
-          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 24px;">Assurman analyseert uw wagenpark en stelt een pakket samen dat de juiste dekkingen combineert, rekening houdend met het type voertuig, het gebruik en het aantal chauffeurs.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- DEKKING TYPES -->
-  <section id="dekking" style="background:#FFFFFF;padding:100px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Types dekking</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">Welke dekkingen zijn er?</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
-        {[
-          {title:'BA Auto (verplicht)',badge:'Verplicht',text:'Dekt schade die u toebrengt aan andere weggebruikers: personen en voertuigen. Wettelijk verplicht voor alle voertuigen op de openbare weg.'},
-          {title:'Mini-omnium',badge:'Optioneel',text:'Dekt brand, diefstal, glasbreuk, storm, hagel, overstroming en aanrijding met dieren. Niet: eigen schuld bij een accident.'},
-          {title:'Omnium (volledige dekking)',badge:'Optioneel',text:'Dekt alles van mini-omnium én eigen schade bij een verkeersongeval, ongeacht wie fout is. Aanbevolen voor nieuwe voertuigen.'},
-          {title:'Pechbijstand',badge:'Aanvulling',text:'Tussenkomst bij pech, lege accu of klapband — thuis of onderweg. Essentieel voor bouwers die dagelijks op de baan zijn.'},
-          {title:'Rechtsbijstand voertuigen',badge:'Aanvulling',text:'Juridische bijstand bij geschillen na een verkeersongeval: betwiste aansprakelijkheid, verhaal op schuldenaar, verzekering van tegenpartij.'}
-        ].map((item) => (
-          <div style="background:#FFFFFF;border:1px solid #E5E8ED;border-radius:8px;padding:28px;box-shadow:0 2px 16px rgba(0,31,63,0.06);">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-              <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;margin:0;">{item.title}</p>
-              <span style={`font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;padding:4px 10px;border-radius:20px;letter-spacing:0.5px;${item.badge === 'Verplicht' ? 'background:#DC2626;color:#FFFFFF;' : item.badge === 'Optioneel' ? 'background:#E5A524;color:#001F3F;' : 'background:#F0F4F8;color:#3F5767;'}`}>{item.badge}</span>
-            </div>
-            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0;">{item.text}</p>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">Eén voertuig, meerdere verzekeringen</h2>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een bedrijfsvoertuigenverzekering is geen enkele polis, maar een combinatie. Je vertrekt altijd vanaf de wettelijk verplichte BA Auto en bouwt van daaruit verder uit met omnium, bestuurdersverzekering, rechtsbijstand, pechbijstand en — voor bouwbedrijven cruciaal — een aparte dekking voor je gereedschap en materiaal.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">In de bouw zijn voertuigen meer dan transport. Je bestelwagen is je werkplaats op wielen, je aanhangwagen is je laadruimte, je belettering is je visitekaartje. Een goede polis houdt rekening met al die rollen — generieke autoverzekeringen doen dat niet.</p>
+        <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div>
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">Wettelijke basis</p>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">De verplichting is vastgelegd in de <strong>Wet van 21 november 1989</strong> betreffende de verplichte aansprakelijkheidsverzekering voor motorrijtuigen. Toezicht via <strong>FSMA</strong> voor verzekeraars en <strong>FOD Mobiliteit</strong> voor inschrijvingsregels. Niet verzekerd rijden is een strafbaar feit.</p>
           </div>
-        ))}
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- VLOOTPOLIS VS INDIVIDUEEL -->
-  <section id="vloot" style="background:#001F3F;padding:100px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Vlootpolis</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#FFFFFF;margin:0 0 16px;">Vlootpolis vs. individuele polissen</h2>
-      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);margin:0 0 48px;max-width:720px;">Vanaf 5 voertuigen is een vlootpolis doorgaans de meest voordelige en administratief eenvoudigste keuze.</p>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
-        {[
-          {type:'Individuele polissen',pros:['Flexibel per voertuig','Geschikt voor 1 tot 4 wagens','Aparte premie per voertuig'],cons:['Meer administratie','Verschillende vervaldata','Hogere totaalkost bij meerdere wagens']},
-          {type:'Vlootpolis',pros:['Één contract voor alle voertuigen','Één vervaldag en factuur','Premievoordeel bij groter wagenpark','Gemakkelijk voertuigen toe te voegen'],cons:['Pas interessant vanaf 5 voertuigen','Vaste polisstructuur']}
-        ].map((item) => (
-          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:36px;">
-            <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#E5A524;margin:0 0 20px;">{item.type}</p>
-            <div style="margin-bottom:16px;">
-              <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin:0 0 10px;">Voordelen</p>
-              {item.pros.map((pro) => (
-                <p style="font-family:'Open Sans',sans-serif;font-size:14px;color:rgba(255,255,255,0.85);margin:0 0 6px;display:flex;align-items:flex-start;gap:8px;">
-                  <span style="color:#22C55E;flex-shrink:0;">✓</span>{pro}
-                </p>
-              ))}
-            </div>
-            <div>
-              <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:1px;margin:0 0 10px;">Nadelen</p>
-              {item.cons.map((con) => (
-                <p style="font-family:'Open Sans',sans-serif;font-size:14px;color:rgba(255,255,255,0.65);margin:0 0 6px;display:flex;align-items:flex-start;gap:8px;">
-                  <span style="color:#EF4444;flex-shrink:0;">−</span>{con}
-                </p>
-              ))}
-            </div>
+<!-- IS HET VERPLICHT -->
+<section id="verplicht" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Voor wie?</span>
+      <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#64748b;margin-bottom:8px;">Wat is wettelijk verplicht en wat niet?</p>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,10vw,112px);line-height:0.9;color:#001F3F;letter-spacing:-4px;">BA.</div>
+      <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:20px;color:#3F5767;margin-top:12px;">BA Auto is verplicht voor elk motorrijtuig op de openbare weg. Alle andere dekkingen zijn vrij te kiezen.</p>
+    </div>
+    <div class="bv-verplicht-grid">
+      {[
+        {icon:'cl', title:'Eigen bestelwagen',          badge:'Verplicht (BA)',           text:'Voor elke bestelwagen op de openbare weg is BA Auto wettelijk verplicht.'},
+        {icon:'us', title:'Vloot',                      badge:'Verplicht (BA per voertuig)',text:'Vanaf meerdere voertuigen kan je een vlootpolis afsluiten — vaak voordeliger.'},
+        {icon:'tr', title:'Aanhangwagen',               badge:'Tot 750 kg automatisch',   text:'Aanhangwagens tot 750 kg zitten meestal mee in de BA van het trekkende voertuig.'},
+        {icon:'ft', title:'Lichte vracht en vrachtwagen',badge:'Verplicht (BA aangepast)', text:'Lichte vracht en vrachtwagens vragen een aangepaste BA-polis met andere premieberekening.'},
+      ].map(card=>(
+        <div style="background:#FFFFFF;padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+          <div style="background:rgba(229,165,36,0.1);border-radius:10px;padding:12px;display:inline-flex;margin-bottom:18px;">
+            {card.icon==='cl'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>}
+            {card.icon==='us'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+            {card.icon==='tr'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>}
+            {card.icon==='ft'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>}
           </div>
-        ))}
+          <div style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.8px;text-transform:uppercase;padding:3px 10px;border-radius:9999px;margin-bottom:10px;">{card.badge}</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#64748b;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- VOORBEELDEN -->
+<section style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Wanneer heb je meer dan alleen BA nodig?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">Hieronder 6 concrete situaties uit de bouwsector die laten zien waarom aanvullende dekkingen zo belangrijk zijn.</p>
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <button id="bv-examples-btn" style="display:flex;align-items:center;gap:10px;background:rgba(0,31,63,0.04);border:1px solid rgba(0,31,63,0.1);border-radius:8px;padding:14px 24px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#001F3F;">
+        <span>Bekijk 6 concrete voorbeelden uit de bouw</span>
+        <svg id="bv-examples-chevron" width="18" height="18" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+    <ul id="bv-examples-list" style="list-style:none;padding:0;margin:16px 0 0;display:none;grid-template-columns:1fr 1fr;gap:10px;">
+      {[
+        'Dakwerker: door wind valt een ladder van het dak op een geparkeerde wagen — schade aan derde via BA Auto, eigen schade via Omnium.',
+        'Metser: aanhangwagen met bouwmateriaal schiet los tijdens het rijden en raakt de achterligger.',
+        'Elektricien: ingebroken in de servicewagen op de werf — al het gereedschap weg.',
+        'Loodgieter: botsing met loslopend hert onderweg naar interventie — gedekt vanaf Mini Omnium.',
+        'Schilder: kortsluiting in de laadruimte met verfblikken veroorzaakt brand in de bestelwagen.',
+        'Schrijnwerker: aanhangwagen met grote zaagmachine wordt door derde aangereden tijdens het lossen bij klant.',
+      ].map(ex=>(
+        <li style="display:flex;gap:10px;align-items:flex-start;background:#F7F4EF;border-radius:8px;padding:12px 16px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{ex}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<!-- DEKKING -->
+<section id="dekking" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:1025px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Dekking</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat is wél en niet gedekt?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:580px;margin:0 auto;">BA is de basis voor schade aan derden. Voor je eigen voertuig en wat erin zit, heb je extra dekkingen nodig.</p>
+    </div>
+    <div class="bv-dekking-grid">
+      <div style="background:#FFFFFF;border:2px solid rgba(34,197,94,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(34,197,94,0.08);border-bottom:1px solid rgba(34,197,94,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#15803d;">Wel gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Lichamelijke en materiële schade aan derden via BA Auto','Schade aan inzittenden van andere voertuigen zoals passagiers, voetgangers, fietsers','Glasbreuk, brand en natuurkrachten vanaf Mini Omnium','Diefstal en vandalisme vanaf Mini Omnium','Schade aan je eigen voertuig na ongeval in fout vanaf Full Omnium','Aanhangwagen tot 750 kg meestal automatisch mee in BA'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgCheck16g} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:2px solid rgba(239,68,68,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(239,68,68,0.06);border-bottom:1px solid rgba(239,68,68,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#b91c1c;">Niet (of beperkt) gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Lichamelijke schade aan de bestuurder zelf bij ongeval in fout','Gereedschap, materiaal en koopwaar in de bestelwagen','Belettering en personalisatie van het voertuig','Schade door dronkenschap, opzettelijke fouten of zware overtredingen','Schade door slijtage, gebrek aan onderhoud of constructiefouten','Aanhangwagen boven 750 kg zonder aangifte aan verzekeraar'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgX16r} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
-  </section>
-
-  <!-- GOLD CTA -->
-  <section style="background:#E9C466;padding:72px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;">
+    <div class="bv-franchise-grid" style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);padding:36px 40px;">
       <div>
-        <p style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(22px,3vw,36px);color:#001F3F;margin:0 0 8px;">Uw wagenpark correct gedekt</p>
-        <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.6;color:rgba(0,31,63,0.75);margin:0;">Assurman vergelijkt en stelt de juiste vlootpolis samen.</p>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Franchise</span>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#FFFFFF;margin:0 0 12px;">Hoeveel betaal je zelf bij schade?</h3>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">De franchise is wat je zelf betaalt bij een schadegeval onder de Omnium. Hoe lager je franchise, hoe hoger je premie — en omgekeerd. In de praktijk schommelt dat tussen € 250 en € 1.250 per schadegeval.</p>
       </div>
-      <div style="display:flex;gap:16px;flex-wrap:wrap;">
-        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#001F3F;color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Gratis scan</a>
-        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid #001F3F;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Afspraak</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" style="background:#FFFFFF;padding:100px 0;">
-    <div style="max-width:900px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Veelgestelde vragen</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">FAQ bedrijfsvoertuigen</h2>
-      <FaqAccordion client:visible items={faqItems} />
-    </div>
-  </section>
-
-  <!-- PARTNERS -->
-  <section style="background:#F8F9FA;padding:60px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin:0 0 32px;">Onze verzekeringspartners</p>
-      <PartnerSlider client:visible />
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section style="background:#001F3F;padding:100px 0 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px 80px;text-align:center;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Klaar om te starten?</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.1;color:#FFFFFF;margin:0 0 20px;">Uw vloot correct verzekerd</h2>
-      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto 40px;">Van BA verplicht tot omnium en vlootpolis — Assurman regelt het.</p>
-      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Gratis scan starten</a>
-        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Afspraak maken</a>
+      <div style="text-align:center;flex-shrink:0;">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:6px;">Typische franchise-range</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:36px;color:#FFFFFF;letter-spacing:-1px;line-height:1;">€ 250 – € 1.250</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:14px;color:#94a3b8;margin-top:6px;">per schadegeval (omnium)</div>
       </div>
     </div>
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
-  </section>
+  </div>
+</section>
+
+<!-- AANVULLENDE WAARBORGEN -->
+<section id="bv-aanvulling" style="background:#3F5767;padding:0 0 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding:100px 32px 0;position:relative;z-index:1;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Aanvullen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Welke aanvullingen zijn zinvol voor de bouw?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0;">De BA dekt anderen, niet jezelf en niet wat je vervoert. In de bouw zijn er vijf aanvullingen die we bijna altijd zinvol vinden.</p>
+    </div>
+    <div class="bv-aanvulling-grid">
+      {[
+        {i:'us',title:'Bestuurdersverzekering',       text:'Vergoedt jouw lichamelijke letsels als je in fout een ongeval veroorzaakt — tot vaak meer dan een miljoen euro per ongeval.'},
+        {i:'br',title:'Pack koopwaar en materiaal',   text:'Verzekert het gereedschap, materiaal en koopwaar in je bestelwagen tegen schade en diefstal — ook \'s nachts op de werf.'},
+        {i:'sh',title:'Rechtsbijstand auto',          text:'Juridische bijstand en advocaatkosten bij geschillen over je voertuigen — van betwiste aansprakelijkheid tot conflicten met je garagist.'},
+        {i:'tr',title:'Pechbijstand 24/7',            text:'Onmiddellijke hulp bij pech of ongeval, in België en in Europa — vaak met vervangwagen tijdens herstelling.'},
+        {i:'ac',title:'Omnium-uitbreiding voor bouw', text:'Specifieke uitbreidingen zoals dekking voor belettering, aanhangwagen en gemonteerde toebehoren in de laadruimte.'},
+      ].map(card=>(
+        <div class="bv-ins-card" style="padding:28px;">
+          <div style="background:rgba(229,165,36,0.15);border-radius:10px;padding:10px;display:inline-flex;margin-bottom:16px;">
+            {card.i==='us'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>}
+            {card.i==='br'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>}
+            {card.i==='sh'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
+            {card.i==='tr'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>}
+            {card.i==='ac'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#FFFFFF;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#94A3B8;margin:0;">{card.text}</p>
+        </div>
+      ))}
+      <div style="background:#E5A524;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:32px;display:flex;flex-direction:column;justify-content:center;">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">Volledig op jouw maat</h3>
+        <p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(0,31,63,0.75);line-height:1.55;margin:0 0 20px;">Niet elk bouwbedrijf heeft dezelfde aanvullingen nodig. Laat ons jouw polis doorlichten in een gratis scan.</p>
+        <a href={CTA_DESTINATIONS.scan} class="bv-scan-btn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.2s;width:100%;">
+          {CTA_SCAN.doIt} <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VLOOT, PREMIE EN BONUS-MALUS -->
+<section id="vloot" style="background:#F7F4EF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Prijs &amp; vloot</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Vanaf wanneer wordt een vlootpolis interessant?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:520px;margin:0 auto;">Eén voertuig wordt afzonderlijk verzekerd. Vanaf meerdere voertuigen kan een vlootpolis voordeliger en eenvoudiger uitvallen.</p>
+    </div>
+    <div class="bv-formule">
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">1. Voertuig</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Type en waarde</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#64748b;line-height:1.4;">personenwagen, lichte vracht, vrachtwagen, aanhangwagen</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">×</div>
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">2. Gebruik en schade</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Profiel + bonus-malus</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#64748b;line-height:1.4;">professioneel, kilometers/jaar, schadeverleden</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">=</div>
+      <div style="background:#3F5767;border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 8px 32px rgba(63,87,103,0.3);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">Jaarpremie</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin-bottom:8px;">Per voertuig of vloot</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#94a3b8;line-height:1.4;">optioneel met combinatiekorting</div>
+      </div>
+    </div>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:#001F3F;text-align:center;margin-bottom:32px;">4 factoren die je premie beïnvloeden</h3>
+    <div class="bv-factors-grid">
+      {[
+        {num:'1',title:'Type voertuig',            text:'Een vrachtwagen heeft een ander risicoprofiel dan een personenwagen of bestelwagen.'},
+        {num:'2',title:'Gebruik',                  text:'Professioneel gebruik telt zwaarder dan privé — typisch 3 punten verschil op de bonus-malusschaal.'},
+        {num:'3',title:'Schadeverleden (bonus-malus)',text:'Eerdere ongevallen in fout verhogen je premie; schadevrije jaren verlagen ze.'},
+        {num:'4',title:'Vlootomvang',              text:'Vanaf meerdere voertuigen kan een vlootpolis lagere premies en eenvoudiger beheer opleveren.'},
+      ].map(f=>(
+        <div class="brand-why-card" style="padding:20px 24px;display:flex;gap:18px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:16px;color:#001F3F;">{f.num}</span></div>
+          <div>
+            <h4 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 4px;">{f.title}</h4>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#64748b;margin:0;">{f.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style="max-width:640px;margin:0 auto 32px;">
+      <div style="background:rgba(229,165,36,0.10);padding:20px 28px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);border:1px solid rgba(229,165,36,0.3);">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="18" height="18" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div>
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#001F3F;margin:0 0 6px;">Wat is bonus-malus precies?</p>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#001F3F;margin:0;">Bonus-malus is een puntensysteem waarmee verzekeraars je premie aanpassen aan je schadeverleden. Het wettelijk verplichte systeem werd op 1 januari 2004 afgeschaft, sindsdien gebruikt elke verzekeraar zijn eigen variant. Een ongeval in fout doet je premie typisch met 5 punten stijgen, een schadevrij jaar verlaagt met 1 punt. Bij grote vloten valt bonus-malus weg en wordt de premie berekend op de schadestatistieken van het hele wagenpark.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:640px;margin:0 auto;">
+      <div style="background:rgba(229,165,36,0.10);padding:20px 28px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);border:1px solid rgba(229,165,36,0.3);">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="18" height="18" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#001F3F;margin:0;"><strong>Fiscaal:</strong> op je premie wordt een verzekeringstaks van <strong>9,25%</strong> ingehouden, en voor BA Auto bovendien een bijdrage aan het Fonds voor Rijslachtoffers. Deze taksen zijn aftrekbaar als beroepskost.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section id="bv-cta-band" style="background:#E9C466;padding:80px 0 100px;position:relative;overflow:hidden;">
+  <div class="assurman-mask assurman-mask--cta bv-cta-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:1;">
+    <img src="/verzekeringen-bouwsector-Bedrijfsvoertuigen­verzekering-cta.jpg" alt="Bouwbedrijf met verzekerde bedrijfsvoertuigen">
+  </div>
+  <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="100px" direction="down" /></div>
+  <div class="bv-cta-deco" style="position:absolute;right:-130px;top:40%;transform:translateY(-50%);pointer-events:none;z-index:2;"><BrandChevron color="white" height="240px" direction="left" /></div>
+  <div style="max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:4;padding:0 32px;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">Bouwprofessional in Vlaanderen?<br />Wij maken jouw pakket op maat.</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#3F5767;margin-bottom:40px;opacity:0.9;">Start nu in 2 minuten of kies meteen voor persoonlijk advies.</p>
+    <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">{CTA_SCAN.requestNow} <Fragment set:html={svgArr18} /></a>
+  </div>
+</section>
+
+<!-- PER BEROEP TABS -->
+<section id="bv-beroep" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Per beroep</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat betekent dit voor jouw stiel?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:520px;margin:0 auto;">Bouwberoepen verschillen sterk in voertuiggebruik. Hieronder de typische aandachtspunten per stiel.</p>
+    </div>
+    <div class="bv-tabs-row" style="display:flex;gap:0;border-bottom:2px solid rgba(0,31,63,0.12);margin-bottom:40px;justify-content:center;">
+      {beroepTabs.map((tab,i)=>(<button class={`bv-tab-btn${i===0?' active':''}`} data-tab-btn={tab.id}>{tab.label}</button>))}
+    </div>
+    {beroepTabs.map((tab,i)=>(
+      <div data-tab-content={tab.id} style={`display:${i===0?'block':'none'};max-width:860px;margin:0 auto;`}>
+      <div class="bv-tab-inner" style="background:#FFFFFF;border-radius:12px;padding:36px 40px;">
+        <div style="background:rgba(229,165,36,0.12);border-radius:12px;padding:18px;flex-shrink:0;">
+          <svg width="32" height="32" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+        </div>
+        <div style="flex:1;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">{tab.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.65;color:#001F3F;margin:0 0 20px;">{tab.text}</p>
+          <a href={tab.link} style="display:inline-flex;align-items:center;gap:6px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;text-decoration:none;">Bekijk sectorpagina <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+      </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- MIJN SITUATIE -->
+<section id="bv-statuten" style="background:#3F5767;padding:96px 32px;position:relative;overflow:hidden;">
+  <div style="max-width:840px;margin:0 auto;position:relative;z-index:1;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Mijn situatie</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Welke aanpak past bij jouw bouwbedrijf?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0 0 40px;">De juiste polis hangt af van hoeveel voertuigen je hebt, wie ermee rijdt en wat je vervoert.</p>
+
+    <div class="bv-stat-panel" data-stat-panel>
+      <button class="bv-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik werk alleen, met één eigen bestelwagen</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Eén voertuig, eigen gebruik, met daarin je gereedschap en materiaal. Voor jou ligt de focus op een degelijke combinatie van BA + Omnium + bestuurdersverzekering + materiaalpack.</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
+          {['Geef bij de polis aan dat je het voertuig gemengd (privé én professioneel) gebruikt — dat klopt fiscaal én verzekeringstechnisch met je realiteit.','Onderschat het gereedschap in je laadruimte niet. € 3.000 tot € 8.000 aan elektrisch materiaal zit zo bij elkaar — gewone omnium dekt dat niet.'].map(item=>(
+            <li style="display:flex;gap:10px;align-items:flex-start;"><svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span style="font-family:'Outfit',sans-serif;font-size:15px;color:#CBD5E1;">{item}</span></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="bv-stat-panel" data-stat-panel>
+      <button class="bv-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik heb personeel met eigen servicewagens</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Eén bestelwagen voor jezelf, één of twee voor je medewerkers. De polis moet rekening houden met het feit dat niet altijd dezelfde persoon rijdt.</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
+          {['Geef alle vaste én occasionele bestuurders door bij het afsluiten. Niet doen maakt je polis kwetsbaar bij schadegeval.','Bonus-malus is gekoppeld aan het voertuig, niet aan de persoon. Een schadegeval door een werknemer werkt door op de polis van dat voertuig.'].map(item=>(
+            <li style="display:flex;gap:10px;align-items:flex-start;"><svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span style="font-family:'Outfit',sans-serif;font-size:15px;color:#CBD5E1;">{item}</span></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="bv-stat-panel" data-stat-panel>
+      <button class="bv-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik heb een vloot van 3 of meer voertuigen</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Vanaf drie tot vijf voertuigen wordt een vlootpolis doorgaans interessanter dan losse contracten. De voordelen:</p>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
+          {['Eén contract, één vervaldag, één gesprekspartner.','Vaak lagere globale premie door schadestatistieken van de hele vloot.','Mogelijkheid om geen vaste bestuurder aan te duiden — handig als voertuigen door verschillende medewerkers worden gebruikt.','Bij grote vloten valt bonus-malus weg; de premie wordt jaarlijks aangepast op basis van schadestatistieken van het wagenpark.'].map(item=>(
+            <li style="display:flex;gap:10px;align-items:flex-start;"><svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span style="font-family:'Outfit',sans-serif;font-size:15px;color:#CBD5E1;">{item}</span></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIJ EEN ONGEVAL -->
+<section id="procedure" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:60px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Bij een ongeval</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat moet je doen als er iets gebeurt?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:520px;margin:0 auto;">Een goede polis is belangrijk, maar een correcte reactie na een ongeval evenzeer. Deze 4 stappen houd je aan.</p>
+    </div>
+    <div class="bv-procedure-grid">
+      <div class="bv-procedure-line" style="position:absolute;top:36px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(to right,#E5A524,rgba(229,165,36,0.2));z-index:0;"></div>
+      {[
+        {ic:'ph', title:'Beveilig en meld',          text:'Beveilig de plaats van het ongeval, verwittig zo nodig politie en verzorg eerste hulp.'},
+        {ic:'ac', title:'Aanrijdingsformulier',       text:'Vul samen met de tegenpartij het Europees aanrijdingsformulier in — handgeschreven of via de app.'},
+        {ic:'ft', title:'Aangifte binnen 8 dagen',   text:'Bezorg het formulier aan je verzekeraar binnen de wettelijke termijn van 8 dagen.'},
+        {ic:'at', title:'Pechbijstand en herstel',   text:'Bel de pechbijstand voor takeling en vraag een vervangwagen indien voorzien in je polis.'},
+      ].map((s,i)=>(
+        <div style="padding:0 20px;text-align:center;position:relative;z-index:1;">
+          <div style="width:72px;height:72px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 4px 16px rgba(229,165,36,0.3);">
+            {s.ic==='ph'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.88 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.79 2.82h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.9a16 16 0 0 0 6.18 6.18l1.24-1.24a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>}
+            {s.ic==='ac'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>}
+            {s.ic==='ft'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>}
+            {s.ic==='at'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>}
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#E5A524;margin-bottom:8px;">Stap {i+1}</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{s.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#64748b;margin:0;">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:840px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over bedrijfsvoertuigen</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">14 concrete vragen van bouwondernemers — klik open voor het antwoord.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      {faqItems.map((item,i)=>(
+        <div data-faq-item style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.08);border-radius:10px;overflow:hidden;">
+          <button data-faq-btn style="width:100%;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;text-align:left;gap:16px;">
+            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;line-height:1.35;">{item.q}</span>
+            <svg data-faq-chevron width="18" height="18" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div data-faq-answer style="display:none;padding:0 24px 20px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#3F5767;margin:0;">{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<InsuranceCarousel
+  client:only="react"
+  cards={insuranceCards}
+  sectionLabel="Ook interessant"
+  headline="Gerelateerde verzekeringen"
+  subheadline="Deze verzekeringen vullen je bedrijfsvoertuigenverzekering aan in een volledig bouwpakket."
+  background="#F5F2FF"
+/>
+
+<section style="background:#F7F4EF;padding:64px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">Ondersteund door sterke verzekeringspartners</p>
+    <PartnerSlider client:only="react" />
+  </div>
+</section>
+
+<section style="background:#3F5767;padding-top:120px;padding-bottom:0;position:relative;text-align:center;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+  <div style="max-width:896px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;text-align:center;margin-bottom:20px;">Start met Assurman</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;color:#FFFFFF;max-width:727px;margin:0 auto 24px;">Zijn jouw bedrijfsvoertuigen correct verzekerd?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouwsector en wil je zeker zijn dat je voertuigen, je gereedschap en je bestuurder correct verzekerd zijn? Wij bekijken met jou wat echt nodig is.</p>
+    <div class="bv-final-btns">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">{CTA_SCAN.hero} <Fragment set:html={svgArr18} /></a>
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">{CTA_AFSPRAAK.advisory}</a>
+    </div>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+</section>
+
+</div>
+
+<script>
+  const progressBar = document.getElementById('bv-progress-bar') as HTMLElement | null;
+  const stickyBtns  = document.querySelectorAll<HTMLElement>('[data-sticky-btn]');
+  const sectionIds  = ['watis','verplicht','dekking','vloot','procedure','faq'];
+
+  stickyBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.stickyBtn!;
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const total = doc.scrollHeight - doc.clientHeight;
+    if (progressBar) progressBar.style.width = total > 0 ? `${(doc.scrollTop / total) * 100}%` : '0%';
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sectionIds[i]);
+      if (el && el.getBoundingClientRect().top <= 120) {
+        stickyBtns.forEach(b => b.classList.toggle('active', b.dataset.stickyBtn === sectionIds[i]));
+        break;
+      }
+    }
+  }, { passive: true });
+
+  const exBtn  = document.getElementById('bv-examples-btn')     as HTMLElement | null;
+  const exList = document.getElementById('bv-examples-list')    as HTMLElement | null;
+  const exChev = document.getElementById('bv-examples-chevron') as HTMLElement | null;
+  if (exBtn && exList && exChev) {
+    exBtn.addEventListener('click', () => {
+      const open = exList.style.display !== 'none';
+      exList.style.display = open ? 'none' : 'grid';
+      exChev.style.transform = open ? '' : 'rotate(180deg)';
+    });
+  }
+
+  const tabBtns     = document.querySelectorAll<HTMLElement>('[data-tab-btn]');
+  const tabContents = document.querySelectorAll<HTMLElement>('[data-tab-content]');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tabBtn!;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      tabContents.forEach(el => { el.style.display = el.dataset.tabContent === t ? 'block' : 'none'; });
+    });
+  });
+
+  document.querySelectorAll('[data-stat-panel]').forEach(panel => {
+    const btn     = panel.querySelector<HTMLElement>('[data-stat-btn]');
+    const content = panel.querySelector<HTMLElement>('[data-stat-content]');
+    const chevron = panel.querySelector<HTMLElement>('[data-stat-chevron]');
+    if (!btn || !content || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = content.style.display !== 'none';
+      document.querySelectorAll('[data-stat-panel]').forEach(p => {
+        const c  = p.querySelector<HTMLElement>('[data-stat-content]');
+        const ch = p.querySelector<HTMLElement>('[data-stat-chevron]');
+        if (c)  c.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { content.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+
+  document.querySelectorAll('[data-faq-item]').forEach(item => {
+    const btn     = item.querySelector<HTMLElement>('[data-faq-btn]');
+    const answer  = item.querySelector<HTMLElement>('[data-faq-answer]');
+    const chevron = item.querySelector<HTMLElement>('[data-faq-chevron]');
+    if (!btn || !answer || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = answer.style.display !== 'none';
+      document.querySelectorAll('[data-faq-item]').forEach(fi => {
+        const a  = fi.querySelector<HTMLElement>('[data-faq-answer]');
+        const ch = fi.querySelector<HTMLElement>('[data-faq-chevron]');
+        if (a)  a.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { answer.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+</script>
+
 </BaseLayout>
