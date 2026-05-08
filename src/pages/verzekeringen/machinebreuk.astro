@@ -1,174 +1,704 @@
-﻿---
+---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import FaqAccordion from '../../components/islands/FaqAccordion';
-import ScrollProgress from '../../components/islands/ScrollProgress';
-import StickyNav from '../../components/islands/StickyNav';
+import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
-
-const navItems = [
-  {id:'watis',label:'Wat is het?'},
-  {id:'dekking',label:'Dekking'},
-  {id:'diefstal',label:'Diefstal'},
-  {id:'faq',label:'FAQ'}
-];
+import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
+import BrandChevron from '../../components/BrandChevron.astro';
 
 const faqItems = [
-  {title:'Wat valt onder machinebreuk?',content:'Machinebreuk dekt onverwachte en plotse defecten aan machines door mechanische of elektrische oorzaken. Normale slijtage en onderhoud vallen buiten de dekking.'},
-  {title:'Is diefstal altijd inbegrepen?',content:'Niet automatisch. Diefstal is een apart risico dat je kunt toevoegen aan de polis. Gezien het hoge risico van gereedschapsdiefstal in de bouwsector is dit voor de meeste bedrijven sterk aanbevolen.'},
-  {title:'Dekt machinebreuk ook schade op de werf?',content:'Ja. Mobiel werfmaterieel en gereedschap zijn te verzekeren voor gebruik op de werf, in de bestelwagen en op het atelierterrein. De locatie en aard van het gebruik bepalen mee de premie.'},
-  {title:'Hoe wordt de waarde bepaald?',content:'U kiest tussen nieuwwaarde of dagwaarde (rekening houdend met afschrijving). Voor recent materieel is nieuwwaarde aanbevolen. Assurman helpt u de juiste dekkingswaarde te bepalen.'},
-  {title:'Kan ik gehuurde machines ook verzekeren?',content:'In principe is de eigenaar verantwoordelijk voor verzekering van zijn materieel. Maar als u gehuurde machines beschadigt, kunt u aansprakelijk worden gesteld. Dit kan opgenomen worden in uw BA-polis.'}
+  { q: 'Is een machinebreukverzekering wettelijk verplicht?', a: 'Nee, machinebreuk is een vrijwillige polis. Wel kunnen verhuurders en opdrachtgevers ze contractueel vereisen vóór ze materieel of opdracht vrijgeven.' },
+  { q: 'Wat is het verschil met een ABR-polis?', a: 'Een ABR dekt schade aan de bouwwerf en de werken zelf. Machinebreuk dekt schade aan je eigen materieel. Beide polissen vullen elkaar aan op een grote werf.' },
+  { q: 'Wordt mijn gereedschap in de bestelwagen ook gedekt?', a: 'Alleen als de polis de waarborg inhoud bestelwagen of een vervoerwaarborg bevat. Vaak vraagt de polis een vaste stallingsplaats \'s nachts.' },
+  { q: 'Wat is het verschil tussen nieuwwaarde en dagwaarde?', a: 'Nieuwwaarde vergoedt het bedrag voor een nieuwe vergelijkbare machine. Dagwaarde houdt rekening met leeftijd en afschrijving. De keuze beïnvloedt premie en uitkering.' },
+  { q: 'Geldt de polis ook voor diefstal op de werf?', a: 'Alleen als de waarborg diefstal in je polis is opgenomen. Vraag uitdrukkelijk werfdekking, want standaard zit ze er niet altijd in.' },
+  { q: 'Wordt gehuurd materieel mee verzekerd?', a: 'Met de uitbreiding gehuurd materieel wel. Veel verhuurders eisen zo\'n dekking vóór ze grote machines vrijgeven.' },
+  { q: 'Wat valt onder eigen gebrek?', a: 'Schade door interne oorzaken zoals warmlopen, kortsluiting, metaalmoeheid of slecht functioneren. Polissen sluiten dit vaak uit voor onderdelen ouder dan tien jaar.' },
+  { q: 'Hoe wordt mijn premie berekend?', a: 'Op basis van de verzekerde waarde van je materieel, je sector en je gekozen waarborgen. Je eigen risico verlaagt de premie wanneer je het hoger zet.' },
+  { q: 'Wat is een typisch eigen risico?', a: 'Bij Belgische polissen ligt dit doorgaans tussen 250 en 1.000 euro per schadegeval. Hoger eigen risico betekent lagere premie.' },
+  { q: 'Is mijn polis ook in het buitenland geldig?', a: 'Standaard alleen in België. Met de uitbreiding buitenlanddekking werkt de polis ook in Nederland, Luxemburg en Duitsland.' },
+  { q: 'Wat als mijn machine ouder is dan tien jaar?', a: 'Veel polissen sluiten eigen gebrek dan uit. Externe schadeoorzaken zoals val, brand of diefstal blijven wel gedekt.' },
+  { q: 'Heb ik machinebreuk nodig naast mijn brandverzekering?', a: 'De brandverzekering dekt enkel schade door brand en aanverwante oorzaken. Machinebreuk vangt eigen gebrek en mechanische schade op die de brandpolis niet dekt.' },
+  { q: 'Worden verloren werfdagen mee gedekt?', a: 'Niet standaard. Met de uitbreiding bedrijfsschade na machinebreuk krijg je een vergoeding voor stilstand tijdens herstelling.' },
+  { q: 'Wat is het verschil met een werkmaterieelverzekering?', a: 'Werkmaterieelverzekering richt zich vooral op zelfrijdend materieel zoals graafmachines en kranen. Machinebreuk dekt een breder pakket: alle vaste én mobiele machines en gereedschap.' },
 ];
+
+const beroepTabs = [
+  { id: 'dakwerkers',    label: 'Dakwerkers',    link: '/sectoren/dakwerkers',    title: 'Voor dakwerkers',                    text: 'Ladderliften, vacuümtransporten en dakwerkermachines staan vaak in open lucht. Storm en val zijn de twee hoofdoorzaken van schade. Een polis met expliciete stormdekking is voor dakwerkers basis.' },
+  { id: 'metsers',       label: 'Metsers',        link: '/sectoren/aannemers',     title: 'Voor metsers en algemene aannemers', text: 'Betonmolens, mengkuipen, hef-toestellen en kleine kranen wisselen tussen werven. Diefstal van werven en breukschade tijdens transport zijn de typische schadegevallen. Combineer machinebreuk met de waarborg vervoer.' },
+  { id: 'loodgieters',   label: 'Loodgieters',    link: '/sectoren/loodgieters',   title: 'Voor loodgieters',                   text: 'Persmachines, soldeerapparaten en kleine kranen vormen de kern van je materieel. Eigen gebrek en kortsluiting komen vaker voor dan diefstal. Een polis met dekking voor warmlopen en kortsluiting is essentieel.' },
+  { id: 'elektriciens',  label: 'Elektriciens',   link: '/sectoren/elektriciens',  title: 'Voor elektriciens',                  text: 'Meetapparatuur, accuboormachines en kabelhaspels zijn waardevol én klein. Diefstal uit de bestelwagen is de grootste schadepost. Vraag uitdrukkelijk dekking voor inhoud van de bestelwagen.' },
+  { id: 'schilders',     label: 'Schilders',      link: '/sectoren/schilders',     title: 'Voor schilders',                     text: 'Airless verfspuiten, hogedrukreinigers en steigerwerk zijn de duurste posten. Vallen en stoten domineren als oorzaak van schade. Diefstal speelt mee bij werven in stedelijk gebied.' },
+  { id: 'schrijnwerkers',label: 'Schrijnwerkers', link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Vlakschaafmachines, zaagbanken en stof-afzuigers staan meestal vast in je atelier. Eigen gebrek en warmlopen zijn de typische schadeoorzaken. Voor het werfmaterieel loont een aparte werfdekking.' },
+];
+
+const insuranceCards = [
+  { title: 'BA Onderneming',          icon: 'shield',  intro: 'Bescherming wanneer je bedrijf schade veroorzaakt aan derden tijdens de uitbating of beroepsactiviteit.',  bullets: ['Schade aan eigendommen van derden','Letselschade aan derden','Claims rond beroepsfouten','Aansprakelijkheid tijdens werken'],   link: '/verzekeringen/ba-onderneming',   cta: 'Meer over BA Onderneming' },
+  { title: 'Bedrijfsvoertuigen',      icon: 'car',     intro: 'De bestelwagen is onmisbaar op de werf. De juiste dekking houdt je mobiel bij schade, diefstal of pech.',   bullets: ['BA en omnium voor bestelwagens','Bescherming bij diefstal of brand','Snelle afhandeling bij schade','Afstembaar op jouw wagenpark'],  link: '/verzekeringen/bedrijfsvoertuigen',cta: 'Meer over bedrijfsvoertuigen' },
+  { title: 'Rechtsbijstand',          icon: 'scale',   intro: 'Juridische bescherming bij geschillen met klanten, leveranciers of personeel. Je staat niet alleen.',        bullets: ['Hulp bij juridische conflicten','Vrije advocaatkeuze','Tussenkomst bij advocaatkosten','Aanvulling op BA'],                       link: '/verzekeringen/rechtsbijstand',   cta: 'Meer over rechtsbijstand' },
+  { title: 'Arbeidsongevallen',       icon: 'users',   intro: 'Wettelijk verplicht vanaf je eerste werknemer. Dekt letsel op de werf en woon-werkverkeer.',                 bullets: ['Verplicht vanaf dag 1','Medische kosten gedekt','Woon-werkverkeer inbegrepen','Aangifte binnen 8 dagen'],                       link: '/verzekeringen/arbeidsongevallen', cta: 'Meer over arbeidsongevallen' },
+];
+
+const schema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+
+const svgCheck16g = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+const svgX16r    = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
+const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
 ---
 
 <BaseLayout
-  title="Machinebreukverzekering voor de bouwsector | Assurman"
-  description="Dekking voor machines, gereedschap en materieel in de bouwsector. Bescherming bij defect, beschadiging en diefstal."
+  title="Machinebreukverzekering voor je bouwbedrijf | Assurman"
+  description="Een verbrande motor of gestolen gereedschap legt je werf stil. Een machinebreukverzekering vergoedt herstelling of vervanging. Vraag een scan aan."
   canonical="/verzekeringen/machinebreuk"
+  schema={schema}
 >
-  <ScrollProgress client:load />
 
-  <!-- HERO -->
-  <section id="hero" style="background:#FFFFFF;padding-top:130px;padding-bottom:80px;overflow:hidden;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
+<style is:global>
+  .mb-sticky-btn{background:#F7F4EF;border:1px solid rgba(229,165,36,0.2);cursor:pointer;padding:7px 16px;margin:10px 5px;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border-radius:9999px;transition:background 0.2s,border-color 0.2s;color:#001F3F;}
+  .mb-sticky-btn:hover,.mb-sticky-btn.active{background:rgba(229,165,36,0.18);border-color:#E5A524;}
+  .mb-sticky-btn .mb-check{color:#94a3b8;flex-shrink:0;transition:color 0.2s;}
+  .mb-sticky-btn:hover .mb-check,.mb-sticky-btn.active .mb-check{color:#E5A524;}
+  .mb-tab-btn{background:none;border:none;cursor:pointer;padding:14px 24px;white-space:nowrap;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.2s,border-color 0.2s;}
+  .mb-tab-btn:hover,.mb-tab-btn.active{color:#E5A524;border-bottom-color:#E5A524;}
+  .mb-ins-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);transition:background 0.2s,transform 0.2s;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);}
+  .mb-ins-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-4px);}
+  .mb-stat-panel{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+  .mb-stat-btn{width:100%;display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;text-align:left;padding:20px 24px;}
+  .mb-scan-btn:hover{background:#324554 !important;}
+  .mb-badge-pill{display:inline-flex;align-items:center;gap:8px;background:#F5F2FF;border:1px solid rgba(213,196,174,0.2);border-radius:9999px;padding:6px 16px;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#001F3F;}
+</style>
+
+<style>
+  .mb-hero-img{position:absolute;top:5%;right:-5px;height:85%;width:auto;max-width:48%;z-index:1;pointer-events:none;}
+  .mb-hero-content{max-width:620px;}
+  .mb-hero-inner{max-width:1280px;margin:0 auto;padding:64px 32px 80px;position:relative;z-index:2;}
+  .mb-hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+  .mb-watis-grid{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:flex-start;}
+  .mb-relevant-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .mb-dekking-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
+  .mb-waardering-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;}
+  .mb-aanvulling-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .mb-formule{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:64px;flex-wrap:wrap;}
+  .mb-factors-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;margin:0 auto 40px;}
+  .mb-procedure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+  .mb-tab-inner{display:flex;gap:32px;align-items:flex-start;border-radius:12px;}
+  .mb-final-btns{display:flex;gap:24px;justify-content:center;margin-bottom:80px;flex-wrap:wrap;}
+  .mb-sticky-nav-bar{position:sticky;top:72px;z-index:90;background:#FFFFFF;border-bottom:1px solid rgba(0,31,63,0.08);overflow:auto;}
+  .mb-sticky-inner{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;gap:0;justify-content:center;flex-wrap:wrap;}
+  .mb-container{max-width:1280px;margin:0 auto;padding:0 32px;}
+  .brand-why-card{background:#FFFFFF;border-left:4px solid #E5A524;box-shadow:0px 1px 2px rgba(0,0,0,0.05);transition:box-shadow 0.2s,transform 0.2s;}
+  .brand-why-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.1);transform:translateY(-2px);}
+
+  @media (max-width:1023px){
+    .mb-container{padding:0 24px;}
+    .mb-sticky-inner{padding:0 24px;}
+    .mb-watis-grid{grid-template-columns:1fr;gap:32px;}
+    .mb-relevant-grid{grid-template-columns:repeat(2,1fr);}
+    .mb-aanvulling-grid{grid-template-columns:repeat(2,1fr);}
+    .mb-procedure-grid{grid-template-columns:repeat(2,1fr);gap:32px;}
+    .mb-factors-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:767px){
+    .mb-sticky-nav-bar{display:none;}
+    .mb-container{padding:0 15px;}
+    .mb-hero-content{max-width:100%;}
+    .mb-hero-img{display:none;}
+    .mb-hero-btns{flex-direction:column;}
+    .mb-hero-btns a{width:100%;justify-content:center;text-align:center;}
+    #watis{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #relevant{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #dekking{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #premie{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #procedure{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #faq{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #mb-beroep{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #mb-statuten{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #mb-aanvulling{padding-bottom:56px !important;}
+    #mb-cta-band{padding-left:15px !important;padding-right:15px !important;padding-bottom:64px !important;}
+    #mb-cta-band h2{font-size:clamp(28px,8vw,48px) !important;}
+    #mb-cta-band p{font-size:18px !important;}
+    .mb-watis-grid{grid-template-columns:1fr;gap:24px;}
+    .mb-relevant-grid{grid-template-columns:1fr;}
+    .mb-dekking-grid{grid-template-columns:1fr;}
+    .mb-waardering-grid{grid-template-columns:1fr;}
+    .mb-waardering-grid>div:last-child{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.15);}
+    .mb-aanvulling-grid{grid-template-columns:1fr;}
+    .mb-formule{flex-direction:column;gap:8px;margin-bottom:40px;}
+    .mb-factors-grid{grid-template-columns:1fr;}
+    .mb-procedure-grid{grid-template-columns:1fr 1fr;gap:32px;}
+    .mb-tab-inner{flex-direction:column;gap:20px;padding:24px 20px;}
+    .mb-tabs-row{overflow-x:auto;justify-content:flex-start !important;padding-bottom:4px;-webkit-overflow-scrolling:touch;}
+    .mb-final-btns{flex-direction:column;align-items:center;}
+    .mb-final-btns a{width:100%;max-width:400px;justify-content:center;}
+    .mb-cta-deco{display:none;}
+    .mb-cta-mask-img{display:none;}
+    .mb-procedure-line{display:none !important;}
+  }
+</style>
+
+<div id="mb-progress-track" style="position:fixed;top:0;left:0;right:0;height:3px;z-index:9999;background:rgba(0,31,63,0.07);">
+  <div id="mb-progress-bar" style="height:100%;background:#E5A524;width:0%;transition:width 0.1s linear;"></div>
+</div>
+
+<div style="font-family:'Outfit',sans-serif;color:#001F3F;background:#FFFFFF;">
+
+<!-- HERO -->
+<section id="mb-hero" style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:100vh;">
+  <div class="mb-hero-img assurman-mask assurman-mask--hero">
+    <img src="/verzekeringen-bouwsector-Machinebreuk­verzekering-hero.jpg" alt="Bouwmachines en gereedschap met machinebreukverzekering" />
+  </div>
+  <div class="mb-hero-inner">
+    <div class="mb-hero-content">
+      <div class="mb-badge-pill" style="margin-bottom:20px;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Assurman &middot; Bouwverzekeringen op maat
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">Machinebreuk&#x2011;<br />verzekering</h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">De polis die je machines, gereedschap en werfmaterieel weer aan de praat krijgt.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Een verbrande compressor of gestolen gereedschap uit je bestelwagen legt je werf snel stil. De rekening loopt op terwijl je niet kunt factureren. Een machinebreukverzekering vergoedt herstelling of vervanging zodat je morgen verder werkt.</p>
+      <div class="mb-hero-btns">
+        <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
+          {CTA_SCAN.hero}
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.advisory}</a>
+      </div>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;">Geen verkooppraatjes. Een scan op maat van je materieel en je werven.</p>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY NAV -->
+<nav id="mb-sticky-nav" class="mb-sticky-nav-bar">
+  <div class="mb-sticky-inner">
+    {[{id:'watis',label:'Wat is het?'},{id:'relevant',label:'Wanneer relevant?'},{id:'dekking',label:'Dekking'},{id:'premie',label:'Premie'},{id:'procedure',label:'Schadegeval'},{id:'faq',label:'FAQ'}].map(item=>(
+      <button class="mb-sticky-btn" data-sticky-btn={item.id}>
+        <svg class="mb-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        {item.label}
+      </button>
+    ))}
+  </div>
+</nav>
+
+<!-- WAT IS HET -->
+<section id="watis" style="background:#FFFFFF;padding:96px 32px;">
+  <div class="mb-container">
+    <div class="mb-watis-grid">
+      <div style="background:#3F5767;padding:32px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);">
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In het kort</span>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+          {[
+            {t:'Machinebreuk dekt <strong style="color:#FFFFFF;">onverwachte schade aan je machines, gereedschap en werfmaterieel</strong>.'},
+            {t:'De polis vergoedt herstelling of vervanging op basis van <strong style="color:#FFFFFF;">nieuwwaarde of dagwaarde</strong>.'},
+            {t:'Zowel <strong style="color:#FFFFFF;">eigen gebrek als externe oorzaken</strong> vallen onder de standaarddekking.'},
+            {t:'Diefstal en vandalisme zijn vaak <strong style="color:#FFFFFF;">een aparte waarborg</strong> in de polis.'},
+            {t:'Niet wettelijk verplicht, maar <strong style="color:#FFFFFF;">verhuurders en opdrachtgevers eisen ze regelmatig</strong>.'},
+          ].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.55;color:#CBD5E1;" set:html={item.t}></span>
+            </li>
+          ))}
+        </ul>
+      </div>
       <div>
-        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Verzekering</p>
-        <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,4.5vw,64px);line-height:1.05;color:#001F3F;margin:0 0 24px;">Machinebreuk&shy;verzekering</h1>
-        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(18px,2vw,24px);color:#E5A524;margin:0 0 24px;line-height:1.3;">Uw machines beschermd. Van gereedschap tot zwaar materieel.</p>
-        <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 40px;">Professionele machines en gereedschap vertegenwoordigen een grote investering. Een plotse panne, breuk of diefstal kan uw productie stilleggen. De machinebreukverzekering dekt de kosten van herstelling of vervanging, zodat u snel weer operationeel bent.</p>
-        <div style="display:flex;gap:16px;flex-wrap:wrap;">
-          <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;">Gratis scan aanvragen</a>
-          <a href="/maak-afspraak" style="display:inline-block;background:transparent;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 32px;border-radius:4px;text-decoration:none;border:2px solid #001F3F;">Afspraak maken</a>
-        </div>
-      </div>
-      <div style="display:flex;align-items:center;justify-content:center;">
-        <img src="/foto-contact-35.png" alt="Machinebreuk verzekering bouw" style="width:100%;max-width:520px;border-radius:8px;object-fit:cover;" loading="eager" />
-      </div>
-    </div>
-  </section>
-
-  <StickyNav client:load navItems={navItems} heroSectionId="hero" />
-
-  <!-- WAT IS HET -->
-  <section id="watis" style="background:#F8F9FA;padding:100px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Wat is het?</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">Bescherming voor uw machines en materieel</h2>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
-        <div style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:40px;">
-          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 20px;">In het kort</p>
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
-            {[
-              'Dekt machines en gereedschap bij defect, beschadiging en vaak diefstal',
-              'Vast ateliermaterieel én mobiel werfmaterieel',
-              'Aanvulbaar met bedrijfsschade voor omzetverlies bij stilstand',
-              'Diefstal: op werf, in bestelwagen of thuis',
-              'Afgestemd op nieuw- of tweedehandswaarde'
-            ].map((item) => (
-              <li style="display:flex;align-items:flex-start;gap:12px;font-family:'Open Sans',sans-serif;font-size:16px;color:#FFFFFF;line-height:1.5;">
-                <span style="color:#E5A524;font-weight:700;flex-shrink:0;margin-top:2px;">✓</span>
-                {item}
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 24px;">De machinebreukverzekering dekt plotse en onverwachte beschadiging of defecten aan machines, gereedschap en apparatuur door mechanische, elektrische of andere externe oorzaken.</p>
-          <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 24px;">Ze is toepasbaar op vast ateliermaterieel (zaagmachines, compressoren, liften) maar ook op mobiel werfmaterieel (boormachines, trilplaten, kabels en handgereedschap).</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TYPES MATERIEEL -->
-  <section id="dekking" style="background:#FFFFFF;padding:100px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Dekking</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">Welk materieel is te verzekeren?</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
-        {[
-          {title:'Vast ateliermaterieel',text:'Zaagmachines, freesmachines, compressoren, lasinstallaties en andere vaste machines op uw atelier of werkplaats.'},
-          {title:'Mobiel werfmaterieel',text:'Trilplaten, graafmachines, betonmixers, liftinstallaties, aggregaten en ander materieel dat u op de werf gebruikt.'},
-          {title:'Handgereedschap',text:'Boormachines, schuurmachines, haaksleutels, meetapparatuur en ander handheld gereedschap — in de bestelwagen of op de werf.'},
-          {title:'Elektronische apparatuur',text:'Meetinstrumenten, lasernivelleerapparaten, digitale detectietoestellen en andere elektronische professionele apparatuur.'}
-        ].map((item) => (
-          <div style="background:#FFFFFF;border:1px solid #E5E8ED;border-radius:8px;padding:32px;box-shadow:0 2px 16px rgba(0,31,63,0.06);">
-            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;margin:0 0 12px;">{item.title}</p>
-            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0;">{item.text}</p>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">De polis voor schade aan je eigen materieel</h2>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een machinebreukverzekering vergoedt onverwachte schade aan je eigen machines en werfmaterieel. Het gaat om compressoren, generatoren, hef-toestellen, persen, kranen en gereedschap. Schade door eigen gebrek valt onder de polis. Schade door val, brand, kortsluiting of storm ook.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Voor een bouwbedrijf is het materieel meestal het zwaarste actief op de balans. Eén defecte kraan of één leeggehaalde bestelwagen blokkeert je werf. Zonder dekking betaal je herstelling én verloren werfdagen zelf. Een goed afgestemde polis brengt je sneller terug aan de slag.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">Belangrijk om te weten: een machinebreukpolis is niet hetzelfde als een verzekering Alle Bouwplaatsrisico's. Die laatste dekt schade aan de werf en het bouwwerk zelf. Machinebreuk dekt schade aan jouw materieel. Beide polissen werken complementair op grotere projecten.</p>
+        <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div>
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">Wettelijke basis</p>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">De <strong>Wet van 4 april 2014</strong> regelt elke verzekeringsovereenkomst in België. De <strong>FSMA</strong> houdt toezicht op verzekeraars en makelaars. Machinebreuk is geen verplichte polis, maar wordt vaak contractueel geëist door verhuurders of opdrachtgevers.</p>
           </div>
-        ))}
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- DIEFSTAL -->
-  <section id="diefstal" style="background:#001F3F;padding:100px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Diefstal</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#FFFFFF;margin:0 0 16px;">Gereedschapsdiefstal: een reëel risico</h2>
-      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);margin:0 0 48px;max-width:720px;">Gereedschapsdiefstal is een van de meest voorkomende schadegevallen in de bouwsector. Van een opengebroken bestelwagen tot diefstal op een verlaten werf — het risico is overal aanwezig.</p>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;">
-        {[
-          {loc:'Op de werf',desc:'Diefstal van gereedschap en materieel dat achterblijft op de werf, ook buiten de werkuren.'},
-          {loc:'In de bestelwagen',desc:'Inbraak in bestelwagen op straat, parking of thuis. Een van de meest voorkomende schadeoorzaken.'},
-          {loc:'Op het atelier',desc:'Diefstal van machines en materieel uit uw werkplaats of opslagruimte.'},
-          {loc:'Onderweg',desc:'Verlies of diefstal van materieel dat u bij u draagt of transporteert.'}
-        ].map((item) => (
-          <div style="background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:28px;">
-            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#E5A524;margin:0 0 10px;">{item.loc}</p>
-            <p style="font-family:'Open Sans',sans-serif;font-size:14px;line-height:1.5;color:rgba(255,255,255,0.7);margin:0;">{item.desc}</p>
+<!-- WANNEER RELEVANT -->
+<section id="relevant" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wanneer relevant?</span>
+      <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#64748b;margin-bottom:8px;">Is een machinebreukverzekering voor jou relevant?</p>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(52px,8vw,96px);line-height:0.9;color:#001F3F;letter-spacing:-4px;">Hangt af<br />van je materieel.</div>
+      <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:20px;color:#3F5767;margin-top:12px;">Hoe hoger de waarde van je machines, hoe groter de noodzaak.</p>
+    </div>
+    <div class="mb-relevant-grid">
+      {[
+        {icon:'us', title:'Solo met basisgereedschap',    text:'Beperkt risico op één werf tegelijk. Een uitbreiding op de brandverzekering volstaat vaak.'},
+        {icon:'ft', title:'Bedrijf met dure machines',    text:'Compressoren, generatoren of hef-toestellen vragen een aparte machinebreukpolis met ruime dekking.'},
+        {icon:'sh', title:'Aannemer op meerdere werven',  text:'Wisselende werven verhogen het diefstal- en vandalismerisico. Een polis met werfdekking is aangewezen.'},
+        {icon:'cl', title:'Bedrijf met gehuurd materieel',text:'Verhuurders eisen vaak een dekking in nieuwwaarde voor ze grote machines vrijgeven.'},
+      ].map(card=>(
+        <div style="background:#FFFFFF;padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+          <div style="background:rgba(229,165,36,0.1);border-radius:10px;padding:12px;display:inline-flex;margin-bottom:18px;">
+            {card.icon==='us'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>}
+            {card.icon==='ft'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>}
+            {card.icon==='sh'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
+            {card.icon==='cl'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>}
           </div>
-        ))}
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#64748b;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- VOORBEELDEN -->
+<section style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Wanneer staat je werf stil zonder machinebreuk?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">Hieronder 6 concrete schadegevallen per bouwstiel die laten zien waarom machinebreuk zo snel relevant wordt.</p>
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <button id="mb-examples-btn" style="display:flex;align-items:center;gap:10px;background:rgba(0,31,63,0.04);border:1px solid rgba(0,31,63,0.1);border-radius:8px;padding:14px 24px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#001F3F;">
+        <span>Bekijk 6 concrete voorbeelden uit de bouw</span>
+        <svg id="mb-examples-chevron" width="18" height="18" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+    <ul id="mb-examples-list" style="list-style:none;padding:0;margin:16px 0 0;display:none;grid-template-columns:1fr 1fr;gap:10px;">
+      {[
+        'Dakwerker: een ladderlift waait om tijdens een storm en raakt onherstelbaar beschadigd.',
+        'Metser: een betonmolen valt van een aanhanger en breekt in twee.',
+        'Loodgieter: een persmachine raakt verbrand door kortsluiting tijdens gebruik.',
+        'Elektricien: gereedschap en kabelhaspels worden uit de bestelwagen gestolen vóór de werf.',
+        'Schilder: een airless verfspuit valt en raakt onherstelbaar beschadigd.',
+        'Schrijnwerker: een vlakschaafmachine in het atelier brandt door door warmlopen.',
+      ].map(ex=>(
+        <li style="display:flex;gap:10px;align-items:flex-start;background:#F7F4EF;border-radius:8px;padding:12px 16px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{ex}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<!-- DEKKING -->
+<section id="dekking" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:1025px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Dekking</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat is wél en niet gedekt?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:580px;margin:0 auto;">Een machinebreukpolis dekt onverwachte schade aan je eigen materieel. De grenzen zitten in de oorzaken en in de keuze van waarborgen.</p>
+    </div>
+    <div class="mb-dekking-grid">
+      <div style="background:#FFFFFF;border:2px solid rgba(34,197,94,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(34,197,94,0.08);border-bottom:1px solid rgba(34,197,94,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#15803d;">Wel gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Eigen gebrek zoals warmlopen, kortsluiting of metaalmoeheid','Externe oorzaken zoals val, stoten of storm','Brand, ontploffing en bliksemschade aan je machines','Schade door menselijke onhandigheid of bedieningsfout','Diefstal en vandalisme, mits de waarborg is opgenomen','Schade tijdens gebruik op de werf en in je atelier'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgCheck16g} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
       </div>
-      <div style="margin-top:40px;background:#E9C466;border-radius:8px;padding:28px 32px;">
-        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 8px;">Aanvulling: bedrijfsschade</p>
-        <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#001F3F;margin:0;">Wanneer een machine defect raakt of gestolen wordt, staat uw productie stil. De aanvulling bedrijfsschade (ook wel bedrijfsstilstandverzekering) vergoedt het omzetverlies dat u lijdt zolang de machine niet operationeel is.</p>
+      <div style="background:#FFFFFF;border:2px solid rgba(239,68,68,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(239,68,68,0.06);border-bottom:1px solid rgba(239,68,68,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#b91c1c;">Niet (of beperkt) gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Slijtage en gewone veroudering van je materieel','Schade door slecht onderhoud of nalatigheid','Defecten in onderdelen ouder dan tien jaar, vaak uitgesloten','Elektronische componenten ouder dan vijf jaar, vaak uitgesloten','Schade tijdens vervoer, tenzij de waarborg vervoer is opgenomen','Bedrijfsschade door stilstand, tenzij apart verzekerd'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgX16r} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
-  </section>
-
-  <!-- GOLD CTA -->
-  <section style="background:#E9C466;padding:72px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr auto;gap:48px;align-items:center;">
+    <div class="mb-waardering-grid" style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);padding:36px 40px;">
       <div>
-        <p style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(22px,3vw,36px);color:#001F3F;margin:0 0 8px;">Uw materieel correct gedekt</p>
-        <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.6;color:rgba(0,31,63,0.75);margin:0;">Assurman stelt een machinebreukpolis op maat samen.</p>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Waardering</span>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#FFFFFF;margin:0 0 12px;">Nieuwwaarde of dagwaarde — jij kiest</h3>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">Bij nieuwwaarde krijg je het bedrag voor een nieuwe vergelijkbare machine. Bij dagwaarde houdt de verzekeraar rekening met afschrijving en leeftijd. De keuze beïnvloedt zowel je premie als je uitkering bij totaal verlies.</p>
       </div>
-      <div style="display:flex;gap:16px;flex-wrap:wrap;">
-        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#001F3F;color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Gratis scan</a>
-        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid #001F3F;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:16px 28px;border-radius:4px;text-decoration:none;white-space:nowrap;">Afspraak</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq" style="background:#FFFFFF;padding:100px 0;">
-    <div style="max-width:900px;margin:0 auto;padding:0 24px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Veelgestelde vragen</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.1;color:#001F3F;margin:0 0 48px;">FAQ machinebreuk</h2>
-      <FaqAccordion client:visible items={faqItems} />
-    </div>
-  </section>
-
-  <!-- PARTNERS -->
-  <section style="background:#F8F9FA;padding:60px 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <p style="text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin:0 0 32px;">Onze verzekeringspartners</p>
-      <PartnerSlider client:visible />
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section style="background:#001F3F;padding:100px 0 0;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px 80px;text-align:center;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Klaar om te starten?</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.1;color:#FFFFFF;margin:0 0 20px;">Uw machines en materieel verzekerd</h2>
-      <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto 40px;">Defect, diefstal of breuk — Assurman zorgt voor de juiste dekking.</p>
-      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-        <a href="/gratis-verzekeringsscan" style="display:inline-block;background:#E5A524;color:#001F3F;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Gratis scan starten</a>
-        <a href="/maak-afspraak" style="display:inline-block;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;padding:18px 36px;border-radius:4px;text-decoration:none;">Afspraak maken</a>
+      <div style="text-align:center;flex-shrink:0;">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:6px;">Standaard eigen risico</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:36px;color:#FFFFFF;letter-spacing:-1px;line-height:1;">€ 250 – € 1.000</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:14px;color:#94a3b8;margin-top:6px;">per schadegeval, te kiezen</div>
       </div>
     </div>
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
-  </section>
+  </div>
+</section>
+
+<!-- AANVULLENDE WAARBORGEN -->
+<section id="mb-aanvulling" style="background:#3F5767;padding:0 0 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding:100px 32px 0;position:relative;z-index:1;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Aanvullen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Vijf uitbreidingen die je polis afmaken</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0;">De basisdekking vangt veel op. Sommige risico's zitten enkel mee als je ze expliciet kiest. Hieronder de vijf die voor een bouwbedrijf vaak terugkomen.</p>
+    </div>
+    <div class="mb-aanvulling-grid">
+      {[
+        {i:'ac',title:'Diefstal en vandalisme',    text:'Dekking voor verdwenen of beschadigd materieel op de werf én in je bestelwagen.'},
+        {i:'tr',title:'Vervoer',                   text:'Schade aan machines tijdens transport tussen je atelier, je werven en je klanten.'},
+        {i:'sh',title:'Gehuurd materieel',          text:'Polis loopt mee op materieel dat je tijdelijk huurt voor één project.'},
+        {i:'us',title:'Bedrijfsschade na machinebreuk',text:'Vergoeding voor verloren werfdagen en omzetverlies tijdens herstelling van een verzekerde machine.'},
+        {i:'br',title:'Buitenlanddekking',          text:'Polis blijft geldig wanneer je tijdelijk werkt in buurlanden.'},
+      ].map(card=>(
+        <div class="mb-ins-card" style="padding:28px;">
+          <div style="background:rgba(229,165,36,0.15);border-radius:10px;padding:10px;display:inline-flex;margin-bottom:16px;">
+            {card.i==='ac'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>}
+            {card.i==='tr'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>}
+            {card.i==='sh'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
+            {card.i==='us'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>}
+            {card.i==='br'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#FFFFFF;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#94A3B8;margin:0;">{card.text}</p>
+        </div>
+      ))}
+      <div style="background:#E5A524;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:32px;display:flex;flex-direction:column;justify-content:center;">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">Welke uitbreidingen heb jij echt nodig?</h3>
+        <p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(0,31,63,0.75);line-height:1.55;margin:0 0 20px;">Doe de scan en zie welke risico's vandaag niet gedekt zijn. We vergelijken jouw materieel met wat verzekeraars vandaag aanbieden.</p>
+        <a href={CTA_DESTINATIONS.scan} class="mb-scan-btn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.2s;width:100%;">
+          {CTA_SCAN.start} <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIE -->
+<section id="premie" style="background:#F7F4EF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Prijs en berekening</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Hoe wordt je premie berekend?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:520px;margin:0 auto;">De premie hangt af van je materieel, je sector en je gekozen waarborgen. Voor een klein bouwbedrijf landt ze meestal tussen 300 en 1.500 euro per jaar.</p>
+    </div>
+    <div class="mb-formule">
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">1. Verzekerde waarde</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Nieuwwaarde of dagwaarde</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#64748b;line-height:1.4;">totaal verzekerd materieel</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">×</div>
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">2. Premievoet</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Activiteit en risicoprofiel</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#64748b;line-height:1.4;">werven, omgeving, type machines</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">=</div>
+      <div style="background:#3F5767;border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 8px 32px rgba(63,87,103,0.3);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">Jaarpremie</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin-bottom:8px;">Jouw polis</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#94a3b8;line-height:1.4;">plus premietaks 9,25%</div>
+      </div>
+    </div>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:#001F3F;text-align:center;margin-bottom:32px;">4 factoren die je premie beïnvloeden</h3>
+    <div class="mb-factors-grid">
+      {[
+        {num:'1',title:'Type materieel',         text:'Een graafmachine weegt zwaarder dan een set elektrisch handgereedschap.'},
+        {num:'2',title:'Waarderingskeuze',       text:'Nieuwwaarde geeft hogere uitkering bij totaal verlies maar verhoogt de premie.'},
+        {num:'3',title:'Werfomgeving',           text:'Werven in stedelijk gebied of nabij water verhogen het schaderisico.'},
+        {num:'4',title:'Eigen risico',           text:'Een hoger eigen risico drukt je premie maar verhoogt je eigen kost bij schade.'},
+      ].map(f=>(
+        <div class="brand-why-card" style="padding:20px 24px;display:flex;gap:18px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:16px;color:#001F3F;">{f.num}</span></div>
+          <div>
+            <h4 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 4px;">{f.title}</h4>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#64748b;margin:0;">{f.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style="max-width:640px;margin:0 auto 32px;">
+      <div style="background:rgba(229,165,36,0.10);padding:20px 28px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);border:1px solid rgba(229,165,36,0.3);">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="18" height="18" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#001F3F;margin:0;"><strong>Richtprijzen:</strong> een dakwerker met 30.000 euro aan verzekerd materieel betaalt typisch tussen 400 en 800 euro per jaar. Een algemene aannemer met hef- en betonmaterieel ten waarde van 200.000 euro zit tussen 1.500 en 3.500 euro per jaar.</p>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:640px;margin:0 auto;">
+      <div style="background:rgba(229,165,36,0.10);padding:20px 28px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);border:1px solid rgba(229,165,36,0.3);">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="18" height="18" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#001F3F;margin:0;"><strong>Fiscaal:</strong> op de premie komt een premietaks van <strong>9,25%</strong>. De premie is fiscaal aftrekbaar als beroepskost.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section id="mb-cta-band" style="background:#E9C466;padding:80px 0 100px;position:relative;overflow:hidden;">
+  <div class="assurman-mask assurman-mask--cta mb-cta-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:1;">
+    <img src="/verzekeringen-bouwsector-Machinebreuk­verzekering-cta.jpg" alt="Bouwmachines met machinebreukverzekering">
+  </div>
+  <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="100px" direction="down" /></div>
+  <div class="mb-cta-deco" style="position:absolute;right:-130px;top:40%;transform:translateY(-50%);pointer-events:none;z-index:2;"><BrandChevron color="white" height="240px" direction="left" /></div>
+  <div style="max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:4;padding:0 32px;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">Bouwprofessional in Vlaanderen?<br />Wij maken jouw pakket op maat.</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#3F5767;margin-bottom:40px;opacity:0.9;">Start nu in 2 minuten of kies meteen voor persoonlijk advies.</p>
+    <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">{CTA_SCAN.requestNow} <Fragment set:html={svgArr18} /></a>
+  </div>
+</section>
+
+<!-- PER BEROEP TABS -->
+<section id="mb-beroep" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Per beroep</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Machinebreuk voor jouw discipline</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:520px;margin:0 auto;">Elk beroep heeft eigen materieel en eigen risico. Hieronder de aandachtspunten per discipline.</p>
+    </div>
+    <div class="mb-tabs-row" style="display:flex;gap:0;border-bottom:2px solid rgba(0,31,63,0.12);margin-bottom:40px;justify-content:center;">
+      {beroepTabs.map((tab,i)=>(<button class={`mb-tab-btn${i===0?' active':''}`} data-tab-btn={tab.id}>{tab.label}</button>))}
+    </div>
+    {beroepTabs.map((tab,i)=>(
+      <div data-tab-content={tab.id} style={`display:${i===0?'block':'none'};max-width:860px;margin:0 auto;`}>
+      <div class="mb-tab-inner" style="background:#FFFFFF;border-radius:12px;padding:36px 40px;">
+        <div style="background:rgba(229,165,36,0.12);border-radius:12px;padding:18px;flex-shrink:0;">
+          <svg width="32" height="32" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+        </div>
+        <div style="flex:1;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">{tab.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.65;color:#001F3F;margin:0 0 20px;">{tab.text}</p>
+          <a href={tab.link} style="display:inline-flex;align-items:center;gap:6px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;text-decoration:none;">Bekijk sectorpagina <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+      </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- MIJN SITUATIE -->
+<section id="mb-statuten" style="background:#3F5767;padding:96px 32px;position:relative;overflow:hidden;">
+  <div style="max-width:840px;margin:0 auto;position:relative;z-index:1;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Mijn situatie</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Welke setup past bij jouw bedrijf?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0 0 40px;">Drie typische profielen uit de Belgische bouwsector. Vind de jouwe en zie wat dat betekent voor je polis.</p>
+
+    <div class="mb-stat-panel" data-stat-panel>
+      <button class="mb-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik werk solo met basisgereedschap</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je rijdt met een bestelwagen en hebt voor enkele duizenden euro aan handgereedschap. Een aparte machinebreukpolis is dan meestal niet nodig. Een uitbreiding op je brandverzekering die diefstal en beschadiging dekt, volstaat vaak. Belangrijk om na te kijken: of die polis je gereedschap dekt op de werf en in de bestelwagen 's nachts.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Let op: veel polissen vragen een vaste stallingsplaats vóór ze diefstal vergoeden.</p>
+      </div>
+    </div>
+
+    <div class="mb-stat-panel" data-stat-panel>
+      <button class="mb-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik heb dure machines op vaste stockage</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Compressoren, generatoren, persen of hef-toestellen vertegenwoordigen een hoge waarde op je balans. Een aparte machinebreukpolis is dan de standaard. Kies bewust tussen nieuwwaarde en dagwaarde voor het hele park. Bij gloednieuwe machines loont nieuwwaarde, bij ouder materieel vaak dagwaarde.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Inventariseer minstens jaarlijks: een machine vergeten in je polis betekent geen vergoeding bij schade.</p>
+      </div>
+    </div>
+
+    <div class="mb-stat-panel" data-stat-panel>
+      <button class="mb-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a8 8 0 0 1 16 0v3"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik werk op meerdere werven met wisselend materieel</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Hef-toestellen, kranen en groot gereedschap rouleren tussen werven en uitleenpartners. Het diefstalrisico ligt hoger dan bij vast atelierwerk. Vraag uitdrukkelijk werfdekking en eventueel buitenlanddekking.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Voor gehuurd materieel kan je verhuurder een specifieke verzekering eisen vóór levering. Een polis die zowel eigen als gehuurd materieel dekt, voorkomt twee aparte contracten.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIJ EEN SCHADEGEVAL -->
+<section id="procedure" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:60px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Bij een schadegeval</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat moet je doen als er iets misgaat?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:520px;margin:0 auto;">Snel reageren bepaalt hoe vlot je dossier loopt. De standaardtermijn voor aangifte staat in je polis en is meestal 8 kalenderdagen.</p>
+    </div>
+    <div class="mb-procedure-grid">
+      <div class="mb-procedure-line" style="position:absolute;top:36px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(to right,#E5A524,rgba(229,165,36,0.2));z-index:0;"></div>
+      {[
+        {ic:'ph', title:'Direct documenteren',     text:'Maak foto\'s van de schade en noteer datum, plaats en getuigen vóór je iets verplaatst.'},
+        {ic:'ac', title:'Aangifte binnen 8 dagen', text:'Verwittig je makelaar of verzekeraar via het standaard schadeformulier.'},
+        {ic:'ft', title:'Expertise',               text:'De verzekeraar stuurt vaak een expert die schade en oorzaak vaststelt ter plaatse.'},
+        {ic:'at', title:'Vergoeding',              text:'Bij akkoord betaalt de verzekeraar doorgaans binnen 30 werkdagen herstelling of vervanging uit.'},
+      ].map((s,i)=>(
+        <div style="padding:0 20px;text-align:center;position:relative;z-index:1;">
+          <div style="width:72px;height:72px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 4px 16px rgba(229,165,36,0.3);">
+            {s.ic==='ph'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>}
+            {s.ic==='ac'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>}
+            {s.ic==='ft'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>}
+            {s.ic==='at'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#E5A524;margin-bottom:8px;">Stap {i+1}</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{s.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#64748b;margin:0;">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:840px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over machinebreuk</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">14 concrete vragen van bouwondernemers — klik open voor het antwoord.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      {faqItems.map((item,i)=>(
+        <div data-faq-item style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.08);border-radius:10px;overflow:hidden;">
+          <button data-faq-btn style="width:100%;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;text-align:left;gap:16px;">
+            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;line-height:1.35;">{item.q}</span>
+            <svg data-faq-chevron width="18" height="18" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div data-faq-answer style="display:none;padding:0 24px 20px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#3F5767;margin:0;">{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<InsuranceCarousel
+  client:only="react"
+  cards={insuranceCards}
+  sectionLabel="Ook interessant"
+  headline="Gerelateerde verzekeringen"
+  subheadline="Machinebreuk werkt complementair met deze verzekeringen in een volledig bouwpakket."
+  background="#F5F2FF"
+/>
+
+<section style="background:#F7F4EF;padding:64px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">Ondersteund door sterke verzekeringspartners</p>
+    <PartnerSlider client:only="react" />
+  </div>
+</section>
+
+<section style="background:#3F5767;padding-top:120px;padding-bottom:0;position:relative;text-align:center;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+  <div style="max-width:896px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;text-align:center;margin-bottom:20px;">Start met Assurman</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;color:#FFFFFF;max-width:727px;margin:0 auto 24px;">Is jouw materieel correct verzekerd?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouwsector en wil je zeker zijn dat jouw machines en gereedschap correct gedekt zijn? Wij bekijken met jou wat echt nodig is — zonder verplichting.</p>
+    <div class="mb-final-btns">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">{CTA_SCAN.hero} <Fragment set:html={svgArr18} /></a>
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">{CTA_AFSPRAAK.advisory}</a>
+    </div>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+</section>
+
+</div>
+
+<script>
+  const progressBar = document.getElementById('mb-progress-bar') as HTMLElement | null;
+  const stickyBtns  = document.querySelectorAll<HTMLElement>('[data-sticky-btn]');
+  const sectionIds  = ['watis','relevant','dekking','premie','procedure','faq'];
+
+  stickyBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.stickyBtn!;
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const total = doc.scrollHeight - doc.clientHeight;
+    if (progressBar) progressBar.style.width = total > 0 ? `${(doc.scrollTop / total) * 100}%` : '0%';
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sectionIds[i]);
+      if (el && el.getBoundingClientRect().top <= 120) {
+        stickyBtns.forEach(b => b.classList.toggle('active', b.dataset.stickyBtn === sectionIds[i]));
+        break;
+      }
+    }
+  }, { passive: true });
+
+  const exBtn  = document.getElementById('mb-examples-btn')     as HTMLElement | null;
+  const exList = document.getElementById('mb-examples-list')    as HTMLElement | null;
+  const exChev = document.getElementById('mb-examples-chevron') as HTMLElement | null;
+  if (exBtn && exList && exChev) {
+    exBtn.addEventListener('click', () => {
+      const open = exList.style.display !== 'none';
+      exList.style.display = open ? 'none' : 'grid';
+      exChev.style.transform = open ? '' : 'rotate(180deg)';
+    });
+  }
+
+  const tabBtns     = document.querySelectorAll<HTMLElement>('[data-tab-btn]');
+  const tabContents = document.querySelectorAll<HTMLElement>('[data-tab-content]');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tabBtn!;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      tabContents.forEach(el => { el.style.display = el.dataset.tabContent === t ? 'block' : 'none'; });
+    });
+  });
+
+  document.querySelectorAll('[data-stat-panel]').forEach(panel => {
+    const btn     = panel.querySelector<HTMLElement>('[data-stat-btn]');
+    const content = panel.querySelector<HTMLElement>('[data-stat-content]');
+    const chevron = panel.querySelector<HTMLElement>('[data-stat-chevron]');
+    if (!btn || !content || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = content.style.display !== 'none';
+      document.querySelectorAll('[data-stat-panel]').forEach(p => {
+        const c  = p.querySelector<HTMLElement>('[data-stat-content]');
+        const ch = p.querySelector<HTMLElement>('[data-stat-chevron]');
+        if (c)  c.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { content.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+
+  document.querySelectorAll('[data-faq-item]').forEach(item => {
+    const btn     = item.querySelector<HTMLElement>('[data-faq-btn]');
+    const answer  = item.querySelector<HTMLElement>('[data-faq-answer]');
+    const chevron = item.querySelector<HTMLElement>('[data-faq-chevron]');
+    if (!btn || !answer || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = answer.style.display !== 'none';
+      document.querySelectorAll('[data-faq-item]').forEach(fi => {
+        const a  = fi.querySelector<HTMLElement>('[data-faq-answer]');
+        const ch = fi.querySelector<HTMLElement>('[data-faq-chevron]');
+        if (a)  a.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { answer.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+</script>
+
 </BaseLayout>
