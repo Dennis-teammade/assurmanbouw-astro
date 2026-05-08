@@ -5,60 +5,74 @@ import PartnerSlider from '../../components/ui/PartnerSlider';
 const verzekeringen = [
   {
     title: 'Arbeidsongevallen',
-    subtitle: 'Verplicht vanaf de eerste werknemer',
-    desc: 'Wettelijk verplicht voor alle werkgevers. Dekt medische kosten, arbeidsongeschiktheid en overlijden bij arbeidsongevallen, ook op het woon-werktraject.',
+    intro: 'Wettelijk verplicht voor alle werkgevers. Dekt medische kosten, arbeidsongeschiktheid en overlijden bij arbeidsongevallen, ook op het woon-werktraject.',
+    bullets: ['Verplicht vanaf de eerste werknemer', 'Dekt werf én woon-werkverkeer', 'Loonplafond 2026: € 58.096,10', 'Aanvulbaar met excedent wet voor hogere lonen'],
+    cta: 'Meer over arbeidsongevallen',
     link: '/verzekeringen/arbeidsongevallen',
     badge: 'Verplicht',
-    color: '#DC2626'
+    badgeBg: '#FEE2E2', badgeColor: '#DC2626',
+    iconPath: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 8 0 4 4 0 0 0-8 0M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
   },
   {
     title: 'BA Onderneming',
-    subtitle: 'Bescherming tegenover derden',
-    desc: 'Dekt schade die u tijdens uw beroepsactiviteit toebrengt aan klanten, passanten of buren. BA Uitbating en BA Na Levering in één polis.',
+    intro: 'Dekt schade die u tijdens uw beroepsactiviteit toebrengt aan klanten, passanten of buren. BA Uitbating en BA Na Levering in één polis.',
+    bullets: ['Schade aan eigendommen van derden', 'Letselschade aan derden op de werf', 'BA Na Levering voor gebreken na oplevering', 'Burenhinder door stof, geluid en trillingen'],
+    cta: 'Meer over BA Onderneming',
     link: '/verzekeringen/ba-onderneming',
     badge: 'Essentieel',
-    color: '#E5A524'
+    badgeBg: 'rgba(229,165,36,0.15)', badgeColor: '#8B6A1A',
+    iconPath: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
   },
   {
     title: 'BA-10',
-    subtitle: 'Tienjarige aansprakelijkheid',
-    desc: 'Verplicht bij woningbouw. Dekt stabiliteits- en soliditeitsgebreken tot 10 jaar na oplevering. Werfpolis of jaarpolis.',
+    intro: 'Verplicht bij woningbouw. Dekt stabiliteits- en soliditeitsgebreken tot 10 jaar na oplevering. Werfpolis of jaarpolis.',
+    bullets: ['Verplicht sinds 1 juli 2018 (Wet Peeters-Borsus)', 'Werfpolis per project of jaarpolis', 'Globale polis voor alle bouwactoren', 'Wettelijk minimum € 500.000 per schadegeval'],
+    cta: 'Meer over BA-10',
     link: '/verzekeringen/ba-10',
     badge: 'Verplicht bij woningbouw',
-    color: '#DC2626'
+    badgeBg: '#FEE2E2', badgeColor: '#DC2626',
+    iconPath: 'M3 21h18M9 21V7l3-4 3 4v14M3 21V11l6-4M21 21V11l-6-4',
   },
   {
     title: 'Bedrijfsvoertuigen',
-    subtitle: 'Uw vloot correct gedekt',
-    desc: 'BA verplicht voor alle voertuigen. Omnium, mini-omnium, pechbijstand en vlootpolis voor bestelwagens, vrachtwagens en aanhangwagens.',
+    intro: 'BA verplicht voor alle voertuigen. Omnium, mini-omnium en vlootpolis voor bestelwagens, vrachtwagens en aanhangwagens.',
+    bullets: ['BA Auto wettelijk verplicht', 'Omnium voor recente bestelwagens', 'Vlootkorting vanaf 5 voertuigen', 'Verzekering vervoerde goederen en aanhangwagens'],
+    cta: 'Meer over bedrijfsvoertuigen',
     link: '/verzekeringen/bedrijfsvoertuigen',
     badge: 'Verplicht (BA)',
-    color: '#DC2626'
+    badgeBg: '#FEE2E2', badgeColor: '#DC2626',
+    iconPath: 'M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v5M16 17H8M12 17v4M17 21v-4',
   },
   {
     title: 'Machinebreuk',
-    subtitle: 'Machines en gereedschap',
-    desc: 'Dekt plotse defecten, beschadiging en diefstal van machines en gereedschap — op de werf, in de bestelwagen of op het atelier.',
+    intro: 'Dekt plotse defecten, beschadiging en diefstal van machines en gereedschap — op de werf, in de bestelwagen of op het atelier.',
+    bullets: ['Breuk en beschadiging van machines', 'Diefstal op werf of in bestelwagen', 'Vast ateliermaterial én mobiel werfmaterieel', 'Aanvulbaar met bedrijfsschade bij omzetverlies'],
+    cta: 'Meer over machinebreuk',
     link: '/verzekeringen/machinebreuk',
     badge: 'Sterk aanbevolen',
-    color: '#3F5767'
+    badgeBg: 'rgba(63,87,103,0.1)', badgeColor: '#3F5767',
+    iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z',
   },
   {
     title: 'Rechtsbijstand',
-    subtitle: 'Juridische bescherming',
-    desc: 'Dekt juridische kosten bij geschillen, factuurincasso, arbeidsrechtelijke problemen en contractbetwistingen. Vrije advocaatkeuze.',
+    intro: 'Dekt juridische kosten bij geschillen, factuurincasso, arbeidsrechtelijke problemen en contractbetwistingen. Vrije advocaatkeuze.',
+    bullets: ['Hulp bij contractgeschillen en betwiste oplevering', 'Incasso bij onbetaalde facturen', 'Verdediging bij arbeidsrechtelijke conflicten', 'Vrije keuze van advocaat'],
+    cta: 'Meer over rechtsbijstand',
     link: '/verzekeringen/rechtsbijstand',
     badge: 'Aanvulling',
-    color: '#3F5767'
+    badgeBg: 'rgba(63,87,103,0.1)', badgeColor: '#3F5767',
+    iconPath: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9 12l2 2 4-4',
   },
   {
     title: "Alle Bouwplaats Risico's",
-    subtitle: "ABR: uw werf beschermd",
-    desc: "Dekt schade aan werken in uitvoering door brand, storm, diefstal, vandalisme en andere oorzaken. Werfpolis of jaarpolis.",
+    intro: "Dekt schade aan werken in uitvoering door brand, storm, diefstal en vandalisme. Onmisbaar bij grotere werven of renovaties.",
+    bullets: ["Schade tijdens uitvoering", "Risico's door weersinvloeden", "Bescherming bij meerdere partijen op één werf", "Flexibel per project of jaarpolis"],
+    cta: "Meer over ABR",
     link: '/verzekeringen/alle-bouwplaats-risicos',
     badge: 'Projectspecifiek',
-    color: '#3F5767'
-  }
+    badgeBg: 'rgba(63,87,103,0.1)', badgeColor: '#3F5767',
+    iconPath: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
+  },
 ];
 ---
 
@@ -98,18 +112,42 @@ const verzekeringen = [
   </section>
 
   <!-- VERZEKERINGEN GRID -->
-  <section style="background:#F8F9FA;padding:80px 0 100px;">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;">
+  <style>
+    .vz-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    @media (max-width:1023px) { .vz-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:639px)  { .vz-grid { grid-template-columns:1fr; } }
+    .vz-card { background:#FFFFFF; padding:32px; box-shadow:0px 1px 2px rgba(0,0,0,0.05); clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 32px),calc(100% - 32px) 100%,0% 100%); display:flex; flex-direction:column; position:relative; transition:box-shadow 0.2s,transform 0.2s; }
+    .vz-card:hover { box-shadow:0 8px 24px rgba(0,0,0,0.1); transform:translateY(-4px); }
+  </style>
+  <section style="background:#FFFFFF;padding:80px 0 100px;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+      <div class="vz-grid">
         {verzekeringen.map((v) => (
-          <a href={v.link} style="display:block;text-decoration:none;background:#FFFFFF;border:1px solid #E5E8ED;border-radius:10px;padding:36px;box-shadow:0 2px 20px rgba(0,31,63,0.06);transition:box-shadow 0.2s;">
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
-              <p style={`font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;padding:4px 12px;border-radius:20px;letter-spacing:0.5px;margin:0;background:${v.color};color:#FFFFFF;`}>{v.badge}</p>
+          <a href={v.link} class="vz-card" style="text-decoration:none;">
+            <!-- Badge pill top-right -->
+            <span style={`position:absolute;top:16px;right:20px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.5px;padding:4px 10px;border-radius:9999px;background:${v.badgeBg};color:${v.badgeColor};`}>{v.badge}</span>
+            <!-- Icon -->
+            <div style="background:rgba(229,165,36,0.1);border-radius:8px;padding:14px;display:inline-flex;align-self:flex-start;margin-bottom:20px;">
+              <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={v.iconPath}/></svg>
             </div>
-            <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 6px;">{v.title}</h2>
-            <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;color:#E5A524;margin:0 0 16px;">{v.subtitle}</p>
-            <p style="font-family:'Open Sans',sans-serif;font-size:15px;line-height:1.6;color:#3F5767;margin:0 0 24px;">{v.desc}</p>
-            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:#001F3F;display:flex;align-items:center;gap:6px;">Meer informatie <span style="color:#E5A524;">→</span></span>
+            <!-- Title -->
+            <h2 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#001F3F;margin-bottom:10px;">{v.title}</h2>
+            <!-- Intro -->
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#001F3F;margin-bottom:20px;">{v.intro}</p>
+            <!-- Bullets -->
+            <ul style="list-style:none;padding:0;margin:0 0 20px;display:flex;flex-direction:column;gap:10px;flex:1;">
+              {v.bullets.map((bullet) => (
+                <li style="display:flex;align-items:flex-start;gap:10px;">
+                  <svg width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                  <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.5;color:#001F3F;">{bullet}</span>
+                </li>
+              ))}
+            </ul>
+            <!-- CTA -->
+            <span style="display:inline-flex;align-items:center;gap:8px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;">
+              {v.cta}
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
           </a>
         ))}
       </div>
@@ -117,7 +155,7 @@ const verzekeringen = [
   </section>
 
   <!-- INFO BAND -->
-  <section style="background:#FFFFFF;padding:80px 0;">
+  <section style="background:#e5a52414;padding:80px 0;">
     <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;">
         <div>
@@ -151,7 +189,7 @@ const verzekeringen = [
   </section>
 
   <!-- PARTNERS -->
-  <section style="background:#F8F9FA;padding:60px 0;">
+  <section style="background:#FFFFFF;padding:60px 0;">
     <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
       <p style="text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin:0 0 32px;">Onze verzekeringspartners</p>
       <PartnerSlider client:visible />
