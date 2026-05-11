@@ -50,7 +50,7 @@ conclusion: |-
   Werken met onderaannemers brengt commerciële voordelen maar ook aansprakelijkheidsrisico's. Sinds Boek 6 BW (2025) is de structuur complexer geworden: derden kunnen meerdere partijen aanspreken, verzekeraars moeten vaker onderling afrekenen, en documentatie van wie wat doet wordt belangrijker dan ooit.
 
   Wat je beschermt: grondige attest-controles vóór de werf, een sterke onderaannemingsovereenkomst met vrijwarings- en regres-clausules, en een werfdagboek dat aantoont wie verantwoordelijk was. Wat je niet doet: zelf rechtstreeks afrekenen met derden zonder verzekeraar, of werken met onderaannemers waarvan je geen geldig BA-attest hebt.
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

@@ -64,7 +64,7 @@ faq:
     a: "Minstens jaarlijks en altijd na een belangrijke bedrijfswijziging: eerste werknemer aanwerven, nieuw voertuig, nieuwe activiteit opnemen, vennootschap oprichten, fusie of sterke omzetwijziging. Een polis die niet meegroeit is de meest voorkomende reden voor onaangename verrassingen bij schade."
   - q: "Wat is de premietaks en waarom betaal ik die?"
     a: "De premietaks is een belasting die de Belgische overheid heft op verzekeringspremies. In de bouw bedraagt ze 4,13% op arbeidsongevallen en 9,25% op de meeste andere bouwverzekeringen. Premies inclusief premietaks zijn volledig aftrekbaar als beroepskost."
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

@@ -48,7 +48,7 @@ faq:
     a: "Niet altijd. Voor onbetwiste, eenvoudige dossiers is de IOS-procedure via een deurwaarder vaak voldoende. Voor betwiste dossiers of grote bedragen is een advocaat aangewezen. Bij rechtsbijstand-tussenkomst heb je vaak vrije keuze van advocaat (artikel 156 Wet Verzekeringen)."
 conclusion: |-
   Een klant die niet betaalt is een commerciële realiteit, geen bouwramp. Volg de wettelijke stappen (herinnering, ingebrekestelling, gerechtelijke invordering), check of je rechtsbijstand het geschil dekt, en vooral: zorg dat je voorafgaand aan elke werf een sluitend contractueel kader hebt (offerte, algemene voorwaarden, gefaseerde facturatie, opleveringsverslag). Wie zijn administratieve discipline op orde heeft, vermijdt 80% van de invorderingsproblemen die we in onze praktijk zien. Voor de overige 20% is een goede rechtsbijstand goud waard.
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

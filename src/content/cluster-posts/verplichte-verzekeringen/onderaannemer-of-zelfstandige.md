@@ -50,7 +50,7 @@ relatedSpokes:
   - "aansprakelijkheid-hulppersonen-2025"
   - "attesten-bouwheer"
   - "arbeidsongevallen-verplichtingen"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

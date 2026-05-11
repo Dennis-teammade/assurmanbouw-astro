@@ -37,7 +37,7 @@ heroImage: "/images/kenniscentrum/c3-p-schadegevallen-bouw.jpg"
 heroImageAlt: "Aannemer aan de telefoon met verzekeraar na schade-incident op werf"
 tldr: >-
   Bij een arbeidsongeval heb je 8 dagen voor de aangifte bij de arbeidsongevallenverzekeraar en moet een ernstig arbeidsongeval onmiddellijk gemeld worden aan de arbeidsinspectie. De eerste 24 uur zijn bij elk schadegeval cruciaal: foto's, getuigenverklaringen en een chronologie bepalen in grote mate hoe het dossier verloopt. Bij een polisweigering heb je via artikel 156 Wet Verzekeringen recht op een schriftelijke motivering en kan je gratis terecht bij de Ombudsman van de Verzekeringen. Goede documentatie is in de bouw je belangrijkste verzekering.
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 
@@ -90,7 +90,7 @@ Wat erin staat:
 
 Te laat aangeven kan leiden tot vertraging in de uitkering aan de werknemer en eventueel discussies over de dekking.
 
-Voor een gedetailleerd stappenplan: [wat te doen bij een werknemer-ongeval op steiger](/kenniscentrum/schadegevallen/val-van-steiger/).
+Voor een gedetailleerd stappenplan: [wat te doen bij een werknemer-ongeval op steiger](/gids/schadegevallen/val-van-steiger/).
 
 ## 3. Wat is een ernstig arbeidsongeval?
 
@@ -110,7 +110,7 @@ Daarna heb je tien werkdagen om een **omstandig verslag** op te stellen. Dat is 
 
 Niet-melding van een ernstig arbeidsongeval is een strafrechtelijke overtreding met sancties tot €4.000 per inbreuk en mogelijk strafrechtelijke vervolging.
 
-Volledig stappenplan: [wat als je een ernstig arbeidsongeval moet melden](/kenniscentrum/schadegevallen/ernstig-arbeidsongeval-melden/).
+Volledig stappenplan: [wat als je een ernstig arbeidsongeval moet melden](/gids/schadegevallen/ernstig-arbeidsongeval-melden/).
 
 ## 4. Schade aan derden: hoe verloopt een claim?
 
@@ -138,9 +138,9 @@ Een eenvoudig dossier (geen betwisting, duidelijke schade) wordt typisch in 2 to
 
 Specifieke scenario's:
 
-- [Wat als de buur klaagt over trillingschade](/kenniscentrum/schadegevallen/trillingschade-buur/)
-- [Wat als een onderaannemer schade veroorzaakt op jouw werf](/kenniscentrum/schadegevallen/onderaannemer-schade-werf/)
-- [Wat als een klant na 3 jaar waterschade aan jou wijt](/kenniscentrum/schadegevallen/waterschade-na-oplevering/)
+- [Wat als de buur klaagt over trillingschade](/gids/schadegevallen/trillingschade-buur/)
+- [Wat als een onderaannemer schade veroorzaakt op jouw werf](/gids/schadegevallen/onderaannemer-schade-werf/)
+- [Wat als een klant na 3 jaar waterschade aan jou wijt](/gids/schadegevallen/waterschade-na-oplevering/)
 
 ## 5. Boek 6 BW: aansprakelijkheidsketen op de werf herzien
 
@@ -200,7 +200,7 @@ Vergelijkbare procedure als diefstal, met extra aandacht voor:
 
 Bij onderverzekering geldt de **evenredigheidsregel**: als je verzekerd kapitaal lager is dan de werkelijke waarde van het materieel, krijg je proportioneel minder uitbetaald. Voorbeeld: gereedschap verzekerd voor €15.000, werkelijke waarde €30.000, schade €5.000 → uitbetaling €2.500 in plaats van €5.000.
 
-Volledig stappenplan: [wat als je gereedschap uit je bestelwagen wordt gestolen](/kenniscentrum/schadegevallen/gereedschap-gestolen/).
+Volledig stappenplan: [wat als je gereedschap uit je bestelwagen wordt gestolen](/gids/schadegevallen/gereedschap-gestolen/).
 
 ## 7. Wat als de verzekeraar weigert uit te betalen?
 
@@ -276,7 +276,7 @@ Als minnelijke invordering faalt, kan een gerechtelijke procedure worden gestart
 
 Veel rechtsbijstandspolissen hebben een minimumbedrag waaronder ze niet tussenkomen (vaak €500 of €1.000). Voor kleine onbetaalde facturen ben je vaak op jezelf aangewezen.
 
-Volledig stappenplan: [wat als een klant weigert te betalen na oplevering](/kenniscentrum/schadegevallen/klant-betaalt-niet/).
+Volledig stappenplan: [wat als een klant weigert te betalen na oplevering](/gids/schadegevallen/klant-betaalt-niet/).
 
 ## 10. Documentatie: je belangrijkste verzekering
 

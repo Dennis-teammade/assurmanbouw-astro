@@ -52,7 +52,7 @@ conclusion: |-
   Wat je beschermt tegen sancties: een goede preventiestructuur, schriftelijke documentatie van risicoanalyse en opleiding, en een correct uitgevoerde meldingsprocedure. Wat je niet beschermt: een afwachtende houding of een poging om zaken minder ernstig te laten lijken dan ze zijn.
 
   Werk samen met je preventiedienst en je verzekeringsmakelaar om je structuur op te bouwen vóór er iets gebeurt. Een sterk preventiebeleid is wat het verschil maakt tussen een dossier dat correct wordt afgehandeld en een dossier dat tot vervolging leidt.
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

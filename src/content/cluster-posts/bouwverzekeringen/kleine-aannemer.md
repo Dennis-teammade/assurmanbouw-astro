@@ -46,7 +46,7 @@ relatedSpokes:
   - "startende-bouwondernemer"
   - "groeiend-bouwbedrijf"
   - "eerste-werknemer"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 conclusion: |-
   De stap van solo naar 1-5 werknemers is een groeispurt waarin je verzekeringen mee moeten ademen. Wat in maand één goed was, hoeft niet meer te kloppen in maand twaalf. De aannemers die we in onze scans helder zien doorgroeien zijn niet degenen die het goedkoopst verzekerd zijn. Het zijn degenen die hun polissen jaarlijks herzien en aanpassen aan hun werkelijkheid.
@@ -76,7 +76,7 @@ De polis dekt:
 
 Voor de bouw is dit een van de duurste polissen omdat de premie wordt berekend op de bruto loonmassa, met een premievoet die tussen 2,5% en 7% schommelt afhankelijk van je NACEBEL-code en schadeverleden. Voor een loonmassa van €175.000 (5 werknemers, gemiddeld bouwloon) reken je op €4.375 tot €12.250 per jaar voor deze ene polis.
 
-Volledige uitleg: [arbeidsongevallenverzekering](/verzekeringen/arbeidsongevallenverzekering).
+Volledige uitleg: [arbeidsongevallenverzekering](/verzekeringen/arbeidsongevallen/).
 
 ### BA Onderneming moet meegroeien
 

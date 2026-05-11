@@ -54,7 +54,7 @@ faq:
     a: "Een boekhouder kan je polissen administratief opvolgen, maar voor het ontwerp en de keuze werk je beter met een verzekeringsmakelaar met sectorkennis. De combinatie boekhouder en sectormakelaar werkt het sterkst."
   - q: "Moet ik mijn polissen vermelden in mijn offertes?"
     a: "Niet verplicht, wel aangeraden. Hoofdaannemers en bouwheren vragen vaak attesten van BA Onderneming en BA-10 voordat ze een werf gunnen. Heb je die direct klaar, dan ben je sneller en geloofwaardiger dan concurrenten die ze nog moeten aanvragen."
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 featured: true
 status: "published"
 conclusion: |-

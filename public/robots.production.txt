@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://assurmanbouw.be/sitemap-index.xml

@@ -48,7 +48,7 @@ faq:
     a: "Voor werven naast bestaande gebouwen vaak niet. Voor stedelijke renovatie- of sloopwerken raden we minimaal €2.500.000 aan, en voor werken naast meerdere woningen of in stadscentra €5.000.000 of meer. Vraag bij je makelaar een verhoging op de polis: de premieverhoging is doorgaans beperkt in verhouding tot de risicodekking."
 conclusion: |-
   Een buurklacht over trillingschade is geen ramp, mits je in de eerste 24 uur het juiste doet: documenteren, niet erkennen, makelaar bellen. Zorg ervoor dat je BA Onderneming de werken dekt die je effectief uitvoert, met een kapitaal dat past bij jouw werfprofiel. En één gouden regel: bij elke werf naast een bestaand pand, plaatsbeschrijving voor de werken. Dat ene document zet 80% van de discussies stop voor ze beginnen.
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

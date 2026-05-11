@@ -30,7 +30,7 @@ relatedSpokes:
   - "premie-ba-onderneming"
   - "kost-arbeidsongevallen"
   - "onderverzekerd-kost"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 tldr: >-
   BA-10 is verplicht voor de gesloten ruwbouw van woningen sinds de Wet-Peeters-Borsus van 31 mei 2017, met een wettelijk minimumkapitaal van €500.000 per schadegeval. Een werfpolis kost 0,5% tot 2% van de bouwkost per werf, terwijl een jaarpolis doorgaans 0,3% tot 0,8% op de jaaromzet bedraagt en voordeliger is bij meerdere werven. Premietaks bedraagt 9,25% en niet-naleving kan leiden tot strafrechtelijke boetes tot €80.000 en persoonlijke aansprakelijkheid. Vanaf 3 werven per jaar is de jaarpolis bijna altijd voordeliger dan losse werfpolissen.

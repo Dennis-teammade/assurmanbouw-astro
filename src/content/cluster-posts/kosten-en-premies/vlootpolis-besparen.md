@@ -30,7 +30,7 @@ relatedSpokes:
   - "premie-ba-onderneming"
   - "kosten-optimaliseren"
   - "fiscaal-aftrekbaar"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 tldr: >-
   Een vlootpolis bundelt al je bedrijfsvoertuigen onder één contract met één vervaldag en biedt vlootkortingen van 10% bij 5 voertuigen tot 25% bij 15 of meer voertuigen. Bonus/malus wordt op vlootniveau berekend, waardoor één schadegeval minder zwaar weegt. De polis is voordelig vanaf 5 voertuigen, vrijwel altijd voordelig vanaf 8 à 10, en de premietaks blijft 9,25% per voertuig. Volledig fiscaal aftrekbaar als beroepskost voor bedrijfsvoertuigen.

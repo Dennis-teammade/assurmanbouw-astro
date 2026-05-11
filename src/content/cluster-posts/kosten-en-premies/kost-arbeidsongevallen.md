@@ -30,7 +30,7 @@ relatedSpokes:
   - "premie-ba-onderneming"
   - "kost-ba-10"
   - "fiscaal-aftrekbaar"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 tldr: >-
   De premie wordt berekend als loonmassa maal premievoet, beperkt tot het loonplafond van €58.096,10 per werknemer in 2026. Premievoeten in de bouw liggen tussen 2,5% voor een schilder en 7% voor een dakwerker, met uitschieters naar 8% bij sloop- of hoogtewerk. De premietaks bedraagt 4,13% op de nettopremie en de polis is wettelijk verplicht vanaf de eerste werknemer. Premies zijn volledig fiscaal aftrekbaar als beroepskost.

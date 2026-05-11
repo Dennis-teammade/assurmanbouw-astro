@@ -54,7 +54,7 @@ relatedSpokes:
   - "ba-10-wanneer-verplicht"
   - "attesten-bouwheer"
   - "onderaannemer-of-zelfstandige"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

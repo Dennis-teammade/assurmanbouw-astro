@@ -30,7 +30,7 @@ relatedSpokes:
   - "kost-arbeidsongevallen"
   - "kost-ba-10"
   - "kosten-optimaliseren"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 tldr: >-
   BA Onderneming bestaat uit twee componenten: BA Uitbating voor schade tijdens werken en BA Na Levering voor schade na oplevering. De premiebasis is doorgaans de jaaromzet en de premievoet ligt tussen 0,3% en 1,5% afhankelijk van risicoprofiel, plus 9,25% premietaks. Een verzekerd kapitaal vanaf €1.250.000 per schadegeval is gangbaar in de bouw, waarbij de meeste verzekeraars werken met €2.500.000 als standaard. De polis is volledig fiscaal aftrekbaar als beroepskost.

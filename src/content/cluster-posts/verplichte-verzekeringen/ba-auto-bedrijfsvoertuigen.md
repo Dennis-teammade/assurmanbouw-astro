@@ -52,7 +52,7 @@ relatedSpokes:
   - "arbeidsongevallen-verplichtingen"
   - "attesten-bouwheer"
   - "onderaannemer-of-zelfstandige"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

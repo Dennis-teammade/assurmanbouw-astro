@@ -54,7 +54,7 @@ conclusion: |-
   3. **Documentatie** met facturen, serienummers en foto's, opgeslagen in de cloud
 
   De €350 tot €1.200 premie per jaar voor een degelijke materiaalpolis is een fractie van de schade die je kan oplopen. En de tijd die het kost om een grondige inventaris bij te houden, is goed besteed wanneer je hem het meest nodig hebt.
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

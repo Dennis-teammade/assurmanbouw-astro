@@ -35,7 +35,7 @@ spokes:
   - "premietaks-uitleg"
   - "kosten-optimaliseren"
   - "onderverzekerd-kost"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 tldr: >-
   Een zelfstandige bouwondernemer zonder personeel betaalt indicatief tussen €2.500 en €4.500 per jaar aan beroepsverzekeringen exclusief voertuigen, terwijl een KMO met 5 werknemers indicatief tussen €12.000 en €22.000 per jaar uitgeeft voor het volledige polispakket. Het loonplafond arbeidsongevallen is in 2026 €58.096,10 per werknemer per jaar en de premietaks bedraagt 4,13% op arbeidsongevallen en 9,25% op de meeste andere bouwverzekeringen. Beroepsmatige verzekeringspremies zijn volledig fiscaal aftrekbaar als beroepskost, inclusief premietaks, maar onderverzekering kan bij schade leiden tot proportionele uitkering: cijfers verlagen om premie te drukken kost later veel meer.

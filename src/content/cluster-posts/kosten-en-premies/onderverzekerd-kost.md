@@ -30,7 +30,7 @@ relatedSpokes:
   - "kosten-optimaliseren"
   - "kost-arbeidsongevallen"
   - "premie-ba-onderneming"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 tldr: >-
   De evenredigheidsregel zegt dat je uitkering proportioneel daalt als je verzekerd kapitaal lager is dan de werkelijke waarde, waarbij verzekerd zijn voor twee derde van de waarde twee derde uitkering bij schade betekent. Brand bedrijfsgebouw is de polis waar onderverzekering het vaakst optreedt door verouderde heropbouwwaardes, en de ABEX-index koppelt brandverzekeringen automatisch aan de bouwkosten-evolutie. Een €100 lagere premie per jaar kan bij schade €15.000 minder uitkering betekenen, dus de evenredigheidsregel is nooit abstract maar een concrete financiële factuur.

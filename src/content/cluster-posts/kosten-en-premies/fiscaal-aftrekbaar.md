@@ -30,7 +30,7 @@ relatedSpokes:
   - "premietaks-uitleg"
   - "kost-arbeidsongevallen"
   - "kosten-optimaliseren"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 tldr: >-
   Beroepsmatige verzekeringspremies zijn 100% aftrekbaar als beroepskost inclusief premietaks, terwijl BTW niet geldt op verzekeringen (vrijgesteld door artikel 44 W. BTW). In een vennootschap geldt het tarief vennootschapsbelasting (20% verlaagd of 25% standaard), terwijl in een eenmanszaak het marginale tarief personenbelasting van 25% tot 50% van toepassing is. Voor gemengd gebruikte voertuigen gelden aparte fiscale regels en privé-verzekeringen zijn niet aftrekbaar in het bedrijf.

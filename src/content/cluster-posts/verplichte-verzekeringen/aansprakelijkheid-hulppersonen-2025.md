@@ -50,7 +50,7 @@ relatedSpokes:
   - "onderaannemer-of-zelfstandige"
   - "wet-peeters-borsus"
   - "ba-10-wanneer-verplicht"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

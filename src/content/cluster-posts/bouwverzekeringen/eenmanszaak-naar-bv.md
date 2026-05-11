@@ -46,7 +46,7 @@ relatedSpokes:
   - "groeiend-bouwbedrijf"
   - "onderaannemer-worden"
   - "eerste-werknemer"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 conclusion: |-
   De overgang van eenmanszaak naar BV is een fiscaal-juridische operatie waar verzekeringen vaak vergeten worden tot het te laat is. Polissen lopen niet automatisch door, BA Bestuurder komt nieuw in beeld, IPT wordt mogelijk, en de zaakvoerder zelf krijgt een ander statuut met andere verzekeringsbehoeften.

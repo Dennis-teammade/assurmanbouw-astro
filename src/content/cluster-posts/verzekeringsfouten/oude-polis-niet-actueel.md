@@ -27,7 +27,7 @@ sectors:
   - "loodgieters"
   - "schilders"
   - "schrijnwerkers"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 relatedSpokes:
   - "boekhouder-regelt-verzekeringen"

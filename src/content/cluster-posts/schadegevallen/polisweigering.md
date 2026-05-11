@@ -48,7 +48,7 @@ faq:
     a: "Een weigering op zich heeft geen invloed op de premie, want er werd geen uitkering gedaan. Wel kan een verzekeraar na een groot schadegeval, ongeacht uitkering, een tariefherziening op vervaldag voorstellen. Bij een weigering wegens 'abnormaal risico' of 'grove fout' kan een verzekeraar in extreme gevallen ook de polis zelf opzeggen op vervaldag."
 conclusion: |-
   Een polisweigering is geen vonnis, het is een uitgangspunt. Eis schriftelijke motivering, check of de gronden juridisch standhouden, schakel je makelaar in en gebruik desnoods de Ombudsman Verzekeringen. Een gestructureerd antwoord leidt in onze praktijk in veel gevallen tot een gehele of gedeeltelijke heroverweging door de verzekeraar, zonder gerechtelijke procedure. De gerechtelijke route is een laatste optie, niet de eerste. Wat je vooral moet onthouden: ken je rechten (artikels 23, 62, 76, 156 Wet Verzekeringen), documenteer je dossier, en werk via een makelaar die jouw belangen verdedigt. Een polisweigering die juridisch zwak staat, valt vaak om wanneer je de juiste argumenten op tafel legt.
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

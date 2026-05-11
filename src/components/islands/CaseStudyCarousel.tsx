@@ -54,7 +54,7 @@ export default function CaseStudyCarousel({ cases }: Props) {
                     Echte situaties, slimme dekking. Zie hoe verzekeringen het verschil maken in de praktijk.
                   </p>
                 </div>
-                <a href="/contact" style={{ width: 48, height: 48, borderRadius: '50%', background: '#3F5767', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, textDecoration: 'none' }}>
+                <a href="/contact/" style={{ width: 48, height: 48, borderRadius: '50%', background: '#3F5767', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, textDecoration: 'none' }}>
                   <Phone size={20} color="white" />
                 </a>
               </div>

@@ -30,7 +30,7 @@ relatedSpokes:
   - "fiscaal-aftrekbaar"
   - "kost-arbeidsongevallen"
   - "premie-ba-onderneming"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 tldr: >-
   De premietaks is een wettelijke belasting op verzekeringspremies in België, waarbij 4,13% geldt voor arbeidsongevallenverzekering en 9,25% voor de meeste andere bouwverzekeringen. De taks wordt automatisch toegevoegd aan de nettopremie en doorgestort naar de schatkist, en premie inclusief premietaks is volledig fiscaal aftrekbaar als beroepskost. Op een totaalpremiepakket van €20.000 betaal je grofweg €1.700 tot €1.800 aan premietaks per jaar.

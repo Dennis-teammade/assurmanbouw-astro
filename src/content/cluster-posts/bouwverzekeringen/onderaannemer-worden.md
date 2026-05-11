@@ -46,7 +46,7 @@ relatedSpokes:
   - "eerste-werknemer"
   - "groeiend-bouwbedrijf"
   - "eenmanszaak-naar-bv"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 conclusion: |-
   Verzekeringen voor onderaannemers in de bouw vraagt nuance: niet alleen de wet, ook contractuele eisen en juridische evoluties zoals Boek 6 BW spelen mee. Drie zaken moet je in 2026 strikt op orde hebben:

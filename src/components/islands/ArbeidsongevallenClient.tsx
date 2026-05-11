@@ -143,7 +143,7 @@ const INSURANCE_CARDS = [
     title: 'BA Onderneming',
     intro: 'Bescherming wanneer je bedrijf schade veroorzaakt aan derden tijdens de uitbating of de beroepsactiviteit.',
     bullets: ['Schade aan eigendommen van derden', 'Letselschade aan derden', 'Claims rond beroepsfouten', 'Aansprakelijkheid tijdens werken'],
-    link: '/verzekeringen/ba-onderneming',
+    link: '/verzekeringen/ba-onderneming/',
     cta: 'Meer over BA Onderneming',
   },
   {
@@ -151,7 +151,7 @@ const INSURANCE_CARDS = [
     title: 'Bedrijfsvoertuigen',
     intro: 'De bestelwagen is onmisbaar op de werf. De juiste dekking houdt je mobiel bij schade, diefstal of pech.',
     bullets: ['BA en omnium voor bestelwagens', 'Bescherming bij diefstal of brand', 'Snelle afhandeling bij schade', 'Afstembaar op jouw wagenpark'],
-    link: '/verzekeringen/bedrijfsvoertuigen',
+    link: '/verzekeringen/bedrijfsvoertuigen/',
     cta: 'Meer over bedrijfsvoertuigen',
   },
   {
@@ -167,7 +167,7 @@ const INSURANCE_CARDS = [
     title: 'BA-10',
     intro: 'Tienjarige aansprakelijkheid voor aannemers en architecten bij ernstige constructiegebreken na oplevering.',
     bullets: ['Verplicht voor aannemers', 'Dekt constructiegebreken 10 jaar', 'Bescherming na oplevering', 'Vereist bij nieuwbouw'],
-    link: '/verzekeringen/ba-10',
+    link: '/verzekeringen/ba-10/',
     cta: 'Meer over BA-10',
   },
   {
@@ -183,7 +183,7 @@ const INSURANCE_CARDS = [
     title: "Alle Bouwplaats Risico's",
     intro: "Allesomvattende dekking voor schade aan werken in uitvoering. Onmisbaar bij grotere werven of renovaties.",
     bullets: ["Schade tijdens uitvoering", "Risico's door weersinvloeden", "Bescherming bij meerdere partijen", "Flexibel per project of jaarpolis"],
-    link: '/verzekeringen/alle-bouwplaats-risicos',
+    link: '/verzekeringen/alle-bouwplaats-risicos/',
     cta: "Meer over ABR",
   },
 ];
@@ -377,7 +377,7 @@ export default function ArbeidsongevallenClient() {
               </p>
 
               <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginBottom: 32 }}>
-                <a href="/gratis-verzekeringsscan" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: GOLD, color: NAVY, fontFamily: "'Open Sans', sans-serif", fontWeight: 700, fontSize: 17, padding: '16px 28px', borderRadius: 8, textDecoration: 'none', transition: 'background 0.2s' }}>
+                <a href="/gratis-verzekeringsscan/" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: GOLD, color: NAVY, fontFamily: "'Open Sans', sans-serif", fontWeight: 700, fontSize: 17, padding: '16px 28px', borderRadius: 8, textDecoration: 'none', transition: 'background 0.2s' }}>
                   Doe de gratis scan <ArrowRight size={16} />
                 </a>
                 <a href="/maak-afspraak" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: 'transparent', color: NAVY, fontFamily: "'Open Sans', sans-serif", fontWeight: 700, fontSize: 17, padding: '14px 28px', borderRadius: 8, textDecoration: 'none', border: `2px solid rgba(0,31,63,0.18)`, transition: 'border-color 0.2s' }}>
@@ -664,7 +664,7 @@ export default function ArbeidsongevallenClient() {
                       </p>
                       <div style={{ display: 'flex', justifyContent: 'center' }}>
                         <a
-                          href="/gratis-verzekeringsscan"
+                          href="/gratis-verzekeringsscan/"
                           style={{
                             display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: 8,
                             background: SLATE, color: '#FFFFFF',
@@ -803,7 +803,7 @@ export default function ArbeidsongevallenClient() {
             <p style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 400, fontSize: 22, lineHeight: 1.4, color: SLATE, marginBottom: 40, opacity: 0.9 }}>
               Start nu in 2 minuten of kies meteen voor persoonlijk advies.
             </p>
-            <a href="/gratis-verzekeringsscan" style={{ display: 'inline-flex', alignItems: 'center', gap: 12, background: SLATE, color: '#FFFFFF', fontFamily: "'Open Sans', sans-serif", fontWeight: 700, fontSize: 18, padding: '18px 40px', borderRadius: 10, textDecoration: 'none', transition: 'background 0.2s' }}>
+            <a href="/gratis-verzekeringsscan/" style={{ display: 'inline-flex', alignItems: 'center', gap: 12, background: SLATE, color: '#FFFFFF', fontFamily: "'Open Sans', sans-serif", fontWeight: 700, fontSize: 18, padding: '18px 40px', borderRadius: 10, textDecoration: 'none', transition: 'background 0.2s' }}>
               Vraag nu een scan aan
               <ArrowRight size={18} />
             </a>
@@ -1083,7 +1083,7 @@ export default function ArbeidsongevallenClient() {
               Werk je in de bouwsector en wil je zeker zijn dat jouw personeel correct verzekerd is? Wij bekijken met jou wat echt nodig is — zonder verplichting.
             </p>
             <div style={{ display: 'flex', gap: 24, justifyContent: 'center', marginBottom: 80, flexWrap: 'wrap' }}>
-              <a href="/gratis-verzekeringsscan" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: GOLD, color: NAVY, fontFamily: "'Open Sans', sans-serif", fontWeight: 700, fontSize: 20, padding: '20px 40px', borderRadius: 8, textDecoration: 'none', boxShadow: '0px 10px 15px -3px rgba(0,0,0,0.1)', transition: 'transform 0.15s' }}>
+              <a href="/gratis-verzekeringsscan/" style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: GOLD, color: NAVY, fontFamily: "'Open Sans', sans-serif", fontWeight: 700, fontSize: 20, padding: '20px 40px', borderRadius: 8, textDecoration: 'none', boxShadow: '0px 10px 15px -3px rgba(0,0,0,0.1)', transition: 'transform 0.15s' }}>
                 Doe de gratis scan <ArrowRight size={18} />
               </a>
               <a href="/maak-afspraak" style={{ display: 'inline-flex', alignItems: 'center', gap: 12, background: 'rgba(255,255,255,0.1)', color: '#FFFFFF', fontFamily: "'Open Sans', sans-serif", fontWeight: 700, fontSize: 20, padding: '20px 40px', borderRadius: 8, textDecoration: 'none', border: '1px solid rgba(255,255,255,0.2)', transition: 'background 0.2s' }}>

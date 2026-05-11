@@ -24,7 +24,7 @@ sectors:
   - "loodgieters"
   - "schilders"
   - "schrijnwerkers"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 hubIntro: "De meeste verzekeringsfouten in de bouwsector zijn niet zichtbaar tot er een schadegeval is. In onze gratis verzekeringsscans zien we elke week dezelfde tien fouten terugkomen bij dakwerkers, schilders, elektriciens en algemene aannemers."
 hubTitle: "Grootste verzekeringsfouten bouwsector"

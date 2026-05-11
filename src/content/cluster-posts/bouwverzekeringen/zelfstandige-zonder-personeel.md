@@ -46,7 +46,7 @@ relatedSpokes:
   - "startende-bouwondernemer"
   - "kleine-aannemer"
   - "eerste-werknemer"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 conclusion: |-
   Verzekeringen voor zelfstandigen in de bouw zonder personeel vraagt twee blikken: naar buiten (BA Onderneming, materiaal, BA Auto) en naar binnen (gewaarborgd inkomen, ongevallenverzekering, pensioenopbouw). Die tweede blik wordt het vaakst overgeslagen. We zien zelfstandigen met perfecte BA Onderneming-polissen die zichzelf totaal onbeschermd laten. Een ladder valt niet alleen op auto's, ze valt soms ook op de zelfstandige zelf.
@@ -81,7 +81,7 @@ Dekt schade die jij veroorzaakt aan derden tijdens je werk. Een ladder die op ee
 
 In de bouw: kies altijd voor de variant **mét BA Na Levering**. Een groot deel van de schade in deze sector manifesteert zich pas na de werken (lekkages, scheuren, isolatieproblemen die maanden later opduiken). Een polis met enkel BA Uitbating laat je dan in de steek.
 
-Voor zelfstandigen zit de premie typisch tussen €600 en €1.200 per jaar, afhankelijk van activiteit en omzet. Volledige uitleg: [BA Onderneming](/verzekeringen/ba-onderneming).
+Voor zelfstandigen zit de premie typisch tussen €600 en €1.200 per jaar, afhankelijk van activiteit en omzet. Volledige uitleg: [BA Onderneming](/verzekeringen/ba-onderneming/).
 
 ### Rechtsbijstand
 

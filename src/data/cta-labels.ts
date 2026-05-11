@@ -3,15 +3,15 @@
 // Zie CLAUDE.md voor de regels rond wanneer deze constanten wel/niet gebruikt worden.
 
 export const CTA_DESTINATIONS = {
-  scan: '/gratis-verzekeringsscan',
+  scan: '/gratis-verzekeringsscan/',
   afspraak: '/maak-afspraak',
-  contact: '/contact',
+  contact: '/contact/',
   tel: 'tel:+3250361693',
   telDisplay: '050 36 16 93',
   email: 'mailto:info@assurman.be',
 } as const;
 
-// Scan-CTA's — leiden naar /gratis-verzekeringsscan
+// Scan-CTA's — leiden naar /gratis-verzekeringsscan/
 export const CTA_SCAN = {
   hero: 'Doe de gratis scan',
   inline: 'Start de scan',

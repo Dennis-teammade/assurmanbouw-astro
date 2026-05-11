@@ -58,7 +58,7 @@ faq:
     a: "BA Onderneming is niet wettelijk verplicht voor een aannemer. Toch wordt ze in de praktijk vaak afgedwongen via bouwheercontracten, ATAB-contracten of bankvoorwaarden bij bouwleningen. Sinds 1 januari 2025 is BA Onderneming bovendien strategisch belangrijker geworden door Boek 6 BW: de polis moet rechtstreekse aanspraak door derden dekken, niet alleen contractuele aansprakelijkheid."
   - q: "Hoe weet ik of mijn onderaannemer schijnzelfstandige is?"
     a: "Je toetst de werkrelatie aan de vier algemene criteria van de Arbeidsrelatieswet van 27 december 2006: wil van de partijen, vrijheid van organisatie, vrijheid van werktijd, en hierarchie. In de bouw geldt daarnaast een lijst sectorspecifieke criteria via Koninklijk Besluit. Indicaties van schijnzelfstandigheid zijn: vaste werkuren bij jou, alleen jouw materiaal gebruiken, geen andere klanten, en geen eigen offertes. Bij twijfel laat je de relatie juridisch toetsen voor de inspectie het doet."
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

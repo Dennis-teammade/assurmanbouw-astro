@@ -46,7 +46,7 @@ relatedSpokes:
   - "kleine-aannemer"
   - "eerste-werknemer"
   - "eenmanszaak-naar-bv"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 conclusion: |-
   Verzekeringen voor een middelgroot bouwbedrijf is geen kwestie meer van losse polissen afsluiten, maar van een coherente polis-architectuur opbouwen. Vlootpolis voor voertuigen, BA-10 als jaarpolis, excedent wet voor zaakvoerders en kaderlijden, en bedrijfsschadeverzekering voor continuïteit zijn de vier kernpunten die we in deze fase typisch zien optimaliseren.
@@ -98,7 +98,7 @@ Bij een vlootpolis voeg je nieuwe bestuurders simpel toe. Bij losse polissen moe
 
 Cijfers zijn richtwaarden voor bestelwagens met gemiddeld profiel. Concrete premies hangen af van jaarlijkse kilometers, NACEBEL-code, schadestatistiek en woonplaats van de bestuurders.
 
-Meer info: [bedrijfsvoertuigen](/verzekeringen/bedrijfsvoertuigen).
+Meer info: [bedrijfsvoertuigen](/verzekeringen/bedrijfsvoertuigen/).
 
 ## 3. BA-10 jaarpolis vs werfpolis
 
@@ -118,7 +118,7 @@ Vuistregel: vanaf 5 à 6 ruwbouwwerven per jaar wordt jaarpolis voordeliger op z
 
 Premies voor jaarpolis schommelen typisch tussen €4.000 en €12.000 voor middelgrote aannemers, afhankelijk van jaaromzet ruwbouw. Het wettelijk minimumkapitaal blijft €500.000 per schadegeval, maar veel hoofdaannemers eisen €1.000.000 of meer in lastenboeken.
 
-Volledige uitleg: [BA-10 verzekering](/verzekeringen/ba-10).
+Volledige uitleg: [BA-10 verzekering](/verzekeringen/ba-10/).
 
 ## 4. Het excedent wet voor zaakvoerders en kaderlijden
 

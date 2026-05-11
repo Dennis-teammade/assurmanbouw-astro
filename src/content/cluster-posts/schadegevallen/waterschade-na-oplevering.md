@@ -48,7 +48,7 @@ faq:
     a: "Voor de tienjarige aansprakelijkheid: de termijn loopt 10 jaar vanaf oplevering, ongeacht wanneer de schade ontdekt wordt. Voor lichte verborgen gebreken: de termijn loopt vanaf ontdekking, maar wordt verkort door contractuele bepalingen. Voor onderlinge vorderingen tussen aannemer en onderaannemer: gewone verjaringstermijnen (10 jaar contractueel, 5 jaar buitencontractueel)."
 conclusion: |-
   Een laattijdige waterschade-claim is geen automatische verloren zaak, maar wel een dossier dat snel en gestructureerd moet aangepakt worden. Bel je makelaar in de eerste week, trek je werfdossier op, doe geen herstel zonder expertise, en check welk regime (tienjarig, lichte verborgen gebreken, 'na levering') van toepassing is. Het verschil tussen een dossier dat je verzekeraar volledig dekt en een dossier dat persoonlijk op jouw schouders valt, zit in de polis-discipline van vóór de claim. Een polisreview elk jaar voorkomt onaangename verrassingen tien jaar later.
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

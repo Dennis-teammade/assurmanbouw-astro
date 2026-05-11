@@ -52,7 +52,7 @@ relatedSpokes:
   - "wet-peeters-borsus"
   - "attesten-bouwheer"
   - "arbeidsongevallen-verplichtingen"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

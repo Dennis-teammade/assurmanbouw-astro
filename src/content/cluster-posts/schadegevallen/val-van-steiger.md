@@ -50,7 +50,7 @@ conclusion: |-
   Een werknemer die van een steiger valt is een ervaring die elke werkgever in de bouw probeert te vermijden, maar waar je realistisch op voorbereid moet zijn. De combinatie van wettelijke meldingstermijnen, parallel onderzoek door verzekeraar en arbeidsinspectie, en de menselijke kant van werknemer en familie maakt dit een complex dossier.
 
   Wat helpt: een duidelijk stappenplan dat je ploegbazen kennen, een arbeidsongevallenverzekering die actueel is en alle werknemers correct dekt, en aanvullende polissen die jouw schade als werkgever opvangen. De €1.575 per jaar premie voor één werknemer is geen budget om op te besparen, het is de basis waar alles op rust wanneer het misgaat.
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

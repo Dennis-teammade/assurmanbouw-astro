@@ -30,7 +30,7 @@ relatedSpokes:
   - "vlootpolis-besparen"
   - "fiscaal-aftrekbaar"
   - "onderverzekerd-kost"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 tldr: >-
   De grootste optimalisatiewinst zit doorgaans in een correcte NACEBEL-activiteitencode die tot 40% verschil kan maken, gevolgd door combinatiekortingen van 5% tot 15% bij dezelfde verzekeraar. Franchises bewust verhogen geeft 8% tot 12% premiekorting per polis en een vlootpolis vanaf 5 voertuigen levert 10% tot 25% korting op. VCA-certificering en preventiebeleid worden door verzekeraars beloond en een driejaarlijkse heroriëntering geeft gemiddeld 8% tot 15% besparing, terwijl onderverzekering vermijden de absolute prioriteit blijft.

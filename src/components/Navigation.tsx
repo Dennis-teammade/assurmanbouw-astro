@@ -2,11 +2,11 @@ import { useState, useRef, useEffect } from 'react';
 import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
 
 const verzekeringenItems = [
-  { label: 'BA Onderneming / BA Uitbating', to: '/verzekeringen/ba-onderneming' },
-  { label: 'Arbeidsongevallenverzekering', to: '/verzekeringen/arbeidsongevallen' },
-  { label: 'Bedrijfsvoertuigen', to: '/verzekeringen/bedrijfsvoertuigen' },
+  { label: 'BA Onderneming / BA Uitbating', to: '/verzekeringen/ba-onderneming/' },
+  { label: 'Arbeidsongevallenverzekering', to: '/verzekeringen/arbeidsongevallen/' },
+  { label: 'Bedrijfsvoertuigen', to: '/verzekeringen/bedrijfsvoertuigen/' },
   { label: 'Machinebreukverzekering', to: '/verzekeringen/machinebreuk' },
-  { label: 'BA 10', to: '/verzekeringen/ba-10' },
+  { label: 'BA 10', to: '/verzekeringen/ba-10/' },
   { label: 'Rechtsbijstandsverzekering', to: '/verzekeringen/rechtsbijstand' },
 ];
 
@@ -124,11 +124,11 @@ export default function Navigation() {
 
             <a href="/werkwijze" className={`nav-link${pathname === '/werkwijze' ? ' active' : ''}`}>Werkwijze</a>
             <a href="/gids/" className={`nav-link${pathname.startsWith('/gids') ? ' active' : ''}`}>Kenniscentrum</a>
-            <a href="/contact" className={`nav-link${pathname === '/contact' ? ' active' : ''}`}>Contact</a>
+            <a href="/contact/" className={`nav-link${pathname === '/contact/' ? ' active' : ''}`}>Contact</a>
           </nav>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-            <a href="/gratis-verzekeringsscan" className="nav-cta desktop-only">
+            <a href="/gratis-verzekeringsscan/" className="nav-cta desktop-only">
               Gratis scan
             </a>
             <button
@@ -178,10 +178,10 @@ export default function Navigation() {
 
             <a href="/werkwijze" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Werkwijze</a>
             <a href="/gids/" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Kenniscentrum</a>
-            <a href="/contact" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Contact</a>
+            <a href="/contact/" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Contact</a>
 
             <div style={{ paddingTop: 20 }}>
-              <a href="/gratis-verzekeringsscan" className="nav-cta" style={{ display: 'inline-block' }} onClick={() => setMobileOpen(false)}>
+              <a href="/gratis-verzekeringsscan/" className="nav-cta" style={{ display: 'inline-block' }} onClick={() => setMobileOpen(false)}>
                 Gratis scan
               </a>
             </div>

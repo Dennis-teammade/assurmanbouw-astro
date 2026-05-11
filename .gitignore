@@ -7,3 +7,11 @@ node_modules/
 
 # Astro build cache
 .astro/
+
+# SEO scan output (lokaal gegenereerd, niet committen)
+seo-scan.md
+seo-scan.mjs
+
+# Link audit output (lokaal gegenereerd, niet committen)
+link-audit.md
+link-audit.mjs

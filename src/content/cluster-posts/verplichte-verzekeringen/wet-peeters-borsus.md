@@ -50,7 +50,7 @@ relatedSpokes:
   - "ba-10-wanneer-verplicht"
   - "attesten-bouwheer"
   - "aansprakelijkheid-hulppersonen-2025"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 ---
 

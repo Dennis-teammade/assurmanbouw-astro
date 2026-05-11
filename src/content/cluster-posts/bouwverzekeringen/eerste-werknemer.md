@@ -46,7 +46,7 @@ relatedSpokes:
   - "kleine-aannemer"
   - "zelfstandige-zonder-personeel"
   - "onderaannemer-worden"
-primaryCta: "/gratis-verzekeringsscan"
+primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 conclusion: |-
   Eerste werknemer in dienst nemen is meer dan een arbeidsovereenkomst ondertekenen. Het is een verzekeringsoperatie waar deadlines harde lijnen zijn. Arbeidsongevallenverzekering vóór dag één, BA Onderneming herzien, voertuig-polissen aangepast: alles moet kloppen op de eerste werkdag van je nieuwe medewerker.
@@ -86,7 +86,7 @@ Aanvraagprocedure neemt 1 tot 2 weken voor een eenvoudig dossier. Doe de aanvraa
 - Aantal werknemers (na deze aanwerving)
 - Statuut werkgever (eenmanszaak, vennootschap, soort vennootschap)
 
-Volledige uitleg: [arbeidsongevallenverzekering](/verzekeringen/arbeidsongevallenverzekering).
+Volledige uitleg: [arbeidsongevallenverzekering](/verzekeringen/arbeidsongevallen/).
 
 ## 2. BA Onderneming herzien
 
@@ -126,7 +126,7 @@ Met een werknemer komt vaak een tweede voertuig. BA Auto voor de nieuwe wagen mo
 
 Soms gebruiken werknemers hun eigen wagen voor woon-werkverkeer of zelfs voor werfbezoeken. Hun privé BA Auto dekt dat tot op zekere hoogte, maar voor verplaatsingen in het kader van het werk zit je in een grijze zone. Bespreek met je makelaar of een uitbreiding op je BA Onderneming nodig is.
 
-Meer info: [bedrijfsvoertuigen](/verzekeringen/bedrijfsvoertuigen).
+Meer info: [bedrijfsvoertuigen](/verzekeringen/bedrijfsvoertuigen/).
 
 ## 4. Materiaal en gereedschap
 
