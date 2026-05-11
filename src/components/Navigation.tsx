@@ -81,6 +81,8 @@ export default function Navigation() {
             <img
               src="/assurman-logo-cropped.svg"
               alt="Assurman"
+              width={331}
+              height={96}
               style={{ height: scrolled ? 56 : 80, width: 'auto', transition: 'height 0.3s ease' }}
             />
           </a>

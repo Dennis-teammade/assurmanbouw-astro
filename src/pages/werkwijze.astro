@@ -8,20 +8,20 @@ import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../data/cta-labels';
 const steps = [
   {
     num: '01',
-    title: 'Korte intake',
+    title: 'Online scan',
     duration: '2 minuten',
     align: 'left' as const,
-    what: 'Je geeft kort aan wie je bent en wat je doet: je beroep, het type werven waar je op staat, en wat je zeker wil verzekeren. Dat kan via ons online formulier of tijdens een eerste telefonisch contact.',
+    what: 'Je doet de gratis online scan zelf, ter plekke. Je beantwoordt enkele korte vragen over je beroep, sector, aantal medewerkers, type werven en je huidige verzekeringen. Geen telefoon, geen afspraak, geen wachttijd. Meteen na het invullen krijg je een rapport op maat van jouw activiteit. Daarin zie je welke verzekeringen verplicht zijn voor jouw stiel, welke aanbevolen zijn, en waar je mogelijk een hiaat hebt.',
     gainLabel: null,
     bullets: null,
-    why: 'Geen papieren vragenlijsten, geen dikke dossiers. We starten met wat echt relevant is om te weten of en hoe we je kunnen helpen.',
+    why: 'Geen papieren vragenlijsten, geen dikke dossiers, geen verkoper aan de lijn. Jij controleert in 2 minuten of je correct verzekerd bent — wij gaan pas in actie als jij dat zelf wil.',
   },
   {
     num: '02',
-    title: 'Risico-scan op maat',
+    title: 'Risico-audit op maat',
     duration: 'Wij doen het werk',
     align: 'right' as const,
-    what: "We bekijken jouw situatie grondig: type werven (renovatie, nieuwbouw, onderhoud), materiaalwaarde, bestelwagen, team, eventuele onderaannemers, en de typische risico's binnen jouw stiel. Heb je al lopende polissen? Dan nemen we die mee in de scan.",
+    what: "Onze expert bekijkt jouw situatie grondig: type werven (renovatie, nieuwbouw, onderhoud), materiaalwaarde, bestelwagen, team, eventuele onderaannemers, en de typische risico's binnen jouw stiel. Heb je al lopende polissen? Dan nemen we die mee in de audit.",
     gainLabel: 'Specifiek bekeken',
     bullets: [
       { b: 'Onderverzekering:', r: ' ben je voldoende gedekt voor wat er werkelijk op het spel staat?' },
@@ -44,7 +44,7 @@ const steps = [
       { b: 'Onafhankelijk advies:', r: ' we vergelijken meerdere verzekeraars' },
       { b: 'Modulair:', r: ' je start met een kernpakket en breidt uit wanneer nodig' },
     ],
-    why: 'Enkel wat nuttig is, geen opties die alleen de premie opdrijven. Onafhankelijk advies, we vergelijken meerdere verzekeraars. Een voorstel dat je rustig kan doornemen en waarover je vragen mag stellen zonder je ergens toe te verbinden.',
+    why: 'Een voorstel dat je rustig kan doornemen en waarover je vragen mag stellen, zonder je ergens toe te verbinden. Geen verrassingen achteraf, alleen wat écht relevant is voor jouw stiel.',
   },
   {
     num: '04',
@@ -54,7 +54,7 @@ const steps = [
     what: 'We nemen het voorstel samen door, beantwoorden je vragen, en passen aan waar nodig. Eens alles klopt, zorgen wij voor de administratieve afhandeling met de verzekeraar. Jij hoeft niet zelf te bellen, geen formulieren te mailen, geen dossiers op te volgen.',
     gainLabel: null,
     bullets: null,
-    why: "Je bent verzekerd, met een dossier dat klopt. Je krijgt een helder overzicht van wat je hebt en bij wie je terecht kan bij schade. En je weet dat wij blijven meedenken, niet alleen op dag één.",
+    why: 'Je bent verzekerd, met een dossier dat klopt. Je krijgt een helder overzicht van wat je hebt en bij wie je terecht kan bij schade. En je weet dat wij blijven meedenken — niet alleen op dag één, maar ook bij wijzigingen, vragen of een schadegeval.',
   },
 ];
 
@@ -149,7 +149,7 @@ const schema = {
 
   /* Hero */
   .ww-hero-img { position: absolute; top: 5%; right: -5px; height: 85%; width: auto; max-width: 48%; z-index: 1; pointer-events: none; }
-  .ww-hero-content { max-width: 52%; padding-top: 40px; }
+  .ww-hero-content { max-width: 52%; }
   .ww-hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
 
   /* Steps */
@@ -199,7 +199,7 @@ const schema = {
   <div class="ww-hero-img assurman-mask assurman-mask--hero">
     <img src="/verzekeringen-bouwsector-werkwijze-hero.jpg" alt="Assurman verzekeringsadviseur bespreekt bouwverzekering op locatie" />
   </div>
-  <div class="ww-container" style="padding-top:48px;padding-bottom:72px;position:relative;z-index:2;">
+  <div class="ww-container" style="padding-top:64px;padding-bottom:72px;position:relative;z-index:2;">
     <div class="ww-hero-content">
       <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Onze Werkwijze</p>
       <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(34px,4.5vw,60px);line-height:1.06;letter-spacing:-1px;color:#001F3F;margin:0 0 8px;">
@@ -251,7 +251,7 @@ const schema = {
     <div style="text-align:center;margin-bottom:72px;">
       <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Onze Aanpak</p>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,46px);line-height:1.1;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">
-        Van intake tot actieve dekking in 4 stappen
+        Van scan tot actieve dekking in 4 stappen
       </h2>
       <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#64748B;max-width:560px;margin:0 auto;">
         Je hoeft niet alles meteen perfect te weten. We begeleiden je stap voor stap en zorgen dat elke stap concreet iets oplevert.

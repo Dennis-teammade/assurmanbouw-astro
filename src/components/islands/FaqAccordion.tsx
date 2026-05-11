@@ -13,6 +13,7 @@ interface Props {
   subheadline?: string;
   background?: string;
   hideHeader?: boolean;
+  fullWidth?: boolean;
 }
 
 export default function FaqAccordion({
@@ -22,12 +23,13 @@ export default function FaqAccordion({
   subheadline,
   background = '#FFFFFF',
   hideHeader = false,
+  fullWidth = false,
 }: Props) {
   const [open, setOpen] = useState<number | null>(null);
 
   return (
-    <section style={{ background, padding: hideHeader ? '0 0 80px' : '80px 0' }}>
-      <div style={{ maxWidth: 768, margin: '0 auto', padding: '0 15px' }}>
+    <section style={{ background, padding: hideHeader ? (fullWidth ? '0' : '0 0 80px') : '80px 0' }}>
+      <div style={{ maxWidth: fullWidth ? 'none' : 768, margin: '0 auto', padding: fullWidth ? '0' : '0 15px' }}>
         {!hideHeader && (
           <div style={{ textAlign: 'center', marginBottom: 40 }}>
             <p style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: 14, letterSpacing: '1.4px', textTransform: 'uppercase', color: '#E5A524', marginBottom: 16 }}>

@@ -182,8 +182,8 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
   .gp-author-card-links { display:flex; flex-wrap:wrap; gap:10px; margin-top:20px; }
   .gp-author-card-link { display:inline-flex; align-items:center; gap:6px; font-family:'Open Sans',sans-serif; font-weight:700; font-size:14px; color:#001F3F; text-decoration:none; padding:9px 16px; border-radius:6px; border:1px solid rgba(0,31,63,0.15); transition:background 0.15s,border-color 0.15s; }
   .gp-author-card-link:hover { background:#FEF7E6; border-color:rgba(229,165,36,0.45); }
-  .gp-author-card-link--primary { background:#001F3F; color:#FFFFFF; border-color:#001F3F; }
-  .gp-author-card-link--primary:hover { background:#3F5767; border-color:#3F5767; }
+  .gp-author-card-link--primary { background:#3F5767; color:#FFFFFF; border-color:#3F5767; }
+  .gp-author-card-link--primary:hover { background:#001F3F; border-color:#001F3F; }
 
   /* ── Spoke grid ── */
   .gp-spokes-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; }
@@ -197,20 +197,39 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
   /* ── Mobile help block (hidden on desktop, shown on tablet/mobile) ── */
   .gp-mobile-help { display:none; }
 
+  /* ── Mobile tab system (TOC + Bijkomende bronnen, verborgen op desktop) ── */
+  .gp-mobile-tabs { display:none; margin-top:16px; }
+  .gp-tab-bar { display:flex; border-bottom:2px solid rgba(0,31,63,0.1); }
+  .gp-tab-btn { flex:1; padding:11px 8px; font-family:'Open Sans',sans-serif; font-weight:700; font-size:14px; color:#3F5767; background:none; border:none; border-bottom:3px solid transparent; margin-bottom:-2px; cursor:pointer; transition:color 0.2s,border-color 0.2s; text-align:center; }
+  .gp-tab-btn.is-active { color:#E5A524; border-bottom-color:#E5A524; }
+  .gp-tab-panel { overflow:hidden; max-height:0; transition:max-height 0.3s ease; }
+  .gp-tab-panel.is-open { max-height:800px; }
+  .gp-tab-panel-inner { padding:16px 0 4px; }
+
   /* ── Final CTA knoppen ── */
   .gp-final-btns { display:flex; gap:20px; justify-content:center; flex-wrap:wrap; margin-bottom:24px; }
 
   /* ── Responsive ── */
+  /* ── Tab panel bronnen: zelfde grootte/padding als TOC-items ── */
+  .gp-tab-panel-inner .gp-bronnen-link { font-size:15px; line-height:1.45; }
+  .gp-tab-panel-inner .gp-bronnen-list li { margin-bottom:6px; }
+
   @media (max-width:1023px) {
     .gp-container { padding:0 24px; }
     .gp-hero-img { display:none; }
+    .gp-hero-section { min-height:auto !important; }
     .gp-hero-content { max-width:100% !important; }
+    .gp-hero-inner { padding-bottom:32px !important; }
     .gp-intro-grid { grid-template-columns:1fr; }
-    .gp-bronnen-col { position:static; }
+    .gp-section-divider { display:none; }
+    .gp-toc-wrap { display:none; }
+    .gp-direct-block { display:none; }
+    .gp-bronnen-col { display:none; }
+    .gp-mobile-tabs { display:block; }
     .gp-spokes-grid { grid-template-columns:repeat(2,1fr); }
     .gp-body-grid { grid-template-columns:1fr; gap:0; }
     .gp-sidebar { display:none; }
-    .gp-mobile-help { display:block; margin-top:40px; }
+    .gp-cta-mask-img { height:60% !important; opacity:0.15 !important; }
   }
   @media (max-width:767px) {
     .gp-container { padding:0 15px; }
@@ -246,11 +265,11 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
 </div>
 
 <!-- ═══ 1. HERO ═══ -->
-<section style="background:#FFFFFF;padding-top:0;position:relative;overflow:hidden;min-height:540px;">
+<section class="gp-hero-section" style="background:#FFFFFF;padding-top:0;position:relative;overflow:hidden;min-height:540px;">
   <div class="gp-hero-img assurman-mask assurman-mask--hero">
     <img src={pillar.data.heroImage} alt={pillar.data.title} />
   </div>
-  <div style="max-width:1280px;margin:0 auto;padding:48px 32px 64px;position:relative;z-index:2;">
+  <div class="gp-hero-inner" style="max-width:1280px;margin:0 auto;padding:48px 32px 64px;position:relative;z-index:2;">
     <div class="gp-hero-content">
 
       <!-- Section-label -->
@@ -299,6 +318,41 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
             </ul>
           ) : null}
         </div>
+
+        <!-- Mobile: TOC + Bijkomende bronnen als tabs (verborgen op desktop) -->
+        <div class="gp-mobile-tabs" id="gp-mobile-tabs">
+          <div class="gp-tab-bar">
+            <button class="gp-tab-btn" id="gp-tab-toc" type="button">Op deze pagina</button>
+            <button class="gp-tab-btn" id="gp-tab-bronnen" type="button">Bijkomende bronnen</button>
+          </div>
+          <div class="gp-tab-panel" id="gp-panel-toc">
+            <div class="gp-tab-panel-inner">
+              {h2s.length > 0 && (
+                <ul class="gp-toc-list" style="columns:1;column-rule:none;">
+                  {h2s.map((h) => (
+                    <li><a href={`#${h.slug}`} class="gp-toc-link">{h.text}</a></li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+          <div class="gp-tab-panel" id="gp-panel-bronnen">
+            <div class="gp-tab-panel-inner">
+              {spokes.length > 0 && (
+                <ul class="gp-bronnen-list">
+                  {spokes.map((s) => (
+                    <li>
+                      <span class="gp-toc-arrow">→</span>
+                      <a href={`/gids/${pillar.slug}/${s.slug}/`} class="gp-bronnen-link">
+                        {s.data.tileTitle ?? s.data.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
 
       <!-- Rechts: Direct regelen + Bijkomende bronnen -->
@@ -345,7 +399,7 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
 </section>
 
 <!-- Scheidingslijn op content-breedte -->
-<div class="gp-container"><div style="border-bottom:1px solid rgba(0,31,63,0.1);"></div></div>
+<div class="gp-container gp-section-divider"><div style="border-bottom:1px solid rgba(0,31,63,0.1);"></div></div>
 
 <!-- ═══ SECTIE 2: SIDEBAR (links) | CONTENT (rechts) ═══ -->
 <section style="background:#FFFFFF;padding:40px 0 88px;">
@@ -407,6 +461,13 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
           <Content />
         </div>
 
+        <!-- FAQ accordion inline placeholder (JS verplaatst dit naar na de FAQ h2 in de prose) -->
+        {faqItems.length > 0 && (
+          <div id="gp-faq-inline" style="display:none;margin-bottom:40px;">
+            <FaqAccordion client:visible items={faqItems} hideHeader={true} fullWidth={true} />
+          </div>
+        )}
+
         <!-- Inline author card -->
         <div class="gp-author-card">
           <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Geschreven door</p>
@@ -456,7 +517,7 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
 
 <!-- ═══ 7. MID-CONTENT CTA ═══ -->
 <section style="background:#E9C466;padding:80px 0 96px;position:relative;overflow:hidden;">
-  <div class="assurman-mask assurman-mask--cta" style="position:absolute;top:0;right:-60px;height:90%;width:auto;pointer-events:none;z-index:1;">
+  <div class="assurman-mask assurman-mask--cta gp-cta-mask-img" style="position:absolute;top:0;right:-60px;height:90%;width:auto;pointer-events:none;z-index:1;">
     <img src="/images/kenniscentrum/c5-8-oude-polis-niet-actueel.jpg" alt="" aria-hidden="true" />
   </div>
   <div style="position:absolute;right:-130px;top:40%;transform:translateY(-50%);pointer-events:none;z-index:2;">
@@ -465,7 +526,7 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
   <div class="gp-container" style="text-align:center;position:relative;z-index:4;">
     <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin:0 0 12px;opacity:0.75;">Gratis en vrijblijvend</p>
     <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,4vw,48px);line-height:1.1;color:#001F3F;margin:0 0 16px;">Niet zeker over je dekking?</h2>
-    <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.55;color:#3F5767;margin:0 auto 36px;max-width:600px;">
+    <p style="font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;line-height:1.55;color:#3F5767;margin:0 auto 36px;max-width:600px;">
       Twijfel je of jij en je onderneming voldoende zijn beschermd? Doe de snelle online scan, of laat onze specialist een vrijblijvende audit doen.
     </p>
     <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
@@ -502,18 +563,7 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
   </section>
 )}
 
-<!-- ═══ 9. FAQ ═══ -->
-{faqItems.length > 0 && (
-  <section style="background:#FFFFFF;padding:80px 0;">
-    <div class="gp-container" style="max-width:820px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;text-align:center;">Veelgestelde vragen</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(24px,3vw,38px);color:#001F3F;margin:0 0 48px;text-align:center;line-height:1.1;">Antwoorden op de meest gestelde vragen</h2>
-      <FaqAccordion client:visible items={faqItems} hideHeader={true} />
-    </div>
-  </section>
-)}
-
-<!-- ═══ 10. DONKERE CTA-BAND ═══ -->
+<!-- ═══ 9. DONKERE CTA-BAND ═══ -->
 <section style="background:#3F5767;padding:100px 0 0;text-align:center;position:relative;overflow:hidden;">
   <div style="max-width:740px;margin:0 auto;padding:0 32px;position:relative;z-index:1;">
     <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Vrijblijvend starten</p>
@@ -552,12 +602,34 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
     firstH2.insertAdjacentElement('beforebegin', featImg);
   }
 
+  // Injecteer FAQ accordion na de FAQ h2 in de prose; verberg plain FAQ-tekst
+  const inlineFaq = document.getElementById('gp-faq-inline');
+  const proseDiv = document.querySelector<HTMLElement>('.gp-prose');
+  if (inlineFaq && proseDiv) {
+    const proseH2s = Array.from(proseDiv.querySelectorAll<HTMLElement>('h2'));
+    const faqH2 = proseH2s.find(h =>
+      h.textContent?.toLowerCase().includes('veelgesteld') ||
+      (h.id && h.id.toLowerCase().includes('veelgesteld'))
+    );
+    if (faqH2) {
+      // Verberg plain FAQ-inhoud (h3 + p tussen FAQ h2 en volgende h2)
+      let el = faqH2.nextElementSibling as HTMLElement | null;
+      while (el && el.tagName !== 'H2') {
+        el.style.display = 'none';
+        el = el.nextElementSibling as HTMLElement | null;
+      }
+      // Verplaats en toon de accordion
+      faqH2.insertAdjacentElement('afterend', inlineFaq);
+      inlineFaq.style.removeProperty('display');
+    }
+  }
+
   // Wissel sidebar box op basis van H2-positie (groepen van 3, altijd eindigen op scan)
   const h2els = Array.from(document.querySelectorAll<HTMLElement>('.gp-prose h2'));
   const authorBox = document.querySelector<HTMLElement>('.gp-sidebar-author');
   const scanBox   = document.querySelector<HTMLElement>('.gp-sidebar-scan');
 
-  if (h2els.length && authorBox && scanBox) {
+  if (window.innerWidth >= 1024 && h2els.length && authorBox && scanBox) {
     const n = h2els.length;
     const getBox = (i: number): 'author' | 'scan' => {
       if (i === n - 1) return 'scan';
@@ -601,6 +673,33 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
     };
     window.addEventListener('scroll', update, { passive: true });
     update();
+  }
+
+  // Mobile tab system: Op deze pagina / Bijkomende bronnen
+  const tabTocBtn = document.getElementById('gp-tab-toc');
+  const tabBronnenBtn = document.getElementById('gp-tab-bronnen');
+  const panelToc = document.getElementById('gp-panel-toc');
+  const panelBronnen = document.getElementById('gp-panel-bronnen');
+
+  if (tabTocBtn && tabBronnenBtn && panelToc && panelBronnen) {
+    let activeTab: string | null = null;
+
+    const toggleTab = (tab: string, btn: HTMLElement, panel: HTMLElement) => {
+      const opening = activeTab !== tab;
+      tabTocBtn.classList.remove('is-active');
+      tabBronnenBtn.classList.remove('is-active');
+      panelToc.classList.remove('is-open');
+      panelBronnen.classList.remove('is-open');
+      activeTab = null;
+      if (opening) {
+        btn.classList.add('is-active');
+        panel.classList.add('is-open');
+        activeTab = tab;
+      }
+    };
+
+    tabTocBtn.addEventListener('click', () => toggleTab('toc', tabTocBtn, panelToc));
+    tabBronnenBtn.addEventListener('click', () => toggleTab('bronnen', tabBronnenBtn, panelBronnen));
   }
 
   // Scrollspy: markeer actieve H2 in sidebar mini-ToC

@@ -1,4 +1,4 @@
----
+﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
@@ -466,10 +466,10 @@ const schema = {
     </div>
     <div class="dw-process-grid">
       {[
-        { num: '01', title: '1) Korte intake (2 minuten)', text: 'Je kiest je beroep, type werven en wat je zeker wil verzekerd zien. Snel, zonder papierwerkstress.' },
-        { num: '02', title: '2) Risico-scan op maat', text: 'We bekijken jouw werfrealiteit: woningbouw of utiliteit, omvang personeel, onderaannemers, materieel.' },
-        { num: '03', title: '3) Voorstel met modules', text: 'Een voorstel dat klopt: BA + BA-10 + arbeidsongevallen + voertuigen, en opties enkel als ze toevoegen.' },
-        { num: '04', title: '4) Afstemming en activatie', text: 'We leggen alles helder uit, passen aan waar nodig en zetten je dekking correct actief — inclusief attesten.' },
+        { num: '01', title: 'Online scan (2 minuten)', text: 'Ben je voldoende beschermd? Doe nu de gratis scan en ontdek wat je nodig hebt.' },
+        { num: '02', title: 'Risico-audit op maat', text: 'We checken je huidige polissen, kosten en werfrealiteit grondig.' },
+        { num: '03', title: 'Voorstel met modules', text: 'Je krijgt een helder voorstel, precies afgestemd op jouw activiteiten.' },
+        { num: '04', title: 'Afstemming & activatie', text: 'We leggen alles helder uit en zetten je dekking correct actief.' },
       ].map((step) => (
         <div style="position:relative;padding-top:56px;">
           <span class="dw-step-number">{step.num}</span>
@@ -616,3 +616,4 @@ const schema = {
 </section>
 
 </BaseLayout>
+

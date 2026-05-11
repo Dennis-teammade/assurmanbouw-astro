@@ -20,7 +20,39 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 12px;
+      gap: 20px 40px;
+    }
+    .footer-nav-btn {
+      background: #E9C466;
+      color: #3F5767;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 8px 22px;
+      border-radius: 10px;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .footer-nav-btn:hover {
+      background: #E5A524;
+      color: #FFFFFF;
+    }
+    .footer-afspraak-btn {
+      background: #FFFFFF;
+      color: #3F5767;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 600;
+      font-size: 15px;
+      padding: 10px 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .footer-afspraak-btn:hover {
+      background: #001F3F;
+      color: #FFFFFF;
     }
     .footer-inner {
       max-width: 1280px;
@@ -45,7 +77,7 @@
 
   <!-- Logo + FSMA -->
   <div style="max-width:1280px;margin:0 auto;padding:48px 32px 60px;text-align:center;">
-    <img src="/assurman-logo-cropped.svg" alt="Assurman" style="height:96px;width:auto;margin-bottom:32px;display:block;margin-left:auto;margin-right:auto;filter:brightness(0) invert(1);" />
+    <img src="/assurman-logo-cropped.svg" alt="Assurman" width="331" height="96" style="height:96px;width:auto;margin-bottom:32px;display:block;margin-left:auto;margin-right:auto;filter:brightness(0) invert(1);" />
     <div style="border-top:1px solid rgba(255,255,255,0.22);padding-top:24px;max-width:640px;margin:0 auto;">
       <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.5;color:#FAF2F2;margin:0;text-align:center;">
         FSMA Certified Broker.<br />
@@ -77,9 +109,9 @@
             <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:18px;letter-spacing:0.2em;color:#FFFFFF;margin:0 0 12px;text-align:center;">MIJN DOSSIER</p>
             <div style="border-top:2px solid #FFFFFF;padding-top:16px;">
               <div style="font-family:'Outfit',sans-serif;font-weight:500;font-size:15px;color:#FFFFFF;line-height:1.9;">
-                <p style="margin:0;">› Mijn verzekeringen raadplegen</p>
-                <p style="margin:0;">› Schadegeval melden</p>
-                <p style="margin:0;">› Contracten tekenen</p>
+                <a href="https://www.mybroker.be/?o=53100" target="_blank" rel="noopener noreferrer" style="display:block;color:#FFFFFF;text-decoration:none;opacity:0.9;transition:opacity 0.15s;">› Mijn verzekeringen raadplegen</a>
+                <a href="https://www.mybroker.be/?o=53100" target="_blank" rel="noopener noreferrer" style="display:block;color:#FFFFFF;text-decoration:none;opacity:0.9;transition:opacity 0.15s;">› Schadegeval melden</a>
+                <a href="https://www.mybroker.be/?o=53100" target="_blank" rel="noopener noreferrer" style="display:block;color:#FFFFFF;text-decoration:none;opacity:0.9;transition:opacity 0.15s;">› Contracten tekenen</a>
               </div>
             </div>
           </div>
@@ -90,16 +122,22 @@
           <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:18px;letter-spacing:0.2em;color:#FFFFFF;margin:0 0 12px;text-align:center;">CONTACT</p>
           <div style="border-top:2px solid #FFFFFF;padding-top:16px;">
             <div style="display:flex;flex-direction:column;gap:8px;">
-              <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;color:#FAF2F2;margin:0;">+32 50 36 16 93</p>
-              <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;color:#FAF2F2;margin:0;">info@assurman.be</p>
-              <a href="/contact/" style="background:#FFFFFF;color:#3F5767;font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;padding:10px 20px;border-radius:10px;text-decoration:none;display:inline-block;margin-top:8px;">
-                Boek een afspraak
-              </a>
+              <a href="tel:003250361693" style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;color:#FAF2F2;text-decoration:none;">+32 50 36 16 93</a>
+              <a href="mailto:info@assurman.be" style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;color:#FAF2F2;text-decoration:none;">info@assurman.be</a>
+              <a href="/maak-afspraak" class="footer-afspraak-btn">Boek een afspraak</a>
               <div style="display:flex;gap:16px;margin-top:8px;">
-                <svg width="20" height="20" fill="none" stroke="#FAF2F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.88 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.79 2.82h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.9a16 16 0 0 0 6.18 6.18l1.24-1.24a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-                <svg width="20" height="20" fill="none" stroke="#FAF2F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-                <svg width="20" height="20" fill="#FAF2F2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-                <svg width="20" height="20" fill="none" stroke="#FAF2F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                <a href="tel:003250361693" aria-label="Bel ons" style="line-height:0;opacity:0.85;transition:opacity 0.15s;">
+                  <svg width="20" height="20" fill="none" stroke="#FAF2F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.88 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.79 2.82h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.9a16 16 0 0 0 6.18 6.18l1.24-1.24a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </a>
+                <a href="mailto:info@assurman.be" aria-label="Stuur een e-mail" style="line-height:0;opacity:0.85;transition:opacity 0.15s;">
+                  <svg width="20" height="20" fill="none" stroke="#FAF2F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+                </a>
+                <a href="https://www.facebook.com/www.zakenkantoorkeerman.be" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style="line-height:0;opacity:0.85;transition:opacity 0.15s;">
+                  <svg width="20" height="20" fill="#FAF2F2" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/assurmanverzekeringen/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style="line-height:0;opacity:0.85;transition:opacity 0.15s;">
+                  <svg width="20" height="20" fill="none" stroke="#FAF2F2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                </a>
               </div>
             </div>
           </div>
@@ -136,11 +174,10 @@
             { label: 'Verzekeringen', to: '/verzekeringen' },
             { label: 'Sectoren', to: '/sectoren' },
             { label: 'Werkwijze', to: '/werkwijze' },
+            { label: 'Over Assurman', to: '/over-assurman' },
             { label: 'Contact', to: '/contact/' },
           ].map(({ label, to }) => (
-            <a href={to} style="background:#E9C466;color:#3F5767;font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;padding:8px 22px;border-radius:10px;text-decoration:none;">
-              {label}
-            </a>
+            <a href={to} class="footer-nav-btn">{label}</a>
           ))}
         </div>
         <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#FFFFFF;margin:0;">
@@ -155,6 +192,7 @@
         <a href="/disclaimer" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:13px;color:#FFFFFF;text-decoration:none;opacity:0.75;">Algemene voorwaarden</a>
         <a href="/duurzaamheidsbeleid" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:13px;color:#FFFFFF;text-decoration:none;opacity:0.75;">SFDR – Duurzaamheidsbeleid</a>
         <a href="/assurmifid-gedragsregels" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:13px;color:#FFFFFF;text-decoration:none;opacity:0.75;">AssurMIFID Gedragsregels</a>
+        <a href="https://teammade.be/" target="_blank" rel="noopener noreferrer" style="font-family:'Outfit',sans-serif;font-weight:500;font-size:13px;color:#FFFFFF;text-decoration:none;opacity:0.75;margin-left:auto;">Website by Team Made</a>
       </div>
     </div>
   </div>

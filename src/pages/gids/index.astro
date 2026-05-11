@@ -68,7 +68,7 @@ const schemas = [collectionPageSchema, itemListSchema, breadcrumbSchema];
   .hub-wrap { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
 
   /* ── Hero ──────────────────────────────────────────── */
-  .hub-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+  .hub-hero { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
   .hub-hero-img { width: 100%; height: auto; max-width: 520px; display: block; }
 
   /* ── Badge pill (identiek aan dakwerkers) ──────────── */
@@ -179,7 +179,7 @@ const schemas = [collectionPageSchema, itemListSchema, breadcrumbSchema];
       </div>
 
       <!-- Rechts: illustratie -->
-      <div style="display:flex;justify-content:center;align-items:center;">
+      <div style="display:flex;justify-content:center;align-items:flex-start;padding-top:48px;">
         <img
           src="/images/gids/assurman-verzekeringen-bouwsector-kenniscentrum.svg"
           alt="Kenniscentrum bouwverzekeringen illustratie"

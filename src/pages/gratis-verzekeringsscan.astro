@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { CTA_DESTINATIONS } from '../data/cta-labels';
 ---
 
 <BaseLayout
@@ -45,6 +46,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     ></iframe>
 
   </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:#3F5767;padding-top:100px;padding-bottom:0;position:relative;text-align:center;">
+  <div style="max-width:800px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,4vw,46px);line-height:1.15;color:#FFFFFF;margin-bottom:20px;">
+      Iedere klant is bij ons een VIP
+    </h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,2vw,20px);line-height:1.6;color:#CBD5E1;margin-bottom:40px;">
+      We gaan steeds tot het uiterste voor al onze klanten. Verzamel al je vragen over verzekeringen en bel ons of maak een afspraak. Wij gaan steeds voor een betere service aan een goedkopere prijs.
+    </p>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;">
+      <a href="tel:003250361693" style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 36px;border-radius:8px;text-decoration:none;transition:background 0.2s,transform 0.15s;">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        Bel ons op
+      </a>
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 36px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.25);transition:background 0.2s;">
+        Maak een afspraak
+      </a>
+    </div>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#CBD5E1;opacity:0.75;margin-bottom:64px;">
+      Geen verplichting. Onze experts helpen je graag verder en geven vrijblijvend advies.
+    </p>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;">
+    <polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" />
+  </svg>
 </section>
 
 </BaseLayout>
