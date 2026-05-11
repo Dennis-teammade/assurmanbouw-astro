@@ -175,17 +175,24 @@ const schema = {
   /* Final CTA buttons */
   .ww-final-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
 
+  /* CTA mask: mobile-only dimming (zelfde als pillar template) */
+  .ww-cta-mask-img { transition: opacity 0.3s; }
+
   @media (max-width: 1023px) {
     .ww-hero-img { display: none; }
     .ww-hero-content { max-width: 100%; }
-    .ww-step-even, .ww-step-odd { grid-template-columns: 1fr; gap: 32px; }
+    .ww-step-even, .ww-step-odd { grid-template-columns: 1fr; gap: 24px; }
+    /* Stap-nummers altijd boven content op mobile */
+    .ww-step-odd > *:first-child { order: 2; }
+    .ww-step-odd > *:last-child  { order: 1; }
     .ww-stats-grid { grid-template-columns: repeat(2, 1fr); }
     .ww-activatie-grid { grid-template-columns: 1fr; gap: 40px; }
+    .ww-cta-mask-img { height: 60% !important; opacity: 0.15 !important; }
   }
   @media (max-width: 767px) {
     .ww-hero-btns { flex-direction: column; }
     .ww-hero-btns a { width: 100%; justify-content: center; }
-    .ww-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .ww-stats-grid { grid-template-columns: 1fr; gap: 16px; }
     .ww-final-btns { flex-direction: column; align-items: center; }
     .ww-final-btns a { width: 100%; max-width: 400px; justify-content: center; }
     .ww-container { padding: 0 15px; }
@@ -346,9 +353,9 @@ const schema = {
 <!-- ══════════════════════════════════════════════
      SECTIE 4: CTA BAND
      ══════════════════════════════════════════════ -->
-<section style="background:#E9C466;padding:80px 0 100px;position:relative;overflow:hidden;">
+<section style="background:#E9C466;padding:80px 0 96px;position:relative;overflow:hidden;">
   <!-- Masked CTA image -->
-  <div class="assurman-mask assurman-mask--cta" style="position:absolute;top:0;right:-60px;height:90%;width:auto;pointer-events:none;z-index:1;">
+  <div class="assurman-mask assurman-mask--cta ww-cta-mask-img" style="position:absolute;top:0;right:-60px;height:90%;width:auto;pointer-events:none;z-index:1;">
     <img src="/verzekeringen-bouwsector-werkwijze-cta.jpg" alt="Bouwprofessionals aan het werk" />
   </div>
   <!-- Decorative right chevron -->
@@ -356,17 +363,22 @@ const schema = {
     <BrandChevron color="white" height="240px" direction="left" />
   </div>
   <div class="ww-container" style="text-align:center;position:relative;z-index:4;">
-    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4.5vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">
-      Geen gedoe.<br />Wel controle.
+    <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin:0 0 12px;opacity:0.75;">Gratis en vrijblijvend</p>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,4vw,48px);line-height:1.1;color:#001F3F;margin:0 0 16px;">
+      Geen gedoe. Wel controle.
     </h2>
-    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#3F5767;margin-bottom:40px;opacity:0.85;">
-      Jij beslist. Wij zorgen dat je verzekering past bij jouw stiel<br />
-      en blijft passen naarmate je bedrijf groeit.
+    <p style="font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;line-height:1.55;color:#3F5767;margin:0 auto 36px;max-width:600px;">
+      Jij beslist. Wij zorgen dat je verzekering past bij jouw stiel en blijft passen naarmate je bedrijf groeit.
     </p>
-    <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">
-      Start je gratis scan (2 min)
-      <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </a>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 36px;border-radius:8px;text-decoration:none;">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        {CTA_SCAN.inline}
+      </a>
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 36px;border-radius:8px;text-decoration:none;">
+        {CTA_AFSPRAAK.inline}
+      </a>
+    </div>
   </div>
 </section>
 

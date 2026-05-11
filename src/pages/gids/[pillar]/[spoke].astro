@@ -158,17 +158,28 @@ const schemas = [articleSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : 
   /* ── Final CTA knoppen ───────────────────────── */
   .gs-final-btns { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
 
+  /* ── Mobile-only TOC + Direct regelen (default hidden) ── */
+  .gs-mobile-toc    { display: none; }
+  .gs-mobile-direct { display: none; }
+
+  /* ── FAQ → Conclusie gap ── */
+  .gs-faq-wrap { margin-top: 56px; }
+  .gs-conclusion-wrap { margin-top: 56px; padding-top: 40px; border-top: 1px solid rgba(0,31,63,0.1); }
+
   /* ── Responsive ──────────────────────────────── */
   @media (max-width: 1023px) {
-    .gs-grid { grid-template-columns: 1fr; padding: 48px 24px; gap: 0; }
-    .gs-sidebar { flex-direction: row; flex-wrap: wrap; margin-bottom: 36px; }
-    .gs-sidebar-block { flex: 1 1 240px; }
-    .gs-below { padding: 0 24px 48px; }
+    .gs-grid    { grid-template-columns: 1fr; padding: 32px 24px; gap: 0; }
+    .gs-sidebar { display: none; }
+    .gs-below   { padding: 0 24px 48px; }
     .gs-cards-grid { grid-template-columns: repeat(2,1fr); }
+    .gs-mobile-toc    { display: block; margin-bottom: 20px; }
+    .gs-mobile-direct { display: block; }
+    .gs-faq-wrap { margin-top: 32px; }
+    .gs-faq-wrap :global(section) { padding-bottom: 0 !important; }
+    .gs-conclusion-wrap { margin-top: 24px !important; padding-top: 24px !important; }
   }
   @media (max-width: 639px) {
-    .gs-grid { padding: 32px 15px; }
-    .gs-sidebar { flex-direction: column; }
+    .gs-grid  { padding: 32px 15px; }
     .gs-below { padding: 0 15px 40px; }
     .gs-cards-grid { grid-template-columns: 1fr; }
     .gs-final-btns { flex-direction: column; align-items: center; }
@@ -279,6 +290,21 @@ const schemas = [articleSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : 
     <!-- TL;DR boven afbeelding -->
     <TLDR text={spoke.data.tldr} />
 
+    <!-- Mobile: TOC accordion (verborgen op desktop) -->
+    {h2Headings.length > 0 && (
+      <details class="gs-toc-details gs-mobile-toc" style="background:#fff;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 16px),calc(100% - 16px) 100%,0% 100%);padding:14px 18px;box-shadow:0 2px 8px rgba(0,31,63,0.06);">
+        <summary>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;">In dit artikel</span>
+          <svg class="gs-toc-chevron" width="14" height="14" fill="none" stroke="#3F5767" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </summary>
+        <nav style="margin-top:10px;">
+          {h2Headings.map((h) => (
+            <a href={`#${h.slug}`} class="gs-toc-link">{h.text}</a>
+          ))}
+        </nav>
+      </details>
+    )}
+
     <!-- Body — afbeelding staat bovenaan, JS verplaatst hem na de eerste alinea -->
     <div class="gs-prose" data-pagefind-body>
       <span style="display:none;" data-pagefind-filter="type">Artikel</span>
@@ -298,7 +324,7 @@ const schemas = [articleSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : 
 
     <!-- FAQ boven de conclusie -->
     {faqItems.length > 0 && (
-      <div style="margin-top:56px;">
+      <div class="gs-faq-wrap">
         <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 14px;">Veelgestelde vragen</p>
         <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(22px,2.5vw,30px);color:#001F3F;margin:0 0 32px;line-height:1.15;">Antwoorden op de meest gestelde vragen</h2>
         <FaqAccordion client:visible items={faqItems} hideHeader={true} />
@@ -307,13 +333,32 @@ const schemas = [articleSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : 
 
     <!-- Conclusie -->
     {spoke.data.conclusion && (
-      <div style="margin-top:56px;padding-top:40px;border-top:1px solid rgba(0,31,63,0.1);">
+      <div class="gs-conclusion-wrap">
         <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,26px);color:#001F3F;margin:0 0 20px;line-height:1.2;">Conclusie</h2>
         {spoke.data.conclusion.split('\n\n').map((para: string) => (
           <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.75;color:#3F5767;margin:0 0 20px;">{para}</p>
         ))}
       </div>
     )}
+
+    <!-- Mobile: Direct regelen CTA (verborgen op desktop) -->
+    <div class="gs-mobile-direct" style="margin-top:32px;">
+      <div style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%);padding:20px 22px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#E9C466;margin:0 0 14px;">Direct regelen</p>
+        <a href="/gratis-verzekeringsscan/" class="gs-direct-link">
+          <svg width="12" height="12" fill="none" stroke="#E9C466" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          Gratis verzekeringsscan
+        </a>
+        <a href="/maak-afspraak" class="gs-direct-link">
+          <svg width="12" height="12" fill="none" stroke="#E9C466" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 4H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zM16 2v4M8 2v4M3 10h18"/></svg>
+          Plan adviesgesprek
+        </a>
+        <a href="/contact/" class="gs-direct-link">
+          <svg width="12" height="12" fill="none" stroke="#E9C466" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Stel een vraag
+        </a>
+      </div>
+    </div>
 
     <!-- Lees het hoofdartikel (onder conclusie) -->
     {pillar && (

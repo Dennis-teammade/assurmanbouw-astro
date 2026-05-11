@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
 
 const verzekeringenItems = [
-  { label: 'BA Onderneming / BA Uitbating', to: '/verzekeringen/ba-onderneming/' },
+  { label: 'BA Onderneming', to: '/verzekeringen/ba-onderneming/' },
   { label: 'Arbeidsongevallenverzekering', to: '/verzekeringen/arbeidsongevallen/' },
   { label: 'Bedrijfsvoertuigen', to: '/verzekeringen/bedrijfsvoertuigen/' },
   { label: 'Machinebreukverzekering', to: '/verzekeringen/machinebreuk' },
