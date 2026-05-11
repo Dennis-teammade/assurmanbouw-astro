@@ -14,12 +14,12 @@ export const CTA_DESTINATIONS = {
 // Scan-CTA's — leiden naar /gratis-verzekeringsscan
 export const CTA_SCAN = {
   hero: 'Doe de gratis scan',
-  inline: 'Start je verzekeringsscan',
-  band: 'Check je verzekeringen in 2 minuten',
+  inline: 'Start de scan',
+  band: 'Doe de scan',
   short: 'Gratis scan',
   question: 'Hoe sta jij ervoor? Doe de scan',
-  request: 'Vraag een scan aan',
-  requestNow: 'Vraag nu een scan aan',
+  request: 'Doe de scan',
+  requestNow: 'Doe de scan nu',
   start: 'Start de scan',
   doIt: 'Doe de scan',
   full: 'Gratis verzekeringsscan',

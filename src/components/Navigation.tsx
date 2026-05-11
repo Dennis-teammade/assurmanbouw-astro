@@ -123,7 +123,7 @@ export default function Navigation() {
             </div>
 
             <a href="/werkwijze" className={`nav-link${pathname === '/werkwijze' ? ' active' : ''}`}>Werkwijze</a>
-            <a href="/kenniscentrum" className={`nav-link${pathname === '/kenniscentrum' ? ' active' : ''}`}>Kenniscentrum</a>
+            <a href="/gids/" className={`nav-link${pathname.startsWith('/gids') ? ' active' : ''}`}>Kenniscentrum</a>
             <a href="/contact" className={`nav-link${pathname === '/contact' ? ' active' : ''}`}>Contact</a>
           </nav>
 
@@ -177,7 +177,7 @@ export default function Navigation() {
             )}
 
             <a href="/werkwijze" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Werkwijze</a>
-            <a href="/kenniscentrum" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Kenniscentrum</a>
+            <a href="/gids/" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Kenniscentrum</a>
             <a href="/contact" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Contact</a>
 
             <div style={{ paddingTop: 20 }}>

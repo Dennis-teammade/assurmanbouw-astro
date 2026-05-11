@@ -1,0 +1,51 @@
+---
+export interface BreadcrumbItem {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: BreadcrumbItem[];
+  theme?: 'dark' | 'light';
+}
+
+const { items, theme = 'dark' } = Astro.props;
+const activeColor = theme === 'dark' ? '#E5A524'              : '#001F3F';
+const sepColor    = theme === 'dark' ? 'rgba(255,255,255,0.3)' : 'rgba(0,31,63,0.2)';
+---
+<style>
+  .bc-link-dark {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(255,255,255,0.55);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .bc-link-dark:hover { color: #E5A524; }
+
+  .bc-link-light {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 13px;
+    color: rgba(0,31,63,0.45);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .bc-link-light:hover { color: #001F3F; }
+</style>
+<nav aria-label="Breadcrumb">
+  <ol style="list-style:none;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center;">
+    {items.map((item, i) => (
+      <>
+        <li>
+          {item.href
+            ? <a href={item.href} class={theme === 'dark' ? 'bc-link-dark' : 'bc-link-light'}>{item.label}</a>
+            : <span style={`font-family:'Open Sans',sans-serif;font-size:13px;color:${activeColor};font-weight:600;`}>{item.label}</span>
+          }
+        </li>
+        {i < items.length - 1 && (
+          <li aria-hidden="true" style={`color:${sepColor};font-size:12px;line-height:1;`}>›</li>
+        )}
+      </>
+    ))}
+  </ol>
+</nav>

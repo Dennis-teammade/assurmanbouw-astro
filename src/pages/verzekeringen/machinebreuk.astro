@@ -258,16 +258,10 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
   <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
     <div style="max-width:640px;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Wanneer staat je werf stil zonder machinebreuk?</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">Hieronder 6 concrete schadegevallen per bouwstiel die laten zien waarom machinebreuk zo snel relevant wordt.</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Per beroep: zes situaties waarin machinebreuk je redt</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">Machinebreuk is geen wettelijke verplichting, maar wel een polis die in de bouw vaak het verschil maakt tussen een tegenvaller van een paar honderd euro en een claim van duizenden euro's. Verhuurders eisen ze contractueel voor ze grote machines vrijgeven, en hoofdaannemers vragen ze steeds vaker op werven met groot materieel. De polis dekt zowel plotse mechanische defecten als externe schade door val, brand, overstroming of vandalisme — ook tijdens transport. Hieronder zes situaties uit de bouw waarin de polis intervenieerde.</p>
     </div>
-    <div style="display:flex;justify-content:center;">
-      <button id="mb-examples-btn" style="display:flex;align-items:center;gap:10px;background:rgba(0,31,63,0.04);border:1px solid rgba(0,31,63,0.1);border-radius:8px;padding:14px 24px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#001F3F;">
-        <span>Bekijk 6 concrete voorbeelden uit de bouw</span>
-        <svg id="mb-examples-chevron" width="18" height="18" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
-      </button>
-    </div>
-    <ul id="mb-examples-list" style="list-style:none;padding:0;margin:16px 0 0;display:none;grid-template-columns:1fr 1fr;gap:10px;">
+    <ul id="mb-examples-list" style="list-style:none;padding:0;margin:32px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
       {[
         'Dakwerker: een ladderlift waait om tijdens een storm en raakt onherstelbaar beschadigd.',
         'Metser: een betonmolen valt van een aanhanger en breekt in twee.',
@@ -643,17 +637,6 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       }
     }
   }, { passive: true });
-
-  const exBtn  = document.getElementById('mb-examples-btn')     as HTMLElement | null;
-  const exList = document.getElementById('mb-examples-list')    as HTMLElement | null;
-  const exChev = document.getElementById('mb-examples-chevron') as HTMLElement | null;
-  if (exBtn && exList && exChev) {
-    exBtn.addEventListener('click', () => {
-      const open = exList.style.display !== 'none';
-      exList.style.display = open ? 'none' : 'grid';
-      exChev.style.transform = open ? '' : 'rotate(180deg)';
-    });
-  }
 
   const tabBtns     = document.querySelectorAll<HTMLElement>('[data-tab-btn]');
   const tabContents = document.querySelectorAll<HTMLElement>('[data-tab-content]');

@@ -1,0 +1,43 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  tileTitle?: string;
+  tldr?: string;
+}
+const { href, title, tileTitle, tldr } = Astro.props;
+function truncate(text: string, max = 110): string {
+  if (!text) return '';
+  if (text.length <= max) return text;
+  const cut = text.lastIndexOf(' ', max);
+  return text.slice(0, cut > 0 ? cut : max) + '…';
+}
+---
+
+<style>
+  .sc { background:#fff; padding:28px; clip-path:polygon(28px 0%,100% 0%,100% 100%,0% 100%,0% 28px); box-shadow:0 2px 8px rgba(0,31,63,0.06); display:flex; flex-direction:column; text-decoration:none; transition:box-shadow 0.2s,transform 0.2s; }
+  .sc:hover { box-shadow:0 10px 28px rgba(0,31,63,0.1); transform:translateY(-3px); }
+  .sc-icon { background:rgba(229,165,36,0.1); border-radius:8px; padding:12px; display:inline-flex; align-self:flex-start; margin-bottom:16px; flex-shrink:0; }
+  .sc-title { font-family:'Outfit',sans-serif; font-weight:700; font-size:17px; line-height:1.3; color:#001F3F; margin:0 0 8px; }
+  .sc-bar { width:32px; height:3px; background:#E5A524; margin-bottom:12px; }
+  .sc-excerpt { font-family:'Open Sans',sans-serif; font-size:14px; line-height:1.6; color:#3F5767; margin:0; flex:1; }
+  .sc-more { display:inline-flex; align-items:center; gap:6px; font-family:'Open Sans',sans-serif; font-weight:700; font-size:14px; color:#E5A524; margin-top:16px; }
+</style>
+
+<a href={href} class="sc">
+  <div class="sc-icon">
+    <svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+      <polyline points="14 2 14 8 20 8"/>
+      <line x1="8" y1="13" x2="16" y2="13"/>
+      <line x1="8" y1="17" x2="12" y2="17"/>
+    </svg>
+  </div>
+  <h3 class="sc-title">{tileTitle ?? title}</h3>
+  <div class="sc-bar"></div>
+  {tldr && <p class="sc-excerpt">{truncate(tldr)}</p>}
+  <div class="sc-more">
+    Lees meer
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </div>
+</a>

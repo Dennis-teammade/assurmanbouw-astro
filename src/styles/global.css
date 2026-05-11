@@ -86,7 +86,7 @@ html, body {
   text-decoration: none;
   transition: background 0.2s, transform 0.15s;
 }
-.brand-btn-primary:hover { background: #d4941a; transform: translateY(-1px); }
+.brand-btn-primary:hover { background: #E9C466; transform: translateY(-1px); }
 
 .brand-btn-primary--lg {
   font-size: 20px;
@@ -371,7 +371,13 @@ html, body {
   white-space: nowrap;
   transition: background 0.2s, transform 0.15s;
 }
-.nav-cta:hover { background: #CF921A; transform: translateY(-1px); }
+.nav-cta:hover { background: #E9C466; transform: translateY(-1px); }
+
+/* Inline-styled gold buttons — covers all a/button elements with background:#E5A524 set via style="" */
+a[style*="background:#E5A524"]:hover,
+a[style*="background: #E5A524"]:hover,
+button[style*="background:#E5A524"]:hover,
+button[style*="background: #E5A524"]:hover { background: #E9C466 !important; }
 
 .mobile-nav-link {
   display: block;

@@ -1,0 +1,25 @@
+---
+interface Props {
+  text: string;
+  maxWidth?: string;
+  margin?: string;
+}
+
+const { text, maxWidth = 'none', margin = '0 0 36px' } = Astro.props;
+---
+<div
+  class="tldr-block"
+  style={`background:#FEF7E6;border-left:4px solid #E3B64F;padding:22px 26px;margin:${margin};clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 16px),calc(100% - 16px) 100%,0% 100%);max-width:${maxWidth};`}
+>
+  <div style="display:flex;gap:14px;align-items:flex-start;">
+    <svg style="flex-shrink:0;margin-top:2px;" width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+      <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/>
+      <path d="M9 18h6"/>
+      <path d="M10 22h4"/>
+    </svg>
+    <div>
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 6px;">Het korte antwoord</p>
+      <p style="font-family:'Open Sans',sans-serif;font-size:16px;line-height:1.65;color:#3F5767;margin:0;">{text}</p>
+    </div>
+  </div>
+</div>

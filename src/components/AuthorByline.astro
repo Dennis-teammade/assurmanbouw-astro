@@ -1,0 +1,54 @@
+---
+import type { Author } from '../data/authors';
+
+interface Props {
+  author: Author;
+  variant?: 'compact' | 'full';
+  publishDate?: string;
+  readingTime?: number;
+}
+
+const { author, variant = 'full', publishDate, readingTime } = Astro.props;
+
+const formattedDate = publishDate
+  ? new Date(publishDate).toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' })
+  : null;
+---
+
+{variant === 'compact' && (
+  <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+    <img src={author.photo} alt={author.photoAlt} style="width:32px;height:32px;border-radius:50%;object-fit:cover;" />
+    <span style="font-family:'Open Sans',sans-serif;font-size:13px;color:#3F5767;">
+      <strong style="color:#001F3F;">{author.name}</strong>
+      {readingTime && <span>&nbsp;<span style="opacity:0.4;">·</span>&nbsp;{readingTime} min leestijd</span>}
+      {formattedDate && <span>&nbsp;<span style="opacity:0.4;">·</span>&nbsp;{formattedDate}</span>}
+    </span>
+  </div>
+)}
+
+{variant === 'full' && (
+  <div style="display:flex;gap:20px;align-items:flex-start;background:#F7F4EF;padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%);">
+    <img
+      src={author.photo}
+      alt={author.photoAlt}
+      style="width:68px;height:68px;border-radius:50%;object-fit:cover;flex-shrink:0;border:3px solid #E5A524;"
+    />
+    <div>
+      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:11px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin:0 0 4px;">Geschreven door</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:17px;color:#001F3F;margin:0 0 2px;">{author.name}</p>
+      <p style="font-family:'Open Sans',sans-serif;font-size:13px;color:#3F5767;margin:0 0 10px;">{author.role}</p>
+      <p style="font-family:'Open Sans',sans-serif;font-size:14px;line-height:1.65;color:#3F5767;margin:0 0 12px;">{author.bioShort}</p>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;">
+        <a href={author.authorPageUrl} style="font-family:'Open Sans',sans-serif;font-size:13px;font-weight:700;color:#E5A524;text-decoration:none;">
+          Lees alle artikelen →
+        </a>
+        <a href={author.linkedin} target="_blank" rel="noopener noreferrer" style="font-family:'Open Sans',sans-serif;font-size:13px;font-weight:700;color:#3F5767;text-decoration:none;">
+          LinkedIn
+        </a>
+        <a href="/contact" style="font-family:'Open Sans',sans-serif;font-size:13px;font-weight:700;color:#3F5767;text-decoration:none;">
+          Stel een vraag
+        </a>
+      </div>
+    </div>
+  </div>
+)}
