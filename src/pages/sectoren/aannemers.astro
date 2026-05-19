@@ -100,7 +100,7 @@ const caseStudies = [
     title: 'Onderaannemer veroorzaakt schade van €28.000 — wie betaalt?',
     businessName: 'Bouwbedrijf Vlaeminck',
     ownerName: 'Vincent Vlaeminck',
-    cityName: 'Antwerpen',
+    cityName: 'Beernem',
     description: 'Een algemene aannemer was bezig met een halfopen woning. Tijdens de uitvoering veroorzaakte een onderaannemer (loodgieter) waterschade aan de pas geplaatste afwerking — vloeren, pleisterwerk en gipskarton. De bouwheer stelde de algemene aannemer in gebreke voor de volledige schade.',
     action: 'Via de BA Onderneming opende Assurman het dossier. Een schade-expert bracht de aansprakelijkheid in kaart: de loodgieter had een fout begaan, maar de algemene aannemer was hoofdverantwoordelijk tegenover de bouwheer. De BA-polis kwam tussen voor de schadeclaim, terwijl rechtsbijstand verhaal haalde op de onderaannemer en zijn verzekeraar.',
     image: 'https://images.pexels.com/photos/585419/pexels-photo-585419.jpeg?auto=compress&cs=tinysrgb&w=800',
@@ -183,7 +183,7 @@ const schema = {
   .dw-hero-content { max-width: 52%; padding-top: 40px; }
   .dw-hero-img { position: absolute; top: 5%; right: 0; height: 90%; width: auto; max-width: 48%; z-index: 1; pointer-events: none; }
   .dw-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .dw-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; align-items: flex-start; }
+  .dw-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; }
   .dw-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .dw-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 48px; }
   .dw-cards3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -292,11 +292,11 @@ const schema = {
         { text: 'Specialist in algemene\naanneming & bouw', iconPath: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 8 0 4 4 0 0 0-8 0M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75' },
         { text: 'Modulair pakket:\nenkel wat nodig is', iconPath: 'm6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2' },
         { text: 'Duidelijke uitleg,\nsnelle service', iconPath: 'M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z' },
-        { text: 'Volledige dekking: werf\n+ materieel + mobiliteit', iconPath: 'M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18ZM6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4' },
+        { html: 'Volledige dekking: <span style="font-size:13px;">werf, materieel, mobiliteit & personen</span>', iconPath: 'M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18ZM6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4', compact: true },
       ].map((item) => (
-        <div style="display:flex;align-items:center;gap:20px;background:#FFFFFF;border:1px solid rgba(229,165,36,0.18);border-radius:12px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+        <div style={`display:flex;align-items:center;gap:20px;background:#FFFFFF;border:1px solid rgba(229,165,36,0.18);border-radius:12px;padding:20px ${item.compact ? '20px' : '24px'};box-shadow:0 1px 4px rgba(0,0,0,0.05);`}>
           <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;"><path d={item.iconPath}/></svg>
-          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#001F3F;line-height:1.45;white-space:pre-line;">{item.text}</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#001F3F;line-height:1.45;white-space:pre-line;">{item.html ? <Fragment set:html={item.html} /> : item.text}</div>
         </div>
       ))}
     </div>
@@ -556,8 +556,8 @@ const schema = {
 
     <div class="dw-testimonials-grid">
       {[
-        { quote: 'Eindelijk iemand die de keten begrijpt. Mijn onderaannemers, mijn ploegen en mijn werven — alles in één pakket geregeld.', name: 'Zaakvoerder algemene aanneming, Limburg' },
-        { quote: 'BA-10 was voor mij een grijze zone. Assurman heeft het helder uitgelegd en alles per werf in orde gebracht.', name: 'Algemene aannemer, Antwerpen' },
+        { quote: 'Eindelijk iemand die de keten begrijpt. Mijn onderaannemers, mijn ploegen en mijn werven. Alles in één pakket geregeld.', name: 'Zaakvoerder algemene aanneming, Roeselare' },
+        { quote: 'BA-10 was voor mij een grijze zone. Assurman heeft het helder uitgelegd en alles per werf in orde gebracht.', name: 'Algemene aannemer, Brugge' },
         { quote: 'We zijn van 8 naar 22 werknemers gegroeid. Het pakket schaalde gewoon mee, zonder dat ik er iets voor moest doen.', name: 'Bouwbedrijf, Oost-Vlaanderen' },
       ].map((t) => (
         <div class="dw-testimonial-card" style="padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);">
