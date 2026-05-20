@@ -24,7 +24,7 @@ author: "benoit-keerman"
 readingTime: 10
 targetAudience: "Onderaannemers en zelfstandigen die in onderaanneming werken"
 tldr: >-
-  BA Onderneming met expliciete dekking voor onderaanneming is essentieel — hoofdaannemers eisen het in vrijwel elk lastenboek met een minimumdekking van €2.500.000 per schadegeval. Attesten moeten klaarliggen vóór elke werf. Sinds 1 januari 2025 geldt Boek 6 BW waardoor derden rechtstreeks de onderaannemer kunnen aanspreken, wat hogere dekkingslimieten noodzakelijk maakt. Het onderscheid tussen zelfstandige onderaannemer en schijnzelfstandige wordt strikt gehandhaafd, met boetes tot €5.000 per persoon per maand bij vaststelling.
+  BA Onderneming met expliciete dekking voor onderaanneming is essentieel. Hoofdaannemers eisen het in vrijwel elk lastenboek met een minimumdekking van €2.500.000 per schadegeval. Attesten moeten klaarliggen vóór elke werf. Sinds 1 januari 2025 geldt Boek 6 BW waardoor derden rechtstreeks de onderaannemer kunnen aanspreken, wat hogere dekkingslimieten noodzakelijk maakt. Het onderscheid tussen zelfstandige onderaannemer en schijnzelfstandige wordt strikt gehandhaafd, met boetes tot €5.000 per persoon per maand bij vaststelling.
 heroImage: "/images/kenniscentrum/c1-6-onderaannemer-worden.jpg"
 heroImageAlt: "Onderaannemer overhandigt verzekeringsattest aan hoofdaannemer op werf"
 faq:

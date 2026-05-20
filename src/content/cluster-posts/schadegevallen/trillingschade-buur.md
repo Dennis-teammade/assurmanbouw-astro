@@ -28,7 +28,7 @@ targetAudience: "Aannemers, sloopwerkers, grondwerkers, metsers en algemene bouw
 heroImage: "/images/kenniscentrum/c3-5-trillingschade-buur.jpg"
 heroImageAlt: "Aannemer inspecteert scheuren in gevel buurpand na bouwwerken met sloopkraan"
 tldr: >-
-  Reageer altijd binnen 24 uur op een buurklacht — ontkennen of negeren maakt je dossier zwakker, niet sterker. Een plaatsbeschrijving voor de werken is de allerbeste verzekering tegen onterechte claims. Sinds Boek 6 BW (1 januari 2025) kan een buur jou rechtstreeks aanspreken, ook als onderaannemer. Je BA Onderneming dekt schade aan derden tijdens werken, maar erken nooit aansprakelijkheid mondeling: de juridische vaststelling gebeurt door een expert, niet door jou aan de poort.
+  Reageer altijd binnen 24 uur op een buurklacht. Ontkennen of negeren maakt je dossier zwakker, niet sterker. Een plaatsbeschrijving voor de werken is de allerbeste verzekering tegen onterechte claims. Sinds Boek 6 BW (1 januari 2025) kan een buur jou rechtstreeks aanspreken, ook als onderaannemer. Je BA Onderneming dekt schade aan derden tijdens werken, maar erken nooit aansprakelijkheid mondeling: de juridische vaststelling gebeurt door een expert, niet door jou aan de poort.
 relatedSpokes:
   - "waterschade-na-oplevering"
   - "onderaannemer-schade-werf"

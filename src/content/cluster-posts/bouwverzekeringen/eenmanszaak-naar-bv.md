@@ -24,7 +24,7 @@ author: "benoit-keerman"
 readingTime: 10
 targetAudience: "Bouwondernemers in transitie van eenmanszaak naar BV"
 tldr: >-
-  Polissen op naam van een eenmanszaak lopen niet automatisch over naar een vennootschap — elke polis moet apart worden hernieuwd of overgeschreven. BA Bestuurder wordt relevant zodra je een vennootschap hebt en dekt fouten in je bestuursbeleid. IPT wordt mogelijk als pensioenopbouwinstrument en is fiscaal vaak aantrekkelijker dan VAPZ. Plan de transitie minstens 2 maanden vooruit zodat alle polissen actief zijn op de exacte oprichtingsdatum.
+  Polissen op naam van een eenmanszaak lopen niet automatisch over naar een vennootschap. Elke polis moet apart worden hernieuwd of overgeschreven. BA Bestuurder wordt relevant zodra je een vennootschap hebt en dekt fouten in je bestuursbeleid. IPT wordt mogelijk als pensioenopbouwinstrument en is fiscaal vaak aantrekkelijker dan VAPZ. Plan de transitie minstens 2 maanden vooruit zodat alle polissen actief zijn op de exacte oprichtingsdatum.
 heroImage: "/images/kenniscentrum/c1-7-eenmanszaak-naar-bv.jpg"
 heroImageAlt: "Aannemer ondertekent oprichtingsakte vennootschap bij notaris"
 faq:

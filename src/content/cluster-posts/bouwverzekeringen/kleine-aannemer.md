@@ -24,7 +24,7 @@ author: "benoit-keerman"
 readingTime: 10
 targetAudience: "Kleine bouwondernemers met 1 tot 5 werknemers"
 tldr: >-
-  Vanaf de dag dat je eerste werknemer in dienst treedt wordt de arbeidsongevallenverzekering wettelijk verplicht — de polis moet actief zijn vóór dag één, niet erna. Je BA Onderneming-dekkingslimiet moet meegroei: vijf werknemers betekent vijf keer meer schaderisico op een werf, en een minimumdekking van €2.500.000 per schadegeval. Reken in 2026 op een totaalbudget van €13.000 tot €18.000 per jaar voor een aannemer met 5 werknemers en 2 bestelwagens. Zaakvoerders in zelfstandig statuut vallen buiten de arbeidsongevallenverzekering en hebben apart gewaarborgd inkomen en een ongevallenverzekering 24/24 nodig.
+  Vanaf de dag dat je eerste werknemer in dienst treedt wordt de arbeidsongevallenverzekering wettelijk verplicht. De polis moet actief zijn vóór dag één, niet erna. Je BA Onderneming-dekkingslimiet moet meegroei: vijf werknemers betekent vijf keer meer schaderisico op een werf, en een minimumdekking van €2.500.000 per schadegeval. Reken in 2026 op een totaalbudget van €13.000 tot €18.000 per jaar voor een aannemer met 5 werknemers en 2 bestelwagens. Zaakvoerders in zelfstandig statuut vallen buiten de arbeidsongevallenverzekering en hebben apart gewaarborgd inkomen en een ongevallenverzekering 24/24 nodig.
 heroImage: "/images/kenniscentrum/c1-2-kleine-aannemer.jpg"
 heroImageAlt: "Kleine aannemer met team van vijf werknemers op werf"
 faq:

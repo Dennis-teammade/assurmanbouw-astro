@@ -31,10 +31,10 @@ targetAudience: "Starters in de bouw (eerste BTW-nummer tot 2 jaar actief)"
 tldr: >-
   Als zelfstandige starter zonder personeel is alleen BA Auto wettelijk verplicht voor je voertuig.
   BA Onderneming met Na Levering, rechtsbijstand en een materiaalverzekering zijn in de praktijk
-  niet te missen. Een gewaarborgd inkomen beschermt jouzelf bij arbeidsongeschiktheid — het ziekenfonds
+  niet te missen. Een gewaarborgd inkomen beschermt jouzelf bij arbeidsongeschiktheid. Het ziekenfonds
   keert maar €51 tot €81 per dag uit. Reken op €2.800 tot €5.250 per jaar als totaalbudget.
 heroImage: "/images/kenniscentrum/c1-1-startende-bouwondernemer.jpg"
-heroImageAlt: "Startende aannemer met bestelwagen en gereedschap — eerste werkdag als bouwondernemer"
+heroImageAlt: "Startende aannemer met bestelwagen en gereedschap, eerste werkdag als bouwondernemer"
 relatedSpokes:
   - "kleine-aannemer"
   - "zelfstandige-zonder-personeel"
@@ -58,7 +58,7 @@ primaryCta: "/gratis-verzekeringsscan/"
 featured: true
 status: "published"
 conclusion: |-
-  Als startende bouwondernemer vraagt verzekeren een evenwichtsoefening: niet zo smal dat je risico loopt op je eerste werf, niet zo breed dat je betaalt voor dekkingen die niet bij je activiteit passen. Het basispakket (BA Auto, BA Onderneming met Na Levering, rechtsbijstand, materiaal en gewaarborgd inkomen) is geen luxe — het is je werkinstrument.
+  Als startende bouwondernemer vraagt verzekeren een evenwichtsoefening: niet zo smal dat je risico loopt op je eerste werf, niet zo breed dat je betaalt voor dekkingen die niet bij je activiteit passen. Het basispakket (BA Auto, BA Onderneming met Na Levering, rechtsbijstand, materiaal en gewaarborgd inkomen) is geen luxe. Het is je werkinstrument.
 
   Wat je nu correct opzet, groeit later mee met je bedrijf. Begin daarom goed.
 ---
@@ -82,7 +82,7 @@ Dat de wet je niet verplicht, betekent niet dat je zonder kan. In de bouw is "we
 
 ## 2. De drie polissen waar elke starter mee begint
 
-Naast BA Auto zijn er drie polissen die je in maand één regelt — niet over zes maanden of "zodra ik zie hoe het loopt".
+Naast BA Auto zijn er drie polissen die je in maand één regelt. Niet over zes maanden of "zodra ik zie hoe het loopt".
 
 ### BA Onderneming met Na Levering
 
@@ -104,7 +104,7 @@ Als zelfstandige val je niet onder enige verplichte ongevallenverzekering. Val j
 
 ### Gewaarborgd inkomen
 
-Keert een vast bedrag uit zolang je arbeidsongeschikt bent — zowel door ongeval als door ziekte. Je kiest het bedrag (typisch 70–80% van je netto-inkomen), de wachttijd (30, 60 of 90 dagen) en de duur. Cruciaal: kies een polis met dekking **tijdens beroepsactiviteit én privé**.
+Keert een vast bedrag uit zolang je arbeidsongeschikt bent, zowel door ongeval als door ziekte. Je kiest het bedrag (typisch 70–80% van je netto-inkomen), de wachttijd (30, 60 of 90 dagen) en de duur. Cruciaal: kies een polis met dekking **tijdens beroepsactiviteit én privé**.
 
 ### Ongevallenverzekering 24/24
 

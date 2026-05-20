@@ -24,7 +24,7 @@ author: "benoit-keerman"
 readingTime: 9
 targetAudience: "Bouwondernemers die hun eerste werknemer aanwerven"
 tldr: >-
-  De arbeidsongevallenverzekering moet actief zijn vóór de eerste werkdag van je nieuwe werknemer — geen enkele uitzondering. BA Onderneming moet je herzien voor extra dekking, want meer mensen op de werf betekent meer schaderisico. Reken op een meerprijs van €4.500 tot €9.000 per jaar voor een eerste werknemer met gemiddeld bouwloon van €35.000 brutoloon. Sommige polissen kun je nog binnen de week regelen, andere vragen 2 tot 4 weken voorbereidingstijd — begin dus minimaal 6 weken voor dag één.
+  De arbeidsongevallenverzekering moet actief zijn vóór de eerste werkdag van je nieuwe werknemer. Geen enkele uitzondering. BA Onderneming moet je herzien voor extra dekking, want meer mensen op de werf betekent meer schaderisico. Reken op een meerprijs van €4.500 tot €9.000 per jaar voor een eerste werknemer met gemiddeld bouwloon van €35.000 brutoloon. Sommige polissen kun je nog binnen de week regelen, andere vragen 2 tot 4 weken voorbereidingstijd. Begin dus minimaal 6 weken voor dag één.
 heroImage: "/images/kenniscentrum/c1-5-eerste-werknemer.jpg"
 heroImageAlt: "Aannemer schudt hand van eerste werknemer op werf, eerste werkdag"
 faq:

@@ -28,7 +28,7 @@ targetAudience: "Zelfstandigen en KMO's in de bouwsector die wachten op betaling
 heroImage: "/images/kenniscentrum/c3-7-klant-betaalt-niet.jpg"
 heroImageAlt: "Aannemer bekijkt onbetaalde factuur en eindafrekening op kantoor na werfoplevering"
 tldr: >-
-  Niet-betaling is geen verzekeringskwestie maar een invorderingskwestie, tenzij er een gegrond geschil is over de werken — dan kan je rechtsbijstand inschakelen. De ingebrekestelling per aangetekende brief is het wettelijke startpunt voor verwijlinteresten. B2B-betalingstermijn is maximaal 60 dagen. Een rechtsbijstandsverzekering met luik contractuele geschillen dekt advocaatkosten bij een gegrond geschil, maar niet bij loutere niet-betaling. Gefaseerde facturatie en een ondertekend opleveringsverslag zijn je beste preventie.
+  Niet-betaling is geen verzekeringskwestie maar een invorderingskwestie, tenzij er een gegrond geschil is over de werken. Dan kan je rechtsbijstand inschakelen. De ingebrekestelling per aangetekende brief is het wettelijke startpunt voor verwijlinteresten. B2B-betalingstermijn is maximaal 60 dagen. Een rechtsbijstandsverzekering met luik contractuele geschillen dekt advocaatkosten bij een gegrond geschil, maar niet bij loutere niet-betaling. Gefaseerde facturatie en een ondertekend opleveringsverslag zijn je beste preventie.
 relatedSpokes:
   - "waterschade-na-oplevering"
   - "gereedschap-gestolen"

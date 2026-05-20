@@ -8,32 +8,32 @@ import BrandChevron from '../../components/BrandChevron.astro';
 const faqItems = [
   { q: 'Is een autoverzekering verplicht voor mijn bedrijfsvoertuig?', a: 'Ja. Elk motorrijtuig dat aan het verkeer deelneemt op de openbare weg moet wettelijk een BA-verzekering hebben. Dit is geregeld in de Wet van 21 november 1989. Niet verzekerd rijden is strafbaar en levert onmiddellijke immobilisatie op.' },
   { q: 'Wat is het verschil tussen BA, Mini Omnium en Full Omnium?', a: 'BA dekt enkel schade aan derden. Mini Omnium voegt brand, diefstal, glasbreuk en natuurkrachten toe. Full Omnium dekt daarbovenop ook schade aan je eigen voertuig bij ongeval in fout.' },
-  { q: 'Ben ik als bestuurder zelf gedekt bij een ongeval in fout?', a: 'Niet automatisch. BA dekt enkel anderen. Voor jouw eigen lichamelijke letsels heb je een bestuurdersverzekering nodig — die wordt apart afgesloten en is bij ongeval in fout vaak het verschil tussen wel of niet vergoed worden.' },
-  { q: 'Is het gereedschap in mijn bestelwagen automatisch verzekerd?', a: 'Nee. Een gewone Omnium dekt het voertuig zelf, niet de inhoud van de laadruimte. Voor gereedschap, materiaal en koopwaar heb je een aparte dekking nodig — vaak aangeboden als pack koopwaar of materiaal-pack.' },
+  { q: 'Ben ik als bestuurder zelf gedekt bij een ongeval in fout?', a: 'Niet automatisch. BA dekt enkel anderen. Voor jouw eigen lichamelijke letsels heb je een bestuurdersverzekering nodig: die wordt apart afgesloten en is bij ongeval in fout vaak het verschil tussen wel of niet vergoed worden.' },
+  { q: 'Is het gereedschap in mijn bestelwagen automatisch verzekerd?', a: 'Nee. Een gewone Omnium dekt het voertuig zelf, niet de inhoud van de laadruimte. Voor gereedschap, materiaal en koopwaar heb je een aparte dekking nodig: vaak aangeboden als pack koopwaar of materiaal-pack.' },
   { q: 'Wat als mijn bestelwagen \'s nachts ingebroken wordt op de werf?', a: 'Voor de schade aan het voertuig zelf: gedekt vanaf Mini Omnium. Voor de gestolen inhoud: enkel gedekt mits pack koopwaar/materieel, en meestal op voorwaarde dat de laadruimte uit hard, afsluitbaar materiaal bestaat.' },
-  { q: 'Is mijn aanhangwagen automatisch verzekerd via mijn BA?', a: 'Aanhangwagens tot 750 kg MTM zijn meestal automatisch meeverzekerd via de BA van het trekkende voertuig. Boven 750 kg moet je dit expliciet aangeven aan je verzekeraar — anders ben je niet gedekt bij een schadegeval.' },
+  { q: 'Is mijn aanhangwagen automatisch verzekerd via mijn BA?', a: 'Aanhangwagens tot 750 kg MTM zijn meestal automatisch meeverzekerd via de BA van het trekkende voertuig. Boven 750 kg moet je dit expliciet aangeven aan je verzekeraar: anders ben je niet gedekt bij een schadegeval.' },
   { q: 'Wat verandert er aan mijn premie als ik mijn wagen ook professioneel gebruik?', a: 'Professioneel gebruik weegt zwaarder in de premieberekening dan privégebruik. Op de bonus-malusschaal is er typisch een verschil van 3 punten tussen privé en gemengd/professioneel. Een jonge bestuurder die professioneel rijdt, start dus hoger op de schaal.' },
   { q: 'Wat is bonus-malus en hoe werkt het voor een bedrijfsvoertuig?', a: 'Bonus-malus is een puntensysteem dat je premie aanpast op basis van je schadeverleden. Een ongeval in fout doet je premie typisch met 5 punten stijgen; een schadevrij jaar verlaagt met 1 punt. Voor individueel verzekerde bedrijfsvoertuigen werkt dit zoals voor privéwagens; bij grote vloten valt bonus-malus weg.' },
-  { q: 'Wat als een werknemer een ongeval in fout veroorzaakt — wat met de bonus-malus?', a: 'De bonus-malus is gekoppeld aan het voertuig, niet aan de bestuurder. Een ongeval door een werknemer werkt dus door op de polis van dat voertuig. In een vlootpolis kan je dit anders organiseren door geen vaste bestuurder aan te duiden.' },
-  { q: 'Vanaf hoeveel voertuigen wordt een vlootpolis interessant?', a: 'Dat verschilt per verzekeraar — sommige spreken van vloot vanaf 3 voertuigen, andere pas vanaf 5 of meer. Vlootpolissen bieden doorgaans één contract voor al je voertuigen, lagere globale premies en eenvoudiger beheer.' },
+  { q: 'Wat als een werknemer een ongeval in fout veroorzaakt: wat met de bonus-malus?', a: 'De bonus-malus is gekoppeld aan het voertuig, niet aan de bestuurder. Een ongeval door een werknemer werkt dus door op de polis van dat voertuig. In een vlootpolis kan je dit anders organiseren door geen vaste bestuurder aan te duiden.' },
+  { q: 'Vanaf hoeveel voertuigen wordt een vlootpolis interessant?', a: 'Een vlootpolis kan al interessant zijn vanaf 2 voertuigen, vooral door het gemak en het overzicht. Je brengt meerdere voertuigen samen onder één verzekering, met meestal één polis, één vervaldag en één centraal beheer. Dat maakt het eenvoudiger om voertuigen toe te voegen, te vervangen of administratief op te volgen. Voor zelfstandigen en bouwbedrijven met meerdere wagens, bestelwagens of bedrijfsvoertuigen kan dat dus al snel praktischer zijn dan aparte polissen per voertuig. De echte financiële vlootkorting wordt meestal pas interessanter vanaf ongeveer 10 voertuigen, afhankelijk van de verzekeraar, het type voertuigen en het schadeverleden.' },
   { q: 'Krijg ik een vervangwagen bij een ongeval of pech?', a: 'Dat hangt af van je polis. Sommige verzekeraars bieden gratis een vervangwagen tijdens herstelling bij een erkende garage; bij andere is het een betalende optie. De duur varieert van enkele dagen tot 30 dagen.' },
   { q: 'Is mijn voertuig ook in het buitenland verzekerd?', a: 'Je BA Auto geldt in alle landen vermeld op je verzekeringsbewijs (groene kaart). Voor pechbijstand en omnium hangt de buitenlandse dekking af van de specifieke polis. Buitenland-bijstand is vaak een betalende uitbreiding.' },
-  { q: 'Wat dekt rechtsbijstand auto?', a: 'Rechtsbijstand dekt advocaat- en procedurekosten bij geschillen over je voertuigen — betwiste aansprakelijkheid, conflicten met je garagist na een ondeugdelijke herstelling, of strafrechtelijke vervolging na een verkeersovertreding. Plafonds variëren van € 25.000 tot € 40.000 per dossier.' },
+  { q: 'Wat dekt rechtsbijstand auto?', a: 'Rechtsbijstand dekt advocaat- en procedurekosten bij geschillen over je voertuigen: betwiste aansprakelijkheid, conflicten met je garagist na een ondeugdelijke herstelling, of strafrechtelijke vervolging na een verkeersovertreding. Plafonds variëren van € 25.000 tot € 40.000 per dossier.' },
   { q: 'Wat als ik mijn bestelwagen uitleen aan een collega of familielid?', a: 'De BA dekt schade die de occasionele bestuurder aan derden toebrengt. Geef alle regelmatige bestuurders door bij het afsluiten van je polis. Verzwijgen kan leiden tot weigering van tussenkomst bij schadegeval.' },
 ];
 
 const beroepTabs = [
-  { id: 'dakwerkers',    label: 'Dakwerkers',        link: '/sectoren/dakwerkers',    title: 'Voor dakwerkers',            text: 'Dakwerkers gebruiken bestelwagens met materiaal op het dak — ladders, dakpannen, isolatie. Het risico op vallend materiaal richting derden is reëel. Een sterke BA Auto en omnium zijn niet optioneel.' },
-  { id: 'metsers',       label: 'Metsers',            link: '/sectoren/aannemers',     title: 'Voor metsers',               text: 'Zware materiaaltransporten, vaak met aanhangwagen. Hier wordt de aanhangwagen-dekking een belangrijk thema — boven 750 kg moet die expliciet aangegeven worden in je polis.' },
+  { id: 'dakwerkers',    label: 'Dakwerkers',        link: '/sectoren/dakwerkers',    title: 'Voor dakwerkers',            text: 'Dakwerkers gebruiken bestelwagens met materiaal op het dak: ladders, dakpannen, isolatie. Het risico op vallend materiaal richting derden is reëel. Een sterke BA Auto en omnium zijn niet optioneel.' },
+  { id: 'metsers',       label: 'Metsers',            link: '/sectoren/aannemers',     title: 'Voor metsers',               text: 'Zware materiaaltransporten, vaak met aanhangwagen. Hier wordt de aanhangwagen-dekking een belangrijk thema: boven 750 kg moet die expliciet aangegeven worden in je polis.' },
   { id: 'loodgieters',   label: 'Loodgieters',        link: '/sectoren/loodgieters',   title: 'Voor loodgieters',           text: 'Veel verplaatsingen tussen klanten, vaak met dure interventietoestellen in de bestelwagen. Het materiaalpack is voor loodgieters bijna altijd zinvol, zeker bij overnachting van het voertuig op straat of werf.' },
-  { id: 'elektriciens',  label: 'Elektriciens',       link: '/sectoren/elektriciens',  title: 'Voor elektriciens',          text: 'Servicewagens vol met meet- en installatiemateriaal. Diefstal van gereedschap is een topprioriteit — een gewone omnium dekt dit niet, een pack koopwaar en materieel wel.' },
-  { id: 'schilders',     label: 'Schilders',          link: '/sectoren/schilders',     title: 'Voor schilders',             text: 'Bestelwagens vol met verfblikken, oplosmiddelen en stellingen. Brand- en explosierisico in de laadruimte vraagt extra aandacht — niet alle omniumformules dekken schade door vervoerde producten.' },
-  { id: 'aannemers',     label: 'Algemene aannemers', link: '/sectoren/aannemers',     title: 'Voor algemene aannemers',    text: 'Typisch een wagenpark met personenwagen, meerdere bestelwagens en aanhangwagens. Vanaf drie of meer voertuigen wordt een vlootpolis doorgaans interessanter dan losse contracten — zowel financieel als administratief.' },
+  { id: 'elektriciens',  label: 'Elektriciens',       link: '/sectoren/elektriciens',  title: 'Voor elektriciens',          text: 'Servicewagens vol met meet- en installatiemateriaal. Diefstal van gereedschap is een topprioriteit: een gewone omnium dekt dit niet, een pack koopwaar en materieel wel.' },
+  { id: 'schilders',     label: 'Schilders',          link: '/sectoren/schilders',     title: 'Voor schilders',             text: 'Bestelwagens vol met verfblikken, oplosmiddelen en stellingen. Brand- en explosierisico in de laadruimte vraagt extra aandacht: niet alle omniumformules dekken schade door vervoerde producten.' },
+  { id: 'aannemers',     label: 'Algemene aannemers', link: '/sectoren/aannemers',     title: 'Voor algemene aannemers',    text: 'Typisch een wagenpark met personenwagen, meerdere bestelwagens en aanhangwagens. Met meerdere voertuigen wordt een vlootpolis vaak praktischer: één contract, één vervaldag, eenvoudig nieuwe voertuigen toevoegen. Vlootkorting komt erbij vanaf 10 voertuigen.' },
 ];
 
 const insuranceCards = [
   { title: 'BA Onderneming',  icon: 'shield',  intro: 'Bescherming wanneer je bedrijf schade veroorzaakt aan derden tijdens de uitbating of beroepsactiviteit.',    bullets: ['Schade aan eigendommen van derden','Letselschade aan derden','Claims rond beroepsfouten','Aansprakelijkheid tijdens werken'],         link: '/verzekeringen/ba-onderneming/',   cta: 'Meer over BA Onderneming' },
-  { title: 'Machinebreuk',    icon: 'wrench',  intro: 'Professionele machines en gereedschap zijn duur. Een defect of diefstal stopt je werk — deze dekking niet.', bullets: ['Machines bij breuk of diefstal','Diefstal op werf of in bestelwagen','Vervanging of herstelling','Op maat van je materieel'],            link: '/verzekeringen/machinebreuk',     cta: 'Meer over machinebreuk' },
+  { title: 'Machinebreuk',    icon: 'wrench',  intro: 'Professionele machines en gereedschap zijn duur. Een defect of diefstal stopt je werk. Deze dekking niet.', bullets: ['Machines bij breuk of diefstal','Diefstal op werf of in bestelwagen','Vervanging of herstelling','Op maat van je materieel'],            link: '/verzekeringen/machinebreuk',     cta: 'Meer over machinebreuk' },
   { title: 'Arbeidsongevallen',icon: 'users',  intro: 'Wettelijk verplicht vanaf je eerste werknemer. Dekt letsel op de werf en woon-werkverkeer.',                  bullets: ['Verplicht vanaf dag 1','Medische kosten gedekt','Woon-werkverkeer inbegrepen','Aangifte binnen 8 dagen'],                              link: '/verzekeringen/arbeidsongevallen/', cta: 'Meer over arbeidsongevallen' },
   { title: 'Rechtsbijstand',  icon: 'scale',   intro: 'Juridische bescherming bij geschillen met klanten, leveranciers of personeel. Je staat niet alleen.',         bullets: ['Hulp bij juridische conflicten','Vrije advocaatkeuze','Tussenkomst bij advocaatkosten','Aanvulling op BA'],                          link: '/verzekeringen/rechtsbijstand',   cta: 'Meer over rechtsbijstand' },
 ];
@@ -157,7 +157,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       </div>
       <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">Verzekering bedrijfs&#x2011;<br />voertuigen</h1>
       <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">Voor je bestelwagen, je vloot en alles wat erin zit.</p>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Heb je een bestelwagen, lichte vracht of een volledig wagenpark in je bouwbedrijf? Dan heb je niet één, maar verschillende verzekeringen nodig. Eén polis dekt zelden alles — zeker niet je gereedschap, je bestuurder of je aanhangwagen.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Heb je een bestelwagen, lichte vracht of een volledig wagenpark in je bouwbedrijf? Dan heb je niet één, maar verschillende verzekeringen nodig. Eén polis dekt zelden alles: zeker niet je gereedschap, je bestuurder of je aanhangwagen.</p>
       <div class="bv-hero-btns">
         <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
           {CTA_SCAN.hero}
@@ -191,10 +191,10 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
           {[
             {t:'BA Auto is <strong style="color:#FFFFFF;">wettelijk verplicht</strong> vanaf elk voertuig dat de openbare weg op gaat.'},
-            {t:'BA dekt enkel schade aan derden — <strong style="color:#FFFFFF;">niet aan je eigen voertuig of bestuurder</strong>.'},
+            {t:'BA dekt enkel schade aan derden: <strong style="color:#FFFFFF;">niet aan je eigen voertuig of bestuurder</strong>.'},
             {t:'Gereedschap en materiaal in je bestelwagen vallen <strong style="color:#FFFFFF;">niet onder een gewone omnium</strong>.'},
             {t:'Aanhangwagens tot 750 kg zitten <strong style="color:#FFFFFF;">meestal mee in je BA-polis</strong>.'},
-            {t:'Vanaf 3 tot 5 voertuigen wordt <strong style="color:#FFFFFF;">vlootverzekering doorgaans interessanter</strong>.'},
+            {t:'Met meerdere voertuigen wordt een <strong style="color:#FFFFFF;">vlootverzekering vaak praktischer</strong> (één polis, één vervaldag); vlootkorting vanaf 10 voertuigen.'},
           ].map(item=>(
             <li style="display:flex;gap:12px;align-items:flex-start;">
               <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -206,8 +206,8 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       <div>
         <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
         <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">Eén voertuig, meerdere verzekeringen</h2>
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een bedrijfsvoertuigenverzekering is geen enkele polis, maar een combinatie. Je vertrekt altijd vanaf de wettelijk verplichte BA Auto en bouwt van daaruit verder uit met omnium, bestuurdersverzekering, rechtsbijstand, pechbijstand en — voor bouwbedrijven cruciaal — een aparte dekking voor je gereedschap en materiaal.</p>
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">In de bouw zijn voertuigen meer dan transport. Je bestelwagen is je werkplaats op wielen, je aanhangwagen is je laadruimte, je belettering is je visitekaartje. Een goede polis houdt rekening met al die rollen — generieke autoverzekeringen doen dat niet.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een bedrijfsvoertuigenverzekering is geen enkele polis, maar een combinatie. Je vertrekt altijd vanaf de wettelijk verplichte BA Auto en bouwt van daaruit verder uit met omnium, bestuurdersverzekering, rechtsbijstand, pechbijstand en, voor bouwbedrijven cruciaal, een aparte dekking voor je gereedschap en materiaal.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">In de bouw zijn voertuigen meer dan transport. Je bestelwagen is je werkplaats op wielen, je aanhangwagen is je laadruimte, je belettering is je visitekaartje. Een goede polis houdt rekening met al die rollen: generieke autoverzekeringen doen dat niet.</p>
         <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
           <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
           <div>
@@ -232,7 +232,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div class="bv-verplicht-grid">
       {[
         {icon:'cl', title:'Eigen bestelwagen',          badge:'Verplicht (BA)',           text:'Voor elke bestelwagen op de openbare weg is BA Auto wettelijk verplicht.'},
-        {icon:'us', title:'Vloot',                      badge:'Verplicht (BA per voertuig)',text:'Vanaf meerdere voertuigen kan je een vlootpolis afsluiten — vaak voordeliger.'},
+        {icon:'us', title:'Vloot',                      badge:'Verplicht (per voertuig)',text:'Vanaf meerdere voertuigen kan je een vlootpolis afsluiten: vaak voordeliger.'},
         {icon:'tr', title:'Aanhangwagen',               badge:'Tot 750 kg automatisch',   text:'Aanhangwagens tot 750 kg zitten meestal mee in de BA van het trekkende voertuig.'},
         {icon:'ft', title:'Lichte vracht en vrachtwagen',badge:'Verplicht (BA aangepast)', text:'Lichte vracht en vrachtwagens vragen een aangepaste BA-polis met andere premieberekening.'},
       ].map(card=>(
@@ -259,16 +259,16 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="max-width:640px;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Per beroep: welke dekking heb je écht nodig op je bestelwagen?</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">BA Auto is wettelijk verplicht voor elk motorrijtuig dat aan het verkeer deelneemt — dat punt staat vast. Wat in de praktijk telt voor een bouwbedrijf, is wat er in en op die wagen zit én wat er onderweg met je werknemer kan gebeuren.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">BA Auto is wettelijk verplicht voor elk motorrijtuig dat aan het verkeer deelneemt. Dat punt staat vast. Wat in de praktijk telt voor een bouwbedrijf, is wat er in en op die wagen zit én wat er onderweg met je werknemer kan gebeuren.</p>
     </div>
     <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:12px;padding:28px;margin:32px 0;max-width:840px;">
       <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
       <div>
         <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 10px;">De drie blinde vlekken in een standaard BA-polis</p>
         <ul style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;padding-left:20px;">
-          <li style="margin-bottom:8px;"><strong>Gereedschap in de bestelwagen</strong> is niet automatisch mee verzekerd via BA — vraag een uitbreiding materiaalpack of laat het mee opnemen in je inboedelpolis.</li>
+          <li style="margin-bottom:8px;"><strong>Gereedschap in de bestelwagen</strong> is niet automatisch mee verzekerd via BA: vraag een uitbreiding materiaalpack of laat het mee opnemen in je inboedelpolis.</li>
           <li style="margin-bottom:8px;"><strong>De bestuurder zelf</strong> (jij of je werknemer) is in een BA-polis enkel als veroorzaker verzekerd, niet als slachtoffer. Een bestuurdersverzekering vult dat gat.</li>
-          <li><strong>Aanhangwagens boven 750 kg</strong> vragen een aparte BA — onder 750 kg meestal automatisch mee in de polis van het trekkende voertuig.</li>
+          <li><strong>Aanhangwagens boven 750 kg</strong> vragen een aparte BA: onder 750 kg meestal automatisch mee in de polis van het trekkende voertuig.</li>
         </ul>
       </div>
     </div>
@@ -280,10 +280,10 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     </div>
     <ul id="bv-examples-list" style="list-style:none;padding:0;margin:16px 0 0;display:none;grid-template-columns:1fr 1fr;gap:10px;">
       {[
-        'Dakwerker: door wind valt een ladder van het dak op een geparkeerde wagen — schade aan derde via BA Auto, eigen schade via Omnium.',
+        'Dakwerker: door wind valt een ladder van het dak op een geparkeerde wagen: schade aan derde via BA Auto, eigen schade via Omnium.',
         'Metser: aanhangwagen met bouwmateriaal schiet los tijdens het rijden en raakt de achterligger.',
-        'Elektricien: ingebroken in de servicewagen op de werf — al het gereedschap weg.',
-        'Loodgieter: botsing met loslopend hert onderweg naar interventie — gedekt vanaf Mini Omnium.',
+        'Elektricien: ingebroken in de servicewagen op de werf: al het gereedschap weg.',
+        'Loodgieter: botsing met loslopend hert onderweg naar interventie: gedekt vanaf Mini Omnium.',
         'Schilder: kortsluiting in de laadruimte met verfblikken veroorzaakt brand in de bestelwagen.',
         'Schrijnwerker: aanhangwagen met grote zaagmachine wordt door derde aangereden tijdens het lossen bij klant.',
       ].map(ex=>(
@@ -338,7 +338,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       <div>
         <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Franchise</span>
         <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#FFFFFF;margin:0 0 12px;">Hoeveel betaal je zelf bij schade?</h3>
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">De franchise is wat je zelf betaalt bij een schadegeval onder de Omnium. Hoe lager je franchise, hoe hoger je premie — en omgekeerd. In de praktijk schommelt dat tussen € 250 en € 1.250 per schadegeval.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">De franchise is wat je zelf betaalt bij een schadegeval onder de Omnium. Hoe lager je franchise, hoe hoger je premie, en omgekeerd. In de praktijk schommelt dat tussen € 250 en € 1.250 per schadegeval.</p>
       </div>
       <div style="text-align:center;flex-shrink:0;">
         <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:6px;">Typische franchise-range</div>
@@ -360,10 +360,10 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     </div>
     <div class="bv-aanvulling-grid">
       {[
-        {i:'us',title:'Bestuurdersverzekering',       text:'Vergoedt jouw lichamelijke letsels als je in fout een ongeval veroorzaakt — tot vaak meer dan een miljoen euro per ongeval.'},
-        {i:'br',title:'Pack koopwaar en materiaal',   text:'Verzekert het gereedschap, materiaal en koopwaar in je bestelwagen tegen schade en diefstal — ook \'s nachts op de werf.'},
-        {i:'sh',title:'Rechtsbijstand auto',          text:'Juridische bijstand en advocaatkosten bij geschillen over je voertuigen — van betwiste aansprakelijkheid tot conflicten met je garagist.'},
-        {i:'tr',title:'Pechbijstand 24/7',            text:'Onmiddellijke hulp bij pech of ongeval, in België en in Europa — vaak met vervangwagen tijdens herstelling.'},
+        {i:'us',title:'Bestuurdersverzekering',       text:'Vergoedt jouw lichamelijke letsels als je in fout een ongeval veroorzaakt: tot vaak meer dan een miljoen euro per ongeval.'},
+        {i:'br',title:'Pack koopwaar en materiaal',   text:'Verzekert het gereedschap, materiaal en koopwaar in je bestelwagen tegen schade en diefstal, ook \'s nachts op de werf.'},
+        {i:'sh',title:'Rechtsbijstand auto',          text:'Juridische bijstand en advocaatkosten bij geschillen over je voertuigen: van betwiste aansprakelijkheid tot conflicten met je garagist.'},
+        {i:'tr',title:'Pechbijstand 24/7',            text:'Onmiddellijke hulp bij pech of ongeval, in België en in Europa: vaak met vervangwagen tijdens herstelling.'},
         {i:'ac',title:'Omnium-uitbreiding voor bouw', text:'Specifieke uitbreidingen zoals dekking voor belettering, aanhangwagen en gemonteerde toebehoren in de laadruimte.'},
       ].map(card=>(
         <div class="bv-ins-card" style="padding:28px;">
@@ -421,7 +421,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div class="bv-factors-grid">
       {[
         {num:'1',title:'Type voertuig',            text:'Een vrachtwagen heeft een ander risicoprofiel dan een personenwagen of bestelwagen.'},
-        {num:'2',title:'Gebruik',                  text:'Professioneel gebruik telt zwaarder dan privé — typisch 3 punten verschil op de bonus-malusschaal.'},
+        {num:'2',title:'Gebruik',                  text:'Professioneel gebruik telt zwaarder dan privé: typisch 3 punten verschil op de bonus-malusschaal.'},
         {num:'3',title:'Schadeverleden (bonus-malus)',text:'Eerdere ongevallen in fout verhogen je premie; schadevrije jaren verlagen ze.'},
         {num:'4',title:'Vlootomvang',              text:'Vanaf meerdere voertuigen kan een vlootpolis lagere premies en eenvoudiger beheer opleveren.'},
       ].map(f=>(
@@ -514,7 +514,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       <div data-stat-content style="display:none;padding:0 24px 24px;">
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Eén voertuig, eigen gebruik, met daarin je gereedschap en materiaal. Voor jou ligt de focus op een degelijke combinatie van BA + Omnium + bestuurdersverzekering + materiaalpack.</p>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-          {['Geef bij de polis aan dat je het voertuig gemengd (privé én professioneel) gebruikt — dat klopt fiscaal én verzekeringstechnisch met je realiteit.','Onderschat het gereedschap in je laadruimte niet. € 3.000 tot € 8.000 aan elektrisch materiaal zit zo bij elkaar — gewone omnium dekt dat niet.'].map(item=>(
+          {['Geef bij de polis aan dat je het voertuig gemengd (privé én professioneel) gebruikt: dat klopt fiscaal én verzekeringstechnisch met je realiteit.','Onderschat het gereedschap in je laadruimte niet. € 3.000 tot € 8.000 aan elektrisch materiaal zit zo bij elkaar: gewone omnium dekt dat niet.'].map(item=>(
             <li style="display:flex;gap:10px;align-items:flex-start;"><svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span style="font-family:'Outfit',sans-serif;font-size:15px;color:#CBD5E1;">{item}</span></li>
           ))}
         </ul>
@@ -540,13 +540,13 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div class="bv-stat-panel" data-stat-panel>
       <button class="bv-stat-btn" data-stat-btn>
         <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
-        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik heb een vloot van 3 of meer voertuigen</span>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik heb een wagenpark of vloot</span>
         <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div data-stat-content style="display:none;padding:0 24px 24px;">
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Vanaf drie tot vijf voertuigen wordt een vlootpolis doorgaans interessanter dan losse contracten. De voordelen:</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Met meerdere voertuigen wordt een vlootpolis vaak praktischer dan losse contracten: één centraal beheer, eenvoudig schalen en consistente voorwaarden. De financiële vlootkorting wordt interessant vanaf ongeveer 10 voertuigen. De voordelen:</p>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-          {['Eén contract, één vervaldag, één gesprekspartner.','Vaak lagere globale premie door schadestatistieken van de hele vloot.','Mogelijkheid om geen vaste bestuurder aan te duiden — handig als voertuigen door verschillende medewerkers worden gebruikt.','Bij grote vloten valt bonus-malus weg; de premie wordt jaarlijks aangepast op basis van schadestatistieken van het wagenpark.'].map(item=>(
+          {['Eén contract, één vervaldag, één gesprekspartner.','Vaak lagere globale premie door schadestatistieken van de hele vloot.','Mogelijkheid om geen vaste bestuurder aan te duiden: handig als voertuigen door verschillende medewerkers worden gebruikt.','Bij grote vloten valt bonus-malus weg; de premie wordt jaarlijks aangepast op basis van schadestatistieken van het wagenpark.'].map(item=>(
             <li style="display:flex;gap:10px;align-items:flex-start;"><svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span style="font-family:'Outfit',sans-serif;font-size:15px;color:#CBD5E1;">{item}</span></li>
           ))}
         </ul>
@@ -568,7 +568,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       <div class="bv-procedure-line" style="position:absolute;top:36px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(to right,#E5A524,rgba(229,165,36,0.2));z-index:0;"></div>
       {[
         {ic:'ph', title:'Beveilig en meld',          text:'Beveilig de plaats van het ongeval, verwittig zo nodig politie en verzorg eerste hulp.'},
-        {ic:'ac', title:'Aanrijdingsformulier',       text:'Vul samen met de tegenpartij het Europees aanrijdingsformulier in — handgeschreven of via de app.'},
+        {ic:'ac', title:'Aanrijdingsformulier',       text:'Vul samen met de tegenpartij het Europees aanrijdingsformulier in: handgeschreven of via de app.'},
         {ic:'ft', title:'Aangifte binnen 8 dagen',   text:'Bezorg het formulier aan je verzekeraar binnen de wettelijke termijn van 8 dagen.'},
         {ic:'at', title:'Pechbijstand en herstel',   text:'Bel de pechbijstand voor takeling en vraag een vervangwagen indien voorzien in je polis.'},
       ].map((s,i)=>(
@@ -594,7 +594,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="text-align:center;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over bedrijfsvoertuigen</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">14 concrete vragen van bouwondernemers — klik open voor het antwoord.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">14 concrete vragen van bouwondernemers: klik open voor het antwoord.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;">
       {faqItems.map((item,i)=>(

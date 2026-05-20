@@ -23,9 +23,9 @@ const insuranceCards = [
   },
   {
     title: 'Bedrijfsvoertuigen',
-    intro: 'Verf, ladders, stellingen — de bestelwagen is jouw werkplaats op wielen.',
+    intro: 'Verf, ladders, stellingen: de bestelwagen is jouw werkplaats op wielen.',
     bullets: [
-      'Omnium voor recente bestelwagens',
+      'Omnium (afhankelijk van leeftijd voertuig)',
       'Bescherming bij diefstal of schade',
       'Materiaalverzekering voor aanwezige goederen',
       'Vlootpolis bij meerdere voertuigen',
@@ -49,11 +49,11 @@ const insuranceCards = [
   },
   {
     title: 'Rechtsbijstand',
-    intro: 'Discussies over kleurschakeringen, kwaliteit of uitvoeringstermijnen komen voor.',
+    intro: 'Discussies over kleurschakeringen, kwaliteit of uitvoeringstermijnen komen voor. Wat kan:',
     bullets: [
-      'Juridische hulp bij geschillen met klanten',
-      'Ondersteuning bij betwiste facturen',
-      'Tussenkomst bij advocaatkosten',
+      'Geschillen met klanten',
+      'Betwiste facturen',
+      'Tussenkomst advocaatkosten',
       'Aanvulling op BA',
     ],
     cta: 'Check rechtsbijstand',
@@ -140,7 +140,7 @@ const faqItems = [
   },
   {
     title: 'Wat als ik schade pas later ontdek?',
-    content: 'Veel schildersschade — vocht achter verf, schimmel, lekken na schraapwerk — komt pas weken of maanden later aan het licht. Een polis met nawerking blijft schade dekken die tot een aantal jaar na de uitvoering wordt gemeld. Wij raden altijd minstens 36 maanden nawerking aan en kijken samen welke termijn bij jouw activiteiten past.',
+    content: 'Veel schildersschade, vocht achter verf, schimmel of lekken na schraapwerk, komt pas weken of maanden later aan het licht. Een polis met nawerking blijft schade dekken die tot een aantal jaar na de uitvoering wordt gemeld. Wij raden altijd minstens 36 maanden nawerking aan en kijken samen welke termijn bij jouw activiteiten past.',
   },
 ];
 
@@ -300,23 +300,23 @@ const schema = {
         </h2>
         <div style="width:96px;height:6px;background:#E5A524;margin-bottom:24px;"></div>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:20px;">
-          Als schilder werk je in direct contact met het interieur en de eigendom van klanten. Verfspetters op een duur parket, een ladder die een muur beschadigt, of een discussie over kleurkeuze — de risico's zijn alledaags maar de financiële gevolgen kunnen zwaar zijn.
+          Als schilder werk je in direct contact met het interieur en de eigendom van klanten. Verfspetters op een duur parket, een ladder die een muur beschadigt, of een discussie over kleurkeuze: de risico's zijn alledaags maar de financiële gevolgen kunnen zwaar zijn.
         </p>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:32px;">
           Assurman bouwt een pakket op maat: BA afgestemd op schildersactiviteiten, gereedschapverzekering voor spuitapparatuur en stellingen, en eventueel arbeidsongevallen voor je medewerkers.
         </p>
         <blockquote style="border-left:4px solid #E5A524;padding-left:24px;margin:0;">
           <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;line-height:1.55;color:#001F3F;margin:0;">
-            "Jij geeft kleur aan gebouwen — wij zorgen dat je beschermd bent."
+            "Jij geeft kleur aan gebouwen. Wij zorgen dat je beschermd bent."
           </p>
         </blockquote>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:20px;padding-top:40px;">
         {[
-          { title: 'Verfschade aan interieur en eigendom', text: 'Een gemorste pot op een nieuwe parketvloer, spuitnevel op meubels of beschadigde plinten — BA Onderneming dekt schade aan klanteneigendom tijdens je werkzaamheden.', iconPath: 'M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01' },
-          { title: 'Vocht- en schraapschade bij voorbereiding', text: 'Schrapen, schuren of strippen kan onverwachte schade aan onderliggende lagen veroorzaken: houtrot, gipsschade, lekken. Klachten komen vaak pas weken later — een polis met nawerking dekt dat.', iconPath: 'M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5M14 6a6 6 0 0 1 6 6v3M4 15v-3a6 6 0 0 1 6-6M3 15L21 15A1 1 0 0 1 22 16L22 18A1 1 0 0 1 21 19L3 19A1 1 0 0 1 2 18L2 16A1 1 0 0 1 3 15z' },
-          { title: 'Oplosmiddelen, brand en milieurisico', text: 'Verven, lakken en thinners zijn brandbaar en chemisch reactief. Bij brand of bodemvervuiling lopen aansprakelijkheid en saneringskosten snel op — BA Onderneming en ABR vangen die risico\'s op.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
+          { title: 'Verfschade aan interieur en eigendom', text: 'Een gemorste pot op een nieuwe parketvloer, spuitnevel op meubels of beschadigde plinten: BA Onderneming dekt schade aan klanteneigendom tijdens je werkzaamheden.', iconPath: 'M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01' },
+          { title: 'Vocht- en schraapschade bij voorbereiding', text: 'Schrapen, schuren of strippen kan onverwachte schade aan onderliggende lagen veroorzaken: houtrot, gipsschade, lekken. Klachten komen vaak pas weken later: een polis met nawerking dekt dat.', iconPath: 'M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5M14 6a6 6 0 0 1 6 6v3M4 15v-3a6 6 0 0 1 6-6M3 15L21 15A1 1 0 0 1 22 16L22 18A1 1 0 0 1 21 19L3 19A1 1 0 0 1 2 18L2 16A1 1 0 0 1 3 15z' },
+          { title: 'Oplosmiddelen, brand en milieurisico', text: 'Verven, lakken en thinners zijn brandbaar en chemisch reactief. Bij brand of bodemvervuiling lopen aansprakelijkheid en saneringskosten snel op: BA Onderneming en ABR vangen die risico\'s op.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
         ].map((card) => (
           <div class="dw-why-card" style="padding:28px;display:flex;align-items:flex-start;gap:20px;">
             <div style="background:rgba(229,165,36,0.1);border-radius:8px;padding:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;min-width:48px;height:48px;">
@@ -347,8 +347,8 @@ const schema = {
     </div>
     <div class="dw-benefits-grid">
       {[
-        { title: 'Heldere dekking', text: 'Geen wollige taal — je weet waarvoor je verzekerd bent.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
-        { title: 'Slimme modules', text: 'BA, gereedschap, bestelwagen, arbeidsongevallen — enkel wat jij nodig hebt.', iconPath: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4' },
+        { title: 'Heldere dekking', text: 'Geen wollige taal: je weet waarvoor je verzekerd bent.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
+        { title: 'Slimme modules', text: 'BA, gereedschap, bestelwagen, arbeidsongevallen: enkel wat jij nodig hebt.', iconPath: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4' },
         { title: 'Snelle intake', text: 'Onze expert bekijkt jouw werkrealiteit en stemt alles af op binnen-, buiten- en spuitwerk.', iconPath: 'M10 2L14 2M12 14L15 11M4 14a8 8 0 1 0 16 0a8 8 0 1 0-16 0' },
         { title: 'Bouw-expertise', text: "We spreken jouw taal: verfwerk, stellingen, kleurcodes, onderaanneming.", iconPath: 'M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83zM2 12l8.58 3.91a2 2 0 0 0 1.66 0L21 12M2 17l8.58 3.91a2 2 0 0 0 1.66 0L21 17' },
       ].map((item) => (
@@ -394,7 +394,7 @@ const schema = {
     <div class="dw-stats-grid">
       {[
         { label: 'Focus', value: 'Bouwsector', text: 'Geen standaardpakket, maar afgestemd op jouw schildersactiviteiten.' },
-        { label: 'Maatwerk', value: 'Modulair pakket', text: 'Jij kiest: BA, gereedschap, bestelwagen — enkel wat jij nodig hebt.' },
+        { label: 'Maatwerk', value: 'Modulair pakket', text: 'Jij kiest: BA, gereedschap, bestelwagen: enkel wat jij nodig hebt.' },
         { label: 'Efficiënt', value: 'Scan in 2 min', text: 'Snel ontdekken of je beschermd bent voor binnen- én spuitwerk.', href: CTA_DESTINATIONS.scan },
         { label: 'Ondersteuning', value: 'Duidelijk contact', text: 'Je krijgt uitleg die aansluit bij jouw dagelijkse werksituatie.' },
       ].map((stat) => (

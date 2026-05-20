@@ -18,7 +18,7 @@ publishDate: "2026-05-08"
 heroImage: "/images/kenniscentrum/c2-p-verplichte-verzekeringen-1.jpg"
 heroImageAlt: "Bouwondernemer op werf controleert verzekeringsdocumenten en attesten"
 hubIntro: >-
-  Niet elke 'verplichte verzekering' is écht wettelijk verplicht — en omgekeerd zijn er polissen die je niet kent maar wel moet hebben. Dit thema zet de drie harde verplichtingen op een rij (arbeidsongevallen, BA-10, BA Auto) en de impact van Boek 6 BW sinds 1 januari 2025.
+  Niet elke 'verplichte verzekering' is écht wettelijk verplicht. En omgekeerd zijn er polissen die je niet kent maar wel moet hebben. Dit thema zet de drie harde verplichtingen op een rij (arbeidsongevallen, BA-10, BA Auto) en de impact van Boek 6 BW sinds 1 januari 2025.
 hubTitle: "Verplichte verzekeringen bouwsector"
 spokes:
   - "arbeidsongevallen-verplichtingen"

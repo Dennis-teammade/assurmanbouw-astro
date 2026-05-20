@@ -8,17 +8,17 @@ import BrandChevron from '../../components/BrandChevron.astro';
 const faqItems = [
   { q: 'Is een rechtsbijstandsverzekering verplicht voor een aannemer?', a: 'Nee, ze is niet wettelijk verplicht. Maar zodra je facturen verstuurt, contracten ondertekent of personeel inhuurt, is ze in de praktijk onmisbaar. Eén onbetaalde factuur of betwiste oplevering weegt jaren premies op.' },
   { q: 'Wat kost een rechtsbijstand voor een zelfstandige in de bouw?', a: 'Premies starten typisch rond € 200 tot € 400 per jaar voor een eenmanszaak. Voor vennootschappen met personeel of meerdere onderaannemers loopt dat op tot € 800-1.500. De exacte premie hangt af van je omzet, statuut en gekozen modules.' },
-  { q: 'Krijg je fiscaal voordeel op je premie?', a: 'Ja. Depuis de Wet Geens van 2019 krijg je 40% belastingvermindering op je premie tot een plafond van € 310 — dat is een teruggave tot € 124 per jaar in je personenbelasting. In een vennootschap is de premie volledig aftrekbaar als beroepskost.' },
+  { q: 'Krijg je fiscaal voordeel op je premie?', a: 'Ja. Depuis de Wet Geens van 2019 krijg je 40% belastingvermindering op je premie tot een plafond van € 310: dat is een teruggave tot € 124 per jaar in je personenbelasting. In een vennootschap is de premie volledig aftrekbaar als beroepskost.' },
   { q: 'Mag je je eigen advocaat kiezen?', a: 'Ja, art. 156 Wet Verzekeringen garandeert vrije advocaatkeuze vanaf het moment dat een gerechtelijke of administratieve procedure start. Geen enkele verzekeraar kan je een advocaat opleggen.' },
-  { q: 'Geldt er een wachttijd voor lopende geschillen?', a: 'Voor feiten die zich vóór de afsluitdatum hebben voorgedaan, ja — meestal 1 tot 3 jaar afhankelijk van het type geschil. Sluit je beter af in een rustige periode, niet wanneer er al een conflict speelt.' },
-  { q: 'Dekt mijn rechtsbijstand een geschil over mijn eigen verbouwing thuis?', a: 'Niet via je beroepspolis — die sluit geschillen uit waarbij jij zelf de bouwheer bent. Daarvoor heb je een aparte privé-rechtsbijstand of een uitbreiding op je woningverzekering nodig.' },
-  { q: 'Wat als de tegenpartij failliet gaat tijdens de procedure?', a: 'Bij insolvabiliteit van de aansprakelijke derde springt de polis bij — meestal tot € 15.000 ter compensatie van de schadevergoeding die je niet meer kunt innen. Een belangrijk vangnet bij faillissement van een onderaannemer of leverancier.' },
+  { q: 'Geldt er een wachttijd voor lopende geschillen?', a: 'Voor feiten die zich vóór de afsluitdatum hebben voorgedaan, ja , meestal 1 tot 3 jaar afhankelijk van het type geschil. Sluit je beter af in een rustige periode, niet wanneer er al een conflict speelt.' },
+  { q: 'Dekt mijn rechtsbijstand een geschil over mijn eigen verbouwing thuis?', a: 'Niet via je beroepspolis: die sluit geschillen uit waarbij jij zelf de bouwheer bent. Daarvoor heb je een aparte privé-rechtsbijstand of een uitbreiding op je woningverzekering nodig.' },
+  { q: 'Wat als de tegenpartij failliet gaat tijdens de procedure?', a: 'Bij insolvabiliteit van de aansprakelijke derde springt de polis bij: meestal tot € 15.000 ter compensatie van de schadevergoeding die je niet meer kunt innen. Een belangrijk vangnet bij faillissement van een onderaannemer of leverancier.' },
   { q: 'Kan de rechtsbijstand ook strafrechtelijke verdediging dekken?', a: 'Ja, bij onopzettelijke feiten (onopzettelijke doding, slagen door onvoorzichtigheid, onopzettelijke brandstichting) is de strafrechtelijke verdediging volledig gedekt tot het plafond. Bij opzettelijke misdrijven enkel als je vrijgesproken wordt.' },
-  { q: 'Wat is het verschil met de juridische bijstand bij Securex of Acerta?', a: 'Sociaal-secretariaten geven juridisch advies en stellen documenten op — dat is preventieve juridische dienstverlening. Een rechtsbijstandsverzekering komt erbovenop en betaalt de procedurekosten als er écht een conflict ontstaat.' },
+  { q: 'Wat is het verschil met de juridische bijstand bij Securex of Acerta?', a: 'Sociaal-secretariaten geven juridisch advies en stellen documenten op: dat is preventieve juridische dienstverlening. Een rechtsbijstandsverzekering komt erbovenop en betaalt de procedurekosten als er écht een conflict ontstaat.' },
   { q: 'Is bemiddeling via de Verzoeningscommissie Bouw een alternatief?', a: 'Voor technische geschillen is de Verzoeningscommissie Bouw often een snelle, goedkope oplossing als beide partijen akkoord gaan. Vanaf 2027 komt er een federale ombudsdienst voor bouw- en verbouwgeschillen.' },
   { q: 'Komt de polis tussen voor onbetaalde facturen?', a: 'Ja, voor invordering van zowel onbetwiste via IOS-procedure (ca. 1 maand) als betwiste facturen via dagvaarding. Voor onbetwiste facturen gelden meestal een minimumdrempel van € 1.000 en een franchise op de deurwaarderskosten.' },
-  { q: 'Hoeveel polissen heb ik nodig — BA Onderneming, BA-10 én rechtsbijstand?', a: 'De drie zijn complementair, niet overlappend. BA Onderneming dekt schade aan derden, BA-10 specifiek de tienjarige aansprakelijkheid, en de rechtsbijstand betaalt de juridische strijd om jouw rechten te verdedigen of schade te verhalen.' },
-  { q: 'Wat als ik mijn activiteit stopzet — loopt de dekking dan af?', a: 'De meeste polissen blijven 5 jaar nawerken voor geschillen rond afgesloten dossiers. Verborgen gebreken, BA-10-claims en betwiste opleveringen kunnen jaren later opduiken. Stopzetting zonder nadekking is een vaak onderschat risico.' },
+  { q: 'Hoeveel polissen heb ik nodig: BA Onderneming, BA-10 én rechtsbijstand?', a: 'De drie zijn complementair, niet overlappend. BA Onderneming dekt schade aan derden, BA-10 specifiek de tienjarige aansprakelijkheid, en de rechtsbijstand betaalt de juridische strijd om jouw rechten te verdedigen of schade te verhalen.' },
+  { q: 'Wat als ik mijn activiteit stopzet: loopt de dekking dan af?', a: 'De meeste polissen blijven 5 jaar nawerken voor geschillen rond afgesloten dossiers. Verborgen gebreken, BA-10-claims en betwiste opleveringen kunnen jaren later opduiken. Stopzetting zonder nadekking is een vaak onderschat risico.' },
   { q: 'Wie behandelt mijn dossier concreet?', a: 'Niet de verzekeraar zelf, maar een gespecialiseerde rechtsbijstand-entiteit zoals Providis (AG), Legal Village (AXA), DAS of een interne rechtsbijstanddienst. Wij blijven jouw aanspreekpunt en volgen het dossier mee op tot het is afgesloten.' },
 ];
 
@@ -28,12 +28,12 @@ const beroepTabs = [
   { id: 'loodgieters',   label: 'Loodgieters',        link: '/sectoren/loodgieters',   title: 'Voor loodgieters',                   text: 'Lekken, drukschade en geschillen over gas- of CV-installaties komen vaak terug. De combinatie rechtsbijstand en BA Onderneming en BA-10 dekt het volledige risicospectrum tussen werf en oplevering.' },
   { id: 'elektriciens',  label: 'Elektriciens',       link: '/sectoren/elektriciens',  title: 'Voor elektriciens',                  text: 'Brand na elektrische installatie of een afgekeurd AREI-keuringsverslag leidt regelmatig tot strafrechtelijke verdediging. De rechtsbijstand neemt zowel de juridische strijd als de expertkosten op zich.' },
   { id: 'schilders',     label: 'Schilders',          link: '/sectoren/schilders',     title: 'Voor schilders',                     text: 'Geschillen over kleurafwijkingen, hechting en uitvoeringskwaliteit zijn de norm. Een rechtsbijstand met IOS-invordering en bouwgeschillenmodule is voor solo-schilders met veel kleine klanten extra waardevol.' },
-  { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Maatwerk leidt often tot interpretatiediscussies over "conform bestek". Geschillen rond opmaat-meubilair, ramen of trappen komen via expertise tot een oordeel — die expertise dekt de polis volledig.' },
+  { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Maatwerk leidt often tot interpretatiediscussies over "conform bestek". Geschillen rond opmaat-meubilair, ramen of trappen komen via expertise tot een oordeel: die expertise dekt de polis volledig.' },
 ];
 
 const insuranceCards = [
   { title: 'BA Onderneming',  icon: 'shield',  intro: 'Bescherming wanneer je bedrijf schade veroorzaakt aan derden tijdens de uitbating of beroepsactiviteit.',    bullets: ['Schade aan eigendommen van derden','Letselschade aan derden','Claims rond beroepsfouten','Aansprakelijkheid tijdens werken'],   link: '/verzekeringen/ba-onderneming/',   cta: 'Meer over BA Onderneming' },
-  { title: 'Machinebreuk',    icon: 'wrench',  intro: 'Professionele machines en gereedschap zijn duur. Een defect of diefstal stopt je werk — deze dekking niet.', bullets: ['Machines bij breuk of diefstal','Diefstal op werf of in bestelwagen','Vervanging of herstelling','Op maat van je materieel'],            link: '/verzekeringen/machinebreuk',     cta: 'Meer over machinebreuk' },
+  { title: 'Machinebreuk',    icon: 'wrench',  intro: 'Professionele machines en gereedschap zijn duur. Een defect of diefstal stopt je werk. Deze dekking niet.', bullets: ['Machines bij breuk of diefstal','Diefstal op werf of in bestelwagen','Vervanging of herstelling','Op maat van je materieel'],            link: '/verzekeringen/machinebreuk',     cta: 'Meer over machinebreuk' },
   { title: 'Bedrijfsvoertuigen',icon: 'car',   intro: 'De bestelwagen is onmisbaar op de werf. De juiste dekking houdt je mobiel bij schade, diefstal of pech.',   bullets: ['BA en omnium voor bestelwagens','Bescherming bij diefstal of brand','Snelle afhandeling bij schade','Afstembaar op jouw wagenpark'],  link: '/verzekeringen/bedrijfsvoertuigen/',cta: 'Meer over bedrijfsvoertuigen' },
   { title: 'Arbeidsongevallen',icon: 'users',  intro: 'Wettelijk verplicht vanaf je eerste werknemer. Dekt letsel op de werf en woon-werkverkeer.',                  bullets: ['Verplicht vanaf dag 1','Medische kosten gedekt','Woon-werkverkeer inbegrepen','Aangifte binnen 8 dagen'],                              link: '/verzekeringen/arbeidsongevallen/', cta: 'Meer over arbeidsongevallen' },
 ];
@@ -49,7 +49,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 ---
 
 <BaseLayout
-  title="Rechtsbijstandsverzekering bouw — juridische bijstand bij geschillen | Assurman"
+  title="Rechtsbijstandsverzekering bouw | juridische bijstand bij geschillen | Assurman"
   description="Rechtsbijstandsverzekering voor de bouwsector. Tot € 75.000 verdedigingskosten, vrije advocaatkeuze en 40% fiscaal voordeel via Wet Geens. Vraag advies."
   canonical="/verzekeringen/rechtsbijstand"
   schema={schema}
@@ -157,7 +157,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       </div>
       <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">Rechtsbijstands&#x2011;<br />verzekering voor de bouw</h1>
       <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">Wie verdedigt jou als een klant niet betaalt of een onderaannemer een fout maakt?</p>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Een onbetaalde factuur, een betwiste oplevering, een geschil met je onderaannemer of een strafrechtelijke procedure na een werfongeval — als zelfstandige in de bouw kom je sneller in een juridische strijd terecht dan je denkt. Een rechtsbijstandsverzekering betaalt je advocaat, expert en gerechtskosten.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Een onbetaalde factuur, een betwiste oplevering, een geschil met je onderaannemer of een strafrechtelijke procedure na een werfongeval: als zelfstandige in de bouw kom je sneller in een juridische strijd terecht dan je denkt. Een rechtsbijstandsverzekering betaalt je advocaat, expert en gerechtskosten.</p>
       <div class="rb-hero-btns">
         <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
           {CTA_SCAN.hero}
@@ -191,10 +191,10 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
           {[
             {t:'Dekking tot <strong style="color:#FFFFFF;">€ 75.000</strong> voor verdedigings- en gerechtskosten per geschil.'},
-            {t:'<strong style="color:#FFFFFF;">Vrije keuze van advocaat en expert</strong> — wettelijk gegarandeerd door art. 156 Wet Verzekeringen.'},
+            {t:'<strong style="color:#FFFFFF;">Vrije keuze van advocaat en expert</strong>, wettelijk gegarandeerd door art. 156 Wet Verzekeringen.'},
             {t:'<strong style="color:#FFFFFF;">40% fiscaal voordeel</strong> op de premie via de Wet Geens (max premie van € 310 voor belastingvermindering tot € 124).'},
-            {t:'Bouwspecifieke geschillen zijn vaak <strong style="color:#FFFFFF;">niet gedekt in standaard rechtsbijstand</strong> — aparte module nodig.'},
-            {t:'Wachttijd van 1 tot 3 jaar voor lopende geschillen — <strong style="color:#FFFFFF;">sluit af vóór er een probleem is</strong>.'},
+            {t:'Bouwspecifieke geschillen zijn vaak <strong style="color:#FFFFFF;">niet gedekt in standaard rechtsbijstand</strong>: aparte module nodig.'},
+            {t:'Wachttijd van 1 tot 3 jaar voor lopende geschillen: <strong style="color:#FFFFFF;">sluit af vóór er een probleem is</strong>.'},
           ].map(item=>(
             <li style="display:flex;gap:12px;align-items:flex-start;">
               <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
@@ -206,7 +206,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       <div>
         <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
         <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">Juridische bijstand wanneer ondernemen wringt</h2>
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een rechtsbijstandsverzekering betaalt de kosten die je maakt om jouw rechten te verdedigen of een schadevergoeding te eisen — of dat nu via onderhandelingen, bemiddeling of een rechtbank gebeurt. De polis vergoedt het ereloon van je advocaat, de expertisekosten, de gerechtsdeurwaarder en de gerechtelijke procedure zelf.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een rechtsbijstandsverzekering betaalt de kosten die je maakt om jouw rechten te verdedigen of een schadevergoeding te eisen: of dat nu via onderhandelingen, bemiddeling of een rechtbank gebeurt. De polis vergoedt het ereloon van je advocaat, de expertisekosten, de gerechtsdeurwaarder en de gerechtelijke procedure zelf.</p>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">In de bouwsector loop je tegen specifieke risico's aan: een bouwheer die de meerwerken weigert te betalen, een hoofdaannemer die je factuur betwist na faillissement, een schadeclaim van een buurman over scheurvorming, of een strafrechtelijke vervolging na een arbeidsongeval op de werf. Een goed afgestemde rechtsbijstand dekt al die scenario's.</p>
         <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
           <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
@@ -258,7 +258,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="max-width:640px;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Per beroep: wanneer rechtsbijstand het verschil maakt</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">Rechtsbijstand is in België niet wettelijk verplicht voor zelfstandigen of vennootschappen. Toch is ze in de bouw vrijwel onmisbaar zodra je facturen verstuurt, contracten ondertekent of personeel tewerkstelt — en dat is meestal vanaf je eerste werfopdracht. Eén onbetaalde factuur, één betwiste oplevering of één strafrechtelijke vervolging na een werfongeval kan vlot oplopen tot € 10.000 à € 75.000 aan advocaten- en expertkosten. Een polis kost gemiddeld € 200 tot € 400 per jaar, en sinds 2019 is een deel daarvan fiscaal aftrekbaar (40% via belastingvermindering, plafond € 310). Hieronder zes situaties waarin de polis daadwerkelijk tussenkomt.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">Rechtsbijstand is in België niet wettelijk verplicht voor zelfstandigen of vennootschappen. Toch is ze in de bouw vrijwel onmisbaar zodra je facturen verstuurt, contracten ondertekent of personeel tewerkstelt, en dat is meestal vanaf je eerste werfopdracht. Eén onbetaalde factuur, één betwiste oplevering of één strafrechtelijke vervolging na een werfongeval kan vlot oplopen tot € 10.000 à € 75.000 aan advocaten- en expertkosten. Een polis kost gemiddeld € 200 tot € 400 per jaar, en sinds 2019 is een deel daarvan fiscaal aftrekbaar (40% via belastingvermindering, plafond € 310). Hieronder zes situaties waarin de polis daadwerkelijk tussenkomt.</p>
     </div>
     <ul id="rb-examples-list" style="list-style:none;padding:0;margin:32px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:10px;">
       {[
@@ -284,7 +284,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="text-align:center;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Dekking</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat is wél en niet gedekt?</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:580px;margin:0 auto;">Een rechtsbijstand is geen schadeverzekering — ze betaalt de juridische strijd om jouw schade vergoed te krijgen of jouw verdediging te organiseren.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:580px;margin:0 auto;">Een rechtsbijstand is geen schadeverzekering: ze betaalt de juridische strijd om jouw schade vergoed te krijgen of jouw verdediging te organiseren.</p>
     </div>
     <div class="rb-dekking-grid">
       <div style="background:#FFFFFF;border:2px solid rgba(34,197,94,0.5);border-radius:1px;overflow:hidden;">
@@ -293,7 +293,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
           <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#15803d;">Wel gedekt</span>
         </div>
         <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
-          {['Erelonen van je vrij gekozen advocaat en gerechtsdeurwaarder','Kosten van expertise (technisch, boekhoudkundig, medisch) om je dossier sterk te maken','Strafrechtelijke verdediging na werkongevallen, brand of overtredingen','Burgerlijk verhaal van schade op derden — aansprakelijke leverancier, onderaannemer of bouwheer','Invordering van onbetwiste én betwiste facturen (afhankelijk van de gekozen formule)','Insolvabiliteit van de tegenpartij: tot € 15.000 als de aansprakelijke derde niet kan betalen'].map(item=>(
+          {['Erelonen van je vrij gekozen advocaat en gerechtsdeurwaarder','Kosten van expertise (technisch, boekhoudkundig, medisch) om je dossier sterk te maken','Strafrechtelijke verdediging na werkongevallen, brand of overtredingen','Burgerlijk verhaal van schade op derden: aansprakelijke leverancier, onderaannemer of bouwheer','Invordering van onbetwiste én betwiste facturen (afhankelijk van de gekozen formule)','Insolvabiliteit van de tegenpartij: tot € 15.000 als de aansprakelijke derde niet kan betalen'].map(item=>(
             <li style="display:flex;gap:12px;align-items:flex-start;">
               <Fragment set:html={svgCheck16g} />
               <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
@@ -307,7 +307,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
           <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#b91c1c;">Niet (of beperkt) gedekt</span>
         </div>
         <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
-          {['Boetes en schikkingen met het parket','Opzettelijke daden of misdrijven (correctionele opzettelijke inbreuken vallen erbuiten)','Geschillen rond eigen bouw of verbouwing als jij de bouwheer bent','Lopende geschillen op de dag van afsluiten — wachttijd van 1 tot 3 jaar','Oneerlijke concurrentie en intellectuele rechten (auteursrechten, octrooien, merken)','Loon- en sociaalrechtelijke inbreuken door de zaakvoerder zelf'].map(item=>(
+          {['Boetes en schikkingen met het parket','Opzettelijke daden of misdrijven (correctionele opzettelijke inbreuken vallen erbuiten)','Geschillen rond eigen bouw of verbouwing als jij de bouwheer bent','Lopende geschillen op de dag van afsluiten: wachttijd van 1 tot 3 jaar','Oneerlijke concurrentie en intellectuele rechten (auteursrechten, octrooien, merken)','Loon- en sociaalrechtelijke inbreuken door de zaakvoerder zelf'].map(item=>(
             <li style="display:flex;gap:12px;align-items:flex-start;">
               <Fragment set:html={svgX16r} />
               <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
@@ -343,7 +343,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div class="rb-aanvulling-grid">
       {[
         {i:'ac',title:'Module Bouwgeschillen',              text:'Dekt geschillen over verborgen gebreken, oplevering, BA-10-aansprakelijkheid en burenhinder die de standaardpolis uitsluit. Onmisbaar voor aannemers met opleveringsdiscussies.'},
-        {i:'sh',title:'Invordering onbetwiste facturen',   text:'Snelle invordering van facturen via gerechtsdeurwaarder zonder rechter — gemiddeld 1 maand looptijd. De polis dekt de deurwaarderskosten boven een drempel.'},
+        {i:'sh',title:'Invordering onbetwiste facturen',   text:'Snelle invordering van facturen via gerechtsdeurwaarder zonder rechter: gemiddeld 1 maand looptijd. De polis dekt de deurwaarderskosten boven een drempel.'},
         {i:'us',title:'Fiscale rechtsbijstand',            text:'Bijstand bij BTW-controles, aanslag in de personenbelasting of vennootschapsbelasting, en bezwaarschriften. Specifiek relevant in de bouw door de medecontractant-regeling.'},
         {i:'tr',title:'Cybercriminaliteit en phishing',    text:'Verdediging na CEO-fraude of facturatie-phishing. Dekt onderzoekskosten en juridische stappen om bedragen te recupereren.'},
         {i:'br',title:'Sociaalrechtelijke geschillen',     text:'Verdediging bij geschillen met werknemers, ontslagprocedures, discriminatieklachten of sociale-inspectiecontroles. Aanvulling op de basisformule als je personeel hebt.'},
@@ -378,7 +378,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="text-align:center;margin-bottom:56px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Fiscaal voordeel</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Tot 40% van je premie terug via de Wet Geens</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:520px;margin:0 auto;">Depuis 2019 maakt de Wet Geens de rechtsbijstandpremie gedeeltelijk fiscaal aftrekbaar — een uniek voordeel onder de Belgische verzekeringen.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:520px;margin:0 auto;">Depuis 2019 maakt de Wet Geens de rechtsbijstandpremie gedeeltelijk fiscaal aftrekbaar: een uniek voordeel onder de Belgische verzekeringen.</p>
     </div>
     <div class="rb-formule">
       <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
@@ -474,7 +474,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
   <div style="max-width:840px;margin:0 auto;position:relative;z-index:1;">
     <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Mijn situatie</span>
     <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Drie scenario's die in de bouw het vaakst spelen</h2>
-    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0 0 40px;">Een rechtsbijstand voelt abstract — tot het moment waarop je hem nodig hebt. Hieronder drie concrete dossiers zoals we ze regelmatig zien bij aannemers en zelfstandigen in de bouw.</p>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0 0 40px;">Een rechtsbijstand voelt abstract, tot het moment waarop je hem nodig hebt. Hieronder drie concrete dossiers zoals we ze regelmatig zien bij aannemers en zelfstandigen in de bouw.</p>
 
     <div class="rb-stat-panel" data-stat-panel>
       <button class="rb-stat-btn" data-stat-btn>
@@ -485,7 +485,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       <div data-stat-content style="display:none;padding:0 24px 24px;">
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">De bouwheer betwist meerwerken, weigert de eindfactuur of houdt een bedrag in op de borgtocht na oplevering. Vaak gaat het over interpretatie van het bestek of communicatie tijdens de werf.</p>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-          {['Een specialist bekijkt het dossier en streeft eerst een minnelijke oplossing na — via bemiddeling.','Faalt dat, dan vergoedt de polis je advocaat tot het plafond, expertisekosten en de gerechtelijke procedure.','Onbetwiste facturen kunnen via een snelle IOS-procedure (1 maand) zonder rechter geïnd worden.','Let op: voor zuiver contractuele geschillen geldt often een minimum schadebedrag van € 1.000 vóór de polis tussenkomt.'].map(item=>(
+          {['Een specialist bekijkt het dossier en streeft eerst een minnelijke oplossing na: via bemiddeling.','Faalt dat, dan vergoedt de polis je advocaat tot het plafond, expertisekosten en de gerechtelijke procedure.','Onbetwiste facturen kunnen via een snelle IOS-procedure (1 maand) zonder rechter geïnd worden.','Let op: voor zuiver contractuele geschillen geldt often een minimum schadebedrag van € 1.000 vóór de polis tussenkomt.'].map(item=>(
             <li style="display:flex;gap:10px;align-items:flex-start;"><svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span style="font-family:'Outfit',sans-serif;font-size:15px;color:#CBD5E1;">{item}</span></li>
           ))}
         </ul>
@@ -501,7 +501,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       <div data-stat-content style="display:none;padding:0 24px 24px;">
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Een onderaannemer levert te laat, presteert ondermaats of veroorzaakt schade die op jou wordt verhaald. Of een materiaalleverancier stuurt verkeerde of gebrekkige bouwmaterialen.</p>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-          {['Burgerlijk verhaal op de aansprakelijke partij — de polis betaalt expertkosten en advocaat.','Bij insolvabiliteit van de onderaannemer komt de aanvullende dekking tussen tot € 15.000.','Geschillen rond ketenaansprakelijkheid en hoofdelijke aansprakelijkheid voor sociale schulden vallen in deze rubriek.'].map(item=>(
+          {['Burgerlijk verhaal op de aansprakelijke partij: de polis betaalt expertkosten en advocaat.','Bij insolvabiliteit van de onderaannemer komt de aanvullende dekking tussen tot € 15.000.','Geschillen rond ketenaansprakelijkheid en hoofdelijke aansprakelijkheid voor sociale schulden vallen in deze rubriek.'].map(item=>(
             <li style="display:flex;gap:10px;align-items:flex-start;"><svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span style="font-family:'Outfit',sans-serif;font-size:15px;color:#CBD5E1;">{item}</span></li>
           ))}
         </ul>
@@ -517,7 +517,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       <div data-stat-content style="display:none;padding:0 24px 24px;">
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Bij een ernstig arbeidsongeval of werfincident opent het parket often een onderzoek wegens onopzettelijke slagen, onopzettelijke brandstichting of onopzettelijke doding. De zaakvoerder wordt persoonlijk gedagvaard.</p>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
-          {['Strafrechtelijke verdediging tot € 75.000, ook tijdens het opsporingsonderzoek en de raadkamer.','Je kiest zelf je advocaat (art. 156 Wet Verzekeringen).','Bij vrijspraak worden alle kosten gedragen; bij veroordeling voor onopzettelijke feiten blijven verdedigingskosten gedekt.','De polis betaalt geen schadevergoeding aan slachtoffers — dat doet je BA Onderneming of arbeidsongevallenverzekering.'].map(item=>(
+          {['Strafrechtelijke verdediging tot € 75.000, ook tijdens het opsporingsonderzoek en de raadkamer.','Je kiest zelf je advocaat (art. 156 Wet Verzekeringen).','Bij vrijspraak worden alle kosten gedragen; bij veroordeling voor onopzettelijke feiten blijven verdedigingskosten gedekt.','De polis betaalt geen schadevergoeding aan slachtoffers: dat doet je BA Onderneming of arbeidsongevallenverzekering.'].map(item=>(
             <li style="display:flex;gap:10px;align-items:flex-start;"><svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span style="font-family:'Outfit',sans-serif;font-size:15px;color:#CBD5E1;">{item}</span></li>
           ))}
         </ul>
@@ -533,7 +533,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="text-align:center;margin-bottom:60px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Bij een geschil</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat moet je doen als er iets misloopt?</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:520px;margin:0 auto;">Hoe sneller je het meldt, hoe sterker je dossier. De eerste 48 uur zijn cruciaal — daarna start je verzekeraar het juridisch onderzoek.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:520px;margin:0 auto;">Hoe sneller je het meldt, hoe sterker je dossier. De eerste 48 uur zijn cruciaal: daarna start je verzekeraar het juridisch onderzoek.</p>
     </div>
     <div class="rb-procedure-grid">
       <div class="rb-procedure-line" style="position:absolute;top:36px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(to right,#E5A524,rgba(229,165,36,0.2));z-index:0;"></div>
@@ -565,7 +565,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="text-align:center;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over rechtsbijstand</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">14 concrete vragen van bouwondernemers — klik open voor het antwoord.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">14 concrete vragen van bouwondernemers: klik open voor het antwoord.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;">
       {faqItems.map((item,i)=>(
@@ -604,7 +604,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
   <div style="max-width:896px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
     <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;text-align:center;margin-bottom:20px;">Start met Assurman</span>
     <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;color:#FFFFFF;max-width:727px;margin:0 auto 24px;">Sta je wel rechtsbijstand als het misgaat?</h2>
-    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouwsector en wil je zeker zijn dat je juridisch beschermd bent bij geschillen? Wij bekijken met jou welke modules je echt nodig hebt — zonder verplichting.</p>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouwsector en wil je zeker zijn dat je juridisch beschermd bent bij geschillen? Wij bekijken met jou welke modules je echt nodig hebt, zonder verplichting.</p>
     <div class="rb-final-btns">
       <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">{CTA_SCAN.hero} <Fragment set:html={svgArr18} /></a>
       <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">{CTA_AFSPRAAK.advisory}</a>

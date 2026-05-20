@@ -31,7 +31,7 @@ spokes:
   - "klant-betaalt-niet"
   - "polisweigering"
 hubIntro: >-
-  Een schadegeval in de bouw is geen kwestie van of, maar van wanneer. Dit thema zet de meest voorkomende scenario's op een rij — van arbeidsongevallen tot diefstal, van trillingschade tot polisweigering — met wettelijke termijnen en concrete stappenplannen.
+  Een schadegeval in de bouw is geen kwestie van of, maar van wanneer. Dit thema zet de meest voorkomende scenario's op een rij: van arbeidsongevallen tot diefstal, van trillingschade tot polisweigering. Met wettelijke termijnen en concrete stappenplannen.
 hubTitle: "Schadegevallen in de bouw"
 heroImage: "/images/kenniscentrum/c3-p-schadegevallen-bouw.jpg"
 heroImageAlt: "Aannemer aan de telefoon met verzekeraar na schade-incident op werf"
