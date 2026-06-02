@@ -6,12 +6,12 @@ import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels'
 import BrandChevron from '../../components/BrandChevron.astro';
 
 const faqItems = [
-  { q: 'Wat is een verzekering Alle Bouwplaatsrisico\'s (ABR)?', a: 'Een ABR-verzekering dekt schade aan werken in uitvoering — het gebouw dat je aan het bouwen of verbouwen bent. Ze beschermt alle betrokken partijen: opdrachtgever, hoofdaannemer en onderaannemers, voor de duur van de bouwfase.' },
+  { q: 'Wat is een verzekering Alle Bouwplaatsrisico\'s (ABR)?', a: 'Een ABR-verzekering dekt schade aan werken in uitvoering: het gebouw dat je aan het bouwen of verbouwen bent. Ze beschermt alle betrokken partijen: opdrachtgever, hoofdaannemer en onderaannemers, voor de duur van de bouwfase.' },
   { q: 'Is een ABR-verzekering wettelijk verplicht?', a: 'Niet altijd, maar voor grotere bouwwerken en bij openbare aanbestedingen wordt ze contractueel vereist. Voor nieuwbouwprojecten boven een bepaalde omvang is ze in de praktijk standaard.' },
   { q: 'Wat is het verschil met BA Onderneming?', a: 'BA Onderneming dekt schade die je veroorzaakt aan derden (mensen of eigendommen buiten de werf). ABR dekt schade aan de werken zelf en de materialen op de werf. Beide zijn complementair.' },
   { q: 'Wat is het verschil met machinebreuk?', a: 'Machinebreuk dekt schade aan jouw eigen machines en gereedschap. ABR dekt schade aan het bouwwerk zelf en de materialen in uitvoering. Op grotere werven zijn beide polissen naast elkaar zinvol.' },
   { q: 'Wie sluit de ABR-polis af?', a: 'Dat kan de opdrachtgever zijn (die alle aannemers mee dekt) of de hoofdaannemer. Soms wordt ze per aannemer apart afgesloten. Op een grote werf is één polis voor alle partijen doorgaans eenvoudiger en voordeliger.' },
-  { q: 'Hoelang loopt een ABR-polis?', a: 'Voor de duur van de bouwfase — van de start van de werken tot en met de (voorlopige) oplevering. Sommige polissen bieden ook een korte onderhoudsdekking na oplevering.' },
+  { q: 'Hoelang loopt een ABR-polis?', a: 'Voor de duur van de bouwfase: van de start van de werken tot en met de (voorlopige) oplevering. Sommige polissen bieden ook een korte onderhoudsdekking na oplevering.' },
   { q: 'Wat is een onderhoudsperiode in een ABR-polis?', a: 'Een verlengde dekking na oplevering, typisch 12 tot 24 maanden, die schade dekt die wordt vastgesteld tijdens de onderhoudstermijn en terug te brengen is tot de bouwfase.' },
   { q: 'Dekt ABR ook schade door slecht weer?', a: 'Ja, storm, hevige regenval, hagel en overstromingen vallen doorgaans onder de ABR-dekking. Er geldt wel een wachttijd (soms 24-48 uur na aanvang van slecht weer) en een drempelwaarde.' },
   { q: 'Worden materialen die nog niet verwerkt zijn ook gedekt?', a: 'Ja, materialen op de werf die bestemd zijn voor verwerking vallen doorgaans onder de ABR. Materialen die elders zijn opgeslagen (magazijn, leverancier) vragen een aparte uitbreiding.' },
@@ -33,7 +33,7 @@ const beroepTabs = [
 
 const insuranceCards = [
   { title: 'BA Onderneming',  icon: 'shield',  intro: 'Bescherming wanneer je bedrijf schade veroorzaakt aan derden tijdens de uitbating of beroepsactiviteit.',    bullets: ['Schade aan eigendommen van derden','Letselschade aan derden','Claims rond beroepsfouten','Aansprakelijkheid tijdens werken'],   link: '/verzekeringen/ba-onderneming/',   cta: 'Meer over BA Onderneming' },
-  { title: 'Machinebreuk',    icon: 'wrench',  intro: 'Professionele machines en gereedschap zijn duur. Een defect of diefstal stopt je werk — deze dekking niet.', bullets: ['Machines bij breuk of diefstal','Diefstal op werf of in bestelwagen','Vervanging of herstelling','Op maat van je materieel'],            link: '/verzekeringen/machinebreuk',     cta: 'Meer over machinebreuk' },
+  { title: 'Machinebreuk',    icon: 'wrench',  intro: 'Professionele machines en gereedschap zijn duur. Een defect of diefstal stopt je werk. Deze dekking niet.', bullets: ['Machines bij breuk of diefstal','Diefstal op werf of in bestelwagen','Vervanging of herstelling','Op maat van je materieel'],            link: '/verzekeringen/machinebreuk',     cta: 'Meer over machinebreuk' },
   { title: 'Rechtsbijstand',  icon: 'scale',   intro: 'Juridische bescherming bij geschillen met klanten, leveranciers of personeel. Je staat niet alleen.',        bullets: ['Hulp bij juridische conflicten','Vrije advocaatkeuze','Tussenkomst bij advocaatkosten','Aanvulling op BA'],                       link: '/verzekeringen/rechtsbijstand',   cta: 'Meer over rechtsbijstand' },
   { title: 'Arbeidsongevallen',icon: 'users',  intro: 'Wettelijk verplicht vanaf je eerste werknemer. Dekt letsel op de werf en woon-werkverkeer.',                  bullets: ['Verplicht vanaf dag 1','Medische kosten gedekt','Woon-werkverkeer inbegrepen','Aangifte binnen 8 dagen'],                              link: '/verzekeringen/arbeidsongevallen/', cta: 'Meer over arbeidsongevallen' },
 ];
@@ -157,7 +157,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       </div>
       <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">Alle Bouwplaats&#x2011;<br />risico's (ABR)</h1>
       <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">Allesomvattende dekking voor schade aan werken in uitvoering.</p>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Een brand die de halve ruwbouw verwoest. Een storm die het dak wegblaast vóór de dakpannen zijn gelegd. Schade aan werken in uitvoering is nooit volledig te vermijden — een ABR-verzekering zorgt dat je werf niet stilligt.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Een brand die de halve ruwbouw verwoest. Een storm die het dak wegblaast vóór de dakpannen zijn gelegd. Schade aan werken in uitvoering is nooit volledig te vermijden: een ABR-verzekering zorgt dat je werf niet stilligt.</p>
       <div class="abr-hero-btns">
         <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
           {CTA_SCAN.hero}
@@ -190,7 +190,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
         <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In het kort</span>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
           {[
-            {t:'ABR dekt <strong style="color:#FFFFFF;">schade aan werken in uitvoering</strong> — het gebouw dat je aan het bouwen bent.'},
+            {t:'ABR dekt <strong style="color:#FFFFFF;">schade aan werken in uitvoering</strong>: het gebouw dat je aan het bouwen bent.'},
             {t:'Ze beschermt <strong style="color:#FFFFFF;">alle betrokken partijen</strong>: opdrachtgever, hoofdaannemer en onderaannemers.'},
             {t:'Loopt van <strong style="color:#FFFFFF;">werfstart tot oplevering</strong>, met optionele onderhoudsdekking daarna.'},
             {t:'Dekt brand, storm, vandalisme, instorting en <strong style="color:#FFFFFF;">schade door uitvoeringsfouten</strong>.'},
@@ -206,8 +206,8 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       <div>
         <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
         <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">De allesomvattende dekking voor je werf</h2>
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een ABR-verzekering (Alle Bouwplaatsrisico's) beschermt de werken in uitvoering tegen alle mogelijke schade — brand, storm, instorting, vandalisme, uitvoeringsfouten en meer. Ze dekt het bouwwerk zelf, de materialen op de werf en de bouwkosten die verloren gaan als je van nul moet beginnen.</p>
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Wat ABR uniek maakt: ze beschermt alle partijen op de werf in één polis. De opdrachtgever, de hoofdaannemer en elke onderaannemer zijn mee gedekt. Dat vermijdt discussies over wie welke schade veroorzaakte — de polis betaalt, de werf draait verder.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een ABR-verzekering (Alle Bouwplaatsrisico's) beschermt de werken in uitvoering tegen alle mogelijke schade: brand, storm, instorting, vandalisme, uitvoeringsfouten en meer. Ze dekt het bouwwerk zelf, de materialen op de werf en de bouwkosten die verloren gaan als je van nul moet beginnen.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Wat ABR uniek maakt: ze beschermt alle partijen op de werf in één polis. De opdrachtgever, de hoofdaannemer en elke onderaannemer zijn mee gedekt. Dat vermijdt discussies over wie welke schade veroorzaakte: de polis betaalt, de werf draait verder.</p>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">ABR is niet hetzelfde als BA Onderneming (die dekt schade aan derden buiten de werf) en niet hetzelfde als machinebreuk (die dekt jouw machines). ABR dekt het bouwwerk zelf. De drie polissen zijn complementair op een grotere werf.</p>
         <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
           <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
@@ -314,7 +314,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
           <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#b91c1c;">Niet (of beperkt) gedekt</span>
         </div>
         <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
-          {['Schade aan bestaande gebouwen (zonder uitbreiding bestaand gebouw)','Materialen opgeslagen buiten de werf (magazijn, leverancier)','Machines en gereedschap van aannemers — valt onder machinebreuk','Opzettelijke schade of bedrog door de verzekerde','Normale slijtage en esthetische gebreken','Aansprakelijkheid tegenover derden buiten de werf — valt onder BA Onderneming'].map(item=>(
+          {['Schade aan bestaande gebouwen (zonder uitbreiding bestaand gebouw)','Materialen opgeslagen buiten de werf (magazijn, leverancier)','Machines en gereedschap van aannemers: valt onder machinebreuk','Opzettelijke schade of bedrog door de verzekerde','Normale slijtage en esthetische gebreken','Aansprakelijkheid tegenover derden buiten de werf: valt onder BA Onderneming'].map(item=>(
             <li style="display:flex;gap:12px;align-items:flex-start;">
               <Fragment set:html={svgX16r} />
               <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
@@ -327,7 +327,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       <div>
         <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Plafond</span>
         <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#FFFFFF;margin:0 0 12px;">Verzekerd bedrag gelijk aan de totale bouwkost</h3>
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">Het verzekerd bedrag bij ABR is altijd gelijk aan of hoger dan de totale bouwkost (inclusief erelonen). Bij totaalverlies betaalt de verzekeraar de volledige herbouwkost. Onderverzekering (een te laag verzekerd bedrag) leidt tot proportionele vergoeding — een punt om bij het afsluiten goed op te letten.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">Het verzekerd bedrag bij ABR is altijd gelijk aan of hoger dan de totale bouwkost (inclusief erelonen). Bij totaalverlies betaalt de verzekeraar de volledige herbouwkost. Onderverzekering (een te laag verzekerd bedrag) leidt tot proportionele vergoeding: een punt om bij het afsluiten goed op te letten.</p>
       </div>
       <div style="text-align:center;flex-shrink:0;">
         <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:6px;">Verzekerd bedrag</div>
@@ -409,7 +409,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:#001F3F;text-align:center;margin-bottom:32px;">4 factoren die je premie beïnvloeden</h3>
     <div class="abr-factors-grid">
       {[
-        {num:'1',title:'Type werken',            text:'Nieuwbouw, renovatie, hoog- of laagbouw — elk heeft een eigen risicoprofiel en premievoet.'},
+        {num:'1',title:'Type werken',            text:'Nieuwbouw, renovatie, hoog- of laagbouw: elk heeft een eigen risicoprofiel en premievoet.'},
         {num:'2',title:'Bouwperiode',            text:'Hoe langer de bouwfase, hoe langer de blootstelling en hoe hoger de premie.'},
         {num:'3',title:'Gekozen uitbreidingen',  text:'Extra modules zoals bestaand gebouw of bedrijfsschade verhogen de premie maar verlagen het risico.'},
         {num:'4',title:'Eigen risico',           text:'Een hoger eigen risico drukt de premie maar vergroot je eigen aandeel bij schade.'},
@@ -491,7 +491,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       </button>
       <div data-stat-content style="display:none;padding:0 24px 24px;">
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Als hoofdaannemer coördineer je alle partijen op de werf en ben je verantwoordelijk voor de correcte verzekering van de werken. Een globale ABR-polis die alle aannemers mee dekt is de standaard aanpak. Ze vermijdt discussies over wie welke schade veroorzaakte.</p>
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: sluit de ABR af vóór de eerste schrep. Vergeet ook de uitbreiding bestaand gebouw niet bij renovatieprojecten — standaard uitgesloten maar onmisbaar als het pand al bestaat.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: sluit de ABR af vóór de eerste schrep. Vergeet ook de uitbreiding bestaand gebouw niet bij renovatieprojecten: standaard uitgesloten maar onmisbaar als het pand al bestaat.</p>
       </div>
     </div>
 
@@ -514,7 +514,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
         <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div data-stat-content style="display:none;padding:0 24px 24px;">
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Bij renovatie zijn er twee risico's: schade aan de nieuwe werken én schade aan het bestaande gebouw. De standaard ABR dekt enkel de nieuwe werken. Voeg uitdrukkelijk de module bestaand gebouw toe — zonder die uitbreiding ben je niet gedekt als een fout van jou het pand beschadigt.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Bij renovatie zijn er twee risico's: schade aan de nieuwe werken én schade aan het bestaande gebouw. De standaard ABR dekt enkel de nieuwe werken. Voeg uitdrukkelijk de module bestaand gebouw toe: zonder die uitbreiding ben je niet gedekt als een fout van jou het pand beschadigt.</p>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Ook handig bij renovatie: maak een plaatsbeschrijving vóór je begint en bewaar ze in het dossier. Bij een claim maakt dat het verschil.</p>
       </div>
     </div>
@@ -560,7 +560,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="text-align:center;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over ABR</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">14 concrete vragen van bouwondernemers — klik open voor het antwoord.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">14 concrete vragen van bouwondernemers: klik open voor het antwoord.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;">
       {faqItems.map((item,i)=>(
@@ -599,7 +599,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
   <div style="max-width:896px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
     <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;text-align:center;margin-bottom:20px;">Start met Assurman</span>
     <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;color:#FFFFFF;max-width:727px;margin:0 auto 24px;">Is je volgende werf correct verzekerd?</h2>
-    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouwsector en wil je zeker zijn dat jouw werken in uitvoering correct gedekt zijn? Wij bekijken met jou wat echt nodig is — zonder verplichting.</p>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouwsector en wil je zeker zijn dat jouw werken in uitvoering correct gedekt zijn? Wij bekijken met jou wat echt nodig is, zonder verplichting.</p>
     <div class="abr-final-btns">
       <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">{CTA_SCAN.hero} <Fragment set:html={svgArr18} /></a>
       <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">{CTA_AFSPRAAK.advisory}</a>

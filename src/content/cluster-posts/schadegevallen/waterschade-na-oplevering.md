@@ -28,7 +28,7 @@ targetAudience: "Dakwerkers, loodgieters, algemene aannemers en bouwbedrijven di
 heroImage: "/images/kenniscentrum/c3-4-waterschade-na-oplevering.jpg"
 heroImageAlt: "Aannemer onderzoekt waterinsijpeling op zoldering jaren na oplevering met klant"
 tldr: >-
-  Voor woningbouw met architect en vergunning afgeleverd vanaf 1 juli 2018 geldt de verplichte BA-10 bij ernstige waterdichtheidsproblemen, met een minimumdekking van €500.000. Lichte verborgen gebreken vallen onder een kortere termijn en worden gedekt via BA Onderneming na levering. Erken nooit aansprakelijkheid voor je je polis hebt gecheckt. In de eerste week: je werfdossier ophalen, je makelaar bellen en een neutrale ontvangstbevestiging sturen — geen herstelling voor er expertise is geweest.
+  Voor woningbouw met architect en vergunning afgeleverd vanaf 1 juli 2018 geldt de verplichte BA-10 bij ernstige waterdichtheidsproblemen, met een minimumdekking van €500.000. Lichte verborgen gebreken vallen onder een kortere termijn en worden gedekt via BA Onderneming na levering. Erken nooit aansprakelijkheid voor je je polis hebt gecheckt. In de eerste week: je werfdossier ophalen, je makelaar bellen en een neutrale ontvangstbevestiging sturen. Geen herstelling voor er expertise is geweest.
 relatedSpokes:
   - "trillingschade-buur"
   - "klant-betaalt-niet"

@@ -7,27 +7,27 @@ import BrandChevron from '../../components/BrandChevron.astro';
 
 const faqItems = [
   { q: 'Is een BA Onderneming wettelijk verplicht voor een aannemer?', a: 'Voor de meeste aannemers niet, maar bouwheren en hoofdaannemers eisen het attest standaard. De facto werk je niet zonder. Voor woningbouw met architect geldt bovendien de afzonderlijke verplichting van BA-10 (tienjarige aansprakelijkheid).' },
-  { q: 'Wat is het verschil tussen BA Onderneming, BA Uitbating en BA Beroep?', a: 'BA Onderneming en BA Uitbating zijn doorgaans synoniem en dekken buitencontractuele schade aan derden tijdens je activiteit. BA Beroep is iets anders en dekt zuivere financiële schade door fouten in advies of dienst — typisch voor architecten, accountants, consultants.' },
-  { q: 'Wat verandert er door Boek 6 BW voor jouw polis?', a: 'Twee dingen: het samenloopverbod is weg — een derde kan je contractueel of buitencontractueel aanspreken — en de quasi-immuniteit van hulppersonen is opgeheven. Onderaannemers, werknemers en bestuurders kunnen rechtstreeks worden aangesproken. Reden om je polis te herzien op dekking van onderaannemers en bestuurders.' },
-  { q: 'Dekt BA Onderneming ook schade aan een toevertrouwd goed?', a: 'Niet standaard. Schade aan goederen die de klant aan jou heeft toevertrouwd — een meubel in renovatie, een installatie waaraan je werkt — valt onder de uitbreiding toevertrouwd goed. Aanrader voor schrijnwerkers, loodgieters en elektriciens.' },
-  { q: 'Wat kost een BA Onderneming voor een bouwbedrijf?', a: 'Voor een typisch klein bouwbedrijf doorgaans tussen € 350 en € 1.500 per jaar. Grotere bedrijven met meer omzet, meer personeel en hogere plafonds betalen enkele duizenden euro per jaar. De activiteit — dakwerk versus binnenafwerking — bepaalt mee de premievoet.' },
+  { q: 'Wat is het verschil tussen BA Onderneming, BA Uitbating en BA Beroep?', a: 'BA Onderneming en BA Uitbating zijn doorgaans synoniem en dekken buitencontractuele schade aan derden tijdens je activiteit. BA Beroep is iets anders en dekt zuivere financiële schade door fouten in advies of dienst: typisch voor architecten, accountants, consultants.' },
+  { q: 'Wat verandert er door Boek 6 BW voor jouw polis?', a: 'Twee dingen: het samenloopverbod is weg, een derde kan je contractueel of buitencontractueel aanspreken, en de quasi-immuniteit van hulppersonen is opgeheven. Onderaannemers, werknemers en bestuurders kunnen rechtstreeks worden aangesproken. Reden om je polis te herzien op dekking van onderaannemers en bestuurders.' },
+  { q: 'Dekt BA Onderneming ook schade aan een toevertrouwd goed?', a: 'Niet standaard. Schade aan goederen die de klant aan jou heeft toevertrouwd, een meubel in renovatie, een installatie waaraan je werkt, valt onder de uitbreiding toevertrouwd goed. Aanrader voor schrijnwerkers, loodgieters en elektriciens.' },
+  { q: 'Wat kost een BA Onderneming voor een bouwbedrijf?', a: 'Voor een typisch klein bouwbedrijf doorgaans tussen € 350 en € 1.500 per jaar. Grotere bedrijven met meer omzet, meer personeel en hogere plafonds betalen enkele duizenden euro per jaar. De activiteit, dakwerk versus binnenafwerking, bepaalt mee de premievoet.' },
   { q: 'Wat als mijn onderaannemer schade veroorzaakt?', a: 'Sinds Boek 6 BW kan jouw onderaannemer rechtstreeks worden aangesproken. Als hij onvoldoende verzekerd is, kom jij snel in beeld als hoofdaannemer. Eis bij elke onderaannemer een actueel attest BA Onderneming met voldoende plafond, of zorg dat je eigen polis hen mee dekt.' },
   { q: 'Wat is het verschil met BA-10 (tienjarige aansprakelijkheid)?', a: 'BA-10 is een aparte, voor woningbouw verplichte polis die specifiek de zware structurele schade gedurende tien jaar na oplevering dekt. BA Onderneming dekt schade aan derden tijdens de werken. Beide zijn complementair.' },
   { q: 'Hoe snel moet ik een schadegeval aangeven?', a: 'Standaard binnen 8 kalenderdagen na vaststelling. Te laat aangeven kan leiden tot vermindering of weigering van tussenkomst. Lees de exacte termijn altijd na in jouw polisvoorwaarden.' },
   { q: 'Wat valt absoluut niet onder BA Onderneming?', a: 'Contractbreuk zonder schade aan derden, opzet, fraude, zware fout, schade aan toevertrouwd goed zonder uitbreiding, schade door bedrijfsvoertuigen via BA Auto, boetes en strafrechtelijke veroordelingen.' },
   { q: 'Is de premie fiscaal aftrekbaar?', a: 'Ja, de premie is een aftrekbare beroepskost voor zowel eenmanszaken als vennootschappen. De premietaks van 9,25% maakt deel uit van de aftrekbare som.' },
-  { q: 'Heb ik BA Onderneming én BA Na Levering nodig?', a: 'Voor een aannemer: in de praktijk wel. BA Onderneming dekt schade tijdens het werk, BA Na Levering dekt schade die zich nadien manifesteert — lek, breuk, kortsluiting. Veel verzekeraars bundelen beide in één pakket.' },
-  { q: 'Kan ik mijn dekking verhogen na een grote opdracht?', a: 'Ja, plafonds zijn doorgaans aanpasbaar gedurende de looptijd. Voor projecten met grote risicoblootstelling — industrie, hoge gebouwen, gevoelige omgeving — is een tijdelijke verhoging gangbaar.' },
+  { q: 'Heb ik BA Onderneming én BA Na Levering nodig?', a: 'Voor een aannemer: in de praktijk wel. BA Onderneming dekt schade tijdens het werk, BA Na Levering dekt schade die zich nadien manifesteert: lek, breuk, kortsluiting. Veel verzekeraars bundelen beide in één pakket.' },
+  { q: 'Kan ik mijn dekking verhogen na een grote opdracht?', a: 'Ja, plafonds zijn doorgaans aanpasbaar gedurende de looptijd. Voor projecten met grote risicoblootstelling, industrie, hoge gebouwen, gevoelige omgeving, is een tijdelijke verhoging gangbaar.' },
   { q: 'Werkt mijn BA Onderneming ook als ik in het buitenland werk?', a: 'Standaard geldt de polis voor werven in België. Voor werken in Nederland, Frankrijk, Luxemburg of Duitsland kan dekking uitgebreid worden, doorgaans tegen bijpremie. Voor occasionele grensoverschrijdende werken altijd vooraf melden aan je verzekeraar.' },
 ];
 
 const beroepTabs = [
-  { id: 'dakwerkers',    label: 'Dakwerkers',        link: '/sectoren/dakwerkers',    title: 'Voor dakwerkers',                    text: 'Hoogwerk betekent een hoge premievoet. Vallend materiaal en weersafhankelijke vertraging zijn de twee meest voorkomende oorzaken van schadeclaims. Standaard plafond € 2.500.000 volstaat zelden voor grote daken in stedelijke omgeving — overweeg € 5.000.000.' },
+  { id: 'dakwerkers',    label: 'Dakwerkers',        link: '/sectoren/dakwerkers',    title: 'Voor dakwerkers',                    text: 'Hoogwerk betekent een hoge premievoet. Vallend materiaal en weersafhankelijke vertraging zijn de twee meest voorkomende oorzaken van schadeclaims. Standaard plafond € 2.500.000 volstaat zelden voor grote daken in stedelijke omgeving: overweeg € 5.000.000.' },
   { id: 'metsers',       label: 'Metsers',            link: '/sectoren/aannemers',     title: 'Voor metsers en algemene aannemers', text: 'Sloop, ruwbouw en heipalen zijn klassieke schadegenerators door puin, trillingen en schade aan aanpalende gebouwen. Combineer BA Onderneming altijd met BA Na Levering en bij heipalen met dekking voor schade aan aanpalende constructies.' },
-  { id: 'loodgieters',   label: 'Loodgieters',        link: '/sectoren/loodgieters',   title: 'Voor loodgieters',                   text: 'Waterschade is het signaalrisico. Lekken duiken vaak pas dagen later op, dus BA Na Levering is geen luxe. Toevertrouwd goed — de installatie van de klant waaraan je werkt — hoort eveneens bij het basispakket.' },
+  { id: 'loodgieters',   label: 'Loodgieters',        link: '/sectoren/loodgieters',   title: 'Voor loodgieters',                   text: 'Waterschade is het signaalrisico. Lekken duiken vaak pas dagen later op, dus BA Na Levering is geen luxe. Toevertrouwd goed, de installatie van de klant waaraan je werkt, hoort eveneens bij het basispakket.' },
   { id: 'elektriciens',  label: 'Elektriciens',       link: '/sectoren/elektriciens',  title: 'Voor elektriciens',                  text: 'Brand- en kortsluitschade vormt het zwaarste risico. Een goed afgestemde BA Onderneming met BA Na Levering en voldoende plafond is essentieel. Industriële installaties vragen € 5.000.000 of meer.' },
-  { id: 'schilders',     label: 'Schilders',          link: '/sectoren/schilders',     title: 'Voor schilders',                     text: 'Frequente, kleinere schadegevallen zoals verf op tapijt, beschadigde meubelen en vlekken op parket. Toevertrouwd goed is hier essentieel — anders sta je voor elk niet-afgedekt meubelstuk zelf in.' },
-  { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Werk in het atelier én bij de klant. Toevertrouwd goed is voor schrijnwerkers vaak de duurste schadepost — beschadigde antieke kasten, verzaagde maatstukken. Stem je polis daarop af.' },
+  { id: 'schilders',     label: 'Schilders',          link: '/sectoren/schilders',     title: 'Voor schilders',                     text: 'Frequente, kleinere schadegevallen zoals verf op tapijt, beschadigde meubelen en vlekken op parket. Toevertrouwd goed is hier essentieel: anders sta je voor elk niet-afgedekt meubelstuk zelf in.' },
+  { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Werk in het atelier én bij de klant. Toevertrouwd goed is voor schrijnwerkers vaak de duurste schadepost: beschadigde antieke kasten, verzaagde maatstukken. Stem je polis daarop af.' },
 ];
 
 const insuranceCards = [
@@ -48,7 +48,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 ---
 
 <BaseLayout
-  title="BA Onderneming voor aannemers — wat dekt het? | Assurman"
+  title="BA Onderneming voor aannemers | wat dekt het? | Assurman"
   description="BA Onderneming dekt schade aan derden tijdens je bouwactiviteit. Wat is verplicht, wat kost het, wat verandert door Boek 6 BW. Vraag een scan aan."
   canonical="/verzekeringen/ba-onderneming/"
   schema={schema}
@@ -158,7 +158,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       </div>
       <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">BA Onderneming<br />voor je bouwbedrijf</h1>
       <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">De polis die schade aan derden dekt.</p>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Een vallende dakpan op een geparkeerde wagen. Een verkeerd aangesloten leiding die het laminaat van je klant ruïneert. Voor een aannemer is de vraag niet of het ooit gebeurt, maar wanneer — en sinds Boek 6 BW kunnen ook je onderaannemers en bestuurders rechtstreeks worden aangesproken.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Een vallende dakpan op een geparkeerde wagen. Een verkeerd aangesloten leiding die het laminaat van je klant ruïneert. Voor een aannemer is de vraag niet of het ooit gebeurt, maar wanneer. En sinds Boek 6 BW kunnen ook je onderaannemers en bestuurders rechtstreeks worden aangesproken.</p>
       <div class="bao-hero-btns">
         <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
           {CTA_SCAN.hero}
@@ -166,7 +166,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
         </a>
         <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.advisory}</a>
       </div>
-      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;">Geen verkooppraatjes — een scan op maat van jouw activiteit, omzet en personeelsbestand.</p>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;">Geen verkooppraatjes: een scan op maat van jouw activiteit, omzet en personeelsbestand.</p>
     </div>
   </div>
 </section>
@@ -192,7 +192,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
           {[
             {t:'BA Onderneming dekt schade aan derden die je veroorzaakt tijdens de <strong style="color:#FFFFFF;">uitbating van je bouwbedrijf</strong>.'},
-            {t:'Het gaat om buitencontractuele aansprakelijkheid — schade aan iemand die <strong style="color:#FFFFFF;">geen partij is bij je contract</strong>.'},
+            {t:'Het gaat om buitencontractuele aansprakelijkheid: schade aan iemand die <strong style="color:#FFFFFF;">geen partij is bij je contract</strong>.'},
             {t:'Standaardkapitaal bij grote spelers ligt rond <strong style="color:#FFFFFF;">€ 2.500.000 per schadegeval</strong>.'},
             {t:'Niet wettelijk verplicht, maar in de praktijk <strong style="color:#FFFFFF;">onmisbaar zodra je op werven werkt</strong>.'},
             {t:'Depuis Boek 6 BW kunnen ook je <strong style="color:#FFFFFF;">onderaannemers en bestuurders rechtstreeks aangesproken</strong> worden.'},
@@ -207,7 +207,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       <div>
         <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
         <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">De basisbescherming voor schade aan derden</h2>
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">BA Onderneming — ook BA Uitbating genoemd — is de verzekering die tussenkomt wanneer jij of een medewerker tijdens de uitoefening van het beroep schade berokkent aan iemand die geen partij is bij je contract: een buurman, een passant, een onderaannemer-werknemer, een bezoeker op de werf. Lichamelijk, materieel en immaterieel zoals omzetverlies door een brand die jij veroorzaakt.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">BA Onderneming, ook BA Uitbating genoemd, is de verzekering die tussenkomt wanneer jij of een medewerker tijdens de uitoefening van het beroep schade berokkent aan iemand die geen partij is bij je contract: een buurman, een passant, een onderaannemer-werknemer, een bezoeker op de werf. Lichamelijk, materieel en immaterieel zoals omzetverlies door een brand die jij veroorzaakt.</p>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">Voor een bouwbedrijf is dit de fundering van je verzekeringsportefeuille. De polis vangt op wat in het civiel recht foutaansprakelijkheid heet: jij maakt een fout, een derde lijdt schade, jij vergoedt. Met BA Onderneming neemt de verzekeraar die rekening over tot de gekozen plafonds.</p>
         <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
           <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
@@ -259,7 +259,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="max-width:640px;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Per beroep: wanneer is een BA Onderneming de facto verplicht?</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">De wet legt het niet altijd op, maar de praktijk wel. Bouwheren, hoofdaannemers en architecten vragen je BA-attest standaard op vóór ze je een werf gunnen — en sinds Boek 6 BW (1 januari 2025) kan je rechtstreeks worden aangesproken voor schade aan derden, ook als je in onderaanneming werkt.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">De wet legt het niet altijd op, maar de praktijk wel. Bouwheren, hoofdaannemers en architecten vragen je BA-attest standaard op vóór ze je een werf gunnen, en sinds Boek 6 BW (1 januari 2025) kan je rechtstreeks worden aangesproken voor schade aan derden, ook als je in onderaanneming werkt.</p>
     </div>
     <div class="bao-rules-grid">
       {[
@@ -303,7 +303,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="text-align:center;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Dekking</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat is wél en niet gedekt?</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:580px;margin:0 auto;">Een BA Onderneming dekt buitencontractuele schade aan derden — lichamelijke, materiële en immateriële schade. Hieronder de hoofdlijnen.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;max-width:580px;margin:0 auto;">Een BA Onderneming dekt buitencontractuele schade aan derden: lichamelijke, materiële en immateriële schade. Hieronder de hoofdlijnen.</p>
     </div>
     <div class="bao-dekking-grid">
       <div style="background:#FFFFFF;border:2px solid rgba(34,197,94,0.5);border-radius:1px;overflow:hidden;">
@@ -326,7 +326,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
           <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#b91c1c;">Niet (of beperkt) gedekt</span>
         </div>
         <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
-          {['Contractbreuk of slecht werk zonder schade aan derden','Schade aan toevertrouwd goed — enkel met aparte uitbreiding','Opzet, fraude en zware fout van de verzekerde of zijn aangestelde','Schade die na oplevering opduikt — valt onder BA Na Levering','Schade door bedrijfsvoertuigen — valt onder verplichte autoverzekering','Boetes, sancties en strafrechtelijke veroordelingen'].map(item=>(
+          {['Contractbreuk of slecht werk zonder schade aan derden','Schade aan toevertrouwd goed: enkel met aparte uitbreiding','Opzet, fraude en zware fout van de verzekerde of zijn aangestelde','Schade die na oplevering opduikt: valt onder BA Na Levering','Schade door bedrijfsvoertuigen: valt onder verplichte autoverzekering','Boetes, sancties en strafrechtelijke veroordelingen'].map(item=>(
             <li style="display:flex;gap:12px;align-items:flex-start;">
               <Fragment set:html={svgX16r} />
               <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
@@ -338,7 +338,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div class="bao-plafond-grid" style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);padding:36px 40px;">
       <div>
         <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Standaardplafond</span>
-        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#FFFFFF;margin:0 0 12px;">Tot € 2.500.000 per schadegeval — keuze op maat</h3>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#FFFFFF;margin:0 0 12px;">Tot € 2.500.000 per schadegeval: keuze op maat</h3>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">Bij de meeste verzekeraars is het basiskapitaal € 2.500.000 voor lichamelijke en materiële schade samen. Voor bouwbedrijven met grote werven wordt vaak verhoogd naar € 5.000.000 of € 10.000.000. Het juiste plafond hangt af van je activiteit, omzet en de waarde van wat er rond je werf staat.</p>
       </div>
       <div style="text-align:center;flex-shrink:0;">
@@ -362,7 +362,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div class="bao-aanvulling-grid">
       {[
         {i:'ac',title:'BA Na Levering',        text:'Dekt schade die zich pas voordoet nadat je werk is opgeleverd. Een lekkage die drie weken later opduikt. Voor de meeste aannemers de eerste uitbreiding die je neemt.'},
-        {i:'sh',title:'Toevertrouwd goed',     text:'Dekt schade aan goederen die de klant aan jou heeft toevertrouwd — meubels in renovatie, een wagen in een werkplaats, een installatie die je verbouwt. Standaard uitgesloten van BA Onderneming.'},
+        {i:'sh',title:'Toevertrouwd goed',     text:'Dekt schade aan goederen die de klant aan jou heeft toevertrouwd: meubels in renovatie, een wagen in een werkplaats, een installatie die je verbouwt. Standaard uitgesloten van BA Onderneming.'},
         {i:'us',title:'Onderaannemers',        text:'Sinds Boek 6 BW kan je onderaannemer rechtstreeks aangesproken worden. Met deze uitbreiding wordt zijn aansprakelijkheid mee verzekerd binnen jouw polis.'},
         {i:'tr',title:'Rechtsbijstand',        text:'Vaak gekoppeld aan BA Onderneming: de verzekeraar betaalt advocaat- en expertisekosten wanneer je een schadeclaim moet betwisten of een eigen vordering moet instellen.'},
         {i:'br',title:'Cross liability',       text:'Wanneer je in joint venture of tijdelijke vereniging werkt: schade veroorzaakt door één partner aan een andere partner wordt mee gedekt. Relevant voor grotere bouwprojecten.'},
@@ -381,7 +381,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       ))}
       <div style="background:#E5A524;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:32px;display:flex;flex-direction:column;justify-content:center;">
         <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">Niet zeker welke uitbreidingen je écht nodig hebt?</h3>
-        <p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(0,31,63,0.75);line-height:1.55;margin:0 0 20px;">Doe de scan — we vergelijken jouw activiteit, omzet en risicoprofiel met wat verzekeraars vandaag aanbieden.</p>
+        <p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(0,31,63,0.75);line-height:1.55;margin:0 0 20px;">Doe de scan: we vergelijken jouw activiteit, omzet en risicoprofiel met wat verzekeraars vandaag aanbieden.</p>
         <a href={CTA_DESTINATIONS.scan} class="bao-scan-btn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.2s;width:100%;">
           {CTA_SCAN.start} <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
@@ -514,7 +514,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
         <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div data-stat-content style="display:none;padding:0 24px 24px;">
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je hebt geen personeel en werkt voor één of meerdere hoofdaannemers, soms rechtstreeks voor particulieren. Je bent niet wettelijk verplicht een BA Onderneming te nemen — maar de hoofdaannemer eist het attest, en zonder werk je niet.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je hebt geen personeel en werkt voor één of meerdere hoofdaannemers, soms rechtstreeks voor particulieren. Je bent niet wettelijk verplicht een BA Onderneming te nemen, maar de hoofdaannemer eist het attest, en zonder werk je niet.</p>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Voor jou is een basispolis met plafond van € 2.500.000 doorgaans voldoende, eventueel uitgebreid met BA Na Levering en toevertrouwd goed als je in renovatie werkt. Premie ligt typisch tussen € 350 en € 750 per jaar voor lage-risico activiteiten en hoger voor dak- of gevelwerken.</p>
       </div>
     </div>
@@ -526,7 +526,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
         <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div data-stat-content style="display:none;padding:0 24px 24px;">
-        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Renovatie heeft een eigen profiel: vaak werk in het huis van de klant, met toevertrouwde materialen, regelmatig schade aan bestaande afwerking — verf op tapijt, krassen op parket, lekken door bestaande leidingen. Drie aandachtspunten:</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Renovatie heeft een eigen profiel: vaak werk in het huis van de klant, met toevertrouwde materialen, regelmatig schade aan bestaande afwerking: verf op tapijt, krassen op parket, lekken door bestaande leidingen. Drie aandachtspunten:</p>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px;">
           {['Neem altijd de uitbreiding toevertrouwd goed: zonder is schade aan een meubelstuk dat je verplaatst niet gedekt.','Overweeg BA Na Levering: lekken en breuken duiken vaak weken later op.','Documenteer de bestaande toestand vóór je begint met foto\'s. Bij betwisting maakt dat het verschil.'].map(item=>(
             <li style="display:flex;gap:10px;align-items:flex-start;"><svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg><span style="font-family:'Outfit',sans-serif;font-size:15px;color:#CBD5E1;">{item}</span></li>
@@ -576,7 +576,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="text-align:center;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over BA Onderneming</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">13 concrete vragen van bouwondernemers — klik open voor het antwoord.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">13 concrete vragen van bouwondernemers: klik open voor het antwoord.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;">
       {faqItems.map((item,i)=>(
@@ -618,7 +618,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
   <div style="max-width:896px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
     <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;text-align:center;margin-bottom:20px;">Start met Assurman</span>
     <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;color:#FFFFFF;max-width:727px;margin:0 auto 24px;">Is jouw bouwbedrijf correct verzekerd?</h2>
-    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouwsector en wil je zeker zijn dat jouw BA Onderneming correct is afgestemd? Wij bekijken met jou wat echt nodig is — zonder verplichting.</p>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouwsector en wil je zeker zijn dat jouw BA Onderneming correct is afgestemd? Wij bekijken met jou wat echt nodig is, zonder verplichting.</p>
     <div class="bao-final-btns">
       <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">{CTA_SCAN.hero} <Fragment set:html={svgArr18} /></a>
       <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">{CTA_AFSPRAAK.advisory}</a>

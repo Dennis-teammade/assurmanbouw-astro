@@ -10,7 +10,7 @@ import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/ct
 const insuranceCards = [
   {
     title: 'BA Onderneming',
-    intro: 'Dekt schade tijdens en na de werken — door je ploegen, onderaannemers en materieel.',
+    intro: 'Dekt schade tijdens en na de werken, door je ploegen, onderaannemers en materieel.',
     bullets: [
       'Schade aan eigendommen van klanten of derden tijdens uitvoering',
       'Letselschade aan derden (passanten, buren, andere ploegen)',
@@ -27,7 +27,7 @@ const insuranceCards = [
     intro: 'Wettelijk verplicht voor werken aan de gesloten ruwbouw van vergunningsplichtige woningen.',
     bullets: [
       'Verplicht sinds 1 juli 2018 (Wet-Peeters-Borsus)',
-      'Werfpolis per project of jaarpolis voor alle werven',
+      'Abonnementspolis voor alle werven',
       'Globale polis: alle bouwactoren samen verzekerd',
       'Verplicht attest vóór de start van de werken',
       'Wettelijk minimum: € 500.000 per schadegeval',
@@ -38,7 +38,7 @@ const insuranceCards = [
   },
   {
     title: 'Arbeidsongevallenverzekering',
-    intro: 'Wettelijk verplicht én operationeel cruciaal — bescherming voor al je werknemers vanaf de eerste werkdag.',
+    intro: 'Wettelijk verplicht én operationeel cruciaal: bescherming voor al je werknemers vanaf de eerste werkdag.',
     bullets: [
       'Verplicht vanaf je eerste werknemer',
       'Dekt werknemers op werf én woon-werkverkeer',
@@ -52,11 +52,11 @@ const insuranceCards = [
   },
   {
     title: 'Bedrijfsvoertuigen',
-    intro: 'Bestelwagens, vrachtwagens, soms werktuigen — een vlootpolis is doorgaans voordeliger.',
+    intro: 'Bestelwagens, vrachtwagens, soms werktuigen: een vlootpolis is doorgaans voordeliger.',
     bullets: [
       'BA Auto wettelijk verplicht voor alle voertuigen',
-      'Omnium voor recente bestelwagens en vrachtwagens',
-      'Vlootkorting vanaf 5 voertuigen',
+      'Omnium (afhankelijk van leeftijd voertuig)',
+      'Vlootkorting vanaf 10 voertuigen',
       'Verzekering vervoerde goederen voor materiaal',
       'Aandacht voor aanhangwagens > 750 kg MTM',
     ],
@@ -66,7 +66,7 @@ const insuranceCards = [
   },
   {
     title: 'Machinebreukverzekering',
-    intro: 'Heftrucks, hoogwerkers, betonmolens, gereedschap — één defect kan een hele werf vertragen.',
+    intro: 'Heftrucks, hoogwerkers, betonmolens, gereedschap: één defect kan een hele werf vertragen.',
     bullets: [
       'Dekking voor breuk, schade en vaak diefstal',
       'Vast atelier-materieel én mobiel werfmaterieel',
@@ -80,12 +80,12 @@ const insuranceCards = [
   },
   {
     title: 'Rechtsbijstand',
-    intro: 'Bouwheren, hoofdaannemers, onderaannemers, leveranciers, personeel — geschillen zijn geen uitzondering.',
+    intro: 'Bouwheren, hoofdaannemers, onderaannemers, leveranciers, personeel. Geschillen zijn geen uitzondering. Mogelijke dekkingen:',
     bullets: [
-      'Hulp bij contractgeschillen en betwiste oplevering',
-      'Incasso bij onbetaalde facturen',
-      'Verdediging bij arbeidsrechtelijke conflicten',
-      'Tussenkomst in advocaat-, expert- en gerechtskosten',
+      'Contractgeschillen en oplevering',
+      'Incasso onbetaalde facturen',
+      'Arbeidsrechtelijke conflicten',
+      'Tussenkomst advocaat- en expertkosten',
       'Vrije keuze van advocaat',
     ],
     cta: 'Meer over rechtsbijstand',
@@ -97,13 +97,13 @@ const insuranceCards = [
 const caseStudies = [
   {
     category: 'ALGEMENE AANNEMING',
-    title: 'Onderaannemer veroorzaakt schade van €28.000 — wie betaalt?',
+    title: 'Onderaannemer veroorzaakt schade van €28.000: wie betaalt?',
     businessName: 'Bouwbedrijf Vlaeminck',
     ownerName: 'Vincent Vlaeminck',
-    cityName: 'Antwerpen',
-    description: 'Een algemene aannemer was bezig met een halfopen woning. Tijdens de uitvoering veroorzaakte een onderaannemer (loodgieter) waterschade aan de pas geplaatste afwerking — vloeren, pleisterwerk en gipskarton. De bouwheer stelde de algemene aannemer in gebreke voor de volledige schade.',
+    cityName: 'Beernem',
+    description: 'Een algemene aannemer was bezig met een halfopen woning. Tijdens de uitvoering veroorzaakte een onderaannemer (loodgieter) waterschade aan de pas geplaatste afwerking: vloeren, pleisterwerk en gipskarton. De bouwheer stelde de algemene aannemer in gebreke voor de volledige schade.',
     action: 'Via de BA Onderneming opende Assurman het dossier. Een schade-expert bracht de aansprakelijkheid in kaart: de loodgieter had een fout begaan, maar de algemene aannemer was hoofdverantwoordelijk tegenover de bouwheer. De BA-polis kwam tussen voor de schadeclaim, terwijl rechtsbijstand verhaal haalde op de onderaannemer en zijn verzekeraar.',
-    image: 'https://images.pexels.com/photos/585419/pexels-photo-585419.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/images/cases/case-aannemers-1.jpg',
   },
   {
     category: 'ALGEMENE AANNEMING',
@@ -113,7 +113,7 @@ const caseStudies = [
     cityName: 'Gent',
     description: 'Tijdens renovatie van een rijwoning werden geleverde materialen zwaar beschadigd door een onverwachte storm.',
     action: 'Via de ABR-dekking werd de schade snel afgehandeld. Nieuwe leveringen werden versneld georganiseerd en het project liep slechts enkele dagen vertraging op.',
-    image: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/images/cases/case-aannemers-2.jpg',
   },
   {
     category: 'ALGEMENE AANNEMING',
@@ -123,7 +123,7 @@ const caseStudies = [
     cityName: 'Kortrijk',
     description: 'Een aannemer werd getroffen door een gerichte diefstal op de werf. Dieven namen alle essentiële machines mee.',
     action: 'Dankzij de machinebreukverzekering kon binnen 48 uur een vervangingsorder geplaatst worden. De zaakvoerder verloor slechts één dag werk.',
-    image: 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/images/cases/case-aannemers-3.jpg',
   },
   {
     category: 'ALGEMENE AANNEMING',
@@ -133,7 +133,7 @@ const caseStudies = [
     cityName: 'Roeselare',
     description: 'Na oplevering van een woning ontstond een geschil over stabiliteitsgebreken. De bouwheer beriep zich op de tienjarige aansprakelijkheid.',
     action: 'Via de BA-10-polis kon een expert worden ingeschakeld. Na bemiddeling werd een compromis bereikt. De verzekering dekte de expert- en herstelkosten volledig.',
-    image: 'https://images.pexels.com/photos/1249611/pexels-photo-1249611.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/images/cases/case-aannemers-4.jpg',
   },
 ];
 
@@ -183,7 +183,7 @@ const schema = {
   .dw-hero-content { max-width: 52%; padding-top: 40px; }
   .dw-hero-img { position: absolute; top: 5%; right: 0; height: 90%; width: auto; max-width: 48%; z-index: 1; pointer-events: none; }
   .dw-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .dw-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; align-items: flex-start; }
+  .dw-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; }
   .dw-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .dw-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 48px; }
   .dw-cards3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -265,7 +265,7 @@ const schema = {
         Goed gedekt voor jouw werf en onderaannemers.
       </p>
       <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#001F3F;margin-bottom:28px;max-width:520px;">
-        Als algemene aannemer coördineer je ploegen, onderaannemers en planning. Eén schakel die hapert — een gebrek na oplevering, een werfongeval, een schadeclaim — en jij staat in de eerste lijn. Assurman regelt verzekeringen op maat van bouwondernemers in Vlaanderen.
+        Als algemene aannemer coördineer je ploegen, onderaannemers en planning. Eén schakel die hapert: een gebrek na oplevering, een werfongeval, een schadeclaim. En jij staat in de eerste lijn. Assurman regelt verzekeringen op maat van bouwondernemers in Vlaanderen.
       </p>
       <div class="dw-hero-btns">
         <a href="/gratis-verzekeringsscan/" class="dw-btn-primary">
@@ -292,11 +292,11 @@ const schema = {
         { text: 'Specialist in algemene\naanneming & bouw', iconPath: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 8 0 4 4 0 0 0-8 0M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75' },
         { text: 'Modulair pakket:\nenkel wat nodig is', iconPath: 'm6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2' },
         { text: 'Duidelijke uitleg,\nsnelle service', iconPath: 'M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z' },
-        { text: 'Volledige dekking: werf\n+ materieel + mobiliteit', iconPath: 'M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18ZM6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4' },
+        { html: 'Volledige dekking: <span style="font-size:13px;">werf, materieel, mobiliteit & personen</span>', iconPath: 'M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18ZM6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4', compact: true },
       ].map((item) => (
-        <div style="display:flex;align-items:center;gap:20px;background:#FFFFFF;border:1px solid rgba(229,165,36,0.18);border-radius:12px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+        <div style={`display:flex;align-items:center;gap:20px;background:#FFFFFF;border:1px solid rgba(229,165,36,0.18);border-radius:12px;padding:20px ${item.compact ? '20px' : '24px'};box-shadow:0 1px 4px rgba(0,0,0,0.05);`}>
           <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;"><path d={item.iconPath}/></svg>
-          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#001F3F;line-height:1.45;white-space:pre-line;">{item.text}</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#001F3F;line-height:1.45;white-space:pre-line;">{item.html ? <Fragment set:html={item.html} /> : item.text}</div>
         </div>
       ))}
     </div>
@@ -313,7 +313,7 @@ const schema = {
         </h2>
         <div style="width:96px;height:6px;background:#E5A524;margin-bottom:24px;"></div>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:20px;">
-          Als algemene aannemer draag je eindverantwoordelijkheid op de werf. Jij coördineert ploegen en onderaannemers, bewaakt planning en kwaliteit, en staat in voor de oplevering. Een fout van één partij in de keten — en jij draait op voor de gevolgen.
+          Als algemene aannemer draag je eindverantwoordelijkheid op de werf. Jij coördineert ploegen en onderaannemers, bewaakt planning en kwaliteit, en staat in voor de oplevering. Een fout van één partij in de keten, en jij draait op voor de gevolgen.
         </p>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:32px;">
           Assurman bouwt geen standaardpakket, maar een pakket op maat van jouw realiteit: type werven, omvang personeel, onderaannemers, materieel, voertuigen en risicoprofiel.
@@ -328,7 +328,7 @@ const schema = {
       <div style="display:flex;flex-direction:column;gap:20px;padding-top:40px;">
         {[
           { title: 'Aansprakelijkheid en oplevering', text: 'Van BA Uitbating tot tienjarige aansprakelijkheid: je verantwoordelijkheid loopt door tot 10 jaar na oplevering.', iconPath: 'M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 14l2 2 4-4' },
-          { title: 'Werfschade en coördinatie', text: 'Schade tijdens uitvoering, betwistingen tussen partijen, gebreken die later opduiken — geen luxe om volledig te dekken.', iconPath: 'M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01' },
+          { title: 'Werfschade en coördinatie', text: 'Schade tijdens uitvoering, betwistingen tussen partijen, gebreken die later opduiken: geen luxe om volledig te dekken.', iconPath: 'M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01' },
           { title: 'Personeel, materieel en mobiliteit', text: 'Eigen ploegen op werven, dure machines, een actieve vloot. Eén ongeval zet je hele organisatie onder druk.', iconPath: 'M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5M14 6a6 6 0 0 1 6 6v3M4 15v-3a6 6 0 0 1 6-6M3 15L21 15A1 1 0 0 1 22 16L22 18A1 1 0 0 1 21 19L3 19A1 1 0 0 1 2 18L2 16A1 1 0 0 1 3 15z' },
         ].map((card) => (
           <div class="dw-why-card" style="padding:28px;display:flex;align-items:flex-start;gap:20px;">
@@ -360,7 +360,7 @@ const schema = {
     </div>
     <div class="dw-benefits-grid">
       {[
-        { title: 'Heldere dekking', text: 'Geen wollige taal — je weet waarvoor je verzekerd bent.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
+        { title: 'Heldere dekking', text: 'Geen wollige taal: je weet waarvoor je verzekerd bent.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
         { title: 'Slimme modules', text: 'Voeg toe wat jij nodig hebt: BA-10, ABR, materieel, voertuigen, rechtsbijstand.', iconPath: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4' },
         { title: 'Snelle intake', text: 'Onze expert doet een grondige audit en stemt alles af op jouw projecten en onderaannemers.', iconPath: 'M10 2L14 2M12 14L15 11M4 14a8 8 0 1 0 16 0a8 8 0 1 0-16 0' },
         { title: 'Bouw-expertise', text: 'We spreken jouw taal: ruwbouw, technieken, afwerking, oplevering.', iconPath: 'M3 6L21 6A1 1 0 0 1 22 7L22 13A1 1 0 0 1 21 14L3 14A1 1 0 0 1 2 13L2 7A1 1 0 0 1 3 6zM17 14v7M7 14v7M17 3v3M7 3v3M10 14L2.3 6.3M14 6L21.7 13.7M8 6L16 14' },
@@ -556,8 +556,8 @@ const schema = {
 
     <div class="dw-testimonials-grid">
       {[
-        { quote: 'Eindelijk iemand die de keten begrijpt. Mijn onderaannemers, mijn ploegen en mijn werven — alles in één pakket geregeld.', name: 'Zaakvoerder algemene aanneming, Limburg' },
-        { quote: 'BA-10 was voor mij een grijze zone. Assurman heeft het helder uitgelegd en alles per werf in orde gebracht.', name: 'Algemene aannemer, Antwerpen' },
+        { quote: 'Eindelijk iemand die de keten begrijpt. Mijn onderaannemers, mijn ploegen en mijn werven. Alles in één pakket geregeld.', name: 'Zaakvoerder algemene aanneming, Roeselare' },
+        { quote: 'BA-10 was voor mij een grijze zone. Assurman heeft het helder uitgelegd en alles per werf in orde gebracht.', name: 'Algemene aannemer, Brugge' },
         { quote: 'We zijn van 8 naar 22 werknemers gegroeid. Het pakket schaalde gewoon mee, zonder dat ik er iets voor moest doen.', name: 'Bouwbedrijf, Oost-Vlaanderen' },
       ].map((t) => (
         <div class="dw-testimonial-card" style="padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);">

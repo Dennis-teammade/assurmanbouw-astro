@@ -25,7 +25,7 @@ const insuranceCards = [
     title: 'Bedrijfsvoertuigen',
     intro: 'Jouw bestelwagen is je werkplek op wielen. Snel, mobiel en onmisbaar.',
     bullets: [
-      'Omnium voor recente voertuigen',
+      'Omnium (afhankelijk van leeftijd voertuig)',
       'Bescherming bij diefstal of accident',
       'Dekking voor materiaal aan boord',
       'Vlootpolis indien meerdere wagens',
@@ -36,7 +36,7 @@ const insuranceCards = [
   },
   {
     title: 'Machinebreuk & gereedschap',
-    intro: 'Snijmachines, perstangen, video-inspectie — duur materiaal dat je dagelijks nodig hebt.',
+    intro: 'Snijmachines, perstangen, video-inspectie: duur materiaal dat je dagelijks nodig hebt.',
     bullets: [
       'Dekking bij defect of beschadiging',
       'Diefstal op werf of in bestelwagen',
@@ -49,11 +49,11 @@ const insuranceCards = [
   },
   {
     title: 'Rechtsbijstand',
-    intro: 'Betwistingen over waterschade, facturen of aansprakelijkheid kunnen escaleren.',
+    intro: 'Betwistingen over waterschade, facturen of aansprakelijkheid kunnen escaleren. Onder de mogelijkheden:',
     bullets: [
-      'Juridische hulp bij geschillen',
-      'Ondersteuning bij betwiste aansprakelijkheid',
-      'Tussenkomst in kosten advocaat',
+      'Geschillen en betwistingen',
+      'Betwiste aansprakelijkheid',
+      'Tussenkomst advocaatkosten',
       'Aanvulling op BA',
     ],
     cta: 'Check rechtsbijstand',
@@ -94,10 +94,10 @@ const caseStudies = [
     title: 'Waterleiding gesprongen na installatie: €22.000 schade aan parket',
     businessName: 'Hydro Install bvba',
     ownerName: 'Thomas Pieters',
-    cityName: 'Antwerpen',
+    cityName: 'Aalter',
     description: 'Na het plaatsen van een nieuwe badkamer spatte een koppeling los. De waterschade trof de volledig vernieuwde badkamer en het parket van de hal.',
     action: 'De BA-verzekering handelde de schade af na expertise. De loodgieter moest niets zelf bijbetalen. De klant werd volledig vergoed.',
-    image: 'https://images.pexels.com/photos/585419/pexels-photo-585419.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/images/cases/case-loodgieters-1.jpg',
   },
   {
     category: 'SANITAIR & VERWARMING',
@@ -107,7 +107,7 @@ const caseStudies = [
     cityName: 'Gent',
     description: 'Na een renovatie van de verwarmingsinstallatie werd een gaslek ontdekt. De bewoners werden geëvacueerd en er dreigde een ernstige situatie.',
     action: 'Via de BA-polis werd de schade onderzocht en werd het slachtoffer vergoed. De oorzaak bleek een fabricagefout aan een koppeling. De verzekeraar verhuurde zich op de leverancier.',
-    image: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/images/cases/case-loodgieters-2.jpg',
   },
   {
     category: 'SANITAIR & VERWARMING',
@@ -117,7 +117,7 @@ const caseStudies = [
     cityName: 'Kortrijk',
     description: 'Een loodgieter verloor zijn duurste uitrusting door inbraak in zijn bestelwagen.',
     action: 'De machinebreukverzekering vergoedde het materiaal volledig. Vervanging werd binnen de week geregeld.',
-    image: 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/images/cases/case-loodgieters-3.jpg',
   },
 ];
 
@@ -167,7 +167,7 @@ const schema = {
   .dw-hero-content { max-width: 52%; padding-top: 40px; }
   .dw-hero-img { position: absolute; top: 5%; right: 0; height: 90%; width: auto; max-width: 48%; z-index: 1; pointer-events: none; }
   .dw-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .dw-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; align-items: flex-start; }
+  .dw-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; }
   .dw-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .dw-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 48px; }
   .dw-cards3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -249,7 +249,7 @@ const schema = {
         Stevig verzekerd bij water, gas en sanitair.
       </p>
       <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#001F3F;margin-bottom:28px;max-width:520px;">
-        Als loodgieter werk je in bewoonde panden, met water en gas — twee elementen die bij een fout ernstige schade kunnen veroorzaken. Assurman verzekert loodgieters op maat van hun activiteiten in Vlaanderen.
+        Als loodgieter werk je in bewoonde panden, met water en gas: twee elementen die bij een fout ernstige schade kunnen veroorzaken. Assurman verzekert loodgieters op maat van hun activiteiten in Vlaanderen.
       </p>
       <div class="dw-hero-btns">
         <a href="/gratis-verzekeringsscan/" class="dw-btn-primary">
@@ -297,21 +297,21 @@ const schema = {
         </h2>
         <div style="width:96px;height:6px;background:#E5A524;margin-bottom:24px;"></div>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:20px;">
-          Als loodgieter werk je dagelijks met water en gas in bewoonde panden. Eén foutief geplaatste koppeling, een vergeten afsluiting of een gaslek — en de gevolgen zijn meteen zichtbaar. Waterschade aan parket, structurele schade aan muren, of erger nog: een gevaarlijk gasincident.
+          Als loodgieter werk je dagelijks met water en gas in bewoonde panden. Eén foutief geplaatste koppeling, een vergeten afsluiting of een gaslek: de gevolgen zijn meteen zichtbaar. Waterschade aan parket, structurele schade aan muren, of erger nog: een gevaarlijk gasincident.
         </p>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:32px;">
           Assurman bouwt een pakket op maat: BA afgestemd op sanitaire en thermische risico's, gereedschapverzekering voor je dure uitrusting, en eventueel rechtsbijstand bij geschillen.
         </p>
         <blockquote style="border-left:4px solid #E5A524;padding-left:24px;margin:0;">
           <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;line-height:1.55;color:#001F3F;margin:0;">
-            "Jij houdt alles stromend — wij zorgen dat je beschermd bent als er iets lekt."
+            "Jij houdt alles stromend. Wij zorgen dat je beschermd bent als er iets lekt."
           </p>
         </blockquote>
       </div>
 
       <div style="display:flex;flex-direction:column;gap:20px;padding-top:40px;">
         {[
-          { title: 'Waterschade na installatie', text: 'BA Onderneming dekt waterschade die optreedt na jouw werkzaamheden — ook als het pas later ontdekt wordt.', iconPath: 'M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05zM12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97' },
+          { title: 'Waterschade na installatie', text: 'BA Onderneming dekt waterschade die optreedt na jouw werkzaamheden, ook als het pas later ontdekt wordt.', iconPath: 'M7 16.3c2.2 0 4-1.83 4-4.05 0-1.16-.57-2.26-1.71-3.19S7.29 6.75 7 5.3c-.29 1.45-1.14 2.84-2.29 3.76S3 11.1 3 12.25c0 2.22 1.8 4.05 4 4.05zM12.56 6.6A10.97 10.97 0 0 0 14 3.02c.5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a6.98 6.98 0 0 1-11.91 4.97' },
           { title: 'Gas- en thermische risico\'s', text: "Gasinstallaties brengen specifieke risico's mee. We zorgen dat jouw polis dit correct afdekt.", iconPath: 'M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z' },
           { title: 'Diefstal van gespecialiseerd materiaal', text: 'Perstangen, video-inspectiecamera\'s en druktestapparatuur zijn duur. Een gereedschapverzekering houdt je op gang.', iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z' },
         ].map((card) => (
@@ -344,8 +344,8 @@ const schema = {
     </div>
     <div class="dw-benefits-grid">
       {[
-        { title: 'Heldere dekking', text: 'Geen wollige taal — je weet waarvoor je verzekerd bent.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
-        { title: 'Slimme modules', text: 'BA, gereedschap, bestelwagen, rechtsbijstand — enkel wat jij nodig hebt.', iconPath: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4' },
+        { title: 'Heldere dekking', text: 'Geen wollige taal: je weet waarvoor je verzekerd bent.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
+        { title: 'Slimme modules', text: 'BA, gereedschap, bestelwagen, rechtsbijstand: enkel wat jij nodig hebt.', iconPath: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4' },
         { title: 'Snelle intake', text: 'Na een audit door onze specialist stemmen we de polis af op jouw installaties en interventies.', iconPath: 'M10 2L14 2M12 14L15 11M4 14a8 8 0 1 0 16 0a8 8 0 1 0-16 0' },
         { title: 'Bouw-expertise', text: "We spreken jouw taal: sanitair, verwarming, gasinstallaties, lekdetectie.", iconPath: 'M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z' },
       ].map((item) => (
@@ -540,7 +540,7 @@ const schema = {
 
     <div class="dw-testimonials-grid">
       {[
-        { quote: 'Waterschade na mijn werken — de BA-polis regelde alles. Ik moest me nergens zorgen over maken.', name: 'Zelfstandig loodgieter, Antwerpen' },
+        { quote: 'Waterschade na mijn werken — de BA-polis regelde alles. Ik moest me nergens zorgen over maken.', name: 'Zelfstandig loodgieter, Aalter' },
         { quote: 'Gereedschapverzekering leek overdreven, tot mijn perstang gestolen werd. Nu zou ik nooit meer zonder.', name: 'Sanitairtechnicus, Gent' },
         { quote: 'Assurman begrijpt wat een loodgieter nodig heeft. Modulair en eerlijk.', name: 'Loodgietersbedrijf, West-Vlaanderen' },
       ].map((t) => (

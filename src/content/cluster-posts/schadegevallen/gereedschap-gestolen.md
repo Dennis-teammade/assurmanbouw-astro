@@ -26,7 +26,7 @@ targetAudience: "Loodgieters, elektriciens, kleine zelfstandigen met bestelwagen
 heroImage: "/images/kenniscentrum/c3-2-gereedschap-gestolen.jpg"
 heroImageAlt: "Opengebroken bestelwagen met afgebroken slot, leeg interieur"
 tldr: >-
-  BA Auto dekt geen gereedschap in de bestelwagen — dat is misverstand nummer één. Je hebt een aparte materiaalverzekering of vervoerde goederen-uitbreiding nodig. Eerste prioriteit bij diefstal: politie verwittigen binnen 24 uur en proces-verbaal opvragen, daarna aangifte bij de verzekeraar binnen 8 dagen. De evenredigheidsregel kan je uitkering drastisch verlagen als je verzekerd kapitaal lager is dan de werkelijke waarde van je gereedschap. Facturen, serienummers en foto's vooraf opslaan in de cloud is je beste verdediging.
+  BA Auto dekt geen gereedschap in de bestelwagen. Dat is misverstand nummer één. Je hebt een aparte materiaalverzekering of vervoerde goederen-uitbreiding nodig. Eerste prioriteit bij diefstal: politie verwittigen binnen 24 uur en proces-verbaal opvragen, daarna aangifte bij de verzekeraar binnen 8 dagen. De evenredigheidsregel kan je uitkering drastisch verlagen als je verzekerd kapitaal lager is dan de werkelijke waarde van je gereedschap. Facturen, serienummers en foto's vooraf opslaan in de cloud is je beste verdediging.
 relatedSpokes:
   - "onderaannemer-schade-werf"
   - "polisweigering"

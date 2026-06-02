@@ -223,7 +223,7 @@ Indicatieve premies per bestelwagen:
 | BA Auto + mini-omnium | €1.000 tot €1.500 |
 | BA Auto + volledige omnium | €1.300 tot €2.200 |
 
-Vanaf 5 voertuigen is een vlootpolis bijna altijd interessanter. Eén contract, één vervaldag, vlootkortingen tot 25% en gemeenschappelijke schadestatistiek.
+Vanaf 10 voertuigen is een vlootpolis bijna altijd interessanter. Eén contract, één vervaldag, vlootkortingen tot 25% en gemeenschappelijke schadestatistiek.
 
 ## 5. Fiscaliteit: wat is aftrekbaar en wat niet?
 
@@ -292,7 +292,7 @@ Er zijn legitieme manieren om je verzekeringskost te verlagen zonder onderverzek
 
 **Stap 3.** **Verhoog franchises bewust.** Een franchise van €500 in plaats van €250 op je BA Onderneming levert vaak 8% tot 12% premiekorting op. Reken na of je dat eigen risico kunt dragen.
 
-**Stap 4.** **Stap over op vlootpolis vanaf 5 voertuigen.** Vlootkortingen van 10% tot 25% op de individuele BA Auto-premies, en gestroomlijnde administratie.
+**Stap 4.** **Stap over op vlootpolis vanaf 10 voertuigen.** Vlootkortingen van 10% tot 25% op de individuele BA Auto-premies, en gestroomlijnde administratie.
 
 **Stap 5.** **Investeer in preventie en VCA.** Verzekeraars belonen aantoonbaar veiligheidsbeleid met betere voorwaarden bij hernieuwing. VCA-certificering is daar een sterk argument.
 
@@ -354,7 +354,7 @@ Geen van beide als doel op zich. Het juiste doel is correct verzekerd zijn tegen
 
 ### Heeft een vlootpolis altijd zin?
 
-Vanaf 5 voertuigen vrijwel altijd. Vlootkortingen van 10% tot 25% maken het financieel interessant, en de administratieve vereenvoudiging (één contract, één vervaldag, gemeenschappelijke bonus/malus) is een bijkomend voordeel. Onder 5 voertuigen is het rekenwerk: soms wel, soms niet, afhankelijk van de leeftijd van de voertuigen en de huidige individuele bonus/malus.
+Vanaf 10 voertuigen vrijwel altijd. Vlootkortingen van 10% tot 25% maken het financieel interessant, en de administratieve vereenvoudiging (één contract, één vervaldag, gemeenschappelijke bonus/malus) is een bijkomend voordeel. Onder 10 voertuigen is het rekenwerk: soms wel, soms niet, afhankelijk van de leeftijd van de voertuigen en de huidige individuele bonus/malus.
 
 ## Conclusie
 

@@ -26,7 +26,7 @@ targetAudience: "Werkgevers in de bouw"
 heroImage: "/images/kenniscentrum/c3-3-val-van-steiger.jpg"
 heroImageAlt: "Werfploeg verleent eerste hulp aan gevallen werknemer, ambulance op komst"
 tldr: >-
-  Eerste prioriteit is hulp aan het slachtoffer — bij twijfel altijd 112 bellen en de werknemer niet bewegen tenzij in onmiddellijk gevaar. Werf veiligstellen en getuigen identificeren volgen onmiddellijk. Aangifte bij de arbeidsongevallenverzekeraar moet binnen 8 dagen, maar een ernstig arbeidsongeval (val boven 2 meter, blijvend letsel, overlijden) moet bovendien onmiddellijk gemeld worden aan de arbeidsinspectie. Niet discussiëren over aansprakelijkheid met het slachtoffer of zijn familie in de eerste dagen.
+  Eerste prioriteit is hulp aan het slachtoffer. Bij twijfel altijd 112 bellen en de werknemer niet bewegen tenzij in onmiddellijk gevaar. Werf veiligstellen en getuigen identificeren volgen onmiddellijk. Aangifte bij de arbeidsongevallenverzekeraar moet binnen 8 dagen, maar een ernstig arbeidsongeval (val boven 2 meter, blijvend letsel, overlijden) moet bovendien onmiddellijk gemeld worden aan de arbeidsinspectie. Niet discussiëren over aansprakelijkheid met het slachtoffer of zijn familie in de eerste dagen.
 relatedSpokes:
   - "ernstig-arbeidsongeval-melden"
   - "onderaannemer-schade-werf"

@@ -34,9 +34,9 @@ const beroepTabs = [
 const insuranceCards = [
   { title: 'BA Onderneming',          icon: 'shield',    intro: 'Bescherming wanneer je bedrijf schade veroorzaakt aan derden tijdens de uitbating of de beroepsactiviteit.',   bullets: ['Schade aan eigendommen van derden','Letselschade aan derden','Claims rond beroepsfouten','Aansprakelijkheid tijdens werken'],        link: '/verzekeringen/ba-onderneming/',        cta: 'Meer over BA Onderneming' },
   { title: 'Bedrijfsvoertuigen',       icon: 'car',       intro: 'De bestelwagen is onmisbaar op de werf. De juiste dekking houdt je mobiel bij schade, diefstal of pech.',       bullets: ['BA en omnium voor bestelwagens','Bescherming bij diefstal of brand','Snelle afhandeling bij schade','Afstembaar op jouw wagenpark'],     link: '/verzekeringen/bedrijfsvoertuigen/',   cta: 'Meer over bedrijfsvoertuigen' },
-  { title: 'Machinebreuk',             icon: 'wrench',    intro: 'Professionele machines en gereedschap zijn duur. Een defect of diefstal stopt je werk — deze dekking niet.',    bullets: ['Machines en gereedschap bij breuk','Diefstal op werf of in bestelwagen','Vervanging of herstelling','Afstembaar op jouw materieel'],     link: '/verzekeringen/machinebreuk',         cta: 'Meer over machinebreuk' },
+  { title: 'Machinebreuk',             icon: 'wrench',    intro: 'Professionele machines en gereedschap zijn duur. Een defect of diefstal stopt je werk. Deze dekking niet.',    bullets: ['Machines en gereedschap bij breuk','Diefstal op werf of in bestelwagen','Vervanging of herstelling','Afstembaar op jouw materieel'],     link: '/verzekeringen/machinebreuk',         cta: 'Meer over machinebreuk' },
   { title: 'BA-10',                    icon: 'building2', intro: 'Tienjarige aansprakelijkheid voor aannemers en architecten bij ernstige constructiegebreken na oplevering.',    bullets: ['Verplicht voor aannemers','Dekt constructiegebreken 10 jaar','Bescherming na oplevering','Vereist bij nieuwbouw'],                     link: '/verzekeringen/ba-10/',                cta: 'Meer over BA-10' },
-  { title: 'Rechtsbijstand',           icon: 'scale',     intro: 'Juridische bescherming bij geschillen met klanten, leveranciers of personeel. Zodat je niet alleen staat.',     bullets: ['Hulp bij juridische conflicten','Ondersteuning bij betwiste aansprakelijkheid','Tussenkomst bij advocaatkosten','Aanvulling op BA'], link: '/verzekeringen/rechtsbijstand',       cta: 'Meer over rechtsbijstand' },
+  { title: 'Rechtsbijstand',           icon: 'scale',     intro: 'Juridische bescherming bij geschillen met klanten, leveranciers of personeel. Onder andere:',     bullets: ['Hulp bij juridische conflicten','Betwiste aansprakelijkheid','Tussenkomst advocaatkosten','Aanvulling op BA'], link: '/verzekeringen/rechtsbijstand',       cta: 'Meer over rechtsbijstand' },
   { title: "Alle Bouwplaats Risico's", icon: 'layers',    intro: "Allesomvattende dekking voor schade aan werken in uitvoering. Onmisbaar bij grotere werven of renovaties.",    bullets: ["Schade tijdens uitvoering","Risico's door weersinvloeden","Bescherming bij meerdere partijen","Flexibel per project of jaarpolis"], link: '/verzekeringen/alle-bouwplaats-risicos/', cta: "Meer over ABR" },
 ];
 
@@ -229,7 +229,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
         <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In het kort</span>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
           {[
-            {t:'<strong style="color:#FFFFFF;">Wettelijk verplicht</strong> vanaf je eerste werknemer — ook bij een Dimona van één dag.'},
+            {t:'<strong style="color:#FFFFFF;">Wettelijk verplicht</strong> vanaf je eerste werknemer, ook bij een Dimona van één dag.'},
             {t:'Dekt werknemers <strong style="color:#FFFFFF;">op de werf én op woon-werkverkeer</strong>.'},
             {t:'Vergoeding begrensd tot <strong style="color:#FFFFFF;">€ 58.096,10 (2026)</strong>.'},
             {t:'Aangifte bij de verzekeraar binnen <strong style="color:#FFFFFF;">8 dagen</strong>, ernstige ongevallen onmiddellijk.'},
@@ -399,7 +399,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
         {i:'ac',title:'Excedent wet',              text:'Verzekert het deel van het loon boven € 58.096,10. Relevant voor ploegbazen, werfleiders, calculators of gespecialiseerde technici.'},
         {i:'sh',title:'Gewaarborgd loon',          text:'Dicht het gat tussen de 90% die de verzekering betaalt en de 100% die je als werkgever de eerste maand moet uitkeren, inclusief patronale bijdragen.'},
         {i:'us',title:'Privéleven',                text:'Breidt de dekking uit naar ongevallen in het privéleven van je werknemer. Populair voor retentie en extra bescherming buiten de werf.'},
-        {i:'tr',title:'Bijstand dienstopdrachten', text:'Relevant bij werven in het buitenland of langere verplaatsingen binnen België — medische bijstand en repatriëring inbegrepen.'},
+        {i:'tr',title:'Bijstand dienstopdrachten', text:'Relevant bij werven in het buitenland of langere verplaatsingen binnen België: medische bijstand en repatriëring inbegrepen.'},
         {i:'br',title:'Thuiswerk & events',        text:'Dekt ongevallen tijdens thuiswerk (calculators, werkvoorbereiders) en door de werkgever georganiseerde events.'},
       ].map(card=>(
         <div class="ao-ins-card" style="padding:28px;">
@@ -532,7 +532,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
   <div style="max-width:840px;margin:0 auto;position:relative;z-index:1;">
     <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Statuten</span>
     <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Zaakvoerder, onderaannemers, stagiairs?</h2>
-    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0 0 40px;">Een punt waar veel verwarring rond bestaat. Hieronder per statuut wat geldt — klik open om te lezen.</p>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0 0 40px;">Een punt waar veel verwarring rond bestaat. Hieronder per statuut wat geldt: klik open om te lezen.</p>
 
     <!-- Panel 1 -->
     <div class="ao-stat-panel" data-stat-panel>
@@ -566,7 +566,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
           ))}
         </ul>
         <div style="background:rgba(229,165,36,0.12);border:1px solid rgba(229,165,36,0.25);border-radius:8px;padding:14px 18px;">
-          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;margin:0;"><strong style="color:#FFFFFF;">Let op:</strong> een "zelfstandige" die in werkelijkheid functioneert als werknemer kan door Fedris of de rechtbank als werknemer herkwalificeerd worden — met terugwerkende kracht aan alle gevolgen van dien.</p>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;margin:0;"><strong style="color:#FFFFFF;">Let op:</strong> een "zelfstandige" die in werkelijkheid functioneert als werknemer kan door Fedris of de rechtbank als werknemer herkwalificeerd worden, met terugwerkende kracht aan alle gevolgen van dien.</p>
         </div>
       </div>
     </div>
@@ -644,7 +644,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="text-align:center;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Antwoorden op de meest voorkomende vragen</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">14 concrete vragen van bouwondernemers — klik open voor het antwoord.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">14 concrete vragen van bouwondernemers: klik open voor het antwoord.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;">
       {faqItems.map((item,i)=>(
@@ -686,7 +686,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
   <div style="max-width:896px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
     <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;text-align:center;margin-bottom:20px;">Start met Assurman</span>
     <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;color:#FFFFFF;max-width:727px;margin:0 auto 24px;">Is jouw bouwbedrijf correct verzekerd?</h2>
-    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouwsector en wil je zeker zijn dat jouw personeel correct verzekerd is? Wij bekijken met jou wat echt nodig is — zonder verplichting.</p>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouwsector en wil je zeker zijn dat jouw personeel correct verzekerd is? Wij bekijken met jou wat echt nodig is, zonder verplichting.</p>
     <div class="ao-final-btns">
       <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">{CTA_SCAN.hero} <Fragment set:html={svgArr18} /></a>
       <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">{CTA_AFSPRAAK.advisory}</a>

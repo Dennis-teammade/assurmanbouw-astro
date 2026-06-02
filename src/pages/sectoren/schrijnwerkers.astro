@@ -23,7 +23,7 @@ const insuranceCards = [
   },
   {
     title: 'Machinebreuk',
-    intro: 'Zaagmachines, freesmachines, CNC-apparatuur — een defect stopt je productie.',
+    intro: 'Zaagmachines, freesmachines, CNC-apparatuur: een defect stopt je productie.',
     bullets: [
       'Dekking voor atelier- en werfmachines',
       'Diefstal van gereedschap of machines',
@@ -38,7 +38,7 @@ const insuranceCards = [
     title: 'Bedrijfsvoertuigen',
     intro: 'Materiaal, machines en producten vervoer je in je bestelwagen of vrachtwagen.',
     bullets: [
-      'Omnium voor recente voertuigen',
+      'Omnium (afhankelijk van leeftijd voertuig)',
       'Bescherming bij diefstal of schade',
       'Verzekering vervoerde goederen',
       'Vlootpolis bij meerdere voertuigen',
@@ -49,11 +49,11 @@ const insuranceCards = [
   },
   {
     title: 'Rechtsbijstand',
-    intro: 'Discussies over maatvoering, kwaliteit of betalingsachterstand zijn geen uitzondering.',
+    intro: 'Discussies over maatvoering, kwaliteit of betalingsachterstand zijn geen uitzondering. Onder andere:',
     bullets: [
-      'Juridische hulp bij geschillen met klanten',
-      'Incasso bij onbetaalde facturen',
-      'Tussenkomst bij advocaatkosten',
+      'Geschillen met klanten',
+      'Incasso onbetaalde facturen',
+      'Tussenkomst advocaatkosten',
       'Aanvulling op BA',
     ],
     cta: 'Check rechtsbijstand',
@@ -90,34 +90,34 @@ const insuranceCards = [
 
 const caseStudies = [
   {
-    category: 'SCHRIJNWERK & TIMMERWERK',
-    title: 'Maatwerk keuken beschadigd tijdens levering: €18.000 schade',
-    businessName: 'Schrijnwerkerij Vandenberghe',
-    ownerName: 'Luc Vandenberghe',
-    cityName: 'Gent',
-    description: 'Een op maat gemaakte keuken werd beschadigd tijdens transport en installatie. Deuren en werkbladen moesten volledig vervangen worden.',
-    action: 'De BA-verzekering dekte de schade. Nieuwe onderdelen werden geproduceerd en de keuken werd heïnstalleerd. De klant werd volledig vergoed.',
-    image: 'https://images.pexels.com/photos/585419/pexels-photo-585419.jpeg?auto=compress&cs=tinysrgb&w=800',
+    category: 'SCHRIJNWERKEN & TIMMERWERK',
+    title: 'Aanrijding bedrijfsvoertuig €13.750: aanslepende herstelling alsnog vlot afgerond',
+    businessName: 'Timmer & Schrijnwerk - Sterk in hout',
+    ownerName: 'Dries De Grande',
+    cityName: 'Oostkamp',
+    description: 'Onze bedrijfsvoertuig raakte beschadigd na een aanrijding. De herstelling werd toevertrouwd aan een garage, maar daar liep het mis: de werken duurden te lang en er werden fouten gemaakt in de afhandeling.',
+    action: 'Het schadeteam van Assurman kwam tussen, volgde de communicatie met de garage op en zette alles recht. Het voertuig werd correct en met spoed hersteld terwijl het dossier snel werd afgerond.',
+    image: '/images/cases/dries-de-grande-pand.jpg',
   },
   {
-    category: 'SCHRIJNWERK & TIMMERWERK',
+    category: 'SCHRIJNWERKEN & TIMMERWERK',
     title: 'CNC-machine defect midden in productie: €12.000 herstelling',
     businessName: 'Timmerbedrijf Claeys',
     ownerName: 'Rik Claeys',
     cityName: 'Roeselare',
     description: 'Een CNC-freesmachine viel uit vlak voor de deadline van een groot project. Herstelling was noodzakelijk maar duur en tijdrovend.',
     action: 'De machinebreukverzekering dekte de herstellingskosten volledig. Een vervangingsmachine werd tijdelijk gehuurd. Het project liep minimale vertraging op.',
-    image: 'https://images.pexels.com/photos/1216589/pexels-photo-1216589.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/images/cases/case-schrijnwerkers-2.jpg',
   },
   {
-    category: 'SCHRIJNWERK & TIMMERWERK',
+    category: 'SCHRIJNWERKEN & TIMMERWERK',
     title: 'Klant betwist maatvoering van inbouwkast',
     businessName: 'Interior Wood bvba',
     ownerName: 'Sara Puts',
-    cityName: 'Antwerpen',
+    cityName: 'Wetteren',
     description: 'Na levering van een inbouwkast beweerde de klant dat de maten niet overeenstemden met de bestelling en eiste volledig herstel of terugbetaling.',
     action: 'Via rechtsbijstand werd een expert aangesteld. De expert bevestigde dat de kast conform de getekende plannen was gemaakt. De klant trok zijn eis in.',
-    image: 'https://images.pexels.com/photos/834892/pexels-photo-834892.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: '/images/cases/case-schrijnwerkers-3.jpg',
   },
 ];
 
@@ -136,7 +136,7 @@ const faqItems = [
   },
   {
     title: 'Hoe bescherm ik mijn maatwerk tijdens transport?',
-    content: 'Via je BA-verzekering zijn beschadigingen bij transport en installatie doorgaans gedekt. Zorg dat jouw activiteiten correct omschreven staan in de polis — "fabricage en plaatsing" moet expliciet vermeld zijn.',
+    content: 'Via je BA-verzekering zijn beschadigingen bij transport en installatie doorgaans gedekt. Zorg dat jouw activiteiten correct omschreven staan in de polis: "fabricage en plaatsing" moet expliciet vermeld zijn.',
   },
   {
     title: 'Kan ik mijn pakket uitbreiden als ik groei?',
@@ -167,7 +167,7 @@ const schema = {
   .dw-hero-content { max-width: 52%; padding-top: 40px; }
   .dw-hero-img { position: absolute; top: 5%; right: 0; height: 90%; width: auto; max-width: 48%; z-index: 1; pointer-events: none; }
   .dw-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .dw-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; align-items: flex-start; }
+  .dw-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; }
   .dw-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
   .dw-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 48px; }
   .dw-cards3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -273,7 +273,7 @@ const schema = {
     </p>
     <div class="dw-features-grid">
       {[
-        { text: 'Specialist in\nschrijfnwerk & timmerwerk', iconPath: 'M15 12l-9.373 9.373a1 1 0 0 1-3.001-3L12 9M18 15L22 11M21.5 11.5l-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5' },
+        { text: 'Specialist in\nschrijnwerk & timmerwerk', iconPath: 'M15 12l-9.373 9.373a1 1 0 0 1-3.001-3L12 9M18 15L22 11M21.5 11.5l-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5' },
         { text: 'Modulair pakket:\nenkel wat nodig is', iconPath: 'm6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2' },
         { text: 'Duidelijke uitleg,\nsnelle service', iconPath: 'M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z' },
         { text: 'Dekking: atelier\n+ werf + transport', iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z' },
@@ -297,14 +297,14 @@ const schema = {
         </h2>
         <div style="width:96px;height:6px;background:#E5A524;margin-bottom:24px;"></div>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:20px;">
-          Als schrijnwerker investeer je in dure machines en kostbaar hout om maatwerk te maken. Van de atelierproductie tot de installatie bij de klant thuis — elk moment brengt specifieke risico's: machinebreuk, transportschade, maatbetwistingen of arbeidsongevallen met zaagmachines.
+          Als schrijnwerker investeer je in dure machines en kostbaar hout om maatwerk te maken. Van de atelierproductie tot de installatie bij de klant thuis, elk moment brengt specifieke risico's: machinebreuk, transportschade, maatbetwistingen of arbeidsongevallen met zaagmachines.
         </p>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:32px;">
           Assurman bouwt een pakket op maat: BA voor installatieschade, machinebreuk voor je atelier, gereedschapverzekering, en eventueel arbeidsongevallen voor je team.
         </p>
         <blockquote style="border-left:4px solid #E5A524;padding-left:24px;margin:0;">
           <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;line-height:1.55;color:#001F3F;margin:0;">
-            "Jij maakt meubels en interieurs op maat — wij zorgen voor de juiste bescherming."
+            "Jij maakt meubels en interieurs op maat. Wij zorgen voor de juiste bescherming."
           </p>
         </blockquote>
       </div>
@@ -312,7 +312,7 @@ const schema = {
       <div style="display:flex;flex-direction:column;gap:20px;padding-top:40px;">
         {[
           { title: 'Machinebreuk en productiestilstand', text: 'Een defect aan een CNC-machine of zaagmachine stopt je productie en kost snel duizenden euro. Machinebreukverzekering is essentieel.', iconPath: 'M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01' },
-          { title: 'Transportschade en installatierisico', text: "Maatwerk beschadigd tijdens levering of installatie is een reëel risico. BA dekt dit — als jouw activiteiten correct omschreven zijn.", iconPath: 'M3 6L21 6A1 1 0 0 1 22 7L22 13A1 1 0 0 1 21 14L3 14A1 1 0 0 1 2 13L2 7A1 1 0 0 1 3 6zM17 14v7M7 14v7M17 3v3M7 3v3M10 14L2.3 6.3M14 6L21.7 13.7M8 6L16 14' },
+          { title: 'Transportschade en installatierisico', text: "Maatwerk beschadigd tijdens levering of installatie is een reëel risico. BA dekt dit, als jouw activiteiten correct omschreven zijn.", iconPath: 'M3 6L21 6A1 1 0 0 1 22 7L22 13A1 1 0 0 1 21 14L3 14A1 1 0 0 1 2 13L2 7A1 1 0 0 1 3 6zM17 14v7M7 14v7M17 3v3M7 3v3M10 14L2.3 6.3M14 6L21.7 13.7M8 6L16 14' },
           { title: 'Geschillen over maatvoering', text: 'Klanten die beweren dat maten niet kloppen, zijn een gekend risico. Rechtsbijstand helpt je positie te verdedigen met een expert.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
         ].map((card) => (
           <div class="dw-why-card" style="padding:28px;display:flex;align-items:flex-start;gap:20px;">
@@ -344,8 +344,8 @@ const schema = {
     </div>
     <div class="dw-benefits-grid">
       {[
-        { title: 'Heldere dekking', text: 'Geen wollige taal — je weet waarvoor je verzekerd bent.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
-        { title: 'Slimme modules', text: 'BA, machinebreuk, voertuigen, rechtsbijstand — enkel wat jij nodig hebt.', iconPath: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4' },
+        { title: 'Heldere dekking', text: 'Geen wollige taal: je weet waarvoor je verzekerd bent.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
+        { title: 'Slimme modules', text: 'BA, machinebreuk, voertuigen, rechtsbijstand: enkel wat jij nodig hebt.', iconPath: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4' },
         { title: 'Snelle intake', text: 'Na een audit door onze expert stemmen we alles af op jouw atelier en plaatsingsrealiteit.', iconPath: 'M10 2L14 2M12 14L15 11M4 14a8 8 0 1 0 16 0a8 8 0 1 0-16 0' },
         { title: 'Bouw-expertise', text: "We spreken jouw taal: CNC, houtbewerking, plaatsing, maatwerk.", iconPath: 'M15 12l-9.373 9.373a1 1 0 0 1-3.001-3L12 9M18 15L22 11M21.5 11.5l-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5' },
       ].map((item) => (
@@ -541,7 +541,7 @@ const schema = {
     <div class="dw-testimonials-grid">
       {[
         { quote: 'Machine defect vlak voor een deadline — machinebreukverzekering redde de situatie.', name: 'Schrijnwerkerij, Gent' },
-        { quote: 'Mijn keuken werd beschadigd bij levering. De BA regelde alles snel en professioneel.', name: 'Meubelmaker, Antwerpen' },
+        { quote: 'Mijn keuken werd beschadigd bij levering. De BA regelde alles snel en professioneel.', name: 'Meubelmaker, Wetteren' },
         { quote: 'Eindelijk een pakket dat past bij mijn realiteit als schrijnwerker.', name: 'Timmerbedrijf, West-Vlaanderen' },
       ].map((t) => (
         <div class="dw-testimonial-card" style="padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);">

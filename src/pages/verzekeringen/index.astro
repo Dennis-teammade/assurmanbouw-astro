@@ -16,7 +16,7 @@ const verzekeringen = [
   {
     title: 'BA Onderneming',
     intro: 'Dekt schade die je tijdens je beroepsactiviteit toebrengt aan klanten, passanten of buren. BA Uitbating en BA Na Levering in één polis.',
-    bullets: ['Schade aan eigendommen van derden', 'Letselschade aan derden op de werf', 'BA Na Levering voor gebreken na oplevering', 'Burenhinder door stof, geluid en trillingen'],
+    bullets: ['Schade aan eigendommen van derden', 'Letselschade aan derden op de werf', 'BA Na Levering voor gebreken na oplevering', 'Burenhinder door stof, geluid en trillingen', 'Toevertrouwd goed'],
     cta: 'Meer over BA Onderneming',
     link: '/verzekeringen/ba-onderneming/',
     badge: 'Essentieel',
@@ -25,8 +25,8 @@ const verzekeringen = [
   },
   {
     title: 'BA-10',
-    intro: 'Verplicht bij woningbouw. Dekt stabiliteits- en soliditeitsgebreken tot 10 jaar na oplevering. Werfpolis of jaarpolis.',
-    bullets: ['Verplicht sinds 1 juli 2018 (Wet Peeters-Borsus)', 'Werfpolis per project of jaarpolis', 'Globale polis voor alle bouwactoren', 'Wettelijk minimum € 500.000 per schadegeval'],
+    intro: 'Verplicht bij woningbouw. Dekt stabiliteits- en soliditeitsgebreken tot 10 jaar na oplevering. Abonnementspolis voor alle werven.',
+    bullets: ['Verplicht sinds 1 juli 2018 (Wet Peeters-Borsus)', 'Abonnementspolis voor alle werven', 'Globale polis voor alle bouwactoren', 'Wettelijk minimum € 500.000 per schadegeval'],
     cta: 'Meer over BA-10',
     link: '/verzekeringen/ba-10/',
     badge: 'Verplicht bij woningbouw',
@@ -36,7 +36,7 @@ const verzekeringen = [
   {
     title: 'Bedrijfsvoertuigen',
     intro: 'BA verplicht voor alle voertuigen. Omnium, mini-omnium en vlootpolis voor bestelwagens, vrachtwagens en aanhangwagens.',
-    bullets: ['BA Auto wettelijk verplicht', 'Omnium voor recente bestelwagens', 'Vlootkorting vanaf 5 voertuigen', 'Verzekering vervoerde goederen en aanhangwagens'],
+    bullets: ['BA Auto wettelijk verplicht', 'Omnium (afhankelijk van leeftijd voertuig)', 'Vlootkorting vanaf 10 voertuigen', 'Diefstal van koopwaar en materieel', 'Verzekering vervoerde goederen en/of aanhangwagens'],
     cta: 'Meer over bedrijfsvoertuigen',
     link: '/verzekeringen/bedrijfsvoertuigen/',
     badge: 'Verplicht (BA)',
@@ -45,8 +45,8 @@ const verzekeringen = [
   },
   {
     title: 'Machinebreuk',
-    intro: 'Dekt plotse defecten, beschadiging en diefstal van machines en gereedschap — op de werf, in de bestelwagen of op het atelier.',
-    bullets: ['Breuk en beschadiging van machines', 'Diefstal op werf of in bestelwagen', 'Vast ateliermaterial én mobiel werfmaterieel', 'Aanvulbaar met bedrijfsschade bij omzetverlies'],
+    intro: 'Dekt plotse defecten, beschadiging en diefstal van machines en gereedschap: op de werf, in de bestelwagen of op het atelier.',
+    bullets: ['Breuk en beschadiging van machines', 'Diefstal - onder voorwaarden', 'Vast ateliermaterial én mobiel werfmaterieel', 'Aanvulbaar met bedrijfsschade bij omzetverlies'],
     cta: 'Meer over machinebreuk',
     link: '/verzekeringen/machinebreuk',
     badge: 'Sterk aanbevolen',
@@ -55,11 +55,11 @@ const verzekeringen = [
   },
   {
     title: 'Rechtsbijstand',
-    intro: 'Dekt juridische kosten bij geschillen, factuurincasso, arbeidsrechtelijke problemen en contractbetwistingen. Vrije advocaatkeuze.',
-    bullets: ['Hulp bij contractgeschillen en betwiste oplevering', 'Incasso bij onbetaalde facturen', 'Verdediging bij arbeidsrechtelijke conflicten', 'Vrije keuze van advocaat'],
+    intro: 'Geeft vrije advocaatkeuze, kan juridische kosten dekken bij geschillen, factuurincasso, arbeidsrechtelijke problemen en contractbetwistingen. Mogelijke dekkingen:',
+    bullets: ['Hulp bij contractgeschillen en betwiste oplevering', 'Incasso bij onbetaalde facturen', 'Verdediging bij arbeidsrechtelijke conflicten'],
     cta: 'Meer over rechtsbijstand',
     link: '/verzekeringen/rechtsbijstand',
-    badge: 'Aanvulling',
+    badge: 'Essentieel',
     badgeBg: 'rgba(63,87,103,0.1)', badgeColor: '#3F5767',
     iconPath: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9 12l2 2 4-4',
   },
@@ -161,7 +161,7 @@ const verzekeringen = [
         <div>
           <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 12px;">Waarom Assurman?</p>
           <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,44px);line-height:1.1;color:#001F3F;margin:0 0 24px;">Specialist in bouwverzekeringen</h2>
-          <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.7;color:#3F5767;margin:0 0 24px;">Assurman is een onafhankelijke verzekeringsmakelaar die uitsluitend werkt voor bouwprofessionals. Geen generalist, maar een specialist die de risico's van je sector kent.</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.7;color:#3F5767;margin:0 0 24px;">Assurman is een onafhankelijke verzekeringsmakelaar die werkt voor bouwprofessionals. Geen generalist, maar een specialist die de risico's van je sector kent.</p>
           <ul style="list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px;">
             {['20+ erkende verzekeringsmaatschappijen vergeleken','Persoonlijk advies op maat van je bouwactiviteit','Snel attest bij de start van je werken','Één aanspreekpunt voor al je polissen'].map((item) => (
               <li style="display:flex;align-items:flex-start;gap:10px;font-family:'Open Sans',sans-serif;font-size:16px;color:#001F3F;">
@@ -179,7 +179,7 @@ const verzekeringen = [
             {stat:'500+',label:'Bouwbedrijven verzekerd'},
             {stat:'15+',label:'Jaar specialist in bouw'},
             {stat:'20+',label:'Verzekeringspartners'},
-            {stat:'4.9/5',label:'Klanttevredenheid'}
+            {stat:'5/5',label:'Klanttevredenheid'}
           ].map((item) => (
             <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:28px;text-align:center;">
               <p style="font-family:'Outfit',sans-serif;font-weight:900;font-size:36px;color:#3F5767;margin:0 0 6px;">{item.stat}</p>
