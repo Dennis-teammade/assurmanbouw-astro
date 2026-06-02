@@ -523,3 +523,109 @@ button[style*="background: #E5A524"]:hover { background: #E9C466 !important; }
 .assurman-mask--why   { aspect-ratio: 512 / 433; clip-path: url(#assurman-mask-why); }
 .assurman-mask--cta   { aspect-ratio: 444 / 381; clip-path: url(#assurman-mask-cta); }
 .assurman-mask--left  { aspect-ratio: 430 / 519; clip-path: url(#assurman-mask-left); }
+
+/* ===== Silktide cookiebanner — Assurman huisstijl ===== */
+
+/* Modal + kleine prompt: slate achtergrond, lichte tekst */
+#stcm-modal,
+#stcm-modal .stcm-modal,
+#stcm-modal section,
+#stcm-prompt,
+#stcm-prompt .stcm-prompt {
+  background-color: #3F5767 !important;
+  color: #E3E3E3 !important;
+}
+
+/* Tekstkleur binnen modal en prompt forceren */
+#stcm-modal p,
+#stcm-modal li,
+#stcm-modal label,
+#stcm-modal span,
+#stcm-prompt p,
+#stcm-prompt li,
+#stcm-prompt span {
+  color: #E3E3E3 !important;
+}
+
+/* Hoofdtitel + sectie-koppen: wit voor maximaal contrast */
+#stcm-modal header h1,
+#stcm-modal h2,
+#stcm-modal h3 {
+  color: #ffffff !important;
+}
+
+/* Primaire knoppen: gold-light achtergrond, navy tekst */
+#stcm-wrapper .stcm-button-primary {
+  background-color: #E9C466 !important;
+  color: #001F3F !important;
+  border: none !important;
+  font-size: 0.875rem !important;
+  font-weight: 700 !important;
+  padding: 0.55rem 1.1rem !important;
+  border-radius: 6px !important;
+  line-height: 1.2 !important;
+  cursor: pointer !important;
+}
+
+#stcm-wrapper .stcm-button-primary:hover {
+  background-color: #E5A524 !important;
+  color: #001F3F !important;
+}
+
+/* "Voorkeuren instellen": subtiele tekstknop op donkere bg */
+#stcm-wrapper .stcm-preferences-button {
+  background: transparent !important;
+  border: none !important;
+  color: #E9C466 !important;
+  font-size: 0.8125rem !important;
+  text-decoration: underline !important;
+  cursor: pointer !important;
+  padding: 0.25rem 0 !important;
+}
+
+#stcm-wrapper .stcm-preferences-button:hover {
+  color: #ffffff !important;
+}
+
+/* Sluitknop (X) wit zodat hij zichtbaar is op slate */
+#stcm-modal button[aria-label*="luit"],
+#stcm-modal button[aria-label*="lose"] {
+  color: #ffffff !important;
+}
+
+/* Toggles in het voorkeurenscherm: gold als aan */
+#stcm-wrapper .stcm-toggle input:checked + .stcm-toggle-track {
+  background-color: #E9C466 !important;
+}
+
+/* Credit-link verbergen */
+#stcm-wrapper .stcm-credit-link,
+#stcm-wrapper .stcm-logo {
+  display: none !important;
+}
+
+/* Cookie-icoon: identiek aan #scroll-top, gestapeld erboven linksonder */
+#stcm-icon {
+  bottom: 84px !important;
+  left: 28px !important;
+  right: auto !important;
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: #3F5767 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18) !important;
+  padding: 0 !important;
+  transition: background 0.2s ease, color 0.2s ease !important;
+}
+
+#stcm-icon:hover {
+  background: #E9C466 !important;
+  color: #3F5767 !important;
+}
+
+#stcm-icon svg {
+  width: 22px !important;
+  height: 22px !important;
+  fill: currentColor !important;
+}
