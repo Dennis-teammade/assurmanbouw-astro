@@ -20,3 +20,6 @@ link-audit.mjs
 HANDOVER-RONDE-2.md
 PROGRESS-RONDE-2.md
 TODO-GA-LIVE.md
+
+# Basic Auth voor staging (lokaal genereren, manueel uploaden naar Hostinger)
+staging-auth/
