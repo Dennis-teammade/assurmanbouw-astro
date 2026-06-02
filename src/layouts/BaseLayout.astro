@@ -38,6 +38,70 @@ const schemaArray = schema
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Rybbit cookieless analytics -->
+    <script src="https://stats.teammade.li/api/script.js" data-site-id="6b9ef746dc7d" defer></script>
+
+    <!-- Cookie consent (Silktide) + GA4 Consent Mode v2 -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="stylesheet" id="silktide-consent-manager-css" href="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.css" integrity="sha384-IO1E/jCrQXyH5rwcI0SXP7OXw47JFqQNDQcKhbFvqnL2IunBxxwE2Ne5XyAmCqKs" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/gh/silktide/consent-manager@v2.0.0/silktide-consent-manager.js" integrity="sha384-j4NIMOecmtzMWe9GJADIIe5hTlHG63aiTQ/2XorW10RNyQJg+IU+xwFVDy45wBah" crossorigin="anonymous"></script>
+    <script>
+    window.silktideConsentManager.init({
+      backdrop: { show: true },
+      icon: { position: "bottomLeft" },
+      prompt: { position: "bottomRight" },
+      consentTypes: [
+        {
+          id: "essentieel",
+          label: "Essentieel",
+          description: "<p>Deze cookies zijn nodig om de website goed te laten werken en kunnen niet uitgezet worden. Ze zorgen onder andere voor je privacy voorkeuren.</p>",
+          required: true
+        },
+        {
+          id: "statistieken",
+          label: "Statistieken",
+          description: "<p>Deze cookies helpen ons de site te verbeteren door bij te houden welke pagina's het populairst zijn en hoe bezoekers door de site navigeren.</p>",
+          required: false,
+          gtag: "analytics_storage",
+          scripts: [
+            { url: "https://www.googletagmanager.com/gtag/js?id=G-FD7Z07N8ZP", load: "async" }
+          ],
+          onAccept: function() {
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { window.dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-FD7Z07N8ZP');
+          }
+        },
+        {
+          id: "marketing",
+          label: "Marketing",
+          description: "Deze cookies worden door ons en onze advertentiepartners gebruikt om je relevante advertenties te tonen en om te meten hoe campagnes presteren.",
+          required: false,
+          gtag: ["ad_storage", "ad_user_data", "ad_personalization"]
+        }
+      ],
+      text: {
+        prompt: {
+          description: "<p>We gebruiken cookies om je ervaring te verbeteren, content af te stemmen en ons verkeer te analyseren.</p>",
+          acceptAllButtonText: "Accepteren",
+          acceptAllButtonAccessibleLabel: "Alle cookies accepteren",
+          rejectNonEssentialButtonText: "Weigeren",
+          rejectNonEssentialButtonAccessibleLabel: "Alle niet-essentiële cookies weigeren",
+          preferencesButtonText: "Voorkeuren instellen",
+          preferencesButtonAccessibleLabel: "Cookievoorkeuren aanpassen"
+        },
+        preferences: {
+          title: "Pas je cookievoorkeuren aan",
+          description: "<p>We respecteren je recht op privacy. Je kunt ervoor kiezen om bepaalde cookies niet toe te staan. Je voorkeuren gelden voor de hele website.</p>",
+          saveButtonText: "Opslaan en sluiten",
+          saveButtonAccessibleLabel: "Cookievoorkeuren opslaan"
+        }
+      }
+    });
+    </script>
+
     <meta name="theme-color" content="#001F3F" />
 
     <title>{title}</title>
