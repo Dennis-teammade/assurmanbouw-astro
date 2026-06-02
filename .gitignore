@@ -15,3 +15,8 @@ seo-scan.mjs
 # Link audit output (lokaal gegenereerd, niet committen)
 link-audit.md
 link-audit.mjs
+
+# Werkdocumenten (lokaal, niet committen)
+HANDOVER-RONDE-2.md
+PROGRESS-RONDE-2.md
+TODO-GA-LIVE.md
