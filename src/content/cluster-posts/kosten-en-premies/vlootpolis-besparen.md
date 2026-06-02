@@ -33,7 +33,7 @@ relatedSpokes:
 primaryCta: "/gratis-verzekeringsscan/"
 status: "published"
 tldr: >-
-  Een vlootpolis bundelt al je bedrijfsvoertuigen onder één contract met één vervaldag en biedt vlootkortingen. Bonus/malus wordt op vlootniveau berekend, waardoor één schadegeval minder zwaar weegt. De polis is voordelig vanaf 10 voertuigen en is volledig fiscaal aftrekbaar als beroepskost voor bedrijfsvoertuigen.
+  Een vlootpolis bundelt al je bedrijfsvoertuigen onder één contract met één vervaldag.
 faq:
   - q: "Kan ik gemakkelijk voertuigen toevoegen aan een lopende vlootpolis?"
     a: "Ja, dat is een van de voordelen. Bij aankoop van een nieuw voertuig stuur je de gegevens (kentekenbewijs, technische specs, bestuurder) door naar je makelaar of verzekeraar, en het voertuig wordt binnen enkele werkdagen toegevoegd aan de vlootpolis. Geen aparte polis afsluiten, geen aparte vervaldag."
