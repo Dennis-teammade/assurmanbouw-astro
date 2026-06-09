@@ -79,7 +79,30 @@ const schemaArray = schema
           label: "Marketing",
           description: "Deze cookies worden door ons en onze advertentiepartners gebruikt om je relevante advertenties te tonen en om te meten hoe campagnes presteren.",
           required: false,
-          gtag: ["ad_storage", "ad_user_data", "ad_personalization"]
+          gtag: ["ad_storage", "ad_user_data", "ad_personalization"],
+          scripts: [
+            { url: "https://connect.facebook.net/en_US/fbevents.js", load: "async" },
+            { url: "https://www.googletagmanager.com/gtag/js?id=AW-18226579560", load: "async" }
+          ],
+          onAccept: function() {
+            // Meta Pixel (1750535209274814) — guard tegen dubbele init
+            if (!window.__metaPixelInit) {
+              window.__metaPixelInit = true;
+              !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+              n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];}(window,document,'script');
+              fbq('init', '1750535209274814');
+              fbq('track', 'PageView');
+            }
+            // Google Ads (AW-18226579560) — apart van GA4 in Statistieken
+            if (!window.__googleAdsInit) {
+              window.__googleAdsInit = true;
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'AW-18226579560');
+            }
+          }
         }
       ],
       text: {
