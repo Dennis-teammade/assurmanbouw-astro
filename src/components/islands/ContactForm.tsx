@@ -120,13 +120,13 @@ export default function ContactForm({ webhookUrl, bron, submitLabel = 'Verstuur'
   // ---------------- styles ----------------
   const cardStyle: CSSProperties = {
     background: '#FFFFFF',
-    border: '1px solid #E5E8ED',
+    border: '1px solid #E9C466',
     boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
   };
 
   const labelStyle: CSSProperties = {
     fontFamily: "'Outfit',sans-serif",
-    fontSize: '13px',
+    fontSize: '16px',
     fontWeight: 600,
     color: '#3F5767',
     marginBottom: '6px',
@@ -138,7 +138,7 @@ export default function ContactForm({ webhookUrl, bron, submitLabel = 'Verstuur'
     fontSize: '15px',
     color: '#001F3F',
     background: '#FFFFFF',
-    border: '1px solid #E5E8ED',
+    border: '1px solid #C7CACF',
     borderRadius: '8px',
     padding: '12px 14px',
     width: '100%',
