@@ -6,19 +6,15 @@ import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels'
 import BrandChevron from '../../components/BrandChevron.astro';
 
 const faqItems = [
-  { q: 'Wat is een verzekering Alle Bouwplaatsrisico\'s (ABR)?', a: 'Een ABR-verzekering dekt schade aan werken in uitvoering: het gebouw dat je aan het bouwen of verbouwen bent. Ze beschermt alle betrokken partijen: opdrachtgever, hoofdaannemer en onderaannemers, voor de duur van de bouwfase.' },
+  { q: 'Wat is een verzekering Alle Bouwplaatsrisico\'s (ABR)?', a: 'Een ABR-verzekering dekt schade aan werken in uitvoering: het gebouw dat je aan het bouwen of verbouwen bent, en de materialen op de werf die bestemd zijn voor verwerking. Ze beschermt alle betrokken partijen: opdrachtgever, hoofdaannemer en onderaannemers, voor de duur van de bouwfase.' },
   { q: 'Is een ABR-verzekering wettelijk verplicht?', a: 'Niet altijd, maar voor grotere bouwwerken en bij openbare aanbestedingen wordt ze contractueel vereist. Voor nieuwbouwprojecten boven een bepaalde omvang is ze in de praktijk standaard.' },
-  { q: 'Wat is het verschil met BA Onderneming?', a: 'BA Onderneming dekt schade die je veroorzaakt aan derden (mensen of eigendommen buiten de werf). ABR dekt schade aan de werken zelf en de materialen op de werf. Beide zijn complementair.' },
+  { q: 'Wat is het verschil met BA Onderneming?', a: 'BA Onderneming dekt schade die je veroorzaakt aan derden (mensen of eigendommen buiten de werf). ABR dekt de werken zelf en de materialen op de werf. ABR dekt dus standaard geen aansprakelijkheid tegenover derden: daarvoor blijft je BA Onderneming nodig. Sommige polissen bundelen beide voor de duur van de werf, maar dat moet je uitdrukkelijk vragen.' },
   { q: 'Wat is het verschil met machinebreuk?', a: 'Machinebreuk dekt schade aan jouw eigen machines en gereedschap. ABR dekt schade aan het bouwwerk zelf en de materialen in uitvoering. Op grotere werven zijn beide polissen naast elkaar zinvol.' },
-  { q: 'Wie sluit de ABR-polis af?', a: 'Dat kan de opdrachtgever zijn (die alle aannemers mee dekt) of de hoofdaannemer. Soms wordt ze per aannemer apart afgesloten. Op een grote werf is één polis voor alle partijen doorgaans eenvoudiger en voordeliger.' },
-  { q: 'Hoelang loopt een ABR-polis?', a: 'Voor de duur van de bouwfase: van de start van de werken tot en met de (voorlopige) oplevering. Sommige polissen bieden ook een korte onderhoudsdekking na oplevering.' },
-  { q: 'Wat is een onderhoudsperiode in een ABR-polis?', a: 'Een verlengde dekking na oplevering, typisch 12 tot 24 maanden, die schade dekt die wordt vastgesteld tijdens de onderhoudstermijn en terug te brengen is tot de bouwfase.' },
+  { q: 'Wie sluit de ABR-polis af, en wat bij meerdere aannemers?', a: 'Dat kan de opdrachtgever zijn (die alle aannemers mee dekt) of de hoofdaannemer. Werken er meerdere aannemers op de werf, dan is één gezamenlijke ABR-polis voor alle partijen doorgaans het eenvoudigst en voordeligst: elke aannemer is mee verzekerd, er is geen overlap en geen discussie over wie welke schade veroorzaakte. Soms wordt ze per aannemer apart afgesloten.' },
+  { q: 'Hoelang loopt een ABR-polis en wat is de onderhoudsperiode?', a: 'Een ABR loopt voor de duur van de bouwfase: van de start van de werken tot en met de (voorlopige) oplevering. Daarna bieden veel polissen een onderhoudsperiode: een verlengde dekking van typisch 12 tot 24 maanden die schade dekt die tijdens de onderhoudstermijn wordt vastgesteld en terug te brengen is tot de bouwfase.' },
   { q: 'Dekt ABR ook schade door slecht weer?', a: 'Ja, storm, hevige regenval, hagel en overstromingen vallen doorgaans onder de ABR-dekking. Er geldt wel een wachttijd (soms 24-48 uur na aanvang van slecht weer) en een drempelwaarde.' },
-  { q: 'Worden materialen die nog niet verwerkt zijn ook gedekt?', a: 'Ja, materialen op de werf die bestemd zijn voor verwerking vallen doorgaans onder de ABR. Materialen die elders zijn opgeslagen (magazijn, leverancier) vragen een aparte uitbreiding.' },
   { q: 'Is er een eigen risico bij ABR?', a: 'Ja, ABR-polissen werken bijna altijd met een eigen risico per schadegeval. De hoogte hangt af van de bouwkost en de gekozen formule. Een hoger eigen risico drukt de premie.' },
-  { q: 'Dekt ABR ook aansprakelijkheid tegenover derden?', a: 'Standaard niet. ABR dekt de werken zelf. Aansprakelijkheid tegenover derden (buurman, voorbijganger) valt onder BA Onderneming. Sommige polissen bundelen beide, maar dat moet je uitdrukkelijk vragen.' },
-  { q: 'Hoe wordt de premie berekend?', a: 'Op basis van de totale bouwkost (inclusief erelonen), de aard van de werken, de bouwperiode en de gekozen plafonds en eigen risico. Typisch 0,1% tot 0,5% van de totale bouwkost.' },
-  { q: 'Wat als er meerdere aannemers op de werf werken?', a: 'Een gezamenlijke ABR-polis (alle-risico\'s in één polis voor alle partijen) is dan het eenvoudigst. Elke aannemer is mee verzekerd, er is geen overlap en er zijn geen discussies over wie welke schade veroorzaakte.' },
+  { q: 'Hoe wordt de premie berekend?', a: 'Op basis van de totale bouwkost (inclusief erelonen), de aard van de werken, de bouwperiode en de gekozen plafonds en eigen risico. Typisch 0,1% tot 0,5% van de totale bouwkost, eenmalig voor de volledige bouwperiode.' },
   { q: 'Zijn bestaande gebouwen ook gedekt als ik renoveer?', a: 'Alleen als je dat uitdrukkelijk vraagt. Bestaande constructies (het pand dat je renoveert) zijn standaard niet gedekt en vragen een aparte uitbreiding bestaand gebouw.' },
 ];
 
@@ -80,6 +76,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
   .abr-dekking-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
   .abr-plafond-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;}
   .abr-aanvulling-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .abr-rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:0 0 40px;}
   .abr-formule{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:64px;flex-wrap:wrap;}
   .abr-factors-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;margin:0 auto 40px;}
   .abr-procedure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
@@ -97,6 +94,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     .abr-watis-grid{grid-template-columns:1fr;gap:32px;}
     .abr-wanneer-grid{grid-template-columns:repeat(2,1fr);}
     .abr-aanvulling-grid{grid-template-columns:repeat(2,1fr);}
+    .abr-rules-grid{grid-template-columns:1fr;}
     .abr-procedure-grid{grid-template-columns:repeat(2,1fr);gap:32px;}
     .abr-factors-grid{grid-template-columns:1fr;}
   }
@@ -259,8 +257,21 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="max-width:640px;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Wat voor schade dekt ABR in de praktijk?</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">Hieronder 6 concrete schadegevallen die zonder ABR-dekking de werf weken of maanden stilleggen.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">ABR werkt anders dan een gewone polis: ze beschermt de werken zelf, niet je aansprakelijkheid. Tot de oplevering ligt het risico op het onafgewerkte bouwwerk bij de aannemer en de bouwheer. Eén brand, storm of instorting kan maanden werk in een klap vernietigen.</p>
     </div>
+    <div class="abr-rules-grid">
+      {[
+        { title: 'Wie draagt het risico?', text: 'Tot de oplevering rust het risico op de onafgewerkte werken bij de aannemer en de bouwheer. Een ABR verschuift dat risico naar de verzekeraar, zodat een schadegeval de werf niet financieel stillegt.' },
+        { title: 'Wat maakt ABR uniek?', text: 'Alle partijen op de werf zitten in één polis: bouwheer, hoofdaannemer en onderaannemers. Ze werkt op het alles-risico-principe: schade is gedekt tenzij ze uitdrukkelijk is uitgesloten.' },
+        { title: 'Wanneer wordt het geëist?', text: 'Bij nieuwbouw en grotere renovaties boven een bepaalde waarde, en standaard bij openbare aanbestedingen. Bouwheren en promotoren vragen het ABR-bewijs vaak vóór de werf mag starten.' },
+      ].map(card => (
+        <div style="background:#FFFFFF;padding:24px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);border-top:3px solid #E5A524;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#3F5767;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.6;color:#3F5767;text-align:center;max-width:560px;margin:0 auto 20px;">Zo ziet dat eruit op de werf: zes concrete schadegevallen die zonder ABR-dekking maanden vertraging en zware kosten betekenen.</p>
     <div style="display:flex;justify-content:center;">
       <button id="abr-examples-btn" style="display:flex;align-items:center;gap:10px;background:rgba(0,31,63,0.04);border:1px solid rgba(0,31,63,0.1);border-radius:8px;padding:14px 24px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#001F3F;">
         <span>Bekijk 6 concrete voorbeelden uit de bouw</span>
@@ -560,7 +571,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
     <div style="text-align:center;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over ABR</h2>
-      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">14 concrete vragen van bouwondernemers: klik open voor het antwoord.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#64748b;margin:0;">10 concrete vragen van bouwondernemers: klik open voor het antwoord.</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:10px;">
       {faqItems.map((item,i)=>(
