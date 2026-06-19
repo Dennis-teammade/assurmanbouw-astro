@@ -9,6 +9,7 @@ import AuthorByline from '../../../components/AuthorByline.astro';
 import { authors, type AuthorSlug } from '../../../data/authors';
 import SpokeCard from '../../../components/SpokeCard.astro';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../../data/cta-labels';
+import { SITE_URL } from '../../../data/site';
 
 export async function getStaticPaths() {
   const allSpokes = await getCollection('cluster-posts', ({ data }) => data.status === 'published');
@@ -49,7 +50,7 @@ const h2Headings = headings.filter((h) => h.depth === 2);
 const author = authors[spoke.data.author as AuthorSlug];
 const faqItems = (spoke.data.faq ?? []).map((item) => ({ title: item.q, content: item.a }));
 
-const siteUrl = 'https://www.assurman.be';
+const siteUrl = SITE_URL;
 const canonicalPath = `/gids/${spoke.data.parentPillar}/${spoke.slug}/`;
 
 const articleSchema = {

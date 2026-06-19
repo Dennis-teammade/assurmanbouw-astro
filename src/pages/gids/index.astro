@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import SearchBar from '../../components/islands/SearchBar';
 import CTABlock from '../../components/CTABlock.astro';
+import { SITE_URL } from '../../data/site';
 
 const pillars = (await getCollection('pillars', ({ data }) => data.status === 'published'))
   .sort((a, b) => a.data.pillarId.localeCompare(b.data.pillarId));
@@ -29,7 +30,7 @@ const PILLAR_META: Record<string, { bg: string; svg: string }> = {
   P5: { bg: '#512DA8', svg: '/images/gids/verzekeringsfouten-bouw-assurman.svg' },
 };
 
-const siteUrl = 'https://www.assurman.be';
+const siteUrl = SITE_URL;
 
 const collectionPageSchema = {
   '@context': 'https://schema.org',

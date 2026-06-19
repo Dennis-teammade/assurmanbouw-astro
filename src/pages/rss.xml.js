@@ -1,6 +1,5 @@
 import { getCollection } from 'astro:content';
-
-const SITE_URL = 'https://www.assurman.be';
+import { SITE_URL } from '../data/site';
 
 function escapeXml(str) {
   return String(str)

@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Breadcrumbs from '../../components/Breadcrumbs.astro';
 import { authors, type AuthorSlug } from '../../data/authors';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
+import { SITE_URL } from '../../data/site';
 
 export async function getStaticPaths() {
   return Object.keys(authors).map((slug) => ({
@@ -44,7 +45,7 @@ const spokeArticles = clusterPosts
 
 const allArticles = [...pillarArticles, ...spokeArticles];
 
-const siteUrl = 'https://www.assurman.be';
+const siteUrl = SITE_URL;
 const canonicalPath = author.authorPageUrl;
 
 const personSchema = {

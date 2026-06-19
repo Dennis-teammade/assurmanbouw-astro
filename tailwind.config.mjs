@@ -13,6 +13,7 @@ export default {
         gold: '#E5A524',
         slate: '#3F5767',
         'gold-light': '#E9C466',
+        sand: '#F7F4EF',
       },
     },
   },

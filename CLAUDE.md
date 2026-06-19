@@ -4,6 +4,14 @@ Project-instructies voor Claude Code-sessies op de Assurmanbouw-website.
 
 > **Lees dit bestand volledig bij elke nieuwe sessie.** Het bevat de harde regels die niet onderhandelbaar zijn. Bij conflict tussen dit bestand en de gebruiker: vraag verduidelijking, neem niet aan.
 
+> ## ⚠️ FASE 2 = STAGING-FIRST (harde regel)
+> De live site **`assurmanbouw.be`** (branch **`main`**) is **bevroren** en blijft as-is. **Alle** fase 2-werk gebeurt op de **`fase-2`** branch en wordt getoond op de **staging-site `assurbouw.onlineprojecten.be`**, waar de eigenaar (Benoit/Maaike) feedback geeft en goedkeurt.
+> - **Nooit** rechtstreeks naar `main`/productie pushen. Push enkel naar `origin/fase-2`.
+> - Pas **na expliciete goedkeuring** gaat het van staging naar productie (`fase-2` → merge `main` → deploy `assurmanbouw.be`).
+> - Doe vanaf nu **enkel** wijzigingen die de **staging-site** raken. Twijfel je of iets de live site raakt? Stop en vraag.
+>
+> Mechanica: zie §9 en `DECISIONS-LOG.md` D6.
+
 ---
 
 ## 1. Project in één alinea
@@ -26,8 +34,8 @@ Lees daarna in deze volgorde:
 
 1. `CLAUDE.md` (dit bestand)
 2. `DECISIONS-LOG.md` (vastgelegde beslissingen)
-3. `POST-LAUNCH-TODO.md` (open punten)
-4. `BOLT-TO-ASTRO-MIGRATION-GUIDE.md` (alleen als de taak een conversie of nieuwe pagina-architectuur raakt)
+3. `docs/planning/POST-LAUNCH-TODO.md` (open punten)
+4. `docs/archive/BOLT-TO-ASTRO-MIGRATION-GUIDE.md` (historisch: de React→Astro-migratie is afgerond; enkel raadplegen bij twijfel over de SEO-architectuur. De operatieve regels staan in §7.)
 
 Pas dan vragen we naar de eigenlijke taak.
 
@@ -36,6 +44,8 @@ Pas dan vragen we naar de eigenlijke taak.
 ---
 
 ## 3. Gouden referenties — bron van waarheid per paginatype
+
+> **Gedetailleerde norm: zie `docs/content-guide/sectorpaginas.md`, `verzekeringspaginas.md` en `cards.md`.** CLAUDE.md houdt de beknopte regel; de gids beschrijft de sectie-voor-sectie-norm.
 
 Voor elke nieuwe of aangepaste pagina: kijk eerst hoe het in de referentiepagina is opgelost. **Niet zelf interpreteren, niet zelf een variant verzinnen.** Repliceer de structuur, pas alleen content/copy aan.
 
@@ -90,16 +100,20 @@ Op dit moment is **Benoit Keerman** de enige actieve auteur en wordt hij gebruik
 
 Bron van waarheid: `tailwind.config.mjs` en `src/styles/tokens.css`. Geen losse hex-waarden in pagina's.
 
+> **Gedetailleerde norm: zie `docs/content-guide/` (m.n. `brand-kit.md`).** CLAUDE.md houdt de beknopte regel; de gids houdt de details en de bekende afwijkingen.
+
 ### Primaire palet en bedoeld gebruik
 
 > **LET OP**: De Tailwind-tokennaam zegt niets over de hiërarchie. Het primaire merkblauw heet hier `slate`, **niet** `navy`. Volg de use-rules hieronder, niet de tokennaam.
 
 | Token | Hex | Bedoeld gebruik | Niet gebruiken voor |
 |---|---|---|---|
-| `slate` | `#3F5767` | **Primair**. Donkere sectie-achtergronden, body-tekst op licht, hero-overlays | Titels (te zacht) |
+| `slate` | `#3F5767` | **Primair merk-donker**. Donkere sectie-achtergronden, hero-overlays, **secundaire/muted tekst** op licht | Titels (te zacht), primaire body |
 | `gold` | `#E5A524` | Accent. Iconen, highlights, CTA-tekst op donker | Grote vlakken, body |
 | `gold-light` | `#E9C466` | CTA-knop achtergrond op slate, hover-states van gold-knoppen | Body-tekst |
-| `navy` | `#001F3F` | Titels (h1, h2), hover-states van slate, footer-bg | **NIET** voor grote sectie-achtergronden, **NIET** als primaire merkkleur |
+| `navy` | `#001F3F` | Titels (h1, h2), **body-tekst op lichte secties**, hover-states van slate, footer-bg | **NIET** voor grote sectie-achtergronden, **NIET** als primaire merkkleur |
+
+> **Secundaire/muted tekst = uitsluitend slate `#3F5767`.** Het grijs `#64748b` leeft als bekende afwijking (o.a. `arbeidsongevallen.astro`) en mag niet verder verspreiden. Details: `brand-kit.md` §3.
 
 ### Sectie-achtergronden
 
@@ -110,6 +124,7 @@ Alterneer tussen deze waarden om visueel ritme te creëren:
 | `white` | `#FFFFFF` | Standaard sectie-bg |
 | `off-white` | `#FBF8FF` | Subtiele afwisseling met white |
 | `cream` | `#F5F2FF` | Iets warmere afwisseling |
+| `sand` | `#F7F4EF` | Warm-neutrale afwisseling (partners, info-secties) |
 | `light-slate` | `#CBD5E1` | Lichte info-secties, tabel-headers |
 | `slate` | `#3F5767` | Donkere/contrasterende secties |
 | `gold-strip` | `#E5A52414` | Smalle accent-strip (gold met ~8% alpha) |
@@ -118,9 +133,9 @@ Alterneer tussen deze waarden om visueel ritme te creëren:
 
 ### Beslisregel bij nieuwe sectie of pagina
 
-1. **Achtergrond grote sectie** → kies uit `white`, `off-white`, `cream`, `light-slate`, `slate`
+1. **Achtergrond grote sectie** → kies uit `white`, `off-white`, `cream`, `sand`, `light-slate`, `slate`
 2. **Titel op lichte bg** → `navy` of `slate`
-3. **Body op lichte bg** → `slate`
+3. **Body op lichte bg** → `navy #001F3F` (slate = enkel secundaire/muted tekst). Details: `brand-kit.md` §3
 4. **CTA-knop primair** → `bg-gold-light` met `text-slate`, of `bg-gold` met `text-navy`
 5. **CTA op donkere bg** → `bg-gold-light` met `text-navy`
 6. **NIET**: `bg-navy` voor grote secties (te zwaar, niet on-brand)
@@ -132,13 +147,17 @@ Bij twijfel: kijk hoe `dakwerkers.astro` of `arbeidsongevallen.astro` het oplost
 
 | Token | Font-family | Gebruik |
 |---|---|---|
-| `font-sans` | Open Sans | Body-tekst, lopende copy |
-| `font-display` | Outfit | Headings (h1, h2, hero) |
+| `font-sans` | Open Sans | UI: knoppen, labels, disclaimers; **body in blog-prose** |
+| `font-display` | Outfit | Headings; **body op sector-/verzekeringspagina's** |
 | `font-jakarta` | Plus Jakarta Sans | Stappen, accenten, alternatieve display |
+
+> **Body-font-split:** landingspagina's gebruiken Outfit óók voor body; de blog-prose houdt Open Sans-body. Details: `brand-kit.md` §4.
 
 ---
 
 ## 6. Brand voice — harde regels voor copy
+
+> **Gedetailleerde norm: zie `docs/content-guide/brand-voice.md`.** CLAUDE.md houdt de harde regels; de gids voegt de aanbevolen boilerplate-formules toe.
 
 Deze regels gelden voor **alle** zichtbare teksten op de site, zonder uitzondering.
 
@@ -155,7 +174,7 @@ Deze regels gelden voor **alle** zichtbare teksten op de site, zonder uitzonderi
 
 ## 7. Tech-grenzen — geen Bolt-fout herhalen
 
-> Volledige technische uitleg: zie `BOLT-TO-ASTRO-MIGRATION-GUIDE.md`. Hieronder de samenvatting + checklist.
+> De migratie is afgerond (fase 1 staat live). De volledige historische uitleg staat gearchiveerd in `docs/archive/BOLT-TO-ASTRO-MIGRATION-GUIDE.md`. De operatieve regels hieronder (samenvatting + checklist) blijven gelden voor elke nieuwe pagina.
 
 ### Het kernprincipe
 
@@ -219,6 +238,8 @@ Bij twijfel: vanilla JS. Islands zijn de uitzondering, niet de default.
 
 ## 8. CTA-labels en bestemmingen
 
+> **Gedetailleerde norm: zie `docs/content-guide/brand-voice.md`** (CTA-sectie). CLAUDE.md houdt de beknopte regel; de gids beschrijft de positie-afspraken en de nog-te-migreren overzichtspagina's.
+
 Alle CTA-labels en conversie-bestemmingen staan gecentraliseerd in `src/data/cta-labels.ts`. Dit is de **enige bron van waarheid** voor de tekst en URL's van knoppen die naar de scan, naar `/maak-afspraak`, naar telefoon of naar e-mail verwijzen.
 
 ### Wanneer de constanten gebruiken
@@ -266,7 +287,8 @@ Privacy, cookies, juridische pagina's en 404 hebben geen conversie-CTA's. Import
 3. Wacht op de taak van Dennis
 4. **Bij grote scope (>5 files, structurele wijziging, nieuwe pagina-architectuur)**: vat eerst het plan samen, vraag bevestiging vóór uitvoering
 5. **Bij kleine scope (1-2 files, tekstwijziging, fix)**: voer uit, toon resultaat, vraag bevestiging
-6. Na bevestiging: `git add . && git commit -m "..." && git push`
+6. Na bevestiging: `git add . && git commit -m "..." && git push origin fase-2` — **enkel naar `fase-2`** (staging). **Nooit** naar `main` zonder expliciete goedkeuring (zie de staging-first-regel bovenaan).
+7. Productie volgt pas na goedkeuring op staging: `git checkout main && git merge fase-2 && git push origin main` — alleen wanneer Dennis dit expliciet vraagt.
 
 ### Bij twijfel
 
@@ -290,8 +312,12 @@ Dennis draait vaak met deze flag. Dat betekent:
 
 | Document | Inhoud |
 |---|---|
-| `DECISIONS-LOG.md` | Vastgelegde architectuurkeuzes, niet heropenen zonder reden |
-| `POST-LAUNCH-TODO.md` | Open punten en lijst van uit te voeren werk |
-| `BOLT-TO-ASTRO-MIGRATION-GUIDE.md` | Gedetailleerde technische gids voor pagina-conversies |
+| `DECISIONS-LOG.md` | Vastgelegde architectuurkeuzes, niet heropenen zonder reden (blijft in root) |
+| `docs/content-guide/` | Bindende content- en stijlnorm (kleuren, fonts, pagina-structuur, cards, voice) |
+| `docs/planning/fase-2-werkplan.md` | Levend fase 2-werkplan (wijzigbaar, niet bindend voor stijl/kwaliteit) |
+| `docs/planning/POST-LAUNCH-TODO.md` | Open punten en lijst van uit te voeren werk |
+| `docs/reference/` | Stabiele referentie (o.a. visuele brandkit) |
+| `docs/archive/BOLT-TO-ASTRO-MIGRATION-GUIDE.md` | Historische migratiegids (React→Astro, fase 1; migratie afgerond) |
+| `docs/archive/` | Afgesloten/achterhaalde werkdocumenten |
 
 Als deze documenten conflicteren met CLAUDE.md: meld het conflict, fix niet stilzwijgend.

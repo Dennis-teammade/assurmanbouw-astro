@@ -10,6 +10,7 @@ import BrandChevron from '../../../components/BrandChevron.astro';
 import SpokeCard from '../../../components/SpokeCard.astro';
 import { authors, type AuthorSlug } from '../../../data/authors';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../../data/cta-labels';
+import { SITE_URL } from '../../../data/site';
 
 export async function getStaticPaths() {
   const pillars = await getCollection('pillars', ({ data }) => data.status === 'published');
@@ -41,7 +42,7 @@ const formattedDate = pillar.data.publishDate
   ? new Date(pillar.data.publishDate).toLocaleDateString('nl-BE', { day: 'numeric', month: 'long', year: 'numeric' })
   : null;
 
-const siteUrl = 'https://www.assurman.be';
+const siteUrl = SITE_URL;
 const canonicalPath = `/gids/${pillar.slug}/`;
 
 const articleSchema = {

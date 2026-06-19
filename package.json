@@ -7,8 +7,8 @@
     "build": "astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
-    "seo:scan": "node seo-scan.mjs",
-    "links:audit": "node link-audit.mjs"
+    "seo:scan": "node scripts/seo-scan.mjs",
+    "links:audit": "node scripts/link-audit.mjs"
   },
   "dependencies": {
     "@astrojs/react": "^3.6.0",

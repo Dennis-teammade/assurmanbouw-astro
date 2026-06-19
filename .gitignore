@@ -8,15 +8,17 @@ node_modules/
 # Astro build cache
 .astro/
 
-# SEO scan output (lokaal gegenereerd, niet committen)
-seo-scan.md
-seo-scan.mjs
+# Build-/export-artefacten (niet committen)
+*.zip
 
-# Link audit output (lokaal gegenereerd, niet committen)
-link-audit.md
-link-audit.mjs
+# Lokale tooling-scripts (niet committen)
+scripts/seo-scan.mjs
+scripts/link-audit.mjs
 
-# Werkdocumenten (lokaal, niet committen)
+# Gegenereerde rapporten (lokaal, niet committen)
+reports/
+
+# Werkdocumenten ronde 2 (lokaal gearchiveerd in docs/archive/, niet committen)
 HANDOVER-RONDE-2.md
 PROGRESS-RONDE-2.md
 TODO-GA-LIVE.md
