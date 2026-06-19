@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import {
   Shield, Wrench, Truck, Users, Zap, CheckCircle, Layers, Building2, Scale, Car, HardHat,
+  Flame, Heart, PiggyBank,
   ChevronLeft, ChevronRight,
 } from 'lucide-react';
 
@@ -33,6 +34,9 @@ const ICON_MAP: Record<string, React.ReactNode> = {
   scale: <Scale size={36} color="#E5A524" />,
   car: <Car size={36} color="#E5A524" />,
   hardhat: <HardHat size={36} color="#E5A524" />,
+  flame: <Flame size={36} color="#E5A524" />,
+  heart: <Heart size={36} color="#E5A524" />,
+  'piggy-bank': <PiggyBank size={36} color="#E5A524" />,
 };
 
 export default function InsuranceCarousel({
