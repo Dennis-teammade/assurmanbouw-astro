@@ -99,3 +99,44 @@ naam, bedrijf, email, telefoon, bericht, bron, entry_url, submitted_at
 - Inline styles via `style={{...}}` object syntax voor brand-kleuren (consistent met andere islands).
 
 Bij wijzigingen aan velden of webhook-URLs: pas dit log bij en update beide pagina's én het island in één commit.
+
+---
+
+## 2026-06-19
+
+### D8 — Docs-herstructurering, content-gids als norm, staging-first vastgelegd
+
+**Content-/stijlgids = single source of truth.** Nieuwe map `docs/content-guide/`
+(README, sectorpaginas, verzekeringspaginas, cards, brand-voice, brand-kit,
+blog-kenniscentrum) is voortaan de **bindende norm** voor hoe pagina's eruitzien. Norm
+afgeleid uit de echte bestanden (`dakwerkers.astro`, `arbeidsongevallen.astro`,
+tokens/config), niet uit oudere design-docs. `docs/planning/fase-2-werkplan.md` is een
+**levend, niet-bindend** werkdocument. CLAUDE.md verwijst per sectie door naar de gids
+maar blijft de beknopte governance.
+
+**Vastgelegde norm-keuzes (waren in tegenspraak met CLAUDE.md, nu rechtgezet in §5):**
+- Body-tekst op lichte secties = **navy `#001F3F`** (inkt, nooit als vlak). Slate
+  `#3F5767` = enige secundaire/muted tint; `#64748b` is een afwijking die niet verder
+  verspreid mag worden.
+- Body-font-split: sector-/verzekeringspagina's gebruiken **Outfit** als body;
+  blog-prose houdt **Open Sans**. UI (knoppen/labels) = Open Sans.
+- Nieuw token **`sand` (`#F7F4EF`)** toegevoegd aan `tailwind.config.mjs` + `tokens.css`,
+  toegelaten als sectie-achtergrond. Bestaand hardcoded gebruik niet aangeraakt.
+
+**Domein-bug gefixt.** Structured data (JSON-LD) en RSS gebruikten `www.assurman.be`
+terwijl de site op `assurmanbouw.be` staat. Gecentraliseerd in `src/data/site.ts`
+(`SITE_URL`), geïmporteerd in `rss.xml.js`, `gids/[pillar]/[spoke].astro`,
+`gids/[pillar]/index.astro`, `gids/index.astro`, `auteur/[slug].astro`. `info@assurman.be`
+(mailadres) ongemoeid.
+
+**STAGING-FIRST expliciet gemaakt.** De live site `assurmanbouw.be` (`main`) is bevroren.
+Alle fase 2-werk gebeurt op `fase-2` en wordt getoond op `assurbouw.onlineprojecten.be`
+voor review/goedkeuring; pas daarna naar productie. Nooit rechtstreeks naar `main`
+zonder goedkeuring. Vastgelegd als harde regel bovenaan CLAUDE.md + in §9 (verfijnt D6).
+
+**Root-opkuis.** Verwijderd: `astro-build.zip` (build-artefact), `homepage.html` (stale
+render), dubbele root-`assurman-logo-cropped.svg` (de geserveerde staat in `public/`).
+Verplaatst: `POST-LAUNCH-TODO.md` → `docs/planning/`, Bolt-migratiegids → `docs/archive/`
+(historisch, migratie afgerond), `Assurman-brandkit.png` → `docs/reference/`,
+`FEEDBACK-CONTEXT*.md` → `docs/archive/`. Tooling-scripts → `scripts/`, output → `reports/`
+(gitignored). Root houdt enkel config + `CLAUDE.md` + `DECISIONS-LOG.md`.
