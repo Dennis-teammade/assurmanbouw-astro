@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CTA_SCAN, CTA_DESTINATIONS } from '../../data/cta-labels';
+---
+<BaseLayout
+  title="BA Bestuurder (bestuurdersaansprakelijkheid) | Assurman"
+  description="Bescherm je privevermogen als zaakvoerder tegen aansprakelijkheid voor bestuursfouten. Binnenkort online bij Assurman."
+  canonical="/verzekeringen/ba-bestuurder/"
+  noindex={true}
+>
+  <main style="min-height:72vh;display:flex;align-items:center;justify-content:center;background:#FBF8FF;padding:140px 24px 96px;">
+    <div style="max-width:680px;text-align:center;">
+      <span style="display:inline-block;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Verzekering</span>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,52px);color:#001F3F;line-height:1.1;margin:0 0 16px;">BA Bestuurder</h1>
+      <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#3F5767;line-height:1.6;margin:0 0 32px;">Deze pagina is in opbouw. Binnenkort lees je hier alles over de bestuurdersaansprakelijkheid en hoe ze je prive beschermt. Wil je nu al weten waar je dekking tekortschiet? Doe de gratis verzekeringsscan in 2 minuten.</p>
+      <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary--lg">{CTA_SCAN.hero}</a>
+      <p style="margin-top:28px;"><a href="/verzekeringen/" style="color:#3F5767;font-family:'Outfit',sans-serif;text-decoration:underline;">Alle verzekeringen bekijken</a></p>
+    </div>
+  </main>
+</BaseLayout>
