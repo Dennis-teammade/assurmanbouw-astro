@@ -180,3 +180,26 @@ Status pagina: **afgewerkt, op staging.** 11 controlepunten. Afbakening bewaakt:
 | BB11 | Aangiftetermijn = **"zo snel mogelijk"** (geen vast getal) | Termijn verschilt per polis | Standaardtermijn tonen of "zie polis" houden? | 🔲 |
 
 Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/band = echt beeld (`/images/verzekeringen/bescherming-bedrijfsleider-*`).
+
+---
+
+## /verzekeringen/groepsverzekering (Groepsverzekering)
+
+Status pagina: **afgewerkt, op staging.** Aanvullend pensioen voor het personeel (tweede pijler), scherp onderscheiden van VAPZ/IPT/POZ (= bedrijfsleider zelf). Rode draad: arbeiders PC 124 (sectoraal via Constructiv) vs bedienden PC 200 (vrijwillig). **12 controlepunten.**
+
+| # | Wat we beslisten (staat zo op de pagina) | Waarom | Te controleren / suggestie | Status |
+|---|---|---|---|---|
+| GRP1 | Wettelijke basis = **WAP 28 april 2003** + minimumrendement **2,50%** + sectoraal plan PC 124 via Constructiv | Cross-cutting C1 (2,50% sinds 2025, vervangt de verouderde 1,75%) + C4 | Bevestig dat 2,50% nog geldt bij publicatie; juridische formulering aftekenen. | 🔲 |
+| GRP2 | Antwoord op "verplicht?" = **"Soms."** (arbeiders PC 124 sectoraal verplicht via Constructiv, bedienden PC 200 vrijwillig) | Eerlijkste weergave van de gemengde verplichting in de bouw | Bevestig de formulering en het onderscheid arbeiders/bedienden. | 🔲 |
+| GRP3 | **PC 124** = sectoraal aanvullend pensioen via Constructiv, niet "groepsverzekering verplicht" | Cross-cutting C4 | Bevestig formulering; we noemen bewust GEEN bijdragepercentage (1,1%) op de pagina. | 🔲 |
+| GRP4 | **Premietaks 4,40%** op de werkgeversbijdragen (fiscaal-card) | Levensverzekering-taks, cross-cutting | Bevestig dat 4,40% klopt voor een groepsverzekering bij publicatie. | 🔲 |
+| GRP5 | **RIZIV-bijdrage 8,86%** op de werkgeverspremies (fiscaal-card) | Bijzondere RSZ/RIZIV-bijdrage, cross-cutting | Bevestig het percentage 8,86%. | 🔲 |
+| GRP6 | **80%-regel**: wettelijk + aanvullend pensioen samen max 80% van het laatste brutojaarloon, anders niet aftrekbaar | Standaard fiscaal kader tweede pijler | Bevestig de formulering (bruto/jaarloon, gevolg niet-aftrekbaarheid). | 🔲 |
+| GRP7 | **Geen netto-uitkeringspercentage** op de pagina (kwalitatief gehouden) | Brand-voice: geen verzonnen/niet-persoonlijke cijfers | Bevestig dat we geen netto-indicatie tonen, of lever een controleerbaar kader. | 🔲 |
+| GRP8 | **Sociaal luik / solidariteitswaarborgen** als aanvulling, met gunstiger fiscaal/parafiscaal regime | Gangbare optie tweede pijler | Bevestig dat dit in ons gamma zit en de fiscale formulering klopt. | 🔲 |
+| GRP9 | **Overlijdensdekking, invaliditeitsrente, premievrijstelling** als optionele waarborgen; zelfdoding 1e jaar + opzet uitgesloten | Marktstandaard | Bevestig welke waarborgen wij effectief aanbieden + uitsluitingen. | 🔲 |
+| GRP10 | **Geen premiebedrag in euro** op de pagina, enkel de factoren (bijdrage, formule, waarborgen, personeelsbestand) | Brand-voice: geen verzonnen cijfers | Bevestig dat we geen indicatief tarief tonen. | 🔲 |
+| GRP11 | Euro-bedragen in de **6 cases** (45.000 overlijdenskapitaal, 400 invaliditeitsrente) = herkenbaar-fictieve illustratie | Brand-voice-regel cases | Bevestig dat dit als illustratie volstaat. | 🔲 |
+| GRP12 | Carousel-slugs: **aanvullend-pensioen, ipt, vapz, gewaarborgd-inkomen** | Verwante pensioen-/personeelspolissen, alle slugs bestaan | Bevestig de selectie of wissel met bescherming-bedrijfsleider/arbeidsongevallen. | 🔲 |
+
+Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/band = echt beeld (`/images/verzekeringen/groepsverzekering-*`).

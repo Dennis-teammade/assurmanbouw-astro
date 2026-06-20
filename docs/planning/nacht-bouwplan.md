@@ -51,7 +51,7 @@ flaggen i.p.v. forceren.
 | 4 | Vervoerde goederen | `vervoerde-goederen` | spullen-en-werk | Codex+Dennis | TODO |
 | 5 | Gewaarborgd inkomen | `gewaarborgd-inkomen` | jij-en-je-mensen | Codex+Dennis | TODO |
 | 6 | Bescherming bedrijfsleider | `bescherming-bedrijfsleider` | jij-en-je-mensen | Codex+Dennis | TODO |
-| 7 | Groepsverzekering | `groepsverzekering` | pensioen-en-fiscaal | Codex+Dennis | TODO |
+| 7 | Groepsverzekering | `groepsverzekering` | pensioen-en-fiscaal | Codex+Dennis | DONE |
 | 8 | Aanvullend pensioen (pijler) | `aanvullend-pensioen` | pensioen-en-fiscaal | Codex+Dennis | TODO |
 | 9 | VAPZ | `vapz` | pensioen-en-fiscaal | dun (pijler) | TODO |
 | 10 | POZ | `poz` | pensioen-en-fiscaal | dun (pijler) | TODO |
@@ -141,7 +141,7 @@ voorstel voor de volgende dag.
 - [x] 4. Vervoerde goederen — DONE
 - [x] 5. Gewaarborgd inkomen — DONE
 - [x] 6. Bescherming bedrijfsleider — DONE
-- [ ] 7. Groepsverzekering — TODO
+- [x] 7. Groepsverzekering — DONE
 - [ ] 8. Aanvullend pensioen — TODO
 - [ ] 9. VAPZ — TODO
 - [ ] 10. POZ — TODO
@@ -159,3 +159,4 @@ voorstel voor de volgende dag.
 - **Vervoerde goederen** — DONE. Gebouwd uit brief (prefix vg-), met echte beelden. Databron live. Build groen. Controlepunten VG1-8. + 22 klant-foto's geplaatst in public/images/verzekeringen/; ba-bestuurder/brand/bedrijfsschade omgezet van generiek naar echt beeld. Volgende: Gewaarborgd inkomen (brief nog te maken via subagent).
 - **Gewaarborgd inkomen** — DONE. Gebouwd uit subagent-brief (prefix gi-), echt beeld, databron live. Build groen. 18 controlepunten (RIZIV/fiscaal). Premietaks bewust WEG (persoonsverzekering, vrijgesteld) - dus geen 9,25% op de pagina. Volgende: Bescherming bedrijfsleider (brief nog te maken via subagent).
 - **Bescherming bedrijfsleider** — DONE. Gebouwd uit subagent-brief (prefix bb-, echt beeld, hero vh). Keuzehub-afbakening (keyman/continuïteit ≠ persoonlijke overlijdensdekking ≠ BA Bestuurder). Premietaks 4,40% (leven, niet 9,25%). Databron live. Build groen. Controlepunten BB1-11. Volgende: Groepsverzekering (pensioencluster; brief nog te maken).
+- **Groepsverzekering** — DONE. Gebouwd uit subagent-brief (prefix gv-, echt beeld, hero vh). Tweede pijler voor het personeel, scherp onderscheiden van VAPZ/IPT/POZ (= bedrijfsleider zelf). Rode draad arbeiders PC 124 (sectoraal via Constructiv) vs bedienden PC 200 (vrijwillig). Verplicht-antwoord "Soms." Kerngetal WAP 2,50% (sinds 2025). Premietaks 4,40% + RIZIV 8,86% + 80%-regel. Databron live (gerelateerde → aanvullend-pensioen/ipt/vapz/gewaarborgd-inkomen). Build groen, 12 FAQ statisch, FAQPage-schema, noindex weg. Controlepunten GRP1-12. Volgende: Aanvullend pensioen (pijler; brief nog te maken).

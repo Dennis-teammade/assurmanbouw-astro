@@ -198,11 +198,11 @@ export const VERZEKERINGEN: Verzekering[] = [
     slug: 'groepsverzekering',
     titel: 'Groepsverzekering',
     categorie: 'pensioen-en-fiscaal',
-    korteBeschrijving: 'Bouw een fiscaal aantrekkelijk aanvullend pensioen op voor je personeel, met overlijdens- en invaliditeitsdekking.', // TODO: definitieve copy
-    bullets: ['Aanvullend pensioen voor je personeel', 'Fiscaal aantrekkelijk', 'Bindt en motiveert medewerkers'], // TODO: definitieve bullets
+    korteBeschrijving: 'Bouw een fiscaal voordelig aanvullend pensioen op voor je werknemers, voordeliger dan cash loon en met optionele overlijdens- en invaliditeitsdekking.',
+    bullets: ['Aanvullend pensioen voor je personeel', 'Fiscaal voordeliger dan een loonsverhoging', 'Bindt en motiveert je vakmensen', 'Optionele overlijdens- en invaliditeitsdekking'],
     icoon: 'users',
-    gerelateerde: ['aanvullend-pensioen', 'ipt', 'arbeidsongevallen'],
-    status: 'skeleton',
+    gerelateerde: ['aanvullend-pensioen', 'ipt', 'vapz', 'gewaarborgd-inkomen'],
+    status: 'live',
   },
   {
     slug: 'aanvullend-pensioen',

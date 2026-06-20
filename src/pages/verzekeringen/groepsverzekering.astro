@@ -1,20 +1,707 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { CTA_SCAN, CTA_DESTINATIONS } from '../../data/cta-labels';
+import { kaartenVoor } from '../../data/verzekeringen';
+import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
+import BrandChevron from '../../components/BrandChevron.astro';
+
+const faqItems = [
+  { q: 'Wat is een groepsverzekering?', a: 'Een groepsverzekering is een aanvullend pensioen dat je als werkgever afsluit voor je werknemers. Jij stort de bijdragen bij een verzekeraar, die het kapitaal opbouwt en bij pensionering uitkeert aan je werknemer. Het hoort bij de tweede pensioenpijler.' },
+  { q: 'Is een groepsverzekering verplicht in de bouw?', a: 'Voor je bouwarbeiders (PC 124) bestaat er een sectoraal aanvullend pensioen via Constructiv, dat is sectoraal geregeld. Voor je bedienden (PC 200) is er geen algemene sectorale verplichting: daar kan je vrijwillig een groepsverzekering afsluiten als extralegaal voordeel.' },
+  { q: 'Wat is het verschil met VAPZ, IPT of POZ?', a: 'Een groepsverzekering bouwt pensioen op voor je werknemers. VAPZ, IPT en POZ bouwen pensioen op voor de zelfstandige of bedrijfsleider zelf. Wil je je eigen pensioen regelen, dan kijk je naar die formules, niet naar de groepsverzekering.' },
+  { q: 'Wie betaalt de groepsverzekering?', a: 'In de eerste plaats de werkgever. Het plan kan voorzien dat de werknemer ook een eigen bijdrage stort, maar dat is geen verplichting. Jij bepaalt mee de structuur in het pensioenreglement.' },
+  { q: 'Wat is de wettelijke rendementsgarantie?', a: 'De WAP legt een minimumrendement op de gestorte bijdragen op. Haalt de verzekeraar dat niet, dan pas jij als werkgever het verschil bij wanneer je werknemer met pensioen gaat of vertrekt. Sinds 2025 bedraagt dat minimum 2,50%.' },
+  { q: 'Waarom is een groepsverzekering fiscaal interessant?', a: 'Op cash loon betaal je zware sociale bijdragen en bedrijfsvoorheffing. Een groepsverzekering wordt veel lichter belast: de premie is voor jou aftrekbaar als beroepskost en je werknemer wordt bij uitkering gunstiger belast dan op brutoloon.' },
+  { q: 'Wat is de 80%-regel?', a: 'Het wettelijke pensioen en het aanvullende pensioen samen mogen niet meer bedragen dan 80% van het laatste brutojaarloon van je werknemer. Stort je meer, dan is het stuk boven die grens niet langer fiscaal aftrekbaar. Wij controleren dat vooraf.' },
+  { q: 'Wat gebeurt er als een werknemer ontslag neemt?', a: 'De opgebouwde reserve blijft eigendom van je werknemer. Hij kan ze laten staan bij de verzekeraar, overdragen naar het plan van zijn nieuwe werkgever, of naar een onthaalstructuur. Je verliest dus niets van wat je al opbouwde.' },
+  { q: 'Kan ik een plan opzetten bovenop het sectorale plan voor arbeiders?', a: 'Ja. Het sectorale aanvullend pensioen via Constructiv is een minimum. Wil je meer bieden, dan kan je voor je arbeiders een aanvullend ondernemingsplan opzetten bovenop die sectorale basis.' },
+  { q: 'Kan een groepsverzekering ook overlijden of invaliditeit dekken?', a: 'Ja. Naast pensioenopbouw kan je een overlijdensdekking en een invaliditeitsrente toevoegen, plus premievrijstelling zodat de opbouw doorloopt bij langdurige arbeidsongeschiktheid. Je stelt het plan samen op maat.' },
+  { q: 'Wat kost een groepsverzekering mij als werkgever?', a: 'Dat bepaal je zelf: een percentage van het loon of een vast bedrag per werknemer. Daarbovenop komen wettelijke taksen en bijdragen. Ook voor een kleine kmo is een haalbare formule mogelijk.' },
+  { q: 'Waar volgt mijn werknemer zijn opgebouwde pensioen op?', a: 'Je werknemer krijgt jaarlijks een pensioenfiche en kan zijn volledige aanvullend pensioen raadplegen op MyPension. Daar ziet hij de opgebouwde reserve en de aangesloten plannen.' },
+];
+
+const beroepTabs = [
+  { id: 'dakwerkers',    label: 'Dakwerkers',        link: '/sectoren/dakwerkers',    title: 'Voor dakwerkers',                    text: 'Je dakwerkers zijn arbeiders (PC 124) en bouwen al een sectoraal aanvullend pensioen op via Constructiv. Wil je je voorman of een bediende meer bieden, dan zet je daar een eigen groepsverzekering bovenop.' },
+  { id: 'metsers',       label: 'Metsers',            link: '/sectoren/aannemers',     title: 'Voor metsers en algemene aannemers', text: 'Met een gemengd team van metselaars (arbeiders) en bedienden op kantoor combineer je het sectorale plan voor je arbeiders met een vrijwillige groepsverzekering voor je bedienden.' },
+  { id: 'loodgieters',   label: 'Loodgieters',        link: '/sectoren/loodgieters',   title: 'Voor loodgieters',                   text: 'Ook als kleine kmo bind je vakmensen met een aanvullend pensioen. Je bepaalt zelf een haalbare bijdrage per werknemer, zonder de zware lasten van extra cash loon.' },
+  { id: 'elektriciens',  label: 'Elektriciens',       link: '/sectoren/elektriciens',  title: 'Voor elektriciens',                  text: 'Goede elektriciens zijn schaars. Een groepsverzekering met overlijdens- en invaliditeitsdekking maakt je aanbod sterker en houdt je technici aan boord.' },
+  { id: 'schilders',     label: 'Schilders',          link: '/sectoren/schilders',     title: 'Voor schilders',                     text: 'In een fysiek beroep telt bescherming bij langdurige uitval. Naast pensioenopbouw voeg je voor je schilders een invaliditeitsrente en premievrijstelling toe.' },
+  { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Of je nu met arbeiders in het atelier of bedienden op kantoor werkt: we stemmen het plan af op je personeelsbestand en op wat sectoraal al geregeld is.' },
+];
+
+const insuranceCards = kaartenVoor(['aanvullend-pensioen', 'ipt', 'vapz', 'gewaarborgd-inkomen']);
+
+const schema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+
+const svgCheck16g = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+const svgX16r    = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
+const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
 ---
+
 <BaseLayout
-  title="Groepsverzekering | Assurman"
-  description="Bouw een fiscaal aantrekkelijk aanvullend pensioen op voor je personeel. Binnenkort online bij Assurman."
+  title="Groepsverzekering voor je personeel in de bouw | Assurman"
+  description="Een groepsverzekering bouwt aanvullend pensioen op voor je werknemers, fiscaal voordeliger dan cash loon. Hoe het werkt voor arbeiders en bedienden."
   canonical="/verzekeringen/groepsverzekering/"
-  noindex={true}
+  schema={schema}
 >
-  <main style="min-height:72vh;display:flex;align-items:center;justify-content:center;background:#FBF8FF;padding:140px 24px 96px;">
-    <div style="max-width:680px;text-align:center;">
-      <span style="display:inline-block;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Verzekering</span>
-      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,52px);color:#001F3F;line-height:1.1;margin:0 0 16px;">Groepsverzekering</h1>
-      <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#3F5767;line-height:1.6;margin:0 0 32px;">Deze pagina is in opbouw. Binnenkort lees je hier alles over de groepsverzekering voor je personeel. Wil je nu al weten waar je dekking tekortschiet? Doe de gratis verzekeringsscan in 2 minuten.</p>
-      <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary--lg">{CTA_SCAN.hero}</a>
-      <p style="margin-top:28px;"><a href="/verzekeringen/" style="color:#3F5767;font-family:'Outfit',sans-serif;text-decoration:underline;">Alle verzekeringen bekijken</a></p>
+
+<style is:global>
+  .gv-sticky-btn{background:#F7F4EF;border:1px solid rgba(229,165,36,0.2);cursor:pointer;padding:7px 16px;margin:10px 5px;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border-radius:9999px;transition:background 0.2s,border-color 0.2s;color:#001F3F;}
+  .gv-sticky-btn:hover,.gv-sticky-btn.active{background:rgba(229,165,36,0.18);border-color:#E5A524;}
+  .gv-sticky-btn .gv-check{color:#94a3b8;flex-shrink:0;transition:color 0.2s;}
+  .gv-sticky-btn:hover .gv-check,.gv-sticky-btn.active .gv-check{color:#E5A524;}
+  .gv-tab-btn{background:none;border:none;cursor:pointer;padding:14px 24px;white-space:nowrap;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.2s,border-color 0.2s;}
+  .gv-tab-btn:hover,.gv-tab-btn.active{color:#E5A524;border-bottom-color:#E5A524;}
+  .gv-ins-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);transition:background 0.2s,transform 0.2s;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);}
+  .gv-ins-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-4px);}
+  .gv-stat-panel{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+  .gv-stat-btn{width:100%;display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;text-align:left;padding:20px 24px;}
+  .gv-scan-btn:hover{background:#324554 !important;}
+  .gv-badge-pill{display:inline-flex;align-items:center;gap:8px;background:#F5F2FF;border:1px solid rgba(213,196,174,0.2);border-radius:9999px;padding:6px 16px;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#001F3F;}
+</style>
+
+<style>
+  .gv-hero-img{position:absolute;top:5vh;right:-5px;height:85vh;width:auto;max-width:48%;z-index:1;pointer-events:none;}
+  .gv-hero-content{max-width:620px;}
+  .gv-hero-inner{max-width:1280px;margin:0 auto;padding:64px 32px 80px;position:relative;z-index:2;}
+  .gv-hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+  .gv-watis-grid{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:flex-start;}
+  .gv-verplicht-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .gv-dekking-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
+  .gv-plafond-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;}
+  .gv-aanvulling-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .gv-rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0;}
+  .gv-formule{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:64px;flex-wrap:wrap;}
+  .gv-factors-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;margin:0 auto 40px;}
+  .gv-procedure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+  .gv-tab-inner{display:flex;gap:32px;align-items:flex-start;border-radius:12px;}
+  .gv-final-btns{display:flex;gap:24px;justify-content:center;margin-bottom:80px;flex-wrap:wrap;}
+  .gv-sticky-nav-bar{position:sticky;top:72px;z-index:90;background:#FFFFFF;border-bottom:1px solid rgba(0,31,63,0.08);overflow:auto;}
+  .gv-sticky-inner{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;gap:0;justify-content:center;flex-wrap:wrap;}
+  .gv-container{max-width:1280px;margin:0 auto;padding:0 32px;}
+  .brand-why-card{background:#FFFFFF;border-left:4px solid #E5A524;box-shadow:0px 1px 2px rgba(0,0,0,0.05);transition:box-shadow 0.2s,transform 0.2s;}
+  .brand-why-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.1);transform:translateY(-2px);}
+
+  @media (max-width:1023px){
+    .gv-container{padding:0 24px;}
+    .gv-sticky-inner{padding:0 24px;}
+    .gv-watis-grid{grid-template-columns:1fr;gap:32px;}
+    .gv-verplicht-grid{grid-template-columns:repeat(2,1fr);}
+    .gv-aanvulling-grid{grid-template-columns:repeat(2,1fr);}
+    .gv-procedure-grid{grid-template-columns:repeat(2,1fr);gap:32px;}
+    .gv-factors-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:767px){
+    .gv-sticky-nav-bar{display:none;}
+    .gv-container{padding:0 15px;}
+    .gv-hero-content{max-width:100%;}
+    .gv-hero-img{display:none;}
+    .gv-hero-btns{flex-direction:column;}
+    .gv-hero-btns a{width:100%;justify-content:center;text-align:center;}
+    #watis{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #verplicht{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #dekking{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #premie{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #procedure{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #faq{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #gv-beroep{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #gv-statuten{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #gv-aanvulling{padding-bottom:56px !important;}
+    #gv-cta-band{padding-left:15px !important;padding-right:15px !important;padding-bottom:64px !important;}
+    #gv-cta-band h2{font-size:clamp(28px,8vw,48px) !important;}
+    #gv-cta-band p{font-size:18px !important;}
+    .gv-watis-grid{grid-template-columns:1fr;gap:24px;}
+    .gv-verplicht-grid{grid-template-columns:1fr;}
+    .gv-dekking-grid{grid-template-columns:1fr;}
+    .gv-plafond-grid{grid-template-columns:1fr;}
+    .gv-plafond-grid>div:last-child{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.15);}
+    .gv-aanvulling-grid{grid-template-columns:1fr;}
+    .gv-rules-grid{grid-template-columns:1fr;}
+    .gv-formule{flex-direction:column;gap:8px;margin-bottom:40px;}
+    .gv-factors-grid{grid-template-columns:1fr;}
+    .gv-procedure-grid{grid-template-columns:1fr 1fr;gap:32px;}
+    .gv-tab-inner{flex-direction:column;gap:20px;padding:24px 20px;}
+    .gv-tabs-row{overflow-x:auto;justify-content:flex-start !important;padding-bottom:4px;-webkit-overflow-scrolling:touch;}
+    .gv-final-btns{flex-direction:column;align-items:center;}
+    .gv-final-btns a{width:100%;max-width:400px;justify-content:center;}
+    .gv-cta-deco{display:none;}
+    .gv-cta-mask-img{display:none;}
+    .gv-procedure-line{display:none !important;}
+  }
+</style>
+
+<div id="gv-progress-track" style="position:fixed;top:0;left:0;right:0;height:3px;z-index:9999;background:rgba(0,31,63,0.07);">
+  <div id="gv-progress-bar" style="height:100%;background:#E5A524;width:0%;transition:width 0.1s linear;"></div>
+</div>
+
+<div style="font-family:'Outfit',sans-serif;color:#001F3F;background:#FFFFFF;">
+
+<!-- HERO -->
+<section id="gv-hero" style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:100vh;">
+  <div class="gv-hero-img assurman-mask assurman-mask--hero">
+    <img src="/images/verzekeringen/groepsverzekering-hero.jpg" alt="Bouwteam met een groepsverzekering als aanvullend pensioen" />
+  </div>
+  <div class="gv-hero-inner">
+    <div class="gv-hero-content">
+      <div class="gv-badge-pill" style="margin-bottom:20px;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Assurman &middot; Bouwverzekeringen op maat
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">Groepsverzekering<br />voor je personeel</h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">Bouw een aanvullend pensioen op voor je werknemers.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Met een groepsverzekering geef je je werknemers een aanvullend pensioen bovenop hun wettelijke pensioen. Het is fiscaal veel voordeliger dan cash loon en helpt je goed personeel binden in een sector waar vakmensen schaars zijn. Voor je arbeiders loopt er al een sectoraal plan via Constructiv.</p>
+      <div class="gv-hero-btns">
+        <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
+          {CTA_SCAN.hero}
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.advisory}</a>
+      </div>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;">Geen verkooppraatjes: we bekijken samen wat past bij je arbeiders, bedienden en budget.</p>
     </div>
-  </main>
+  </div>
+</section>
+
+<!-- STICKY NAV -->
+<nav id="gv-sticky-nav" class="gv-sticky-nav-bar">
+  <div class="gv-sticky-inner">
+    {[{id:'watis',label:'Wat is het?'},{id:'verplicht',label:'Verplicht?'},{id:'dekking',label:'Dekking'},{id:'premie',label:'Premie'},{id:'procedure',label:'Bij uitkering'},{id:'faq',label:'FAQ'}].map(item=>(
+      <button class="gv-sticky-btn" data-sticky-btn={item.id}>
+        <svg class="gv-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        {item.label}
+      </button>
+    ))}
+  </div>
+</nav>
+
+<!-- WAT IS HET -->
+<section id="watis" style="background:#FFFFFF;padding:96px 32px;">
+  <div class="gv-container">
+    <div class="gv-watis-grid">
+      <div style="background:#3F5767;padding:32px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);">
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In het kort</span>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+          {[
+            {t:'Een groepsverzekering bouwt een <strong style="color:#FFFFFF;">aanvullend pensioen</strong> op voor je werknemers, betaald door jou als werkgever.'},
+            {t:'<strong style="color:#FFFFFF;">Fiscaal voordeliger dan cash loon</strong>: de premie is aftrekbaar en je werknemer wordt veel lichter belast dan op brutoloon.'},
+            {t:'Voor <strong style="color:#FFFFFF;">bouwarbeiders (PC 124)</strong> loopt er al een sectoraal plan via Constructiv. Voor <strong style="color:#FFFFFF;">bedienden (PC 200)</strong> regel je dit vrijwillig.'},
+            {t:'Op de werkgeversbijdragen geldt een <strong style="color:#FFFFFF;">wettelijke rendementsgarantie van 2,50%</strong>: haalt de verzekeraar dat niet, dan pas je het verschil bij.'},
+            {t:'Optioneel voeg je <strong style="color:#FFFFFF;">overlijdensdekking en een invaliditeitsrente</strong> toe, zodat het plan ook bij tegenslag bescherming biedt.'},
+          ].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.55;color:#CBD5E1;" set:html={item.t}></span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">Aanvullend pensioen dat jij regelt voor je team</h2>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een groepsverzekering is een <strong>aanvullend pensioen dat je als werkgever afsluit voor je werknemers</strong>. Jij stort periodiek een bijdrage bij een verzekeraar, die het kapitaal opbouwt en beheert buiten je vennootschap. Bij pensioen krijgt je werknemer dat kapitaal uitgekeerd, als eenmalig bedrag of als rente.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Het hoort thuis in de <strong>tweede pensioenpijler</strong>, naast het wettelijke pensioen. Belangrijk verschil met VAPZ, IPT of POZ: die bouwen pensioen op voor de zelfstandige of bedrijfsleider zelf. Een groepsverzekering gaat over <strong>je personeel</strong>, arbeiders en bedienden.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">De opgebouwde reserve blijft eigendom van je werknemer. Vertrekt iemand, dan neemt hij zijn verworven reserve mee: laten staan, overdragen naar het plan van een nieuwe werkgever, of naar een onthaalstructuur.</p>
+        <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div>
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">Wettelijke basis</p>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">Een groepsverzekering valt onder de <strong>Wet op de aanvullende pensioenen (WAP) van 28 april 2003</strong>. Die wet legt een <strong>minimumrendement van 2,50%</strong> op de bijdragen op: haalt de verzekeraar dat niet, dan pas jij als werkgever het verschil bij. Voor bouwarbeiders bestaat daarnaast een sectoraal aanvullend pensioen via Constructiv (PC 124); bedienden vallen onder PC 200, zonder algemene sectorale verplichting.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IS HET VERPLICHT -->
+<section id="verplicht" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Is het verplicht?</span>
+      <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#3F5767;margin-bottom:8px;">Moet ik als werkgever een groepsverzekering aanbieden?</p>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,10vw,112px);line-height:0.9;color:#001F3F;letter-spacing:-4px;">Soms.</div>
+      <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:20px;color:#3F5767;margin-top:12px;">Voor je bouwarbeiders is een sectoraal plan verplicht. Voor je bedienden kies je zelf.</p>
+    </div>
+    <div class="gv-verplicht-grid">
+      {[
+        {icon:'us', title:'Bouwarbeiders (PC 124)',         text:'Sectoraal verplicht. Voor arbeiders in de bouw loopt er een aanvullend pensioen via Constructiv, gefinancierd met een sectorale bijdrage. Dat regel je niet zelf per werknemer.'},
+        {icon:'ft', title:'Bedienden (PC 200)',             text:'Niet verplicht. Er is geen algemene sectorale verplichting voor bedienden. Je kan vrijwillig een groepsverzekering afsluiten als extralegaal loonvoordeel.'},
+        {icon:'sh', title:'Kaderleden en sleutelmensen',    text:'Niet verplicht, vaak strategisch. Een eigen plan voor sleutelprofielen helpt je hen aantrekken en houden zonder de zware lasten van extra cash loon.'},
+        {icon:'cl', title:'Bovenop het sectorplan',         text:'Je mag voor je arbeiders een aanvullend ondernemingsplan opzetten bovenop het sectorale minimum, voor wie meer wil bieden dan de basis.'},
+      ].map(card=>(
+        <div style="background:#FFFFFF;padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+          <div style="background:rgba(229,165,36,0.1);border-radius:10px;padding:12px;display:inline-flex;margin-bottom:18px;">
+            {card.icon==='us'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+            {card.icon==='ft'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>}
+            {card.icon==='sh'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
+            {card.icon==='cl'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- VOORBEELDEN SECTIE -->
+<section style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Waarom een groepsverzekering in de bouw?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">Vakmensen zijn schaars en cash loon is duur door de hoge lasten. Een groepsverzekering is een fiscaal slimme manier om meer te bieden, je team te binden en tegelijk een pensioen op te bouwen.</p>
+    </div>
+    <div class="gv-rules-grid">
+      {[
+        { title: 'Voordeliger dan opslag', text: 'Op cash loon betaal je zware RSZ en bedrijfsvoorheffing. Eenzelfde bedrag in een groepsverzekering komt veel efficiënter bij je werknemer terecht.' },
+        { title: 'Personeel binden', text: 'In de war for talent maakt een aanvullend pensioen het verschil. Het is een tastbaar voordeel dat goed personeel bij je houdt.' },
+        { title: 'Jij bepaalt het budget', text: 'Je kiest zelf de premie: een vast percentage van het loon of een vast bedrag per werknemer. Ook voor een kleine kmo is dat haalbaar.' },
+      ].map(card => (
+        <div style="background:#FFFFFF;padding:24px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);border-top:3px solid #E5A524;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#3F5767;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <button id="gv-examples-btn" style="display:flex;align-items:center;gap:10px;background:rgba(0,31,63,0.04);border:1px solid rgba(0,31,63,0.1);border-radius:8px;padding:14px 24px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#001F3F;">
+        <span>Bekijk 6 concrete voorbeelden uit de bouw</span>
+        <svg id="gv-examples-chevron" width="18" height="18" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+    <ul id="gv-examples-list" style="list-style:none;padding:0;margin:16px 0 0;display:none;grid-template-columns:1fr 1fr;gap:10px;">
+      {[
+        'Loonoptimalisatie voor een calculator: in plaats van een nettoverhoging die je als werkgever bijna het dubbele in brutokost kost, stort je maandelijks in de groepsverzekering van je hoofdberekenaar (bediende, PC 200). Voordeliger voor jullie allebei.',
+        'Sectorale bijdrage voor metselaars: met vier metselaars (arbeiders, PC 124) draag je verplicht bij aan het sectorale aanvullend pensioen via Constructiv. Dat staat los van een eigen plan voor je bedienden.',
+        'Overlijdenskapitaal voor het gezin van een kraanmachinist: een machinist overlijdt onverwacht op 48. De groepsverzekering keert het opgebouwde pensioenkapitaal plus de afgesloten overlijdenswaarborg van zo\'n 45.000 euro rechtstreeks uit aan zijn echtgenote.',
+        'Aanvullende rente na een werfongeval: een ploegbaas raakt zwaar gewond bij een instorting en is blijvend werkonbekwaam. Door de optie invaliditeitsrente ontvangt hij maandelijks zo\'n 400 euro extra bovenop zijn wettelijke uitkering.',
+        'Bijpassen van het rendement: een werknemer gaat met pensioen, maar de verzekeraar haalde op een deel van het kapitaal minder dan het wettelijke minimum. Als werkgever pas je het verschil bij tot de gegarandeerde 2,50%.',
+        'Fiscale aftrek bewaken: je bedrijf draait goed en wil extra storten voor de bedienden. Wij controleren vooraf de 80%-regel, zodat alle premies aftrekbaar blijven als beroepskost.',
+      ].map(ex=>(
+        <li style="display:flex;gap:10px;align-items:flex-start;background:#F7F4EF;border-radius:8px;padding:12px 16px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{ex}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<!-- DEKKING -->
+<section id="dekking" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:1025px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Dekking</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat zit er in een groepsverzekering?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:580px;margin:0 auto;">Een groepsverzekering draait om pensioenopbouw, maar kan ook bescherming bij overlijden en arbeidsongeschiktheid bevatten. Hieronder de hoofdlijnen.</p>
+    </div>
+    <div class="gv-dekking-grid">
+      <div style="background:#FFFFFF;border:2px solid rgba(34,197,94,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(34,197,94,0.08);border-bottom:1px solid rgba(34,197,94,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#15803d;">Wel gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Opbouw van een aanvullend pensioenkapitaal voor je werknemer, uitgekeerd bij pensionering','Een wettelijk gegarandeerd minimumrendement op de bijdragen (de WAP-garantie)','Overlijdensdekking: een kapitaal voor de begunstigden als je werknemer overlijdt vóór zijn pensioen','Optioneel een invaliditeitsrente bij langdurige arbeidsongeschiktheid door ziekte of ongeval','Optioneel premievrijstelling, zodat de opbouw doorloopt als je werknemer arbeidsongeschikt is','Behoud van de verworven reserve voor je werknemer, ook wanneer hij van werkgever verandert'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgCheck16g} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:2px solid rgba(239,68,68,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(239,68,68,0.06);border-bottom:1px solid rgba(239,68,68,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#b91c1c;">Niet (of beperkt) gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Het pensioen van de zelfstandige of bedrijfsleider zelf (dat loopt via VAPZ, IPT of POZ)','Zelfdoding in het eerste jaar na afsluiten of verhogen van de overlijdensdekking','Arbeidsongeschiktheid door een opzettelijke daad van de werknemer','Premies boven de 80%-grens (die zijn niet langer fiscaal aftrekbaar)','Werknemers die volgens het pensioenreglement niet zijn aangesloten','Risico\'s die thuishoren in andere polissen, zoals arbeidsongevallen of gewaarborgd inkomen'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgX16r} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <div class="gv-plafond-grid" style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);padding:36px 40px;">
+      <div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wettelijke rendementsgarantie</span>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#FFFFFF;margin:0 0 12px;">Een gegarandeerd minimum op je bijdragen</h3>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">Op de gestorte bijdragen geldt een wettelijk minimumrendement. Haalt de verzekeraar dat niet, dan moet jij als werkgever het verschil bijpassen op het moment dat je werknemer met pensioen gaat of het bedrijf verlaat. Dit minimum bedraagt sinds 2025 <strong style="color:#FFFFFF;">2,50%</strong>.</p>
+      </div>
+      <div style="text-align:center;flex-shrink:0;">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:6px;">WAP-minimum</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:48px;color:#FFFFFF;letter-spacing:-1px;line-height:1;">2,50%</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:14px;color:#94a3b8;margin-top:6px;">minimumrendement op de bijdragen (sinds 2025)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AANVULLENDE WAARBORGEN -->
+<section id="gv-aanvulling" style="background:#3F5767;padding:0 0 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding:100px 32px 0;position:relative;z-index:1;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Aanvullen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Vijf waarborgen die je plan completer maken</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0;">De basis is pensioenopbouw, maar een goed afgestemd plan voegt bescherming toe die in de praktijk telkens terugkomt.</p>
+    </div>
+    <div class="gv-aanvulling-grid">
+      {[
+        {i:'ac',title:'Overlijdensdekking',   text:'Een kapitaal voor de partner of kinderen als je werknemer overlijdt vóór zijn pensioen. Vaak het opgebouwde kapitaal, eventueel verhoogd met een extra waarborg.'},
+        {i:'sh',title:'Premievrijstelling',   text:'Wordt je werknemer langdurig arbeidsongeschikt, dan neemt de verzekeraar de premie over en loopt de pensioenopbouw door. Zo valt het plan niet stil bij ziekte.'},
+        {i:'us',title:'Invaliditeitsrente',   text:'Een maandelijkse rente die het inkomensverlies opvangt bij langdurige arbeidsongeschiktheid, bovenop de wettelijke uitkering. Zinvol in een fysiek zwaar beroep.'},
+        {i:'tr',title:'Sociaal luik',         text:'Een sociaal pensioenplan voegt solidariteitswaarborgen toe en geeft recht op een gunstiger fiscaal en parafiscaal regime op de bijdragen.'},
+        {i:'br',title:'Aanvullende waarborgen',text:'Denk aan een wezenrente, een rente voor de partner of een dekking bij ongeval. Je stelt het plan samen op maat van je personeelsbestand.'},
+      ].map(card=>(
+        <div class="gv-ins-card" style="padding:28px;">
+          <div style="background:rgba(229,165,36,0.15);border-radius:10px;padding:10px;display:inline-flex;margin-bottom:16px;">
+            {card.i==='ac'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>}
+            {card.i==='sh'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
+            {card.i==='us'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>}
+            {card.i==='tr'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+            {card.i==='br'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#FFFFFF;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#94A3B8;margin:0;">{card.text}</p>
+        </div>
+      ))}
+      <div style="background:#E5A524;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:32px;display:flex;flex-direction:column;justify-content:center;">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">Niet zeker wat past bij je team?</h3>
+        <p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(0,31,63,0.75);line-height:1.55;margin:0 0 20px;">Doe de scan: we bekijken je personeelsbestand, je arbeiders en bedienden, en wat verzekeraars vandaag bieden.</p>
+        <a href={CTA_DESTINATIONS.scan} class="gv-scan-btn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.2s;width:100%;">
+          {CTA_SCAN.start} <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIE -->
+<section id="premie" style="background:#F7F4EF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Prijs &amp; berekening</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Hoeveel kost een groepsverzekering?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Geen vaste prijs: jij bepaalt de bijdrage. Vaak is dat een percentage van het loon of een vast bedrag per werknemer. Daar bovenop komen wettelijke taksen en bijdragen.</p>
+    </div>
+    <div class="gv-formule">
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">1. Bijdrage</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Jouw budget</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#3F5767;line-height:1.4;">percentage van het loon of vast bedrag per werknemer</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">×</div>
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">2. Plan</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Formule x waarborgen</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#3F5767;line-height:1.4;">vaste bijdrage of vaste prestatie, plus de gekozen dekkingen</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">=</div>
+      <div style="background:#3F5767;border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 8px 32px rgba(63,87,103,0.3);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">Werkgeverskost</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin-bottom:8px;">Jouw budget</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#94a3b8;line-height:1.4;">plus premietaks en RIZIV-bijdrage</div>
+      </div>
+    </div>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:#001F3F;text-align:center;margin-bottom:32px;">4 factoren die je premie bepalen</h3>
+    <div class="gv-factors-grid">
+      {[
+        {num:'1',title:'De gekozen bijdrage',  text:'Het percentage of vaste bedrag dat je per werknemer stort, is de grootste hefboom op de totale kost.'},
+        {num:'2',title:'De planformule',       text:'Bij een vaste bijdrage stort je een vast bedrag; bij een vaste prestatie mik je op een vooraf bepaald eindkapitaal, wat de kost minder voorspelbaar maakt.'},
+        {num:'3',title:'De extra waarborgen',  text:'Overlijdensdekking, invaliditeitsrente en premievrijstelling verhogen de premie naargelang wat je toevoegt.'},
+        {num:'4',title:'Je personeelsbestand', text:'Aantal werknemers, hun leeftijd en loon bepalen mee de opbouw en de kost van de risicowaarborgen.'},
+      ].map(f=>(
+        <div class="brand-why-card" style="padding:20px 24px;display:flex;gap:18px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:16px;color:#001F3F;">{f.num}</span></div>
+          <div>
+            <h4 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 4px;">{f.title}</h4>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#3F5767;margin:0;">{f.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style="max-width:680px;margin:0 auto;">
+      <div style="background:rgba(229,165,36,0.10);padding:20px 28px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);border:1px solid rgba(229,165,36,0.3);">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="18" height="18" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#001F3F;margin:0;"><strong>Fiscaal:</strong> de werkgeversbijdragen zijn aftrekbaar als beroepskost, binnen de grenzen van de 80%-regel. Op de werkgeversbijdragen geldt een <strong>premietaks van 4,40%</strong> en een bijzondere <strong>RIZIV-bijdrage van 8,86%</strong>. Het wettelijke en het aanvullende pensioen samen mogen niet meer bedragen dan 80% van het laatste brutojaarloon, anders is het stuk boven die grens niet meer aftrekbaar.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section id="gv-cta-band" style="background:#E9C466;padding:80px 0 100px;position:relative;overflow:hidden;">
+  <div class="assurman-mask assurman-mask--cta gv-cta-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:1;">
+    <img src="/images/verzekeringen/groepsverzekering-band.jpg" alt="Bouwteam met een groepsverzekering">
+  </div>
+  <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="100px" direction="down" /></div>
+  <div class="gv-cta-deco" style="position:absolute;right:-130px;top:40%;transform:translateY(-50%);pointer-events:none;z-index:2;"><BrandChevron color="white" height="240px" direction="left" /></div>
+  <div style="max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:4;padding:0 32px;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">Werkgever in de bouw?<br />Bouw mee aan het pensioen van je team.</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#3F5767;margin-bottom:40px;opacity:0.9;">Start nu in 2 minuten of kies meteen voor persoonlijk advies.</p>
+    <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">{CTA_SCAN.requestNow} <Fragment set:html={svgArr18} /></a>
+  </div>
+</section>
+
+<!-- PER BEROEP TABS -->
+<section id="gv-beroep" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Per beroep</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Een pensioenplan voor jouw ploeg</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Arbeiders, bedienden of een mix? Hieronder wat een groepsverzekering betekent per discipline.</p>
+    </div>
+    <div class="gv-tabs-row" style="display:flex;gap:0;border-bottom:2px solid rgba(0,31,63,0.12);margin-bottom:40px;justify-content:center;">
+      {beroepTabs.map((tab,i)=>(<button class={`gv-tab-btn${i===0?' active':''}`} data-tab-btn={tab.id}>{tab.label}</button>))}
+    </div>
+    {beroepTabs.map((tab,i)=>(
+      <div data-tab-content={tab.id} style={`display:${i===0?'block':'none'};max-width:860px;margin:0 auto;`}>
+      <div class="gv-tab-inner" style="background:#FFFFFF;border-radius:12px;padding:36px 40px;">
+        <div style="background:rgba(229,165,36,0.12);border-radius:12px;padding:18px;flex-shrink:0;">
+          <svg width="32" height="32" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div style="flex:1;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">{tab.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.65;color:#001F3F;margin:0 0 20px;">{tab.text}</p>
+          <a href={tab.link} style="display:inline-flex;align-items:center;gap:6px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;text-decoration:none;">Bekijk sectorpagina <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+      </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- MIJN SITUATIE ACCORDION -->
+<section id="gv-statuten" style="background:#3F5767;padding:96px 32px;position:relative;overflow:hidden;">
+  <div style="max-width:840px;margin:0 auto;position:relative;z-index:1;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Mijn situatie</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Welke aanpak past bij jouw personeel?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0 0 40px;">Drie typische situaties uit de Belgische bouwsector. Vind de jouwe en zie wat dat concreet betekent voor je groepsverzekering.</p>
+
+    <div class="gv-stat-panel" data-stat-panel>
+      <button class="gv-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik heb enkel bouwarbeiders (PC 124)</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Voor je arbeiders loopt er al een sectoraal aanvullend pensioen via Constructiv. Dat is de basis en die regel je niet zelf per werknemer.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: wil je meer bieden dan het sectorale minimum, dan kan je een aanvullend ondernemingsplan opzetten bovenop dat sectorale plan. We bekijken samen of dat zinvol is voor jouw zaak.</p>
+      </div>
+    </div>
+
+    <div class="gv-stat-panel" data-stat-panel>
+      <button class="gv-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik heb een gemengd team: arbeiders én bedienden</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je arbeiders vallen onder het sectorale plan (PC 124). Voor je bedienden (PC 200) is er geen sectorale verplichting, daar kan je vrijwillig een groepsverzekering afsluiten.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: zo combineer je een verplichte basis voor je arbeiders met een eigen plan op maat voor je bedienden en kaderleden. Wij houden de twee logica's uit elkaar.</p>
+      </div>
+    </div>
+
+    <div class="gv-stat-panel" data-stat-panel>
+      <button class="gv-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.4-6.3-4.6L5.7 21.4 8 14 2 9.4h7.6z"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik wil mijn personeel binden en aantrekken</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">In de war for talent is een aanvullend pensioen een tastbaar voordeel. Het is fiscaal voordeliger dan een loonsverhoging en versterkt je positie als werkgever.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: je bepaalt zelf het budget en de waarborgen. We stemmen het plan af op wie je wil binden, van sleutelprofielen tot je volledige ploeg.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIJ UITKERING -->
+<section id="procedure" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:60px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Bij uitkering</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wanneer en hoe wordt er uitbetaald?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Een groepsverzekering keert uit op een aantal vaste momenten. Hieronder wat er dan gebeurt en wat je werknemer of zijn nabestaanden moeten doen.</p>
+    </div>
+    <div class="gv-procedure-grid">
+      <div class="gv-procedure-line" style="position:absolute;top:36px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(to right,#E5A524,rgba(229,165,36,0.2));z-index:0;"></div>
+      {[
+        {ic:'ph', title:'Aansluiting',        text:'Bij indiensttreding wordt je werknemer volgens het pensioenreglement aangesloten. De opbouw start en hij volgt ze op via zijn jaarlijkse pensioenfiche en MyPension.'},
+        {ic:'ac', title:'Gebeurtenis melden', text:'Bij pensionering, overlijden of langdurige arbeidsongeschiktheid meld je dit aan je makelaar of verzekeraar, met de nodige documenten.'},
+        {ic:'ft', title:'Uitbetaling',        text:'Het opgebouwde kapitaal wordt uitgekeerd: aan je werknemer bij pensioen, aan de begunstigden bij overlijden, of als rente bij een gedekte invaliditeit.'},
+        {ic:'at', title:'Fiscale afhandeling',text:'Op de uitkering houdt de verzekeraar de wettelijke bijdragen en belastingen in. Het nettobedrag hangt af van loopbaan, leeftijd en financiering.'},
+      ].map((s,i)=>(
+        <div style="padding:0 20px;text-align:center;position:relative;z-index:1;">
+          <div style="width:72px;height:72px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 4px 16px rgba(229,165,36,0.3);">
+            {s.ic==='ph'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>}
+            {s.ic==='ac'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>}
+            {s.ic==='ft'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+            {s.ic==='at'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>}
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#E5A524;margin-bottom:8px;">Stap {i+1}</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{s.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:840px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over de groepsverzekering</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;margin:0;">12 concrete vragen van bouwondernemers: klik open voor het antwoord.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      {faqItems.map((item,i)=>(
+        <div data-faq-item style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.08);border-radius:10px;overflow:hidden;">
+          <button data-faq-btn style="width:100%;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;text-align:left;gap:16px;">
+            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;line-height:1.35;">{item.q}</span>
+            <svg data-faq-chevron width="18" height="18" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div data-faq-answer style="display:none;padding:0 24px 20px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#3F5767;margin:0;">{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- GERELATEERDE VERZEKERINGEN -->
+<InsuranceCarousel
+  client:only="react"
+  cards={insuranceCards}
+  sectionLabel="Ook interessant"
+  headline="Gerelateerde verzekeringen"
+  subheadline="Deze verzekeringen sluiten aan bij de pensioen- en personeelsopbouw van je bouwbedrijf."
+  background="#F5F2FF"
+/>
+
+<!-- PARTNERS -->
+<section style="background:#F7F4EF;padding:64px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">Ondersteund door sterke verzekeringspartners</p>
+    <PartnerSlider client:only="react" />
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:#3F5767;padding-top:120px;padding-bottom:0;position:relative;text-align:center;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+  <div style="max-width:896px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;text-align:center;margin-bottom:20px;">Start met Assurman</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;color:#FFFFFF;max-width:727px;margin:0 auto 24px;">Geef je personeel een aanvullend pensioen</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouw en wil je weten wat past bij je arbeiders, bedienden en budget? Wij bekijken met jou wat echt zinvol is, zonder verplichting.</p>
+    <div class="gv-final-btns">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">{CTA_SCAN.hero} <Fragment set:html={svgArr18} /></a>
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">{CTA_AFSPRAAK.advisory}</a>
+    </div>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+</section>
+
+</div>
+
+<script>
+  const progressBar = document.getElementById('gv-progress-bar') as HTMLElement | null;
+  const stickyBtns  = document.querySelectorAll<HTMLElement>('[data-sticky-btn]');
+  const sectionIds  = ['watis','verplicht','dekking','premie','procedure','faq'];
+
+  stickyBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.stickyBtn!;
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const total = doc.scrollHeight - doc.clientHeight;
+    if (progressBar) progressBar.style.width = total > 0 ? `${(doc.scrollTop / total) * 100}%` : '0%';
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sectionIds[i]);
+      if (el && el.getBoundingClientRect().top <= 120) {
+        stickyBtns.forEach(b => b.classList.toggle('active', b.dataset.stickyBtn === sectionIds[i]));
+        break;
+      }
+    }
+  }, { passive: true });
+
+  const exBtn  = document.getElementById('gv-examples-btn')     as HTMLElement | null;
+  const exList = document.getElementById('gv-examples-list')    as HTMLElement | null;
+  const exChev = document.getElementById('gv-examples-chevron') as HTMLElement | null;
+  if (exBtn && exList && exChev) {
+    exBtn.addEventListener('click', () => {
+      const open = exList.style.display !== 'none';
+      exList.style.display = open ? 'none' : 'grid';
+      exChev.style.transform = open ? '' : 'rotate(180deg)';
+    });
+  }
+
+  const tabBtns     = document.querySelectorAll<HTMLElement>('[data-tab-btn]');
+  const tabContents = document.querySelectorAll<HTMLElement>('[data-tab-content]');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tabBtn!;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      tabContents.forEach(el => { el.style.display = el.dataset.tabContent === t ? 'block' : 'none'; });
+    });
+  });
+
+  document.querySelectorAll('[data-stat-panel]').forEach(panel => {
+    const btn     = panel.querySelector<HTMLElement>('[data-stat-btn]');
+    const content = panel.querySelector<HTMLElement>('[data-stat-content]');
+    const chevron = panel.querySelector<HTMLElement>('[data-stat-chevron]');
+    if (!btn || !content || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = content.style.display !== 'none';
+      document.querySelectorAll('[data-stat-panel]').forEach(p => {
+        const c  = p.querySelector<HTMLElement>('[data-stat-content]');
+        const ch = p.querySelector<HTMLElement>('[data-stat-chevron]');
+        if (c)  c.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { content.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+
+  document.querySelectorAll('[data-faq-item]').forEach(item => {
+    const btn     = item.querySelector<HTMLElement>('[data-faq-btn]');
+    const answer  = item.querySelector<HTMLElement>('[data-faq-answer]');
+    const chevron = item.querySelector<HTMLElement>('[data-faq-chevron]');
+    if (!btn || !answer || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = answer.style.display !== 'none';
+      document.querySelectorAll('[data-faq-item]').forEach(fi => {
+        const a  = fi.querySelector<HTMLElement>('[data-faq-answer]');
+        const ch = fi.querySelector<HTMLElement>('[data-faq-chevron]');
+        if (a)  a.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { answer.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+</script>
+
 </BaseLayout>
