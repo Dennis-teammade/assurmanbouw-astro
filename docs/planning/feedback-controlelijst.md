@@ -129,3 +129,32 @@ Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie.
 ## Beeldmateriaal verzekeringen (geplaatst 2026-06-20)
 
 De 22 klant-aangeleverde foto's (11 pagina's × hero + band) staan in `public/images/verzekeringen/{slug}-hero.jpg` en `-band.jpg`. **BA Bestuurder, Brandverzekering en Bedrijfsschade** gebruiken nu hun **echte** beeld (de eerdere "generiek beeld"-minors zijn opgelost). De skeleton-pagina's (gewaarborgd-inkomen, bescherming-bedrijfsleider, groeps, aanvullend-pensioen, vapz, poz, ipt) krijgen hun beeld zodra ze worden uitgewerkt; de bestanden staan klaar.
+
+---
+
+## /verzekeringen/gewaarborgd-inkomen (Gewaarborgd inkomen)
+
+Status pagina: **afgewerkt, op staging.** Persoonlijk vervangingsinkomen, scherp onderscheiden van arbeidsongevallen/bedrijfsschade/omzet. **18 controlepunten** (veel RIZIV-/fiscaal-cijfers, bewust kwalitatief of indicatief gehouden).
+
+| # | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| GI1 | Wettelijke basis = **RIZIV** | Juridische formulering aftekenen. | 🔲 |
+| GI2 | Wettelijke wachttijd genoemd, géén hard getal (research: 14 dagen sinds 2018) | Bevestig actuele wachttijd + of we het cijfer tonen. | 🔲 |
+| GI3 | RIZIV-daguitkering forfaitair "ruim onvoldoende", géén eurobedrag | Tonen we een actueel bereik (bron+peildatum) of kwalitatief? | 🔲 |
+| GI4 | **80%-regel** (verzekerbaar tot ±80% beroepsinkomen) | Bevestig formulering (bruto/netto belastbaar). | 🔲 |
+| GI5 | Uitkeringsdrempels **25% / 67%** | Bevestig tegen onze polisvoorwaarden. | 🔲 |
+| GI6 | Wachttijden voorbeeld 1/3/6 maanden | Bevestig welke wij aanbieden. | 🔲 |
+| GI7 | Eindleeftijd impliciet (research: 65/67) | Bevestig gangbare eindleeftijd. | 🔲 |
+| GI8 | Fiscaliteit: premie aftrekbaar, uitkering belast | Fiscaal aftekenen. | 🔲 |
+| GI9 | **Premietaks afwijkend/vrijgesteld** → géén "9,25%" op de pagina | Bevestig of gewaarborgd inkomen vrijgesteld is van premietaks. | 🔲 |
+| GI10 | Psychische aandoeningen vaak uitgesloten, dekbaar via uitbreiding | Bevestig optie + voorwaarde. | 🔲 |
+| GI11 | Risicosporten uitgesloten tenzij bijpremie | Bevestig lijst/regeling. | 🔲 |
+| GI12 | Ziekenhuisforfait als optie | Bieden wij dit aan? (bedrag niet getoond) | 🔲 |
+| GI13 | Indexering van de rente als optie | Bevestig beschikbaarheid. | 🔲 |
+| GI14 | Premievrijstelling als optie | Bevestig in ons gamma. | 🔲 |
+| GI15 | Economische vs fysiologische ongeschiktheid (economische aangeraden voor bouw) | Bevestig dat onze polissen economische ongeschiktheid dekken. | 🔲 |
+| GI16 | Aangiftetermijn = "zie polis", geen vast getal | Standaardtermijn tonen of "zie polis" houden? | 🔲 |
+| GI17 | Medische acceptatie: verzwijgen → weigering (art. 58 Verzekeringswet, niet op pagina) | Wetsartikel vermelden of kwalitatief? | 🔲 |
+| GI18 | Geen premiebedrag in euro op de pagina | Bevestig dat we geen indicatief tarief tonen. | 🔲 |
+
+Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/CTA = echt klant-beeld.

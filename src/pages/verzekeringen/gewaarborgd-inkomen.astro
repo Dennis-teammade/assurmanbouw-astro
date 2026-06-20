@@ -1,20 +1,706 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { CTA_SCAN, CTA_DESTINATIONS } from '../../data/cta-labels';
+import { kaartenVoor } from '../../data/verzekeringen';
+import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
+import BrandChevron from '../../components/BrandChevron.astro';
+
+const faqItems = [
+  { q: 'Wat is een verzekering gewaarborgd inkomen voor zelfstandigen?', a: 'Het is een private verzekering die je een maandelijks vervangingsinkomen betaalt wanneer je door ziekte of een ongeval je beroep niet meer kunt uitoefenen. Ze vult de beperkte uitkering van het ziekenfonds aan, zodat je je persoonlijke levensstandaard en vaste lasten kunt blijven dragen.' },
+  { q: 'Is een gewaarborgd inkomen verplicht?', a: 'Nee, deze verzekering is niet wettelijk verplicht. Maar als zelfstandige heb je geen gewaarborgd loon en geen werkgever die doorbetaalt. Voor wie een fysiek beroep uitoefent, is het daarom een van de belangrijkste basisbeschermingen.' },
+  { q: 'Hoeveel krijg ik van het ziekenfonds als ik uitval?', a: 'Het ziekenfonds betaalt na een wettelijke wachttijd een forfaitaire daguitkering die afhangt van je gezinssituatie. Dat bedrag ligt voor de meeste zelfstandigen ver onder hun werkelijke inkomen, waardoor een aanvulling nodig is.' },
+  { q: 'Hoeveel van mijn inkomen kan ik verzekeren?', a: 'Samen met de wettelijke uitkering mag je tot ongeveer 80% van je beroepsinkomen verzekeren. De verzekeraar vraagt je fiscale gegevens op om dit te toetsen, zodat je niet meer verzekert dan toegelaten.' },
+  { q: 'Wat is een wachttijd of eigenrisicotermijn?', a: 'Dat is de periode tussen het begin van je arbeidsongeschiktheid en het moment dat de verzekering begint uit te keren. Je kiest die zelf. Een langere wachttijd verlaagt je premie, maar betekent dat je het eerste deel zelf moet overbruggen.' },
+  { q: 'Dekt de polis zowel ziekte als ongeval?', a: 'Ja. Een gewaarborgd inkomen dekt arbeidsongeschiktheid door ziekte en door ongeval, doorgaans 24 uur per dag. Zowel een val op de werf als een privé-ongeval of een ernstige ziekte komt in aanmerking.' },
+  { q: 'Wat is het verschil tussen fysiologische en economische arbeidsongeschiktheid?', a: 'Fysiologische ongeschiktheid meet je algemene lichamelijke verlies, los van je beroep. Economische ongeschiktheid kijkt of je je eigen stiel nog kunt uitoefenen. Voor een bouwvakker is een economische beoordeling cruciaal: je kunt fysiek beperkt verlies hebben maar je vak toch niet meer aankunnen.' },
+  { q: 'Zijn burn-out, rugklachten en zwangerschap gedekt?', a: 'Rugklachten zijn doorgaans gedekt als ze niet voorafbestaand en verzwegen zijn. Psychische aandoeningen zoals burn-out zitten in basispolissen vaak niet of beperkt, tenzij je een uitbreiding koos. Zwangerschap valt onder een eigen regeling. Vermeld bij de medische vragenlijst altijd je bestaande klachten eerlijk.' },
+  { q: 'Is de premie fiscaal aftrekbaar en wordt de uitkering belast?', a: 'De premie van een gewaarborgd inkomen is doorgaans aftrekbaar als beroepskost, en de latere uitkering wordt als vervangingsinkomen belast. Het fiscale regime is eigen aan dit product. De exacte behandeling hangt af van je situatie.' },
+  { q: 'Wat kost een gewaarborgd inkomen?', a: 'Er is geen vaste prijs. De premie hangt af van je leeftijd, je beroep en risicoklasse, het bedrag dat je verzekert en de gekozen wachttijd. We berekenen een tarief op maat na een korte intake.' },
+  { q: 'Wat is het verschil met een omzet- of bedrijfsschadeverzekering?', a: 'Een gewaarborgd inkomen beschermt jouw persoonlijke inkomen. Een omzet- of vastekostenverzekering betaalt de vaste kosten van je vennootschap, en een bedrijfsschadeverzekering vangt je stilstand op na materiële schade zoals brand. Het zijn drie aparte polissen die elk een ander gat dichten.' },
+  { q: 'Kan een starter zonder gekend inkomen zich verzekeren?', a: 'Ja. Je kunt je vaak verzekeren op basis van een geschat startinkomen en de verzekerde rente later bijstellen wanneer je werkelijke inkomen bekend is. Zo ben je vanaf het begin van je activiteit beschermd.' },
+];
+
+const beroepTabs = [
+  { id: 'dakwerkers',    label: 'Dakwerkers',        link: '/sectoren/dakwerkers',    title: 'Voor dakwerkers',                    text: 'Werken op hoogte maakt je extra kwetsbaar voor zware valpartijen en breuken. Eén misstap op een natte stelling kan je maanden van de werf houden. Een gewaarborgd inkomen vangt dat inkomensverlies op terwijl je herstelt, zodat je gezin niet meebetaalt voor je ongeval.' },
+  { id: 'metsers',       label: 'Metsers',            link: '/sectoren/aannemers',     title: 'Voor metsers en aannemers',          text: 'Het constante tillen, bukken en metselen belast je rug, schouders en knieën jarenlang. Een hernia of versleten gewrichten kan je stiel plots onmogelijk maken. Met een polis die je economische ongeschiktheid dekt, krijg je een rente die rekening houdt met het feit dat je net jouw vak niet meer kunt uitoefenen.' },
+  { id: 'loodgieters',   label: 'Loodgieters',        link: '/sectoren/loodgieters',   title: 'Voor loodgieters',                   text: 'Zwaar materiaal sjouwen, werken in kruipruimtes en lassen in moeilijke houdingen vragen veel van je lichaam. Een rugletsel of brandwonde houdt je snel weken tot maanden thuis. Je gewaarborgd inkomen blijft dan maandelijks doorbetalen zodat je lopende kosten gedekt zijn.' },
+  { id: 'elektriciens',  label: 'Elektriciens',       link: '/sectoren/elektriciens',  title: 'Voor elektriciens',                  text: 'Naast valrisico en elektrocutie is langdurige uitval door fysieke of mentale overbelasting reëel. Val je uit, dan stopt je omzet maar niet je facturen. Een gewaarborgd inkomen, eventueel met een uitbreiding voor psychische aandoeningen, houdt je inkomen overeind.' },
+  { id: 'schilders',     label: 'Schilders',          link: '/sectoren/schilders',     title: 'Voor schilders',                     text: 'Jaren plafond- en gevelwerk veroorzaakt slijtage aan schouders, nek en rug, en je werkt vaak met steigers. Chronische klachten kunnen je geleidelijk arbeidsongeschikt maken. Een polis die gedeeltelijke ongeschiktheid uitkeert, vangt dat verlies aan werkdagen op.' },
+  { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Werken met zware machines en het tillen van ramen en deuren brengt een hoog risico op snij- en tilletsels mee. Verlies van een vinger of een hand raakt rechtstreeks je vakmanschap. Een gewaarborgd inkomen met economische ongeschiktheid betaalt je een rente die je werkelijke verlies weerspiegelt.' },
+];
+
+const insuranceCards = kaartenVoor(['arbeidsongevallen', 'bescherming-bedrijfsleider', 'aanvullend-pensioen', 'bedrijfsschade']);
+
+const schema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+
+const svgCheck16g = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+const svgX16r    = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
+const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
 ---
+
 <BaseLayout
   title="Gewaarborgd inkomen voor zelfstandigen | Assurman"
-  description="Verzeker een maandelijks vervangingsinkomen bij ziekte of ongeval. Binnenkort online bij Assurman."
+  description="Gewaarborgd inkomen geeft je een maandelijks vervangingsinkomen als je door ziekte of ongeval niet kunt werken. Wat het dekt, wat RIZIV uitkeert en wat het kost."
   canonical="/verzekeringen/gewaarborgd-inkomen/"
-  noindex={true}
+  schema={schema}
 >
-  <main style="min-height:72vh;display:flex;align-items:center;justify-content:center;background:#FBF8FF;padding:140px 24px 96px;">
-    <div style="max-width:680px;text-align:center;">
-      <span style="display:inline-block;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Verzekering</span>
-      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,52px);color:#001F3F;line-height:1.1;margin:0 0 16px;">Gewaarborgd inkomen</h1>
-      <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#3F5767;line-height:1.6;margin:0 0 32px;">Deze pagina is in opbouw. Binnenkort lees je hier alles over het gewaarborgd inkomen voor zelfstandigen in de bouw. Wil je nu al weten waar je dekking tekortschiet? Doe de gratis verzekeringsscan in 2 minuten.</p>
-      <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary--lg">{CTA_SCAN.hero}</a>
-      <p style="margin-top:28px;"><a href="/verzekeringen/" style="color:#3F5767;font-family:'Outfit',sans-serif;text-decoration:underline;">Alle verzekeringen bekijken</a></p>
+
+<style is:global>
+  .gi-sticky-btn{background:#F7F4EF;border:1px solid rgba(229,165,36,0.2);cursor:pointer;padding:7px 16px;margin:10px 5px;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border-radius:9999px;transition:background 0.2s,border-color 0.2s;color:#001F3F;}
+  .gi-sticky-btn:hover,.gi-sticky-btn.active{background:rgba(229,165,36,0.18);border-color:#E5A524;}
+  .gi-sticky-btn .gi-check{color:#94a3b8;flex-shrink:0;transition:color 0.2s;}
+  .gi-sticky-btn:hover .gi-check,.gi-sticky-btn.active .gi-check{color:#E5A524;}
+  .gi-tab-btn{background:none;border:none;cursor:pointer;padding:14px 24px;white-space:nowrap;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.2s,border-color 0.2s;}
+  .gi-tab-btn:hover,.gi-tab-btn.active{color:#E5A524;border-bottom-color:#E5A524;}
+  .gi-ins-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);transition:background 0.2s,transform 0.2s;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);}
+  .gi-ins-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-4px);}
+  .gi-stat-panel{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+  .gi-stat-btn{width:100%;display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;text-align:left;padding:20px 24px;}
+  .gi-scan-btn:hover{background:#324554 !important;}
+  .gi-badge-pill{display:inline-flex;align-items:center;gap:8px;background:#F5F2FF;border:1px solid rgba(213,196,174,0.2);border-radius:9999px;padding:6px 16px;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#001F3F;}
+</style>
+
+<style>
+  .gi-hero-img{position:absolute;top:5%;right:-5px;height:85%;width:auto;max-width:48%;z-index:1;pointer-events:none;}
+  .gi-hero-content{max-width:620px;}
+  .gi-hero-inner{max-width:1280px;margin:0 auto;padding:64px 32px 80px;position:relative;z-index:2;}
+  .gi-hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+  .gi-watis-grid{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:flex-start;}
+  .gi-verplicht-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .gi-dekking-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
+  .gi-plafond-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;}
+  .gi-aanvulling-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .gi-rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0;}
+  .gi-formule{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:64px;flex-wrap:wrap;}
+  .gi-factors-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;margin:0 auto 40px;}
+  .gi-procedure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+  .gi-tab-inner{display:flex;gap:32px;align-items:flex-start;border-radius:12px;}
+  .gi-final-btns{display:flex;gap:24px;justify-content:center;margin-bottom:80px;flex-wrap:wrap;}
+  .gi-sticky-nav-bar{position:sticky;top:72px;z-index:90;background:#FFFFFF;border-bottom:1px solid rgba(0,31,63,0.08);overflow:auto;}
+  .gi-sticky-inner{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;gap:0;justify-content:center;flex-wrap:wrap;}
+  .gi-container{max-width:1280px;margin:0 auto;padding:0 32px;}
+  .brand-why-card{background:#FFFFFF;border-left:4px solid #E5A524;box-shadow:0px 1px 2px rgba(0,0,0,0.05);transition:box-shadow 0.2s,transform 0.2s;}
+  .brand-why-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.1);transform:translateY(-2px);}
+
+  @media (max-width:1023px){
+    .gi-container{padding:0 24px;}
+    .gi-sticky-inner{padding:0 24px;}
+    .gi-watis-grid{grid-template-columns:1fr;gap:32px;}
+    .gi-verplicht-grid{grid-template-columns:repeat(2,1fr);}
+    .gi-aanvulling-grid{grid-template-columns:repeat(2,1fr);}
+    .gi-procedure-grid{grid-template-columns:repeat(2,1fr);gap:32px;}
+    .gi-factors-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:767px){
+    .gi-sticky-nav-bar{display:none;}
+    .gi-container{padding:0 15px;}
+    .gi-hero-content{max-width:100%;}
+    .gi-hero-img{display:none;}
+    .gi-hero-btns{flex-direction:column;}
+    .gi-hero-btns a{width:100%;justify-content:center;text-align:center;}
+    #watis{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #verplicht{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #dekking{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #premie{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #procedure{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #faq{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #gi-beroep{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #gi-statuten{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #gi-aanvulling{padding-bottom:56px !important;}
+    #gi-cta-band{padding-left:15px !important;padding-right:15px !important;padding-bottom:64px !important;}
+    #gi-cta-band h2{font-size:clamp(28px,8vw,48px) !important;}
+    #gi-cta-band p{font-size:18px !important;}
+    .gi-watis-grid{grid-template-columns:1fr;gap:24px;}
+    .gi-verplicht-grid{grid-template-columns:1fr;}
+    .gi-dekking-grid{grid-template-columns:1fr;}
+    .gi-plafond-grid{grid-template-columns:1fr;}
+    .gi-plafond-grid>div:last-child{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.15);}
+    .gi-aanvulling-grid{grid-template-columns:1fr;}
+    .gi-rules-grid{grid-template-columns:1fr;}
+    .gi-formule{flex-direction:column;gap:8px;margin-bottom:40px;}
+    .gi-factors-grid{grid-template-columns:1fr;}
+    .gi-procedure-grid{grid-template-columns:1fr 1fr;gap:32px;}
+    .gi-tab-inner{flex-direction:column;gap:20px;padding:24px 20px;}
+    .gi-tabs-row{overflow-x:auto;justify-content:flex-start !important;padding-bottom:4px;-webkit-overflow-scrolling:touch;}
+    .gi-final-btns{flex-direction:column;align-items:center;}
+    .gi-final-btns a{width:100%;max-width:400px;justify-content:center;}
+    .gi-cta-deco{display:none;}
+    .gi-cta-mask-img{display:none;}
+    .gi-procedure-line{display:none !important;}
+  }
+</style>
+
+<div id="gi-progress-track" style="position:fixed;top:0;left:0;right:0;height:3px;z-index:9999;background:rgba(0,31,63,0.07);">
+  <div id="gi-progress-bar" style="height:100%;background:#E5A524;width:0%;transition:width 0.1s linear;"></div>
+</div>
+
+<div style="font-family:'Outfit',sans-serif;color:#001F3F;background:#FFFFFF;">
+
+<!-- HERO -->
+<section id="gi-hero" style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:100vh;">
+  <div class="gi-hero-img assurman-mask assurman-mask--hero">
+    <img src="/images/verzekeringen/gewaarborgd-inkomen-hero.jpg" alt="Zelfstandige bouwvakker beschermd door een verzekering gewaarborgd inkomen" />
+  </div>
+  <div class="gi-hero-inner">
+    <div class="gi-hero-content">
+      <div class="gi-badge-pill" style="margin-bottom:20px;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Assurman &middot; Bouwverzekeringen op maat
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">Gewaarborgd inkomen<br />voor zelfstandigen</h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">Je inkomen loopt door, ook als jij even niet kunt.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Een stielman die door een rugletsel maanden niet op de werf kan staan, valt terug op de uitkering van het ziekenfonds. Voor de meeste zelfstandigen is dat veel te weinig om de huur, de afbetaling van de bestelwagen en de gezinsuitgaven mee te dragen. Een verzekering gewaarborgd inkomen vult dat gat: je krijgt een maandelijks vervangingsinkomen bovenop de wettelijke uitkering, zolang je arbeidsongeschikt bent. Zo blijft je persoonlijke levensstandaard overeind terwijl je herstelt.</p>
+      <div class="gi-hero-btns">
+        <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
+          {CTA_SCAN.hero}
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.advisory}</a>
+      </div>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;">Geen verplichting. We finaliseren je pakket samen na je intake, op maat van jouw stiel en inkomen.</p>
     </div>
-  </main>
+  </div>
+</section>
+
+<!-- STICKY NAV -->
+<nav id="gi-sticky-nav" class="gi-sticky-nav-bar">
+  <div class="gi-sticky-inner">
+    {[{id:'watis',label:'Wat is het?'},{id:'verplicht',label:'Verplicht?'},{id:'dekking',label:'Dekking'},{id:'premie',label:'Premie'},{id:'procedure',label:'Bij uitval'},{id:'faq',label:'FAQ'}].map(item=>(
+      <button class="gi-sticky-btn" data-sticky-btn={item.id}>
+        <svg class="gi-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        {item.label}
+      </button>
+    ))}
+  </div>
+</nav>
+
+<!-- WAT IS HET -->
+<section id="watis" style="background:#FFFFFF;padding:96px 32px;">
+  <div class="gi-container">
+    <div class="gi-watis-grid">
+      <div style="background:#3F5767;padding:32px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);">
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In het kort</span>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+          {[
+            {t:'Gewaarborgd inkomen betaalt je een <strong style="color:#FFFFFF;">maandelijks vervangingsinkomen</strong> als je door ziekte of ongeval arbeidsongeschikt wordt.'},
+            {t:'Het vult de <strong style="color:#FFFFFF;">beperkte wettelijke RIZIV-uitkering</strong> aan: die alleen volstaat zelden om je vaste lasten te dragen.'},
+            {t:'Dekt <strong style="color:#FFFFFF;">24 uur per dag</strong>, zowel beroepsongevallen op de werf als ziekte en privé-ongevallen.'},
+            {t:'Beschermt je <strong style="color:#FFFFFF;">persoonlijke</strong> inkomen, niet de vaste kosten of de omzet van je vennootschap. Dat zijn aparte polissen.'},
+            {t:'Niet wettelijk verplicht, maar voor een fysieke bouwstiel een <strong style="color:#FFFFFF;">basisbescherming</strong> die je gezin recht houdt.'},
+          ].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.55;color:#CBD5E1;" set:html={item.t}></span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">De polis die je loon vervangt als je niet kunt werken</h2>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een verzekering gewaarborgd inkomen, ook inkomensverzekering of arbeidsongeschiktheidsverzekering genoemd, betaalt je een vooraf afgesproken maandelijks bedrag uit wanneer je door ziekte of een ongeval je beroep niet meer kunt uitoefenen. Als zelfstandige heb je geen werkgever die je loon doorbetaalt en geen gewaarborgd loon zoals een werknemer. Val je uit, dan valt je inkomen weg, terwijl je vaste kosten gewoon doorlopen. Deze polis vangt dat verlies op met een vervangingsinkomen, bovenop wat het ziekenfonds je betaalt.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">Belangrijk: gewaarborgd inkomen beschermt jou persoonlijk, niet je bedrijf. Het is dus iets anders dan een omzet- of vastekostenverzekering, die de vaste kosten van je vennootschap betaalt, en iets anders dan een bedrijfsschadeverzekering, die je stilstand na materiële schade zoals brand opvangt. Verwar het ook niet met het gewaarborgd loon dat een werkgever bij ziekte aan een werknemer betaalt. Hier gaat het om jouw eigen vervangingsinkomen als zelfstandige.</p>
+        <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div>
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">Wettelijke basis</p>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">Je sociale bescherming bij arbeidsongeschiktheid valt onder het <strong>RIZIV</strong> (Rijksinstituut voor Ziekte- en Invaliditeitsverzekering). Als je arbeidsongeschikt wordt, betaalt je ziekenfonds na een wettelijke wachttijd een uitkering. Die wettelijke uitkering is voor zelfstandigen een forfaitair bedrag dat afhangt van je gezinssituatie en in de meeste gevallen ruim onvoldoende is om je werkelijke levensstandaard te behouden. De verzekering gewaarborgd inkomen is een private aanvulling bovenop die RIZIV-uitkering en is niet wettelijk verplicht.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IS HET VERPLICHT -->
+<section id="verplicht" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Is het verplicht?</span>
+      <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#3F5767;margin-bottom:8px;">Is een verzekering gewaarborgd inkomen wettelijk verplicht?</p>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,10vw,112px);line-height:0.9;color:#001F3F;letter-spacing:-4px;">Nee.</div>
+      <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:20px;color:#3F5767;margin-top:12px;">Maar voor een fysieke bouwstiel is het de enige manier om je inkomen écht op te vangen.</p>
+    </div>
+    <div class="gi-verplicht-grid">
+      {[
+        {icon:'us', title:'Zelfstandige in hoofdberoep',     text:'Niet verplicht. Maar je hebt geen gewaarborgd loon en geen werkgever die doorbetaalt. Val je uit, dan stopt je inkomen en blijft enkel de beperkte RIZIV-uitkering over.'},
+        {icon:'ft', title:'Zaakvoerder met vennootschap',    text:'Niet verplicht. Een polis op de vaste kosten van je BV vangt je persoonlijke inkomen niet op. Daarvoor heb je een eigen gewaarborgd inkomen nodig.'},
+        {icon:'cl', title:'Starter zonder gekend inkomen',   text:'Niet verplicht. Je kunt je vaak toch verzekeren op basis van een geschat startinkomen, zodat je vanaf dag één beschermd bent.'},
+        {icon:'sh', title:'Stielman met zwaar fysiek werk',  text:'Niet verplicht. Maar net bij dakwerkers, metsers en loodgieters is de kans op uitval door letsel of slijtage het grootst.'},
+      ].map(card=>(
+        <div style="background:#FFFFFF;padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+          <div style="background:rgba(229,165,36,0.1);border-radius:10px;padding:12px;display:inline-flex;margin-bottom:18px;">
+            {card.icon==='us'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+            {card.icon==='ft'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>}
+            {card.icon==='cl'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>}
+            {card.icon==='sh'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- VOORBEELDEN SECTIE -->
+<section style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Hoe werkt een gewaarborgd inkomen concreet?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">De wettelijke uitkering start pas na een wachttijd en is bewust laag gehouden. Een goede polis bepaalt vooraf hoeveel je verzekert, vanaf wanneer ze uitkeert en in welke mate. Hieronder de drie knoppen die je dekking sturen.</p>
+    </div>
+    <div class="gi-rules-grid">
+      {[
+        { title: 'De wachttijd (eigenrisicotermijn)', text: 'Dit is de periode tussen het begin van je arbeidsongeschiktheid en het moment dat de verzekering begint uit te betalen. Je kiest die zelf, bijvoorbeeld 1, 3 of 6 maanden. Hoe langer je wachttijd, hoe lager je premie. De juiste keuze hangt af van hoeveel maanden je zelf kunt overbruggen met spaargeld.' },
+        { title: 'Wat keert RIZIV uit?', text: 'Het ziekenfonds betaalt na een wettelijke wachttijd een forfaitaire daguitkering die afhangt van je gezinssituatie (gezinshoofd, alleenstaande of samenwonende). Dat forfait ligt voor de meeste zelfstandigen ver onder hun werkelijke inkomen. Het gewaarborgd inkomen dicht net dat gat.' },
+        { title: 'Hoe wordt de rente bepaald?', text: 'Samen leggen we het maandelijkse bedrag vast dat je verzekert. Wettelijk mag je verzekerde rente, samen met de wettelijke uitkering, niet hoger liggen dan ongeveer 80% van je beroepsinkomen. De verzekeraar vraagt bij een aanvraag of claim je fiscale gegevens op om dit te toetsen.' },
+      ].map(card => (
+        <div style="background:#FFFFFF;padding:24px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);border-top:3px solid #E5A524;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#3F5767;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <button id="gi-examples-btn" style="display:flex;align-items:center;gap:10px;background:rgba(0,31,63,0.04);border:1px solid rgba(0,31,63,0.1);border-radius:8px;padding:14px 24px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#001F3F;">
+        <span>Bekijk 6 concrete voorbeelden uit de bouw</span>
+        <svg id="gi-examples-chevron" width="18" height="18" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+    <ul id="gi-examples-list" style="list-style:none;padding:0;margin:16px 0 0;display:none;grid-template-columns:1fr 1fr;gap:10px;">
+      {[
+        'Een dakwerker glijdt uit op een natte stelling, breekt zijn scheenbeen en kan vier maanden niet werken. Na zijn wachttijd ontvangt hij maandelijks zijn verzekerde rente bovenop de uitkering van het ziekenfonds.',
+        'Een loodgieter ontwikkelt een zware hernia door het sjouwen van warmtepompen en moet geopereerd worden, waardoor hij zeven maanden buiten strijd is en zijn gewaarborgd inkomen elke maand bijspringt.',
+        'Een metser raakt twee vingers kwijt bij een ongeval met een cirkelzaag en wordt blijvend gedeeltelijk arbeidsongeschikt verklaard voor zijn stiel, waarna de verzekering een evenredige rente blijft uitkeren.',
+        'Een schrijnwerker valt tijdens een weekendfietstocht en breekt zijn schouder, en omdat de polis 24 uur per dag dekt, ontvangt hij ook voor dat privé-ongeval zijn maandelijkse rente.',
+        'Een elektricien valt langdurig uit met een ernstige burn-out en krijgt, omdat hij de uitbreiding voor psychische aandoeningen koos en in begeleiding is, na zijn wachttijd een uitkering.',
+        'Een schilder krijgt chronische schouder- en rugklachten van jaren plafondwerk en wordt gedeeltelijk arbeidsongeschikt bevonden, waarna zijn rente het verlies aan werkdagen opvangt.',
+      ].map(ex=>(
+        <li style="display:flex;gap:10px;align-items:flex-start;background:#F7F4EF;border-radius:8px;padding:12px 16px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{ex}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<!-- DEKKING -->
+<section id="dekking" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:1025px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Dekking</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat is wél en niet gedekt?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:580px;margin:0 auto;">Een gewaarborgd inkomen dekt je arbeidsongeschiktheid door ziekte én ongeval, dag en nacht. Wat precies onder de dekking valt, hangt af van de gekozen formule en de medische voorwaarden. Hieronder de hoofdlijnen.</p>
+    </div>
+    <div class="gi-dekking-grid">
+      <div style="background:#FFFFFF;border:2px solid rgba(34,197,94,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(34,197,94,0.08);border-bottom:1px solid rgba(34,197,94,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#15803d;">Wel gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Arbeidsongeschiktheid door ziekte, zoals een hernia, kanker of een ernstige aandoening','Arbeidsongeschiktheid door ongeval, zowel op de werf als in je privéleven, 24 uur per dag','Een maandelijks vervangingsinkomen, uitgekeerd naargelang je graad van ongeschiktheid','Gedeeltelijke arbeidsongeschiktheid: je krijgt een evenredig deel van je verzekerde rente','Uitkering tot het einde van je ongeschiktheid of tot de eindleeftijd van de polis','Herval na een eerdere periode van arbeidsongeschiktheid, volgens de polisvoorwaarden'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgCheck16g} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:2px solid rgba(239,68,68,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(239,68,68,0.06);border-bottom:1px solid rgba(239,68,68,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#b91c1c;">Niet (of beperkt) gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Voorafbestaande aandoeningen die je al had en niet aangaf bij de medische vragenlijst','Opzettelijk veroorzaakt letsel en zelfverminking','Psychische aandoeningen zoals burn-out of depressie, in basispolissen vaak uitgesloten of beperkt, tenzij je een uitbreiding koos','Letsels door risicosporten zoals bergbeklimmen, diepzeeduiken of motorsport, tenzij meeverzekerd met bijpremie','De wachttijd: de eerste gekozen periode keert de verzekering nooit uit','Het deel boven de wettelijke grens van ongeveer 80% van je beroepsinkomen'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgX16r} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <div class="gi-plafond-grid" style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);padding:36px 40px;">
+      <div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Verzekerbaar inkomen</span>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#FFFFFF;margin:0 0 12px;">Tot ongeveer 80% van je beroepsinkomen</h3>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">Je verzekert tot ongeveer 80% van je beroepsinkomen, samen met de wettelijke RIZIV-uitkering. Veel polissen keren een evenredige rente uit vanaf een ongeschiktheid van 25% en het volledige bedrag vanaf 67%. De exacte drempels en de grondslag staan in je polisvoorwaarden.</p>
+      </div>
+      <div style="text-align:center;flex-shrink:0;">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:6px;">Richtwaarde</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:44px;color:#FFFFFF;letter-spacing:-1px;line-height:1;">±80%</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:14px;color:#94a3b8;margin-top:6px;">maximaal verzekerbaar deel (indicatief)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AANVULLENDE WAARBORGEN -->
+<section id="gi-aanvulling" style="background:#3F5767;padding:0 0 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding:100px 32px 0;position:relative;z-index:1;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Aanvullen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Vijf uitbreidingen die je polis afmaken</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0;">De basisdekking vangt je inkomensverlies op. Deze waarborgen stemmen de polis fijner af op een fysieke bouwstiel.</p>
+    </div>
+    <div class="gi-aanvulling-grid">
+      {[
+        {i:'ac',title:'Economische ongeschiktheid',     text:'Een fysiologische beoordeling meet enkel je algemene lichamelijke verlies. Een economische beoordeling kijkt of je je eigen stiel nog kunt uitoefenen. Voor een metser die geen stenen meer kan leggen is dat het verschil tussen een lage en een volwaardige uitkering.'},
+        {i:'sh',title:'Dekking 24 uur per dag',         text:'Standaard breidt deze waarborg je dekking uit naar ongevallen in je privéleven, niet alleen op de werf. Een val tijdens het weekend of een verkeersongeval telt dan ook mee.'},
+        {i:'us',title:'Premievrijstelling',             text:'Zolang je arbeidsongeschikt bent, neemt de verzekeraar de premiebetaling over. Je dekking loopt door zonder dat jij nog premie betaalt, net wanneer je inkomen laag is.'},
+        {i:'tr',title:'Indexering van de rente',        text:'Je verzekerde rente en de uitbetaling stijgen mee met de index, zodat je bescherming na enkele jaren of tijdens een lange ongeschiktheid niet uitholt door de levensduurte.'},
+        {i:'br',title:'Ziekenhuisforfait',             text:'Een vast bedrag per dag ziekenhuisopname, bovenop je rente, om de extra kosten van een opname op te vangen.'},
+      ].map(card=>(
+        <div class="gi-ins-card" style="padding:28px;">
+          <div style="background:rgba(229,165,36,0.15);border-radius:10px;padding:10px;display:inline-flex;margin-bottom:16px;">
+            {card.i==='ac'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>}
+            {card.i==='sh'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>}
+            {card.i==='us'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>}
+            {card.i==='tr'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>}
+            {card.i==='br'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M19 9h-4V5a2 2 0 0 0-2-2h-2a2 2 0 0 0-2 2v4H5a2 2 0 0 0-2 2v2a2 2 0 0 0 2 2h4v4a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2v-4h4a2 2 0 0 0 2-2v-2a2 2 0 0 0-2-2z"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#FFFFFF;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#94A3B8;margin:0;">{card.text}</p>
+        </div>
+      ))}
+      <div style="background:#E5A524;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:32px;display:flex;flex-direction:column;justify-content:center;">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">Niet zeker hoeveel inkomen je moet verzekeren?</h3>
+        <p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(0,31,63,0.75);line-height:1.55;margin:0 0 20px;">Doe de scan: we berekenen samen het gat tussen je RIZIV-uitkering en je werkelijke gezinsbehoefte, en kiezen de juiste wachttijd en rente.</p>
+        <a href={CTA_DESTINATIONS.scan} class="gi-scan-btn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.2s;width:100%;">
+          {CTA_SCAN.start} <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIE -->
+<section id="premie" style="background:#F7F4EF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Prijs &amp; berekening</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Hoe wordt je premie berekend?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Er is geen vaste prijs. Wat je betaalt hangt af van je leeftijd, je beroep, het bedrag dat je verzekert en de wachttijd die je kiest. Een langere wachttijd of een lager verzekerd bedrag drukt de premie. Voor een stielman is een gewaarborgd inkomen vaak betaalbaarder dan gedacht, zeker afgezet tegen het risico op maandenlang inkomensverlies.</p>
+    </div>
+    <div class="gi-formule">
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">1. Basis</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Verzekerde rente</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#3F5767;line-height:1.4;">het maandbedrag dat je wilt ontvangen bij uitval</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">×</div>
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">2. Risicoprofiel</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Leeftijd x beroep x wachttijd</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#3F5767;line-height:1.4;">fysiek risico en een korte wachttijd wegen zwaarder</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">=</div>
+      <div style="background:#3F5767;border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 8px 32px rgba(63,87,103,0.3);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">Jaarpremie</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin-bottom:8px;">Jouw polis</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#94a3b8;line-height:1.4;">op maat van jouw inkomen en stiel</div>
+      </div>
+    </div>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:#001F3F;text-align:center;margin-bottom:32px;">4 factoren die je premie beïnvloeden</h3>
+    <div class="gi-factors-grid">
+      {[
+        {num:'1',title:'Leeftijd bij instap',        text:'Hoe jonger je instapt, hoe lager je premie, en hoe langer je verzekerd bent tegen een gunstig tarief.'},
+        {num:'2',title:'Beroep en risicoklasse',     text:'Een zware fysieke bouwstiel met werfrisico zit in een hogere risicoklasse dan administratief werk.'},
+        {num:'3',title:'Verzekerd bedrag',           text:'Hoe hoger de maandelijkse rente die je verzekert, hoe hoger de premie. De grens ligt rond 80% van je inkomen.'},
+        {num:'4',title:'Wachttijd',                  text:'Een langere wachttijd verlaagt je premie aanzienlijk, omdat je het eerste deel van het risico zelf draagt.'},
+      ].map(f=>(
+        <div class="brand-why-card" style="padding:20px 24px;display:flex;gap:18px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:16px;color:#001F3F;">{f.num}</span></div>
+          <div>
+            <h4 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 4px;">{f.title}</h4>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#3F5767;margin:0;">{f.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style="max-width:640px;margin:0 auto;">
+      <div style="background:rgba(229,165,36,0.10);padding:20px 28px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);border:1px solid rgba(229,165,36,0.3);">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="18" height="18" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#001F3F;margin:0;"><strong>Fiscaal:</strong> een verzekering gewaarborgd inkomen heeft een eigen fiscaal regime. De premie is doorgaans aftrekbaar als beroepskost en de latere uitkering wordt als vervangingsinkomen belast. Anders dan bij een klassieke schadeverzekering geldt voor deze persoonsverzekering een afwijkende fiscale behandeling. De exacte aftrekbaarheid hangt af van je situatie.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section id="gi-cta-band" style="background:#E9C466;padding:80px 0 100px;position:relative;overflow:hidden;">
+  <div class="assurman-mask assurman-mask--cta gi-cta-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:1;">
+    <img src="/images/verzekeringen/gewaarborgd-inkomen-band.jpg" alt="Zelfstandige bouwvakker beschermd door een gewaarborgd inkomen">
+  </div>
+  <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="100px" direction="down" /></div>
+  <div class="gi-cta-deco" style="position:absolute;right:-130px;top:40%;transform:translateY(-50%);pointer-events:none;z-index:2;"><BrandChevron color="white" height="240px" direction="left" /></div>
+  <div style="max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:4;padding:0 32px;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">Stielman met een fysiek beroep?<br />Wij houden je inkomen recht.</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#3F5767;margin-bottom:40px;opacity:0.9;">Start nu in 2 minuten of kies meteen voor persoonlijk advies.</p>
+    <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">{CTA_SCAN.requestNow} <Fragment set:html={svgArr18} /></a>
+  </div>
+</section>
+
+<!-- PER BEROEP TABS -->
+<section id="gi-beroep" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Per beroep</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Inkomensbescherming in jouw discipline</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Elke bouwstiel heeft zijn eigen fysieke slijtage en risico's. Hieronder wat een gewaarborgd inkomen concreet voor jouw vak betekent.</p>
+    </div>
+    <div class="gi-tabs-row" style="display:flex;gap:0;border-bottom:2px solid rgba(0,31,63,0.12);margin-bottom:40px;justify-content:center;">
+      {beroepTabs.map((tab,i)=>(<button class={`gi-tab-btn${i===0?' active':''}`} data-tab-btn={tab.id}>{tab.label}</button>))}
+    </div>
+    {beroepTabs.map((tab,i)=>(
+      <div data-tab-content={tab.id} style={`display:${i===0?'block':'none'};max-width:860px;margin:0 auto;`}>
+      <div class="gi-tab-inner" style="background:#FFFFFF;border-radius:12px;padding:36px 40px;">
+        <div style="background:rgba(229,165,36,0.12);border-radius:12px;padding:18px;flex-shrink:0;">
+          <svg width="32" height="32" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div style="flex:1;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">{tab.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.65;color:#001F3F;margin:0 0 20px;">{tab.text}</p>
+          <a href={tab.link} style="display:inline-flex;align-items:center;gap:6px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;text-decoration:none;">Bekijk sectorpagina <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+      </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- MIJN SITUATIE ACCORDION -->
+<section id="gi-statuten" style="background:#3F5767;padding:96px 32px;position:relative;overflow:hidden;">
+  <div style="max-width:840px;margin:0 auto;position:relative;z-index:1;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Mijn situatie</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Welke setup past bij jouw situatie?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0 0 40px;">Drie typische situaties uit de Belgische bouwsector. Vind de jouwe en zie wat dat concreet betekent voor je gewaarborgd inkomen.</p>
+
+    <div class="gi-stat-panel" data-stat-panel>
+      <button class="gi-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Zelfstandige in hoofdberoep zonder personeel</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je werkt alleen of als eenmanszaak en je inkomen hangt volledig van jezelf af. Er is geen werkgever en geen vennootschap die de vaste kosten opvangt. Val je uit, dan stopt je omzet onmiddellijk terwijl je huur, lening en gezinsuitgaven doorlopen.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: een gewaarborgd inkomen is hier je basisvangnet. Kies een verzekerde rente die samen met de RIZIV-uitkering je vaste lasten dekt, en een wachttijd die past bij wat je zelf enkele maanden kunt overbruggen.</p>
+      </div>
+    </div>
+
+    <div class="gi-stat-panel" data-stat-panel>
+      <button class="gi-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Zaakvoerder met een vennootschap</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je runt een BV en hebt misschien al een polis voor de vaste kosten of de omzet van je bedrijf. Die beschermt je vennootschap, niet jou persoonlijk. Als jij door ziekte of ongeval uitvalt, betaalt zo'n bedrijfspolis je privé-hypotheek en je gezinsuitgaven niet.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: een gewaarborgd inkomen vult dat aan met een persoonlijk vervangingsinkomen. We bekijken samen hoe je dit fiscaal het beste opzet en hoe het aansluit op je bestaande bedrijfsdekkingen, zonder dubbel te verzekeren.</p>
+      </div>
+    </div>
+
+    <div class="gi-stat-panel" data-stat-panel>
+      <button class="gi-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Starter zonder gekend jaarinkomen</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je bent net gestart en hebt nog geen volledig boekjaar achter de rug, dus je hebt geen bewezen inkomen om je op te baseren. Toch ben je vanaf dag één blootgesteld aan het risico op uitval, vaak net wanneer je financieel het kwetsbaarst bent.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: je kunt je doorgaans verzekeren op basis van een geschat startinkomen. Later, wanneer je inkomen bekend is, stem je de verzekerde rente bij. Zo zit je niet onverzekerd in je eerste jaren.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIJ ARBEIDSONGESCHIKTHEID -->
+<section id="procedure" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:60px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Bij arbeidsongeschiktheid</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat doe je als je arbeidsongeschikt wordt?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Een correcte en tijdige aangifte bepaalt of en wanneer je uitkering start. Doorloop deze vier stappen zodra je niet meer kunt werken.</p>
+    </div>
+    <div class="gi-procedure-grid">
+      <div class="gi-procedure-line" style="position:absolute;top:36px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(to right,#E5A524,rgba(229,165,36,0.2));z-index:0;"></div>
+      {[
+        {ic:'ph', title:'Aangifte arbeidsongeschiktheid', text:'Verwittig je ziekenfonds én je makelaar of verzekeraar zo snel mogelijk dat je arbeidsongeschikt bent. De termijn waarbinnen je moet aangeven, staat in je polis.'},
+        {ic:'ac', title:'Medisch attest',              text:'Bezorg een medisch getuigschrift van je behandelende arts dat je ongeschiktheid en de vermoedelijke duur bevestigt. Dit is de basis waarop de dekking wordt beoordeeld.'},
+        {ic:'ft', title:'Controle',                    text:'De adviserend arts van het ziekenfonds en de raadgevend arts van de verzekeraar bepalen je graad van arbeidsongeschiktheid. Bij een fysieke bouwstiel weegt mee in welke mate je je eigen beroep nog kunt uitoefenen.'},
+        {ic:'at', title:'Uitkering',                   text:'Na het verstrijken van je gekozen wachttijd start de maandelijkse uitkering, evenredig met je vastgestelde graad van ongeschiktheid, en loopt door zolang je arbeidsongeschikt blijft.'},
+      ].map((s,i)=>(
+        <div style="padding:0 20px;text-align:center;position:relative;z-index:1;">
+          <div style="width:72px;height:72px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 4px 16px rgba(229,165,36,0.3);">
+            {s.ic==='ph'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>}
+            {s.ic==='ac'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 12h6M9 16h6M9 8h2M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>}
+            {s.ic==='ft'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>}
+            {s.ic==='at'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#E5A524;margin-bottom:8px;">Stap {i+1}</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{s.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:840px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over gewaarborgd inkomen</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;margin:0;">12 concrete vragen van bouwondernemers: klik open voor het antwoord.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      {faqItems.map((item,i)=>(
+        <div data-faq-item style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.08);border-radius:10px;overflow:hidden;">
+          <button data-faq-btn style="width:100%;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;text-align:left;gap:16px;">
+            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;line-height:1.35;">{item.q}</span>
+            <svg data-faq-chevron width="18" height="18" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div data-faq-answer style="display:none;padding:0 24px 20px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#3F5767;margin:0;">{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- GERELATEERDE VERZEKERINGEN -->
+<InsuranceCarousel
+  client:only="react"
+  cards={insuranceCards}
+  sectionLabel="Ook interessant"
+  headline="Gerelateerde verzekeringen"
+  subheadline="Deze verzekeringen beschermen jou, je gezin en je bouwbedrijf naast je gewaarborgd inkomen."
+  background="#F5F2FF"
+/>
+
+<!-- PARTNERS -->
+<section style="background:#F7F4EF;padding:64px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">Ondersteund door sterke verzekeringspartners</p>
+    <PartnerSlider client:only="react" />
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:#3F5767;padding-top:120px;padding-bottom:0;position:relative;text-align:center;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+  <div style="max-width:896px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;text-align:center;margin-bottom:20px;">Start met Assurman</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;color:#FFFFFF;max-width:727px;margin:0 auto 24px;">Loopt je inkomen door als je morgen uitvalt?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je als zelfstandige in de bouw en wil je zeker zijn dat je gezin verder kan als jij door ziekte of ongeval niet kunt werken? Wij bekijken met jou wat echt nodig is, zonder verplichting.</p>
+    <div class="gi-final-btns">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">{CTA_SCAN.hero} <Fragment set:html={svgArr18} /></a>
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">{CTA_AFSPRAAK.advisory}</a>
+    </div>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+</section>
+
+</div>
+
+<script>
+  const progressBar = document.getElementById('gi-progress-bar') as HTMLElement | null;
+  const stickyBtns  = document.querySelectorAll<HTMLElement>('[data-sticky-btn]');
+  const sectionIds  = ['watis','verplicht','dekking','premie','procedure','faq'];
+
+  stickyBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.stickyBtn!;
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const total = doc.scrollHeight - doc.clientHeight;
+    if (progressBar) progressBar.style.width = total > 0 ? `${(doc.scrollTop / total) * 100}%` : '0%';
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sectionIds[i]);
+      if (el && el.getBoundingClientRect().top <= 120) {
+        stickyBtns.forEach(b => b.classList.toggle('active', b.dataset.stickyBtn === sectionIds[i]));
+        break;
+      }
+    }
+  }, { passive: true });
+
+  const exBtn  = document.getElementById('gi-examples-btn')     as HTMLElement | null;
+  const exList = document.getElementById('gi-examples-list')    as HTMLElement | null;
+  const exChev = document.getElementById('gi-examples-chevron') as HTMLElement | null;
+  if (exBtn && exList && exChev) {
+    exBtn.addEventListener('click', () => {
+      const open = exList.style.display !== 'none';
+      exList.style.display = open ? 'none' : 'grid';
+      exChev.style.transform = open ? '' : 'rotate(180deg)';
+    });
+  }
+
+  const tabBtns     = document.querySelectorAll<HTMLElement>('[data-tab-btn]');
+  const tabContents = document.querySelectorAll<HTMLElement>('[data-tab-content]');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tabBtn!;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      tabContents.forEach(el => { el.style.display = el.dataset.tabContent === t ? 'block' : 'none'; });
+    });
+  });
+
+  document.querySelectorAll('[data-stat-panel]').forEach(panel => {
+    const btn     = panel.querySelector<HTMLElement>('[data-stat-btn]');
+    const content = panel.querySelector<HTMLElement>('[data-stat-content]');
+    const chevron = panel.querySelector<HTMLElement>('[data-stat-chevron]');
+    if (!btn || !content || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = content.style.display !== 'none';
+      document.querySelectorAll('[data-stat-panel]').forEach(p => {
+        const c  = p.querySelector<HTMLElement>('[data-stat-content]');
+        const ch = p.querySelector<HTMLElement>('[data-stat-chevron]');
+        if (c)  c.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { content.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+
+  document.querySelectorAll('[data-faq-item]').forEach(item => {
+    const btn     = item.querySelector<HTMLElement>('[data-faq-btn]');
+    const answer  = item.querySelector<HTMLElement>('[data-faq-answer]');
+    const chevron = item.querySelector<HTMLElement>('[data-faq-chevron]');
+    if (!btn || !answer || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = answer.style.display !== 'none';
+      document.querySelectorAll('[data-faq-item]').forEach(fi => {
+        const a  = fi.querySelector<HTMLElement>('[data-faq-answer]');
+        const ch = fi.querySelector<HTMLElement>('[data-faq-chevron]');
+        if (a)  a.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { answer.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+</script>
+
 </BaseLayout>

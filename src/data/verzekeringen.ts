@@ -176,11 +176,11 @@ export const VERZEKERINGEN: Verzekering[] = [
     slug: 'gewaarborgd-inkomen',
     titel: 'Gewaarborgd inkomen',
     categorie: 'jij-en-je-mensen',
-    korteBeschrijving: 'Garandeert een maandelijks vervangingsinkomen bij ziekte of ongeval, zodat je je gezinsuitgaven kunt blijven betalen.', // TODO: definitieve copy
-    bullets: ['Maandelijks vervangingsinkomen', 'Bij ziekte of ongeval', 'Voor zelfstandigen in de bouw'], // TODO: definitieve bullets
+    korteBeschrijving: 'Garandeert je een maandelijks vervangingsinkomen bij arbeidsongeschiktheid door ziekte of ongeval, zodat je je gezinsuitgaven en vaste lasten kunt blijven betalen.',
+    bullets: ['Maandelijks vervangingsinkomen bovenop RIZIV', 'Dekt ziekte én ongeval, 24 uur per dag', 'Beschermt jouw inkomen, niet je vennootschap', 'Wachttijd en bedrag kies je zelf'],
     icoon: 'heart',
     gerelateerde: ['arbeidsongevallen', 'bescherming-bedrijfsleider', 'aanvullend-pensioen'],
-    status: 'skeleton',
+    status: 'live',
   },
   {
     slug: 'bescherming-bedrijfsleider',

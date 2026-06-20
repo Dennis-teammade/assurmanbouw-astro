@@ -137,7 +137,7 @@ voorstel voor de volgende dag.
 - [x] 2. Brandverzekering — DONE
 - [x] 3. Bedrijfsschade — DONE
 - [x] 4. Vervoerde goederen — DONE
-- [ ] 5. Gewaarborgd inkomen — TODO
+- [x] 5. Gewaarborgd inkomen — DONE
 - [ ] 6. Bescherming bedrijfsleider — TODO
 - [ ] 7. Groepsverzekering — TODO
 - [ ] 8. Aanvullend pensioen — TODO
@@ -155,3 +155,4 @@ voorstel voor de volgende dag.
 - **Brandverzekering** — DONE. Gebouwd uit brief (prefix brv-), databron live. Build groen (101 pagina's). Controlepunten BRV-1..7 (let op: afwijkende brandtaks, bewust kwalitatief). Brand voice schoon. Volgende: Bedrijfsschade (brief klaar).
 - **Bedrijfsschade** — DONE. Gebouwd uit brief (prefix bs-), databron live. Build groen (101 pagina's). Controlepunten BS1-8. Inhoudelijke grens bedrijfsschade vs omzet/gewaarborgd-inkomen zuiver gehouden. Volgende: Vervoerde goederen (brief klaar).
 - **Vervoerde goederen** — DONE. Gebouwd uit brief (prefix vg-), met echte beelden. Databron live. Build groen. Controlepunten VG1-8. + 22 klant-foto's geplaatst in public/images/verzekeringen/; ba-bestuurder/brand/bedrijfsschade omgezet van generiek naar echt beeld. Volgende: Gewaarborgd inkomen (brief nog te maken via subagent).
+- **Gewaarborgd inkomen** — DONE. Gebouwd uit subagent-brief (prefix gi-), echt beeld, databron live. Build groen. 18 controlepunten (RIZIV/fiscaal). Premietaks bewust WEG (persoonsverzekering, vrijgesteld) - dus geen 9,25% op de pagina. Volgende: Bescherming bedrijfsleider (brief nog te maken via subagent).
