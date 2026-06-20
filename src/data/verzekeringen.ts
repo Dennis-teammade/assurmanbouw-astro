@@ -186,11 +186,11 @@ export const VERZEKERINGEN: Verzekering[] = [
     slug: 'bescherming-bedrijfsleider',
     titel: 'Bescherming bedrijfsleider',
     categorie: 'jij-en-je-mensen',
-    korteBeschrijving: 'Beschermt de continuïteit van je bedrijf bij overlijden of langdurige uitval van een sleutelfiguur.', // TODO: definitieve copy
-    bullets: ['Kapitaal bij uitval van een sleutelfiguur', 'Beschermt de bedrijfscontinuïteit', 'Inclusief overlijdensdekking'], // TODO: definitieve bullets
+    korteBeschrijving: 'Keert een kapitaal uit aan je vennootschap bij overlijden of langdurige uitval van je zaakvoerder of een onmisbare sleutelfiguur, zodat je bedrijf kan doordraaien.',
+    bullets: ['Kapitaal voor de vennootschap, niet voor het gezin', 'Vangt overlijden én langdurige uitval op', 'Vrij besteedbaar: vervanger, omzet of krediet', 'Premie in principe aftrekbaar (art. 49 WIB92)'],
     icoon: 'users',
     gerelateerde: ['gewaarborgd-inkomen', 'aanvullend-pensioen', 'groepsverzekering'],
-    status: 'skeleton',
+    status: 'live',
   },
 
   // ===== Pensioen & fiscaal =====

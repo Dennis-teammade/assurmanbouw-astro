@@ -140,7 +140,7 @@ voorstel voor de volgende dag.
 - [x] 3. Bedrijfsschade — DONE
 - [x] 4. Vervoerde goederen — DONE
 - [x] 5. Gewaarborgd inkomen — DONE
-- [ ] 6. Bescherming bedrijfsleider — TODO
+- [x] 6. Bescherming bedrijfsleider — DONE
 - [ ] 7. Groepsverzekering — TODO
 - [ ] 8. Aanvullend pensioen — TODO
 - [ ] 9. VAPZ — TODO
@@ -158,3 +158,4 @@ voorstel voor de volgende dag.
 - **Bedrijfsschade** — DONE. Gebouwd uit brief (prefix bs-), databron live. Build groen (101 pagina's). Controlepunten BS1-8. Inhoudelijke grens bedrijfsschade vs omzet/gewaarborgd-inkomen zuiver gehouden. Volgende: Vervoerde goederen (brief klaar).
 - **Vervoerde goederen** — DONE. Gebouwd uit brief (prefix vg-), met echte beelden. Databron live. Build groen. Controlepunten VG1-8. + 22 klant-foto's geplaatst in public/images/verzekeringen/; ba-bestuurder/brand/bedrijfsschade omgezet van generiek naar echt beeld. Volgende: Gewaarborgd inkomen (brief nog te maken via subagent).
 - **Gewaarborgd inkomen** — DONE. Gebouwd uit subagent-brief (prefix gi-), echt beeld, databron live. Build groen. 18 controlepunten (RIZIV/fiscaal). Premietaks bewust WEG (persoonsverzekering, vrijgesteld) - dus geen 9,25% op de pagina. Volgende: Bescherming bedrijfsleider (brief nog te maken via subagent).
+- **Bescherming bedrijfsleider** — DONE. Gebouwd uit subagent-brief (prefix bb-, echt beeld, hero vh). Keuzehub-afbakening (keyman/continuïteit ≠ persoonlijke overlijdensdekking ≠ BA Bestuurder). Premietaks 4,40% (leven, niet 9,25%). Databron live. Build groen. Controlepunten BB1-11. Volgende: Groepsverzekering (pensioencluster; brief nog te maken).

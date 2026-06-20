@@ -158,3 +158,25 @@ Status pagina: **afgewerkt, op staging.** Persoonlijk vervangingsinkomen, scherp
 | GI18 | Geen premiebedrag in euro op de pagina | Bevestig dat we geen indicatief tarief tonen. | 🔲 |
 
 Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/CTA = echt klant-beeld.
+
+---
+
+## /verzekeringen/bescherming-bedrijfsleider (Bescherming bedrijfsleider)
+
+Status pagina: **afgewerkt, op staging.** 11 controlepunten. Afbakening bewaakt: keyman/continuïteit (vennootschap = begunstigde), expliciet onderscheiden van persoonlijke overlijdensdekking (aparte pagina) en BA Bestuurder.
+
+| # | Wat we beslisten (staat zo op de pagina) | Waarom | Te controleren / suggestie | Status |
+|---|---|---|---|---|
+| BB1 | Wettelijke basis = **Wet 4 april 2014 + FSMA** | Generieke verzekeringsrechtelijke verwijzing | Juridische formulering aftekenen. | 🔲 |
+| BB2 | Fiscale aftrek premie = **art. 49 WIB92**, mits vennootschap=begunstigde + reëel continuïteitsrisico | Standaard fiscaal kader keyman | Fiscaal/juridisch aftekenen. | 🔲 |
+| BB3 | **Premietaks = 4,40%** (levensverzekering-taks, NIET de 9,25% van schade) | Research §3; dekking op een hoofd | Bevestig dat 4,40% klopt voor deze dekkingsvorm. | 🔲 |
+| BB4 | **Uitkering** = uitzonderlijke opbrengst in venn.belasting; **geen hard tarief** op de pagina | Tarief situatieafhankelijk | Bevestig formulering; tarief tonen? Lever actuele cijfers. | 🔲 |
+| BB5 | **Verzekerd kapitaal € 100.000 – € 500.000** (richtwaarde, indicatief) | Gangbaar bouw-bereik (research §3) | Bevestig tegen effectieve limieten van onze verzekeraars. | 🔲 |
+| BB6 | **Arbeidsongeschiktheid = optionele uitbreiding** met wachttijd (geen vast aantal dagen op de pagina) | Verschilt per polis | Standaardwachttijd tonen of "zie polis" houden? | 🔲 |
+| BB7 | **Zelfdoding 1e jaar uitgesloten** | Marktstandaard overlijdensdekking | Bevestig formulering. | 🔲 |
+| BB8 | **Sleutelfiguur-criterium fiscus** = directe, zware impact (willekeurige medewerker niet aanvaard) | Research §4 | Bevestig formulering. | 🔲 |
+| BB9 | **Uitkoopclausule mede-vennoten** voorgesteld | Gangbare keyman-toepassing | Bevestig dat wij dit aanbieden/faciliteren. | 🔲 |
+| BB10 | **Geen premiebedrag in euro** op de pagina, enkel de factoren | Brand-voice: geen verzonnen cijfers | Bevestig dat we geen indicatief tarief tonen. | 🔲 |
+| BB11 | Aangiftetermijn = **"zo snel mogelijk"** (geen vast getal) | Termijn verschilt per polis | Standaardtermijn tonen of "zie polis" houden? | 🔲 |
+
+Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/band = echt beeld (`/images/verzekeringen/bescherming-bedrijfsleider-*`).

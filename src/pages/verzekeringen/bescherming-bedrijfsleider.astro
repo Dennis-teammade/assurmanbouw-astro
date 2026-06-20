@@ -1,20 +1,707 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { CTA_SCAN, CTA_DESTINATIONS } from '../../data/cta-labels';
+import { kaartenVoor } from '../../data/verzekeringen';
+import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
+import BrandChevron from '../../components/BrandChevron.astro';
+
+const faqItems = [
+  { q: 'Wat is een bescherming bedrijfsleider of keyman-verzekering?', a: 'Het is een dekking op het hoofd van je zaakvoerder of een onmisbare sleutelfiguur. Bij overlijden, en optioneel bij langdurige arbeidsongeschiktheid, keert ze een kapitaal uit aan je vennootschap om de continuïteit te garanderen. De vennootschap is verzekeringnemer én begunstigde.' },
+  { q: 'Wie krijgt het geld bij een keyman-verzekering?', a: 'De vennootschap zelf. Het kapitaal gaat dus niet rechtstreeks naar de familie van de zaakvoerder, maar dient om de werking van het bedrijf overeind te houden: een vervanger aanwerven, omzetverlies opvangen of een krediet aflossen.' },
+  { q: 'Wat is het verschil met een persoonlijke overlijdensverzekering voor mijn gezin?', a: 'Bij een keyman-verzekering is de vennootschap de begunstigde. Wil je je partner of kinderen beschermen bij je overlijden, dan heb je een aparte persoonlijke overlijdensdekking nodig waarbij zij de begunstigden zijn. De twee vullen elkaar aan.' },
+  { q: 'Wat is het verschil met BA Bestuurder?', a: 'BA Bestuurder dekt je persoonlijke aansprakelijkheid als bestuurder voor fouten in je mandaat. Een bescherming bedrijfsleider dekt het wegvallen van een sleutelfiguur en de continuïteit van het bedrijf. Het zijn twee verschillende risico\'s en twee aparte polissen.' },
+  { q: 'Wie kan ik als sleutelfiguur verzekeren?', a: 'Iemand wiens wegvallen een directe, zware impact heeft op je bedrijfsvoering: de zaakvoerder, een werfleider, een hoofdberekenaar of een enige gecertificeerde technieker. Een willekeurige medewerker zonder die impact aanvaardt de fiscus niet als verzekerbare sleutelfiguur.' },
+  { q: 'Zijn de premies fiscaal aftrekbaar?', a: 'In principe wel, als beroepskost van de vennootschap op basis van artikel 49 WIB92. Voorwaarde is dat de vennootschap de begunstigde is en kan aantonen dat het wegvallen van de sleutelfiguur een reëel financieel risico vormt. Laat dit altijd door je boekhouder bevestigen.' },
+  { q: 'Hoe wordt de uitkering belast?', a: 'De uitkering die de vennootschap ontvangt, wordt als een uitzonderlijke opbrengst belast in de vennootschapsbelasting. Het exacte tarief hangt af van je situatie; je boekhouder licht dit toe.' },
+  { q: 'Is arbeidsongeschiktheid ook gedekt?', a: 'Overlijden is de basis. Langdurige of blijvende arbeidsongeschiktheid is meestal een optionele uitbreiding, die een kapitaal of een maandelijkse rente aan de vennootschap uitkeert. Er geldt een wachttijd vóór de rente start.' },
+  { q: 'Hoeveel kapitaal heb ik nodig?', a: 'Vaak vertrek je van de vaste kosten over één à twee jaar, of van de kostprijs om een gelijkwaardige vervanger te rekruteren en in te werken. In de bouw ligt dat doorgaans tussen € 100.000 en € 500.000, maar het hangt af van je concrete situatie.' },
+  { q: 'Kan de verzekering helpen om mede-vennoten uit te kopen?', a: 'Ja. Met een uitkoopclausule dient het kapitaal om de aandelen van een overleden vennoot over te nemen, zodat de overblijvende vennoten de controle houden zonder de werkingsmiddelen aan te spreken of te herfinancieren.' },
+  { q: 'Wat is het verschil met een schuldsaldoverzekering?', a: 'Een schuldsaldoverzekering hangt vast aan een specifiek krediet en lost bij overlijden de schuld rechtstreeks bij de bank af. Een keyman-verzekering keert een vrij besteedbaar kapitaal uit aan de vennootschap voor de algemene werking, niet voor één krediet.' },
+  { q: 'Hoe hangt dit samen met mijn IPT of groepsverzekering?', a: 'Een IPT of groepsverzekering is in de eerste plaats pensioenopbouw, met soms een overlijdens- of invaliditeitsluik. Een bescherming bedrijfsleider focust op de continuïteit van het bedrijf. We stemmen ze op elkaar af zodat ze elkaar aanvullen in plaats van overlappen.' },
+];
+
+const beroepTabs = [
+  { id: 'dakwerkers',    label: 'Dakwerkers',        link: '/sectoren/dakwerkers',    title: 'Voor dakwerkers',                    text: 'In een dakwerkersbedrijf draait alles vaak rond de ervaren ploegbaas die de complexe werken inschat en de mannen aanstuurt. Valt die weg, dan liggen de moeilijke daken stil en moet je dringend evenwaardige expertise inkopen. Een keyman-bescherming geeft je de tijd en middelen om dat correct op te lossen.' },
+  { id: 'metsers',       label: 'Metsers',            link: '/sectoren/aannemers',     title: 'Voor metsers en algemene aannemers', text: 'Als algemene aannemer hangt je omzet vast aan de zaakvoerder die calculeert, onderhandelt en de planning bewaakt. Overlijdt of valt die langdurig uit, dan dreigen lopende offertes en werven te ontsporen. De uitkering aan de vennootschap financiert een vervanger en houdt je werven recht.' },
+  { id: 'loodgieters',   label: 'Loodgieters',        link: '/sectoren/loodgieters',   title: 'Voor loodgieters',                   text: 'Veel loodgietersbedrijven draaien op één gecertificeerde vakman die de installaties keurt en de klanten kent. Zonder hem kan je bepaalde opdrachten wettelijk niet meer uitvoeren. Een bescherming op zijn hoofd overbrugt de zoektocht naar een gelijkwaardige opvolger.' },
+  { id: 'elektriciens',  label: 'Elektriciens',       link: '/sectoren/elektriciens',  title: 'Voor elektriciens',                  text: 'Een elektriciensbedrijf leunt vaak op de zaakvoerder of hoofdtechnieker met de juiste attesten en keuringsbevoegdheid. Valt die weg, dan stokken de keuringen en de oplevering van installaties. De keyman-uitkering geeft je bedrijf ademruimte om die kennis opnieuw binnen te halen.' },
+  { id: 'schilders',     label: 'Schilders',          link: '/sectoren/schilders',     title: 'Voor schilders',                     text: 'In een schildersvennootschap is het vaak de zaakvoerder die de offertes maakt, de klanten bindt en de planning regelt. Zijn wegvallen legt de commerciële motor stil, ook al kunnen de ploegen blijven werken. Een continuïteitsdekking houdt de zaak rendabel terwijl je herorganiseert.' },
+  { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Bij een schrijnwerkerij zit de meerwaarde vaak in de meester-vakman die maatwerk tekent, calculeert en uitvoert. Valt die persoon weg, dan stokken de lopende bestellingen en voorschotten. De uitkering aan de vennootschap financiert de vervanging zonder dat je klanten in de kou staan.' },
+];
+
+const insuranceCards = kaartenVoor(['gewaarborgd-inkomen', 'aanvullend-pensioen', 'groepsverzekering', 'ba-bestuurder']);
+
+const schema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+
+const svgCheck16g = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+const svgX16r    = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
+const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
 ---
+
 <BaseLayout
-  title="Bescherming bedrijfsleider | Assurman"
-  description="Bescherm de continuiteit van je bedrijf bij uitval van een sleutelfiguur. Binnenkort online bij Assurman."
+  title="Bescherming bedrijfsleider: continuïteit bij uitval | Assurman"
+  description="Valt je zaakvoerder of sleutelfiguur weg door overlijden of langdurige uitval? Een keyman-verzekering keert een kapitaal uit aan je vennootschap. Doe de scan."
   canonical="/verzekeringen/bescherming-bedrijfsleider/"
-  noindex={true}
+  schema={schema}
 >
-  <main style="min-height:72vh;display:flex;align-items:center;justify-content:center;background:#FBF8FF;padding:140px 24px 96px;">
-    <div style="max-width:680px;text-align:center;">
-      <span style="display:inline-block;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Verzekering</span>
-      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,52px);color:#001F3F;line-height:1.1;margin:0 0 16px;">Bescherming bedrijfsleider</h1>
-      <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#3F5767;line-height:1.6;margin:0 0 32px;">Deze pagina is in opbouw. Binnenkort lees je hier alles over de bescherming bedrijfsleider en de keuzes daarbinnen. Wil je nu al weten waar je dekking tekortschiet? Doe de gratis verzekeringsscan in 2 minuten.</p>
-      <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary--lg">{CTA_SCAN.hero}</a>
-      <p style="margin-top:28px;"><a href="/verzekeringen/" style="color:#3F5767;font-family:'Outfit',sans-serif;text-decoration:underline;">Alle verzekeringen bekijken</a></p>
+
+<style is:global>
+  .bb-sticky-btn{background:#F7F4EF;border:1px solid rgba(229,165,36,0.2);cursor:pointer;padding:7px 16px;margin:10px 5px;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border-radius:9999px;transition:background 0.2s,border-color 0.2s;color:#001F3F;}
+  .bb-sticky-btn:hover,.bb-sticky-btn.active{background:rgba(229,165,36,0.18);border-color:#E5A524;}
+  .bb-sticky-btn .bb-check{color:#94a3b8;flex-shrink:0;transition:color 0.2s;}
+  .bb-sticky-btn:hover .bb-check,.bb-sticky-btn.active .bb-check{color:#E5A524;}
+  .bb-tab-btn{background:none;border:none;cursor:pointer;padding:14px 24px;white-space:nowrap;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.2s,border-color 0.2s;}
+  .bb-tab-btn:hover,.bb-tab-btn.active{color:#E5A524;border-bottom-color:#E5A524;}
+  .bb-ins-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);transition:background 0.2s,transform 0.2s;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);}
+  .bb-ins-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-4px);}
+  .bb-stat-panel{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+  .bb-stat-btn{width:100%;display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;text-align:left;padding:20px 24px;}
+  .bb-scan-btn:hover{background:#324554 !important;}
+  .bb-badge-pill{display:inline-flex;align-items:center;gap:8px;background:#F5F2FF;border:1px solid rgba(213,196,174,0.2);border-radius:9999px;padding:6px 16px;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#001F3F;}
+</style>
+
+<style>
+  .bb-hero-img{position:absolute;top:5vh;right:-5px;height:85vh;width:auto;max-width:48%;z-index:1;pointer-events:none;}
+  .bb-hero-content{max-width:620px;}
+  .bb-hero-inner{max-width:1280px;margin:0 auto;padding:64px 32px 80px;position:relative;z-index:2;}
+  .bb-hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+  .bb-watis-grid{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:flex-start;}
+  .bb-verplicht-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .bb-dekking-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
+  .bb-plafond-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;}
+  .bb-aanvulling-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .bb-rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0;}
+  .bb-formule{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:64px;flex-wrap:wrap;}
+  .bb-factors-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;margin:0 auto 40px;}
+  .bb-procedure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+  .bb-tab-inner{display:flex;gap:32px;align-items:flex-start;border-radius:12px;}
+  .bb-final-btns{display:flex;gap:24px;justify-content:center;margin-bottom:80px;flex-wrap:wrap;}
+  .bb-sticky-nav-bar{position:sticky;top:72px;z-index:90;background:#FFFFFF;border-bottom:1px solid rgba(0,31,63,0.08);overflow:auto;}
+  .bb-sticky-inner{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;gap:0;justify-content:center;flex-wrap:wrap;}
+  .bb-container{max-width:1280px;margin:0 auto;padding:0 32px;}
+  .brand-why-card{background:#FFFFFF;border-left:4px solid #E5A524;box-shadow:0px 1px 2px rgba(0,0,0,0.05);transition:box-shadow 0.2s,transform 0.2s;}
+  .brand-why-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.1);transform:translateY(-2px);}
+
+  @media (max-width:1023px){
+    .bb-container{padding:0 24px;}
+    .bb-sticky-inner{padding:0 24px;}
+    .bb-watis-grid{grid-template-columns:1fr;gap:32px;}
+    .bb-verplicht-grid{grid-template-columns:repeat(2,1fr);}
+    .bb-aanvulling-grid{grid-template-columns:repeat(2,1fr);}
+    .bb-procedure-grid{grid-template-columns:repeat(2,1fr);gap:32px;}
+    .bb-factors-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:767px){
+    .bb-sticky-nav-bar{display:none;}
+    .bb-container{padding:0 15px;}
+    .bb-hero-content{max-width:100%;}
+    .bb-hero-img{display:none;}
+    .bb-hero-btns{flex-direction:column;}
+    .bb-hero-btns a{width:100%;justify-content:center;text-align:center;}
+    #watis{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #verplicht{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #dekking{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #premie{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #procedure{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #faq{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #bb-beroep{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #bb-statuten{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #bb-aanvulling{padding-bottom:56px !important;}
+    #bb-cta-band{padding-left:15px !important;padding-right:15px !important;padding-bottom:64px !important;}
+    #bb-cta-band h2{font-size:clamp(28px,8vw,48px) !important;}
+    #bb-cta-band p{font-size:18px !important;}
+    .bb-watis-grid{grid-template-columns:1fr;gap:24px;}
+    .bb-verplicht-grid{grid-template-columns:1fr;}
+    .bb-dekking-grid{grid-template-columns:1fr;}
+    .bb-plafond-grid{grid-template-columns:1fr;}
+    .bb-plafond-grid>div:last-child{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.15);}
+    .bb-aanvulling-grid{grid-template-columns:1fr;}
+    .bb-rules-grid{grid-template-columns:1fr;}
+    .bb-formule{flex-direction:column;gap:8px;margin-bottom:40px;}
+    .bb-factors-grid{grid-template-columns:1fr;}
+    .bb-procedure-grid{grid-template-columns:1fr 1fr;gap:32px;}
+    .bb-tab-inner{flex-direction:column;gap:20px;padding:24px 20px;}
+    .bb-tabs-row{overflow-x:auto;justify-content:flex-start !important;padding-bottom:4px;-webkit-overflow-scrolling:touch;}
+    .bb-final-btns{flex-direction:column;align-items:center;}
+    .bb-final-btns a{width:100%;max-width:400px;justify-content:center;}
+    .bb-cta-deco{display:none;}
+    .bb-cta-mask-img{display:none;}
+    .bb-procedure-line{display:none !important;}
+  }
+</style>
+
+<div id="bb-progress-track" style="position:fixed;top:0;left:0;right:0;height:3px;z-index:9999;background:rgba(0,31,63,0.07);">
+  <div id="bb-progress-bar" style="height:100%;background:#E5A524;width:0%;transition:width 0.1s linear;"></div>
+</div>
+
+<div style="font-family:'Outfit',sans-serif;color:#001F3F;background:#FFFFFF;">
+
+<!-- HERO -->
+<section id="bb-hero" style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:100vh;">
+  <div class="bb-hero-img assurman-mask assurman-mask--hero">
+    <img src="/images/verzekeringen/bescherming-bedrijfsleider-hero.jpg" alt="Zaakvoerder van een bouwbedrijf, beschermd door een keyman-verzekering" />
+  </div>
+  <div class="bb-hero-inner">
+    <div class="bb-hero-content">
+      <div class="bb-badge-pill" style="margin-bottom:20px;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Assurman &middot; Bouwverzekeringen op maat
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">Bescherming bedrijfsleider<br />voor je bouwbedrijf</h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">Hou je zaak recht als de sleutelfiguur wegvalt.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Eén persoon doet de calculaties, kent de klanten en stuurt de werven. Valt die weg door overlijden of langdurige uitval, dan wankelt je hele bedrijf. Een bescherming op het hoofd van die sleutelfiguur keert een kapitaal uit aan je vennootschap, zodat de werking doorloopt.</p>
+      <div class="bb-hero-btns">
+        <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
+          {CTA_SCAN.hero}
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.advisory}</a>
+      </div>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;">Geen verkooppraatjes: we bepalen samen wie of wat je bedrijf echt recht houdt.</p>
     </div>
-  </main>
+  </div>
+</section>
+
+<!-- STICKY NAV -->
+<nav id="bb-sticky-nav" class="bb-sticky-nav-bar">
+  <div class="bb-sticky-inner">
+    {[{id:'watis',label:'Wat is het?'},{id:'verplicht',label:'Verplicht?'},{id:'dekking',label:'Dekking'},{id:'premie',label:'Premie'},{id:'procedure',label:'Bij uitval'},{id:'faq',label:'FAQ'}].map(item=>(
+      <button class="bb-sticky-btn" data-sticky-btn={item.id}>
+        <svg class="bb-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        {item.label}
+      </button>
+    ))}
+  </div>
+</nav>
+
+<!-- WAT IS HET -->
+<section id="watis" style="background:#FFFFFF;padding:96px 32px;">
+  <div class="bb-container">
+    <div class="bb-watis-grid">
+      <div style="background:#3F5767;padding:32px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);">
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In het kort</span>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+          {[
+            {t:'Beschermt de <strong style="color:#FFFFFF;">continuïteit van je vennootschap</strong> als een onmisbare sleutelfiguur of zaakvoerder wegvalt.'},
+            {t:'Keert een <strong style="color:#FFFFFF;">kapitaal uit aan de vennootschap</strong> bij overlijden, en optioneel bij langdurige arbeidsongeschiktheid.'},
+            {t:'De vennootschap is <strong style="color:#FFFFFF;">verzekeringnemer én begunstigde</strong>: het geld dient om de zaak verder te zetten, niet om je gezin te beschermen.'},
+            {t:'Vrij besteedbaar: <strong style="color:#FFFFFF;">vervanger aanwerven, omzetverlies opvangen, krediet aflossen of mede-vennoten uitkopen</strong>.'},
+            {t:'Niet wettelijk verplicht, maar <strong style="color:#FFFFFF;">strategisch cruciaal voor kmo\'s</strong> die op één of twee mensen draaien.'},
+          ].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.55;color:#CBD5E1;" set:html={item.t}></span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">De bescherming die je bedrijf overeind houdt</h2>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Bescherming bedrijfsleider is een <strong>verzamelnaam voor de polissen die de continuïteit van je vennootschap beschermen</strong> wanneer een onmisbare persoon wegvalt. De kern is een <strong>keyman- of bedrijfsleidersverzekering</strong>: een dekking op het hoofd van je zaakvoerder of een sleutelfiguur die bij overlijden, en optioneel bij langdurige arbeidsongeschiktheid, een kapitaal aan de vennootschap uitkeert.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Het verschil met een gewone overlijdensverzekering zit in de begunstigde. Hier is <strong>de vennootschap zowel verzekeringnemer als begunstigde</strong>. Het kapitaal dient om de zaak draaiende te houden: een vervanger aanwerven, omzetverlies overbruggen of een mede-vennoot uitkopen. <strong>Wil je je gezin beschermen bij je overlijden, dan heb je een aparte persoonlijke overlijdensdekking nodig</strong> waarbij je partner of kinderen de begunstigde zijn.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">Let op de term bedrijfsleidersverzekering: sommigen gebruiken die voor deze keyman-bescherming, anderen voor de aansprakelijkheid van de bestuurder (BA Bestuurder). Hier bedoelen we de bescherming van de continuïteit, niet de aansprakelijkheid.</p>
+        <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div>
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">Wettelijke basis</p>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">De verzekering valt onder de <strong>Wet van 4 april 2014 betreffende de verzekeringen</strong>, onder toezicht van de FSMA. De fiscale aftrekbaarheid steunt op <strong>artikel 49 van het Wetboek van de Inkomstenbelastingen (WIB92)</strong>: de vennootschap moet aantonen dat het wegvallen van de sleutelfiguur een reëel financieel risico is, en moet zelf de begunstigde zijn.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IS HET VERPLICHT -->
+<section id="verplicht" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Is het verplicht?</span>
+      <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#3F5767;margin-bottom:8px;">Is een bescherming bedrijfsleider wettelijk verplicht?</p>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,10vw,112px);line-height:0.9;color:#001F3F;letter-spacing:-4px;">Nee.</div>
+      <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:20px;color:#3F5767;margin-top:12px;">Maar voor een kmo die op één of twee mensen draait, is het vaak het verschil tussen doorgaan en stoppen.</p>
+    </div>
+    <div class="bb-verplicht-grid">
+      {[
+        {icon:'us', title:'Eenpersoonsvennootschap',         text:'Niet verplicht. Maar als jij de enige bent die calculeert, verkoopt en de werven aanstuurt, ligt je hele omzet bij één persoon. Valt die weg, dan valt de zaak stil.'},
+        {icon:'ft', title:'Bedrijf met een sleutelmedewerker',text:'Niet verplicht. Toch kan het wegvallen van je werfleider, hoofdberekenaar of enige gecertificeerde technieker je projecten lamleggen. De fiscus aanvaardt zo iemand als sleutelfiguur.'},
+        {icon:'cl', title:'Vennootschap met een lopend krediet',text:'Niet verplicht. Maar bij overlijden van de zaakvoerder kan de bank een krediet met persoonlijke borg onmiddellijk opeisen. Een uitkering aan de vennootschap vangt dat op.'},
+        {icon:'sh', title:'Bedrijf met meerdere vennoten',   text:'Niet verplicht. Bij overlijden van een vennoot willen de erfgenamen vaak snel uitgekocht worden. Zonder voorziening komt dat geld uit de werkingsmiddelen.'},
+      ].map(card=>(
+        <div style="background:#FFFFFF;padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+          <div style="background:rgba(229,165,36,0.1);border-radius:10px;padding:12px;display:inline-flex;margin-bottom:18px;">
+            {card.icon==='us'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+            {card.icon==='ft'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>}
+            {card.icon==='cl'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>}
+            {card.icon==='sh'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- VOORBEELDEN SECTIE -->
+<section style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Wat gebeurt er als je sleutelfiguur wegvalt?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">De beperkte aansprakelijkheid van je vennootschap beschermt je tegen schulden, niet tegen het verlies van kennis, netwerk en omzet. Wanneer de persoon wegvalt die de zaak doet draaien, ontstaat er een financieel gat dat losstaat van elke andere polis.</p>
+    </div>
+    <div class="bb-rules-grid">
+      {[
+        { title: 'Wie is een sleutelfiguur?', text: 'De zaakvoerder, maar evengoed een werfleider, hoofdberekenaar of de enige medewerker met een vereist certificaat. Het criterium: iemand wiens wegvallen een directe, zware impact heeft op je inkomsten.' },
+        { title: 'Welk gat ontstaat er?', text: 'Omzet die wegvalt, vaste kosten die doorlopen, de loonkost van een vervanger, rekruteringskosten en soms een krediet dat plots opeisbaar wordt. Samen vaak meerdere maanden draaikapitaal.' },
+        { title: 'Wie krijgt het geld?', text: 'De vennootschap, niet het gezin. Het kapitaal is vrij besteedbaar en dient om de werking recht te houden tot je bedrijf zich heeft hersteld of gereorganiseerd.' },
+      ].map(card => (
+        <div style="background:#FFFFFF;padding:24px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);border-top:3px solid #E5A524;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#3F5767;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <button id="bb-examples-btn" style="display:flex;align-items:center;gap:10px;background:rgba(0,31,63,0.04);border:1px solid rgba(0,31,63,0.1);border-radius:8px;padding:14px 24px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#001F3F;">
+        <span>Bekijk 6 concrete voorbeelden uit de bouw</span>
+        <svg id="bb-examples-chevron" width="18" height="18" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+    <ul id="bb-examples-list" style="list-style:none;padding:0;margin:16px 0 0;display:none;grid-template-columns:1fr 1fr;gap:10px;">
+      {[
+        'De zaakvoerder van een bouwbedrijf overlijdt onverwacht; hij deed alle calculaties en offertes, en de vennootschap gebruikt de uitkering om meteen een ervaren interim-manager aan te trekken.',
+        'Bij het overlijden van de zaakvoerder eist de bank de openstaande financiering van de graafmachines op omdat het krediet aan zijn persoonlijke borg hing; de uitkering lost dat krediet af.',
+        'De technisch directeur raakt na een zwaar ongeval blijvend arbeidsongeschikt en kan zijn functie nooit meer uitoefenen; een maandelijkse rente vangt de loonkost van een nieuwe ingenieur op.',
+        'Een installatiebedrijf verliest zijn enige gecertificeerde projectleider en betaalt acht maanden lang een headhunter; de uitkering dekt de rekruteringskosten en de misgelopen marge.',
+        'Een van de twee actieve vennoten overlijdt en zijn erfgenamen willen hun aandelen verkopen; de vennootschap koopt hen uit met het keyman-kapitaal en de overblijvende vennoot houdt de controle.',
+        'De onmisbare werfleider valt maandenlang uit na een burn-out; de vennootschap overbrugt met de uitkering de periode waarin de werven trager draaien en er extra personeel nodig is.',
+      ].map(ex=>(
+        <li style="display:flex;gap:10px;align-items:flex-start;background:#F7F4EF;border-radius:8px;padding:12px 16px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{ex}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<!-- DEKKING -->
+<section id="dekking" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:1025px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Dekking</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat is wél en niet gedekt?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:580px;margin:0 auto;">De basis is een overlijdensdekking op het hoofd van de sleutelfiguur, met de vennootschap als begunstigde. Arbeidsongeschiktheid is meestal een optionele uitbreiding. De exacte voorwaarden staan in je polis.</p>
+    </div>
+    <div class="bb-dekking-grid">
+      <div style="background:#FFFFFF;border:2px solid rgba(34,197,94,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(34,197,94,0.08);border-bottom:1px solid rgba(34,197,94,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#15803d;">Wel gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Uitkering van het verzekerde kapitaal aan de vennootschap bij overlijden van de sleutelfiguur vóór de einddatum van het contract','Vrij besteedbaar kapitaal: aanwerven van een vervanger, opvangen van omzetverlies of aflossen van een krediet','Optioneel: een kapitaal of maandelijkse rente bij blijvende arbeidsongeschiktheid van de verzekerde door ziekte of ongeval','De zaakvoerder én aangeduide sleutelmedewerkers, mits hun wegvallen een aantoonbare impact op de onderneming heeft','Financiering van de uitkoop van de erfgenamen van een overleden mede-vennoot, zodat de controle bij de overblijvende vennoten blijft','Vrije bepaling van het verzekerde kapitaal in functie van de werkelijke continuïteitsbehoefte van je bedrijf'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgCheck16g} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:2px solid rgba(239,68,68,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(239,68,68,0.06);border-bottom:1px solid rgba(239,68,68,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#b91c1c;">Niet (of beperkt) gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Bescherming van je gezin: het kapitaal gaat naar de vennootschap, niet naar je partner of kinderen (daarvoor dien je een persoonlijke overlijdensdekking af te sluiten)','Zelfdoding in het eerste jaar na het afsluiten van het contract','Korte afwezigheid: enkele weken ziekte vallen niet onder de invaliditeitsrente, er geldt een wachttijd vóór de rente start','Een willekeurige medewerker zonder aantoonbare sleutelrol: de fiscus aanvaardt enkel een persoon met directe, zware impact','Opzettelijk veroorzaakte schade en verzwegen of foutief meegedeelde medische informatie bij onderschrijving','Risico\'s die onder een andere polis horen, zoals een specifiek krediet (schuldsaldoverzekering) of je persoonlijk vervangingsinkomen (gewaarborgd inkomen)'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgX16r} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <div class="bb-plafond-grid" style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);padding:36px 40px;">
+      <div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Verzekerd kapitaal</span>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#FFFFFF;margin:0 0 12px;">Afgestemd op je continuïteitsbehoefte</h3>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">Het verzekerde kapitaal wordt bepaald in functie van je continuïteitsbehoefte: vaak de vaste kosten over één à twee jaar, of de geraamde kostprijs om een gelijkwaardige vervanger te rekruteren en in te werken. In de bouwsector ligt dat doorgaans tussen € 100.000 en € 500.000.</p>
+      </div>
+      <div style="text-align:center;flex-shrink:0;">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:6px;">Richtwaarde</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#FFFFFF;letter-spacing:-1px;line-height:1;">€ 100k-500k</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:14px;color:#94a3b8;margin-top:6px;">verzekerd kapitaal (indicatief)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AANVULLENDE WAARBORGEN -->
+<section id="bb-aanvulling" style="background:#3F5767;padding:0 0 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding:100px 32px 0;position:relative;z-index:1;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Aanvullen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Vijf uitbreidingen die je bescherming afmaken</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0;">De basisdekking vangt het overlijden van je sleutelfiguur op. Deze uitbreidingen sluiten de gaten die in de praktijk telkens terugkomen.</p>
+    </div>
+    <div class="bb-aanvulling-grid">
+      {[
+        {i:'ac',title:'Arbeidsongeschiktheidsdekking', text:'Naast overlijden ook een kapitaal of maandelijkse rente aan de vennootschap wanneer de sleutelfiguur langdurig of definitief uitvalt door ziekte of ongeval.'},
+        {i:'sh',title:'Meerdere sleutelfiguren',       text:'Eén overeenkomst die zowel de zaakvoerder als een onmisbare werfleider of hoofdberekenaar verzekert, elk met een eigen kapitaal.'},
+        {i:'us',title:'Dekking van mede-vennoten',     text:'Een uitkoopclausule waarbij de uitkering specifiek dient om de aandelen van een overleden vennoot over te nemen en zo de controle binnen het bedrijf te houden.'},
+        {i:'tr',title:'Indexering van het kapitaal',   text:'Het verzekerde bedrag groeit mee met de evolutie van je vaste kosten en je omzet, zodat de dekking afgestemd blijft op je werkelijke behoefte.'},
+        {i:'br',title:'Aansluiting op je pensioenopbouw',text:'In overleg afstemmen op je IPT of groepsverzekering, zodat risicobescherming en pensioenopbouw elkaar aanvullen in plaats van overlappen.'},
+      ].map(card=>(
+        <div class="bb-ins-card" style="padding:28px;">
+          <div style="background:rgba(229,165,36,0.15);border-radius:10px;padding:10px;display:inline-flex;margin-bottom:16px;">
+            {card.i==='ac'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>}
+            {card.i==='sh'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+            {card.i==='us'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg>}
+            {card.i==='tr'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>}
+            {card.i==='br'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#FFFFFF;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#94A3B8;margin:0;">{card.text}</p>
+        </div>
+      ))}
+      <div style="background:#E5A524;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:32px;display:flex;flex-direction:column;justify-content:center;">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">Niet zeker wie jouw zaak recht houdt?</h3>
+        <p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(0,31,63,0.75);line-height:1.55;margin:0 0 20px;">Doe de scan: we bekijken wie onmisbaar is in je bedrijf, welk gat hun wegvallen slaat en welke bescherming daarbij past.</p>
+        <a href={CTA_DESTINATIONS.scan} class="bb-scan-btn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.2s;width:100%;">
+          {CTA_SCAN.start} <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIE -->
+<section id="premie" style="background:#F7F4EF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Prijs &amp; berekening</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Hoe wordt je premie berekend?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Geen vaste prijs: wat je betaalt hangt af van het verzekerde kapitaal, de leeftijd en gezondheid van de verzekerde persoon, de looptijd en de gekozen waarborgen. Voor een kmo in de bouw is de premie vaak toegankelijker dan ondernemers denken.</p>
+    </div>
+    <div class="bb-formule">
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">1. Basis</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Verzekerd kapitaal</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#3F5767;line-height:1.4;">de continuïteitsbehoefte van je bedrijf</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">×</div>
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">2. Risicoprofiel</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Leeftijd × gezondheid</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#3F5767;line-height:1.4;">van de verzekerde sleutelfiguur, plus de looptijd</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">=</div>
+      <div style="background:#3F5767;border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 8px 32px rgba(63,87,103,0.3);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">Jaarpremie</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin-bottom:8px;">Jouw polis</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#94a3b8;line-height:1.4;">plus premietaks 4,40%</div>
+      </div>
+    </div>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:#001F3F;text-align:center;margin-bottom:32px;">4 factoren die je premie beïnvloeden</h3>
+    <div class="bb-factors-grid">
+      {[
+        {num:'1',title:'Verzekerd kapitaal',     text:'Hoe hoger de continuïteitsbehoefte die je wil afdekken, hoe hoger de premie.'},
+        {num:'2',title:'Leeftijd en gezondheid', text:'De leeftijd en de medische acceptatie van de verzekerde sleutelfiguur wegen sterk door in het tarief.'},
+        {num:'3',title:'Gekozen waarborgen',     text:'Enkel overlijden is goedkoper dan een combinatie met een arbeidsongeschiktheidsdekking.'},
+        {num:'4',title:'Looptijd en activiteit', text:'De duur van het contract en het risicoprofiel van de bouwactiviteit bepalen mee de prijs.'},
+      ].map(f=>(
+        <div class="brand-why-card" style="padding:20px 24px;display:flex;gap:18px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:16px;color:#001F3F;">{f.num}</span></div>
+          <div>
+            <h4 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 4px;">{f.title}</h4>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#3F5767;margin:0;">{f.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style="max-width:680px;margin:0 auto;">
+      <div style="background:rgba(229,165,36,0.10);padding:20px 28px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);border:1px solid rgba(229,165,36,0.3);">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="18" height="18" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#001F3F;margin:0;"><strong>Fiscaal:</strong> de premie is in principe aftrekbaar als beroepskost van de vennootschap (art. 49 WIB92), op voorwaarde dat de vennootschap de begunstigde is en het continuïteitsrisico reëel is. Op de stortingen geldt een premietaks van <strong>4,40%</strong>. De latere uitkering wordt belast in de vennootschapsbelasting.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section id="bb-cta-band" style="background:#E9C466;padding:80px 0 100px;position:relative;overflow:hidden;">
+  <div class="assurman-mask assurman-mask--cta bb-cta-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:1;">
+    <img src="/images/verzekeringen/bescherming-bedrijfsleider-band.jpg" alt="Bedrijfsleider beschermd door een keyman-verzekering">
+  </div>
+  <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="100px" direction="down" /></div>
+  <div class="bb-cta-deco" style="position:absolute;right:-130px;top:40%;transform:translateY(-50%);pointer-events:none;z-index:2;"><BrandChevron color="white" height="240px" direction="left" /></div>
+  <div style="max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:4;padding:0 32px;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">Draait je bouwbedrijf op één of twee mensen?<br />Wij houden je continuïteit recht.</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#3F5767;margin-bottom:40px;opacity:0.9;">Start nu in 2 minuten of kies meteen voor persoonlijk advies.</p>
+    <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">{CTA_SCAN.requestNow} <Fragment set:html={svgArr18} /></a>
+  </div>
+</section>
+
+<!-- PER BEROEP TABS -->
+<section id="bb-beroep" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Per beroep</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wie houdt jouw zaak draaiende?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Elk bouwberoep heeft zijn eigen onmisbare figuur. Hieronder wat het wegvallen daarvan concreet betekent per discipline.</p>
+    </div>
+    <div class="bb-tabs-row" style="display:flex;gap:0;border-bottom:2px solid rgba(0,31,63,0.12);margin-bottom:40px;justify-content:center;">
+      {beroepTabs.map((tab,i)=>(<button class={`bb-tab-btn${i===0?' active':''}`} data-tab-btn={tab.id}>{tab.label}</button>))}
+    </div>
+    {beroepTabs.map((tab,i)=>(
+      <div data-tab-content={tab.id} style={`display:${i===0?'block':'none'};max-width:860px;margin:0 auto;`}>
+      <div class="bb-tab-inner" style="background:#FFFFFF;border-radius:12px;padding:36px 40px;">
+        <div style="background:rgba(229,165,36,0.12);border-radius:12px;padding:18px;flex-shrink:0;">
+          <svg width="32" height="32" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div style="flex:1;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">{tab.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.65;color:#001F3F;margin:0 0 20px;">{tab.text}</p>
+          <a href={tab.link} style="display:inline-flex;align-items:center;gap:6px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;text-decoration:none;">Bekijk sectorpagina <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+      </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- MIJN SITUATIE ACCORDION -->
+<section id="bb-statuten" style="background:#3F5767;padding:96px 32px;position:relative;overflow:hidden;">
+  <div style="max-width:840px;margin:0 auto;position:relative;z-index:1;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Mijn situatie</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Welke setup past bij jouw bedrijf?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0 0 40px;">Drie typische situaties uit de Belgische bouwsector. Vind de jouwe en zie wat dat concreet betekent voor je bescherming.</p>
+
+    <div class="bb-stat-panel" data-stat-panel>
+      <button class="bb-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik run een eenpersoonsvennootschap</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je bent de enige die calculeert, verkoopt en de werven aanstuurt. Je hele omzet hangt aan één persoon: jezelf. Valt jij weg door overlijden of langdurige uitval, dan staat de zaak van de ene dag op de andere stil en lopen de vaste kosten gewoon door.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: een bescherming op je eigen hoofd, met de vennootschap als begunstigde, geeft je medewerkers of erfgenamen de middelen om de zaak ordelijk verder te zetten of af te bouwen. Combineer dit met een aparte persoonlijke overlijdensdekking als je ook je gezin wil beschermen.</p>
+      </div>
+    </div>
+
+    <div class="bb-stat-panel" data-stat-panel>
+      <button class="bb-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Mijn bedrijf draait op een onmisbare sleutelmedewerker</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Naast jezelf is er één persoon die echt onvervangbaar lijkt: je werfleider, je hoofdberekenaar of je enige gecertificeerde technieker. Zijn of haar wegvallen legt een deel van je activiteit meteen plat, en een vervanger vind je niet in een week.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: je verzekert die sleutelfiguur op naam, met een kapitaal dat de rekruterings- en inwerkkosten plus het omzetverlies dekt. De vennootschap betaalt de premie en ontvangt de uitkering, en kan zo zonder liquiditeitsstress een opvolger aantrekken.</p>
+      </div>
+    </div>
+
+    <div class="bb-stat-panel" data-stat-panel>
+      <button class="bb-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 21h18M5 21V7l8-4v18M19 21V11l-6-4M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Wij zijn een familiebedrijf met opvolging</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">In een familiebedrijf zitten vaak meerdere generaties of vennoten samen. Bij overlijden van een actieve vennoot willen de erfgenamen soms snel uitgekocht worden, terwijl de overblijvende familieleden de controle willen houden en de werking niet mag haperen.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: een keyman-opzet met uitkoopclausule voorziet het kapitaal om de aandelen van de overledene over te nemen, zonder dat je daarvoor de werkingsmiddelen moet aanspreken. Stem dit af met je IPT of groepsverzekering, zodat bescherming en pensioenopbouw elkaar aanvullen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIJ UITVAL -->
+<section id="procedure" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:60px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Bij uitval</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat als je sleutelfiguur wegvalt?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Op zo'n moment telt elke dag. Een snelle, correcte melding zorgt dat de uitkering er is wanneer je ze nodig hebt.</p>
+    </div>
+    <div class="bb-procedure-grid">
+      <div class="bb-procedure-line" style="position:absolute;top:36px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(to right,#E5A524,rgba(229,165,36,0.2));z-index:0;"></div>
+      {[
+        {ic:'ph', title:'Verwittig je makelaar',     text:'Meld het overlijden of de langdurige arbeidsongeschiktheid van de verzekerde persoon zo snel mogelijk aan je makelaar of verzekeraar.'},
+        {ic:'ac', title:'Verzamel de documenten',    text:'Bezorg de nodige stukken: de overlijdensakte of het medisch attest, de polis en de gegevens van de vennootschap als begunstigde.'},
+        {ic:'ft', title:'Beoordeling en uitkering',  text:'De verzekeraar beoordeelt het dossier en keert het verzekerde kapitaal of de overeengekomen rente uit aan de vennootschap.'},
+        {ic:'at', title:'Continuïteit organiseren',  text:'Je zet de uitkering in waar ze het meest nodig is: een vervanger aanwerven, omzetverlies opvangen, een krediet aflossen of vennoten uitkopen.'},
+      ].map((s,i)=>(
+        <div style="padding:0 20px;text-align:center;position:relative;z-index:1;">
+          <div style="width:72px;height:72px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 4px 16px rgba(229,165,36,0.3);">
+            {s.ic==='ph'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>}
+            {s.ic==='ac'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>}
+            {s.ic==='ft'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+            {s.ic==='at'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>}
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#E5A524;margin-bottom:8px;">Stap {i+1}</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{s.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:840px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over bescherming bedrijfsleider</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;margin:0;">12 concrete vragen van bouwondernemers: klik open voor het antwoord.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      {faqItems.map((item,i)=>(
+        <div data-faq-item style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.08);border-radius:10px;overflow:hidden;">
+          <button data-faq-btn style="width:100%;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;text-align:left;gap:16px;">
+            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;line-height:1.35;">{item.q}</span>
+            <svg data-faq-chevron width="18" height="18" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div data-faq-answer style="display:none;padding:0 24px 20px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#3F5767;margin:0;">{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- GERELATEERDE VERZEKERINGEN -->
+<InsuranceCarousel
+  client:only="react"
+  cards={insuranceCards}
+  sectionLabel="Ook interessant"
+  headline="Gerelateerde verzekeringen"
+  subheadline="Deze polissen beschermen jou, je inkomen en je bedrijf naast de continuïteit van je sleutelfiguur."
+  background="#F5F2FF"
+/>
+
+<!-- PARTNERS -->
+<section style="background:#F7F4EF;padding:64px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">Ondersteund door sterke verzekeringspartners</p>
+    <PartnerSlider client:only="react" />
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:#3F5767;padding-top:120px;padding-bottom:0;position:relative;text-align:center;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+  <div style="max-width:896px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;text-align:center;margin-bottom:20px;">Start met Assurman</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;color:#FFFFFF;max-width:727px;margin:0 auto 24px;">Wie houdt jouw bouwbedrijf recht?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouwsector en wil je zeker zijn dat je bedrijf de uitval van een sleutelfiguur overleeft? Wij bekijken met jou wat echt nodig is, zonder verplichting.</p>
+    <div class="bb-final-btns">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">{CTA_SCAN.hero} <Fragment set:html={svgArr18} /></a>
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">{CTA_AFSPRAAK.advisory}</a>
+    </div>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+</section>
+
+</div>
+
+<script>
+  const progressBar = document.getElementById('bb-progress-bar') as HTMLElement | null;
+  const stickyBtns  = document.querySelectorAll<HTMLElement>('[data-sticky-btn]');
+  const sectionIds  = ['watis','verplicht','dekking','premie','procedure','faq'];
+
+  stickyBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.stickyBtn!;
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const total = doc.scrollHeight - doc.clientHeight;
+    if (progressBar) progressBar.style.width = total > 0 ? `${(doc.scrollTop / total) * 100}%` : '0%';
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sectionIds[i]);
+      if (el && el.getBoundingClientRect().top <= 120) {
+        stickyBtns.forEach(b => b.classList.toggle('active', b.dataset.stickyBtn === sectionIds[i]));
+        break;
+      }
+    }
+  }, { passive: true });
+
+  const exBtn  = document.getElementById('bb-examples-btn')     as HTMLElement | null;
+  const exList = document.getElementById('bb-examples-list')    as HTMLElement | null;
+  const exChev = document.getElementById('bb-examples-chevron') as HTMLElement | null;
+  if (exBtn && exList && exChev) {
+    exBtn.addEventListener('click', () => {
+      const open = exList.style.display !== 'none';
+      exList.style.display = open ? 'none' : 'grid';
+      exChev.style.transform = open ? '' : 'rotate(180deg)';
+    });
+  }
+
+  const tabBtns     = document.querySelectorAll<HTMLElement>('[data-tab-btn]');
+  const tabContents = document.querySelectorAll<HTMLElement>('[data-tab-content]');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tabBtn!;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      tabContents.forEach(el => { el.style.display = el.dataset.tabContent === t ? 'block' : 'none'; });
+    });
+  });
+
+  document.querySelectorAll('[data-stat-panel]').forEach(panel => {
+    const btn     = panel.querySelector<HTMLElement>('[data-stat-btn]');
+    const content = panel.querySelector<HTMLElement>('[data-stat-content]');
+    const chevron = panel.querySelector<HTMLElement>('[data-stat-chevron]');
+    if (!btn || !content || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = content.style.display !== 'none';
+      document.querySelectorAll('[data-stat-panel]').forEach(p => {
+        const c  = p.querySelector<HTMLElement>('[data-stat-content]');
+        const ch = p.querySelector<HTMLElement>('[data-stat-chevron]');
+        if (c)  c.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { content.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+
+  document.querySelectorAll('[data-faq-item]').forEach(item => {
+    const btn     = item.querySelector<HTMLElement>('[data-faq-btn]');
+    const answer  = item.querySelector<HTMLElement>('[data-faq-answer]');
+    const chevron = item.querySelector<HTMLElement>('[data-faq-chevron]');
+    if (!btn || !answer || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = answer.style.display !== 'none';
+      document.querySelectorAll('[data-faq-item]').forEach(fi => {
+        const a  = fi.querySelector<HTMLElement>('[data-faq-answer]');
+        const ch = fi.querySelector<HTMLElement>('[data-faq-chevron]');
+        if (a)  a.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { answer.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+</script>
+
 </BaseLayout>
