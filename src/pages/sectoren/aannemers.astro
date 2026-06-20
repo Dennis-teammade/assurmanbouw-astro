@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
@@ -7,92 +8,7 @@ import PartnerSlider from '../../components/ui/PartnerSlider';
 import BrandChevron from '../../components/BrandChevron.astro';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
 
-const insuranceCards = [
-  {
-    title: 'BA Onderneming',
-    intro: 'Dekt schade tijdens en na de werken, door je ploegen, onderaannemers en materieel.',
-    bullets: [
-      'Schade aan eigendommen van klanten of derden tijdens uitvoering',
-      'Letselschade aan derden (passanten, buren, andere ploegen)',
-      'Schade door werftoestellen en niet-ingeschreven motorvoertuigen',
-      'BA Na Levering voor gebreken die pas na oplevering opduiken',
-      'Burenhinder door stof, geluid en trillingen',
-    ],
-    cta: 'Meer over BA Onderneming',
-    link: '/verzekeringen/ba-onderneming/',
-    icon: 'shield',
-  },
-  {
-    title: 'BA-10 (Tienjarige aansprakelijkheid)',
-    intro: 'Wettelijk verplicht voor werken aan de gesloten ruwbouw van vergunningsplichtige woningen.',
-    bullets: [
-      'Verplicht sinds 1 juli 2018 (Wet-Peeters-Borsus)',
-      'Abonnementspolis voor alle werven',
-      'Globale polis: alle bouwactoren samen verzekerd',
-      'Verplicht attest vóór de start van de werken',
-      'Wettelijk minimum: € 500.000 per schadegeval',
-    ],
-    cta: 'Meer over BA-10',
-    link: '/verzekeringen/ba-10/',
-    icon: 'check-circle',
-  },
-  {
-    title: 'Arbeidsongevallenverzekering',
-    intro: 'Wettelijk verplicht én operationeel cruciaal: bescherming voor al je werknemers vanaf de eerste werkdag.',
-    bullets: [
-      'Verplicht vanaf je eerste werknemer',
-      'Dekt werknemers op werf én woon-werkverkeer',
-      'Loonplafond 2026: € 58.096,10 per werknemer',
-      'Aanvulbaar met excedent wet voor hogere lonen',
-      'Aandacht voor onderaannemers en hun statuut',
-    ],
-    cta: 'Meer over arbeidsongevallen',
-    link: '/verzekeringen/arbeidsongevallen/',
-    icon: 'users',
-  },
-  {
-    title: 'Bedrijfsvoertuigen',
-    intro: 'Bestelwagens, vrachtwagens, soms werktuigen: een vlootpolis is doorgaans voordeliger.',
-    bullets: [
-      'BA Auto wettelijk verplicht voor alle voertuigen',
-      'Omnium (afhankelijk van leeftijd voertuig)',
-      'Vlootkorting vanaf 10 voertuigen',
-      'Verzekering vervoerde goederen voor materiaal',
-      'Aandacht voor aanhangwagens > 750 kg MTM',
-    ],
-    cta: 'Meer over bedrijfsvoertuigen',
-    link: '/verzekeringen/bedrijfsvoertuigen/',
-    icon: 'truck',
-  },
-  {
-    title: 'Machinebreukverzekering',
-    intro: 'Heftrucks, hoogwerkers, betonmolens, gereedschap: één defect kan een hele werf vertragen.',
-    bullets: [
-      'Dekking voor breuk, schade en vaak diefstal',
-      'Vast atelier-materieel én mobiel werfmaterieel',
-      'Aanvulbaar met bedrijfsschade voor omzetverlies',
-      'Verzekering tijdens transport en op werven',
-      'Ook gemonteerde toestellen op voertuigen',
-    ],
-    cta: 'Meer over machinebreuk',
-    link: '/verzekeringen/machinebreuk',
-    icon: 'wrench',
-  },
-  {
-    title: 'Rechtsbijstand',
-    intro: 'Bouwheren, hoofdaannemers, onderaannemers, leveranciers, personeel. Geschillen zijn geen uitzondering. Mogelijke dekkingen:',
-    bullets: [
-      'Contractgeschillen en oplevering',
-      'Incasso onbetaalde facturen',
-      'Arbeidsrechtelijke conflicten',
-      'Tussenkomst advocaat- en expertkosten',
-      'Vrije keuze van advocaat',
-    ],
-    cta: 'Meer over rechtsbijstand',
-    link: '/verzekeringen/rechtsbijstand',
-    icon: 'zap',
-  },
-];
+const insuranceCards = kaartenVoor(['ba-onderneming', 'ba-10', 'arbeidsongevallen', 'bedrijfsvoertuigen', 'machinebreuk', 'rechtsbijstand']);
 
 const caseStudies = [
   {

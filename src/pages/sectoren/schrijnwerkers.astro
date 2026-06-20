@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
@@ -7,86 +8,7 @@ import PartnerSlider from '../../components/ui/PartnerSlider';
 import BrandChevron from '../../components/BrandChevron.astro';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
 
-const insuranceCards = [
-  {
-    title: 'BA Onderneming (schrijnwerker)',
-    intro: 'Bescherming bij schade aan eigendom van klanten tijdens installatie of montage.',
-    bullets: [
-      'Beschadigingen tijdens transport of installatie',
-      'Schade aan aangrenzende ruimtes bij plaatsing',
-      'Claims over maatvoering of afwerking',
-      'Dekking voor zowel atelier als werf',
-    ],
-    cta: 'Check BA',
-    link: '/verzekeringen/ba-onderneming/',
-    icon: 'shield',
-  },
-  {
-    title: 'Machinebreuk',
-    intro: 'Zaagmachines, freesmachines, CNC-apparatuur: een defect stopt je productie.',
-    bullets: [
-      'Dekking voor atelier- en werfmachines',
-      'Diefstal van gereedschap of machines',
-      'Vervanging of herstelling voor continuïteit',
-      'Op maat van jouw machinepark',
-    ],
-    cta: 'Check machinebreuk',
-    link: '/verzekeringen/machinebreuk',
-    icon: 'wrench',
-  },
-  {
-    title: 'Bedrijfsvoertuigen',
-    intro: 'Materiaal, machines en producten vervoer je in je bestelwagen of vrachtwagen.',
-    bullets: [
-      'Omnium (afhankelijk van leeftijd voertuig)',
-      'Bescherming bij diefstal of schade',
-      'Verzekering vervoerde goederen',
-      'Vlootpolis bij meerdere voertuigen',
-    ],
-    cta: 'Check bedrijfsvoertuigen',
-    link: '/verzekeringen/bedrijfsvoertuigen/',
-    icon: 'truck',
-  },
-  {
-    title: 'Rechtsbijstand',
-    intro: 'Discussies over maatvoering, kwaliteit of betalingsachterstand zijn geen uitzondering. Onder andere:',
-    bullets: [
-      'Geschillen met klanten',
-      'Incasso onbetaalde facturen',
-      'Tussenkomst advocaatkosten',
-      'Aanvulling op BA',
-    ],
-    cta: 'Check rechtsbijstand',
-    link: '/verzekeringen/rechtsbijstand',
-    icon: 'zap',
-  },
-  {
-    title: 'Arbeidsongevallen',
-    intro: 'Zaagmachines en zware materialen brengen risico mee voor jouw medewerkers.',
-    bullets: [
-      'Bescherming bij snijwonden en ander werkmateriaal',
-      'Verplicht vanaf eerste werknemer',
-      'Aanvulbaar voor hogere lonen',
-      'Dekt ook woon-werkverkeer',
-    ],
-    cta: 'Check arbeidsongevallen',
-    link: '/verzekeringen/arbeidsongevallen/',
-    icon: 'users',
-  },
-  {
-    title: "Alle Bouwplaats Risico's",
-    intro: 'Extra dekking bij grotere werf- of renovatieprojecten.',
-    bullets: [
-      "Schade aan plaatsingswerken in uitvoering",
-      'Interessant bij projecten met meerdere partijen',
-      'Flexibel per project',
-      'Gecombineerd met BA',
-    ],
-    cta: 'Check ABR',
-    link: '/verzekeringen/alle-bouwplaats-risicos/',
-    icon: 'layers',
-  },
-];
+const insuranceCards = kaartenVoor(['ba-onderneming', 'machinebreuk', 'bedrijfsvoertuigen', 'rechtsbijstand', 'arbeidsongevallen', 'alle-bouwplaats-risicos']);
 
 const caseStudies = [
   {

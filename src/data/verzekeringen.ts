@@ -290,3 +290,15 @@ export function naarKaart(v: Verzekering): {
     icon: v.icoon,
   };
 }
+
+/**
+ * Carousel-kaarten voor een lijst slugs, in opgegeven volgorde.
+ * Onbekende slugs worden stil overgeslagen. Gebruikt door de "gerelateerde
+ * verzekeringen"-carousels en de sectorpagina-pakketten.
+ */
+export function kaartenVoor(slugs: string[]): ReturnType<typeof naarKaart>[] {
+  return slugs
+    .map((s) => getVerzekering(s))
+    .filter((v): v is Verzekering => Boolean(v))
+    .map(naarKaart);
+}

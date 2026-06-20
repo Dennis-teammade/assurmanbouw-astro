@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -31,12 +32,7 @@ const beroepTabs = [
   { id: 'aannemers',     label: 'Algemene aannemers', link: '/sectoren/aannemers',     title: 'Voor algemene aannemers',    text: 'Typisch een wagenpark met personenwagen, meerdere bestelwagens en aanhangwagens. Met meerdere voertuigen wordt een vlootpolis vaak praktischer: één contract, één vervaldag, eenvoudig nieuwe voertuigen toevoegen. Vlootkorting komt erbij vanaf 10 voertuigen.' },
 ];
 
-const insuranceCards = [
-  { title: 'BA Onderneming',  icon: 'shield',  intro: 'Bescherming wanneer je bedrijf schade veroorzaakt aan derden tijdens de uitbating of beroepsactiviteit.',    bullets: ['Schade aan eigendommen van derden','Letselschade aan derden','Claims rond beroepsfouten','Aansprakelijkheid tijdens werken'],         link: '/verzekeringen/ba-onderneming/',   cta: 'Meer over BA Onderneming' },
-  { title: 'Machinebreuk',    icon: 'wrench',  intro: 'Professionele machines en gereedschap zijn duur. Een defect of diefstal stopt je werk. Deze dekking niet.', bullets: ['Machines bij breuk of diefstal','Diefstal op werf of in bestelwagen','Vervanging of herstelling','Op maat van je materieel'],            link: '/verzekeringen/machinebreuk',     cta: 'Meer over machinebreuk' },
-  { title: 'Arbeidsongevallen',icon: 'users',  intro: 'Wettelijk verplicht vanaf je eerste werknemer. Dekt letsel op de werf en woon-werkverkeer.',                  bullets: ['Verplicht vanaf dag 1','Medische kosten gedekt','Woon-werkverkeer inbegrepen','Aangifte binnen 8 dagen'],                              link: '/verzekeringen/arbeidsongevallen/', cta: 'Meer over arbeidsongevallen' },
-  { title: 'Rechtsbijstand',  icon: 'scale',   intro: 'Juridische bescherming bij geschillen met klanten, leveranciers of personeel. Je staat niet alleen.',         bullets: ['Hulp bij juridische conflicten','Vrije advocaatkeuze','Tussenkomst bij advocaatkosten','Aanvulling op BA'],                          link: '/verzekeringen/rechtsbijstand',   cta: 'Meer over rechtsbijstand' },
-];
+const insuranceCards = kaartenVoor(['ba-onderneming', 'machinebreuk', 'arbeidsongevallen', 'rechtsbijstand']);
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

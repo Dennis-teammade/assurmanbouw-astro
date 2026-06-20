@@ -140,3 +140,20 @@ Verplaatst: `POST-LAUNCH-TODO.md` → `docs/planning/`, Bolt-migratiegids → `d
 (historisch, migratie afgerond), `Assurman-brandkit.png` → `docs/reference/`,
 `FEEDBACK-CONTEXT*.md` → `docs/archive/`. Tooling-scripts → `scripts/`, output → `reports/`
 (gitignored). Root houdt enkel config + `CLAUDE.md` + `DECISIONS-LOG.md`.
+
+## 2026-06-20
+
+### D9 — Verzekeringen: centrale databron + categorie-indeling
+
+Alle **18 verzekeringen** leven in één bron: `src/data/verzekeringen.ts` (zelfde patroon
+als `cta-labels.ts`/`partners.ts`). De archiefpagina `/verzekeringen`, het mega-menu en
+alle "gerelateerde verzekeringen"-carousels (7 verzekerings- + 6 sectorpagina's) putten
+daaruit via `verzekeringenPerCategorie()` / `kaartenVoor()` / `naarKaart()`. **0** hardcoded
+verzekeringslijsten meer. Indeling = **4 categorieën** (werkindeling optie B; klant-keuze
+A/B/C nog open): `aansprakelijkheid`, `spullen-en-werk`, `jij-en-je-mensen`,
+`pensioen-en-fiscaal`. URL's blijven **plat** `/verzekeringen/{slug}/` (categorie leeft in
+data + menu, niet in het pad). Beslist: BA Uitbating uitgesteld (buiten de 18, skeleton
+blijft ongebruikt); omzet/overlijden buiten de databron; VAPZ/POZ/IPT als 3 aparte
+pagina's. Skeleton-copy is voorlopig (`// TODO`); badges op het archief vervielen (geen
+databron-veld). **Bron van waarheid + changelog: `docs/ARCHITECTUUR-INDELING-VERZEKERINGEN.md`**
+(levend document, bijwerken bij elke architectuurwijziging).

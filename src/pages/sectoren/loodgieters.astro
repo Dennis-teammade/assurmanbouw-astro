@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
@@ -7,86 +8,7 @@ import PartnerSlider from '../../components/ui/PartnerSlider';
 import BrandChevron from '../../components/BrandChevron.astro';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
 
-const insuranceCards = [
-  {
-    title: 'BA Onderneming (loodgieter)',
-    intro: 'Bescherming bij waterschade, gasincidenten en andere schade aan derden door jouw werkzaamheden.',
-    bullets: [
-      'Waterschade na installatie of reparatie',
-      'Gasincidenten en lekken door fouten',
-      'Letselschade aan bewoners of derden',
-      'Claims over gebrekkige uitvoering',
-    ],
-    cta: 'Check BA',
-    link: '/verzekeringen/ba-onderneming/',
-    icon: 'shield',
-  },
-  {
-    title: 'Bedrijfsvoertuigen',
-    intro: 'Jouw bestelwagen is je werkplek op wielen. Snel, mobiel en onmisbaar.',
-    bullets: [
-      'Omnium (afhankelijk van leeftijd voertuig)',
-      'Bescherming bij diefstal of accident',
-      'Dekking voor materiaal aan boord',
-      'Vlootpolis indien meerdere wagens',
-    ],
-    cta: 'Check bedrijfsvoertuigen',
-    link: '/verzekeringen/bedrijfsvoertuigen/',
-    icon: 'truck',
-  },
-  {
-    title: 'Machinebreuk & gereedschap',
-    intro: 'Snijmachines, perstangen, video-inspectie: duur materiaal dat je dagelijks nodig hebt.',
-    bullets: [
-      'Dekking bij defect of beschadiging',
-      'Diefstal op werf of in bestelwagen',
-      'Snelle vervanging zodat je niet stilstaat',
-      'Afstembaar op jouw materiaalwaarde',
-    ],
-    cta: 'Check machinebreuk',
-    link: '/verzekeringen/machinebreuk',
-    icon: 'wrench',
-  },
-  {
-    title: 'Rechtsbijstand',
-    intro: 'Betwistingen over waterschade, facturen of aansprakelijkheid kunnen escaleren. Onder de mogelijkheden:',
-    bullets: [
-      'Geschillen en betwistingen',
-      'Betwiste aansprakelijkheid',
-      'Tussenkomst advocaatkosten',
-      'Aanvulling op BA',
-    ],
-    cta: 'Check rechtsbijstand',
-    link: '/verzekeringen/rechtsbijstand',
-    icon: 'zap',
-  },
-  {
-    title: "Alle Bouwplaats Risico's",
-    intro: 'Extra werfdekking voor grotere projecten.',
-    bullets: [
-      "Schade aan werken in uitvoering",
-      "Samenwerking met andere aannemers",
-      'Interessant bij grote renovaties',
-      'Per project of jaarpolis',
-    ],
-    cta: 'Check ABR',
-    link: '/verzekeringen/alle-bouwplaats-risicos/',
-    icon: 'layers',
-  },
-  {
-    title: 'Arbeidsongevallen',
-    intro: 'Verplicht zodra je personeel in dienst neemt.',
-    bullets: [
-      'Dekt werknemers bij interventies op locatie',
-      'Bescherming bij technische ruimtes en renovaties',
-      'Verplicht vanaf eerste werknemer',
-      'Aanvulbaar voor hogere lonen',
-    ],
-    cta: 'Check arbeidsongevallen',
-    link: '/verzekeringen/arbeidsongevallen/',
-    icon: 'users',
-  },
-];
+const insuranceCards = kaartenVoor(['ba-onderneming', 'bedrijfsvoertuigen', 'machinebreuk', 'rechtsbijstand', 'alle-bouwplaats-risicos', 'arbeidsongevallen']);
 
 const caseStudies = [
   {

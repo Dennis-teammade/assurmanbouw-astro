@@ -1,26 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
+import { verzekeringenPerCategorie, verzekeringUrl } from '../data/verzekeringen';
 
-const verzekeringenItems = [
-  { label: 'BA Onderneming', to: '/verzekeringen/ba-onderneming/' },
-  { label: 'BA Uitbating', to: '/verzekeringen/ba-uitbating/' },
-  { label: 'BA Bestuurder', to: '/verzekeringen/ba-bestuurder/' },
-  { label: 'BA 10', to: '/verzekeringen/ba-10/' },
-  { label: 'Arbeidsongevallenverzekering', to: '/verzekeringen/arbeidsongevallen/' },
-  { label: 'Rechtsbijstandsverzekering', to: '/verzekeringen/rechtsbijstand' },
-  { label: 'Bedrijfsvoertuigen', to: '/verzekeringen/bedrijfsvoertuigen/' },
-  { label: 'Machinebreukverzekering', to: '/verzekeringen/machinebreuk' },
-  { label: 'Alle bouwplaats risico’s (ABR)', to: '/verzekeringen/alle-bouwplaats-risicos/' },
-  { label: 'Brandverzekering', to: '/verzekeringen/brandverzekering/' },
-  { label: 'Bedrijfsschadeverzekering', to: '/verzekeringen/bedrijfsschade/' },
-  { label: 'Verzekering vervoerde goederen', to: '/verzekeringen/vervoerde-goederen/' },
-  { label: 'Gewaarborgd inkomen', to: '/verzekeringen/gewaarborgd-inkomen/' },
-  { label: 'Omzetverzekering', to: '/verzekeringen/omzetverzekering/' },
-  { label: 'Groepsverzekering', to: '/verzekeringen/groepsverzekering/' },
-  { label: 'Aanvullend pensioen', to: '/verzekeringen/aanvullend-pensioen/' },
-  { label: 'Bescherming bedrijfsleider', to: '/verzekeringen/bescherming-bedrijfsleider/' },
-  { label: 'Overlijdensdekking', to: '/verzekeringen/overlijdensdekking/' },
-];
+// Verzekeringen-menu volledig uit de centrale databron (src/data/verzekeringen.ts).
+const verzekeringGroepen = verzekeringenPerCategorie();
 
 const sectovenItems = [
   { label: 'Aannemers', to: '/sectoren/aannemers' },
@@ -49,6 +32,7 @@ export default function Navigation() {
   const [showSectoren, setShowSectoren] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileVerzekeringen, setMobileVerzekeringen] = useState(false);
+  const [mobileVerzCat, setMobileVerzCat] = useState<string | null>(null);
   const [mobileSectoren, setMobileSectoren] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [pathname, setPathname] = useState('');
@@ -118,12 +102,27 @@ export default function Navigation() {
                 Verzekeringen
                 <ChevronDown size={15} style={{ transition: 'transform 0.2s', transform: showVerzekeringen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
               </button>
-              <div className={`nav-dropdown ${showVerzekeringen ? 'visible' : 'hidden'}`}>
-                {verzekeringenItems.map((item) => (
-                  <a key={item.to} href={item.to} className="nav-dropdown-item" onClick={() => setShowVerzekeringen(false)}>
-                    {item.label}
-                  </a>
-                ))}
+              <div className={`nav-dropdown ${showVerzekeringen ? 'visible' : 'hidden'}`} style={{ minWidth: 760 }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4, padding: '18px 18px 14px' }}>
+                  {verzekeringGroepen.map((groep) => (
+                    <div key={groep.categorie} style={{ minWidth: 0 }}>
+                      <p style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: '0.6px', textTransform: 'uppercase', color: '#E5A524', margin: '0 0 8px', paddingBottom: 6, borderBottom: '1px solid rgba(229,165,36,0.2)' }}>
+                        {groep.label}
+                      </p>
+                      {groep.items.map((v) => (
+                        <a
+                          key={v.slug}
+                          href={verzekeringUrl(v.slug)}
+                          className="nav-dropdown-item"
+                          style={{ padding: '6px 8px', borderBottom: 'none', borderRadius: 6, fontFamily: "'Outfit', sans-serif", fontSize: 13.5, lineHeight: 1.3 }}
+                          onClick={() => setShowVerzekeringen(false)}
+                        >
+                          {v.titel}
+                        </a>
+                      ))}
+                    </div>
+                  ))}
+                </div>
                 <a href="/verzekeringen" className="nav-dropdown-all" onClick={() => setShowVerzekeringen(false)}>
                   <ArrowRight size={14} />
                   Alle verzekeringen bekijken
@@ -176,15 +175,33 @@ export default function Navigation() {
           background: '#FFFFFF',
           borderTop: mobileOpen ? '1px solid rgba(0,31,63,0.08)' : 'none',
         }} className="mobile-menu">
-          <div style={{ padding: '8px 15px 24px' }}>
+          <div style={{ padding: '8px 15px 24px', overflowY: 'auto', maxHeight: 'calc(100vh - 80px)' }}>
             <button className="mobile-section-btn" onClick={() => setMobileVerzekeringen(!mobileVerzekeringen)}>
               Verzekeringen
               <ChevronDown size={16} style={{ transform: mobileVerzekeringen ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }} />
             </button>
             {mobileVerzekeringen && (
               <div>
-                {verzekeringenItems.map((item) => (
-                  <a key={item.to} href={item.to} className="mobile-sub-item" onClick={() => setMobileOpen(false)}>{item.label}</a>
+                {verzekeringGroepen.map((groep) => (
+                  <div key={groep.categorie}>
+                    <button
+                      className="mobile-section-btn"
+                      style={{ paddingLeft: 12, fontSize: 15 }}
+                      onClick={() => setMobileVerzCat(mobileVerzCat === groep.categorie ? null : groep.categorie)}
+                    >
+                      {groep.label}
+                      <ChevronDown size={15} style={{ transform: mobileVerzCat === groep.categorie ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }} />
+                    </button>
+                    {mobileVerzCat === groep.categorie && (
+                      <div>
+                        {groep.items.map((v) => (
+                          <a key={v.slug} href={verzekeringUrl(v.slug)} className="mobile-sub-item" style={{ paddingLeft: 24 }} onClick={() => setMobileOpen(false)}>
+                            {v.titel}
+                          </a>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
                 <a href="/verzekeringen" className="mobile-sub-item" style={{ color: '#E5A524' }} onClick={() => setMobileOpen(false)}>Alle verzekeringen →</a>
               </div>

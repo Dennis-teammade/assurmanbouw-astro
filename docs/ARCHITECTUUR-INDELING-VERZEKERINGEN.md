@@ -13,7 +13,7 @@
 
 ---
 
-**Laatst bijgewerkt:** 2026-06-19
+**Laatst bijgewerkt:** 2026-06-20
 **Beheerd door:** Teammade
 **Project:** assurmanbouw.be
 **Definitieve indeling bevestigd door klant:** ❌ NEE — in afwachting van keuze A/B/C (zie §2)
@@ -101,8 +101,9 @@ klant uiteindelijk A of C kiest.
 | 17 | POZ | `/verzekeringen/poz` | pensioen-en-fiscaal | 🔲 |
 | 18 | IPT | `/verzekeringen/ipt` | pensioen-en-fiscaal | 🔲 |
 
-> **Slug-noot:** VAPZ/POZ/IPT hebben nog **geen** skeleton-pagina (enkel een record in
-> de databron, status `skeleton`). De skeletons `ba-uitbating`, `omzetverzekering` en
+> **Slug-noot:** VAPZ/POZ/IPT hebben sinds STAP 3 elk een skeleton-pagina
+> (`/verzekeringen/vapz/`, `/poz/`, `/ipt/`, status `skeleton`). De skeletons
+> `ba-uitbating`, `omzetverzekering` en
 > `overlijdensdekking` bestaan wél als bestand maar staan **buiten** de 18 (zie open punt
 > + §2-noot). Bestaande live-slugs ongewijzigd.
 
@@ -214,6 +215,23 @@ correct in alle lijsten verschijnen.
 
 ## 8. Wat al gebeurd is (los van de indeling)
 
+- **STAP 3 uitgevoerd — databron geconsumeerd (één bron, nul hardcoded lijsten):**
+  - 3 skeleton-pagina's bijgemaakt: `/verzekeringen/vapz/`, `/poz/`, `/ipt/`.
+  - Helpers afgemaakt: `verzekeringenPerCategorie()`, `naarKaart()`, plus `kaartenVoor(slugs)`.
+  - **Archiefpagina `/verzekeringen`** herbouwd op `verzekeringenPerCategorie()`: 4 gerubriceerde
+    secties (categorie-kop + kaarten), alle 18 polissen, iconen via statisch-gerenderde
+    lucide-componenten. De badges (Verplicht/Essentieel) zijn vervallen (geen veld in de
+    databron) → eventueel later terug via een optioneel `badge`-veld.
+  - **Mega-menu** in `Navigation.tsx`: desktop = 4 kolommen (categorieën) + "Alle verzekeringen";
+    mobiel = geneste accordeon (Verzekeringen → 4 categorie-sub-accordeons → polissen). De oude
+    platte 18-lijst (met omzet/overlijden, zonder VAPZ/POZ/IPT) is vervangen.
+  - **13 carousels** omgeschakeld naar `kaartenVoor()`: 7 live verzekeringspagina's + 6
+    sectorpagina's. Selectie en volgorde per pagina behouden; copy/iconen komen nu uit de databron.
+    Gevolg: 2 kaarttitels zijn langer (BA-10 → "Tienjarige aansprakelijkheid (BA-10)", ABR →
+    "Alle Bouwplaatsrisico's (ABR)") en de intro/bullets gebruiken de canonieke databron-copy.
+  - Resultaat: **0** hardcoded `insuranceCards`-arrays buiten de databron. Build groen (101 pagina's).
+  - Noot scope: op ABR is enkel de gerelateerde-carousel-bron omgeschakeld; geen sectie-/copy-content aangeraakt.
+
 - **STAP 2 uitgevoerd — databron `src/data/verzekeringen.ts` gebouwd:**
   - Alle 18 verzekeringen ingevuld (7 `live` met geverifieerde copy uit de pagina's,
     11 `skeleton` met voorlopige copy, gemarkeerd `// TODO`).
@@ -238,6 +256,7 @@ correct in alle lijsten verschijnen.
 | Datum | Wijziging | Door |
 |---|---|---|
 | 2026-06-19 | Document aangemaakt. Werkindeling = optie B vastgelegd. 18 polissen + slugs + schema gedocumenteerd. Taxonomie nog niet klant-bevestigd. BA Onderneming/Uitbating open. | Teammade |
+| 2026-06-20 | STAP 3: databron geconsumeerd. 3 skeletons (vapz/poz/ipt). Helpers af (`verzekeringenPerCategorie`, `naarKaart`, `kaartenVoor`). Archief `/verzekeringen` herbouwd (4 rubrieken, lucide-iconen, badges vervallen). Mega-menu desktop + mobiel accordeon. 13 carousels omgeschakeld. 0 hardcoded lijsten over. Build 101 pagina's groen. | Claude Code |
 | 2026-06-19 | STAP 2: `verzekeringen.ts` gebouwd (18 records). 4 knopen verwerkt: BA Uitbating uitgesteld (buiten 18, skeleton blijft ongebruikt); omzet/overlijden buiten databron met bevinding genoteerd; VAPZ/POZ/IPT als 3 aparte items (slugs `vapz`/`poz`/`ipt`); trailing slash centraal genormaliseerd. Skeleton-slugs vastgelegd in §3. ICON_MAP +flame/heart/piggy-bank. | Claude Code |
 
 <!--

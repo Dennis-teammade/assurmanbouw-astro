@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
@@ -7,86 +8,7 @@ import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
 import BrandChevron from '../../components/BrandChevron.astro';
 
-const insuranceCards = [
-  {
-    title: 'Beroepsaansprakelijkheid (dakwerker)',
-    intro: 'Bescherming wanneer jij (of je team) schade veroorzaakt aan derden of wanneer er discussie ontstaat over een fout of gebrek in je werk.',
-    bullets: [
-      'Schade aan eigendom van klant (bv. waterinsijpeling na werken, beschadigde gevel, doorboring)',
-      'Letselschade aan derden (bv. vallend materiaal)',
-      'Claims rond beroepsfouten of verkeerd advies',
-      'Dekking afgestemd op jouw activiteiten (herstellingen, renovatie, nieuwbouw)',
-    ],
-    cta: 'Check BA voor dakwerkers',
-    link: '/verzekeringen/ba-onderneming/',
-    icon: 'shield',
-  },
-  {
-    title: "ABR (Alle Bouwplaats Risico's): Werfdekking",
-    intro: "Voor dakwerkers is de werf vaak de grootste bron van 'onverwachte kosten': schade tijdens uitvoering, beschadigde materialen, incidenten door weer of derden.",
-    bullets: [
-      'Schade aan werken in uitvoering',
-      "Risico's op de werf (afhankelijk van situatie en afspraken)",
-      'Extra geruststelling bij grotere projecten of complexe renovaties',
-      'Zeker interessant bij meerdere partijen op één werf',
-    ],
-    cta: 'Check ABR',
-    link: '/verzekeringen/alle-bouwplaats-risicos/',
-    icon: 'wrench',
-  },
-  {
-    title: 'Bedrijfsvoertuigen',
-    intro: 'De bestelwagen is voor de meeste dakwerkers onmisbaar: van gereedschap naar de werf, van werf naar werf. Zonder voertuig sta je letterlijk stil.',
-    bullets: [
-      'Schade aan bestelwagen door accident, brand of diefstal',
-      'Omnium- of mini-omniumdekking op maat van jouw gebruik',
-      'Bescherming voor voertuigen ook buiten de standaard rijuren',
-      'Snelle afhandeling zodat je snel terug op de werf bent',
-    ],
-    cta: 'Check bedrijfsvoertuigen',
-    link: '/verzekeringen/bedrijfsvoertuigen/',
-    icon: 'truck',
-  },
-  {
-    title: 'Machinebreukverzekering',
-    intro: 'Dakwerkers werken met gespecialiseerde machines en duur gereedschap: ladders, dakliften, compressoren, zaagmachines en valbeveiliging. Een defect of diefstal stopt je werk.',
-    bullets: [
-      'Dekking voor machines en gereedschap bij breuk of beschadiging',
-      'Diefstal van professioneel materiaal op werf, thuis of in de bestelwagen',
-      'Vervanging of herstelling zodat je continuïteit bewaart',
-      'Afstembaar op waarde en gebruik van jouw machines',
-    ],
-    cta: 'Check machinebreuk',
-    link: '/verzekeringen/machinebreuk',
-    icon: 'wrench',
-  },
-  {
-    title: 'Rechtsbijstand',
-    intro: 'Bij dakwerken ontstaan soms discussies over schade, aansprakelijkheid of uitgevoerde werken. Onder andere:',
-    bullets: [
-      'Geschillen met klanten of derden',
-      'Betwiste aansprakelijkheid of klachten',
-      'Tussenkomst advocaat- en expertkosten',
-      'Aanvulling op BA en ABR',
-    ],
-    cta: 'Check rechtsbijstand',
-    link: '/verzekeringen/rechtsbijstand',
-    icon: 'users',
-  },
-  {
-    title: 'Arbeidsongevallenverzekering',
-    intro: "Voor dakwerkers met personeel is dit een essentiële dekking. Werken op hoogte en op de werf brengt risico's mee.",
-    bullets: [
-      'Bescherming bij ongevallen op de werf of onderweg',
-      'Relevant voor dakwerkers met personeel',
-      'Extra belangrijk bij werk op hoogte en stellingen',
-      'Meer zekerheid voor werkgever en werknemer',
-    ],
-    cta: 'Check arbeidsongevallen',
-    link: '/verzekeringen/arbeidsongevallen/',
-    icon: 'zap',
-  },
-];
+const insuranceCards = kaartenVoor(['ba-onderneming', 'alle-bouwplaats-risicos', 'bedrijfsvoertuigen', 'machinebreuk', 'rechtsbijstand', 'arbeidsongevallen']);
 
 const caseStudies = [
   {

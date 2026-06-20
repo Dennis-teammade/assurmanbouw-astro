@@ -1,91 +1,13 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import BrandChevron from '../../components/BrandChevron.astro';
 
-const insuranceCards = [
-  {
-    title: 'BA Onderneming (elektricien)',
-    intro: 'Bescherming bij schade aan derden tijdens of na je werkzaamheden aan elektrische installaties.',
-    bullets: [
-      'Schade door fouten in de installatie (brand, kortsluiting)',
-      'Letselschade aan derden op de werf',
-      'Claims over gebrekkige uitvoering of verkeerd advies',
-      'Dekking voor zowel renovatie als nieuwbouw',
-    ],
-    cta: 'Check BA voor elektriciens',
-    link: '/verzekeringen/ba-onderneming/',
-    icon: 'shield',
-  },
-  {
-    title: 'Bedrijfsvoertuigen',
-    intro: 'De bestelwagen is onmisbaar: materiaal en gereedschap van werf naar werf.',
-    bullets: [
-      'Schade aan bestelwagen door accident of diefstal',
-      'Omnium (afhankelijk van leeftijd voertuig)',
-      'Bescherming buiten de standaard rijuren',
-      'Snelle afhandeling bij schade',
-    ],
-    cta: 'Check bedrijfsvoertuigen',
-    link: '/verzekeringen/bedrijfsvoertuigen/',
-    icon: 'truck',
-  },
-  {
-    title: 'Machinebreukverzekering',
-    intro: 'Elektrisch meetmateriaal, gereedschap en kabeltrekkers zijn duur. Diefstal of defect stopt je werk.',
-    bullets: [
-      'Dekking voor gespecialiseerd meetmateriaal',
-      'Diefstal uit bestelwagen of op de werf',
-      'Vervanging zodat je snel terug aan de slag bent',
-      'Op maat van jouw materiaalwaarde',
-    ],
-    cta: 'Check machinebreuk',
-    link: '/verzekeringen/machinebreuk',
-    icon: 'wrench',
-  },
-  {
-    title: "ABR (Alle Bouwplaats Risico's)",
-    intro: "Extra werfdekking voor grotere projecten of renovaties met meerdere partijen.",
-    bullets: [
-      "Schade aan werken in uitvoering",
-      "Risico's bij samenwerking met andere aannemers",
-      "Interessant bij nieuwbouw of grote renovaties",
-      "Flexibel per project",
-    ],
-    cta: "Check ABR",
-    link: '/verzekeringen/alle-bouwplaats-risicos/',
-    icon: 'layers',
-  },
-  {
-    title: 'Rechtsbijstand',
-    intro: 'Geschillen over installaties, facturen of aansprakelijkheid komen voor. Mogelijkheden:',
-    bullets: [
-      'Betwiste opdrachten',
-      'Geschillen met bouwheren',
-      'Tussenkomst advocaatkosten',
-      'Aanvulling op BA',
-    ],
-    cta: 'Check rechtsbijstand',
-    link: '/verzekeringen/rechtsbijstand',
-    icon: 'zap',
-  },
-  {
-    title: 'Arbeidsongevallenverzekering',
-    intro: 'Verplicht voor elektriciens met personeel. Werven en ladders brengen risico mee.',
-    bullets: [
-      "Bescherming bij elektrische risico's en valgevaar",
-      'Dekt werknemers op werf én onderweg',
-      'Verplicht vanaf eerste werknemer',
-      'Aanvulbaar voor hogere lonen',
-    ],
-    cta: 'Check arbeidsongevallen',
-    link: '/verzekeringen/arbeidsongevallen/',
-    icon: 'users',
-  },
-];
+const insuranceCards = kaartenVoor(['ba-onderneming', 'bedrijfsvoertuigen', 'machinebreuk', 'alle-bouwplaats-risicos', 'rechtsbijstand', 'arbeidsongevallen']);
 
 const caseStudies = [
   {

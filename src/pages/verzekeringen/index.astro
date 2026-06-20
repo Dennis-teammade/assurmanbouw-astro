@@ -1,79 +1,15 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PartnerSlider from '../../components/ui/PartnerSlider';
+import { verzekeringenPerCategorie, verzekeringUrl } from '../../data/verzekeringen';
+import { Shield, Building2, Layers, CheckCircle, Scale, Flame, Wrench, Truck, Car, HardHat, Heart, Users, PiggyBank } from 'lucide-react';
 
-const verzekeringen = [
-  {
-    title: 'Arbeidsongevallen',
-    intro: 'Wettelijk verplicht voor alle werkgevers. Dekt medische kosten, arbeidsongeschiktheid en overlijden bij arbeidsongevallen, ook op het woon-werktraject.',
-    bullets: ['Verplicht vanaf de eerste werknemer', 'Dekt werf én woon-werkverkeer', 'Loonplafond 2026: € 58.096,10', 'Aanvulbaar met excedent wet voor hogere lonen'],
-    cta: 'Meer over arbeidsongevallen',
-    link: '/verzekeringen/arbeidsongevallen/',
-    badge: 'Verplicht',
-    badgeBg: '#FEE2E2', badgeColor: '#DC2626',
-    iconPath: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 7a4 4 0 1 0 8 0 4 4 0 0 0-8 0M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
-  },
-  {
-    title: 'BA Onderneming',
-    intro: 'Dekt schade die je tijdens je beroepsactiviteit toebrengt aan klanten, passanten of buren. BA Uitbating en BA Na Levering in één polis.',
-    bullets: ['Schade aan eigendommen van derden', 'Letselschade aan derden op de werf', 'BA Na Levering voor gebreken na oplevering', 'Burenhinder door stof, geluid en trillingen', 'Toevertrouwd goed'],
-    cta: 'Meer over BA Onderneming',
-    link: '/verzekeringen/ba-onderneming/',
-    badge: 'Essentieel',
-    badgeBg: 'rgba(229,165,36,0.15)', badgeColor: '#8B6A1A',
-    iconPath: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
-  },
-  {
-    title: 'BA-10',
-    intro: 'Verplicht bij woningbouw. Dekt stabiliteits- en soliditeitsgebreken tot 10 jaar na oplevering. Abonnementspolis voor alle werven.',
-    bullets: ['Verplicht sinds 1 juli 2018 (Wet Peeters-Borsus)', 'Abonnementspolis voor alle werven', 'Globale polis voor alle bouwactoren', 'Wettelijk minimum € 500.000 per schadegeval'],
-    cta: 'Meer over BA-10',
-    link: '/verzekeringen/ba-10/',
-    badge: 'Verplicht bij woningbouw',
-    badgeBg: '#FEE2E2', badgeColor: '#DC2626',
-    iconPath: 'M3 21h18M9 21V7l3-4 3 4v14M3 21V11l6-4M21 21V11l-6-4',
-  },
-  {
-    title: 'Bedrijfsvoertuigen',
-    intro: 'BA verplicht voor alle voertuigen. Omnium, mini-omnium en vlootpolis voor bestelwagens, vrachtwagens en aanhangwagens.',
-    bullets: ['BA Auto wettelijk verplicht', 'Omnium (afhankelijk van leeftijd voertuig)', 'Vlootkorting vanaf 10 voertuigen', 'Diefstal van koopwaar en materieel', 'Verzekering vervoerde goederen en/of aanhangwagens'],
-    cta: 'Meer over bedrijfsvoertuigen',
-    link: '/verzekeringen/bedrijfsvoertuigen/',
-    badge: 'Verplicht (BA)',
-    badgeBg: '#FEE2E2', badgeColor: '#DC2626',
-    iconPath: 'M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v5M16 17H8M12 17v4M17 21v-4',
-  },
-  {
-    title: 'Machinebreuk',
-    intro: 'Dekt plotse defecten, beschadiging en diefstal van machines en gereedschap: op de werf, in de bestelwagen of op het atelier.',
-    bullets: ['Breuk en beschadiging van machines', 'Diefstal - onder voorwaarden', 'Vast ateliermaterial én mobiel werfmaterieel', 'Aanvulbaar met bedrijfsschade bij omzetverlies'],
-    cta: 'Meer over machinebreuk',
-    link: '/verzekeringen/machinebreuk',
-    badge: 'Sterk aanbevolen',
-    badgeBg: 'rgba(63,87,103,0.1)', badgeColor: '#3F5767',
-    iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z',
-  },
-  {
-    title: 'Rechtsbijstand',
-    intro: 'Geeft vrije advocaatkeuze, kan juridische kosten dekken bij geschillen, factuurincasso, arbeidsrechtelijke problemen en contractbetwistingen. Mogelijke dekkingen:',
-    bullets: ['Hulp bij contractgeschillen en betwiste oplevering', 'Incasso bij onbetaalde facturen', 'Verdediging bij arbeidsrechtelijke conflicten'],
-    cta: 'Meer over rechtsbijstand',
-    link: '/verzekeringen/rechtsbijstand',
-    badge: 'Essentieel',
-    badgeBg: 'rgba(63,87,103,0.1)', badgeColor: '#3F5767',
-    iconPath: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9 12l2 2 4-4',
-  },
-  {
-    title: "Alle Bouwplaats Risico's",
-    intro: "Dekt schade aan werken in uitvoering door brand, storm, diefstal en vandalisme. Onmisbaar bij grotere werven of renovaties.",
-    bullets: ["Schade tijdens uitvoering", "Risico's door weersinvloeden", "Bescherming bij meerdere partijen op één werf", "Flexibel per project of jaarpolis"],
-    cta: "Meer over ABR",
-    link: '/verzekeringen/alle-bouwplaats-risicos/',
-    badge: 'Projectspecifiek',
-    badgeBg: 'rgba(63,87,103,0.1)', badgeColor: '#3F5767',
-    iconPath: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
-  },
-];
+const ICON_COMP: Record<string, any> = {
+  shield: Shield, building2: Building2, layers: Layers, 'check-circle': CheckCircle, scale: Scale,
+  flame: Flame, wrench: Wrench, truck: Truck, car: Car, hardhat: HardHat, heart: Heart, users: Users, 'piggy-bank': PiggyBank,
+};
+
+const groepen = verzekeringenPerCategorie();
 ---
 
 <BaseLayout
@@ -111,46 +47,50 @@ const verzekeringen = [
     </div>
   </section>
 
-  <!-- VERZEKERINGEN GRID -->
+  <!-- VERZEKERINGEN GRID (gerubriceerd, gevoed door src/data/verzekeringen.ts) -->
   <style>
     .vz-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
     @media (max-width:1023px) { .vz-grid { grid-template-columns:repeat(2,1fr); } }
     @media (max-width:639px)  { .vz-grid { grid-template-columns:1fr; } }
     .vz-card { background:#e5a5240f; padding:32px; clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 32px),calc(100% - 32px) 100%,0% 100%); display:flex; flex-direction:column; position:relative; transition:box-shadow 0.2s,transform 0.2s; }
     .vz-card:hover { box-shadow:0 8px 24px rgba(0,0,0,0.08); transform:translateY(-4px); }
+    .vz-cat { margin-bottom:56px; }
+    .vz-cat:last-child { margin-bottom:0; }
+    .vz-cat-head { font-family:'Outfit',sans-serif; font-weight:800; font-size:clamp(24px,3vw,34px); line-height:1.1; color:#001F3F; margin:0 0 24px; padding-bottom:12px; border-bottom:2px solid rgba(229,165,36,0.3); }
   </style>
   <section style="background:#FFFFFF;padding:80px 0 100px;">
     <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
-      <div class="vz-grid">
-        {verzekeringen.map((v) => (
-          <a href={v.link} class="vz-card" style="text-decoration:none;">
-            <!-- Badge pill top-right -->
-            <span style={`position:absolute;top:30px;right:20px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:11px;letter-spacing:0.5px;padding:4px 10px;border-radius:9999px;background:${v.badgeBg};color:${v.badgeColor};`}>{v.badge}</span>
-            <!-- Icon -->
-            <div style="background:rgba(229,165,36,0.1);border-radius:8px;padding:14px;display:inline-flex;align-self:flex-start;margin-bottom:20px;">
-              <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={v.iconPath}/></svg>
-            </div>
-            <!-- Title -->
-            <h2 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#001F3F;margin-bottom:10px;">{v.title}</h2>
-            <!-- Intro -->
-            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#001F3F;margin-bottom:20px;">{v.intro}</p>
-            <!-- Bullets -->
-            <ul style="list-style:none;padding:0;margin:0 0 20px;display:flex;flex-direction:column;gap:10px;flex:1;">
-              {v.bullets.map((bullet) => (
-                <li style="display:flex;align-items:flex-start;gap:10px;">
-                  <svg width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                  <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.5;color:#001F3F;">{bullet}</span>
-                </li>
-              ))}
-            </ul>
-            <!-- CTA -->
-            <span style="display:inline-flex;align-items:center;gap:8px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;">
-              {v.cta}
-              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-            </span>
-          </a>
-        ))}
-      </div>
+      {groepen.map((groep) => (
+        <div class="vz-cat">
+          <h2 class="vz-cat-head">{groep.label}</h2>
+          <div class="vz-grid">
+            {groep.items.map((v) => {
+              const Icon = ICON_COMP[v.icoon] ?? Shield;
+              return (
+                <a href={verzekeringUrl(v.slug)} class="vz-card" style="text-decoration:none;">
+                  <div style="background:rgba(229,165,36,0.1);border-radius:8px;padding:14px;display:inline-flex;align-self:flex-start;margin-bottom:20px;">
+                    <Icon size={36} color="#E5A524" strokeWidth={1.8} />
+                  </div>
+                  <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#001F3F;margin-bottom:10px;">{v.titel}</h3>
+                  <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#001F3F;margin-bottom:20px;">{v.korteBeschrijving}</p>
+                  <ul style="list-style:none;padding:0;margin:0 0 20px;display:flex;flex-direction:column;gap:10px;flex:1;">
+                    {v.bullets.map((bullet) => (
+                      <li style="display:flex;align-items:flex-start;gap:10px;">
+                        <svg width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;margin-top:2px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                        <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.5;color:#001F3F;">{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <span style="display:inline-flex;align-items:center;gap:8px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;">
+                    Meer over {v.titel}
+                    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                  </span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      ))}
     </div>
   </section>
 

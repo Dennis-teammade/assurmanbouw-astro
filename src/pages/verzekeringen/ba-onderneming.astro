@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -30,12 +31,7 @@ const beroepTabs = [
   { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Werk in het atelier én bij de klant. Toevertrouwd goed is voor schrijnwerkers vaak de duurste schadepost: beschadigde antieke kasten, verzaagde maatstukken. Stem je polis daarop af.' },
 ];
 
-const insuranceCards = [
-  { title: 'Arbeidsongevallen',        icon: 'shield',    intro: 'Wettelijk verplicht vanaf je eerste werknemer. Dekt letsel op de werf en woon-werkverkeer.',             bullets: ['Verplicht vanaf dag 1','Medische kosten en arbeidsongeschiktheid','Woon-werkverkeer inbegrepen','Aangifte binnen 8 dagen'],                     link: '/verzekeringen/arbeidsongevallen/',       cta: 'Meer over arbeidsongevallen' },
-  { title: 'BA-10',                    icon: 'building2', intro: 'Tienjarige aansprakelijkheid voor aannemers bij ernstige constructiegebreken na oplevering.',            bullets: ['Verplicht voor aannemers','Dekt constructiegebreken 10 jaar','Bescherming na oplevering','Vereist bij nieuwbouw'],                         link: '/verzekeringen/ba-10/',                  cta: 'Meer over BA-10' },
-  { title: 'Rechtsbijstand',           icon: 'scale',     intro: 'Juridische bescherming bij geschillen met klanten, leveranciers of personeel. Je staat niet alleen.',    bullets: ['Hulp bij juridische conflicten','Vrije advocaatkeuze','Tussenkomst bij advocaatkosten','Aanvulling op BA'],                          link: '/verzekeringen/rechtsbijstand',         cta: 'Meer over rechtsbijstand' },
-  { title: "Alle Bouwplaats Risico's", icon: 'layers',    intro: "Allesomvattende dekking voor schade aan werken in uitvoering. Onmisbaar bij grotere werven.",            bullets: ["Schade tijdens uitvoering","Weersinvloeden gedekt","Bescherming bij meerdere partijen","Flexibel per project of jaarpolis"],        link: '/verzekeringen/alle-bouwplaats-risicos/',cta: "Meer over ABR" },
-];
+const insuranceCards = kaartenVoor(['arbeidsongevallen', 'ba-10', 'rechtsbijstand', 'alle-bouwplaats-risicos']);
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

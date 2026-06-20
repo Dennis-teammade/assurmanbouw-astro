@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
@@ -7,86 +8,7 @@ import PartnerSlider from '../../components/ui/PartnerSlider';
 import BrandChevron from '../../components/BrandChevron.astro';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
 
-const insuranceCards = [
-  {
-    title: 'BA Onderneming (schilder)',
-    intro: 'Bescherming bij schade aan eigendom van klanten door verfspetters, beschadigingen of fouten in uitvoering.',
-    bullets: [
-      'Verfspetters op vloeren, meubilair of aangrenzende ruimtes',
-      'Beschadigingen bij voor- en nabereidingswerk',
-      'Claims over kleurkeuze of kwaliteit van afwerking',
-      'Dekking voor zowel binnen als buiten',
-    ],
-    cta: 'Check BA',
-    link: '/verzekeringen/ba-onderneming/',
-    icon: 'shield',
-  },
-  {
-    title: 'Bedrijfsvoertuigen',
-    intro: 'Verf, ladders, stellingen: de bestelwagen is jouw werkplaats op wielen.',
-    bullets: [
-      'Omnium (afhankelijk van leeftijd voertuig)',
-      'Bescherming bij diefstal of schade',
-      'Materiaalverzekering voor aanwezige goederen',
-      'Vlootpolis bij meerdere voertuigen',
-    ],
-    cta: 'Check bedrijfsvoertuigen',
-    link: '/verzekeringen/bedrijfsvoertuigen/',
-    icon: 'truck',
-  },
-  {
-    title: 'Machinebreuk & gereedschap',
-    intro: 'Spuitapparatuur, hoogwerkers en professionele borstelsets zijn een investering.',
-    bullets: [
-      'Dekking bij breuk of beschadiging',
-      'Diefstal op werf of uit bestelwagen',
-      'Vervanging zodat je planning intact blijft',
-      'Op maat van jouw materiaal',
-    ],
-    cta: 'Check machinebreuk',
-    link: '/verzekeringen/machinebreuk',
-    icon: 'wrench',
-  },
-  {
-    title: 'Rechtsbijstand',
-    intro: 'Discussies over kleurschakeringen, kwaliteit of uitvoeringstermijnen komen voor. Wat kan:',
-    bullets: [
-      'Geschillen met klanten',
-      'Betwiste facturen',
-      'Tussenkomst advocaatkosten',
-      'Aanvulling op BA',
-    ],
-    cta: 'Check rechtsbijstand',
-    link: '/verzekeringen/rechtsbijstand',
-    icon: 'zap',
-  },
-  {
-    title: 'Arbeidsongevallen',
-    intro: 'Voor schilders met personeel: werken op ladders en stellingen brengt val- en ademhalingsrisico mee.',
-    bullets: [
-      'Dekt werknemers bij val of blootstelling aan chemicaliën',
-      'Verplicht vanaf eerste werknemer',
-      'Aanvulbaar voor hogere lonen',
-      'Beschermt ook bij woon-werkverkeer',
-    ],
-    cta: 'Check arbeidsongevallen',
-    link: '/verzekeringen/arbeidsongevallen/',
-    icon: 'users',
-  },
-  {
-    title: "Alle Bouwplaats Risico's",
-    intro: "Extra werfdekking voor nieuwbouwwerven of grote renovatieprojecten.",
-    bullets: [
-      "Schade aan werken in uitvoering",
-      "Meerdere partijen op één werf",
-      'Bescherming bij weersinvloeden',
-      'Per project of jaarpolis',
-    ],
-    cta: 'Check ABR',
-    link: '/verzekeringen/alle-bouwplaats-risicos/',
-    icon: 'layers',
-  },
-];
+const insuranceCards = kaartenVoor(['ba-onderneming', 'bedrijfsvoertuigen', 'machinebreuk', 'rechtsbijstand', 'arbeidsongevallen', 'alle-bouwplaats-risicos']);
 
 const caseStudies = [
   {

@@ -4,6 +4,7 @@ import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
 import BrandChevron from '../../components/BrandChevron.astro';
+import { kaartenVoor } from '../../data/verzekeringen';
 
 const faqItems = [
   { q: 'Is een arbeidsongevallenverzekering verplicht vanaf mijn eerste werknemer?', a: 'Ja. In België moet je als werkgever in de privésector je eerste werknemer vanaf de eerste werkdag verzekeren tegen arbeidsongevallen.' },
@@ -31,14 +32,9 @@ const beroepTabs = [
   { id: 'aannemers',   label: 'Algemene aannemers', link: '/sectoren/aannemers',   title: 'Voor algemene aannemers', text: 'Organisatie van meerdere ploegen, onderlinge coördinatie en wisselende werfomstandigheden maken de polis complexer: verschillende functies hebben verschillende premievoeten.' },
 ];
 
-const insuranceCards = [
-  { title: 'BA Onderneming',          icon: 'shield',    intro: 'Bescherming wanneer je bedrijf schade veroorzaakt aan derden tijdens de uitbating of de beroepsactiviteit.',   bullets: ['Schade aan eigendommen van derden','Letselschade aan derden','Claims rond beroepsfouten','Aansprakelijkheid tijdens werken'],        link: '/verzekeringen/ba-onderneming/',        cta: 'Meer over BA Onderneming' },
-  { title: 'Bedrijfsvoertuigen',       icon: 'car',       intro: 'De bestelwagen is onmisbaar op de werf. De juiste dekking houdt je mobiel bij schade, diefstal of pech.',       bullets: ['BA en omnium voor bestelwagens','Bescherming bij diefstal of brand','Snelle afhandeling bij schade','Afstembaar op jouw wagenpark'],     link: '/verzekeringen/bedrijfsvoertuigen/',   cta: 'Meer over bedrijfsvoertuigen' },
-  { title: 'Machinebreuk',             icon: 'wrench',    intro: 'Professionele machines en gereedschap zijn duur. Een defect of diefstal stopt je werk. Deze dekking niet.',    bullets: ['Machines en gereedschap bij breuk','Diefstal op werf of in bestelwagen','Vervanging of herstelling','Afstembaar op jouw materieel'],     link: '/verzekeringen/machinebreuk',         cta: 'Meer over machinebreuk' },
-  { title: 'BA-10',                    icon: 'building2', intro: 'Tienjarige aansprakelijkheid voor aannemers en architecten bij ernstige constructiegebreken na oplevering.',    bullets: ['Verplicht voor aannemers','Dekt constructiegebreken 10 jaar','Bescherming na oplevering','Vereist bij nieuwbouw'],                     link: '/verzekeringen/ba-10/',                cta: 'Meer over BA-10' },
-  { title: 'Rechtsbijstand',           icon: 'scale',     intro: 'Juridische bescherming bij geschillen met klanten, leveranciers of personeel. Onder andere:',     bullets: ['Hulp bij juridische conflicten','Betwiste aansprakelijkheid','Tussenkomst advocaatkosten','Aanvulling op BA'], link: '/verzekeringen/rechtsbijstand',       cta: 'Meer over rechtsbijstand' },
-  { title: "Alle Bouwplaats Risico's", icon: 'layers',    intro: "Allesomvattende dekking voor schade aan werken in uitvoering. Onmisbaar bij grotere werven of renovaties.",    bullets: ["Schade tijdens uitvoering","Risico's door weersinvloeden","Bescherming bij meerdere partijen","Flexibel per project of jaarpolis"], link: '/verzekeringen/alle-bouwplaats-risicos/', cta: "Meer over ABR" },
-];
+// Gerelateerde verzekeringen — afgeleid uit de centrale databron (src/data/verzekeringen.ts).
+// Selectie en volgorde bewust behouden; copy/iconen komen nu uit de databron.
+const insuranceCards = kaartenVoor(['ba-onderneming', 'bedrijfsvoertuigen', 'machinebreuk', 'ba-10', 'rechtsbijstand', 'alle-bouwplaats-risicos']);
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",
