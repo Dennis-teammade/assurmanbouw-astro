@@ -203,3 +203,26 @@ Status pagina: **afgewerkt, op staging.** Aanvullend pensioen voor het personeel
 | GRP12 | Carousel-slugs: **aanvullend-pensioen, ipt, vapz, gewaarborgd-inkomen** | Verwante pensioen-/personeelspolissen, alle slugs bestaan | Bevestig de selectie of wissel met bescherming-bedrijfsleider/arbeidsongevallen. | 🔲 |
 
 Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/band = echt beeld (`/images/verzekeringen/groepsverzekering-*`).
+
+---
+
+## /verzekeringen/aanvullend-pensioen (Aanvullend pensioen — pijler/keuzehub)
+
+Status pagina: **afgewerkt, op staging.** Pijler-/keuzehub-pagina boven VAPZ, POZ, IPT en de groepsverzekering. Geen enkel-product-pagina: "Dekking" is vervangen door **De formules** (4 routeerkaarten), "Premie" door **Fiscaal voordeel**. Rode draad = routeren op statuut: zonder venn. → VAPZ+POZ, met venn. → VAPZ+IPT, werkgever → groepsverzekering. **12 controlepunten.**
+
+| # | Wat we beslisten (staat zo op de pagina) | Waarom | Te controleren / suggestie | Status |
+|---|---|---|---|---|
+| AP1 | Antwoord op "verplicht?" = **"Nee."** + claim "wettelijk pensioen zelfstandige is laag" (kwalitatief, geen hard cijfer) | Aanvullend pensioen is nooit wettelijk verplicht; het lage zelfstandigenpensioen is de kernmotivatie | Bevestig "Nee." en de kwalitatieve formulering; beslis of je een concreet richtcijfer voor het wettelijk zelfstandigenpensioen wil tonen. | 🔲 |
+| AP2 | **Pensioensparen 2026** = max **€ 1.050 (30% vermindering)** of **€ 1.350 (25% vermindering)** | Geverifieerd (KBC, Wikifin, FOD Financiën, juni 2026). Bedragen bevroren t/m aanslagjaar 2026 | Bevestig de bedragen bij publicatie. | 🔲 |
+| AP3 | **Langetermijnsparen 2026** = max **€ 2.450**, **30% vermindering**, ruimte afhankelijk van woonkrediet | Geverifieerd (Wikifin, Practicali, juni 2026) | Bevestig het bedrag; let op samenhang met de woonbonus voor oudere kredieten. | 🔲 |
+| AP4 | **VAPZ 2026** = gewoon **8,17%**, sociaal **9,40%** (percentages op de koepel; bedragen op de VAPZ-sub-pagina) | Uit geverifieerde reference (Practicali). Wetswijziging op komst (8,50%/9,78%) bewust niet op koepel getoond | Bevestig de huidige percentages; details + overgangsregel horen op de VAPZ-sub-pagina. | 🔲 |
+| AP5 | **Premietaks 4,40%** op premies van een tweede-/derdepijlerverzekering | Levensverzekering-taks, cross-cutting | Bevestig dat 4,40% geldt voor de getoonde formules bij publicatie. | 🔲 |
+| AP6 | **80%-regel** = wettelijk + aanvullend pensioen samen max 80% van het laatste normale brutojaarloon; geldt voor **IPT/POZ/groepsverzekering** (niet VAPZ) | Standaard fiscaal kader tweede pijler | Bevestig de formulering en de afbakening (geldt niet voor VAPZ). | 🔲 |
+| AP7 | **Geen netto-uitkeringspercentage** op de uitkering getoond | Verschilt per formule/situatie; brand-voice: geen ongekwalificeerde cijfers | Bevestig dat we kwalitatief blijven, of lever een controleerbaar kader per formule. | 🔲 |
+| AP8 | **Tak21 (gewaarborgd) vs tak23 (geen kapitaalgarantie)** kort uitgelegd in FAQ | Standaard onderscheid pensioenbeleggingen; eerlijke nuance | Bevestig de formulering tegen ons gamma (welke takken bieden we effectief aan). | 🔲 |
+| AP9 | Carousel toont de **4 sub-pagina's** `['vapz','ipt','poz','groepsverzekering']`; databron-`gerelateerde` = **`['vapz','ipt','poz']`** | Carousel = de keuzehub-functie; gerelateerde-array houdt de drie zelfstandige-formules | Bevestig de carousel-selectie en de gerelateerde-array (voorkeur `['vapz','ipt','poz']`, alternatief met groepsverzekering). | 🔲 |
+| AP10 | **Geen euro-bedrag voor premies** op de pagina, enkel mechanisme en factoren | Brand-voice: geen verzonnen tarieven | Bevestig dat we geen indicatief premietarief tonen. | 🔲 |
+| AP11 | Euro-bedragen / scenario's in de **6 cases** zijn herkenbaar-fictieve illustraties; geen verzekeraarsnamen in copy | Brand-voice-regel cases | Bevestig dat dit als illustratie volstaat. | 🔲 |
+| AP12 | **Afbakening sub-pagina's:** POZ = zonder vennootschap, IPT = met vennootschap, VAPZ = elke zelfstandige (basis), groepsverzekering = voor personeel | Kern van de routeer-logica; fout hierin stuurt bezoekers verkeerd | Bevestig de afbakening; belangrijkste inhoudelijke check van de pagina. | 🔲 |
+
+Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/band = echt beeld (`/images/verzekeringen/aanvullend-pensioen-*`). De sub-pagina's VAPZ, POZ en IPT zijn nog skelet en worden hierna gebouwd (8 → 9-11).

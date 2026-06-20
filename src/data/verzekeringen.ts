@@ -208,11 +208,11 @@ export const VERZEKERINGEN: Verzekering[] = [
     slug: 'aanvullend-pensioen',
     titel: 'Aanvullend pensioen',
     categorie: 'pensioen-en-fiscaal',
-    korteBeschrijving: 'Bouw als zelfstandige of zaakvoerder een aanvullend pensioen op met maximaal fiscaal voordeel. De pijler boven VAPZ, IPT en POZ.', // TODO: definitieve copy
-    bullets: ['Extra pensioen bovenop het wettelijke', 'Maximaal fiscaal voordeel', 'Via VAPZ, IPT of POZ'], // TODO: definitieve bullets
+    korteBeschrijving: 'De pijlerpagina over je aanvullend pensioen: ontdek welke van de vier formules (VAPZ, POZ, IPT of groepsverzekering) past bij jouw situatie als zelfstandige of werkgever in de bouw.',
+    bullets: ['Vult je lage wettelijk pensioen aan', 'Vier formules: VAPZ, POZ, IPT, groepsverzekering', 'Fiscaal voordelig opbouwen, formules combineerbaar', 'Wij kiezen de juiste mix voor jouw statuut'],
     icoon: 'piggy-bank',
     gerelateerde: ['vapz', 'ipt', 'poz'],
-    status: 'skeleton',
+    status: 'live',
   },
   {
     slug: 'vapz',

@@ -52,7 +52,7 @@ flaggen i.p.v. forceren.
 | 5 | Gewaarborgd inkomen | `gewaarborgd-inkomen` | jij-en-je-mensen | Codex+Dennis | TODO |
 | 6 | Bescherming bedrijfsleider | `bescherming-bedrijfsleider` | jij-en-je-mensen | Codex+Dennis | TODO |
 | 7 | Groepsverzekering | `groepsverzekering` | pensioen-en-fiscaal | Codex+Dennis | DONE |
-| 8 | Aanvullend pensioen (pijler) | `aanvullend-pensioen` | pensioen-en-fiscaal | Codex+Dennis | TODO |
+| 8 | Aanvullend pensioen (pijler) | `aanvullend-pensioen` | pensioen-en-fiscaal | Codex+Dennis | DONE |
 | 9 | VAPZ | `vapz` | pensioen-en-fiscaal | dun (pijler) | TODO |
 | 10 | POZ | `poz` | pensioen-en-fiscaal | dun (pijler) | TODO |
 | 11 | IPT | `ipt` | pensioen-en-fiscaal | dun (pijler) | TODO |
@@ -142,7 +142,7 @@ voorstel voor de volgende dag.
 - [x] 5. Gewaarborgd inkomen — DONE
 - [x] 6. Bescherming bedrijfsleider — DONE
 - [x] 7. Groepsverzekering — DONE
-- [ ] 8. Aanvullend pensioen — TODO
+- [x] 8. Aanvullend pensioen — DONE
 - [ ] 9. VAPZ — TODO
 - [ ] 10. POZ — TODO
 - [ ] 11. IPT — TODO
@@ -160,3 +160,4 @@ voorstel voor de volgende dag.
 - **Gewaarborgd inkomen** — DONE. Gebouwd uit subagent-brief (prefix gi-), echt beeld, databron live. Build groen. 18 controlepunten (RIZIV/fiscaal). Premietaks bewust WEG (persoonsverzekering, vrijgesteld) - dus geen 9,25% op de pagina. Volgende: Bescherming bedrijfsleider (brief nog te maken via subagent).
 - **Bescherming bedrijfsleider** — DONE. Gebouwd uit subagent-brief (prefix bb-, echt beeld, hero vh). Keuzehub-afbakening (keyman/continuïteit ≠ persoonlijke overlijdensdekking ≠ BA Bestuurder). Premietaks 4,40% (leven, niet 9,25%). Databron live. Build groen. Controlepunten BB1-11. Volgende: Groepsverzekering (pensioencluster; brief nog te maken).
 - **Groepsverzekering** — DONE. Gebouwd uit subagent-brief (prefix gv-, echt beeld, hero vh). Tweede pijler voor het personeel, scherp onderscheiden van VAPZ/IPT/POZ (= bedrijfsleider zelf). Rode draad arbeiders PC 124 (sectoraal via Constructiv) vs bedienden PC 200 (vrijwillig). Verplicht-antwoord "Soms." Kerngetal WAP 2,50% (sinds 2025). Premietaks 4,40% + RIZIV 8,86% + 80%-regel. Databron live (gerelateerde → aanvullend-pensioen/ipt/vapz/gewaarborgd-inkomen). Build groen, 12 FAQ statisch, FAQPage-schema, noindex weg. Controlepunten GRP1-12. Volgende: Aanvullend pensioen (pijler; brief nog te maken).
+- **Aanvullend pensioen** — DONE. PIJLER-/KEUZEHUB-pagina (prefix ap-, echt beeld, hero vh), afwijkend van de enkel-product-norm: "Dekking" → **De formules** (4 routeerkaarten VAPZ/POZ/IPT/groepsverzekering met voor-wie-badge + link naar sub-pagina), "Premie" → **Fiscaal voordeel**. Rode draad = routeren op statuut (zonder venn. → VAPZ+POZ; met venn. → VAPZ+IPT; werkgever → groepsverzekering), doorgetrokken in hero, verplicht-antwoord "Nee.", mijn-situatie (3 panelen) en per-beroep. Geverifieerde cijfers (subagent, juni 2026): pensioensparen €1.050/€1.350, langetermijnsparen €2.450, VAPZ 8,17%/9,40%, premietaks 4,40%, 80%-regel. Databron live (gerelateerde → vapz/ipt/poz). Build groen (101 pagina's), 12 FAQ statisch, FAQPage-schema, noindex weg. Controlepunten AP1-12. Volgende: VAPZ (sub-pagina 9; brief nog te maken).
