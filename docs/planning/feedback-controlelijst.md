@@ -226,3 +226,29 @@ Status pagina: **afgewerkt, op staging.** Pijler-/keuzehub-pagina boven VAPZ, PO
 | AP12 | **Afbakening sub-pagina's:** POZ = zonder vennootschap, IPT = met vennootschap, VAPZ = elke zelfstandige (basis), groepsverzekering = voor personeel | Kern van de routeer-logica; fout hierin stuurt bezoekers verkeerd | Bevestig de afbakening; belangrijkste inhoudelijke check van de pagina. | 🔲 |
 
 Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/band = echt beeld (`/images/verzekeringen/aanvullend-pensioen-*`). De sub-pagina's VAPZ, POZ en IPT zijn nog skelet en worden hierna gebouwd (8 → 9-11).
+
+---
+
+## /verzekeringen/vapz (VAPZ — Vrij Aanvullend Pensioen voor Zelfstandigen)
+
+Status pagina: **afgewerkt, op staging.** Enkel-product-pagina (standaard polis-norm, prefix vz-). De basis-tweedepijlerformule voor élke zelfstandige in hoofdberoep. Rode draad = gewoon vs sociaal VAPZ. Scherp afgebakend t.o.v. POZ/IPT/groepsverzekering en 3e-pijler pensioensparen. Onderscheidend voordeel: vrijstelling premietaks 4,40% + niet onder de 80%-regel. **15 controlepunten.**
+
+| # | Wat we beslisten (staat zo op de pagina) | Waarom | Te controleren / suggestie | Status |
+|---|---|---|---|---|
+| VZ1 | **Wettelijke basis** = Programmawet (I) van 24 december 2002 / WAPZ-kader + **FSMA-toezicht** | Het VAPZ wordt geregeld door het WAPZ-kader; FSMA houdt toezicht op de aanbieders | Bevestig de exacte wetsverwijzing (Programmawet 24/12/2002) of houd kwalitatief. | 🔲 |
+| VZ2 | Antwoord op "verplicht?" = **"Nee."** (VAPZ is vrijwillig, de V staat voor "Vrij") | Eerlijkste weergave: nooit verplicht, wel sterk aangeraden | Bevestig de formulering. | 🔲 |
+| VZ3 | **Solidariteitsluik** sociaal VAPZ = minstens 10% van de premie, dekt arbeidsongeschiktheid, overlijden, moederschap, faillissement | Geverifieerd (FSMA/verzekeraars, juni 2026) | Bevestig de opsomming van de gedekte risico's tegen ons gamma. | 🔲 |
+| VZ4 | **VAPZ-plafonds 2026** = gewoon **8,17% / € 4.086,34**, sociaal **9,40% / € 4.701,54** | Geverifieerd (reference + Practicali/FSMA, juni 2026) | Aangekondigde wetswijziging (8,50% / € 4.251,39 en 9,78% / € 4.891,60) wordt in 2026 gestemd; voor stortingen begin 2026 gelden voorlopig de huidige percentages. Bevestig of de wijziging bij publicatie al van kracht is. | 🔲 |
+| VZ5 | **Vrijstelling premietaks 4,40%** op de VAPZ-premie (kerngetal, fiscaal-card, FAQ, case 6) | Geverifieerd: op een VAPZ is geen premietaks van 4,40% verschuldigd, anders dan op IPT/groepsverzekering/levensverzekering | **LET OP:** op de aanvullende waarborg arbeidsongeschiktheid binnen een sociaal VAPZ kan wél een afzonderlijke taks gelden. We claimen de vrijstelling enkel op de zuivere pensioenpremie. Bevestig. | 🔲 |
+| VZ6 | **Dubbel voordeel sociale bijdragen**: premie aftrekbaar via sociale bijdragen + verlaagt de basis van die bijdragen | Kernvoordeel van het VAPZ | Bevestig de formulering. Sociale-bijdragepercentage (~20,5%) bewust niet als hard cijfer getoond. | 🔲 |
+| VZ7 | **VAPZ valt NIET onder de 80%-regel**, maar onder een eigen plafond als % van het inkomen | Belangrijke afbakening tegenover IPT/POZ/groepsverzekering | Bevestig de formulering en de afbakening. | 🔲 |
+| VZ8 | **Uitkering** belast via **fictieve rente / gunstregime** bij pensioen op de wettelijke leeftijd; **geen hard netto-percentage** | Brand-voice: geen ongekwalificeerde cijfers; bewust kwalitatief | Bevestig de formulering "fictieve rente / gunstregime". | 🔲 |
+| VZ9 | **Toegang in bijberoep** afhankelijk van de hoogte van de sociale bijdragen | Een VAPZ is in de eerste plaats voor hoofdberoep/gelijkgestelden | Bevestig de formulering en de voorwaarde. | 🔲 |
+| VZ10 | **Referentie-inkomen N-3**: plafond berekend op het geherwaardeerd netto-beroepsinkomen van ongeveer 3 jaar eerder | Geverifieerd (FSMA/Securex/Practicali, juni 2026) | Bevestig de formulering "ongeveer drie jaar eerder (N-3)". | 🔲 |
+| VZ11 | **Carousel** = `['aanvullend-pensioen','poz','ipt','gewaarborgd-inkomen']`; databron-`gerelateerde` = `['aanvullend-pensioen','poz','ipt']` | Koepel + de twee vervolgformules; gewaarborgd-inkomen vult het solidariteitsluik inhoudelijk aan | Bevestig de carousel-selectie en de gerelateerde-array. | 🔲 |
+| VZ12 | **Tak21 (gewaarborgd) vs tak23 (geen kapitaalgarantie)** kort uitgelegd; **premievrijstelling** als optionele waarborg | Standaard onderscheid pensioenbeleggingen + gangbare optie | Bevestig de formulering tegen ons gamma (welke takken/waarborgen we effectief aanbieden). | 🔲 |
+| VZ13 | **Afbakening tegen POZ/IPT/groepsverzekering en 3e pijler**: VAPZ = basis; POZ erbovenop (zonder venn.), IPT erbovenop (met venn.); pensioensparen = privé/3e pijler | Kern van de routeer-logica | Bevestig de afbakening; belangrijkste inhoudelijke check. | 🔲 |
+| VZ14 | **Geen euro-premiebedrag** op de pagina, enkel de plafonds en de factoren | Brand-voice: geen verzonnen tarieven | Bevestig dat we geen indicatief premietarief tonen. | 🔲 |
+| VZ15 | Euro-scenario's in de **6 cases** zijn herkenbaar-fictieve illustraties; geen verzekeraarsnamen in de copy | Brand-voice-regel cases | Bevestig dat dit als illustratie volstaat. | 🔲 |
+
+Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/band = echt beeld (`/images/verzekeringen/vapz-*`). Consistent met de koepelpagina aanvullend-pensioen. POZ en IPT (sub-pagina's 10-11) worden hierna gebouwd.

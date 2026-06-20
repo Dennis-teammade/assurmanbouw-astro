@@ -218,11 +218,11 @@ export const VERZEKERINGEN: Verzekering[] = [
     slug: 'vapz',
     titel: 'VAPZ',
     categorie: 'pensioen-en-fiscaal',
-    korteBeschrijving: 'Vrij Aanvullend Pensioen voor Zelfstandigen: fiscaal voordelig pensioensparen via je sociale bijdragen.', // TODO: definitieve copy
-    bullets: ['Voor elke zelfstandige', 'Fiscaal aftrekbaar', 'Basis van je aanvullend pensioen'], // TODO: definitieve bullets
+    korteBeschrijving: 'Het VAPZ is de basis-tweedepijlerformule voor elke zelfstandige in hoofdberoep: aftrekbaar via je sociale bijdragen, vrij van premietaks en de voordeligste eerste stap in je aanvullend pensioen.',
+    bullets: ['De voordeligste eerste stap in je aanvullend pensioen', 'Aftrekbaar via je sociale bijdragen, dubbel voordeel', 'Gewoon of sociaal VAPZ, met solidariteitsluik', 'Vrijgesteld van premietaks, eigen plafond los van de 80%-regel'],
     icoon: 'piggy-bank',
     gerelateerde: ['aanvullend-pensioen', 'poz', 'ipt'],
-    status: 'skeleton',
+    status: 'live',
   },
   {
     slug: 'poz',

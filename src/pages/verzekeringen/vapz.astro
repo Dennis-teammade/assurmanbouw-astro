@@ -1,20 +1,709 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { CTA_SCAN, CTA_DESTINATIONS } from '../../data/cta-labels';
+import { kaartenVoor } from '../../data/verzekeringen';
+import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
+import BrandChevron from '../../components/BrandChevron.astro';
+
+const faqItems = [
+  { q: 'Wat is een VAPZ?', a: 'Een VAPZ (Vrij Aanvullend Pensioen voor Zelfstandigen) is een aanvullend pensioen dat je als zelfstandige zelf opbouwt via je sociale bijdragen. Je stort een premie bij een verzekeraar, die het kapitaal opbouwt en bij je pensioen uitkeert. Het is de basisformule van de tweede pensioenpijler voor zelfstandigen.' },
+  { q: 'Is een VAPZ verplicht?', a: 'Nee. De V staat letterlijk voor "Vrij": een VAPZ is volledig vrijwillig. Maar omdat het zo voordelig is en je wettelijk pensioen als zelfstandige laag ligt, is het bijna altijd de slimste eerste stap om aanvullend pensioen op te bouwen.' },
+  { q: 'Wat is het verschil tussen een gewoon en een sociaal VAPZ?', a: 'Bij een gewoon VAPZ gaat je volledige premie naar pensioenopbouw, met een lager plafond. Bij een sociaal VAPZ mag je ongeveer 15% meer storten, maar gaat minstens 10% van je premie naar een solidariteitsluik. Dat luik dekt je onder meer bij arbeidsongeschiktheid, overlijden, moederschap en faillissement. Veel zelfstandigen kiezen daarom voor het sociaal VAPZ.' },
+  { q: 'Hoeveel kan ik in 2026 storten in mijn VAPZ?', a: 'In 2026 stort je maximaal 8,17% van je geherwaardeerd netto-beroepsinkomen in een gewoon VAPZ, met een absoluut maximum van 4.086,34 euro. Voor een sociaal VAPZ is dat 9,40%, met een absoluut maximum van 4.701,54 euro. Het plafond wordt berekend op je inkomen van ongeveer drie jaar eerder.' },
+  { q: 'Kan ik een VAPZ combineren met een POZ of IPT?', a: 'Ja, en dat is vaak de slimste aanpak. Het VAPZ is je basis. Heb je geen vennootschap, dan bouw je bij met een POZ. Heb je wel een vennootschap, dan bouw je bij met een IPT die je vennootschap betaalt. Je vult het best eerst je VAPZ op, want dat is de voordeligste formule.' },
+  { q: 'Geldt de 80%-regel voor een VAPZ?', a: 'Nee. Het VAPZ heeft een eigen wettelijk plafond, berekend als percentage van je beroepsinkomen. De 80%-regel, die zegt dat je wettelijk en aanvullend pensioen samen maximaal 80% van je laatste brutoloon mogen bedragen, geldt enkel voor IPT, POZ en de groepsverzekering, niet voor het VAPZ.' },
+  { q: 'Wat is het voordeel op mijn sociale bijdragen?', a: 'Je VAPZ-premie is aftrekbaar via je sociale bijdragen. Dat doet twee dingen tegelijk: je krijgt een voordeel in de personenbelasting én je verlaagt de basis waarop je sociale bijdragen berekend worden, zodat je daar ook minder betaalt. Dat dubbele voordeel maakt het VAPZ uniek voordelig.' },
+  { q: 'Betaal ik premietaks op mijn VAPZ?', a: 'Nee. Een VAPZ is vrijgesteld van de premietaks van 4,40% die wel geldt op een IPT, een groepsverzekering of een gewone levensverzekering. Daardoor gaat je volledige premie naar je opbouw. Het is een van de redenen waarom het VAPZ zo voordelig is.' },
+  { q: 'Wat als ik arbeidsongeschikt word?', a: 'Met een sociaal VAPZ ben je beschermd via het solidariteitsluik: dat kan een tussenkomst voorzien en je opbouw deels laten doorlopen bij langdurige arbeidsongeschiktheid. Je kan daarnaast een aanvullende premievrijstelling voorzien, zodat je premie wordt overgenomen en je pensioenopbouw niet stilvalt.' },
+  { q: 'Wat gebeurt er met mijn VAPZ bij overlijden?', a: 'Je kan een begunstigde aanduiden die het opgebouwde kapitaal ontvangt als je overlijdt vóór je pensioen, vaak je partner of kinderen. Bij een sociaal VAPZ voorziet het solidariteitsluik bovendien een bijkomende dekking bij overlijden. De exacte regeling leggen we je per polis uit.' },
+  { q: 'Vanaf wanneer wordt mijn VAPZ uitgekeerd?', a: 'Je VAPZ-kapitaal wordt in principe uitgekeerd op je wettelijke pensioenleeftijd, wanneer je je pensioen opneemt. De uitkering wordt gunstig belast, onder meer via een fictieve rente. Vervroegd opnemen kan enkel binnen de wettelijke uitzonderingen.' },
+  { q: 'Kan ik een VAPZ afsluiten in bijberoep?', a: 'Dat hangt af van je sociale bijdragen. Een VAPZ staat in de eerste plaats open voor zelfstandigen in hoofdberoep en gelijkgestelden. Werk je in bijberoep, dan kan je toegang hebben als je voldoende sociale bijdragen betaalt. We bekijken samen of je in aanmerking komt.' },
+];
+
+const beroepTabs = [
+  { id: 'dakwerkers',    label: 'Dakwerkers',     link: '/sectoren/dakwerkers',     title: 'Voor dakwerkers',                    text: 'Als zelfstandige dakwerker leg je met een VAPZ de basis van je aanvullend pensioen. Door je fysiek beroep is een sociaal VAPZ met solidariteitsluik vaak de slimste keuze: meer ruimte én bescherming bij uitval.' },
+  { id: 'metsers',       label: 'Metsers',        link: '/sectoren/aannemers',      title: 'Voor metsers en algemene aannemers', text: 'Of je nu een eenmanszaak of een vennootschap hebt: het VAPZ is altijd je persoonlijke basis. Vul het eerst volledig op, want het is de voordeligste formule, en bouw daarna bij met een POZ of IPT.' },
+  { id: 'loodgieters',   label: 'Loodgieters',    link: '/sectoren/loodgieters',    title: 'Voor loodgieters',                   text: 'Met een VAPZ bouw je fiscaal voordelig pensioen op, ook met een wisselend inkomen. Je bepaalt zelf hoeveel je stort binnen het maximum. Wij berekenen je ruimte op basis van je inkomen.' },
+  { id: 'elektriciens',  label: 'Elektriciens',   link: '/sectoren/elektriciens',   title: 'Voor elektriciens',                  text: 'Een VAPZ levert je een dubbel fiscaal voordeel: je trekt de premie af en betaalt minder sociale bijdragen. Werk je via een vennootschap, dan vul je het VAPZ eerst op voor je bijstort in een IPT.' },
+  { id: 'schilders',     label: 'Schilders',      link: '/sectoren/schilders',      title: 'Voor schilders',                     text: 'In een fysiek beroep telt bescherming bij langdurige uitval. Met een sociaal VAPZ bouw je niet alleen pensioen op, maar krijg je via het solidariteitsluik ook een tussenkomst bij arbeidsongeschiktheid.' },
+  { id: 'schrijnwerkers',label: 'Schrijnwerkers', link: '/sectoren/schrijnwerkers', title: 'Voor schrijnwerkers',                text: 'Het VAPZ is je startpunt, ongeacht je statuut. We bekijken samen of een gewoon of een sociaal VAPZ het meeste oplevert en hoe je het later combineert met een POZ of IPT.' },
+];
+
+const insuranceCards = kaartenVoor(['aanvullend-pensioen', 'poz', 'ipt', 'gewaarborgd-inkomen']);
+
+const schema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+
+const svgCheck16g = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+const svgX16r    = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
+const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
 ---
+
 <BaseLayout
-  title="VAPZ: Vrij Aanvullend Pensioen Zelfstandigen | Assurman"
-  description="Bouw als zelfstandige fiscaalvriendelijk een aanvullend pensioen op via het VAPZ. Binnenkort online bij Assurman."
+  title="VAPZ voor zelfstandigen in de bouw | Assurman"
+  description="Het VAPZ is de voordeligste eerste stap in je aanvullend pensioen als zelfstandige. Aftrekbaar via je sociale bijdragen, vrij van premietaks. Zo werkt het."
   canonical="/verzekeringen/vapz/"
-  noindex={true}
+  schema={schema}
 >
-  <main style="min-height:72vh;display:flex;align-items:center;justify-content:center;background:#FBF8FF;padding:140px 24px 96px;">
-    <div style="max-width:680px;text-align:center;">
-      <span style="display:inline-block;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Verzekering</span>
-      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,52px);color:#001F3F;line-height:1.1;margin:0 0 16px;">VAPZ</h1>
-      <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#3F5767;line-height:1.6;margin:0 0 32px;">Deze pagina is in opbouw. Binnenkort lees je hier alles over het Vrij Aanvullend Pensioen voor Zelfstandigen (VAPZ). Wil je nu al weten waar je dekking tekortschiet? Doe de gratis verzekeringsscan in 2 minuten.</p>
-      <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary--lg">{CTA_SCAN.hero}</a>
-      <p style="margin-top:28px;"><a href="/verzekeringen/" style="color:#3F5767;font-family:'Outfit',sans-serif;text-decoration:underline;">Alle verzekeringen bekijken</a></p>
+
+<style is:global>
+  .vz-sticky-btn{background:#F7F4EF;border:1px solid rgba(229,165,36,0.2);cursor:pointer;padding:7px 16px;margin:10px 5px;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border-radius:9999px;transition:background 0.2s,border-color 0.2s;color:#001F3F;}
+  .vz-sticky-btn:hover,.vz-sticky-btn.active{background:rgba(229,165,36,0.18);border-color:#E5A524;}
+  .vz-sticky-btn .vz-check{color:#94a3b8;flex-shrink:0;transition:color 0.2s;}
+  .vz-sticky-btn:hover .vz-check,.vz-sticky-btn.active .vz-check{color:#E5A524;}
+  .vz-tab-btn{background:none;border:none;cursor:pointer;padding:14px 24px;white-space:nowrap;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.2s,border-color 0.2s;}
+  .vz-tab-btn:hover,.vz-tab-btn.active{color:#E5A524;border-bottom-color:#E5A524;}
+  .vz-ins-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);transition:background 0.2s,transform 0.2s;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);}
+  .vz-ins-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-4px);}
+  .vz-stat-panel{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+  .vz-stat-btn{width:100%;display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;text-align:left;padding:20px 24px;}
+  .vz-scan-btn:hover{background:#324554 !important;}
+  .vz-badge-pill{display:inline-flex;align-items:center;gap:8px;background:#F5F2FF;border:1px solid rgba(213,196,174,0.2);border-radius:9999px;padding:6px 16px;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#001F3F;}
+</style>
+
+<style>
+  .vz-hero-img{position:absolute;top:5vh;right:-5px;height:85vh;width:auto;max-width:48%;z-index:1;pointer-events:none;}
+  .vz-hero-content{max-width:620px;}
+  .vz-hero-inner{max-width:1280px;margin:0 auto;padding:64px 32px 80px;position:relative;z-index:2;}
+  .vz-hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+  .vz-watis-grid{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:flex-start;}
+  .vz-verplicht-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .vz-dekking-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
+  .vz-plafond-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;}
+  .vz-aanvulling-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .vz-rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0;}
+  .vz-formule{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:64px;flex-wrap:wrap;}
+  .vz-factors-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;margin:0 auto 40px;}
+  .vz-procedure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+  .vz-tab-inner{display:flex;gap:32px;align-items:flex-start;border-radius:12px;}
+  .vz-final-btns{display:flex;gap:24px;justify-content:center;margin-bottom:80px;flex-wrap:wrap;}
+  .vz-sticky-nav-bar{position:sticky;top:72px;z-index:90;background:#FFFFFF;border-bottom:1px solid rgba(0,31,63,0.08);overflow:auto;}
+  .vz-sticky-inner{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;gap:0;justify-content:center;flex-wrap:wrap;}
+  .vz-container{max-width:1280px;margin:0 auto;padding:0 32px;}
+  .brand-why-card{background:#FFFFFF;border-left:4px solid #E5A524;box-shadow:0px 1px 2px rgba(0,0,0,0.05);transition:box-shadow 0.2s,transform 0.2s;}
+  .brand-why-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.1);transform:translateY(-2px);}
+
+  @media (max-width:1023px){
+    .vz-container{padding:0 24px;}
+    .vz-sticky-inner{padding:0 24px;}
+    .vz-watis-grid{grid-template-columns:1fr;gap:32px;}
+    .vz-verplicht-grid{grid-template-columns:repeat(2,1fr);}
+    .vz-aanvulling-grid{grid-template-columns:repeat(2,1fr);}
+    .vz-procedure-grid{grid-template-columns:repeat(2,1fr);gap:32px;}
+    .vz-factors-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:767px){
+    .vz-sticky-nav-bar{display:none;}
+    .vz-container{padding:0 15px;}
+    .vz-hero-content{max-width:100%;}
+    .vz-hero-img{display:none;}
+    .vz-hero-btns{flex-direction:column;}
+    .vz-hero-btns a{width:100%;justify-content:center;text-align:center;}
+    #watis{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #verplicht{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #dekking{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #premie{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #procedure{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #faq{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #vz-beroep{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #vz-statuten{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #vz-aanvulling{padding-bottom:56px !important;}
+    #vz-praktijk{padding-bottom:56px !important;}
+    #vz-cta-band{padding-left:15px !important;padding-right:15px !important;padding-bottom:64px !important;}
+    #vz-cta-band h2{font-size:clamp(28px,8vw,48px) !important;}
+    #vz-cta-band p{font-size:18px !important;}
+    .vz-watis-grid{grid-template-columns:1fr;gap:24px;}
+    .vz-verplicht-grid{grid-template-columns:1fr;}
+    .vz-dekking-grid{grid-template-columns:1fr;}
+    .vz-plafond-grid{grid-template-columns:1fr;}
+    .vz-plafond-grid>div:last-child{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.15);}
+    .vz-aanvulling-grid{grid-template-columns:1fr;}
+    .vz-rules-grid{grid-template-columns:1fr;}
+    .vz-formule{flex-direction:column;gap:8px;margin-bottom:40px;}
+    .vz-factors-grid{grid-template-columns:1fr;}
+    .vz-procedure-grid{grid-template-columns:1fr 1fr;gap:32px;}
+    .vz-tab-inner{flex-direction:column;gap:20px;padding:24px 20px;}
+    .vz-tabs-row{overflow-x:auto;justify-content:flex-start !important;padding-bottom:4px;-webkit-overflow-scrolling:touch;}
+    .vz-final-btns{flex-direction:column;align-items:center;}
+    .vz-final-btns a{width:100%;max-width:400px;justify-content:center;}
+    .vz-cta-deco{display:none;}
+    .vz-cta-mask-img{display:none;}
+    .vz-procedure-line{display:none !important;}
+    #vz-examples-list{grid-template-columns:1fr !important;}
+  }
+</style>
+
+<div id="vz-progress-track" style="position:fixed;top:0;left:0;right:0;height:3px;z-index:9999;background:rgba(0,31,63,0.07);">
+  <div id="vz-progress-bar" style="height:100%;background:#E5A524;width:0%;transition:width 0.1s linear;"></div>
+</div>
+
+<div style="font-family:'Outfit',sans-serif;color:#001F3F;background:#FFFFFF;">
+
+<!-- HERO -->
+<section id="vz-hero" style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:100vh;">
+  <div class="vz-hero-img assurman-mask assurman-mask--hero">
+    <img src="/images/verzekeringen/vapz-hero.jpg" alt="Zelfstandige in de bouw bouwt een VAPZ-pensioen op" />
+  </div>
+  <div class="vz-hero-inner">
+    <div class="vz-hero-content">
+      <div class="vz-badge-pill" style="margin-bottom:20px;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Assurman &middot; Bouwverzekeringen op maat
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">VAPZ<br />voor zelfstandigen in de bouw</h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">De voordeligste eerste stap in je aanvullend pensioen.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Het VAPZ is de basisformule voor elke zelfstandige in hoofdberoep. Je bouwt een aanvullend pensioen op via je sociale bijdragen, betaalt minder belasting en minder sociale bijdragen, en er is geen premietaks. De meest toegankelijke en voordeligste manier om te starten.</p>
+      <div class="vz-hero-btns">
+        <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
+          {CTA_SCAN.hero}
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.advisory}</a>
+      </div>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;">Geen verkooppraatjes: we bekijken samen of een gewoon of een sociaal VAPZ het meeste voor jou oplevert.</p>
     </div>
-  </main>
+  </div>
+</section>
+
+<!-- STICKY NAV -->
+<nav id="vz-sticky-nav" class="vz-sticky-nav-bar">
+  <div class="vz-sticky-inner">
+    {[{id:'watis',label:'Wat is het?'},{id:'verplicht',label:'Verplicht?'},{id:'dekking',label:'Dekking'},{id:'premie',label:'Premie'},{id:'procedure',label:'Opbouw'},{id:'faq',label:'FAQ'}].map(item=>(
+      <button class="vz-sticky-btn" data-sticky-btn={item.id}>
+        <svg class="vz-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        {item.label}
+      </button>
+    ))}
+  </div>
+</nav>
+
+<!-- WAT IS HET -->
+<section id="watis" style="background:#FFFFFF;padding:96px 32px;">
+  <div class="vz-container">
+    <div class="vz-watis-grid">
+      <div style="background:#3F5767;padding:32px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);">
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In het kort</span>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+          {[
+            {t:'Het VAPZ is de <strong style="color:#FFFFFF;">basis van je aanvullend pensioen</strong> als zelfstandige in hoofdberoep, met of zonder vennootschap.'},
+            {t:'Je premie is <strong style="color:#FFFFFF;">aftrekbaar via je sociale bijdragen</strong> en verlaagt meteen de basis waarop je sociale bijdragen berekend worden: een dubbel voordeel.'},
+            {t:'Er bestaan <strong style="color:#FFFFFF;">twee soorten</strong>: een gewoon VAPZ en een sociaal VAPZ met meer ruimte en een solidariteitsluik dat je beschermt bij tegenslag.'},
+            {t:'In 2026 stort je tot <strong style="color:#FFFFFF;">8,17% van je inkomen (gewoon)</strong> of <strong style="color:#FFFFFF;">9,40% (sociaal)</strong>, met een eigen wettelijk plafond los van de 80%-regel.'},
+            {t:'Het VAPZ is <strong style="color:#FFFFFF;">vrijgesteld van de premietaks van 4,40%</strong>, precies wat het zo voordelig maakt tegenover andere formules.'},
+          ].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.55;color:#CBD5E1;" set:html={item.t}></span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">Je aanvullend pensioen via je sociale bijdragen</h2>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een VAPZ is een <strong>aanvullend pensioen dat je als zelfstandige zelf opbouwt</strong>. Je stort periodiek een premie bij een verzekeraar, die het kapitaal opbouwt en beheert. Het bijzondere zit in de fiscaliteit: <strong>je premie is aftrekbaar via je sociale bijdragen</strong>, en dat verlaagt meteen ook de basis waarop je sociale bijdragen berekend worden. Zo win je twee keer.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Het VAPZ hoort thuis in de <strong>tweede pensioenpijler</strong>, naast je wettelijk pensioen (eerste pijler). Het is de <strong>basisformule voor elke zelfstandige in hoofdberoep</strong>, of je nu een eenmanszaak hebt of via een vennootschap werkt. Daarom is het bijna altijd de eerste stap: pas als je VAPZ-ruimte vol is, bouw je bij met een POZ of een IPT.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">Het opgebouwde kapitaal blijft van jou. Stop je je activiteit, dan stopt de opbouw, maar het kapitaal blijft staan en groeit verder tot je pensioen. Verwar het VAPZ niet met pensioensparen uit de derde pijler: dat sluit je privé af, los van je beroep. Het VAPZ is gekoppeld aan je statuut als zelfstandige.</p>
+        <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div>
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">Wettelijke basis</p>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">Het VAPZ valt onder de <strong>Programmawet (I) van 24 december 2002</strong>, die het kader voor het vrij aanvullend pensioen voor zelfstandigen vastlegt (de zogenaamde WAPZ-bepalingen). De verzekeraars en pensioeninstellingen die een VAPZ aanbieden, staan onder <strong>toezicht van de FSMA</strong>, de Belgische toezichthouder voor de financiële sector. Het jaarlijkse maximum is wettelijk geplafonneerd als percentage van je beroepsinkomen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IS HET VERPLICHT -->
+<section id="verplicht" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Is het verplicht?</span>
+      <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#3F5767;margin-bottom:8px;">Moet ik als zelfstandige een VAPZ afsluiten?</p>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,10vw,112px);line-height:0.9;color:#001F3F;letter-spacing:-4px;">Nee.</div>
+      <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:20px;color:#3F5767;margin-top:12px;max-width:680px;margin-left:auto;margin-right:auto;">De V staat letterlijk voor "Vrij". Een VAPZ is volledig vrijwillig, maar het is wel de meest toegankelijke en voordeligste eerste stap.</p>
+    </div>
+    <div class="vz-verplicht-grid">
+      {[
+        {icon:'eu', title:'Vrij, maar voordelig',       text:'Niet verplicht, wel slim. Geen enkele zelfstandige is verplicht een VAPZ af te sluiten, maar weinig formules leveren fiscaal zoveel op voor zo weinig moeite. Het is de logische start.'},
+        {icon:'pg', title:'Je wettelijk pensioen is laag', text:'Niet verplicht, wel nodig. Het wettelijk pensioen van een zelfstandige ligt vaak een stuk lager dan dat van een werknemer. Zonder aanvulling val je bij je pensioen sterk terug.'},
+        {icon:'us', title:'Hoofdberoep vereist',        text:'Een VAPZ staat open voor zelfstandigen in hoofdberoep en gelijkgestelden. Zit je in bijberoep, dan hangt het af van je sociale bijdragen of je toegang hebt.'},
+        {icon:'st', title:'De basis voor meer',         text:'Het VAPZ is de eerste laag. Wil je meer opbouwen, dan komt daar een POZ (zonder vennootschap) of een IPT (met vennootschap) bovenop. Maar het VAPZ vul je het best eerst.'},
+      ].map(card=>(
+        <div style="background:#FFFFFF;padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+          <div style="background:rgba(229,165,36,0.1);border-radius:10px;padding:12px;display:inline-flex;margin-bottom:18px;">
+            {card.icon==='eu'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+            {card.icon==='pg'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>}
+            {card.icon==='us'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+            {card.icon==='st'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- IN DE PRAKTIJK -->
+<section id="vz-praktijk" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Waarom een VAPZ in de bouw?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">Zelfstandigen in de bouw werken hard en fysiek, vaak met een onregelmatig inkomen en een laag wettelijk pensioen in het vooruitzicht. Een VAPZ is dan de meest voordelige manier om geld opzij te zetten: je bouwt pensioen op en betaalt er minder belasting en sociale bijdragen door.</p>
+    </div>
+    <div class="vz-rules-grid">
+      {[
+        { title: 'Dubbel fiscaal voordeel', text: 'Je premie is aftrekbaar én verlaagt de basis van je sociale bijdragen. Daardoor kost een euro in je VAPZ je netto veel minder dan een euro die je gewoon laat staan.' },
+        { title: 'Geen premietaks', text: 'Anders dan een IPT of groepsverzekering is een VAPZ vrijgesteld van de premietaks van 4,40%. Elke euro die je stort, gaat dus volledig naar je opbouw.' },
+        { title: 'Toegankelijk en flexibel', text: 'Je bepaalt zelf hoeveel je stort binnen het wettelijke maximum. Ook met een kleiner of wisselend inkomen is een VAPZ haalbaar en de moeite waard.' },
+      ].map(card => (
+        <div style="background:#FFFFFF;padding:24px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);border-top:3px solid #E5A524;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#3F5767;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <button id="vz-examples-btn" style="display:flex;align-items:center;gap:10px;background:rgba(0,31,63,0.04);border:1px solid rgba(0,31,63,0.1);border-radius:8px;padding:14px 24px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#001F3F;">
+        <span>Bekijk 6 concrete voorbeelden uit de bouw</span>
+        <svg id="vz-examples-chevron" width="18" height="18" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+    <ul id="vz-examples-list" style="list-style:none;padding:0;margin:16px 0 0;display:none;grid-template-columns:1fr 1fr;gap:10px;">
+      {[
+        'Start voor een zelfstandige dakwerker: een dakwerker met een eenmanszaak sluit een VAPZ af. Hij stort jaarlijks binnen het wettelijke maximum, trekt die premie af en betaalt zo ook minder sociale bijdragen. Meteen de basis van zijn aanvullend pensioen gelegd.',
+        'Sociaal VAPZ voor een loodgieter: een loodgieter kiest bewust voor een sociaal VAPZ. Hij mag zo meer storten en krijgt er een solidariteitsluik bij dat hem dekt bij langdurige arbeidsongeschiktheid, een reëel risico in zijn fysiek beroep.',
+        'Minder sociale bijdragen voor een elektricien: een elektricien stort het maximum in zijn VAPZ. Omdat die premie de basis van zijn sociale bijdragen verlaagt, daalt zijn afrekening bij de sociale kas. Het voordeel komt dus van twee kanten.',
+        'VAPZ als fundament onder een IPT: een schrijnwerker werkt via een vennootschap. Hij vult eerst zijn VAPZ volledig op, omdat dat het voordeligst is, en pas daarna laat hij zijn vennootschap bijstorten in een IPT.',
+        'Bescherming bij ziekte via het solidariteitsluik: een schilder met een sociaal VAPZ valt langdurig uit door rugklachten. Via het solidariteitsluik loopt een deel van zijn opbouw door en krijgt hij een tussenkomst, bovenop zijn wettelijke uitkering.',
+        'Geen premietaks, meer rendement: een metselaar vergelijkt een VAPZ met een gewone levensverzekering. Op het VAPZ betaalt hij geen premietaks van 4,40%, waardoor zijn volledige premie aan het werk gaat in plaats van een stuk af te dragen.',
+      ].map(ex=>(
+        <li style="display:flex;gap:10px;align-items:flex-start;background:#F7F4EF;border-radius:8px;padding:12px 16px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{ex}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<!-- DEKKING -->
+<section id="dekking" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:1025px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Dekking</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat zit er in een VAPZ?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:600px;margin:0 auto;">Een VAPZ draait in de eerste plaats om pensioenopbouw. Kies je voor een sociaal VAPZ, dan komt daar een solidariteitsluik bij dat je beschermt bij tegenslag. Hieronder de hoofdlijnen.</p>
+    </div>
+    <div class="vz-dekking-grid">
+      <div style="background:#FFFFFF;border:2px solid rgba(34,197,94,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(34,197,94,0.08);border-bottom:1px solid rgba(34,197,94,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#15803d;">Wel gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Opbouw van een aanvullend pensioenkapitaal, uitgekeerd bij je wettelijke pensioen','Fiscale aftrek van je premie via je sociale bijdragen, met een voordeel in de personenbelasting','Een lagere basis voor je sociale bijdragen, waardoor je ook daar minder betaalt','Een gegarandeerd rendement (tak21) of een rendement uit fondsen (tak23), naar keuze','Bij een sociaal VAPZ: een solidariteitsluik met dekkingen bij arbeidsongeschiktheid, overlijden, moederschap en faillissement','Behoud van het opgebouwde kapitaal: het blijft van jou, ook als je je activiteit stopzet'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgCheck16g} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:2px solid rgba(239,68,68,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(239,68,68,0.06);border-bottom:1px solid rgba(239,68,68,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#b91c1c;">Niet (of beperkt) gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Stortingen boven het wettelijk plafond (8,17% gewoon of 9,40% sociaal): dat deel is niet aftrekbaar','Aftrek als beroepskost van een vennootschap: dat loopt niet via een VAPZ maar via een IPT','Toegang zonder hoofdberoep: je moet zelfstandige in hoofdberoep of gelijkgestelde zijn','Een solidariteitsluik bij een gewoon VAPZ: die bescherming zit enkel in het sociaal VAPZ','Het opnemen van je kapitaal vóór je wettelijke pensioenleeftijd (buiten de wettelijke uitzonderingen)','Risico\'s die thuishoren in andere polissen, zoals een gewaarborgd inkomen of een ongevallendekking'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgX16r} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <div class="vz-plafond-grid" style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);padding:36px 40px;">
+      <div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">VAPZ-plafonds 2026</span>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#FFFFFF;margin:0 0 12px;">Je maximum als percentage van je inkomen</h3>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">Je VAPZ-premie is geplafonneerd als percentage van je geherwaardeerd netto-beroepsinkomen. In 2026 stort je maximaal <strong style="color:#FFFFFF;">8,17%</strong> in een gewoon VAPZ (absoluut maximum 4.086,34 euro) of <strong style="color:#FFFFFF;">9,40%</strong> in een sociaal VAPZ (absoluut maximum 4.701,54 euro). Dit eigen plafond staat los van de 80%-regel die voor IPT en POZ geldt.</p>
+      </div>
+      <div style="text-align:center;flex-shrink:0;">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:6px;">Gewoon / sociaal</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:44px;color:#FFFFFF;letter-spacing:-1px;line-height:1;">8,17% / 9,40%</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:14px;color:#94a3b8;margin-top:6px;">max 4.086,34 euro / 4.701,54 euro</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AANVULLENDE WAARBORGEN -->
+<section id="vz-aanvulling" style="background:#3F5767;padding:0 0 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding:100px 32px 0;position:relative;z-index:1;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Aanvullen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Vijf manieren om meer uit je VAPZ te halen</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0;">De basis is pensioenopbouw, maar rond je VAPZ heen kan je extra bescherming en optimalisatie regelen. Vijf zaken die in de praktijk telkens terugkomen.</p>
+    </div>
+    <div class="vz-aanvulling-grid">
+      {[
+        {i:'sh',title:'Sociaal VAPZ met solidariteitsluik', text:'Kies je voor een sociaal VAPZ, dan gaat minstens 10% van je premie naar solidariteitswaarborgen. Die dekken je onder meer bij arbeidsongeschiktheid, overlijden, moederschap en faillissement. Je mag bovendien meer storten dan in een gewoon VAPZ.'},
+        {i:'st',title:'Combineren met POZ of IPT',         text:'Het VAPZ is de basis. Is je VAPZ-ruimte vol, dan bouw je bij met een POZ (zonder vennootschap) of een IPT (met vennootschap). Zo benut je je volledige fiscale ruimte in de tweede pijler.'},
+        {i:'tr',title:'Tak21 of tak23',                    text:'Een tak21-VAPZ geeft je een gewaarborgd rendement, soms aangevuld met een winstdeelname: veiligheid voorop. Een tak23-VAPZ belegt in fondsen met meer rendementskansen, maar zonder kapitaalgarantie. Je kan ook combineren.'},
+        {i:'sd',title:'Premievrijstelling bij ziekte',     text:'Met een aanvullende waarborg neemt de verzekeraar je premie over als je langdurig arbeidsongeschikt wordt, zodat je pensioenopbouw blijft doorlopen. Zinvol in een fysiek zwaar bouwberoep.'},
+        {i:'br',title:'Fiscale optimalisatie',             text:'Door je VAPZ eerst volledig op te vullen, haal je het hoogste rendement op je fiscale ruimte voor je bijstort in een POZ of IPT. Wij rekenen je optimale volgorde en bedrag voor je uit.'},
+      ].map(card=>(
+        <div class="vz-ins-card" style="padding:28px;">
+          <div style="background:rgba(229,165,36,0.15);border-radius:10px;padding:10px;display:inline-flex;margin-bottom:16px;">
+            {card.i==='sh'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
+            {card.i==='st'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>}
+            {card.i==='tr'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>}
+            {card.i==='sd'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>}
+            {card.i==='br'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#FFFFFF;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#94A3B8;margin:0;">{card.text}</p>
+        </div>
+      ))}
+      <div style="background:#E5A524;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:32px;display:flex;flex-direction:column;justify-content:center;">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">Gewoon of sociaal VAPZ: wat past bij jou?</h3>
+        <p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(0,31,63,0.75);line-height:1.55;margin:0 0 20px;">Doe de scan: we bekijken je inkomen, je statuut en je situatie, en berekenen welk VAPZ het meeste voor je oplevert.</p>
+        <a href={CTA_DESTINATIONS.scan} class="vz-scan-btn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.2s;width:100%;">
+          {CTA_SCAN.start} <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIE -->
+<section id="premie" style="background:#F7F4EF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Prijs &amp; berekening</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Hoeveel kan ik storten in mijn VAPZ?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:560px;margin:0 auto;">Je bepaalt zelf hoeveel je stort, tot het wettelijke maximum. Dat maximum is een percentage van je beroepsinkomen, met een absolute bovengrens. Het rekensommetje is eenvoudig.</p>
+    </div>
+    <div class="vz-formule">
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">1. Inkomen</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Je beroepsinkomen</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#3F5767;line-height:1.4;">geherwaardeerd netto-beroepsinkomen van 3 jaar eerder (N-3)</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">×</div>
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">2. Plafond</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">8,17% of 9,40%</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#3F5767;line-height:1.4;">gewoon of sociaal VAPZ, met een absoluut wettelijk maximum</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">=</div>
+      <div style="background:#3F5767;border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 8px 32px rgba(63,87,103,0.3);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">Jouw premie</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin-bottom:8px;">Binnen het maximum</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#94a3b8;line-height:1.4;">volledig aftrekbaar, geen premietaks</div>
+      </div>
+    </div>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:#001F3F;text-align:center;margin-bottom:32px;">4 factoren die je premie bepalen</h3>
+    <div class="vz-factors-grid">
+      {[
+        {num:'1',title:'Je beroepsinkomen (N-3)',  text:'Je VAPZ-plafond wordt berekend op je geherwaardeerd netto-beroepsinkomen van ongeveer drie jaar eerder. Hoe hoger dat inkomen, hoe meer ruimte je hebt.'},
+        {num:'2',title:'Gewoon of sociaal VAPZ',   text:'Een sociaal VAPZ geeft je een hoger plafond (ongeveer 15% meer ruimte), maar minstens 10% van de premie gaat naar het solidariteitsluik in plaats van naar zuivere opbouw.'},
+        {num:'3',title:'Het gekozen rendementstype',text:'Bij een tak21-formule mik je op zekerheid met een gewaarborgd rendement; bij tak23 op meer rendementskansen zonder kapitaalgarantie. Dat bepaalt mee je eindkapitaal.'},
+        {num:'4',title:'Je leeftijd en horizon',   text:'Hoe vroeger je start, hoe langer je kapitaal kan groeien. De looptijd tot je pensioen weegt zwaar door op wat je uiteindelijk opbouwt.'},
+      ].map(f=>(
+        <div class="brand-why-card" style="padding:20px 24px;display:flex;gap:18px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:16px;color:#001F3F;">{f.num}</span></div>
+          <div>
+            <h4 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 4px;">{f.title}</h4>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#3F5767;margin:0;">{f.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style="max-width:680px;margin:0 auto;">
+      <div style="background:rgba(229,165,36,0.10);padding:20px 28px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);border:1px solid rgba(229,165,36,0.3);">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="18" height="18" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#001F3F;margin:0;"><strong>Fiscaal:</strong> je VAPZ-premie is aftrekbaar via je sociale bijdragen, wat een voordeel oplevert in de personenbelasting. Tegelijk verlaagt ze de basis waarop je sociale bijdragen berekend worden, zodat je ook daar minder betaalt. Een VAPZ is bovendien <strong>vrijgesteld van de premietaks van 4,40%</strong> die wel op een IPT of groepsverzekering geldt, en valt <strong>niet onder de 80%-regel</strong> maar onder een eigen plafond. Bij de uitkering op je wettelijke pensioenleeftijd geldt een gunstige eindbelasting.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section id="vz-cta-band" style="background:#E9C466;padding:80px 0 100px;position:relative;overflow:hidden;">
+  <div class="assurman-mask assurman-mask--cta vz-cta-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:1;">
+    <img src="/images/verzekeringen/vapz-band.jpg" alt="Zelfstandige in de bouw met een VAPZ-pensioen">
+  </div>
+  <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="100px" direction="down" /></div>
+  <div class="vz-cta-deco" style="position:absolute;right:-130px;top:40%;transform:translateY(-50%);pointer-events:none;z-index:2;"><BrandChevron color="white" height="240px" direction="left" /></div>
+  <div style="max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:4;padding:0 32px;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">Zelfstandige in de bouw?<br />Start met de voordeligste pensioenformule.</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#3F5767;margin-bottom:40px;opacity:0.9;">Start nu in 2 minuten of kies meteen voor persoonlijk advies.</p>
+    <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">{CTA_SCAN.requestNow} <Fragment set:html={svgArr18} /></a>
+  </div>
+</section>
+
+<!-- PER BEROEP TABS -->
+<section id="vz-beroep" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Per beroep</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Een VAPZ voor jouw stiel</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:560px;margin:0 auto;">Het VAPZ is je persoonlijke basis, ongeacht je beroep. Hieronder wat het concreet betekent per discipline.</p>
+    </div>
+    <div class="vz-tabs-row" style="display:flex;gap:0;border-bottom:2px solid rgba(0,31,63,0.12);margin-bottom:40px;justify-content:center;">
+      {beroepTabs.map((tab,i)=>(<button class={`vz-tab-btn${i===0?' active':''}`} data-tab-btn={tab.id}>{tab.label}</button>))}
+    </div>
+    {beroepTabs.map((tab,i)=>(
+      <div data-tab-content={tab.id} style={`display:${i===0?'block':'none'};max-width:860px;margin:0 auto;`}>
+      <div class="vz-tab-inner" style="background:#FFFFFF;border-radius:12px;padding:36px 40px;">
+        <div style="background:rgba(229,165,36,0.12);border-radius:12px;padding:18px;flex-shrink:0;">
+          <svg width="32" height="32" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+        </div>
+        <div style="flex:1;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">{tab.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.65;color:#001F3F;margin:0 0 20px;">{tab.text}</p>
+          <a href={tab.link} style="display:inline-flex;align-items:center;gap:6px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;text-decoration:none;">Bekijk sectorpagina <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+      </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- MIJN SITUATIE ACCORDION -->
+<section id="vz-statuten" style="background:#3F5767;padding:96px 32px;position:relative;overflow:hidden;">
+  <div style="max-width:840px;margin:0 auto;position:relative;z-index:1;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Mijn situatie</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Welke aanpak past bij jouw VAPZ?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0 0 40px;">Drie typische situaties uit de Belgische bouwsector. Vind de jouwe en zie wat dat concreet betekent voor je VAPZ.</p>
+
+    <div class="vz-stat-panel" data-stat-panel>
+      <button class="vz-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik start net als zelfstandige</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je bent net begonnen als zelfstandige in hoofdberoep. Het VAPZ is de logische eerste stap: laagdrempelig, volledig aftrekbaar via je sociale bijdragen en zonder premietaks. Je hoeft niet meteen het maximum te storten, je kan groeien met je inkomen mee.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: begin met een haalbaar bedrag binnen het wettelijke plafond. Hoe vroeger je start, hoe langer je kapitaal kan groeien. Bekijk samen met ons of een gewoon of een sociaal VAPZ het best bij je past.</p>
+      </div>
+    </div>
+
+    <div class="vz-stat-panel" data-stat-panel>
+      <button class="vz-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik wil maximaal opbouwen</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je wil zoveel mogelijk fiscaal voordelig opbouwen. Kies dan voor een <strong style="color:#FFFFFF;">sociaal VAPZ</strong>: dat geeft je ongeveer 15% meer ruimte én een solidariteitsluik. Is dat plafond vol, dan bouw je bij met een <strong style="color:#FFFFFF;">POZ</strong> (zonder vennootschap) of een <strong style="color:#FFFFFF;">IPT</strong> (met vennootschap).</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: VAPZ eerst tot het maximum, want het is de voordeligste laag, en daarna bijbouwen in de juiste vervolgformule. Bekijk de details op de pagina's over <a href="/verzekeringen/poz/" style="color:#E5A524;text-decoration:underline;">POZ</a> en <a href="/verzekeringen/ipt/" style="color:#E5A524;text-decoration:underline;">IPT</a>, of doe de scan.</p>
+      </div>
+    </div>
+
+    <div class="vz-stat-panel" data-stat-panel>
+      <button class="vz-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik heb een vennootschap</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Ook met een vennootschap blijft het VAPZ je <strong style="color:#FFFFFF;">persoonlijke basis</strong>: je betaalt het uit je privé-inkomen, maar het is aftrekbaar via je sociale bijdragen en verlaagt die bijdragen. De grote hefboom daarbovenop is een <strong style="color:#FFFFFF;">IPT</strong>, die je vennootschap betaalt en aftrekt als beroepskost.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: vul eerst je VAPZ op, want dat is voordeliger dan meteen alles via de IPT te doen, en laat je vennootschap daarna bijstorten in een <a href="/verzekeringen/ipt/" style="color:#E5A524;text-decoration:underline;">IPT</a> binnen de 80%-regel. Wij rekenen de optimale verdeling voor je uit.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPBOUW EN UITKERING -->
+<section id="procedure" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:60px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Opbouw en uitkering</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Hoe verloopt het van aansluiting tot pensioen?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Een VAPZ is een traject van jaren. Hieronder zie je hoe het loopt, van je aansluiting tot de uitkering bij je pensioen.</p>
+    </div>
+    <div class="vz-procedure-grid">
+      <div class="vz-procedure-line" style="position:absolute;top:36px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(to right,#E5A524,rgba(229,165,36,0.2));z-index:0;"></div>
+      {[
+        {ic:'ph', title:'Aansluiten',             text:'Je sluit een VAPZ af bij een verzekeraar of pensioeninstelling, voor een gewoon of een sociaal VAPZ. Samen bepalen we het type en het rendement (tak21, tak23 of een combinatie).'},
+        {ic:'eu', title:'Jaarlijks storten',      text:'Je stort periodiek of jaarlijks, binnen het wettelijke plafond van 8,17% of 9,40% van je beroepsinkomen. Elke storting trek je af via je sociale bijdragen en verlaagt meteen die bijdragen.'},
+        {ic:'ey', title:'Opvolgen via MyPension', text:'Je volgt je opgebouwde reserve op via je jaarlijkse fiche en via MyPension, het officiële platform van de overheid, waar je je volledige aanvullend pensioen samen ziet. We sturen bij waar nodig.'},
+        {ic:'gf', title:'Uitkering bij pensioen', text:'Op je wettelijke pensioenleeftijd wordt het kapitaal uitgekeerd. De belasting verloopt via een gunstregime (onder meer een fictieve rente), waardoor de eindbelasting beperkt blijft. Het nettobedrag hangt af van je loopbaan en situatie.'},
+      ].map((s,i)=>(
+        <div style="padding:0 20px;text-align:center;position:relative;z-index:1;">
+          <div style="width:72px;height:72px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 4px 16px rgba(229,165,36,0.3);">
+            {s.ic==='ph'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>}
+            {s.ic==='eu'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+            {s.ic==='ey'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>}
+            {s.ic==='gf'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>}
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#E5A524;margin-bottom:8px;">Stap {i+1}</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{s.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:840px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over het VAPZ</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;margin:0;">Concrete vragen van zelfstandigen in de bouw: klik open voor het antwoord.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      {faqItems.map((item)=>(
+        <div data-faq-item style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.08);border-radius:10px;overflow:hidden;">
+          <button data-faq-btn style="width:100%;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;text-align:left;gap:16px;">
+            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;line-height:1.35;">{item.q}</span>
+            <svg data-faq-chevron width="18" height="18" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div data-faq-answer style="display:none;padding:0 24px 20px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#3F5767;margin:0;">{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- GERELATEERDE VERZEKERINGEN -->
+<InsuranceCarousel
+  client:only="react"
+  cards={insuranceCards}
+  sectionLabel="Ook interessant"
+  headline="Gerelateerde verzekeringen"
+  subheadline="Deze formules sluiten aan bij de opbouw van je aanvullend pensioen als zelfstandige in de bouw."
+  background="#F5F2FF"
+/>
+
+<!-- PARTNERS -->
+<section style="background:#F7F4EF;padding:64px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">Ondersteund door sterke verzekeringspartners</p>
+    <PartnerSlider client:only="react" />
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:#3F5767;padding-top:120px;padding-bottom:0;position:relative;text-align:center;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+  <div style="max-width:896px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;text-align:center;margin-bottom:20px;">Start met Assurman</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;color:#FFFFFF;max-width:727px;margin:0 auto 24px;">Bouw je pensioen op met je VAPZ</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je als zelfstandige in de bouw en wil je weten of een gewoon of een sociaal VAPZ het meeste oplevert? Wij rekenen het samen met jou uit, zonder verplichting.</p>
+    <div class="vz-final-btns">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">{CTA_SCAN.hero} <Fragment set:html={svgArr18} /></a>
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">{CTA_AFSPRAAK.advisory}</a>
+    </div>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+</section>
+
+</div>
+
+<script>
+  const progressBar = document.getElementById('vz-progress-bar') as HTMLElement | null;
+  const stickyBtns  = document.querySelectorAll<HTMLElement>('[data-sticky-btn]');
+  const sectionIds  = ['watis','verplicht','dekking','premie','procedure','faq'];
+
+  stickyBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.stickyBtn!;
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const total = doc.scrollHeight - doc.clientHeight;
+    if (progressBar) progressBar.style.width = total > 0 ? `${(doc.scrollTop / total) * 100}%` : '0%';
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sectionIds[i]);
+      if (el && el.getBoundingClientRect().top <= 120) {
+        stickyBtns.forEach(b => b.classList.toggle('active', b.dataset.stickyBtn === sectionIds[i]));
+        break;
+      }
+    }
+  }, { passive: true });
+
+  const exBtn  = document.getElementById('vz-examples-btn')     as HTMLElement | null;
+  const exList = document.getElementById('vz-examples-list')    as HTMLElement | null;
+  const exChev = document.getElementById('vz-examples-chevron') as HTMLElement | null;
+  if (exBtn && exList && exChev) {
+    exBtn.addEventListener('click', () => {
+      const open = exList.style.display !== 'none';
+      exList.style.display = open ? 'none' : 'grid';
+      exChev.style.transform = open ? '' : 'rotate(180deg)';
+    });
+  }
+
+  const tabBtns     = document.querySelectorAll<HTMLElement>('[data-tab-btn]');
+  const tabContents = document.querySelectorAll<HTMLElement>('[data-tab-content]');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tabBtn!;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      tabContents.forEach(el => { el.style.display = el.dataset.tabContent === t ? 'block' : 'none'; });
+    });
+  });
+
+  document.querySelectorAll('[data-stat-panel]').forEach(panel => {
+    const btn     = panel.querySelector<HTMLElement>('[data-stat-btn]');
+    const content = panel.querySelector<HTMLElement>('[data-stat-content]');
+    const chevron = panel.querySelector<HTMLElement>('[data-stat-chevron]');
+    if (!btn || !content || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = content.style.display !== 'none';
+      document.querySelectorAll('[data-stat-panel]').forEach(p => {
+        const c  = p.querySelector<HTMLElement>('[data-stat-content]');
+        const ch = p.querySelector<HTMLElement>('[data-stat-chevron]');
+        if (c)  c.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { content.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+
+  document.querySelectorAll('[data-faq-item]').forEach(item => {
+    const btn     = item.querySelector<HTMLElement>('[data-faq-btn]');
+    const answer  = item.querySelector<HTMLElement>('[data-faq-answer]');
+    const chevron = item.querySelector<HTMLElement>('[data-faq-chevron]');
+    if (!btn || !answer || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = answer.style.display !== 'none';
+      document.querySelectorAll('[data-faq-item]').forEach(fi => {
+        const a  = fi.querySelector<HTMLElement>('[data-faq-answer]');
+        const ch = fi.querySelector<HTMLElement>('[data-faq-chevron]');
+        if (a)  a.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { answer.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+</script>
+
 </BaseLayout>
