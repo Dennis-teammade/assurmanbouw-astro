@@ -54,7 +54,7 @@ flaggen i.p.v. forceren.
 | 7 | Groepsverzekering | `groepsverzekering` | pensioen-en-fiscaal | Codex+Dennis | DONE |
 | 8 | Aanvullend pensioen (pijler) | `aanvullend-pensioen` | pensioen-en-fiscaal | Codex+Dennis | DONE |
 | 9 | VAPZ | `vapz` | pensioen-en-fiscaal | dun (pijler) | DONE |
-| 10 | POZ | `poz` | pensioen-en-fiscaal | dun (pijler) | TODO |
+| 10 | POZ | `poz` | pensioen-en-fiscaal | dun (pijler) | DONE |
 | 11 | IPT | `ipt` | pensioen-en-fiscaal | dun (pijler) | TODO |
 
 > Overlijdensdekking + BA Uitbating + Omzetverzekering: NIET bouwen (buiten de 18 / uitgesteld).
@@ -144,7 +144,7 @@ voorstel voor de volgende dag.
 - [x] 7. Groepsverzekering — DONE
 - [x] 8. Aanvullend pensioen — DONE
 - [x] 9. VAPZ — DONE
-- [ ] 10. POZ — TODO
+- [x] 10. POZ — DONE
 - [ ] 11. IPT — TODO
 
 ### Blokkers / openstaande beslissingen
@@ -162,3 +162,4 @@ voorstel voor de volgende dag.
 - **Groepsverzekering** — DONE. Gebouwd uit subagent-brief (prefix gv-, echt beeld, hero vh). Tweede pijler voor het personeel, scherp onderscheiden van VAPZ/IPT/POZ (= bedrijfsleider zelf). Rode draad arbeiders PC 124 (sectoraal via Constructiv) vs bedienden PC 200 (vrijwillig). Verplicht-antwoord "Soms." Kerngetal WAP 2,50% (sinds 2025). Premietaks 4,40% + RIZIV 8,86% + 80%-regel. Databron live (gerelateerde → aanvullend-pensioen/ipt/vapz/gewaarborgd-inkomen). Build groen, 12 FAQ statisch, FAQPage-schema, noindex weg. Controlepunten GRP1-12. Volgende: Aanvullend pensioen (pijler; brief nog te maken).
 - **Aanvullend pensioen** — DONE. PIJLER-/KEUZEHUB-pagina (prefix ap-, echt beeld, hero vh), afwijkend van de enkel-product-norm: "Dekking" → **De formules** (4 routeerkaarten VAPZ/POZ/IPT/groepsverzekering met voor-wie-badge + link naar sub-pagina), "Premie" → **Fiscaal voordeel**. Rode draad = routeren op statuut (zonder venn. → VAPZ+POZ; met venn. → VAPZ+IPT; werkgever → groepsverzekering), doorgetrokken in hero, verplicht-antwoord "Nee.", mijn-situatie (3 panelen) en per-beroep. Geverifieerde cijfers (subagent, juni 2026): pensioensparen €1.050/€1.350, langetermijnsparen €2.450, VAPZ 8,17%/9,40%, premietaks 4,40%, 80%-regel. Databron live (gerelateerde → vapz/ipt/poz). Build groen (101 pagina's), 12 FAQ statisch, FAQPage-schema, noindex weg. Controlepunten AP1-12. Volgende: VAPZ (sub-pagina 9; brief nog te maken).
 - **VAPZ** — DONE. Enkel-product-pagina (standaard polis-norm, prefix vz-, echt beeld, hero vh). Basis-tweedepijlerformule voor élke zelfstandige in hoofdberoep. Rode draad = gewoon vs sociaal VAPZ (solidariteitsluik ≥10%). Onderscheidende voordelen prominent: **vrijstelling premietaks 4,40%** (geverifieerd, load-bearing) en **niet onder de 80%-regel** (eigen plafond). Scherp afgebakend t.o.v. POZ (zonder venn.)/IPT (met venn.)/groepsverzekering + 3e-pijler pensioensparen. Geverifieerde cijfers 2026: plafonds 8,17%/€4.086,34 (gewoon), 9,40%/€4.701,54 (sociaal), N-3 referentie-inkomen. Databron live (gerelateerde → aanvullend-pensioen/poz/ipt). Build groen (101 pagina's), 12 FAQ statisch, FAQPage-schema, noindex weg. Controlepunten VZ1-15 (let op VZ5: ao-waarborg in sociaal VAPZ kan wél belast worden). Volgende: POZ (sub-pagina 10; brief nog te maken).
+- **POZ** — DONE. Enkel-product-pagina (standaard polis-norm, prefix pz-, echt beeld, hero vh). Tweedepijler-aanvulling bovenop het VAPZ voor zelfstandigen ZONDER vennootschap (eenmanszaak/vrij beroep/meewerkende echtgenoot); de tegenhanger van de IPT. Onderscheidende nuances eerlijk getoond: POZ valt **WEL onder de 80%-regel** (VAPZ niet) en de **premietaks 4,40% is WEL van toepassing** (VAPZ vrijgesteld). Geverifieerde cijfers (juni 2026): 30% belastingvermindering, 80%-regel, premietaks 4,40%. Volgorde-logica VAPZ-eerst-dan-POZ + overstap POZ→IPT bij vennootschap als rode draad. Databron live (gerelateerde → aanvullend-pensioen/vapz/ipt). Build groen (101 pagina's), 12 FAQ statisch, FAQPage-schema, noindex weg. Controlepunten PZ1-12 (let op PZ2: snippet over afschaffing premietaks 2025 onbevestigd; PZ4: wetsdatum 18/2/2018 nog te bevestigen). Volgende: IPT (sub-pagina 11, LAATSTE; brief nog te maken).

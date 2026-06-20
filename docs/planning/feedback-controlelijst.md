@@ -252,3 +252,26 @@ Status pagina: **afgewerkt, op staging.** Enkel-product-pagina (standaard polis-
 | VZ15 | Euro-scenario's in de **6 cases** zijn herkenbaar-fictieve illustraties; geen verzekeraarsnamen in de copy | Brand-voice-regel cases | Bevestig dat dit als illustratie volstaat. | 🔲 |
 
 Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/band = echt beeld (`/images/verzekeringen/vapz-*`). Consistent met de koepelpagina aanvullend-pensioen. POZ en IPT (sub-pagina's 10-11) worden hierna gebouwd.
+
+---
+
+## /verzekeringen/poz (POZ — Pensioenovereenkomst voor Zelfstandigen)
+
+Status pagina: **afgewerkt, op staging.** Enkel-product-pagina (standaard polis-norm, prefix pz-). Tweedepijler-aanvulling bovenop het VAPZ voor zelfstandigen ZONDER vennootschap. De tegenhanger van de IPT. Onderscheidend: valt WEL onder de 80%-regel + premietaks 4,40% WEL van toepassing (verschil met VAPZ). **12 controlepunten.**
+
+| # | Wat we beslisten (staat zo op de pagina) | Waarom | Te controleren / suggestie | Status |
+|---|---|---|---|---|
+| PZ1 | **Belastingvermindering POZ = 30%** op de gestorte premie (kerngetal, fiscaal-card, FAQ) | Geverifieerd (KBC, Practicali, juni 2026): federale belastingvermindering van 30%, geen aftrek als beroepskost | Bevestig de 30% bij publicatie en de formulering "belastingvermindering" (niet "aftrek"). | 🔲 |
+| PZ2 | **Premietaks 4,40% is WEL van toepassing** op de POZ-premie (verschil met VAPZ) | Geverifieerd (Practicali): "premietaks van 4,4% verschuldigd op de POZ-premies", net zoals bij IPT/groepsverzekering | **LET OP:** één online snippet suggereerde een afschaffing in 2025 (onbevestigd, lijkt verwarring met latere hervorming). Bevestig dat 4,40% bij publicatie nog van kracht is. | 🔲 |
+| PZ3 | **POZ valt WEL onder de 80%-regel**; referentie-inkomen = gemiddelde belastbaar beroepsinkomen over de voorbije jaren | Geverifieerd (KBC, Practicali, AG). Kernverschil met VAPZ (eigen plafond), gelijk aan IPT | Bevestig de formulering en het referentie-inkomen. | 🔲 |
+| PZ4 | **Wettelijke basis** = wet van **18 februari 2018** (versterking aanvullende pensioenen), in werking voor inkomstenjaar 2018 + FSMA-toezicht | POZ ingevoerd in 2018; gaf zelfstandigen zonder vennootschap een eigen tweedepijlerformule | Wetsdatum 18/2/2018 kon niet onafhankelijk bevestigd worden (zoekmachine viel uit). Bevestig de exacte wet + datum, of houd kwalitatief ("ingevoerd in 2018"). | 🔲 |
+| PZ5 | Antwoord op "verplicht?" = **"Nee."**; doelgroep = zelfstandige zonder vennootschap (eenmanszaak, vrij beroep, meewerkende echtgenoot) | Eerlijkste weergave: nooit verplicht, wel de logische vervolgstap zonder vennootschap | Bevestig "Nee." en de doelgroep-afbakening. | 🔲 |
+| PZ6 | **Afbakening POZ (zonder venn.) vs IPT (met venn.)** + **overstap POZ → IPT** mogelijk bij oprichting vennootschap | Kern van de routeer-logica; overstap-vraag komt vaak terug | Bevestig de afbakening en de overstap-logica (gaat opgebouwde POZ mee, en onder welke voorwaarden). | 🔲 |
+| PZ7 | **Uitkering** belast via een **gunstregime** bij pensioen; **geen hard netto-percentage** op de pagina | Brand-voice: geen ongekwalificeerde cijfers; bewust kwalitatief | Bronnen noemen ~10% eindbelasting. Beslis of je dat richtcijfer expliciet wil tonen of kwalitatief houdt. | 🔲 |
+| PZ8 | **Carousel** = `['aanvullend-pensioen','vapz','ipt','gewaarborgd-inkomen']`; databron-`gerelateerde` = `['aanvullend-pensioen','vapz','ipt']` | Koepel + basislaag (VAPZ) + tegenhanger (IPT); gewaarborgd-inkomen vult de ao-waarborg aan | Bevestig de carousel-selectie en de gerelateerde-array. | 🔲 |
+| PZ9 | **Volgorde-logica:** eerst VAPZ opvullen (voordeligst, vrij van premietaks), dan POZ erbovenop binnen de 80%-regel | Geeft de juiste fiscale prioriteit; consistent met VAPZ- en koepelpagina | Bevestig de formulering. | 🔲 |
+| PZ10 | **Tak21 vs tak23** kort uitgelegd; **overlijdensdekking** en **premievrijstelling** als optionele waarborgen | Standaard onderscheid + gangbare opties | Bevestig de formulering tegen ons gamma (welke takken/waarborgen binnen de POZ). | 🔲 |
+| PZ11 | **Geen euro-premiebedrag** op de pagina, enkel de 80%-logica en de factoren | Brand-voice: geen verzonnen tarieven | Bevestig dat we geen indicatief premietarief tonen. | 🔲 |
+| PZ12 | Euro-scenario's in de **6 cases** zijn herkenbaar-fictieve illustraties; geen verzekeraarsnamen in de copy | Brand-voice-regel cases | Bevestig dat dit als illustratie volstaat. | 🔲 |
+
+Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/band = echt beeld (`/images/verzekeringen/poz-*`). Consistent met de koepel- en VAPZ-pagina. Laatste sub-pagina IPT (11/11) volgt.

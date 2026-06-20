@@ -228,11 +228,11 @@ export const VERZEKERINGEN: Verzekering[] = [
     slug: 'poz',
     titel: 'POZ',
     categorie: 'pensioen-en-fiscaal',
-    korteBeschrijving: 'Pensioenovereenkomst voor Zelfstandigen: aanvullend pensioen voor zelfstandigen zonder vennootschap.', // TODO: definitieve copy
-    bullets: ['Voor zelfstandigen zonder vennootschap', 'Aanvulling op het VAPZ', 'Fiscaal voordeel'], // TODO: definitieve bullets
+    korteBeschrijving: 'De POZ is het aanvullend pensioen voor zelfstandigen zonder vennootschap: bovenop je VAPZ, met een belastingvermindering van 30% binnen de 80%-regel, en de tegenhanger van de IPT.',
+    bullets: ['Aanvullend pensioen voor zelfstandigen zonder vennootschap', '30% belastingvermindering op je gestorte premie', 'Opbouw bovenop je VAPZ, binnen de 80%-regel', 'De tegenhanger van de IPT, maar zonder vennootschap'],
     icoon: 'piggy-bank',
     gerelateerde: ['aanvullend-pensioen', 'vapz', 'ipt'],
-    status: 'skeleton',
+    status: 'live',
   },
   {
     slug: 'ipt',

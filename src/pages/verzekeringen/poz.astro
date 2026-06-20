@@ -1,20 +1,709 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { CTA_SCAN, CTA_DESTINATIONS } from '../../data/cta-labels';
+import { kaartenVoor } from '../../data/verzekeringen';
+import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
+import BrandChevron from '../../components/BrandChevron.astro';
+
+const faqItems = [
+  { q: 'Wat is een POZ?', a: 'Een POZ (Pensioenovereenkomst voor Zelfstandigen) is een aanvullend pensioen voor zelfstandigen zonder vennootschap: een eenmanszaak, een vrij beroep of een meewerkende echtgenoot. Je stort een premie bij een verzekeraar, krijgt er een belastingvermindering van 30% voor in de plaats, en het kapitaal wordt bij je pensioen uitgekeerd. Het is de tweedepijler-aanvulling bovenop je VAPZ.' },
+  { q: 'Is een POZ verplicht?', a: 'Nee. Een POZ is volledig vrijwillig. Maar als je geen vennootschap hebt, is het wel dé manier om bovenop je VAPZ extra pensioen op te bouwen met fiscaal voordeel. Voor zelfstandigen zonder vennootschap is de POZ de tegenhanger van de IPT.' },
+  { q: 'Wat is het verschil tussen een POZ en een IPT?', a: 'Beide zijn een tweedepijler-pensioen bovenop je VAPZ, maar ze hangen af van je statuut. Een IPT is voor wie via een vennootschap werkt: de vennootschap betaalt de premie en trekt die af als beroepskost. Een POZ is voor wie geen vennootschap heeft: jij betaalt de premie privé en krijgt een belastingvermindering van 30%. Beide vallen onder de 80%-regel.' },
+  { q: 'Wat is het verschil tussen een POZ en een VAPZ?', a: 'Het VAPZ is de basis voor elke zelfstandige, met een eigen plafond en vrij van premietaks. De POZ komt daar bovenop, specifiek voor wie geen vennootschap heeft. Twee belangrijke verschillen: de POZ valt onder de 80%-regel (het VAPZ niet) en op de POZ-premie is wel een premietaks van 4,40% verschuldigd (op het VAPZ niet). Daarom vul je je VAPZ best eerst op.' },
+  { q: 'Geldt de 80%-regel voor een POZ?', a: 'Ja. Je wettelijk pensioen en je aanvullend pensioen samen mogen niet meer bedragen dan 80% van je referentie-inkomen. Die grens bepaalt hoeveel je fiscaal voordelig in je POZ kan storten. Anders dan het VAPZ, dat een eigen plafond heeft, valt de POZ dus wel onder de 80%-regel. Wij berekenen je ruimte vooraf.' },
+  { q: 'Hoeveel belastingvermindering krijg ik op mijn POZ?', a: 'Je krijgt een belastingvermindering van 30% op de premies die je stort, een federaal voordeel in je personenbelasting. Het is geen aftrek als beroepskost zoals bij een IPT, maar een rechtstreekse vermindering van wat je aan belasting betaalt. Het voordeel geldt zolang je binnen de 80%-regel blijft.' },
+  { q: 'Betaal ik premietaks op mijn POZ?', a: 'Ja. Anders dan bij een VAPZ is op de POZ-premie een premietaks van 4,40% verschuldigd, net zoals bij een IPT of een groepsverzekering. Dat is precies een van de redenen waarom je je VAPZ, dat van die taks vrijgesteld is, het best eerst volledig opvult voor je bijbouwt met een POZ.' },
+  { q: 'Kan ik een POZ en een VAPZ combineren?', a: 'Ja, en dat is net de bedoeling. Het VAPZ is je basis en het voordeligst, dus dat vul je eerst op. Pas daarna bouw je bij met een POZ binnen je 80%-ruimte. Zo benut je je volledige fiscale ruimte als zelfstandige zonder vennootschap.' },
+  { q: 'Wat als ik later een vennootschap opricht?', a: 'Dan verandert je situatie: met een vennootschap krijg je toegang tot een IPT, waarbij je vennootschap de premie betaalt en aftrekt als beroepskost. Een overstap van POZ naar IPT is mogelijk. We bekijken samen hoe je opgebouwde POZ daarbij meegaat en welke formule dan het meeste oplevert.' },
+  { q: 'Wat gebeurt er bij arbeidsongeschiktheid of overlijden?', a: 'Je kan aanvullende waarborgen koppelen aan je POZ. Met een waarborg premievrijstelling neemt de verzekeraar je premie over als je langdurig arbeidsongeschikt wordt, zodat je opbouw doorloopt. Met een overlijdensdekking ontvangt een begunstigde, vaak je partner of kinderen, een kapitaal als je overlijdt vóór je pensioen. De exacte regeling leggen we je per polis uit.' },
+  { q: 'Vanaf wanneer wordt mijn POZ uitgekeerd?', a: 'Je POZ-kapitaal wordt in principe uitgekeerd op je wettelijke pensioenleeftijd, wanneer je je pensioen opneemt. De uitkering wordt gunstig belast via een gunstregime. Vervroegd opnemen kan enkel binnen de wettelijke uitzonderingen.' },
+  { q: 'Hoe volg ik mijn POZ op?', a: 'Je krijgt jaarlijks een pensioenfiche van je verzekeraar. Daarnaast zie je je volledige aanvullend pensioen op MyPension, het officiële platform van de overheid. Daar staan al je aangesloten plannen en je opgebouwde reserve, waaronder je VAPZ en je POZ, samen.' },
+];
+
+const beroepTabs = [
+  { id: 'dakwerkers',    label: 'Dakwerkers',     link: '/sectoren/dakwerkers',     title: 'Voor dakwerkers',                    text: 'Werk je als zelfstandige dakwerker met een eenmanszaak en is je VAPZ-ruimte vol, dan bouw je met een POZ verder, met 30% belastingvermindering binnen de 80%-regel. Heb je een vennootschap, dan kies je in de plaats een IPT.' },
+  { id: 'metsers',       label: 'Metsers',        link: '/sectoren/aannemers',      title: 'Voor metsers en algemene aannemers', text: 'Veel algemene aannemers werken via een vennootschap en gebruiken een IPT. Werk je nog als natuurlijk persoon, dan is de POZ jouw formule om bovenop je VAPZ extra pensioen op te bouwen.' },
+  { id: 'loodgieters',   label: 'Loodgieters',    link: '/sectoren/loodgieters',    title: 'Voor loodgieters',                   text: 'Als zelfstandige loodgieter zonder vennootschap bouw je met een POZ verder na je VAPZ. Wij berekenen je 80%-ruimte op basis van je referentie-inkomen, zodat je premie fiscaal voordelig blijft.' },
+  { id: 'elektriciens',  label: 'Elektriciens',   link: '/sectoren/elektriciens',   title: 'Voor elektriciens',                  text: 'Heb je een eenmanszaak, dan is de POZ je tegenhanger van de IPT: je betaalt privé en krijgt 30% belastingvermindering. Stap je later over naar een vennootschap, dan kan je overschakelen naar een IPT.' },
+  { id: 'schilders',     label: 'Schilders',      link: '/sectoren/schilders',      title: 'Voor schilders',                     text: 'Een schilder met een eenmanszaak vult eerst zijn VAPZ op en bouwt daarna bij met een POZ. In een fysiek beroep koppel je er best een waarborg arbeidsongeschiktheid aan, zodat je opbouw doorloopt bij uitval.' },
+  { id: 'schrijnwerkers',label: 'Schrijnwerkers', link: '/sectoren/schrijnwerkers', title: 'Voor schrijnwerkers',                text: 'Werk je als schrijnwerker zonder vennootschap, dan is de POZ je formule bovenop het VAPZ. We bekijken samen hoeveel 80%-ruimte je nog hebt en welke waarborgen zinvol zijn.' },
+];
+
+const insuranceCards = kaartenVoor(['aanvullend-pensioen', 'vapz', 'ipt', 'gewaarborgd-inkomen']);
+
+const schema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+
+const svgCheck16g = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+const svgX16r    = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
+const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
 ---
+
 <BaseLayout
-  title="POZ: Pensioenovereenkomst voor Zelfstandigen | Assurman"
-  description="Bouw als zelfstandige zonder vennootschap een aanvullend pensioen op via de POZ. Binnenkort online bij Assurman."
+  title="POZ voor zelfstandigen zonder vennootschap | Assurman"
+  description="De POZ is je aanvullend pensioen als zelfstandige zonder vennootschap: bovenop je VAPZ, met 30% belastingvermindering binnen de 80%-regel. Zo werkt het."
   canonical="/verzekeringen/poz/"
-  noindex={true}
+  schema={schema}
 >
-  <main style="min-height:72vh;display:flex;align-items:center;justify-content:center;background:#FBF8FF;padding:140px 24px 96px;">
-    <div style="max-width:680px;text-align:center;">
-      <span style="display:inline-block;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Verzekering</span>
-      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,52px);color:#001F3F;line-height:1.1;margin:0 0 16px;">POZ</h1>
-      <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#3F5767;line-height:1.6;margin:0 0 32px;">Deze pagina is in opbouw. Binnenkort lees je hier alles over de Pensioenovereenkomst voor Zelfstandigen (POZ). Wil je nu al weten waar je dekking tekortschiet? Doe de gratis verzekeringsscan in 2 minuten.</p>
-      <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary--lg">{CTA_SCAN.hero}</a>
-      <p style="margin-top:28px;"><a href="/verzekeringen/" style="color:#3F5767;font-family:'Outfit',sans-serif;text-decoration:underline;">Alle verzekeringen bekijken</a></p>
+
+<style is:global>
+  .pz-sticky-btn{background:#F7F4EF;border:1px solid rgba(229,165,36,0.2);cursor:pointer;padding:7px 16px;margin:10px 5px;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border-radius:9999px;transition:background 0.2s,border-color 0.2s;color:#001F3F;}
+  .pz-sticky-btn:hover,.pz-sticky-btn.active{background:rgba(229,165,36,0.18);border-color:#E5A524;}
+  .pz-sticky-btn .pz-check{color:#94a3b8;flex-shrink:0;transition:color 0.2s;}
+  .pz-sticky-btn:hover .pz-check,.pz-sticky-btn.active .pz-check{color:#E5A524;}
+  .pz-tab-btn{background:none;border:none;cursor:pointer;padding:14px 24px;white-space:nowrap;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.2s,border-color 0.2s;}
+  .pz-tab-btn:hover,.pz-tab-btn.active{color:#E5A524;border-bottom-color:#E5A524;}
+  .pz-ins-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);transition:background 0.2s,transform 0.2s;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);}
+  .pz-ins-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-4px);}
+  .pz-stat-panel{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+  .pz-stat-btn{width:100%;display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;text-align:left;padding:20px 24px;}
+  .pz-scan-btn:hover{background:#324554 !important;}
+  .pz-badge-pill{display:inline-flex;align-items:center;gap:8px;background:#F5F2FF;border:1px solid rgba(213,196,174,0.2);border-radius:9999px;padding:6px 16px;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#001F3F;}
+</style>
+
+<style>
+  .pz-hero-img{position:absolute;top:5vh;right:-5px;height:85vh;width:auto;max-width:48%;z-index:1;pointer-events:none;}
+  .pz-hero-content{max-width:620px;}
+  .pz-hero-inner{max-width:1280px;margin:0 auto;padding:64px 32px 80px;position:relative;z-index:2;}
+  .pz-hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+  .pz-watis-grid{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:flex-start;}
+  .pz-verplicht-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .pz-dekking-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
+  .pz-plafond-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;}
+  .pz-aanvulling-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .pz-rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0;}
+  .pz-formule{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:64px;flex-wrap:wrap;}
+  .pz-factors-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;margin:0 auto 40px;}
+  .pz-procedure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+  .pz-tab-inner{display:flex;gap:32px;align-items:flex-start;border-radius:12px;}
+  .pz-final-btns{display:flex;gap:24px;justify-content:center;margin-bottom:80px;flex-wrap:wrap;}
+  .pz-sticky-nav-bar{position:sticky;top:72px;z-index:90;background:#FFFFFF;border-bottom:1px solid rgba(0,31,63,0.08);overflow:auto;}
+  .pz-sticky-inner{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;gap:0;justify-content:center;flex-wrap:wrap;}
+  .pz-container{max-width:1280px;margin:0 auto;padding:0 32px;}
+  .brand-why-card{background:#FFFFFF;border-left:4px solid #E5A524;box-shadow:0px 1px 2px rgba(0,0,0,0.05);transition:box-shadow 0.2s,transform 0.2s;}
+  .brand-why-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.1);transform:translateY(-2px);}
+
+  @media (max-width:1023px){
+    .pz-container{padding:0 24px;}
+    .pz-sticky-inner{padding:0 24px;}
+    .pz-watis-grid{grid-template-columns:1fr;gap:32px;}
+    .pz-verplicht-grid{grid-template-columns:repeat(2,1fr);}
+    .pz-aanvulling-grid{grid-template-columns:repeat(2,1fr);}
+    .pz-procedure-grid{grid-template-columns:repeat(2,1fr);gap:32px;}
+    .pz-factors-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:767px){
+    .pz-sticky-nav-bar{display:none;}
+    .pz-container{padding:0 15px;}
+    .pz-hero-content{max-width:100%;}
+    .pz-hero-img{display:none;}
+    .pz-hero-btns{flex-direction:column;}
+    .pz-hero-btns a{width:100%;justify-content:center;text-align:center;}
+    #watis{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #verplicht{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #dekking{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #premie{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #procedure{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #faq{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #pz-beroep{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #pz-statuten{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #pz-aanvulling{padding-bottom:56px !important;}
+    #pz-praktijk{padding-bottom:56px !important;}
+    #pz-cta-band{padding-left:15px !important;padding-right:15px !important;padding-bottom:64px !important;}
+    #pz-cta-band h2{font-size:clamp(28px,8vw,48px) !important;}
+    #pz-cta-band p{font-size:18px !important;}
+    .pz-watis-grid{grid-template-columns:1fr;gap:24px;}
+    .pz-verplicht-grid{grid-template-columns:1fr;}
+    .pz-dekking-grid{grid-template-columns:1fr;}
+    .pz-plafond-grid{grid-template-columns:1fr;}
+    .pz-plafond-grid>div:last-child{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.15);}
+    .pz-aanvulling-grid{grid-template-columns:1fr;}
+    .pz-rules-grid{grid-template-columns:1fr;}
+    .pz-formule{flex-direction:column;gap:8px;margin-bottom:40px;}
+    .pz-factors-grid{grid-template-columns:1fr;}
+    .pz-procedure-grid{grid-template-columns:1fr 1fr;gap:32px;}
+    .pz-tab-inner{flex-direction:column;gap:20px;padding:24px 20px;}
+    .pz-tabs-row{overflow-x:auto;justify-content:flex-start !important;padding-bottom:4px;-webkit-overflow-scrolling:touch;}
+    .pz-final-btns{flex-direction:column;align-items:center;}
+    .pz-final-btns a{width:100%;max-width:400px;justify-content:center;}
+    .pz-cta-deco{display:none;}
+    .pz-cta-mask-img{display:none;}
+    .pz-procedure-line{display:none !important;}
+    #pz-examples-list{grid-template-columns:1fr !important;}
+  }
+</style>
+
+<div id="pz-progress-track" style="position:fixed;top:0;left:0;right:0;height:3px;z-index:9999;background:rgba(0,31,63,0.07);">
+  <div id="pz-progress-bar" style="height:100%;background:#E5A524;width:0%;transition:width 0.1s linear;"></div>
+</div>
+
+<div style="font-family:'Outfit',sans-serif;color:#001F3F;background:#FFFFFF;">
+
+<!-- HERO -->
+<section id="pz-hero" style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:100vh;">
+  <div class="pz-hero-img assurman-mask assurman-mask--hero">
+    <img src="/images/verzekeringen/poz-hero.jpg" alt="Zelfstandige zonder vennootschap bouwt een POZ-pensioen op" />
+  </div>
+  <div class="pz-hero-inner">
+    <div class="pz-hero-content">
+      <div class="pz-badge-pill" style="margin-bottom:20px;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Assurman &middot; Bouwverzekeringen op maat
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">POZ<br />voor zelfstandigen zonder vennootschap</h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">Jouw tweedepijler-pensioen bovenop het VAPZ, zonder vennootschap.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">De POZ is het aanvullend pensioen voor zelfstandigen zonder vennootschap. Heb je een eenmanszaak en is je VAPZ-ruimte vol? Dan bouw je met een POZ verder, met een belastingvermindering van 30% op je premie, binnen de 80%-regel. Het is jouw tegenhanger van de IPT.</p>
+      <div class="pz-hero-btns">
+        <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
+          {CTA_SCAN.hero}
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.advisory}</a>
+      </div>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;">Geen verkooppraatjes: we bekijken eerst of je VAPZ-ruimte vol is en hoeveel je nog kan bijstorten in een POZ.</p>
     </div>
-  </main>
+  </div>
+</section>
+
+<!-- STICKY NAV -->
+<nav id="pz-sticky-nav" class="pz-sticky-nav-bar">
+  <div class="pz-sticky-inner">
+    {[{id:'watis',label:'Wat is het?'},{id:'verplicht',label:'Verplicht?'},{id:'dekking',label:'Dekking'},{id:'premie',label:'Premie'},{id:'procedure',label:'Opbouw'},{id:'faq',label:'FAQ'}].map(item=>(
+      <button class="pz-sticky-btn" data-sticky-btn={item.id}>
+        <svg class="pz-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        {item.label}
+      </button>
+    ))}
+  </div>
+</nav>
+
+<!-- WAT IS HET -->
+<section id="watis" style="background:#FFFFFF;padding:96px 32px;">
+  <div class="pz-container">
+    <div class="pz-watis-grid">
+      <div style="background:#3F5767;padding:32px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);">
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In het kort</span>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+          {[
+            {t:'De POZ is het <strong style="color:#FFFFFF;">aanvullend pensioen voor zelfstandigen zonder vennootschap</strong>: een eenmanszaak, vrij beroeper of meewerkende echtgenoot.'},
+            {t:'Het is de <strong style="color:#FFFFFF;">tegenhanger van de IPT</strong>: heb je een vennootschap, dan gebruik je een IPT; heb je er geen, dan is de POZ jouw formule.'},
+            {t:'Je krijgt een <strong style="color:#FFFFFF;">belastingvermindering van 30%</strong> op je gestorte premie, een federaal voordeel in de personenbelasting.'},
+            {t:'De POZ valt <strong style="color:#FFFFFF;">onder de 80%-regel</strong>: wettelijk en aanvullend pensioen samen mogen maximaal 80% van je referentie-inkomen bedragen.'},
+            {t:'Je vult <strong style="color:#FFFFFF;">eerst je VAPZ op</strong> (voordeligst, vrij van premietaks) en bouwt pas daarna bij met een POZ binnen je 80%-ruimte.'},
+          ].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.55;color:#CBD5E1;" set:html={item.t}></span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">Je aanvullend pensioen als zelfstandige zonder vennootschap</h2>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een POZ (Pensioenovereenkomst voor Zelfstandigen) is een <strong>aanvullend pensioen voor zelfstandigen die geen vennootschap hebben</strong>: een eenmanszaak, een vrij beroep of een meewerkende echtgenoot. Je stort periodiek een premie bij een verzekeraar, die het kapitaal opbouwt en beheert. In ruil krijg je een <strong>belastingvermindering van 30%</strong> op wat je stort.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">De POZ is de <strong>tegenhanger van de IPT</strong>. Werk je via een vennootschap, dan bouwt die vennootschap pensioen op met een IPT en trekt ze de premie af als beroepskost. Heb je geen vennootschap, dan kon je dat vroeger niet. Sinds 2018 vult de POZ dat gat: <strong>jij betaalt de premie privé en krijgt er een belastingvermindering voor in de plaats</strong>. Beide vallen onder de 80%-regel.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">De POZ komt bovenop je VAPZ, niet in de plaats. Je vult eerst je VAPZ op, want dat is de voordeligste laag, en bouwt daarna bij met een POZ tot je je 80%-ruimte hebt benut. Verwar de POZ niet met pensioensparen uit de derde pijler: dat sluit je privé af, los van je beroep, en heeft een veel lager plafond. De POZ is gekoppeld aan je activiteit als zelfstandige zonder vennootschap.</p>
+        <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div>
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">Wettelijke basis</p>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">De POZ werd ingevoerd door de <strong>wet van 18 februari 2018</strong>, de wet houdende maatregelen ter versterking van de aanvullende pensioenen. Ze trad in werking voor het inkomstenjaar 2018 en gaf zelfstandigen zonder vennootschap voor het eerst een eigen tweedepijlerformule naast het VAPZ. De verzekeraars en pensioeninstellingen die een POZ aanbieden, staan onder <strong>toezicht van de FSMA</strong>, de Belgische toezichthouder voor de financiële sector.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IS HET VERPLICHT -->
+<section id="verplicht" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Is het verplicht?</span>
+      <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#3F5767;margin-bottom:8px;">Moet ik als zelfstandige zonder vennootschap een POZ afsluiten?</p>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,10vw,112px);line-height:0.9;color:#001F3F;letter-spacing:-4px;">Nee.</div>
+      <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:20px;color:#3F5767;margin-top:12px;max-width:680px;margin-left:auto;margin-right:auto;">Een POZ is volledig vrijwillig. Maar als je geen vennootschap hebt, is het dé manier om bovenop je VAPZ door te bouwen, met 30% belastingvermindering.</p>
+    </div>
+    <div class="pz-verplicht-grid">
+      {[
+        {icon:'eu', title:'Vrij, maar logisch',         text:'Niet verplicht, wel de logische volgende stap. Zonder vennootschap heb je geen toegang tot een IPT. De POZ is dan de enige manier om bovenop je VAPZ extra pensioen op te bouwen met fiscaal voordeel.'},
+        {icon:'st', title:'Pas als je VAPZ vol zit',    text:'Niet verplicht, wel slim getimed. Je VAPZ is voordeliger en heeft een eigen plafond. Pas als dat plafond bereikt is, levert een POZ erbovenop het meeste op binnen je 80%-ruimte.'},
+        {icon:'us', title:'Zonder vennootschap',        text:'De POZ is er specifiek voor zelfstandigen zonder vennootschap: een eenmanszaak, een vrij beroep of een meewerkende echtgenoot. Heb je wel een vennootschap, dan kies je een IPT.'},
+        {icon:'pg', title:'Je wettelijk pensioen is laag', text:'Niet verplicht, wel nodig. Het wettelijk pensioen van een zelfstandige ligt vaak een stuk lager dan dat van een werknemer. Zonder aanvulling val je bij je pensioen sterk terug.'},
+      ].map(card=>(
+        <div style="background:#FFFFFF;padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+          <div style="background:rgba(229,165,36,0.1);border-radius:10px;padding:12px;display:inline-flex;margin-bottom:18px;">
+            {card.icon==='eu'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+            {card.icon==='st'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>}
+            {card.icon==='us'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+            {card.icon==='pg'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- IN DE PRAKTIJK -->
+<section id="pz-praktijk" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Waarom een POZ in de bouw?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">Veel zelfstandigen in de bouw werken met een eenmanszaak, zonder vennootschap. Hun VAPZ raakt na verloop van tijd vol, maar ze willen meer opbouwen. De POZ is dan precies de formule die ontbrak: extra pensioen, met een belastingvermindering van 30%, binnen de 80%-regel.</p>
+    </div>
+    <div class="pz-rules-grid">
+      {[
+        { title: 'Bovenop je VAPZ', text: 'Is je VAPZ-ruimte op en wil je toch meer opbouwen? Met een POZ bouw je verder binnen je 80%-ruimte. Zo benut je je volledige fiscale ruimte als zelfstandige zonder vennootschap.' },
+        { title: '30% belastingvermindering', text: 'Op elke euro die je in je POZ stort, krijg je een belastingvermindering van 30%. Een federaal voordeel in je personenbelasting, jaar na jaar dat je stort.' },
+        { title: 'Jouw IPT-equivalent', text: 'Wie via een vennootschap werkt, bouwt op met een IPT. Heb jij geen vennootschap, dan is de POZ jouw tegenhanger. Zo sta je fiscaal niet langer in de kou.' },
+      ].map(card => (
+        <div style="background:#FFFFFF;padding:24px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);border-top:3px solid #E5A524;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#3F5767;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <button id="pz-examples-btn" style="display:flex;align-items:center;gap:10px;background:rgba(0,31,63,0.04);border:1px solid rgba(0,31,63,0.1);border-radius:8px;padding:14px 24px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#001F3F;">
+        <span>Bekijk 6 concrete voorbeelden uit de bouw</span>
+        <svg id="pz-examples-chevron" width="18" height="18" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+    <ul id="pz-examples-list" style="list-style:none;padding:0;margin:16px 0 0;display:none;grid-template-columns:1fr 1fr;gap:10px;">
+      {[
+        'POZ bovenop een vol VAPZ voor een zelfstandige dakwerker: een dakwerker met een eenmanszaak heeft zijn VAPZ-plafond bereikt, maar wil meer opbouwen. Met een POZ legt hij bovenop zijn VAPZ extra opzij, binnen de 80%-regel, met een belastingvermindering van 30% op zijn premie.',
+        'De IPT-tegenhanger voor een loodgieter zonder vennootschap: een loodgieter werkt als natuurlijk persoon. Een IPT is niet mogelijk zonder vennootschap, dus kiest hij voor een POZ. Zo bouwt hij toch een stevig aanvullend pensioen op met fiscaal voordeel.',
+        'Belastingvermindering voor een elektricien: een elektricien met een eenmanszaak stort jaarlijks in zijn POZ. Door de belastingvermindering van 30% krijgt hij een fors deel van die premie terug via zijn personenbelasting.',
+        'Binnen de 80%-regel blijven bij een schilder: een schilder wil flink storten in zijn POZ. Wij berekenen vooraf zijn 80%-ruimte op basis van zijn referentie-inkomen, zodat zijn volledige premie fiscaal voordelig blijft.',
+        'Eerst VAPZ, dan POZ bij een schrijnwerker: een schrijnwerker vult eerst zijn VAPZ volledig op, want dat is de voordeligste laag, en bouwt pas daarna bij met een POZ. Zo haalt hij het maximum uit zijn fiscale ruimte.',
+        'Overstap-denken bij een metselaar die later een vennootschap wil: een metselaar bouwt nu op met een POZ, maar overweegt later een vennootschap. We leggen hem uit dat hij dan kan overschakelen naar een IPT, en hoe zijn opgebouwde POZ daarbij meegaat.',
+      ].map(ex=>(
+        <li style="display:flex;gap:10px;align-items:flex-start;background:#F7F4EF;border-radius:8px;padding:12px 16px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{ex}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<!-- DEKKING -->
+<section id="dekking" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:1025px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Dekking</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat zit er in een POZ?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:600px;margin:0 auto;">Een POZ draait om pensioenopbouw met een fiscaal voordeel. Je kan er optioneel bescherming aan koppelen, zoals een overlijdens- of arbeidsongeschiktheidsdekking. Hieronder de hoofdlijnen.</p>
+    </div>
+    <div class="pz-dekking-grid">
+      <div style="background:#FFFFFF;border:2px solid rgba(34,197,94,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(34,197,94,0.08);border-bottom:1px solid rgba(34,197,94,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#15803d;">Wel gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Opbouw van een aanvullend pensioenkapitaal, uitgekeerd bij je wettelijke pensioen','Een belastingvermindering van 30% op je gestorte premie, een federaal voordeel in de personenbelasting','Opbouw binnen de 80%-regel, berekend op je referentie-inkomen als zelfstandige','Een gegarandeerd rendement (tak21) of een rendement uit fondsen (tak23), naar keuze','Een optionele overlijdensdekking en aanvullende waarborgen, zoals premievrijstelling bij arbeidsongeschiktheid','Behoud van het opgebouwde kapitaal: het blijft van jou, ook als je je activiteit stopzet'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgCheck16g} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:2px solid rgba(239,68,68,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(239,68,68,0.06);border-bottom:1px solid rgba(239,68,68,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#b91c1c;">Niet (of beperkt) gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Aftrek als beroepskost van een vennootschap: dat loopt niet via een POZ maar via een IPT','Toegang met een vennootschap: heb je een vennootschap, dan kies je een IPT, niet een POZ','Stortingen boven de 80%-grens: dat deel levert geen fiscaal voordeel meer op','Vrijstelling van de premietaks: op een POZ is, anders dan bij een VAPZ, wél een premietaks van 4,40% verschuldigd','Het opnemen van je kapitaal vóór je wettelijke pensioenleeftijd (buiten de wettelijke uitzonderingen)','Risico\'s die thuishoren in andere polissen, zoals een gewaarborgd inkomen of een ongevallendekking'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgX16r} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <div class="pz-plafond-grid" style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);padding:36px 40px;">
+      <div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Fiscaal voordeel POZ</span>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#FFFFFF;margin:0 0 12px;">30% belastingvermindering, binnen de 80%-regel</h3>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">Op elke euro die je in je POZ stort, krijg je een <strong style="color:#FFFFFF;">belastingvermindering van 30%</strong> in je personenbelasting. Dat voordeel geldt zolang je binnen de <strong style="color:#FFFFFF;">80%-regel</strong> blijft: je wettelijk en aanvullend pensioen samen mogen maximaal 80% van je referentie-inkomen bedragen. Anders dan bij een VAPZ is op de POZ-premie wel een premietaks van 4,40% verschuldigd.</p>
+      </div>
+      <div style="text-align:center;flex-shrink:0;">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:6px;">Belastingvermindering</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:48px;color:#FFFFFF;letter-spacing:-1px;line-height:1;">30%</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:14px;color:#94a3b8;margin-top:6px;">op je gestorte premie, binnen de 80%-regel</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AANVULLENDE WAARBORGEN -->
+<section id="pz-aanvulling" style="background:#3F5767;padding:0 0 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding:100px 32px 0;position:relative;z-index:1;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Aanvullen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Vijf manieren om meer uit je POZ te halen</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0;">De basis is pensioenopbouw, maar rond je POZ heen kan je extra bescherming en optimalisatie regelen. Vijf zaken die in de praktijk telkens terugkomen.</p>
+    </div>
+    <div class="pz-aanvulling-grid">
+      {[
+        {i:'ac',title:'Overlijdensdekking',                      text:'Je kan een overlijdensdekking koppelen aan je POZ, zodat een begunstigde, vaak je partner of kinderen, een kapitaal ontvangt als je overlijdt vóór je pensioen. Zo bescherm je je gezin naast je eigen opbouw.'},
+        {i:'sd',title:'Arbeidsongeschiktheid en premievrijstelling', text:'Met een aanvullende waarborg neemt de verzekeraar je premie over als je langdurig arbeidsongeschikt wordt, zodat je pensioenopbouw blijft doorlopen. Zinvol in een fysiek zwaar bouwberoep.'},
+        {i:'tr',title:'Tak21 of tak23',                         text:'Een tak21-POZ geeft je een gewaarborgd rendement, soms aangevuld met een winstdeelname: veiligheid voorop. Een tak23-POZ belegt in fondsen met meer rendementskansen, maar zonder kapitaalgarantie. Je kan ook combineren.'},
+        {i:'st',title:'Eerst VAPZ, dan POZ',                    text:'Je VAPZ is voordeliger en vrij van premietaks. Vul dat eerst volledig op, en bouw daarna bij met een POZ binnen je 80%-ruimte. Die volgorde levert je het hoogste fiscale rendement op.'},
+        {i:'br',title:'Fiscale optimalisatie binnen de 80%-regel', text:'Hoeveel je voordelig kan storten, hangt af van je referentie-inkomen en wat je al opbouwde. Wij rekenen je 80%-ruimte uit, zodat elke euro die je in je POZ stort fiscaal blijft meetellen.'},
+      ].map(card=>(
+        <div class="pz-ins-card" style="padding:28px;">
+          <div style="background:rgba(229,165,36,0.15);border-radius:10px;padding:10px;display:inline-flex;margin-bottom:16px;">
+            {card.i==='ac'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>}
+            {card.i==='sd'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
+            {card.i==='tr'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>}
+            {card.i==='st'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>}
+            {card.i==='br'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#FFFFFF;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#94A3B8;margin:0;">{card.text}</p>
+        </div>
+      ))}
+      <div style="background:#E5A524;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:32px;display:flex;flex-direction:column;justify-content:center;">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">Hoeveel POZ-ruimte heb jij nog?</h3>
+        <p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(0,31,63,0.75);line-height:1.55;margin:0 0 20px;">Doe de scan: we bekijken je VAPZ, je referentie-inkomen en je 80%-ruimte, en berekenen hoeveel je nog voordelig kan bijstorten in een POZ.</p>
+        <a href={CTA_DESTINATIONS.scan} class="pz-scan-btn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.2s;width:100%;">
+          {CTA_SCAN.start} <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIE -->
+<section id="premie" style="background:#F7F4EF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Prijs &amp; berekening</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Hoeveel kan ik storten in mijn POZ?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:560px;margin:0 auto;">Je bepaalt zelf hoeveel je stort, tot je 80%-grens bereikt is. Die grens hangt af van je referentie-inkomen en van wat je al opbouwde in je wettelijk en aanvullend pensioen. Het rekensommetje maken we samen.</p>
+    </div>
+    <div class="pz-formule">
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">1. Referentie-inkomen</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Je beroepsinkomen</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#3F5767;line-height:1.4;">gemiddelde van je belastbaar beroepsinkomen over de voorbije jaren</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">×</div>
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">2. 80%-ruimte</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Max 80%</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#3F5767;line-height:1.4;">wettelijk + aanvullend pensioen samen, min wat je al opbouwde</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">=</div>
+      <div style="background:#3F5767;border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 8px 32px rgba(63,87,103,0.3);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">Jouw premie</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin-bottom:8px;">Binnen je 80%-ruimte</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#94a3b8;line-height:1.4;">met 30% belastingvermindering, premietaks 4,40% inbegrepen</div>
+      </div>
+    </div>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:#001F3F;text-align:center;margin-bottom:32px;">4 factoren die je premie bepalen</h3>
+    <div class="pz-factors-grid">
+      {[
+        {num:'1',title:'Je referentie-inkomen',  text:'Je 80%-ruimte wordt berekend op het gemiddelde van je belastbaar beroepsinkomen over de voorbije jaren. Hoe hoger dat inkomen, hoe meer ruimte je hebt om voordelig te storten.'},
+        {num:'2',title:'Wat je al opbouwde',     text:'Je reeds opgebouwde wettelijk en aanvullend pensioen (waaronder je VAPZ) telt mee in de 80%-regel. Hoe meer je al hebt, hoe kleiner je resterende POZ-ruimte.'},
+        {num:'3',title:'De gekozen waarborgen',  text:'Voeg je een overlijdensdekking of een waarborg arbeidsongeschiktheid toe, dan bepaalt dat mee je premie. Meer bescherming betekent een hogere premie, maar ook meer zekerheid.'},
+        {num:'4',title:'Je leeftijd en horizon', text:'Hoe vroeger je start, hoe langer je kapitaal kan groeien. De looptijd tot je pensioen weegt zwaar door op wat je uiteindelijk opbouwt.'},
+      ].map(f=>(
+        <div class="brand-why-card" style="padding:20px 24px;display:flex;gap:18px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:16px;color:#001F3F;">{f.num}</span></div>
+          <div>
+            <h4 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 4px;">{f.title}</h4>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#3F5767;margin:0;">{f.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style="max-width:680px;margin:0 auto;">
+      <div style="background:rgba(229,165,36,0.10);padding:20px 28px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);border:1px solid rgba(229,165,36,0.3);">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="18" height="18" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#001F3F;margin:0;"><strong>Fiscaal:</strong> je POZ-premie levert een <strong>belastingvermindering van 30%</strong> op in je personenbelasting, een federaal voordeel zolang je binnen de <strong>80%-regel</strong> blijft. Anders dan een VAPZ is een POZ <strong>niet vrijgesteld van de premietaks van 4,40%</strong>: net zoals bij een IPT is die taks op je POZ-premie verschuldigd. Daarom vul je je VAPZ best eerst op. Bij de uitkering op je wettelijke pensioenleeftijd geldt een gunstige eindbelasting.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section id="pz-cta-band" style="background:#E9C466;padding:80px 0 100px;position:relative;overflow:hidden;">
+  <div class="assurman-mask assurman-mask--cta pz-cta-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:1;">
+    <img src="/images/verzekeringen/poz-band.jpg" alt="Zelfstandige zonder vennootschap met een POZ-pensioen">
+  </div>
+  <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="100px" direction="down" /></div>
+  <div class="pz-cta-deco" style="position:absolute;right:-130px;top:40%;transform:translateY(-50%);pointer-events:none;z-index:2;"><BrandChevron color="white" height="240px" direction="left" /></div>
+  <div style="max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:4;padding:0 32px;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">Zelfstandige zonder vennootschap?<br />Bouw bovenop je VAPZ verder met een POZ.</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#3F5767;margin-bottom:40px;opacity:0.9;">Start nu in 2 minuten of kies meteen voor persoonlijk advies.</p>
+    <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">{CTA_SCAN.requestNow} <Fragment set:html={svgArr18} /></a>
+  </div>
+</section>
+
+<!-- PER BEROEP TABS -->
+<section id="pz-beroep" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Per beroep</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Een POZ voor jouw stiel</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:560px;margin:0 auto;">Werk je zonder vennootschap, dan is de POZ jouw formule bovenop het VAPZ. Hieronder de aanpak per discipline.</p>
+    </div>
+    <div class="pz-tabs-row" style="display:flex;gap:0;border-bottom:2px solid rgba(0,31,63,0.12);margin-bottom:40px;justify-content:center;">
+      {beroepTabs.map((tab,i)=>(<button class={`pz-tab-btn${i===0?' active':''}`} data-tab-btn={tab.id}>{tab.label}</button>))}
+    </div>
+    {beroepTabs.map((tab,i)=>(
+      <div data-tab-content={tab.id} style={`display:${i===0?'block':'none'};max-width:860px;margin:0 auto;`}>
+      <div class="pz-tab-inner" style="background:#FFFFFF;border-radius:12px;padding:36px 40px;">
+        <div style="background:rgba(229,165,36,0.12);border-radius:12px;padding:18px;flex-shrink:0;">
+          <svg width="32" height="32" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+        </div>
+        <div style="flex:1;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">{tab.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.65;color:#001F3F;margin:0 0 20px;">{tab.text}</p>
+          <a href={tab.link} style="display:inline-flex;align-items:center;gap:6px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;text-decoration:none;">Bekijk sectorpagina <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+      </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- MIJN SITUATIE ACCORDION -->
+<section id="pz-statuten" style="background:#3F5767;padding:96px 32px;position:relative;overflow:hidden;">
+  <div style="max-width:840px;margin:0 auto;position:relative;z-index:1;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Mijn situatie</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Welke aanpak past bij jouw POZ?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0 0 40px;">Drie typische situaties uit de Belgische bouwsector. Vind de jouwe en zie wat dat concreet betekent voor je POZ.</p>
+
+    <div class="pz-stat-panel" data-stat-panel>
+      <button class="pz-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Mijn VAPZ-ruimte is vol</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je hebt je VAPZ-plafond bereikt en wil meer opbouwen. Dan is de <strong style="color:#FFFFFF;">POZ</strong> de logische volgende stap: je bouwt verder binnen je 80%-ruimte, met een belastingvermindering van 30% op je premie. Zo benut je je volledige fiscale ruimte als zelfstandige zonder vennootschap.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: VAPZ eerst tot het maximum, want dat is de voordeligste laag en vrij van premietaks, en daarna bijbouwen met een POZ. Bekijk de details op de pagina over <a href="/verzekeringen/vapz/" style="color:#E5A524;text-decoration:underline;">VAPZ</a>, of doe de scan en wij rekenen je resterende 80%-ruimte voor je uit.</p>
+      </div>
+    </div>
+
+    <div class="pz-stat-panel" data-stat-panel>
+      <button class="pz-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik heb geen vennootschap</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je werkt als natuurlijk persoon: een eenmanszaak, een vrij beroep of als meewerkende echtgenoot. Een IPT is voor jou niet mogelijk, want die loopt via een vennootschap. De <strong style="color:#FFFFFF;">POZ is jouw equivalent</strong>: je betaalt de premie privé en krijgt er een belastingvermindering van 30% voor in de plaats.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: de POZ dicht het gat dat zelfstandigen zonder vennootschap vroeger hadden. Samen bekijken we hoeveel je voordelig kan storten binnen de 80%-regel.</p>
+      </div>
+    </div>
+
+    <div class="pz-stat-panel" data-stat-panel>
+      <button class="pz-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik twijfel tussen een POZ en een vennootschap oprichten</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je overweegt om een vennootschap op te richten, onder meer voor de fiscale hefboom van een <strong style="color:#FFFFFF;">IPT</strong>. Tot het zover is, hoef je niet stil te zitten: met een <strong style="color:#FFFFFF;">POZ</strong> bouw je nu al fiscaal voordelig pensioen op als natuurlijk persoon.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: start vandaag met een POZ en richt later eventueel een vennootschap op. Schakel je dan over naar een <a href="/verzekeringen/ipt/" style="color:#E5A524;text-decoration:underline;">IPT</a>, dan bekijken we hoe je opgebouwde POZ daarbij meegaat. Een vennootschap oprichten is een bredere beslissing dan pensioen alleen; dat wegen we samen af, zonder je tot iets te verplichten.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OPBOUW EN UITKERING -->
+<section id="procedure" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:60px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Opbouw en uitkering</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Hoe verloopt het van aansluiting tot pensioen?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Een POZ is een traject van jaren. Hieronder zie je hoe het loopt, van je aansluiting tot de uitkering bij je pensioen.</p>
+    </div>
+    <div class="pz-procedure-grid">
+      <div class="pz-procedure-line" style="position:absolute;top:36px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(to right,#E5A524,rgba(229,165,36,0.2));z-index:0;"></div>
+      {[
+        {ic:'ph', title:'Aansluiten',                  text:'Je sluit een POZ af bij een verzekeraar of pensioeninstelling. Samen bepalen we het rendementstype (tak21, tak23 of een combinatie) en welke optionele waarborgen je toevoegt, zoals een overlijdensdekking.'},
+        {ic:'eu', title:'Storten binnen je 80%-ruimte', text:'Je stort periodiek of jaarlijks, binnen je 80%-ruimte. Op elke premie krijg je een belastingvermindering van 30%. Anders dan bij een VAPZ is op je POZ-premie wel een premietaks van 4,40% verschuldigd.'},
+        {ic:'ey', title:'Opvolgen via MyPension',      text:'Je volgt je opgebouwde reserve op via je jaarlijkse fiche en via MyPension, het officiële platform van de overheid, waar je je volledige aanvullend pensioen samen ziet. We sturen bij waar nodig.'},
+        {ic:'gf', title:'Uitkering bij pensioen',      text:'Op je wettelijke pensioenleeftijd wordt het kapitaal uitgekeerd. De belasting verloopt via een gunstregime, waardoor de eindbelasting beperkt blijft. Het nettobedrag hangt af van je loopbaan en situatie.'},
+      ].map((s,i)=>(
+        <div style="padding:0 20px;text-align:center;position:relative;z-index:1;">
+          <div style="width:72px;height:72px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 4px 16px rgba(229,165,36,0.3);">
+            {s.ic==='ph'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>}
+            {s.ic==='eu'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+            {s.ic==='ey'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>}
+            {s.ic==='gf'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 12 20 22 4 22 4 12"/><rect x="2" y="7" width="20" height="5"/><line x1="12" y1="22" x2="12" y2="7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>}
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#E5A524;margin-bottom:8px;">Stap {i+1}</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{s.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:840px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over de POZ</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;margin:0;">Concrete vragen van zelfstandigen zonder vennootschap: klik open voor het antwoord.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      {faqItems.map((item)=>(
+        <div data-faq-item style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.08);border-radius:10px;overflow:hidden;">
+          <button data-faq-btn style="width:100%;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;text-align:left;gap:16px;">
+            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;line-height:1.35;">{item.q}</span>
+            <svg data-faq-chevron width="18" height="18" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div data-faq-answer style="display:none;padding:0 24px 20px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#3F5767;margin:0;">{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- GERELATEERDE VERZEKERINGEN -->
+<InsuranceCarousel
+  client:only="react"
+  cards={insuranceCards}
+  sectionLabel="Ook interessant"
+  headline="Gerelateerde verzekeringen"
+  subheadline="Deze formules sluiten aan bij de opbouw van je aanvullend pensioen als zelfstandige zonder vennootschap."
+  background="#F5F2FF"
+/>
+
+<!-- PARTNERS -->
+<section style="background:#F7F4EF;padding:64px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">Ondersteund door sterke verzekeringspartners</p>
+    <PartnerSlider client:only="react" />
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:#3F5767;padding-top:120px;padding-bottom:0;position:relative;text-align:center;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+  <div style="max-width:896px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;text-align:center;margin-bottom:20px;">Start met Assurman</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;color:#FFFFFF;max-width:727px;margin:0 auto 24px;">Bouw je pensioen op met een POZ</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je als zelfstandige zonder vennootschap in de bouw en is je VAPZ-ruimte vol? Wij rekenen je 80%-ruimte uit en bekijken hoeveel je voordelig kan bijstorten in een POZ, zonder verplichting.</p>
+    <div class="pz-final-btns">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">{CTA_SCAN.hero} <Fragment set:html={svgArr18} /></a>
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">{CTA_AFSPRAAK.advisory}</a>
+    </div>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+</section>
+
+</div>
+
+<script>
+  const progressBar = document.getElementById('pz-progress-bar') as HTMLElement | null;
+  const stickyBtns  = document.querySelectorAll<HTMLElement>('[data-sticky-btn]');
+  const sectionIds  = ['watis','verplicht','dekking','premie','procedure','faq'];
+
+  stickyBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.stickyBtn!;
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const total = doc.scrollHeight - doc.clientHeight;
+    if (progressBar) progressBar.style.width = total > 0 ? `${(doc.scrollTop / total) * 100}%` : '0%';
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sectionIds[i]);
+      if (el && el.getBoundingClientRect().top <= 120) {
+        stickyBtns.forEach(b => b.classList.toggle('active', b.dataset.stickyBtn === sectionIds[i]));
+        break;
+      }
+    }
+  }, { passive: true });
+
+  const exBtn  = document.getElementById('pz-examples-btn')     as HTMLElement | null;
+  const exList = document.getElementById('pz-examples-list')    as HTMLElement | null;
+  const exChev = document.getElementById('pz-examples-chevron') as HTMLElement | null;
+  if (exBtn && exList && exChev) {
+    exBtn.addEventListener('click', () => {
+      const open = exList.style.display !== 'none';
+      exList.style.display = open ? 'none' : 'grid';
+      exChev.style.transform = open ? '' : 'rotate(180deg)';
+    });
+  }
+
+  const tabBtns     = document.querySelectorAll<HTMLElement>('[data-tab-btn]');
+  const tabContents = document.querySelectorAll<HTMLElement>('[data-tab-content]');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tabBtn!;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      tabContents.forEach(el => { el.style.display = el.dataset.tabContent === t ? 'block' : 'none'; });
+    });
+  });
+
+  document.querySelectorAll('[data-stat-panel]').forEach(panel => {
+    const btn     = panel.querySelector<HTMLElement>('[data-stat-btn]');
+    const content = panel.querySelector<HTMLElement>('[data-stat-content]');
+    const chevron = panel.querySelector<HTMLElement>('[data-stat-chevron]');
+    if (!btn || !content || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = content.style.display !== 'none';
+      document.querySelectorAll('[data-stat-panel]').forEach(p => {
+        const c  = p.querySelector<HTMLElement>('[data-stat-content]');
+        const ch = p.querySelector<HTMLElement>('[data-stat-chevron]');
+        if (c)  c.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { content.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+
+  document.querySelectorAll('[data-faq-item]').forEach(item => {
+    const btn     = item.querySelector<HTMLElement>('[data-faq-btn]');
+    const answer  = item.querySelector<HTMLElement>('[data-faq-answer]');
+    const chevron = item.querySelector<HTMLElement>('[data-faq-chevron]');
+    if (!btn || !answer || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = answer.style.display !== 'none';
+      document.querySelectorAll('[data-faq-item]').forEach(fi => {
+        const a  = fi.querySelector<HTMLElement>('[data-faq-answer]');
+        const ch = fi.querySelector<HTMLElement>('[data-faq-chevron]');
+        if (a)  a.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { answer.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+</script>
+
 </BaseLayout>
