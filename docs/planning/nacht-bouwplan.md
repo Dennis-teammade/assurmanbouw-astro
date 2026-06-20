@@ -32,6 +32,8 @@
   en `bullets` in `src/data/verzekeringen.ts` door de finale copy.
 - **Documenten bijhouden:** controlelijst-blok per pagina; deze tracker per pagina;
   bij architectuurwijziging `ARCHITECTUUR-INDELING-VERZEKERINGEN.md` + changelog.
+- **Hero-lengte (norm):** hero-intro kort en krachtig, streefdoel 3-5 regels, < 50 woorden / < 340 tekens. Subzin = standaard `clamp(20px,2.5vw,34px)` (niet groter). Vuistregel: groeit de hero-mask-foto, dan staat er te veel tekst in titel/subzin/intro.
+- **Wat is het (norm):** vermijd wall-of-text. Relatief korte alineas; zet de kernzaken in de eerste 2 alineas vet (`<strong>`), bv. de dekkingsopsomming.
 
 ---
 
