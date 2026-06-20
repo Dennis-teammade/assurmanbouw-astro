@@ -144,11 +144,11 @@ export const VERZEKERINGEN: Verzekering[] = [
     slug: 'vervoerde-goederen',
     titel: 'Verzekering vervoerde goederen',
     categorie: 'spullen-en-werk',
-    korteBeschrijving: 'Dekt je gereedschap, machines en materialen tegen diefstal en schade tijdens vervoer.', // TODO: definitieve copy
-    bullets: ['Gereedschap en materiaal onderweg', 'Diefstal uit de bestelwagen', 'Schade bij laden en lossen'], // TODO: definitieve bullets
+    korteBeschrijving: 'Dekt je gereedschap, machines en bouwmateriaal tegen diefstal met braak, ongeval of brand en schade tijdens het laden en lossen terwijl je ze zelf vervoert.',
+    bullets: ['Diefstal met braak uit je bestelwagen', 'Ongeval, brand en natuurgeweld onderweg', 'Schade bij laden en lossen', 'Aanvulling op je BA Auto en omnium'],
     icoon: 'truck',
     gerelateerde: ['bedrijfsvoertuigen', 'machinebreuk', 'alle-bouwplaats-risicos'],
-    status: 'skeleton',
+    status: 'live',
   },
   {
     slug: 'bedrijfsvoertuigen',

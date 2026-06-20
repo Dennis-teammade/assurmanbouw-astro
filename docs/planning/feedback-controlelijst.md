@@ -104,3 +104,28 @@ Status pagina: **afgewerkt, op staging.** 8 controlepunten (uit de research-brie
 | BS8 | **Boete-/contractverlies** dekt enkel boetes die rechtstreeks uit de gedekte schade voortvloeien | Research §4 | Bevestig de voorwaarde/formulering tegen onze polisvoorwaarden. | 🔲 |
 
 Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/CTA-beeld generiek.
+
+---
+
+## /verzekeringen/vervoerde-goederen (Verzekering vervoerde goederen)
+
+Status pagina: **afgewerkt, op staging.** "Eigen goederen onderweg"-pagina; cargo/CMR scherp afgebakend. 8 controlepunten.
+
+| # | Wat we beslisten (staat zo op de pagina) | Waarom | Te controleren / suggestie | Status |
+|---|---|---|---|---|
+| VG1 | **Verzekerd bedrag per voertuig: € 5.000 - € 25.000**, richtwaarde € 25.000 indicatief | Gangbaar marktbereik voor stielmannen | Bevestig bereik + richtwaarde tegen onze effectieve limieten. | 🔲 |
+| VG2 | **Franchise € 250 - € 500 per schadegeval** | Gangbare franchise | Bevestig het bereik dat wij hanteren. | 🔲 |
+| VG3 | **Nachtclausule** (alarm of vaste stallingsplaats) als kernvoorwaarde nachtelijke diefstal | Belangrijkste preventieparameter | Bevestig standaardformulering (uren + eisen) van onze polissen. | 🔲 |
+| VG4 | **Braak** als diefstalvoorwaarde | Marktstandaard | Bevestig + of we keyless-uitbreiding aanbieden. | 🔲 |
+| VG5 | **Verzekeringstaks 9,25%** | Overgenomen als gangbare taks | Bevestig het correcte percentage voor zaakschade/transport. | 🔲 |
+| VG6 | **Territorium = België + buurlanden**, uitbreidbaar Europa | Gangbare default | Bevestig de standaard territoriale dekking. | 🔲 |
+| VG7 | **Wet 4 april 2014 + FSMA**; onderscheid eigen rekening vs CMR | CMR-afbakening juridisch gevoelig | Juridisch laten aftekenen (eigen-rekening/CMR). | 🔲 |
+| VG8 | **Gereedschap op de werf valt buiten deze polis** (→ ABR of diefstalwaarborg brand) | Afbakening tegen misverstand | Bevestig + welke polis wij daarvoor aanraden. | 🔲 |
+
+Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie.
+
+---
+
+## Beeldmateriaal verzekeringen (geplaatst 2026-06-20)
+
+De 22 klant-aangeleverde foto's (11 pagina's × hero + band) staan in `public/images/verzekeringen/{slug}-hero.jpg` en `-band.jpg`. **BA Bestuurder, Brandverzekering en Bedrijfsschade** gebruiken nu hun **echte** beeld (de eerdere "generiek beeld"-minors zijn opgelost). De skeleton-pagina's (gewaarborgd-inkomen, bescherming-bedrijfsleider, groeps, aanvullend-pensioen, vapz, poz, ipt) krijgen hun beeld zodra ze worden uitgewerkt; de bestanden staan klaar.
