@@ -92,11 +92,11 @@ export const VERZEKERINGEN: Verzekering[] = [
     slug: 'ba-bestuurder',
     titel: 'BA Bestuurder',
     categorie: 'aansprakelijkheid',
-    korteBeschrijving: 'Beschermt je privévermogen als zaakvoerder of bestuurder tegen aansprakelijkheid voor bestuursfouten.', // TODO: definitieve copy
-    bullets: ['Beschermt je privévermogen', 'Dekt bestuursfouten en nalatigheid', 'Voor zaakvoerders en bestuurders'], // TODO: definitieve bullets
+    korteBeschrijving: 'Beschermt het privévermogen van zaakvoerders en bestuurders bij persoonlijke aansprakelijkheid voor bestuursfouten, faillissement of onbetaalde RSZ- en btw-schulden.',
+    bullets: ['Beschermt je privévermogen', 'Dekt de verdedigingskosten', 'Ook gewezen en feitelijke bestuurders', 'Cruciaal sinds Boek 6 BW'],
     icoon: 'check-circle',
     gerelateerde: ['ba-onderneming', 'rechtsbijstand', 'bescherming-bedrijfsleider'],
-    status: 'skeleton',
+    status: 'live',
   },
   {
     slug: 'rechtsbijstand',

@@ -51,3 +51,19 @@ weloverwogen ingevuld maar vragen jouw bevestiging.
 - Hero/CTA-beeld is generiek (`algemeen-hero`); eventueel later een ABR-eigen beeld.
 - Geen aparte alert-sectie (rood-tint) zoals de norm optioneel toelaat.
 - Overweeg een kruislink naar BA-10 (tienjarige aansprakelijkheid): ABR en tienjarige hangen sterk samen.
+
+---
+
+## /verzekeringen/ba-bestuurder (BA Bestuurder)
+
+Status pagina: **afgewerkt, op staging.** Onderstaande punten weloverwogen ingevuld, vragen jouw bevestiging.
+
+| # | Wat we beslisten (staat zo op de pagina) | Waarom | Te controleren / suggestie | Status |
+|---|---|---|---|---|
+| BAB1 | Wettelijke basis = WVV art. 2:56 (bestuursfouten) + 2:57 (aansprakelijkheidsbeperking) | Standaard juridisch kader bestuurdersaansprakelijkheid | Juridisch laten aftekenen (artikelnummers + formulering). | 🔲 |
+| BAB2 | De wettelijke "cap" staat **kwalitatief** op de pagina (geldt niet bij zware fouten, herhaalde lichte fouten, RSZ/btw) — GEEN bedragen | Codex waarschuwde tegen ongekwalificeerd overnemen van bedragen (bv. "12 miljoen") | Bevestig of we de exacte cap-tiers (125k/250k/1M/3M/12M) willen tonen; zo ja, met officiële bron. | 🔲 |
+| BAB3 | Verzekerd kapitaal "richtwaarde vanaf € 250.000", franchise vaak nihil | Marktindicatie aansluitend bij de KMO-cap | Bevestig tegen de effectieve kapitalen/tarieven van onze verzekeraars. | 🔲 |
+| BAB4 | Premietaks 9,25% | Standaard taks aansprakelijkheidsverzekering | Bevestig dat 9,25% klopt voor een D&O-polis. | 🔲 |
+| BAB5 | Boek 6 BW (1/1/2025) schaft quasi-immuniteit hulppersoon af → bestuurder sneller rechtstreeks aanspreekbaar | Zie cross-cutting C5 | Juridisch laten aftekenen (idem C5). | 🔲 |
+
+Minors: hero/CTA-beeld generiek (`algemeen`); geen aparte alert-sectie; tab-btn/FAQ-chevron gebruiken nog `#64748b` (cosmetische afwijking, idem norm-pagina's). De 6 sectorcases zijn kwalitatief (geen euro-bedragen).
