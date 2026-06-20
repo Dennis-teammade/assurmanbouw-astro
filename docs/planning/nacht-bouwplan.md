@@ -62,6 +62,11 @@ flaggen i.p.v. forceren.
 ## 2. Per-pagina-recept (elke pagina identiek doorlopen)
 
 ### Fase A — Research consolideren (read-only)
+> **Sneller pad:** als `docs/planning/briefs/<slug>.md` bestaat, is de research al door een
+> research-subagent geconsolideerd tot definitieve copy + een CONTROLEPUNTEN-tabel. Lees dan
+> die brief i.p.v. Fase A zelf te doen, en neem de controlepunten over in `feedback-controlelijst.md`.
+> Beschikbare briefs: brandverzekering, bedrijfsschade, vervoerde-goederen.
+
 1. Lees `Fase2-Research-codex/SERP_ONDERZOEK_<TOPIC>.md` (of pilot) → SERP-gaps, aanbevolen
    H2-structuur, FAQ's, content-matrix, bronnen.
 2. Lees `Fase2 Research/Verzekeringen/<topic>.md` → feiten, juridisch kader, dekking/
