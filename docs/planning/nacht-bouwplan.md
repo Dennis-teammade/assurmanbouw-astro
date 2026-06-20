@@ -135,7 +135,7 @@ voorstel voor de volgende dag.
 
 - [x] 1. BA Bestuurder — DONE
 - [x] 2. Brandverzekering — DONE
-- [ ] 3. Bedrijfsschade — TODO
+- [x] 3. Bedrijfsschade — DONE
 - [ ] 4. Vervoerde goederen — TODO
 - [ ] 5. Gewaarborgd inkomen — TODO
 - [ ] 6. Bescherming bedrijfsleider — TODO
@@ -153,3 +153,4 @@ voorstel voor de volgende dag.
 
 - **BA Bestuurder** — DONE. Pagina herschreven op norm-skelet (ba-onderneming-template, prefix bab-), volledige D&O-content uit Codex+Dennis. Databron-record → live + finale copy. Build groen (101 pagina's). Controlelijst-punten BAB1-5. Brand voice schoon (0 em-dash, 0 u/uw, FR-slip gefixt). FR-slip "Depuis" uit origineel ba-onderneming meegefixt — NB: check of ba-onderneming.astro diezelfde slip nog heeft.
 - **Brandverzekering** — DONE. Gebouwd uit brief (prefix brv-), databron live. Build groen (101 pagina's). Controlepunten BRV-1..7 (let op: afwijkende brandtaks, bewust kwalitatief). Brand voice schoon. Volgende: Bedrijfsschade (brief klaar).
+- **Bedrijfsschade** — DONE. Gebouwd uit brief (prefix bs-), databron live. Build groen (101 pagina's). Controlepunten BS1-8. Inhoudelijke grens bedrijfsschade vs omzet/gewaarborgd-inkomen zuiver gehouden. Volgende: Vervoerde goederen (brief klaar).

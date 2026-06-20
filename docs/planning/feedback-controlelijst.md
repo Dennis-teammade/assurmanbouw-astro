@@ -85,3 +85,22 @@ Status pagina: **afgewerkt, op staging.** 7 controlepunten (uit de research-brie
 | BRV-7 | **Franchise** niet als hard bedrag genoemd | Verschilt sterk per maatschappij | Bevestig of we een franchisebereik willen tonen; zo ja, tegen de effectieve voorwaarden. | 🔲 |
 
 Euro-bedragen in de 6 praktijkcases (bv. ± 18.000 euro gestolen gereedschap) staan enkel als herkenbaar-fictieve illustratie.
+
+---
+
+## /verzekeringen/bedrijfsschade (Bedrijfsschadeverzekering)
+
+Status pagina: **afgewerkt, op staging.** 8 controlepunten (uit de research-brief). Inhoudelijke grens bewaakt: bedrijfsschade = stilstand na **materiële** schade, NIET uitval zaakvoerder (= omzet/gewaarborgd inkomen).
+
+| # | Wat we beslisten (staat zo op de pagina) | Waarom | Te controleren / suggestie | Status |
+|---|---|---|---|---|
+| BS1 | Wettelijke basis = **Wet 4 april 2014 + FSMA**; niet-verplichte aanvullende waarborg, trigger = gedekt materieel schadegeval | Generieke verzekeringsrechtelijke verwijzing | Juridische formulering laten aftekenen. | 🔲 |
+| BS2 | **Vergoedingsperiode = 12 tot 24 maanden** (18-24 als bouw-norm) | Marktstandaard; geen neutrale bron met exacte termijnen | Bevestig dat 12/18/24 de termijnen zijn die wij aanbieden. | 🔲 |
+| BS3 | **Dekkingsbasis = brutowinst** (omzet min variabele kosten), op jaarrekening, jaarlijks actualiseren | Gangbare brutowinstmethode | Bevestig dat dit onze standaard is. | 🔲 |
+| BS4 | **Premietaks 9,25%** (staat als feit op de pagina, idem BA Bestuurder) | Standaardtaks niet-leven; research §3 noemt 9,25% expliciet | Bevestig dat 9,25% klopt op moment van publicatie (geen brandspecifieke opslag zoals bij de brandpolis). | 🔲 |
+| BS5 | **Geen premie-bereik in euro** op de pagina, enkel de factoren | Brand-voice: geen verzonnen cijfers | Bevestig dat we geen indicatief bereik tonen; zo ja met effectieve tarieven. | 🔲 |
+| BS6 | **"Failliet binnen het jaar"-statistiek NIET als hard cijfer** (kwalitatief: "verschil tussen heropstarten en stoppen") | Percentage niet controleerbaar onderbouwd | Wil je een cijfer tonen? Lever een controleerbare bron; anders kwalitatief laten. | 🔲 |
+| BS7 | **5 uitbreidingen** (leveranciers/klanten, extra kosten, langere vergoedingsperiode, nutsvoorzieningen, boete-/contractverlies) als beschikbaar voorgesteld | Gangbare optionele waarborgen | Bevestig welke wij effectief aanbieden; schrap/hernoem wat niet in ons gamma zit. | 🔲 |
+| BS8 | **Boete-/contractverlies** dekt enkel boetes die rechtstreeks uit de gedekte schade voortvloeien | Research §4 | Bevestig de voorwaarde/formulering tegen onze polisvoorwaarden. | 🔲 |
+
+Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/CTA-beeld generiek.

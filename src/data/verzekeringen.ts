@@ -134,11 +134,11 @@ export const VERZEKERINGEN: Verzekering[] = [
     slug: 'bedrijfsschade',
     titel: 'Bedrijfsschadeverzekering',
     categorie: 'spullen-en-werk',
-    korteBeschrijving: 'Vangt omzetverlies en vaste kosten op wanneer je bedrijf stilligt na schade, zoals na een brand of storm.', // TODO: definitieve copy
-    bullets: ['Vangt omzetverlies op', 'Betaalt vaste kosten door', 'Aanvulling op brand en machinebreuk'], // TODO: definitieve bullets
+    korteBeschrijving: 'Vangt je omzetverlies en vaste kosten op wanneer je bouwbedrijf stilligt na een gedekt schadegeval zoals brand, storm of machinebreuk.',
+    bullets: ['Vergoedt gederfde brutowinst bij stilstand', 'Betaalt lonen, huur en leasings door', 'Dekt extra kosten om sneller te heropstarten', 'Aanvulling op brand- en machinebreukverzekering'],
     icoon: 'building2',
     gerelateerde: ['brandverzekering', 'machinebreuk', 'gewaarborgd-inkomen'],
-    status: 'skeleton',
+    status: 'live',
   },
   {
     slug: 'vervoerde-goederen',

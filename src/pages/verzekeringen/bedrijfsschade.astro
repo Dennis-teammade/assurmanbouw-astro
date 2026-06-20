@@ -1,20 +1,705 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { CTA_SCAN, CTA_DESTINATIONS } from '../../data/cta-labels';
+import { kaartenVoor } from '../../data/verzekeringen';
+import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
+import BrandChevron from '../../components/BrandChevron.astro';
+
+const faqItems = [
+  { q: 'Wat dekt een bedrijfsschadeverzekering precies?', a: 'Ze vergoedt het financiële gevolg van een gedekt materieel schadegeval: je gederfde brutowinst, je doorlopende vaste kosten zoals lonen en leasings, en de extra kosten om je activiteit sneller te hervatten. Ze dekt niet de materiële schade zelf, dat doet je brandverzekering.' },
+  { q: 'Is een bedrijfsschadeverzekering verplicht in België?', a: 'Nee, ze is niet wettelijk verplicht. Ze is wel een aanvullende waarborg die je apart activeert binnen je brand- of machinebreukverzekering, en voor veel bouwbedrijven is ze in de praktijk doorslaggevend om een zware brand of storm te overleven.' },
+  { q: 'Betaalt mijn brandverzekering mijn gederfde omzet niet na een brand?', a: 'Nee. Je brandverzekering vergoedt enkel de materiële schade: de heropbouw van het gebouw en de aankoop van nieuwe machines of gereedschap. Het omzetverlies, de lonen van je personeel en de doorlopende leasings tijdens de heropbouw dekt enkel de bedrijfsschadeverzekering.' },
+  { q: 'Wat is het verschil met een omzetverzekering of gewaarborgd inkomen?', a: 'De trigger verschilt. Een bedrijfsschadeverzekering komt tussen bij materiële schade aan je gebouw, inhoud of machines. Een omzetverzekering of gewaarborgd inkomen komt tussen wanneer de zaakvoerder zelf uitvalt door ziekte of ongeval. Het ene beschermt je bedrijf na schade, het andere je inkomen bij arbeidsongeschiktheid.' },
+  { q: 'Zijn lonen, huur en kredieten gedekt?', a: 'Ja, dat zijn typische doorlopende vaste kosten die de polis tijdens de stilstand opvangt: personeelslonen van arbeiders en bedienden, huur en leasing van gebouwen, bestelwagens en machines, en interesten op lopende bankkredieten.' },
+  { q: 'Worden extra kosten voor een tijdelijke loods of vervangmachine vergoed?', a: 'Ja, dat zijn meeruitgaven of reddingskosten. Kosten die je maakt om de onderbreking te verkorten, zoals een tijdelijk atelier huren, vervangmateriaal leasen of overuren betalen, zijn doorgaans mee gedekt.' },
+  { q: 'Kan machinebreuk een bedrijfsschade-uitkering activeren?', a: 'Ja, op voorwaarde dat je bedrijfsschadewaarborg gekoppeld is aan je machinebreukverzekering. Valt een verzekerde machine uit door een gedekt schadegeval, dan vergoedt de polis het omzetverlies tot de machine hersteld of vervangen is.' },
+  { q: 'Hoe wordt het verzekerde bedrag berekend?', a: 'Op basis van je brutowinst: je omzet min de variabele kosten zoals de aankoop van bouwmaterialen. Dat bedrag dekt je vaste kosten en de winst die je zou hebben gemaakt. Werk met je makelaar je cijfers uit je neergelegde jaarrekening bij om onderverzekering te vermijden.' },
+  { q: 'Hoelang ontvang ik een vergoeding?', a: 'Zolang de vergoedingsperiode in je polis loopt, meestal 12, 18 of 24 maanden. De uitkering stopt onherroepelijk zodra die termijn verstreken is, ook als je heropbouw nog niet klaar is of je omzet nog niet op het oude niveau zit. In de bouw kies je daarom best ruim.' },
+  { q: 'Waarom is 12 maanden vaak te kort voor een bouwbedrijf?', a: 'Omdat een nieuwe bouwvergunning, de heropbouw van een afgebrand pand en de lange levertermijnen van specifieke machines samen vaak meer dan een jaar in beslag nemen. Loopt je vergoedingsperiode dan af, dan val je zonder dekking terwijl je nog niet draait. Een termijn van 18 of 24 maanden is voor aannemers vaak realistischer.' },
+  { q: 'Is stilstand door een getroffen leverancier verzekerd?', a: 'Niet standaard, maar wel met de uitbreiding bedrijfsschade door leveranciers en klanten. Ligt je bedrijf stil omdat een sleutelleverancier of grote klant zelf getroffen is door schade, dan vangt die uitbreiding jouw omzetverlies en vaste kosten op.' },
+];
+
+const beroepTabs = [
+  { id: 'dakwerkers',    label: 'Dakwerkers',        link: '/sectoren/dakwerkers',    title: 'Voor dakwerkers',                    text: 'Een brand in je loods of een storm die je materiaal en stockpannen vernielt, legt je ploegen stil. Terwijl je opslag en bestelwagens hersteld of vervangen worden, lopen de lonen van je dakdekkers door en mis je de omzet van geplande daken. De bedrijfsschadeverzekering betaalt die lonen en de gederfde winst door tot je weer op de werf staat.' },
+  { id: 'metsers',       label: 'Metsers',            link: '/sectoren/aannemers',     title: 'Voor metsers en algemene aannemers', text: 'Als algemeen aannemer draai je op je magazijn, je materieel en je planning. Brandt je magazijn af, dan kan je weken tot maanden geen werven bedienen, terwijl personeel, leasings en kredieten doorlopen. Deze polis vangt het omzetverlies en de vaste kosten op tot je vergunning rond is en je heropgebouwd hebt.' },
+  { id: 'loodgieters',   label: 'Loodgieters',        link: '/sectoren/loodgieters',   title: 'Voor loodgieters',                   text: 'Je voorraad leidingen, ketels en gereedschap en je bestelwagens zijn je werkkapitaal. Een brand of waterschade in je atelier legt je interventies en installaties stil. De bedrijfsschadeverzekering compenseert de gemiste omzet en houdt je vaste kosten betaalbaar terwijl je opnieuw uitrust.' },
+  { id: 'elektriciens',  label: 'Elektriciens',       link: '/sectoren/elektriciens',  title: 'Voor elektriciens',                  text: 'Schade aan je atelier, je voorraad kabels en componenten of je testapparatuur kan je installaties wekenlang blokkeren. Tijdens die stilstand lopen je lonen en leasings door zonder facturatie. Deze polis dekt het omzetverlies tot je werkplaats en stock weer operationeel zijn.' },
+  { id: 'schilders',     label: 'Schilders',          link: '/sectoren/schilders',     title: 'Voor schilders',                     text: 'Een brand in je opslag van verf, materiaal en steigers, of stormschade aan je atelier, legt je ploegen plat. Terwijl je heraankoopt en herinricht, blijven de lonen lopen en valt de omzet weg. De bedrijfsschadeverzekering houdt je bedrijf recht tot je opnieuw kan schilderen.' },
+  { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Je leeft van je machinepark: CNC, zagen en afkortinstallaties. Valt dat uit door brand, storm of machinebreuk, dan staat je maatwerk stil tot de vervangmachines geleverd zijn, soms maandenlang. Deze polis vergoedt net dat omzetverlies en je doorlopende kosten.' },
+];
+
+const insuranceCards = kaartenVoor(['brandverzekering', 'machinebreuk', 'alle-bouwplaats-risicos', 'vervoerde-goederen']);
+
+const schema = {
+  "@context": "https://schema.org", "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({ "@type": "Question", "name": f.q, "acceptedAnswer": { "@type": "Answer", "text": f.a } }))
+};
+
+const svgCheck16g = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`;
+const svgX16r    = `<svg style="flex-shrink:0;margin-top:2px;" width="16" height="16" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
+const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>`;
 ---
+
 <BaseLayout
-  title="Bedrijfsschadeverzekering | Assurman"
-  description="Vang je omzetverlies en vaste kosten op wanneer je bedrijf stilligt na schade. Binnenkort online bij Assurman."
+  title="Bedrijfsschadeverzekering: omzet beschermd na schade | Assurman"
+  description="Bedrijfsschadeverzekering vangt je omzetverlies en vaste kosten op wanneer je bouwbedrijf stilligt na brand, storm of machinebreuk. Bekijk dekking en premie."
   canonical="/verzekeringen/bedrijfsschade/"
-  noindex={true}
+  schema={schema}
 >
-  <main style="min-height:72vh;display:flex;align-items:center;justify-content:center;background:#FBF8FF;padding:140px 24px 96px;">
-    <div style="max-width:680px;text-align:center;">
-      <span style="display:inline-block;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Verzekering</span>
-      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,52px);color:#001F3F;line-height:1.1;margin:0 0 16px;">Bedrijfsschadeverzekering</h1>
-      <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#3F5767;line-height:1.6;margin:0 0 32px;">Deze pagina is in opbouw. Binnenkort lees je hier alles over de bedrijfsschadeverzekering en hoe ze je continuiteit beschermt. Wil je nu al weten waar je dekking tekortschiet? Doe de gratis verzekeringsscan in 2 minuten.</p>
-      <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary--lg">{CTA_SCAN.hero}</a>
-      <p style="margin-top:28px;"><a href="/verzekeringen/" style="color:#3F5767;font-family:'Outfit',sans-serif;text-decoration:underline;">Alle verzekeringen bekijken</a></p>
+
+<style is:global>
+  .bs-sticky-btn{background:#F7F4EF;border:1px solid rgba(229,165,36,0.2);cursor:pointer;padding:7px 16px;margin:10px 5px;font-family:'Outfit',sans-serif;font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:8px;white-space:nowrap;border-radius:9999px;transition:background 0.2s,border-color 0.2s;color:#001F3F;}
+  .bs-sticky-btn:hover,.bs-sticky-btn.active{background:rgba(229,165,36,0.18);border-color:#E5A524;}
+  .bs-sticky-btn .bs-check{color:#94a3b8;flex-shrink:0;transition:color 0.2s;}
+  .bs-sticky-btn:hover .bs-check,.bs-sticky-btn.active .bs-check{color:#E5A524;}
+  .bs-tab-btn{background:none;border:none;cursor:pointer;padding:14px 24px;white-space:nowrap;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.2s,border-color 0.2s;}
+  .bs-tab-btn:hover,.bs-tab-btn.active{color:#E5A524;border-bottom-color:#E5A524;}
+  .bs-ins-card{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.1);transition:background 0.2s,transform 0.2s;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);}
+  .bs-ins-card:hover{background:rgba(255,255,255,0.1);transform:translateY(-4px);}
+  .bs-stat-panel{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;margin-bottom:12px;}
+  .bs-stat-btn{width:100%;display:flex;align-items:center;gap:14px;background:none;border:none;cursor:pointer;text-align:left;padding:20px 24px;}
+  .bs-scan-btn:hover{background:#324554 !important;}
+  .bs-badge-pill{display:inline-flex;align-items:center;gap:8px;background:#F5F2FF;border:1px solid rgba(213,196,174,0.2);border-radius:9999px;padding:6px 16px;font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#001F3F;}
+</style>
+
+<style>
+  .bs-hero-img{position:absolute;top:5%;right:-5px;height:85%;width:auto;max-width:48%;z-index:1;pointer-events:none;}
+  .bs-hero-content{max-width:620px;}
+  .bs-hero-inner{max-width:1280px;margin:0 auto;padding:64px 32px 80px;position:relative;z-index:2;}
+  .bs-hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
+  .bs-watis-grid{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:flex-start;}
+  .bs-verplicht-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .bs-dekking-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:28px;}
+  .bs-plafond-grid{display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;}
+  .bs-aanvulling-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .bs-rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0;}
+  .bs-formule{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:64px;flex-wrap:wrap;}
+  .bs-factors-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:800px;margin:0 auto 40px;}
+  .bs-procedure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
+  .bs-tab-inner{display:flex;gap:32px;align-items:flex-start;border-radius:12px;}
+  .bs-final-btns{display:flex;gap:24px;justify-content:center;margin-bottom:80px;flex-wrap:wrap;}
+  .bs-sticky-nav-bar{position:sticky;top:72px;z-index:90;background:#FFFFFF;border-bottom:1px solid rgba(0,31,63,0.08);overflow:auto;}
+  .bs-sticky-inner{max-width:1280px;margin:0 auto;padding:0 32px;display:flex;gap:0;justify-content:center;flex-wrap:wrap;}
+  .bs-container{max-width:1280px;margin:0 auto;padding:0 32px;}
+  .brand-why-card{background:#FFFFFF;border-left:4px solid #E5A524;box-shadow:0px 1px 2px rgba(0,0,0,0.05);transition:box-shadow 0.2s,transform 0.2s;}
+  .brand-why-card:hover{box-shadow:0 8px 24px rgba(0,0,0,0.1);transform:translateY(-2px);}
+
+  @media (max-width:1023px){
+    .bs-container{padding:0 24px;}
+    .bs-sticky-inner{padding:0 24px;}
+    .bs-watis-grid{grid-template-columns:1fr;gap:32px;}
+    .bs-verplicht-grid{grid-template-columns:repeat(2,1fr);}
+    .bs-aanvulling-grid{grid-template-columns:repeat(2,1fr);}
+    .bs-procedure-grid{grid-template-columns:repeat(2,1fr);gap:32px;}
+    .bs-factors-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:767px){
+    .bs-sticky-nav-bar{display:none;}
+    .bs-container{padding:0 15px;}
+    .bs-hero-content{max-width:100%;}
+    .bs-hero-img{display:none;}
+    .bs-hero-btns{flex-direction:column;}
+    .bs-hero-btns a{width:100%;justify-content:center;text-align:center;}
+    #watis{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #verplicht{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #dekking{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #premie{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #procedure{padding-left:15px !important;padding-right:15px !important;padding-bottom:56px !important;}
+    #faq{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #bs-beroep{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #bs-statuten{padding-left:15px !important;padding-right:15px !important;padding-top:56px !important;padding-bottom:56px !important;}
+    #bs-aanvulling{padding-bottom:56px !important;}
+    #bs-cta-band{padding-left:15px !important;padding-right:15px !important;padding-bottom:64px !important;}
+    #bs-cta-band h2{font-size:clamp(28px,8vw,48px) !important;}
+    #bs-cta-band p{font-size:18px !important;}
+    .bs-watis-grid{grid-template-columns:1fr;gap:24px;}
+    .bs-verplicht-grid{grid-template-columns:1fr;}
+    .bs-dekking-grid{grid-template-columns:1fr;}
+    .bs-plafond-grid{grid-template-columns:1fr;}
+    .bs-plafond-grid>div:last-child{text-align:center;padding-top:24px;border-top:1px solid rgba(255,255,255,0.15);}
+    .bs-aanvulling-grid{grid-template-columns:1fr;}
+    .bs-rules-grid{grid-template-columns:1fr;}
+    .bs-formule{flex-direction:column;gap:8px;margin-bottom:40px;}
+    .bs-factors-grid{grid-template-columns:1fr;}
+    .bs-procedure-grid{grid-template-columns:1fr 1fr;gap:32px;}
+    .bs-tab-inner{flex-direction:column;gap:20px;padding:24px 20px;}
+    .bs-tabs-row{overflow-x:auto;justify-content:flex-start !important;padding-bottom:4px;-webkit-overflow-scrolling:touch;}
+    .bs-final-btns{flex-direction:column;align-items:center;}
+    .bs-final-btns a{width:100%;max-width:400px;justify-content:center;}
+    .bs-cta-deco{display:none;}
+    .bs-cta-mask-img{display:none;}
+    .bs-procedure-line{display:none !important;}
+  }
+</style>
+
+<div id="bs-progress-track" style="position:fixed;top:0;left:0;right:0;height:3px;z-index:9999;background:rgba(0,31,63,0.07);">
+  <div id="bs-progress-bar" style="height:100%;background:#E5A524;width:0%;transition:width 0.1s linear;"></div>
+</div>
+
+<div style="font-family:'Outfit',sans-serif;color:#001F3F;background:#FFFFFF;">
+
+<!-- HERO -->
+<section id="bs-hero" style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:100vh;">
+  <div class="bs-hero-img assurman-mask assurman-mask--hero">
+    <img src="/verzekeringen-bouwsector-algemeen-hero.jpg" alt="Bouwbedrijf dat heropbouwt na schade, beschermd door een bedrijfsschadeverzekering" />
+  </div>
+  <div class="bs-hero-inner">
+    <div class="bs-hero-content">
+      <div class="bs-badge-pill" style="margin-bottom:20px;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Assurman &middot; Bouwverzekeringen op maat
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">Bedrijfsschadeverzekering<br />voor stilstand na schade</h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">Je omzet beschermd wanneer je werf en atelier stilliggen.</p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Een brand of storm legt meer plat dan je gebouw en je machines. Terwijl je heropbouwt, loopt je omzet terug naar nul, maar je lonen, leasings en kredieten lopen gewoon door. Je brandverzekering betaalt de heropbouw, niet die maandenlange stilstand. De bedrijfsschadeverzekering vangt net dat gat op en houdt je bouwbedrijf recht tot je weer draait.</p>
+      <div class="bs-hero-btns">
+        <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
+          {CTA_SCAN.hero}
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.advisory}</a>
+      </div>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;">Geen verplichting. We finaliseren je pakket samen na je intake.</p>
     </div>
-  </main>
+  </div>
+</section>
+
+<!-- STICKY NAV -->
+<nav id="bs-sticky-nav" class="bs-sticky-nav-bar">
+  <div class="bs-sticky-inner">
+    {[{id:'watis',label:'Wat is het?'},{id:'verplicht',label:'Verplicht?'},{id:'dekking',label:'Dekking'},{id:'premie',label:'Premie'},{id:'procedure',label:'Bij schade'},{id:'faq',label:'FAQ'}].map(item=>(
+      <button class="bs-sticky-btn" data-sticky-btn={item.id}>
+        <svg class="bs-check" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        {item.label}
+      </button>
+    ))}
+  </div>
+</nav>
+
+<!-- WAT IS HET -->
+<section id="watis" style="background:#FFFFFF;padding:96px 32px;">
+  <div class="bs-container">
+    <div class="bs-watis-grid">
+      <div style="background:#3F5767;padding:32px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);">
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In het kort</span>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+          {[
+            {t:'Vangt je <strong style="color:#FFFFFF;">omzetverlies en gederfde brutowinst</strong> op wanneer je bedrijf stilligt na een gedekt materieel schadegeval.'},
+            {t:'Betaalt je <strong style="color:#FFFFFF;">doorlopende vaste kosten</strong> door: personeelslonen, huur, leasing van machines en bestelwagens, en interesten op kredieten.'},
+            {t:'Vergoedt <strong style="color:#FFFFFF;">extra kosten</strong> om sneller weer te draaien, zoals een tijdelijke loods, vervangmachines of overuren.'},
+            {t:'Werkt altijd als <strong style="color:#FFFFFF;">aanvulling op je brand- of machinebreukverzekering</strong>: er moet eerst gedekte materiële schade zijn.'},
+            {t:'Niet wettelijk verplicht, maar voor veel bouwbedrijven het verschil tussen <strong style="color:#FFFFFF;">heropstarten en stoppen</strong>.'},
+          ].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+              <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.55;color:#CBD5E1;" set:html={item.t}></span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">De polis die je omzet beschermt terwijl je heropbouwt</h2>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een bedrijfsschadeverzekering komt tussen wanneer je activiteit geheel of gedeeltelijk stilvalt na een materieel schadegeval, zoals een brand, storm, waterschade of machinebreuk. Je brandverzekering vergoedt dan de heropbouw van je gebouw en de aankoop van nieuwe machines, maar niet de omzet die je tijdens die periode misloopt. Net die financiële stilstand dekt deze polis: de winst die je had gemaakt als er niets gebeurd was, en de vaste kosten die ondertussen blijven lopen.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">Het verschil met je gewone brandpolis is simpel uit te leggen. De brandverzekering herstelt je spullen, de bedrijfsschadeverzekering herstelt je cijfers. Zonder die tweede waarborg betaal je maandenlang lonen, leasings en kredieten terwijl er geen euro binnenkomt. Voor een bouwbedrijf waar de heropbouw van een afgebrand magazijn of het wachten op een nieuwe machine al snel meer dan een jaar duurt, is dat het verschil tussen overleven en de boeken neerleggen.</p>
+        <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div>
+            <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">Wettelijke basis</p>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">De bedrijfsschadeverzekering valt onder de <strong>Wet van 4 april 2014 betreffende de verzekeringen</strong>, met toezicht door de <strong>FSMA</strong>. Ze is niet wettelijk verplicht en bestaat altijd als aanvullende waarborg: er kan pas een uitkering volgen als er sprake is van een gedekt materieel schadegeval onder je brand- of machinebreukverzekering. Belangrijk om zuiver te houden: deze polis dekt stilstand na materiële schade, niet de uitval van de zaakvoerder zelf. Dat laatste is omzetverzekering of gewaarborgd inkomen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IS HET VERPLICHT -->
+<section id="verplicht" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:64px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Is het verplicht?</span>
+      <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#3F5767;margin-bottom:8px;">Is een bedrijfsschadeverzekering wettelijk verplicht?</p>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(64px,10vw,112px);line-height:0.9;color:#001F3F;letter-spacing:-4px;">Nee.</div>
+      <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:20px;color:#3F5767;margin-top:12px;">Maar zonder deze polis betaal je een zware brand of storm vaak uit eigen zak, terwijl je niets verdient.</p>
+    </div>
+    <div class="bs-verplicht-grid">
+      {[
+        {icon:'us', title:'Zelfstandige aannemer',          text:'Niet verplicht. Maar als je magazijn of atelier afbrandt, lopen je lonen en leasings door terwijl je werven stilliggen. Die maanden zonder omzet draag je dan zelf.'},
+        {icon:'ft', title:'Bouwbedrijf met personeel',       text:'Niet verplicht. Toch is dit vaak de belangrijkste polis: ze laat je toe je stielmannen door te betalen en aan boord te houden in plaats van ze kwijt te raken tijdens de stilstand.'},
+        {icon:'cl', title:'Bedrijf met dure machines',       text:'Niet verplicht. Maar wanneer een CNC-machine of productielijn uitvalt door schade, dekt de bedrijfsschadeverzekering het omzetverlies tot de vervangmachine geleverd en operationeel is.'},
+        {icon:'sh', title:'Kmo met kredieten en leasings',   text:'Niet verplicht. Toch lopen je bankinteresten en leasingcontracten gewoon door bij stilstand. Deze polis houdt die vaste kosten betaalbaar tot je weer draait.'},
+      ].map(card=>(
+        <div style="background:#FFFFFF;padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+          <div style="background:rgba(229,165,36,0.1);border-radius:10px;padding:12px;display:inline-flex;margin-bottom:18px;">
+            {card.icon==='us'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+            {card.icon==='ft'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>}
+            {card.icon==='cl'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>}
+            {card.icon==='sh'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- VOORBEELDEN SECTIE -->
+<section style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 20px;">Wanneer valt je bedrijf stil na schade?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0;">De materiële schade is maar het begin. De echte rekening komt van de weken of maanden dat je niet kan produceren, leveren of factureren, terwijl alles wat geld kost gewoon doorloopt.</p>
+    </div>
+    <div class="bs-rules-grid">
+      {[
+        { title: 'Wat is de trigger?', text: 'Er moet eerst een gedekt materieel schadegeval zijn: brand, ontploffing, storm, waterschade of machinebreuk aan je gebouw, inhoud of machines. Pas dan komt de bedrijfsschadeverzekering tussen voor de stilstand die daaruit volgt.' },
+        { title: 'Wat wordt vergoed?', text: 'De gederfde brutowinst (omzet min variabele kosten), je doorlopende vaste kosten zoals lonen en leasings, en de extra kosten die je maakt om de stilstand zo kort mogelijk te houden.' },
+        { title: 'Hoe lang loopt het?', text: 'Zolang als de vergoedingsperiode in je polis, niet langer. Die kies je vooraf, meestal 12, 18 of 24 maanden. In de bouw is 12 maanden vaak te kort, want vergunningen, heropbouw en lange levertermijnen lopen makkelijk uit.' },
+      ].map(card => (
+        <div style="background:#FFFFFF;padding:24px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);border-top:3px solid #E5A524;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#3F5767;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+    <div style="display:flex;justify-content:center;">
+      <button id="bs-examples-btn" style="display:flex;align-items:center;gap:10px;background:rgba(0,31,63,0.04);border:1px solid rgba(0,31,63,0.1);border-radius:8px;padding:14px 24px;cursor:pointer;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#001F3F;">
+        <span>Bekijk 6 concrete voorbeelden uit de bouw</span>
+        <svg id="bs-examples-chevron" width="18" height="18" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+    </div>
+    <ul id="bs-examples-list" style="list-style:none;padding:0;margin:16px 0 0;display:none;grid-template-columns:1fr 1fr;gap:10px;">
+      {[
+        'Een algemeen aannemingsbedrijf met zes arbeiders verliest magazijn en kantoor door brand en heeft vijftien maanden nodig voor vergunning en heropbouw; de polis betaalt al die tijd de lonen en de gederfde brutowinst door.',
+        'Een storm rukt het dak van een schrijnwerkerij weg en beschadigt de CNC-machine zwaar, met acht maanden levertermijn voor een nieuwe; het omzetverlies door het stilliggende maatwerk wordt vergoed.',
+        'Na een brand in het atelier van een metaalconstructeur huurt het bedrijf meteen een tijdelijke loods en least het lasapparatuur om lopende contracten na te komen; die extra huur valt onder de meeruitgaven.',
+        'Een storm vernielt de productiehal van een producent van prefab-betonelementen, waardoor de productie twee weken stilligt en de werknemers nadien overuren draaien om de werfdeadlines te halen; die extra loonkosten zijn gedekt.',
+        'Waterschade legt de IT-infrastructuur op het hoofdkantoor van een wegenbouwer plat, waardoor een maand lang geen werfplanning, nacalculatie of facturatie mogelijk is; de financiële schade van die stilstand wordt gecompenseerd.',
+        'Een brand bij de enige profielleverancier van een raamspecialist legt zijn werven vier maanden stil; met de uitbreiding bedrijfsschade door leveranciers krijgt hij zijn vaste kosten en winstderving vergoed.',
+      ].map(ex=>(
+        <li style="display:flex;gap:10px;align-items:flex-start;background:#F7F4EF;border-radius:8px;padding:12px 16px;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="15" height="15" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{ex}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<!-- DEKKING -->
+<section id="dekking" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:1025px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Dekking</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat is wél en niet gedekt?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:580px;margin:0 auto;">Een bedrijfsschadeverzekering vergoedt het financiële gevolg van een gedekt materieel schadegeval. Hieronder de hoofdlijnen; je exacte waarborgen en uitsluitingen staan in je polisvoorwaarden.</p>
+    </div>
+    <div class="bs-dekking-grid">
+      <div style="background:#FFFFFF;border:2px solid rgba(34,197,94,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(34,197,94,0.08);border-bottom:1px solid rgba(34,197,94,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#15803d;">Wel gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Gederfde brutowinst: het omzetverlies, verminderd met de variabele kosten, dat je zonder het schadegeval wel had gerealiseerd','Doorlopende personeelslonen van arbeiders en bedienden, zodat je je ploeg kan doorbetalen en aan boord houden','Doorlopende vaste kosten: huur, leasing van gebouwen, bestelwagens en machines, en interesten op lopende bankkredieten','Belastingen en sociale bijdragen die blijven doorlopen tijdens de onderbreking','Meeruitgaven of reddingskosten: een tijdelijke loods, vervangmachines of overuren om sneller weer te draaien','De stilstand na zowel brand, ontploffing, storm en waterschade als, mits gekoppeld, na machinebreuk'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgCheck16g} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div style="background:#FFFFFF;border:2px solid rgba(239,68,68,0.5);border-radius:1px;overflow:hidden;">
+        <div style="background:rgba(239,68,68,0.06);border-bottom:1px solid rgba(239,68,68,0.18);padding:16px 28px;display:flex;align-items:center;gap:10px;">
+          <svg width="18" height="18" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:15px;color:#b91c1c;">Niet (of beperkt) gedekt</span>
+        </div>
+        <ul style="list-style:none;padding:20px 28px;margin:0;display:flex;flex-direction:column;gap:14px;">
+          {['Stilstand zonder voorafgaand gedekt materieel schadegeval: er is altijd eerst een gedekte oorzaak nodig','Omzetverlies door uitval van de zaakvoerder zelf wegens ziekte of ongeval; dat hoort bij omzetverzekering of gewaarborgd inkomen','Stopzetting door het faillissement van een klant, een staking of een economische terugval','Administratieve boetes wegens laattijdige oplevering, tenzij contractueel mee verzekerd','De materiële schade zelf aan gebouw, inhoud of machines; die valt onder je brand- of machinebreukverzekering','Het deel van het verlies boven de gekozen vergoedingsperiode of boven het verzekerde bedrag, en het effect van onderverzekering'].map(item=>(
+            <li style="display:flex;gap:12px;align-items:flex-start;">
+              <Fragment set:html={svgX16r} />
+              <span style="font-family:'Outfit',sans-serif;font-size:15px;color:#001F3F;line-height:1.5;">{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+    <div class="bs-plafond-grid" style="background:#3F5767;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);padding:36px 40px;">
+      <div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Vergoedingsperiode</span>
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:24px;color:#FFFFFF;margin:0 0 12px;">Kies ze ruim: 12 tot 24 maanden</h3>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#CBD5E1;max-width:520px;margin:0;">De vergoedingsperiode is de maximale termijn waarin je verzekeraar je verlies compenseert, meestal 12, 18 of 24 maanden. In de bouwsector is 12 maanden vaak te kort: een nieuwe vergunning voor een afgebrand magazijn, de heropbouw en de lange levertermijnen van specifieke machines duren samen al snel 18 tot 24 maanden. Het verzekerde bedrag wordt bepaald op basis van je brutowinst (omzet min variabele kosten) uit je neergelegde jaarrekening. Actualiseer dat bedrag jaarlijks om onderverzekering te vermijden.</p>
+      </div>
+      <div style="text-align:center;flex-shrink:0;">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:6px;">Vergoedingsperiode</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:44px;color:#FFFFFF;letter-spacing:-1px;line-height:1;">12-24</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:14px;color:#94a3b8;margin-top:6px;">maanden (vooraf te kiezen)</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AANVULLENDE WAARBORGEN -->
+<section id="bs-aanvulling" style="background:#3F5767;padding:0 0 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding:100px 32px 0;position:relative;z-index:1;">
+    <div style="max-width:640px;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Aanvullen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Vijf uitbreidingen die je polis afmaken</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0;">De basiswaarborg vangt de klassieke stilstand op. Deze uitbreidingen sluiten de gaten die in de bouw telkens terugkomen.</p>
+    </div>
+    <div class="bs-aanvulling-grid">
+      {[
+        {i:'ac',title:'Bedrijfsschade door leveranciers en klanten', text:'Ligt je bedrijf stil omdat een sleutelleverancier of een grote klant zelf getroffen is door schade, dan vangt deze uitbreiding jouw omzetverlies en vaste kosten op. Voor bouwbedrijven die op één specifieke fabrikant of opdrachtgever leunen, sluit dit een reëel gat.'},
+        {i:'sh',title:'Extra kosten en heropstartkosten',         text:'Naast de vaste kosten dekt deze waarborg ruimer de meeruitgaven om je activiteit sneller te hervatten: een tijdelijk atelier, het leasen van vervangmateriaal, overuren of een versnelde levering. Zo beperk je de duur van de stilstand.'},
+        {i:'us',title:'Langere vergoedingsperiode',               text:'Standaard loopt de uitkering vaak tot 12 maanden, maar in de bouw is dat krap. Met deze uitbreiding verleng je naar 18 of 24 maanden, afgestemd op realistische termijnen voor vergunningen, heropbouw en machinelevering.'},
+        {i:'tr',title:'Uitval van nutsvoorzieningen',             text:'Valt je activiteit stil door een onderbreking van elektriciteit, water of gas, of doordat je werf of atelier onbereikbaar is na schade in de omgeving, dan dekt deze uitbreiding de daaruit volgende bedrijfsschade.'},
+        {i:'br',title:'Boete- en contractverlies',               text:'Een onderbreking kan leiden tot contractuele boetes voor laattijdige oplevering of tot het verlies van een lopend contract. Deze uitbreiding verzekert die specifieke financiële gevolgen, voor zover ze rechtstreeks voortvloeien uit de gedekte schade.'},
+      ].map(card=>(
+        <div class="bs-ins-card" style="padding:28px;">
+          <div style="background:rgba(229,165,36,0.15);border-radius:10px;padding:10px;display:inline-flex;margin-bottom:16px;">
+            {card.i==='ac'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>}
+            {card.i==='sh'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>}
+            {card.i==='us'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>}
+            {card.i==='tr'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>}
+            {card.i==='br'&&<svg width="24" height="24" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>}
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#FFFFFF;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#94A3B8;margin:0;">{card.text}</p>
+        </div>
+      ))}
+      <div style="background:#E5A524;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);padding:32px;display:flex;flex-direction:column;justify-content:center;">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">Niet zeker hoeveel maanden stilstand je moet indekken?</h3>
+        <p style="font-family:'Outfit',sans-serif;font-size:15px;color:rgba(0,31,63,0.75);line-height:1.55;margin:0 0 20px;">Doe de scan: we bekijken je brutowinst, je hersteltermijnen en je vaste kosten tegenover wat verzekeraars vandaag aanbieden.</p>
+        <a href={CTA_DESTINATIONS.scan} class="bs-scan-btn" style="display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;padding:12px 24px;border-radius:8px;text-decoration:none;transition:background 0.2s;width:100%;">
+          {CTA_SCAN.start} <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PREMIE -->
+<section id="premie" style="background:#F7F4EF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:56px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Prijs &amp; berekening</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Hoe wordt je premie berekend?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Er bestaat geen vaste prijs. Wat je betaalt hangt af van je verzekerde brutowinst, je activiteit, de gekozen vergoedingsperiode en je risicoprofiel. De premie wordt doorgaans als percentage op je verzekerde brutowinst berekend en mee opgenomen in je brand- of machinebreukpolis.</p>
+    </div>
+    <div class="bs-formule">
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">1. Basis</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Verzekerde brutowinst</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#3F5767;line-height:1.4;">omzet min variabele kosten, uit je jaarrekening</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">×</div>
+      <div style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">2. Looptijd &amp; risico</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:8px;">Vergoedingsperiode en activiteit</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#3F5767;line-height:1.4;">12, 18 of 24 maanden; bouwrisico weegt zwaarder</div>
+      </div>
+      <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:40px;color:#E5A524;user-select:none;">=</div>
+      <div style="background:#3F5767;border-radius:12px;padding:28px 32px;text-align:center;min-width:200px;box-shadow:0 8px 32px rgba(63,87,103,0.3);">
+        <div style="font-family:'Outfit',sans-serif;font-weight:700;font-size:12px;letter-spacing:1.2px;text-transform:uppercase;color:#E5A524;margin-bottom:10px;">Jaarpremie</div>
+        <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin-bottom:8px;">Jouw polis</div>
+        <div style="font-family:'Outfit',sans-serif;font-size:13px;color:#94a3b8;line-height:1.4;">plus premietaks 9,25%</div>
+      </div>
+    </div>
+    <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:22px;color:#001F3F;text-align:center;margin-bottom:32px;">4 factoren die je premie beïnvloeden</h3>
+    <div class="bs-factors-grid">
+      {[
+        {num:'1',title:'Verzekerde brutowinst',     text:'Hoe hoger de te beschermen brutowinst, hoe hoger de premie. Dit bedrag komt uit je neergelegde jaarrekening.'},
+        {num:'2',title:'Gekozen vergoedingsperiode', text:'Een termijn van 18 of 24 maanden in plaats van 12 verhoogt de premie, maar past beter bij de lange hersteltermijnen in de bouw.'},
+        {num:'3',title:'Activiteit en risicoprofiel',text:'Een bedrijf met dure machines, brandgevoelige opslag of veel werfrisico betaalt meer dan een zuivere dienstenactiviteit.'},
+        {num:'4',title:'Gekozen uitbreidingen',      text:'Waarborgen zoals leveranciersuitval, nutsvoorzieningen of een langere vergoedingsperiode verhogen de premie naargelang je dekking.'},
+      ].map(f=>(
+        <div class="brand-why-card" style="padding:20px 24px;display:flex;gap:18px;align-items:flex-start;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:16px;color:#001F3F;">{f.num}</span></div>
+          <div>
+            <h4 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 4px;">{f.title}</h4>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#3F5767;margin:0;">{f.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+    <div style="max-width:640px;margin:0 auto;">
+      <div style="background:rgba(229,165,36,0.10);padding:20px 28px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);border:1px solid rgba(229,165,36,0.3);">
+        <div style="display:flex;gap:14px;align-items:flex-start;">
+          <svg style="flex-shrink:0;margin-top:2px;" width="18" height="18" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#001F3F;margin:0;"><strong>Fiscaal:</strong> de premie is aftrekbaar als beroepskost van je onderneming. Op de premie is een premietaks van <strong>9,25%</strong> verschuldigd.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section id="bs-cta-band" style="background:#E9C466;padding:80px 0 100px;position:relative;overflow:hidden;">
+  <div class="assurman-mask assurman-mask--cta bs-cta-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:1;">
+    <img src="/verzekeringen-bouwsector-algemeen2-hero.jpg" alt="Bouwbedrijf beschermd door een bedrijfsschadeverzekering">
+  </div>
+  <div style="position:absolute;top:-30px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="white" height="100px" direction="down" /></div>
+  <div class="bs-cta-deco" style="position:absolute;right:-130px;top:40%;transform:translateY(-50%);pointer-events:none;z-index:2;"><BrandChevron color="white" height="240px" direction="left" /></div>
+  <div style="max-width:1100px;margin:0 auto;text-align:center;position:relative;z-index:4;padding:0 32px;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(36px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">Bouwbedrijf dat stilvalt na schade?<br />Wij houden je omzet recht.</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#3F5767;margin-bottom:40px;opacity:0.9;">Start nu in 2 minuten of kies meteen voor persoonlijk advies.</p>
+    <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">{CTA_SCAN.requestNow} <Fragment set:html={svgArr18} /></a>
+  </div>
+</section>
+
+<!-- PER BEROEP TABS -->
+<section id="bs-beroep" style="background:#e5a52414;padding:96px 32px;">
+  <div style="max-width:1280px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Per beroep</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat stilstand betekent voor jouw stiel</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Elk bouwberoep valt op een andere manier stil na schade. Hieronder wat een bedrijfsschadeverzekering concreet voor jou opvangt.</p>
+    </div>
+    <div class="bs-tabs-row" style="display:flex;gap:0;border-bottom:2px solid rgba(0,31,63,0.12);margin-bottom:40px;justify-content:center;">
+      {beroepTabs.map((tab,i)=>(<button class={`bs-tab-btn${i===0?' active':''}`} data-tab-btn={tab.id}>{tab.label}</button>))}
+    </div>
+    {beroepTabs.map((tab,i)=>(
+      <div data-tab-content={tab.id} style={`display:${i===0?'block':'none'};max-width:860px;margin:0 auto;`}>
+      <div class="bs-tab-inner" style="background:#FFFFFF;border-radius:12px;padding:36px 40px;">
+        <div style="background:rgba(229,165,36,0.12);border-radius:12px;padding:18px;flex-shrink:0;">
+          <svg width="32" height="32" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v2z"/><path d="M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5"/><path d="M4 15v-3a8 8 0 0 1 16 0v3"/></svg>
+        </div>
+        <div style="flex:1;">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin:0 0 12px;">{tab.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.65;color:#001F3F;margin:0 0 20px;">{tab.text}</p>
+          <a href={tab.link} style="display:inline-flex;align-items:center;gap:6px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;text-decoration:none;">Bekijk sectorpagina <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+      </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<!-- MIJN SITUATIE ACCORDION -->
+<section id="bs-statuten" style="background:#3F5767;padding:96px 32px;position:relative;overflow:hidden;">
+  <div style="max-width:840px;margin:0 auto;position:relative;z-index:1;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Mijn situatie</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Welke situatie past bij jou?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;margin:0 0 40px;">Drie typische situaties uit de Belgische bouwsector. Vind de jouwe en zie wat dat concreet betekent voor je bedrijfsschadeverzekering.</p>
+
+    <div class="bs-stat-panel" data-stat-panel>
+      <button class="bs-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik werk vooral met dure machines en een vast atelier</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Je productie hangt af van een beperkt aantal sleutelmachines. Valt er één uit door brand, storm of machinebreuk, dan ligt je maatwerk of productie stil tot de vervanging er is, en die levertermijnen lopen in de bouw makkelijk op tot vele maanden.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: koppel je bedrijfsschadeverzekering aan zowel je brand- als je machinebreukverzekering, en kies een vergoedingsperiode die rekening houdt met realistische levertermijnen. Een termijn van 18 of 24 maanden is hier zelden overdreven.</p>
+      </div>
+    </div>
+
+    <div class="bs-stat-panel" data-stat-panel>
+      <button class="bs-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik heb personeel dat ik niet wil verliezen</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Goede stielmannen en technici zijn schaars. Ze tijdelijk op technische werkloosheid zetten lijkt goedkoop, maar het risico bestaat dat ze tijdens de stilstand naar een andere werkgever vertrekken en dat je na de heropbouw zonder ploeg zit.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: zorg dat de doorlopende personeelslonen ruim in je verzekerde brutowinst zitten, zodat je je mensen volledig kan doorbetalen tijdens de onderbreking. Zo behoud je je ploeg en herstart je sneller.</p>
+      </div>
+    </div>
+
+    <div class="bs-stat-panel" data-stat-panel>
+      <button class="bs-stat-btn" data-stat-btn>
+        <div style="background:rgba(229,165,36,0.15);border-radius:8px;padding:8px;flex-shrink:0;"><svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;flex:1;">Ik denk dat mijn brandverzekering dit al dekt</span>
+        <svg data-stat-chevron width="18" height="18" fill="none" stroke="#CBD5E1" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+      </button>
+      <div data-stat-content style="display:none;padding:0 24px 24px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 16px;">Een veelvoorkomend misverstand. Je brandverzekering vergoedt de materiële schade: de heropbouw van het gebouw en de aankoop van nieuwe machines of gereedschap. Ze betaalt niet voor het omzetverlies, de lonen van je personeel of de doorlopende leasings tijdens de heropbouwperiode.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0;">Praktisch: laat je polis nakijken. De bedrijfsschadeverzekering is meestal een optionele waarborg binnen je brandpolis die je apart moet activeren. Zonder die activering draag je de hele financiële stilstand zelf.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BIJ EEN SCHADEGEVAL -->
+<section id="procedure" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+  <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
+    <div style="text-align:center;margin-bottom:60px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Bij schade</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat moet je doen als je bedrijf stilvalt?</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:520px;margin:0 auto;">Een goede bedrijfsschadeclaim staat of valt met je boekhouding. Verwittig je makelaar snel en hou je cijfers bij de hand.</p>
+    </div>
+    <div class="bs-procedure-grid">
+      <div class="bs-procedure-line" style="position:absolute;top:36px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(to right,#E5A524,rgba(229,165,36,0.2));z-index:0;"></div>
+      {[
+        {ic:'ph', title:'Beperk en documenteer',  text:'Stel je gebouw en inhoud veilig, beperk verdere schade en leg alles vast met foto\'s. Bewaar bewijsstukken van de schade en van het ogenblik waarop de stilstand begon.'},
+        {ic:'ac', title:'Meld onmiddellijk',      text:'Verwittig je makelaar of verzekeraar zo snel mogelijk, en sowieso binnen de meldingstermijn uit je polis. Een tijdige melding zet zowel je brand- als je bedrijfsschadedossier in gang.'},
+        {ic:'ft', title:'Onderbouw je verlies',   text:'De omvang van je bedrijfsschade wordt berekend op basis van je brutowinst. Hou je jaarrekeningen, omzetcijfers en lopende contracten bij de hand; vaak stelt de verzekeraar een expert aan.'},
+        {ic:'at', title:'Vraag een voorschot',    text:'Maak waar mogelijk meeruitgaven om sneller te heropstarten; die zijn vaak mee gedekt. Vraag bij een langere stilstand een voorschot op de uitkering, zodat je vaste kosten ondertussen betaald raken.'},
+      ].map((s,i)=>(
+        <div style="padding:0 20px;text-align:center;position:relative;z-index:1;">
+          <div style="width:72px;height:72px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;box-shadow:0 4px 16px rgba(229,165,36,0.3);">
+            {s.ic==='ph'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>}
+            {s.ic==='ac'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>}
+            {s.ic==='ft'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>}
+            {s.ic==='at'&&<svg width="20" height="20" fill="none" stroke="#001F3F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>}
+          </div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#E5A524;margin-bottom:8px;">Stap {i+1}</div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{s.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">{s.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background:#F7F4EF;padding:96px 32px;">
+  <div style="max-width:840px;margin:0 auto;">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Veelgestelde vragen</span>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 12px;">Veelgestelde vragen over de bedrijfsschadeverzekering</h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;margin:0;">11 concrete vragen van bouwondernemers: klik open voor het antwoord.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      {faqItems.map((item,i)=>(
+        <div data-faq-item style="background:#FFFFFF;border:1px solid rgba(0,31,63,0.08);border-radius:10px;overflow:hidden;">
+          <button data-faq-btn style="width:100%;padding:20px 24px;display:flex;justify-content:space-between;align-items:center;background:none;border:none;cursor:pointer;text-align:left;gap:16px;">
+            <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;line-height:1.35;">{item.q}</span>
+            <svg data-faq-chevron width="18" height="18" fill="none" stroke="#64748b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;transition:transform 0.2s;"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div data-faq-answer style="display:none;padding:0 24px 20px;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#3F5767;margin:0;">{item.a}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- GERELATEERDE VERZEKERINGEN -->
+<InsuranceCarousel
+  client:only="react"
+  cards={insuranceCards}
+  sectionLabel="Ook interessant"
+  headline="Gerelateerde verzekeringen"
+  subheadline="Deze verzekeringen vormen samen met je bedrijfsschadeverzekering een sluitend pakket na schade."
+  background="#F5F2FF"
+/>
+
+<!-- PARTNERS -->
+<section style="background:#F7F4EF;padding:64px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">Ondersteund door sterke verzekeringspartners</p>
+    <PartnerSlider client:only="react" />
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:#3F5767;padding-top:120px;padding-bottom:0;position:relative;text-align:center;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.05) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+  <div style="max-width:896px;margin:0 auto;padding:0 32px;position:relative;z-index:2;">
+    <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;text-align:center;margin-bottom:20px;">Start met Assurman</span>
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(32px,4vw,48px);line-height:1;color:#FFFFFF;max-width:727px;margin:0 auto 24px;">Overleeft je bouwbedrijf een maandenlange stilstand?</h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:22px;line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 48px;">Werk je in de bouwsector en wil je zeker zijn dat je omzet en je vaste kosten beschermd zijn na een brand of storm? Wij bekijken met jou wat echt nodig is, zonder verplichting.</p>
+    <div class="bs-final-btns">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">{CTA_SCAN.hero} <Fragment set:html={svgArr18} /></a>
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">{CTA_AFSPRAAK.advisory}</a>
+    </div>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+</section>
+
+</div>
+
+<script>
+  const progressBar = document.getElementById('bs-progress-bar') as HTMLElement | null;
+  const stickyBtns  = document.querySelectorAll<HTMLElement>('[data-sticky-btn]');
+  const sectionIds  = ['watis','verplicht','dekking','premie','procedure','faq'];
+
+  stickyBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.stickyBtn!;
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 80, behavior: 'smooth' });
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const total = doc.scrollHeight - doc.clientHeight;
+    if (progressBar) progressBar.style.width = total > 0 ? `${(doc.scrollTop / total) * 100}%` : '0%';
+    for (let i = sectionIds.length - 1; i >= 0; i--) {
+      const el = document.getElementById(sectionIds[i]);
+      if (el && el.getBoundingClientRect().top <= 120) {
+        stickyBtns.forEach(b => b.classList.toggle('active', b.dataset.stickyBtn === sectionIds[i]));
+        break;
+      }
+    }
+  }, { passive: true });
+
+  const exBtn  = document.getElementById('bs-examples-btn')     as HTMLElement | null;
+  const exList = document.getElementById('bs-examples-list')    as HTMLElement | null;
+  const exChev = document.getElementById('bs-examples-chevron') as HTMLElement | null;
+  if (exBtn && exList && exChev) {
+    exBtn.addEventListener('click', () => {
+      const open = exList.style.display !== 'none';
+      exList.style.display = open ? 'none' : 'grid';
+      exChev.style.transform = open ? '' : 'rotate(180deg)';
+    });
+  }
+
+  const tabBtns     = document.querySelectorAll<HTMLElement>('[data-tab-btn]');
+  const tabContents = document.querySelectorAll<HTMLElement>('[data-tab-content]');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tabBtn!;
+      tabBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      tabContents.forEach(el => { el.style.display = el.dataset.tabContent === t ? 'block' : 'none'; });
+    });
+  });
+
+  document.querySelectorAll('[data-stat-panel]').forEach(panel => {
+    const btn     = panel.querySelector<HTMLElement>('[data-stat-btn]');
+    const content = panel.querySelector<HTMLElement>('[data-stat-content]');
+    const chevron = panel.querySelector<HTMLElement>('[data-stat-chevron]');
+    if (!btn || !content || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = content.style.display !== 'none';
+      document.querySelectorAll('[data-stat-panel]').forEach(p => {
+        const c  = p.querySelector<HTMLElement>('[data-stat-content]');
+        const ch = p.querySelector<HTMLElement>('[data-stat-chevron]');
+        if (c)  c.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { content.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+
+  document.querySelectorAll('[data-faq-item]').forEach(item => {
+    const btn     = item.querySelector<HTMLElement>('[data-faq-btn]');
+    const answer  = item.querySelector<HTMLElement>('[data-faq-answer]');
+    const chevron = item.querySelector<HTMLElement>('[data-faq-chevron]');
+    if (!btn || !answer || !chevron) return;
+    btn.addEventListener('click', () => {
+      const open = answer.style.display !== 'none';
+      document.querySelectorAll('[data-faq-item]').forEach(fi => {
+        const a  = fi.querySelector<HTMLElement>('[data-faq-answer]');
+        const ch = fi.querySelector<HTMLElement>('[data-faq-chevron]');
+        if (a)  a.style.display   = 'none';
+        if (ch) ch.style.transform = '';
+      });
+      if (!open) { answer.style.display = 'block'; chevron.style.transform = 'rotate(180deg)'; }
+    });
+  });
+</script>
+
 </BaseLayout>
