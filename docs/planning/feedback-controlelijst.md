@@ -67,3 +67,21 @@ Status pagina: **afgewerkt, op staging.** Onderstaande punten weloverwogen ingev
 | BAB5 | Boek 6 BW (1/1/2025) schaft quasi-immuniteit hulppersoon af → bestuurder sneller rechtstreeks aanspreekbaar | Zie cross-cutting C5 | Juridisch laten aftekenen (idem C5). | 🔲 |
 
 Minors: hero/CTA-beeld generiek (`algemeen`); geen aparte alert-sectie; tab-btn/FAQ-chevron gebruiken nog `#64748b` (cosmetische afwijking, idem norm-pagina's). De 6 sectorcases zijn kwalitatief (geen euro-bedragen).
+
+---
+
+## /verzekeringen/brandverzekering (Brandverzekering)
+
+Status pagina: **afgewerkt, op staging.** 7 controlepunten (uit de research-brief).
+
+| # | Wat we beslisten (staat zo op de pagina) | Waarom | Te controleren / suggestie | Status |
+|---|---|---|---|---|
+| BRV-1 | Antwoordwoord op "verplicht?" = **"Soms."** (niet wettelijk verplicht voor eigenaar; contractueel vereist bij handelshuur en krediet) | Eerlijkste weergave van de gemengde verplichting | Bevestig de formulering. Liever een hard "Nee."? Dan passen we het aan met behoud van de subzin. | 🔲 |
+| BRV-2 | Wettelijke basis = **Wet 4 april 2014** + **huurdersaansprakelijkheid art. 1733-1735 oud BW** + natuurrampendekking wettelijk sinds **2007** | Standaard Belgisch kader | Juridisch laten aftekenen: exacte artikelnummers (1733-1735) + jaartal 2007 + formulering. | 🔲 |
+| BRV-3 | **ABEX ± 1056 (begin 2026)** als indexatie, op de pagina "indicatief, controleer bij afsluiten" | Cross-cutting C3 (1056 vs 1057) | Bevestig de exacte ABEX-waarde op de officiële publicatie. | 🔲 |
+| BRV-4 | **Aangiftetermijn** niet als vast getal; copy zegt "de termijn die in je polis staat" | Termijn verschilt per polis | Bevestig of we een standaardtermijn (bv. 8 kalenderdagen) tonen, of "zie polis" houden. | 🔲 |
+| BRV-5 | **Brandtaks = afwijkend**: basis-premietaks 9,25% (volgens begroting → 9,60% vanaf 1/4/2026) **plus** brandspecifieke RIZIV-bijdrage (± 6,5%). Copy noemt **geen hard eindpercentage**, enkel "hoger dan bij een gewone aansprakelijkheidsverzekering". | Brand draagt een extra wettelijke bijdrage; totaal niet eenduidig in neutrale bronnen | Bevestig: (a) 9,25% of al 9,60%; (b) % brandbijdrage; (c) totaal expliciet tonen of kwalitatief houden. | 🔲 |
+| BRV-6 | **Diefstal en bedrijfsschade = aparte/optionele** waarborgen, niet standaard in de brandpolis | Marktstandaard; voorkomt misverstand | Bevestig dat dit aansluit bij wat Assurman aanbiedt. | 🔲 |
+| BRV-7 | **Franchise** niet als hard bedrag genoemd | Verschilt sterk per maatschappij | Bevestig of we een franchisebereik willen tonen; zo ja, tegen de effectieve voorwaarden. | 🔲 |
+
+Euro-bedragen in de 6 praktijkcases (bv. ± 18.000 euro gestolen gereedschap) staan enkel als herkenbaar-fictieve illustratie.

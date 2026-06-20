@@ -114,11 +114,11 @@ export const VERZEKERINGEN: Verzekering[] = [
     slug: 'brandverzekering',
     titel: 'Brandverzekering',
     categorie: 'spullen-en-werk',
-    korteBeschrijving: 'Dekt je bedrijfsgebouw, magazijn en inhoud tegen brand, storm en waterschade.', // TODO: definitieve copy
-    bullets: ['Gebouw én inhoud gedekt', 'Brand, storm en waterschade', 'Huurdersaansprakelijkheid'], // TODO: definitieve bullets
+    korteBeschrijving: 'Dekt je bedrijfsgebouw, magazijn en inhoud (machines, gereedschap en stock) tegen brand, storm, water, glasbreuk en diefstal, en beschermt je huurdersaansprakelijkheid.',
+    bullets: ['Gebouw én inhoud verzekerd', 'Méér dan vuur: storm, water en glas', 'Huurdersaansprakelijkheid gedekt', 'Uit te breiden met diefstal en bedrijfsschade'],
     icoon: 'flame',
     gerelateerde: ['bedrijfsschade', 'machinebreuk', 'alle-bouwplaats-risicos'],
-    status: 'skeleton',
+    status: 'live',
   },
   {
     slug: 'machinebreuk',

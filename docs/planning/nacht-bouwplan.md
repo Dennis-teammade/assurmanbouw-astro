@@ -134,7 +134,7 @@ voorstel voor de volgende dag.
 > Werk deze sectie bij na ELKE fase-D. Houd commit-hash per pagina bij.
 
 - [x] 1. BA Bestuurder — DONE
-- [ ] 2. Brandverzekering — TODO
+- [x] 2. Brandverzekering — DONE
 - [ ] 3. Bedrijfsschade — TODO
 - [ ] 4. Vervoerde goederen — TODO
 - [ ] 5. Gewaarborgd inkomen — TODO
@@ -152,3 +152,4 @@ voorstel voor de volgende dag.
 (per pagina: tijd, commit-hash, controlelijst-punten, bijzonderheden)
 
 - **BA Bestuurder** — DONE. Pagina herschreven op norm-skelet (ba-onderneming-template, prefix bab-), volledige D&O-content uit Codex+Dennis. Databron-record → live + finale copy. Build groen (101 pagina's). Controlelijst-punten BAB1-5. Brand voice schoon (0 em-dash, 0 u/uw, FR-slip gefixt). FR-slip "Depuis" uit origineel ba-onderneming meegefixt — NB: check of ba-onderneming.astro diezelfde slip nog heeft.
+- **Brandverzekering** — DONE. Gebouwd uit brief (prefix brv-), databron live. Build groen (101 pagina's). Controlepunten BRV-1..7 (let op: afwijkende brandtaks, bewust kwalitatief). Brand voice schoon. Volgende: Bedrijfsschade (brief klaar).
