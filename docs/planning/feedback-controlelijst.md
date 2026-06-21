@@ -389,6 +389,23 @@ Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeho
 
 ---
 
+## /sectoren/tuinaannemers (Sectorpagina — sectorcluster 10/13)
+
+Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/tuin-cluster.md`, prefix `tun-`. Polis-pakket: BA-onderneming, ABR, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen, rechtsbijstand. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: werf + zware machines + graafwerk (verzakt terras, geraakte leiding, machinepech).
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| TA-01 | Fictieve case verzakt terras (€22.000) → BA + rechtsbijstand | Valt verzakking door onderbouw-fout onder BA en/of BA-10? | 🔲 |
+| TA-02 | Fictieve case geraakte nutsleiding (€9.500) → BA + rechtsbijstand | Voorwaarden BA-dekking nutsleidingen (opzoekplicht KLIP/KLIM)? | 🔲 |
+| TA-03 | Fictieve case defecte minigraver (€7.000) → machinebreuk | Akkoord als illustratie? | 🔲 |
+| TA-04 | Fictieve case storm beschadigt klinkers/beplanting (€11.000) → ABR | Akkoord; schade aan werk in uitvoering + materiaal op werf? | 🔲 |
+| TA-PAK | Polis-pakket: BA-onderneming, ABR, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen, rechtsbijstand | Pakket akkoord? | 🔲 |
+| TA-FOTO | Placeholder-beelden (`/images/sectoren/tuinaannemers-{hero,why,cta}.jpg` + `/images/cases/case-tuinaannemers-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+
+Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
+
+---
+
 ## /sectoren/koeltechniek-hvac (Sectorpagina — sectorcluster 9/13)
 
 Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/technieken-cluster.md`, prefix `hvc-`. Polis-pakket: BA-onderneming, vervoerde-goederen, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen, rechtsbijstand. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: koelmiddel/gevolgschade + waterschade condensafvoer + dure units + dimensionering-geschillen. **Technieken-cluster (8-9) compleet.**
