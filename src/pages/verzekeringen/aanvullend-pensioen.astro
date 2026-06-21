@@ -61,7 +61,7 @@ const svgArr18 = `<svg width="18" height="18" fill="none" stroke="currentColor" 
   .ap-sticky-btn:hover .ap-check,.ap-sticky-btn.active .ap-check{color:#E5A524;}
   .ap-tab-btn{background:none;border:none;cursor:pointer;padding:14px 24px;white-space:nowrap;font-family:'Open Sans',sans-serif;font-weight:700;font-size:15px;color:#64748b;border-bottom:2px solid transparent;margin-bottom:-2px;transition:color 0.2s,border-color 0.2s;}
   .ap-tab-btn:hover,.ap-tab-btn.active{color:#E5A524;border-bottom-color:#E5A524;}
-  .ap-formule-card{background:#FFFFFF;border:1px solid rgba(0,31,63,0.1);border-top:3px solid #E5A524;transition:box-shadow 0.2s,transform 0.2s;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 22px),calc(100% - 22px) 100%,0% 100%);display:flex;flex-direction:column;}
+  .ap-formule-card{background:#FFFFFF;box-shadow:0 2px 8px rgba(0,31,63,0.05);transition:box-shadow 0.2s,transform 0.2s;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 22px),calc(100% - 22px) 100%,0% 100%);display:flex;flex-direction:column;}
   .ap-formule-card:hover{box-shadow:0 12px 32px rgba(0,31,63,0.1);transform:translateY(-4px);}
   .ap-formule-link{display:inline-flex;align-items:center;gap:6px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;text-decoration:none;margin-top:auto;transition:gap 0.2s;}
   .ap-formule-link:hover{gap:10px;}
@@ -77,10 +77,11 @@ const svgArr18 = `<svg width="18" height="18" fill="none" stroke="currentColor" 
   .ap-hero-inner{max-width:1280px;margin:0 auto;padding:64px 32px 80px;position:relative;z-index:2;}
   .ap-hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
   .ap-watis-grid{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:flex-start;}
+  .ap-pijler-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
   .ap-verplicht-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
   .ap-formules-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-bottom:28px;}
   .ap-rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0;}
-  .ap-fiscaal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto 40px;}
+  .ap-fiscaal-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
   .ap-procedure-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;}
   .ap-tab-inner{display:flex;gap:32px;align-items:flex-start;border-radius:12px;}
   .ap-final-btns{display:flex;gap:24px;justify-content:center;margin-bottom:80px;flex-wrap:wrap;}
@@ -118,6 +119,7 @@ const svgArr18 = `<svg width="18" height="18" fill="none" stroke="currentColor" 
     #ap-cta-band h2{font-size:clamp(28px,8vw,48px) !important;}
     #ap-cta-band p{font-size:18px !important;}
     .ap-watis-grid{grid-template-columns:1fr;gap:24px;}
+    .ap-pijler-grid{grid-template-columns:1fr;}
     .ap-verplicht-grid{grid-template-columns:1fr;}
     .ap-formules-grid{grid-template-columns:1fr;}
     .ap-rules-grid{grid-template-columns:1fr;}
@@ -205,24 +207,22 @@ const svgArr18 = `<svg width="18" height="18" fill="none" stroke="currentColor" 
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een aanvullend pensioen is <strong>pensioenkapitaal dat je bovenop je wettelijk pensioen opbouwt</strong>. Je stort periodiek een bijdrage bij een verzekeraar, die het kapitaal opbouwt en beheert. Bij je pensioen krijg je dat uitgekeerd, als eenmalig bedrag of als rente. Voor een zelfstandige in de bouw is dat geen luxe, maar noodzaak: <strong>het wettelijk pensioen van een zelfstandige ligt structureel laag</strong>.</p>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">In België is het pensioen opgebouwd in <strong>vier pijlers</strong>. Deze pagina gaat over de <strong>tweede pijler</strong>: het professioneel aanvullend pensioen dat je opbouwt via je beroep. Daar zitten de formules VAPZ, POZ, IPT en de groepsverzekering. Welke je gebruikt, hangt af van je statuut: zelfstandige met of zonder vennootschap, of werkgever met personeel.</p>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">De keuze is geen of-of. Veel zelfstandigen <strong>combineren formules</strong>: een VAPZ als basis, en daarbovenop een POZ of een IPT. Zo bouw je sneller op en haal je het maximum uit je fiscale ruimte. Op deze pagina helpen we je de juiste mix kiezen en sturen we je door naar de formule die bij jou past.</p>
-        <div style="background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
-          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 16px;display:flex;align-items:center;gap:10px;">
-            <svg style="flex-shrink:0;" width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
-            De vier pensioenpijlers
-          </p>
-          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;">
+        <div>
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">De vier pensioenpijlers</p>
+          <div class="ap-pijler-grid">
             {[
-              '<strong>1e pijler:</strong> het wettelijk pensioen van de overheid, opgebouwd via je sociale bijdragen. Voor zelfstandigen vaak laag.',
-              '<strong>2e pijler:</strong> het professioneel aanvullend pensioen. Hier zitten VAPZ, POZ, IPT en de groepsverzekering. Dit is de focus van deze pagina.',
-              '<strong>3e pijler:</strong> individueel sparen met fiscaal voordeel: pensioensparen en langetermijnsparen. Sluit je privé af, los van je beroep.',
-              '<strong>4e pijler:</strong> je eigen vermogen: spaargeld, beleggingen en vastgoed waarmee je je oude dag mee financiert.',
-            ].map(item=>(
-              <li style="display:flex;gap:10px;align-items:flex-start;">
-                <span style="flex-shrink:0;width:7px;height:7px;border-radius:50%;background:#E5A524;margin-top:8px;"></span>
-                <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#3F5767;" set:html={item}></span>
-              </li>
+              {label:'Pijler 1', titel:'Wettelijk pensioen', tekst:'Van de overheid, via je sociale bijdragen. Voor zelfstandigen vaak laag.', focus:false},
+              {label:'Pijler 2', titel:'Aanvullend via je beroep', tekst:'VAPZ, POZ, IPT en de groepsverzekering. Dit is waar deze pagina over gaat.', focus:true},
+              {label:'Pijler 3', titel:'Individueel sparen', tekst:'Pensioensparen en langetermijnsparen, privé en met fiscaal voordeel.', focus:false},
+              {label:'Pijler 4', titel:'Eigen vermogen', tekst:'Spaargeld, beleggingen en vastgoed voor je oude dag.', focus:false},
+            ].map(p=>(
+              <div style={`padding:18px 20px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 16px),calc(100% - 16px) 100%,0% 100%);background:${p.focus ? '#3F5767' : '#F7F4EF'};`}>
+                <span style={`font-family:'Outfit',sans-serif;font-weight:800;font-size:12px;letter-spacing:1px;text-transform:uppercase;color:${p.focus ? '#E5A524' : '#001F3F'};display:block;margin-bottom:6px;`}>{p.label}{p.focus ? ' · focus' : ''}</span>
+                <p style={`font-family:'Outfit',sans-serif;font-weight:800;font-size:15px;line-height:1.25;margin:0 0 5px;color:${p.focus ? '#FFFFFF' : '#001F3F'};`}>{p.titel}</p>
+                <p style={`font-family:'Outfit',sans-serif;font-weight:400;font-size:13px;line-height:1.5;margin:0;color:${p.focus ? '#CBD5E1' : '#3F5767'};`}>{p.tekst}</p>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -261,7 +261,7 @@ const svgArr18 = `<svg width="18" height="18" fill="none" stroke="currentColor" 
 </section>
 
 <!-- DE FORMULES (keuzehub - hart van de pagina) -->
-<section id="formules" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+<section id="formules" style="background:#F7F4EF;padding:0 32px 96px;position:relative;overflow:hidden;">
   <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
   <div style="max-width:1100px;margin:0 auto;padding-top:100px;">
     <div style="text-align:center;margin-bottom:52px;">
@@ -282,7 +282,7 @@ const svgArr18 = `<svg width="18" height="18" fill="none" stroke="currentColor" 
         </div>
       ))}
     </div>
-    <div style="background:#F7F4EF;border:1px solid rgba(229,165,36,0.25);border-radius:10px;padding:22px 28px;display:flex;gap:14px;align-items:flex-start;">
+    <div style="background:#FFFFFF;border-radius:10px;padding:22px 28px;display:flex;gap:14px;align-items:flex-start;box-shadow:0 2px 8px rgba(0,31,63,0.05);">
       <svg style="flex-shrink:0;margin-top:2px;" width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
       <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#001F3F;margin:0;"><strong>En privé?</strong> Naast je beroep kan iedereen sparen in de <strong>derde pijler</strong>: pensioensparen en langetermijnsparen, allebei met een belastingvoordeel. Dat staat los van je beroep en je combineert het gerust met je tweede pijler. Meer daarover lees je in het stuk over de fiscaliteit hieronder.</p>
     </div>
@@ -290,7 +290,7 @@ const svgArr18 = `<svg width="18" height="18" fill="none" stroke="currentColor" 
 </section>
 
 <!-- IN DE PRAKTIJK -->
-<section id="ap-praktijk" style="background:#F7F4EF;padding:96px 32px;">
+<section id="ap-praktijk" style="background:#F5F2FF;padding:96px 32px;">
   <div style="max-width:1280px;margin:0 auto;">
     <div style="max-width:640px;margin-bottom:52px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In de praktijk</span>
@@ -303,9 +303,9 @@ const svgArr18 = `<svg width="18" height="18" fill="none" stroke="currentColor" 
         { title: 'Fiscaal slim opbouwen', text: 'Elke euro die je in je tweede pijler stort, levert een fiscaal voordeel op. Je bouwt pensioen op met geld dat je anders deels aan belastingen kwijt was.' },
         { title: 'Combineren loont', text: 'VAPZ als basis, daarbovenop een POZ of IPT. Wie de formules slim stapelt, haalt het maximum uit zijn fiscale ruimte en bouwt sneller op.' },
       ].map(card => (
-        <div style="background:#FFFFFF;padding:24px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);border-top:3px solid #E5A524;">
-          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
-          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#3F5767;margin:0;">{card.text}</p>
+        <div style="background:#3F5767;padding:28px 26px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 20px),calc(100% - 20px) 100%,0% 100%);">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:17px;color:#FFFFFF;margin:0 0 10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.6;color:#CBD5E1;margin:0;">{card.text}</p>
         </div>
       ))}
     </div>
@@ -334,7 +334,7 @@ const svgArr18 = `<svg width="18" height="18" fill="none" stroke="currentColor" 
 </section>
 
 <!-- FISCAAL VOORDEEL (vervangt premie) -->
-<section id="premie" style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+<section id="premie" style="background:#F7F4EF;padding:0 32px 96px;position:relative;overflow:hidden;">
   <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
   <div style="max-width:1280px;margin:0 auto;padding-top:100px;">
     <div style="text-align:center;margin-bottom:56px;">
@@ -342,20 +342,30 @@ const svgArr18 = `<svg width="18" height="18" fill="none" stroke="currentColor" 
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Wat levert een aanvullend pensioen fiscaal op?</h2>
       <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#3F5767;max-width:600px;margin:0 auto;">Het fiscale voordeel is precies wat een aanvullend pensioen zo aantrekkelijk maakt. Hoe groot het is, hangt af van de formule die je kiest. De grote lijnen zetten we hieronder op een rij. De exacte berekening maken we samen.</p>
     </div>
-    <div class="ap-fiscaal-grid">
-      {[
-        {num:'1',title:'Aftrekbare premie of belastingvermindering', text:'In de tweede pijler is de premie meestal aftrekbaar: via je sociale bijdragen (VAPZ) of als beroepskost van je vennootschap (IPT). Bij een POZ en in de derde pijler krijg je een belastingvermindering op de gestorte premie. Het mechanisme verschilt per formule, het voordeel blijft.'},
-        {num:'2',title:'De 80%-regel', text:'Voor IPT, POZ en de groepsverzekering geldt de 80%-regel: je wettelijk en aanvullend pensioen samen mogen niet meer bedragen dan <strong>80% van je laatste normale brutojaarloon</strong>. Stort je meer, dan is het stuk boven die grens niet langer aftrekbaar. Wij rekenen dat vooraf voor je uit.'},
-        {num:'3',title:'Premietaks 4,40%', text:'Op de premies van een tweede- of derdepijlerverzekering geldt een <strong>premietaks van 4,40%</strong>. Die is in het voordeel doorgaans ruimschoots verrekend. Bij de uitkering gelden later nog afzonderlijke bijdragen en belastingen, die we per formule met je doornemen.'},
-      ].map(f=>(
-        <div class="brand-why-card" style="padding:24px 28px;">
-          <div style="width:40px;height:40px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;margin-bottom:16px;"><span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:18px;color:#001F3F;">{f.num}</span></div>
-          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{f.title}</h3>
-          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;" set:html={f.text}></p>
+    <div style="max-width:900px;margin:0 auto;display:flex;flex-direction:column;gap:16px;">
+      <div class="brand-why-card" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start;">
+        <div style="width:32px;height:32px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:15px;color:#001F3F;">1</span></div>
+        <div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">Aftrekbare premie of belastingvermindering</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#3F5767;margin:0;">In de tweede pijler is de premie meestal aftrekbaar: via je sociale bijdragen (VAPZ) of als beroepskost van je vennootschap (IPT). Bij een POZ en in de derde pijler krijg je een belastingvermindering op de gestorte premie. Het mechanisme verschilt per formule, het voordeel blijft.</p>
         </div>
-      ))}
-    </div>
-    <div style="max-width:900px;margin:0 auto;">
+      </div>
+      <div class="ap-fiscaal-grid">
+        <div class="brand-why-card" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:32px;height:32px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:15px;color:#001F3F;">2</span></div>
+          <div>
+            <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">De 80%-regel</h3>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#3F5767;margin:0;">Voor IPT, POZ en de groepsverzekering geldt de 80%-regel: je wettelijk en aanvullend pensioen samen mogen niet meer bedragen dan <strong>80% van je laatste normale brutojaarloon</strong>. Stort je meer, dan is het stuk boven die grens niet langer aftrekbaar. Wij rekenen dat vooraf voor je uit.</p>
+          </div>
+        </div>
+        <div class="brand-why-card" style="padding:20px 24px;display:flex;gap:16px;align-items:flex-start;">
+          <div style="width:32px;height:32px;border-radius:50%;background:#E5A524;display:flex;align-items:center;justify-content:center;flex-shrink:0;"><span style="font-family:'Outfit',sans-serif;font-weight:900;font-size:15px;color:#001F3F;">3</span></div>
+          <div>
+            <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">Premietaks 4,40%</h3>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.65;color:#3F5767;margin:0;">Op de premies van een tweede- of derdepijlerverzekering geldt een <strong>premietaks van 4,40%</strong>. Die is in het voordeel doorgaans ruimschoots verrekend. Bij de uitkering gelden later nog afzonderlijke bijdragen en belastingen, die we per formule met je doornemen.</p>
+          </div>
+        </div>
+      </div>
       <div style="background:rgba(229,165,36,0.10);padding:28px 32px;clip-path:polygon(24px 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%,0% 24px);border:1px solid rgba(229,165,36,0.3);">
         <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin:0 0 12px;">Tweede pijler vs derde pijler</h3>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.7;color:#001F3F;margin:0;"><strong>Tweede pijler (beroep):</strong> VAPZ, POZ, IPT en groepsverzekering. De premie is meestal aftrekbaar als beroepskost of via je sociale bijdragen, met de hoogste hefboom. <strong>Derde pijler (privé):</strong> pensioensparen en langetermijnsparen. Hier krijg je een belastingvermindering. In 2026 kan je in <strong>pensioensparen</strong> kiezen tussen maximaal 1.050 euro (30% vermindering) of 1.350 euro (25% vermindering). In <strong>langetermijnsparen</strong> kan je tot 2.450 euro storten met 30% vermindering, al hangt je ruimte daar samen met een eventueel woonkrediet. De derde pijler vult je tweede pijler aan; ze sluiten elkaar niet uit.</p>
