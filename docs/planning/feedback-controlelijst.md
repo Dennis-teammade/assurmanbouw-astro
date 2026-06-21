@@ -372,6 +372,23 @@ Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeho
 
 ---
 
+## /sectoren/vloerders-tegelzetters (Sectorpagina — sectorcluster 6/13)
+
+Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/afwerking-cluster.md`, prefix `vlt-`. Polis-pakket: BA-onderneming, rechtsbijstand, vervoerde-goederen, bedrijfsvoertuigen, arbeidsongevallen, ABR. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: esthetische geschillen (loskomend/hol klinkend werk, kleurverschil natuursteen) + hoog materiaalrisico (duur natuursteen/grootformaat) → rechtsbijstand + BA + vervoerde-goederen.
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| VL-01 | Fictieve case loskomende/hol klinkende tegels (€15.500) → rechtsbijstand + BA | Akkoord; lijmlaag/ondergrond beoordelen, rol van de chape? | 🔲 |
+| VL-02 | Fictieve case kleurverschil natuursteen (€12.000) → rechtsbijstand | Akkoord; natuurlijke kleur-/structuurvariatie van het materiaal? | 🔲 |
+| VL-03 | Fictieve case breuk grootformaat bij transport (€9.000) → vervoerde-goederen | Akkoord; materiaalwaarde verzekerd tijdens vervoer naar de werf? | 🔲 |
+| VL-04 | Fictieve case beschadigde natuursteenplaat bij plaatsing (€7.500) → ABR/werfdekking | Akkoord; schade aan materiaal in uitvoering op de werf? | 🔲 |
+| VL-PAK | Polis-pakket: BA-onderneming, rechtsbijstand, vervoerde-goederen, bedrijfsvoertuigen, arbeidsongevallen, ABR | Pakket akkoord? | 🔲 |
+| VL-FOTO | Placeholder-beelden (`/images/sectoren/vloerders-tegelzetters-{hero,why,cta}.jpg` + `/images/cases/case-vloerders-tegelzetters-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+
+Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
+
+---
+
 ## /sectoren/chappers (Sectorpagina — sectorcluster 5/13)
 
 Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/afwerking-cluster.md`, prefix `chp-`. Polis-pakket: BA-onderneming, **BA-10**, rechtsbijstand, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: gevolgschade aan afwerking + tienjarige aansprakelijkheid (chape = structureel deel vloeropbouw).
