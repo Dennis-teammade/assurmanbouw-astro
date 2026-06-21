@@ -140,6 +140,7 @@ Alterneer tussen deze waarden om visueel ritme te creëren:
 5. **CTA op donkere bg** → `bg-gold-light` met `text-navy`
 6. **NIET**: `bg-navy` voor grote secties (te zwaar, niet on-brand)
 7. **NIET**: navy zien als hoofdkleur — `slate` is primair
+8. **Kaart-contrast (hard)**: een kaart moet contrasteren met zijn sectie-achtergrond; een 1-zijdige gold-rand mag **nooit** het enige accent zijn (geen wit-op-wit). Geen `border-top/bottom` gold op kaarten. Houd tekst-lengte per kaartenrij in balans. Volledige regel: `docs/content-guide/cards.md` § "Universele kaart-regels".
 
 Bij twijfel: kijk hoe `dakwerkers.astro` of `arbeidsongevallen.astro` het oplost.
 

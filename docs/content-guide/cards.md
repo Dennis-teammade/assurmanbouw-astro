@@ -8,6 +8,44 @@ Er zijn **twee** card-varianten, bewust bijna identiek. Bronnen:
 > DNA.** Behoud bg, clip-path, icon-box, titel-stijl, hover en gold-cta. Pas alleen de
 > inhoud (en de variant-specifieke extra's) aan.
 
+## Universele kaart-regels (geldt voor ÁLLE kaarten, ook op detail-/sector-/verzekeringspagina's)
+
+> Vastgelegd na een design-review met de eigenaar (juni 2026) en daarna site-breed
+> toegepast op de verzekeringspagina's. Doel: vermijden dat we in "standaard
+> AI-design" vervallen (overal randjes, halflege vakken). Referentie blijft
+> `arbeidsongevallen.astro` (verzekeringen) en `dakwerkers.astro` (sectoren).
+
+1. **Een kaart moet CONTRASTEREN met zijn sectie-achtergrond. Een 1-zijdige rand
+   (gold) mag NOOIT het enige accent zijn.**
+   - Zet **nooit** een witte kaart op een **witte of bijna-witte** sectie waarbij
+     enkel een randje de kaart "maakt". Wit-op-wit → de rand wordt gedwongen het
+     accent; dat is precies de goedkope look die we niet willen.
+   - Witte kaarten horen op een **getinte** sectie (`sand #F7F4EF`, `cream #F5F2FF`,
+     `gold-strip #e5a52414`); of gebruik een **gevulde** kaart (`slate #3F5767`,
+     witte tekst) op een lichte sectie. Het witte/gevulde **vlak** is het accent,
+     een rand hooguit een detail.
+   - Bekende, toegestane uitzondering = de **why-card** (`.brand-why-card` /
+     `.dw-why-card`, `border-left:4px #E5A524`). Die werkt omdat ze als **witte
+     kaart op een niet-witte sectie** staat (sand op de verzekeringspagina's,
+     off-white `#FBF8FF` op de sectorpagina's). De border-left is daar een detail,
+     niet het accent. Repliceer ze enkel zó; verplaats ze nooit naar een witte
+     sectie.
+
+2. **Voeg NOOIT `border-top` / `border-bottom` (gold) toe aan kaarten.** Dat was een
+   over-decoratie die site-breed verwijderd is. De referentiepagina's gebruiken
+   **precies één** 1-zijdige rand: de why-card (border-left), op een getinte sectie.
+   Meer 1-zijdige randen = niet on-brand.
+
+3. **Tekst-lengtebalans binnen een rij kaarten.** Houd de teksten in eenzelfde rij
+   ongeveer **even lang**; de *hoeveelheid* tekst van de referentiepagina is de norm.
+   Eén veel langere kaart breekt het visuele evenwicht en geeft elders halflege
+   vakken. Richtlijn voor korte kaart-bodies: **~9-13 woorden**; kort uitschieters in.
+
+4. **Sectie-ritme:** alterneer de sectie-achtergronden zodat opeenvolgende
+   content-secties met kaarten elk contrast geven (bv. `gold-strip → sand → cream →
+   sand`). Nooit twee identieke tinten naast elkaar. Zie `brand-kit.md` §
+   sectie-achtergronden.
+
 ## Gedeeld card-DNA (beide varianten)
 
 - **Achtergrond:** `#e5a5240f` (gold ~6%).
