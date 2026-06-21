@@ -238,11 +238,11 @@ export const VERZEKERINGEN: Verzekering[] = [
     slug: 'ipt',
     titel: 'IPT',
     categorie: 'pensioen-en-fiscaal',
-    korteBeschrijving: 'Individuele Pensioentoezegging: aanvullend pensioen dat je vennootschap voor jou als bedrijfsleider opbouwt.', // TODO: definitieve copy
-    bullets: ['Voor bedrijfsleiders met vennootschap', 'Premies betaald door de vennootschap', 'Fiscaal geoptimaliseerd'], // TODO: definitieve bullets
+    korteBeschrijving: 'De IPT is het aanvullend pensioen voor bedrijfsleiders met een vennootschap: je vennootschap betaalt de premie en trekt die af als beroepskost binnen de 80%-regel, en het is de tegenhanger van de POZ.',
+    bullets: ['Aanvullend pensioen voor bedrijfsleiders met een vennootschap', 'Je vennootschap betaalt en trekt de premie af als beroepskost', 'Opbouw bovenop je VAPZ, binnen de 80%-regel, met backservice', 'De tegenhanger van de POZ, maar dan via je vennootschap'],
     icoon: 'piggy-bank',
-    gerelateerde: ['aanvullend-pensioen', 'vapz', 'groepsverzekering'],
-    status: 'skeleton',
+    gerelateerde: ['aanvullend-pensioen', 'vapz', 'poz'],
+    status: 'live',
   },
 ];
 

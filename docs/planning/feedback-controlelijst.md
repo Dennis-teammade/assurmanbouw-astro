@@ -275,3 +275,31 @@ Status pagina: **afgewerkt, op staging.** Enkel-product-pagina (standaard polis-
 | PZ12 | Euro-scenario's in de **6 cases** zijn herkenbaar-fictieve illustraties; geen verzekeraarsnamen in de copy | Brand-voice-regel cases | Bevestig dat dit als illustratie volstaat. | 🔲 |
 
 Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/band = echt beeld (`/images/verzekeringen/poz-*`). Consistent met de koepel- en VAPZ-pagina. Laatste sub-pagina IPT (11/11) volgt.
+
+---
+
+## /verzekeringen/ipt (IPT — Individuele Pensioentoezegging)
+
+Status pagina: **afgewerkt, op staging.** Enkel-product-pagina (standaard polis-norm, prefix it-). LAATSTE pagina van de pensioencluster. Tweedepijler-aanvulling bovenop het VAPZ voor bedrijfsleiders MET een vennootschap; de tegenhanger van de POZ. Kenmerk: de vennootschap betaalt en trekt af als beroepskost. **15 controlepunten.**
+
+> **BELANGRIJK:** WebSearch lag eruit tijdens het opstellen van deze brief. De fiscale claims zijn afgeleid uit de reeds-geverifieerde POZ/VAPZ/koepel-briefs (gespiegeld-consistent) maar NIET onafhankelijk herbevestigd in die sessie. IP1, IP3, IP5, IP6, IP8 prioritair laten aftekenen vóór go-live.
+
+| # | Wat we beslisten (staat zo op de pagina) | Waarom | Te controleren / suggestie | Status |
+|---|---|---|---|---|
+| IP1 | **Premie aftrekbaar als beroepskost** door de vennootschap (art. 195 WIB92), binnen de 80%-regel + WAP-kader + FSMA-toezicht | Dé reden waarom een IPT zo krachtig is: opbouw met geld van de vennootschap i.p.v. belast nettoloon | **WebSearch onbeschikbaar bij opstellen.** Bevestig de exacte wetsverwijzing (art. 195 WIB92) of houd kwalitatief. | 🔲 |
+| IP2 | Antwoord op "verplicht?" = **"Nee."**; doelgroep = bedrijfsleider/zaakvoerder met een vennootschap | Eerlijkste weergave: nooit verplicht, wel de krachtigste hefboom met een vennootschap | Bevestig "Nee." en de doelgroep-afbakening. | 🔲 |
+| IP3 | **Voorwaarde regelmatige maandelijkse bezoldiging** voor de aftrekbaarheid (case 5, fiscaal-card, FAQ 6, mijn-situatie 1) | Wettelijke voorwaarde sinds aanslagjaar 2020; zonder regelmatig maandloon is de premie niet (volledig) aftrekbaar | **WebSearch onbeschikbaar.** Bevestig de voorwaarde en formulering. Raakt direct de aftrekbaarheid: prioritair. | 🔲 |
+| IP4 | **IPT valt WEL onder de 80%-regel** = wettelijk + aanvullend pensioen samen max 80% van de laatste normale brutojaarbezoldiging | Kernverschil met VAPZ (eigen plafond), gelijk aan POZ. Consistent met koepel AP6 | Bevestig de toepassing en de referentie (brutojaarbezoldiging bedrijfsleider). | 🔲 |
+| IP5 | **Backservice** = berekening op tot **10 jaar voorbije loopbaandienstjaren**, binnen de 80%-regel | Sterke hefboom voor wie laat start; inhaalbijdrage voor het verleden | **WebSearch onbeschikbaar.** Bevestig het maximum van 10 jaar en de werking. | 🔲 |
+| IP6 | **Premietaks 4,40% is WEL van toepassing** op de IPT-premie (verschil met VAPZ) | Eerlijk verschil met het vrijgestelde VAPZ; zelfde taks als POZ/groepsverzekering. Consistent met PZ2 en AP5 | Bevestig dat 4,40% bij publicatie nog van kracht is (zelfde waarschuwing als PZ2). | 🔲 |
+| IP7 | **Vastgoedfinanciering** via een IPT (voorschot / inpandgeving / wedersamenstelling), kwalitatief gehouden | Veelgevraagde toepassing bij bedrijfsleiders die via hun vennootschap vastgoed kopen | Bevestig de drie mechanismen. Geen euro-bedragen. | 🔲 |
+| IP8 | **Wijninckx-bijdrage** = bijzondere bijdrage (~3%) op hoge aanvullende pensioenen boven een drempel (fiscaal-card) | Eerlijke nuance bij hoge opbouw | **WebSearch onbeschikbaar.** Bevestig tarief/drempel, of laat weg als te technisch voor de doelgroep. | 🔲 |
+| IP9 | **Uitkering** belast via een **gunstregime**; tarief afhankelijk van leeftijd / effectief actief blijven; **geen hard netto-percentage** | Brand-voice: geen ongekwalificeerde cijfers; bewust kwalitatief | Bevestig de formulering "gunstregime" + nuance "effectief actief blijven = voordeligste tarief". | 🔲 |
+| IP10 | **Carousel** = `['aanvullend-pensioen','vapz','poz','bescherming-bedrijfsleider']` | Koepel + basislaag (VAPZ) + tegenhanger (POZ) + bescherming-bedrijfsleider (sluit aan bij doelgroep) | `bescherming-bedrijfsleider` bestaat live → OK. Bevestig de selectie. | 🔲 |
+| IP11 | **Databron-`gerelateerde`** gewijzigd naar `['aanvullend-pensioen','vapz','poz']` (was `[...,groepsverzekering]`) | Symmetrie met de tegenhanger: POZ is de directe spiegel van de IPT, wederzijdse link | Bevestig de wijziging, of behoud groepsverzekering als de cross-sell naar personeel-pensioen gewenst is. | 🔲 |
+| IP12 | **Afbakening IPT (met venn.) vs POZ (zonder venn.) vs VAPZ (basis)** door de hele pagina | Kern van de routeer-logica; gespiegeld consistent met PZ6 en AP12 | Bevestig de afbakening; belangrijkste inhoudelijke check. | 🔲 |
+| IP13 | **Tak21 vs tak23** kort uitgelegd; **overlijdensdekking** en **premievrijstelling** als optionele waarborgen | Standaard onderscheid + gangbare opties | Bevestig de formulering tegen ons gamma. | 🔲 |
+| IP14 | **Geen euro-premiebedrag** op de pagina, enkel de 80%-logica, backservice en factoren | Brand-voice: geen verzonnen tarieven | Bevestig dat we geen indicatief premietarief tonen. | 🔲 |
+| IP15 | Euro-scenario's in de **6 cases** zijn herkenbaar-fictieve illustraties; geen verzekeraarsnamen in de copy | Brand-voice-regel cases | Bevestig dat dit als illustratie volstaat. | 🔲 |
+
+Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/band = echt beeld (`/images/verzekeringen/ipt-*`). Gespiegeld-consistent met de POZ-pagina (de tegenhanger). **Pensioencluster (8-11) volledig af; alle 18 databron-records nu live.**

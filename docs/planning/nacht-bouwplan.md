@@ -55,7 +55,7 @@ flaggen i.p.v. forceren.
 | 8 | Aanvullend pensioen (pijler) | `aanvullend-pensioen` | pensioen-en-fiscaal | Codex+Dennis | DONE |
 | 9 | VAPZ | `vapz` | pensioen-en-fiscaal | dun (pijler) | DONE |
 | 10 | POZ | `poz` | pensioen-en-fiscaal | dun (pijler) | DONE |
-| 11 | IPT | `ipt` | pensioen-en-fiscaal | dun (pijler) | TODO |
+| 11 | IPT | `ipt` | pensioen-en-fiscaal | dun (pijler) | DONE |
 
 > Overlijdensdekking + BA Uitbating + Omzetverzekering: NIET bouwen (buiten de 18 / uitgesteld).
 
@@ -145,7 +145,7 @@ voorstel voor de volgende dag.
 - [x] 8. Aanvullend pensioen — DONE
 - [x] 9. VAPZ — DONE
 - [x] 10. POZ — DONE
-- [ ] 11. IPT — TODO
+- [x] 11. IPT — DONE  ✅ pensioencluster volledig af (8-11)
 
 ### Blokkers / openstaande beslissingen
 (leeg)
@@ -163,3 +163,4 @@ voorstel voor de volgende dag.
 - **Aanvullend pensioen** — DONE. PIJLER-/KEUZEHUB-pagina (prefix ap-, echt beeld, hero vh), afwijkend van de enkel-product-norm: "Dekking" → **De formules** (4 routeerkaarten VAPZ/POZ/IPT/groepsverzekering met voor-wie-badge + link naar sub-pagina), "Premie" → **Fiscaal voordeel**. Rode draad = routeren op statuut (zonder venn. → VAPZ+POZ; met venn. → VAPZ+IPT; werkgever → groepsverzekering), doorgetrokken in hero, verplicht-antwoord "Nee.", mijn-situatie (3 panelen) en per-beroep. Geverifieerde cijfers (subagent, juni 2026): pensioensparen €1.050/€1.350, langetermijnsparen €2.450, VAPZ 8,17%/9,40%, premietaks 4,40%, 80%-regel. Databron live (gerelateerde → vapz/ipt/poz). Build groen (101 pagina's), 12 FAQ statisch, FAQPage-schema, noindex weg. Controlepunten AP1-12. Volgende: VAPZ (sub-pagina 9; brief nog te maken).
 - **VAPZ** — DONE. Enkel-product-pagina (standaard polis-norm, prefix vz-, echt beeld, hero vh). Basis-tweedepijlerformule voor élke zelfstandige in hoofdberoep. Rode draad = gewoon vs sociaal VAPZ (solidariteitsluik ≥10%). Onderscheidende voordelen prominent: **vrijstelling premietaks 4,40%** (geverifieerd, load-bearing) en **niet onder de 80%-regel** (eigen plafond). Scherp afgebakend t.o.v. POZ (zonder venn.)/IPT (met venn.)/groepsverzekering + 3e-pijler pensioensparen. Geverifieerde cijfers 2026: plafonds 8,17%/€4.086,34 (gewoon), 9,40%/€4.701,54 (sociaal), N-3 referentie-inkomen. Databron live (gerelateerde → aanvullend-pensioen/poz/ipt). Build groen (101 pagina's), 12 FAQ statisch, FAQPage-schema, noindex weg. Controlepunten VZ1-15 (let op VZ5: ao-waarborg in sociaal VAPZ kan wél belast worden). Volgende: POZ (sub-pagina 10; brief nog te maken).
 - **POZ** — DONE. Enkel-product-pagina (standaard polis-norm, prefix pz-, echt beeld, hero vh). Tweedepijler-aanvulling bovenop het VAPZ voor zelfstandigen ZONDER vennootschap (eenmanszaak/vrij beroep/meewerkende echtgenoot); de tegenhanger van de IPT. Onderscheidende nuances eerlijk getoond: POZ valt **WEL onder de 80%-regel** (VAPZ niet) en de **premietaks 4,40% is WEL van toepassing** (VAPZ vrijgesteld). Geverifieerde cijfers (juni 2026): 30% belastingvermindering, 80%-regel, premietaks 4,40%. Volgorde-logica VAPZ-eerst-dan-POZ + overstap POZ→IPT bij vennootschap als rode draad. Databron live (gerelateerde → aanvullend-pensioen/vapz/ipt). Build groen (101 pagina's), 12 FAQ statisch, FAQPage-schema, noindex weg. Controlepunten PZ1-12 (let op PZ2: snippet over afschaffing premietaks 2025 onbevestigd; PZ4: wetsdatum 18/2/2018 nog te bevestigen). Volgende: IPT (sub-pagina 11, LAATSTE; brief nog te maken).
+- **IPT** — DONE. **LAATSTE pagina van de cluster.** Enkel-product-pagina (standaard polis-norm, prefix it-, echt beeld, hero vh). Tweedepijler-aanvulling bovenop het VAPZ voor bedrijfsleiders MET een vennootschap; de tegenhanger van de POZ (gespiegeld-consistent gebouwd). Kenmerk: de vennootschap betaalt en trekt af als beroepskost (art. 195 WIB92). Backservice (10 jaar verleden), vastgoedfinanciering en de voorwaarde regelmatige maandbezoldiging als rode draden. Databron live (gerelateerde gewijzigd naar aanvullend-pensioen/vapz/poz voor POZ-symmetrie). Carousel incl. bescherming-bedrijfsleider (bestaat live). Build groen (101 pagina's), 12 FAQ statisch, FAQPage-schema, noindex weg. Controlepunten IP1-15. **LET OP: WebSearch lag eruit bij het opstellen van de brief; de fiscale claims (IP1/IP3/IP5/IP6/IP8) zijn afgeleid uit de geverifieerde POZ/VAPZ/koepel-briefs maar NIET onafhankelijk herbevestigd — prioritair laten aftekenen vóór go-live.** Pensioencluster 8-11 volledig af; alle 18 databron-records nu live.
