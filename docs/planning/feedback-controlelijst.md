@@ -369,3 +369,20 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | ST-FOTO | Placeholder-beelden (`/images/sectoren/stukadoors-{hero,why,cta}.jpg` + `/images/cases/case-stukadoors-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
+
+---
+
+## /sectoren/chappers (Sectorpagina — sectorcluster 5/13)
+
+Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/afwerking-cluster.md`, prefix `chp-`. Polis-pakket: BA-onderneming, **BA-10**, rechtsbijstand, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: gevolgschade aan afwerking + tienjarige aansprakelijkheid (chape = structureel deel vloeropbouw).
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| CH-01 | Fictieve case niet-vlakke chape (€16.500) | Akkoord; vlakheidstolerantie/meetmethode bepalen aansprakelijkheid? | 🔲 |
+| CH-02 | Fictieve case restvocht onder vloerverwarming (€22.000) → rechtsbijstand + BA-10 | Akkoord; restvochtmeting vóór afwerking + gevolgschade parket? | 🔲 |
+| CH-03 | Fictieve case te vroeg belaste chape scheurt (€13.000) → rechtsbijstand | Akkoord; belasting door derden vóór uitharding documenteren? | 🔲 |
+| CH-04 | Fictieve case defecte chapepomp (€8.000) → machinebreuk | Akkoord als illustratie? | 🔲 |
+| CH-BA10 | **BA-10 (tienjarige aansprakelijkheid) in het kernpakket** (enige afwerkingsberoep met BA-10) | Akkoord dat chape onder de tienjarige valt (structureel deel vloeropbouw, vloerverwarming)? | 🔲 |
+| CH-FOTO | Placeholder-beelden (`/images/sectoren/chappers-{hero,why,cta}.jpg` + `/images/cases/case-chappers-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+
+Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
