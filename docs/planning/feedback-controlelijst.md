@@ -389,6 +389,23 @@ Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeho
 
 ---
 
+## /sectoren/parketzetters (Sectorpagina — sectorcluster 7/13)
+
+Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/afwerking-cluster.md`, prefix `prk-`. Polis-pakket: BA-onderneming, rechtsbijstand, vervoerde-goederen, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: werkend hout (vocht/binnenklimaat) + afwerkingsgeschillen (lak/schuren) + duur parket en eigen schuurmachines. **Afwerking-cluster (4-7) compleet.**
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| PA-01 | Fictieve case werkend parket door restvocht (€17.000) → rechtsbijstand + BA | Akkoord; vochtmeting ondergrond/binnenklimaat bepalen aansprakelijkheid? | 🔲 |
+| PA-02 | Fictieve case krasschade aan trap/plint bij plaatsing (€6.500) → BA-onderneming | Akkoord; schade aan eigendom klant in bewoonde woning? | 🔲 |
+| PA-03 | Fictieve case geschil over lak-/schuurresultaat (€8.500) → rechtsbijstand | Akkoord; glansgraad/strepen technisch laten beoordelen? | 🔲 |
+| PA-04 | Fictieve case defecte schuurmachine (€5.500) → machinebreuk | Akkoord; intern defect eigen materieel + stilstandrisico? | 🔲 |
+| PA-PAK | Polis-pakket: BA-onderneming, rechtsbijstand, vervoerde-goederen, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen | Pakket akkoord? | 🔲 |
+| PA-FOTO | Placeholder-beelden (`/images/sectoren/parketzetters-{hero,why,cta}.jpg` + `/images/cases/case-parketzetters-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+
+Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
+
+---
+
 ## /sectoren/chappers (Sectorpagina — sectorcluster 5/13)
 
 Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/afwerking-cluster.md`, prefix `chp-`. Polis-pakket: BA-onderneming, **BA-10**, rechtsbijstand, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: gevolgschade aan afwerking + tienjarige aansprakelijkheid (chape = structureel deel vloeropbouw).
