@@ -21,7 +21,7 @@ pagina = één commit op `fase-2`. Volgorde per cluster:
 |---|------|---------|-------|-----------|--------|
 | 1 | `grondwerkers` | ruwbouw | ruwbouw-cluster.md | `gw-` | DONE |
 | 2 | `bestraters` | ruwbouw | ruwbouw-cluster.md | `bst-` | DONE |
-| 3 | `asfalteerders` | ruwbouw | ruwbouw-cluster.md | `asf-` | TODO |
+| 3 | `asfalteerders` | ruwbouw | ruwbouw-cluster.md | `asf-` | DONE |
 | 4 | `stukadoors` | afwerking | afwerking-cluster.md | `stk-` | TODO |
 | 5 | `chappers` | afwerking | afwerking-cluster.md | `chp-` | TODO |
 | 6 | `vloerders-tegelzetters` | afwerking | afwerking-cluster.md | `vlt-` | TODO |

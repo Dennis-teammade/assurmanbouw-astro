@@ -336,3 +336,19 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | BS-FOTO | Placeholder-beelden (`/images/sectoren/bestraters-{hero,why,cta}.jpg` + `/images/cases/case-bestraters-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
+
+---
+
+## /sectoren/asfalteerders (Sectorpagina — sectorcluster 3/13)
+
+Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/ruwbouw-cluster.md`, prefix `asf-`. Polis-pakket: BA-onderneming, ABR, machinebreuk, bedrijfsvoertuigen, rechtsbijstand, arbeidsongevallen. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: vlakheid-/afwateringsgeschillen + schade wegmeubilair + dure asfalteermachine. **Ruwbouw-cluster (1-3) compleet.**
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| AS-1 | Fictieve cases + bedragen (€24.000 / €11.000 / €35.000 / €6.500) | Akkoord als illustratie? | 🔲 |
+| AS-2 | Polis-pakket: BA-onderneming, ABR, machinebreuk, bedrijfsvoertuigen, rechtsbijstand, arbeidsongevallen | Pakket akkoord? | 🔲 |
+| AS-3 | Schade aan wegmeubilair / boordstenen / nutsput als "gedekt" gepresenteerd | Stellig houden of voorwaardelijker? | 🔲 |
+| AS-4 | Asfalteermachine: dekking via machinebreuk als hoofdblok (vs. ingeschreven voertuig) | Klopt die aanname? | 🔲 |
+| AS-FOTO | Placeholder-beelden (`/images/sectoren/asfalteerders-{hero,why,cta}.jpg` + `/images/cases/case-asfalteerders-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+
+Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
