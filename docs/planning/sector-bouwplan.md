@@ -29,7 +29,7 @@ pagina = één commit op `fase-2`. Volgorde per cluster:
 | 8 | `zonnepanelen-installateurs` | technieken | technieken-cluster.md | `zon-` | DONE |
 | 9 | `koeltechniek-hvac` | technieken | technieken-cluster.md | `hvc-` | DONE |
 | 10 | `tuinaannemers` | tuin | tuin-cluster.md | `tun-` | DONE |
-| 11 | `hoveniers` | tuin | tuin-cluster.md | `hov-` | TODO |
+| 11 | `hoveniers` | tuin | tuin-cluster.md | `hov-` | DONE |
 | 12 | `boomverzorgers` | tuin | tuin-cluster.md | `bmv-` | TODO |
 | 13 | `zwembadinstallateurs` | tuin | tuin-cluster.md | `zwb-` | TODO |
 

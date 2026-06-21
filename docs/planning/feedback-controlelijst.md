@@ -389,6 +389,24 @@ Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeho
 
 ---
 
+## /sectoren/hoveniers (Sectorpagina — sectorcluster 11/13)
+
+Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/tuin-cluster.md`, prefix `hov-`. Polis-pakket: BA-onderneming, bedrijfsvoertuigen, machinebreuk, arbeidsongevallen, rechtsbijstand, vervoerde-goederen. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: onderhoud bij de klant + materieel onderweg (steenworp, diefstal uit bestelwagen, gazon-geschil).
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| HO-01 | Fictieve case steenworp tegen autoruit klant (€3.200) → BA-onderneming | Bevestig dat steenworp-schade aan eigendom klant onder BA valt. | 🔲 |
+| HO-02 | Fictieve case gestolen materieel uit bestelwagen (€4.800) → machinebreuk + vervoerde-goederen | Welke polis dekt diefstal uit voertuig + voorwaarden braak? | 🔲 |
+| HO-03 | Fictieve case gazon slaat niet aan (€5.500) → rechtsbijstand | Akkoord als illustratie? | 🔲 |
+| HO-04 | Fictieve case snoeischade haag buur (€2.700) → BA-onderneming | Akkoord als illustratie? | 🔲 |
+| HO-PAK | Polis-pakket: BA-onderneming, bedrijfsvoertuigen, machinebreuk, arbeidsongevallen, rechtsbijstand, vervoerde-goederen | Pakket akkoord? | 🔲 |
+| HO-FYT | Fytolicentie (gewasbescherming) — kwalitatief in FAQ, geen harde claim in copy | Geldt de fytolicentie-verplichting en hoe verwoorden we dit correct? | 🔲 |
+| HO-FOTO | Placeholder-beelden (`/images/sectoren/hoveniers-{hero,why,cta}.jpg` + `/images/cases/case-hoveniers-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+
+Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
+
+---
+
 ## /sectoren/tuinaannemers (Sectorpagina — sectorcluster 10/13)
 
 Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/tuin-cluster.md`, prefix `tun-`. Polis-pakket: BA-onderneming, ABR, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen, rechtsbijstand. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: werf + zware machines + graafwerk (verzakt terras, geraakte leiding, machinepech).
