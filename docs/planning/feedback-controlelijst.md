@@ -389,6 +389,26 @@ Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeho
 
 ---
 
+## /sectoren/zonnepanelen-installateurs (Sectorpagina — sectorcluster 8/13)
+
+Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/technieken-cluster.md`, prefix `zon-`. Polis-pakket: BA-10, BA-onderneming, ABR, vervoerde-goederen, bedrijfsvoertuigen, arbeidsongevallen. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: dakdoorboring/waterdichtheid (claimbron) + tienjarige aansprakelijkheid + brand/elektriciteit + dure panelen/omvormers.
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| ZP-01 | Fictieve case waterinsijpeling na dakdoorboring (€38.000) → BA Na Levering | Akkoord als illustratie? | 🔲 |
+| ZP-02 | Fictieve case brand door oververhitte connector (€52.000) → BA-onderneming | Akkoord als illustratie? | 🔲 |
+| ZP-03 | Fictieve case paneel valt/breekt bij montage (€9.500) → materiaal + BA Uitbating | Akkoord als illustratie? | 🔲 |
+| ZP-04 | Fictieve case geschil opbrengstgarantie → rechtsbijstand | Akkoord; geen reële opbrengstcijfers/garanties in copy? | 🔲 |
+| ZP-PAK | Polis-pakket: BA-10, BA-onderneming, ABR, vervoerde-goederen, bedrijfsvoertuigen, arbeidsongevallen | Pakket akkoord? | 🔲 |
+| ZP-BA10 | **BA-10 (tienjarige aansprakelijkheid) als eerste blok** ("verplicht bij werken aan woningen", Wet Peeters-Borsus) | Bevestig reikwijdte BA-10 voor PV-werk dat structuur/waterdichtheid raakt; geen artikelnummers in copy. | 🔲 |
+| ZP-RES | RESCert-installateur (drempel 5 kWc / datum 1-1-2026) — kwalitatief in FAQ, geen harde cijfers in copy | Bevestig exacte drempel/datum vóór hard in copy. | 🔲 |
+| ZP-AREI | AREI-keuring vóór ingebruikname — kwalitatief in FAQ | Bevestig actuele formulering. | 🔲 |
+| ZP-FOTO | Placeholder-beelden (`/images/sectoren/zonnepanelen-installateurs-{hero,why,cta}.jpg` + `/images/cases/case-zonnepanelen-installateurs-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+
+Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
+
+---
+
 ## /sectoren/parketzetters (Sectorpagina — sectorcluster 7/13)
 
 Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/afwerking-cluster.md`, prefix `prk-`. Polis-pakket: BA-onderneming, rechtsbijstand, vervoerde-goederen, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: werkend hout (vocht/binnenklimaat) + afwerkingsgeschillen (lak/schuren) + duur parket en eigen schuurmachines. **Afwerking-cluster (4-7) compleet.**
