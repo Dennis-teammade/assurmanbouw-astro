@@ -389,6 +389,24 @@ Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeho
 
 ---
 
+## /sectoren/koeltechniek-hvac (Sectorpagina — sectorcluster 9/13)
+
+Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/technieken-cluster.md`, prefix `hvc-`. Polis-pakket: BA-onderneming, vervoerde-goederen, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen, rechtsbijstand. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: koelmiddel/gevolgschade + waterschade condensafvoer + dure units + dimensionering-geschillen. **Technieken-cluster (8-9) compleet.**
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| HV-01 | Fictieve case koelmiddellek → gevolgschade (€16.000) → BA Na Levering | Akkoord; copy houdt het kwalitatief, geen harde dekkingsbelofte? | 🔲 |
+| HV-02 | Fictieve case verkeerd gedimensioneerde warmtepomp (€22.000) → rechtsbijstand | Akkoord; geen reële prestatie-/COP-cijfers in copy? | 🔲 |
+| HV-03 | Fictieve case waterschade condensafvoer (€13.500) → BA Uitbating | Akkoord; dekking waterschade aan derden is voorwaardelijk (kwalitatief)? | 🔲 |
+| HV-04 | Fictieve case dure warmtepomp beschadigd bij transport (€8.900) → vervoerde-goederen | Akkoord als illustratie? | 🔲 |
+| HV-PAK | Polis-pakket: BA-onderneming, vervoerde-goederen, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen, rechtsbijstand | Pakket akkoord? | 🔲 |
+| HV-FGAS | F-gassencertificaat (EU 517/2014) + erkenning koeltechnicus — kwalitatief in FAQ, geen artikelnummers in copy | Bevestig actuele formulering. | 🔲 |
+| HV-FOTO | Placeholder-beelden (`/images/sectoren/koeltechniek-hvac-{hero,why,cta}.jpg` + `/images/cases/case-koeltechniek-hvac-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+
+Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
+
+---
+
 ## /sectoren/zonnepanelen-installateurs (Sectorpagina — sectorcluster 8/13)
 
 Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/technieken-cluster.md`, prefix `zon-`. Polis-pakket: BA-10, BA-onderneming, ABR, vervoerde-goederen, bedrijfsvoertuigen, arbeidsongevallen. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: dakdoorboring/waterdichtheid (claimbron) + tienjarige aansprakelijkheid + brand/elektriciteit + dure panelen/omvormers.
