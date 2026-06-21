@@ -320,3 +320,19 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden** — echte 
 | GW-FOTO | Placeholder-beelden (`/images/sectoren/grondwerkers-{hero,why,cta}.jpg` + `/images/cases/case-grondwerkers-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
+
+---
+
+## /sectoren/bestraters (Sectorpagina — sectorcluster 2/13)
+
+Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/ruwbouw-cluster.md`, prefix `bst-`. Polis-pakket: BA-onderneming, ABR, machinebreuk, bedrijfsvoertuigen, rechtsbijstand, arbeidsongevallen. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: verzakking/afwatering-geschillen → rechtsbijstand.
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| BS-1 | Fictieve cases + bedragen (€16.000 / €12.500 / €8.000 / €7.500) | Akkoord als illustratie? | 🔲 |
+| BS-2 | Polis-pakket: BA-onderneming, ABR, machinebreuk, bedrijfsvoertuigen, rechtsbijstand, arbeidsongevallen | Pakket akkoord? | 🔲 |
+| BS-3 | "Materiaal- en werfdekking" voor klinkers/kasseien op de werf | Dekt het pakket dit voldoende, of `vervoerde-goederen`/materiaalmodule expliciet toevoegen? | 🔲 |
+| BS-4 | Rechtsbijstand sterk benadrukt voor afwatering-/verzakkingsgeschillen | Akkoord met die framing? | 🔲 |
+| BS-FOTO | Placeholder-beelden (`/images/sectoren/bestraters-{hero,why,cta}.jpg` + `/images/cases/case-bestraters-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+
+Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.

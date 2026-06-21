@@ -1,20 +1,533 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { CTA_SCAN, CTA_DESTINATIONS } from '../../data/cta-labels';
+import { kaartenVoor } from '../../data/verzekeringen';
+import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
+import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import FaqAccordion from '../../components/islands/FaqAccordion';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
+import BrandChevron from '../../components/BrandChevron.astro';
+
+const insuranceCards = kaartenVoor(['ba-onderneming', 'alle-bouwplaats-risicos', 'machinebreuk', 'bedrijfsvoertuigen', 'rechtsbijstand', 'arbeidsongevallen']);
+
+const caseStudies = [
+  {
+    category: 'BESTRATING',
+    title: 'Geschil over afwatering oprit leidt tot €16.000 herstelclaim',
+    businessName: 'Bestratingen Devos',
+    ownerName: 'Bart Devos',
+    cityName: 'Kortrijk',
+    description: 'Na de aanleg van een grote oprit klaagde de klant dat het water richting de garage liep in plaats van naar de straat. De klant eiste een volledige heraanleg met aangepaste helling.',
+    action: 'Via de rechtsbijstand kon een onafhankelijke expert de helling en de afwatering nameten. Na bemiddeling werd een compromis bereikt waarbij een deel van het werk werd aangepast. De verzekering dekte de juridische kosten en een deel van de herstelwerken. Het conflict escaleerde niet verder.',
+    image: '/images/cases/case-bestraters-1.jpg',
+  },
+  {
+    category: 'BESTRATING',
+    title: 'Verzakte klinkers op openbare verharding: €12.500 herstel',
+    businessName: 'Kasseiwerken West',
+    ownerName: 'Geert Lefebvre',
+    cityName: 'Ieper',
+    description: 'Enkele maanden na de oplevering van een stuk openbare verharding verzakten klinkers door een probleem met de ondergrond. De opdrachtgever stelde de aannemer aansprakelijk voor het herstel.',
+    action: 'Via de aansprakelijkheid en ABR werd de oorzaak onderzocht en het herstel gedekt. De verzakte zone werd opnieuw aangelegd zonder dat de aannemer de volledige kost zelf droeg. De relatie met de opdrachtgever bleef behouden.',
+    image: '/images/cases/case-bestraters-2.jpg',
+  },
+  {
+    category: 'DIEFSTAL',
+    title: 'Kasseien en materiaal van werf gestolen: €8.000 schade',
+    businessName: 'Bestratingen Vermeersch',
+    ownerName: 'Niels Vermeersch',
+    cityName: 'Gent',
+    description: "Op een lopende werf werd 's nachts een voorraad natuurstenen kasseien en materiaal gestolen. De levering lag klaar voor plaatsing de volgende ochtend.",
+    action: 'Dankzij de materiaal- en werfdekking kon snel een nieuwe levering geregeld worden. De verzekering dekte vrijwel de volledige schade, waardoor de werf slechts enkele dagen vertraging opliep.',
+    image: '/images/cases/case-bestraters-3.jpg',
+  },
+  {
+    category: 'MACHINESCHADE',
+    title: 'Defecte minigraver legt terrasaanleg stil: €7.500 herstel',
+    businessName: 'Tuinverhardingen Claus',
+    ownerName: 'Pieter Claus',
+    cityName: 'Dendermonde',
+    description: 'Tijdens de aanleg van een terras viel de minigraver uit door een technisch defect aan de hydraulica. Zonder die machine kon het grondwerk voor het terras niet verder.',
+    action: 'Via de machinebreukverzekering werd de herstelling snel goedgekeurd en vergoed. Er kon meteen een herstelling ingepland worden, waardoor de stilstand op de werf beperkt bleef.',
+    image: '/images/cases/case-bestraters-4.jpg',
+  },
+];
+
+const faqItems = [
+  {
+    title: "Welke risico's heeft een bestrater het meest?",
+    content: "De grootste risico's komen meestal uit 4 hoeken:\n\n• Aansprakelijkheid & geschillen: discussies over verzakking, afwatering of de afwerking van het werk.\n\n• Materiaal: klinkers, kasseien en zand die op de werf blijven, zijn gevoelig voor diefstal en schade.\n\n• Machines: trilplaten, minigravers en gereedschap die uitvallen, leggen je werf stil.\n\n• Mobiliteit & personeel: zonder transport en zonder ploeg sta je stil.\n\nDaarom is een basis met BA + ABR + materiaal/machines + rechtsbijstand voor veel bestraters een logische start.",
+  },
+  {
+    title: 'Wat als een klant klaagt over verzakking of afwatering?',
+    content: "Dat is de meest typische discussie bij bestrating. De klant vindt dat het water verkeerd loopt of dat de bestrating verzakt, en eist herstel.\n\nDe burgerlijke aansprakelijkheid en rechtsbijstand zijn hier de kernblokken: rechtsbijstand betaalt de juridische kosten en de expertise om vast te stellen wat er aan de hand is, de aansprakelijkheid dekt terecht herstel. We bekijken samen welke dekking past bij het soort werk dat je doet.",
+  },
+  {
+    title: 'Is een rechtsbijstandverzekering echt nuttig voor een bestrater?',
+    content: "Heel vaak wel. Veel schade bij bestrating draait niet om de herstelkost zelf, maar om de discussie wie verantwoordelijk is. Rechtsbijstand betaalt de kosten van een expert en eventuele juridische bijstand om dat uit te klaren.\n\nZo sta je sterker in een geschil en moet je een onterechte claim niet zomaar uit eigen zak betalen.",
+  },
+  {
+    title: 'Is materiaal dat op de werf blijft liggen verzekerd?',
+    content: "Dat kan, via een materiaal- of werfdekking. De impact zit niet alleen in de aankoopprijs van klinkers of kasseien, maar ook in de vertraging als je materiaal weg is.\n\nWe stemmen de dekking af op de waarde van je materiaal, waar het ligt en hoe je de werf beveiligt.",
+  },
+  {
+    title: 'Hoe verzeker ik mijn trilplaat, minigraver of gereedschap?',
+    content: "Dat gebeurt typisch via machinebreuk en werfmateriaaldekking, afhankelijk van het type machine. Een uitgevallen trilplaat of minigraver legt je werf snel stil, dus die dekking is voor veel bestraters waardevol.\n\nWe stemmen alles af op je machinepark en waar je het inzet.",
+  },
+  {
+    title: 'Ik doe zowel particuliere als openbare werken. Maakt dat verschil?',
+    content: "Ja, dat kan invloed hebben op de aansprakelijkheid en de voorwaarden. Openbare werken brengen vaak andere eisen en risico's mee dan een oprit bij een particulier.\n\nIn je intake geef je aan welk type werken je doet. We bekijken daarna welke dekking en voorwaarden het best passen.",
+  },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({
+    "@type": "Question",
+    "name": f.title,
+    "acceptedAnswer": { "@type": "Answer", "text": f.content.replace(/\n/g, ' ') }
+  }))
+};
 ---
+
 <BaseLayout
-  title="Verzekeringen voor bestraters en kasseileggers | Assurman"
-  description="Verzekeringen op maat van bestraters en kasseileggers. Binnenkort online bij Assurman."
+  title="Verzekeringen voor bestraters & kasseileggers | Assurman"
+  description="Opritten, terrassen, openbare verharding en kasseien: bestraters hebben eigen risico's. Assurman bouwt jouw verzekeringspakket op maat van de werf."
   canonical="/sectoren/bestraters/"
-  noindex={true}
+  schema={schema}
 >
-  <main style="min-height:72vh;display:flex;align-items:center;justify-content:center;background:#FBF8FF;padding:140px 24px 96px;">
-    <div style="max-width:680px;text-align:center;">
-      <span style="display:inline-block;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Sector</span>
-      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,52px);color:#001F3F;line-height:1.1;margin:0 0 16px;">Bestraters & kasseileggers</h1>
-      <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#3F5767;line-height:1.6;margin:0 0 32px;">Deze pagina is in opbouw. Binnenkort lees je hier alles over verzekeringen op maat van bestraters en kasseileggers. Wil je nu al weten waar je dekking tekortschiet? Doe de gratis verzekeringsscan in 2 minuten.</p>
-      <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary--lg">{CTA_SCAN.hero}</a>
-      <p style="margin-top:28px;"><a href="/sectoren/" style="color:#3F5767;font-family:'Outfit',sans-serif;text-decoration:underline;">Alle sectoren bekijken</a></p>
+
+<style>
+  .bst-container { max-width: 1280px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
+  .bst-hero-content { max-width: 52%; padding-top: 40px; }
+  .bst-hero-img { position: absolute; top: 5%; right: 0; height: 90%; width: auto; max-width: 48%; z-index: 1; pointer-events: none; }
+  .bst-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .bst-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; }
+  .bst-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .bst-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 48px; }
+  .bst-cards3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .bst-process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 64px; }
+  .bst-testimonials-header { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-bottom: 64px; }
+  .bst-testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .bst-cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .bst-hero-btns { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+  .bst-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .bst-final-btns { display: flex; gap: 24px; justify-content: center; margin-bottom: 80px; flex-wrap: wrap; }
+
+  .bst-btn-primary { display: inline-flex; align-items: center; gap: 10px; background: #E5A524; color: #001F3F; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 18px; padding: 18px 32px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .bst-btn-primary:hover { background: #E9C466; transform: translateY(-1px); }
+  .bst-btn-secondary { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: #001F3F; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 18px; padding: 16px 32px; border-radius: 8px; border: 2px solid rgba(213, 196, 174, 0.5); cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s; white-space: nowrap; }
+  .bst-btn-secondary:hover { border-color: #E5A524; background: rgba(229, 165, 36, 0.05); }
+  .bst-badge-pill { display: inline-flex; align-items: center; gap: 8px; background: #F5F2FF; border: 1px solid rgba(213, 196, 174, 0.2); border-radius: 9999px; padding: 6px 16px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #001F3F; }
+  .bst-section-label { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 1.4px; text-transform: uppercase; color: #E5A524; }
+  .bst-step-number { font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 80px; line-height: 1; color: rgba(229, 165, 36, 0.18); position: absolute; top: 0; left: -4px; user-select: none; pointer-events: none; }
+  .bst-insurance-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(2px); transition: background 0.2s, transform 0.2s; }
+  .bst-insurance-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+  .bst-why-card { background: #FFFFFF; border-left: 4px solid #E5A524; box-shadow: 0px 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.2s, transform 0.2s; }
+  .bst-why-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .bst-testimonial-card { background: #FFFFFF; box-shadow: 0px 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.2s, transform 0.2s; }
+  .bst-testimonial-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+  @media (max-width: 1023px) {
+    .bst-hero-img { display: none; }
+    .bst-features-grid { grid-template-columns: repeat(2, 1fr); }
+    .bst-benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    .bst-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .bst-process-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .bst-testimonials-header { grid-template-columns: 1fr; gap: 32px; }
+    .bst-testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .bst-intro-grid { grid-template-columns: 1fr; }
+    .bst-container { padding-left: 24px; padding-right: 24px; }
+  }
+  @media (max-width: 767px) {
+    .bst-container { padding-left: 15px; padding-right: 15px; }
+    .bst-hero-content { max-width: 100%; padding-top: 16px; }
+    .bst-features-grid { grid-template-columns: 1fr; gap: 12px; }
+    .bst-intro-grid { grid-template-columns: 1fr; gap: 24px; }
+    .bst-benefits-grid { grid-template-columns: 1fr; }
+    .bst-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .bst-cards3-grid { grid-template-columns: 1fr; }
+    .bst-process-grid { grid-template-columns: 1fr; gap: 32px; }
+    .bst-testimonials-header { grid-template-columns: 1fr; gap: 24px; }
+    .bst-testimonials-grid { grid-template-columns: 1fr; }
+    .bst-cert-grid { grid-template-columns: 1fr 1fr; }
+    .bst-btn-primary { font-size: 16px; padding: 16px 24px; }
+    .bst-btn-secondary { font-size: 16px; padding: 14px 24px; }
+    .bst-hero-btns { flex-direction: column; }
+    .bst-hero-btns a { width: 100%; justify-content: center; text-align: center; }
+    .bst-cta-btns { flex-direction: column; align-items: center; }
+    .bst-cta-btns a { width: 100%; max-width: 400px; justify-content: center; }
+    .bst-final-btns { flex-direction: column; align-items: center; }
+    .bst-final-btns a { width: 100%; max-width: 400px; justify-content: center; }
+    .bst-step-number { font-size: 56px; }
+    .bst-hero-section { display: flex; flex-direction: column; min-height: unset !important; }
+    .bst-waarom-mask-img,
+    .bst-cta-mask-img { width: 55% !important; opacity: 0.35 !important; }
+  }
+</style>
+
+<!-- SECTION 1: HERO -->
+<section class="bst-hero-section" style="padding-top:120px;background:#FFFFFF;position:relative;overflow:hidden;min-height:480px;">
+  <div class="bst-hero-img assurman-mask assurman-mask--hero">
+    <img src="/images/sectoren/bestraters-hero.jpg" alt="Bestrater die klinkers legt op een nieuwe oprit" />
+  </div>
+  <div class="bst-container" style="padding-top:40px;padding-bottom:64px;position:relative;z-index:2;">
+    <div class="bst-hero-content">
+      <div class="bst-badge-pill" style="margin-bottom:20px;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Assurman • Bouwverzekeringen op maat
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">
+        Verzekeringen voor bestraters
+      </h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(22px,3.5vw,52px);line-height:1.1;letter-spacing:-1px;color:#E5A524;margin-bottom:20px;">
+        Strak gelegd, goed verzekerd.
+      </p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#001F3F;margin-bottom:28px;max-width:520px;">
+        Een oprit, terras of openbare verharding moet jaren meegaan zonder verzakking of waterplas. Eén discussie over de afwatering of een verzakte klinker kan al leiden tot een herstelclaim. Assurman is gespecialiseerd in verzekeringen op maat van bestraters en kasseileggers in Vlaanderen.
+      </p>
+      <div class="bst-hero-btns">
+        <a href={CTA_DESTINATIONS.scan} class="bst-btn-primary">
+          {CTA_SCAN.request}
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href={CTA_DESTINATIONS.afspraak} class="bst-btn-secondary">{CTA_AFSPRAAK.advisoryFull}</a>
+      </div>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#001F3F;opacity:0.75;">
+        Geen verplichting. We finaliseren je pakket samen na je intake.
+      </p>
     </div>
-  </main>
+  </div>
+</section>
+
+<!-- SECTION 2: KEY FEATURES STRIP -->
+<section style="background:#e5a52414;padding:48px 0;">
+  <div class="bst-container">
+    <p style="font-family:'Open Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#8B6A1A;text-align:center;margin:0 0 32px 0;">
+      Een goede verzekering begint bij:
+    </p>
+    <div class="bst-features-grid">
+      {[
+        { text: 'Specialist in\nbestrating & verharding', iconPath: 'M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5M14 6a6 6 0 0 1 6 6v3M4 15v-3a6 6 0 0 1 6-6M3 15L21 15A1 1 0 0 1 22 16L22 18A1 1 0 0 1 21 19L3 19A1 1 0 0 1 2 18L2 16A1 1 0 0 1 3 15z' },
+        { text: 'Dekking bij\nverzakking & afwatering', iconPath: 'M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1' },
+        { text: 'Materiaal & machines\ncorrect verzekerd', iconPath: 'm6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2' },
+        { text: 'Eén aanspreekpunt\nvoor je hele werf', iconPath: 'M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z' },
+      ].map((item) => (
+        <div style="display:flex;align-items:center;gap:20px;background:#FFFFFF;border:1px solid rgba(229,165,36,0.18);border-radius:12px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+          <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;"><path d={item.iconPath}/></svg>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#001F3F;line-height:1.45;white-space:pre-line;">{item.text}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: INTRO + POSITIONERING -->
+<section style="background:#FBF8FF;padding:80px 0;">
+  <div class="bst-container" style="max-width:1110px;">
+    <div class="bst-intro-grid">
+      <div style="padding-top:40px;padding-right:0;">
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3vw,41px);line-height:1.1;color:#001F3F;margin-bottom:16px;">
+          Waarom een bestrater een specialist nodig heeft
+        </h2>
+        <div style="width:96px;height:6px;background:#E5A524;margin-bottom:24px;"></div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:20px;">
+          Bestraten lijkt eenvoudig, maar de aansprakelijkheid zit in de details. De ondergrond, de helling, de afwatering en de voegen bepalen of het werk jaren goed blijft liggen. Verzakt een oprit of blijft er water staan, dan volgt vaak een discussie met de klant over wie verantwoordelijk is. En je werkt met machines zoals trilplaten en minigravers en met materiaal dat 's nachts op de werf blijft staan.
+        </p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:32px;">
+          Daarom werkt Assurman niet met een one-size-fits-all polis. We bouwen een pakket op maat van jouw realiteit: type werken (opritten, terrassen, openbare verharding, kasseien), je machines en materiaal, personeel, onderaannemers en de regio waarin je werkt.
+        </p>
+        <blockquote style="border-left:4px solid #E5A524;padding-left:24px;margin:0;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;line-height:1.55;color:#001F3F;margin:0;">
+            "Jij legt het strak. Wij zorgen dat een discussie achteraf jou niet onderuit haalt."
+          </p>
+        </blockquote>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:20px;padding-top:40px;">
+        {[
+          { title: 'Verzakking & afwatering', text: 'De meest voorkomende discussie bij bestrating. De juiste aansprakelijkheid dekt herstel en geschillen.', iconPath: 'M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1' },
+          { title: 'Materiaal op de werf', text: 'Klinkers, kasseien en materiaal die op de werf blijven, dekken we tegen diefstal en schade.', iconPath: 'M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16zM3.3 7L12 12l8.7-5M12 22V12' },
+          { title: 'Machines & gereedschap', text: 'Trilplaten, minigravers en gereedschap correct verzekerd, zodat je niet stilstaat.', iconPath: 'M15 12l-9.373 9.373a1 1 0 0 1-3.001-3L12 9M18 15L22 11M21.5 11.5l-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5' },
+        ].map((card) => (
+          <div class="bst-why-card" style="padding:28px;display:flex;align-items:flex-start;gap:20px;">
+            <div style="background:rgba(229,165,36,0.1);border-radius:8px;padding:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;min-width:48px;height:48px;">
+              <svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={card.iconPath}/></svg>
+            </div>
+            <div>
+              <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#001F3F;margin-bottom:6px;">{card.title}</h3>
+              <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.4;color:#001F3F;margin:0;">{card.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: QUICK BENEFITS - Dark -->
+<section style="background:#3F5767;padding:80px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:50%;right:-110px;transform:translateY(-50%);pointer-events:none;">
+    <BrandChevron color="white" height="200px" direction="left" opacity={0.07} />
+  </div>
+  <div class="bst-container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <p class="bst-section-label" style="margin-bottom:16px;">Wat bestraters waarderen</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1;color:#FFFFFF;margin:0;">
+        Wat bestraters vooral waarderen aan Assurman
+      </h2>
+    </div>
+    <div class="bst-benefits-grid">
+      {[
+        { title: 'Heldere dekking', text: 'Geen wollige taal. Je weet precies waarvoor je verzekerd bent en waarom.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
+        { title: 'Slimme modules', text: 'Voeg toe wat jij nodig hebt: werfdekking, materiaal, machines, rechtsbijstand.', iconPath: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4' },
+        { title: 'Snelle intake', text: 'Na een audit van onze expert stemmen we alles af op jouw werven en materiaal.', iconPath: 'M10 2L14 2M12 14L15 11M4 14a8 8 0 1 0 16 0a8 8 0 1 0-16 0' },
+        { title: 'Bouw-expertise', text: 'We spreken jouw taal: fundering, drainage, klinkers, kasseien, voegen, afwatering.', iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z' },
+      ].map((item) => (
+        <div class="bst-insurance-card" style="padding:32px;display:flex;flex-direction:column;align-items:center;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);">
+          <div style="margin-bottom:20px;">
+            <svg width="44" height="44" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={item.iconPath}/></svg>
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#FFFFFF;margin-bottom:10px;">{item.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#CBD5E1;margin:0;">{item.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: INSURANCE CAROUSEL -->
+<InsuranceCarousel
+  client:visible
+  cards={insuranceCards}
+  sectionLabel="Het Bestraterspakket"
+  headline="Jouw bestraterspakket: de belangrijkste verzekeringen"
+  subheadline="Dit zijn de kernblokken voor de meeste bestraters. Daarna verfijnen we met extra modules waar nodig."
+/>
+
+<!-- SECTION 6: WAAROM KIEZEN -->
+<section style="background:#3F5767;padding:80px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.07) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0;"></div>
+  <div class="assurman-mask assurman-mask--why bst-waarom-mask-img" style="position:absolute;top:0;right:-5px;width:380px;pointer-events:none;z-index:0;">
+    <img src="/images/sectoren/bestraters-why.jpg" alt="Bestrater tijdens een werfcontrole">
+  </div>
+  <div class="bst-container" style="position:relative;z-index:1;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <p class="bst-section-label" style="margin-bottom:16px;">Waarom Assurman</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.5vw,48px);line-height:1;color:#FFFFFF;margin:0 auto;max-width:762px;">
+        Waarom bestraters voor Assurman kiezen
+      </h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#CBD5E1;margin-top:16px;">
+        Omdat je een verzekeringspartner wil die de bouwsector begrijpt en snel schakelt.
+      </p>
+    </div>
+
+    <div class="bst-stats-grid">
+      {[
+        { label: 'Focus', value: 'Bouwsector', text: 'Geen algemene aanpak, maar afgestemd op jouw stiel.' },
+        { label: 'Maatwerk', value: 'Modulair pakket', text: 'Jij kiest: basis + opties. Niet te veel, niet te weinig.' },
+        { label: 'Efficiënt', value: 'Scan in 2 min', text: 'Start snel, ontdek of je correct en volledig bent beschermd.', href: CTA_DESTINATIONS.scan },
+        { label: 'Ondersteuning', value: 'Duidelijk contact', text: 'Je krijgt uitleg waar je iets aan hebt.' },
+      ].map((stat) => (
+        stat.href
+          ? <a href={stat.href} class="bst-insurance-card" style="padding:24px;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);background:#E9C466;text-decoration:none;display:block;">
+              <div style="font-family:'Open Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin-bottom:8px;">{stat.label}</div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:6px;">{stat.value}</div>
+              <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:13px;line-height:1.5;color:#001F3F;margin:0;">{stat.text}</p>
+            </a>
+          : <div class="bst-insurance-card" style="padding:24px;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);">
+              <div style="font-family:'Open Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#CBD5E1;margin-bottom:8px;">{stat.label}</div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin-bottom:6px;">{stat.value}</div>
+              <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:13px;line-height:1.5;color:#CBD5E1;margin:0;">{stat.text}</p>
+            </div>
+      ))}
+    </div>
+
+    <div class="bst-cards3-grid">
+      {[
+        { title: 'Minder discussies, meer duidelijkheid', text: 'We leggen alles helder uit, geen verrassingen achteraf.' },
+        { title: 'Past bij kleine én groeiende teams', text: 'Eénmanszaak? Meerdere ploegen? We schalen je pakket mee met je bedrijf.' },
+        { title: 'Klaar voor echte werfrealiteit', text: "Van opritten tot openbare verharding: we denken mee over risico's die typisch zijn voor bestrating." },
+      ].map((card) => (
+        <div class="bst-insurance-card" style="padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 32px),calc(100% - 32px) 100%,0% 100%);">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;color:#FFFFFF;margin-bottom:10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#CBD5E1;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: CASE CAROUSEL -->
+<CaseStudyCarousel client:visible cases={caseStudies} />
+
+<!-- SECTION 8: FAQ -->
+<FaqAccordion
+  client:visible
+  items={faqItems}
+  sectionLabel="Bestratersverzekeringen uitgelegd"
+  headline="In mensentaal"
+  subheadline="De vragen die bestraters het vaakst stellen, duidelijk beantwoord."
+/>
+
+<!-- SECTION 9: PROCESS -->
+<section style="background:#FFFFFF;padding:80px 0;">
+  <div class="bst-container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <p class="bst-section-label" style="margin-bottom:16px;">Onze aanpak</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,41px);line-height:1;color:#001F3F;margin:0 auto;max-width:720px;">
+        Onze aanpak: snel starten, slim verfijnen
+      </h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#001F3F;margin-top:16px;">
+        Je hoeft niet alles meteen perfect te weten. We begeleiden je stap voor stap.
+      </p>
+    </div>
+    <div class="bst-process-grid">
+      {[
+        { num: '01', title: 'Online scan (2 minuten)', text: 'Ben je voldoende beschermd? Doe de gratis scan en ontdek wat je bestratingswerk nodig heeft.' },
+        { num: '02', title: 'Risico-audit op maat', text: 'We checken je huidige polissen, je materiaal, je machines en je werfrealiteit.' },
+        { num: '03', title: 'Voorstel met modules', text: 'Je krijgt een helder voorstel, afgestemd op je werk, materiaal en aansprakelijkheid.' },
+        { num: '04', title: 'Afstemming & activatie', text: 'We leggen alles helder uit en zetten je dekking correct actief.' },
+      ].map((step) => (
+        <div style="position:relative;padding-top:56px;">
+          <span class="bst-step-number">{step.num}</span>
+          <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;line-height:1.3;color:#001F3F;margin-bottom:10px;">{step.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#001F3F;margin:0;">{step.text}</p>
+        </div>
+      ))}
+    </div>
+    <div style="max-width:480px;margin:0 auto;background:rgba(229,165,36,0.08);border:1px solid rgba(229,165,36,0.25);padding:32px 24px;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% calc(100% - 32px),calc(100% - 32px) 100%,0% 100%,0% 32px);">
+      <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="opacity:0.4;margin-bottom:16px;display:block;margin-left:auto;margin-right:auto;"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+      <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin-bottom:10px;">Geen gedoe. Wel controle.</h3>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#001F3F;margin:0;">Jij beslist. Wij zorgen dat je verzekering past bij jouw stiel.</p>
+    </div>
+  </div>
+</section>
+
+<div style="position:relative;z-index:10;height:0;pointer-events:none;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);">
+    <BrandChevron color="white" height="80px" direction="down" />
+  </div>
+</div>
+<!-- SECTION 10: TUSSEN-CTA BAND -->
+<section style="background:#E9C466;padding:80px 0 80px;position:relative;overflow:hidden;">
+  <div class="assurman-mask assurman-mask--cta bst-cta-mask-img" style="position:absolute;top:0;right:-5px;width:380px;pointer-events:none;z-index:0;">
+    <img src="/images/sectoren/bestraters-cta.jpg" alt="Bestrater rondt een oprit af">
+  </div>
+  <div class="bst-container" style="text-align:center;position:relative;z-index:1;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">
+      Bestrater in Vlaanderen?<br />Wij maken jouw pakket op maat.
+    </h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,2vw,22px);line-height:1.4;color:#3F5767;margin-bottom:32px;opacity:0.85;">
+      Start nu in 2 minuten of kies meteen voor advies.
+    </p>
+    <div class="bst-cta-btns">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">
+        {CTA_SCAN.requestNow}
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 11: TESTIMONIALS -->
+<section style="background:#F5F2FF;padding:80px 0;">
+  <div class="bst-container">
+    <div class="bst-testimonials-header">
+      <div style="display:flex;flex-direction:column;gap:28px;">
+        <div>
+          <p class="bst-section-label" style="margin-bottom:16px;">Klantenervaringen</p>
+          <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,41px);line-height:1;color:#001F3F;margin:0 0 16px;">Wat bestraters zeggen</h2>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#001F3F;margin:0;">
+            Ervaringen van klanten helpen je om met meer vertrouwen de juiste keuze te maken.
+          </p>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:16px;background:#FFFFFF;padding:18px 28px;box-shadow:0px 1px 2px rgba(0,0,0,0.05);align-self:flex-start;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 16px),calc(100% - 16px) 100%,0% 100%);">
+          <div style="display:flex;gap:4px;">
+            {[1,2,3,4,5].map(_ => <svg width="20" height="20" fill="#E5A524" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
+          </div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:#001F3F;line-height:1;">5/5</div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#001F3F;margin-top:4px;">op basis van klantfeedback</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#E5A524;padding:36px 32px;display:flex;flex-direction:column;gap:20px;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:24px;line-height:1.23;color:#001F3F;margin:0;">Sector Gecertificeerd</h3>
+        <div class="bst-cert-grid">
+          {['FSMA 0805.250.547', 'BZB-FEDAF'].map((badge) => (
+            <div style="background:#3F5767;padding:14px;display:flex;align-items:center;justify-content:center;">
+              <span style="font-family:'Open Sans',sans-serif;font-weight:700;font-size:12px;color:#FFFFFF;">{badge}</span>
+            </div>
+          ))}
+        </div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.5;color:rgba(40,25,0,0.8);margin:0;">
+          Als onafhankelijk makelaar werken we met alle maatschappijen om voor jou de beste voorwaarden te onderhandelen.
+        </p>
+      </div>
+    </div>
+
+    <div class="bst-testimonials-grid">
+      {[
+        { quote: 'Toen een klant klaagde over de afwatering, stond ik niet alleen. De rechtsbijstand heeft alles uitgeklaard.', name: 'Zaakvoerder, bestratingen (West-Vlaanderen)' },
+        { quote: 'De aanvraag ging vlot. Daarna hebben we het pakket echt op maat gezet voor mijn materiaal en machines.', name: 'Bestrater, Oost-Vlaanderen' },
+        { quote: 'Ik wou vooral zekerheid rond discussies en diefstal van materiaal. Alles helder, zonder gedoe.', name: 'Zelfstandig kasseilegger' },
+      ].map((t) => (
+        <div class="bst-testimonial-card" style="padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);">
+          <div style="display:flex;gap:4px;margin-bottom:14px;">
+            {[1,2,3,4,5].map(_ => <svg width="16" height="16" fill="#E5A524" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
+          </div>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.55;color:#001F3F;margin-bottom:14px;font-style:italic;">"{t.quote}"</p>
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:#001F3F;margin:0;">{t.name}</p>
+        </div>
+      ))}
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:40px;">
+      {['Bouw-specialist', '100% op maat', 'Snel proces', 'Heldere voorwaarden'].map((badge) => (
+        <div class="bst-badge-pill">{badge}</div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section style="background:#F7F4EF;padding:56px 0;">
+  <div class="bst-container">
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">
+      Ondersteund door sterke verzekeringspartners
+    </p>
+    <PartnerSlider client:visible />
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:#3F5767;padding-top:96px;padding-bottom:0;position:relative;text-align:center;">
+  <div class="bst-container" style="position:relative;z-index:2;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.5vw,48px);line-height:1.1;color:#FFFFFF;max-width:727px;margin:0 auto 20px;">
+      Ondernemen in de bouwsector zonder zorgen? Het kan!
+    </h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,2vw,22px);line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 40px;">
+      Start nu en doe je verzekeringen scan in 2 minuten of plan meteen een adviesgesprek met onze expert.
+    </p>
+    <div class="bst-final-btns">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">
+        {CTA_SCAN.request}
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
+        {CTA_AFSPRAAK.advisory}
+      </a>
+    </div>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#CBD5E1;margin-bottom:64px;opacity:0.75;">
+      Geen verplichting. We helpen je kiezen wat écht nodig is.
+    </p>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;">
+    <polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" />
+  </svg>
+</section>
+
 </BaseLayout>
