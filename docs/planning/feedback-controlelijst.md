@@ -352,3 +352,20 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | AS-FOTO | Placeholder-beelden (`/images/sectoren/asfalteerders-{hero,why,cta}.jpg` + `/images/cases/case-asfalteerders-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
+
+---
+
+## /sectoren/stukadoors (Sectorpagina — sectorcluster 4/13)
+
+Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/afwerking-cluster.md`, prefix `stk-`. Polis-pakket: BA-onderneming, rechtsbijstand, ABR, bedrijfsvoertuigen, arbeidsongevallen, vervoerde-goederen. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: esthetische geschillen (vlakheid/scheuren/kleur) → rechtsbijstand + BA.
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| ST-01 | Fictieve case krimpscheuren (€14.000) na te snelle opwarming | Akkoord; droogomstandigheden/ondergrond bepalen mee aansprakelijkheid? | 🔲 |
+| ST-02 | Fictieve case waterschade parket bij klant (€9.500) → BA-onderneming | Akkoord als illustratie? | 🔲 |
+| ST-03 | Fictieve case kleurverschil gevelpleister (€11.000) → rechtsbijstand | Akkoord; uitkleuring minerale pleister hangt af van droogcondities? | 🔲 |
+| ST-04 | Fictieve case loslatend pleisterwerk badkamer (€7.800) → rechtsbijstand + BA | Akkoord; vochtbron in ondergrond verifiëren vóór toewijzing? | 🔲 |
+| ST-PAK | Polis-pakket: BA-onderneming, rechtsbijstand, ABR, bedrijfsvoertuigen, arbeidsongevallen, vervoerde-goederen | Pakket akkoord? | 🔲 |
+| ST-FOTO | Placeholder-beelden (`/images/sectoren/stukadoors-{hero,why,cta}.jpg` + `/images/cases/case-stukadoors-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+
+Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
