@@ -389,6 +389,24 @@ Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeho
 
 ---
 
+## /sectoren/boomverzorgers (Sectorpagina — sectorcluster 12/13)
+
+Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/tuin-cluster.md`, prefix `bmv-`. Polis-pakket: BA-onderneming, arbeidsongevallen, gewaarborgd-inkomen, machinebreuk, bedrijfsvoertuigen, rechtsbijstand. Build groen, **7 FAQ** statisch + FAQPage-schema. Rode draad: hoogste fysieke risico (klimwerk) + schade door vallende takken → extra nadruk op mensen en inkomen.
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| BV-01 | Fictieve case vallende tak op dak buur (€16.000) → BA-onderneming | Bevestig dekking schade aan derden door vallende takken bij snoei/velling. | 🔲 |
+| BV-02 | Fictieve case klimongeval, 5 maanden uitval → arbeidsongevallen + gewaarborgd-inkomen | Klopt onderscheid eenmanszaak-zonder-personeel vs. met personeel? | 🔲 |
+| BV-03 | Fictieve case velling beschadigt serre buur (€8.900) → BA-onderneming | Akkoord als illustratie? | 🔲 |
+| BV-04 | Fictieve case versnipperaar defect + kettingzaag gestolen (€6.300) → machinebreuk | Akkoord als illustratie? | 🔲 |
+| BV-PAK | Polis-pakket: BA-onderneming, arbeidsongevallen, gewaarborgd-inkomen, machinebreuk, bedrijfsvoertuigen, rechtsbijstand | Pakket akkoord (gewaarborgd-inkomen als kernblok)? | 🔲 |
+| BV-ETW | ETW (European Tree Worker)-certificaat — kwalitatief in FAQ, geen harde claim in copy | Speelt ETW mee in risicobeoordeling/premie en hoe formuleren? | 🔲 |
+| BV-FOTO | Placeholder-beelden (`/images/sectoren/boomverzorgers-{hero,why,cta}.jpg` + `/images/cases/case-boomverzorgers-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+
+Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
+
+---
+
 ## /sectoren/hoveniers (Sectorpagina — sectorcluster 11/13)
 
 Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/tuin-cluster.md`, prefix `hov-`. Polis-pakket: BA-onderneming, bedrijfsvoertuigen, machinebreuk, arbeidsongevallen, rechtsbijstand, vervoerde-goederen. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: onderhoud bij de klant + materieel onderweg (steenworp, diefstal uit bestelwagen, gazon-geschil).
