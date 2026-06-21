@@ -1,20 +1,533 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { CTA_SCAN, CTA_DESTINATIONS } from '../../data/cta-labels';
+import { kaartenVoor } from '../../data/verzekeringen';
+import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
+import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import FaqAccordion from '../../components/islands/FaqAccordion';
+import PartnerSlider from '../../components/ui/PartnerSlider';
+import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
+import BrandChevron from '../../components/BrandChevron.astro';
+
+const insuranceCards = kaartenVoor(['ba-onderneming', 'ba-10', 'alle-bouwplaats-risicos', 'machinebreuk', 'bedrijfsvoertuigen', 'arbeidsongevallen']);
+
+const caseStudies = [
+  {
+    category: 'GRONDWERK',
+    title: 'Geraakte gasleiding tijdens sleufwerk leidt tot €60.000 gevolgschade',
+    businessName: 'Grondwerken De Backer',
+    ownerName: 'Wim De Backer',
+    cityName: 'Roeselare',
+    description: 'Tijdens het graven van een sleuf voor nutsleidingen raakte de kraan een niet correct ingetekende gasleiding. De straat moest afgesloten worden en de netbeheerder eiste vergoeding voor het noodherstel.',
+    action: 'Via de BA-onderneming werd de aansprakelijkheid onderzocht en de gevolgschade aan de netbeheerder vergoed. De verzekering nam de herstel- en expertisekosten op zich. Het dossier werd afgehandeld zonder dat de zaakvoerder zelf voor de volledige rekening opdraaide.',
+    image: '/images/cases/case-grondwerkers-1.jpg',
+  },
+  {
+    category: 'GRONDWERK',
+    title: 'Verzakking beschadigt aanpalend pand: €38.000 herstelkosten',
+    businessName: 'Aardewerk Vlaanderen',
+    ownerName: 'Koen Maes',
+    cityName: 'Aalst',
+    description: 'Bij een uitgraving voor een nieuwe kelder ontstond een verzakking waardoor scheuren verschenen in de gevel van het buurpand. De buur stelde de aannemer aansprakelijk voor de herstelling.',
+    action: "Via de ABR-dekking (Alle Bouwplaats Risico's) en de aansprakelijkheid werd de schade aan het aanpalend pand opgevangen. Een expert stelde de oorzaak vast en de herstelwerken aan de buurwoning werden gedekt. Het conflict met de buur escaleerde niet verder.",
+    image: '/images/cases/case-grondwerkers-2.jpg',
+  },
+  {
+    category: 'MACHINESCHADE',
+    title: 'Hydraulische breuk legt graafmachine stil: €22.000 herstel',
+    businessName: 'Grondwerken Vandenberghe',
+    ownerName: 'Stijn Vandenberghe',
+    cityName: 'Brugge',
+    description: 'Op een lopende werf viel de hoofdgraafmachine uit door een plotse hydraulische breuk. Zonder die machine lag de planning van meerdere werven stil.',
+    action: 'Dankzij de machinebreukverzekering werd de herstelling snel goedgekeurd en vergoed. Er kon meteen een herstelling ingepland worden, waardoor de stilstand beperkt bleef en de andere werven niet in het gedrang kwamen.',
+    image: '/images/cases/case-grondwerkers-3.jpg',
+  },
+  {
+    category: 'GRONDWERK',
+    title: 'Beschadigde oprit van buur tijdens afbraakwerken kost €9.500',
+    businessName: 'De Clerck Grond- en Afbraakwerken',
+    ownerName: 'Tom De Clerck',
+    cityName: 'Sint-Niklaas',
+    description: 'Tijdens afbraakwerken reed de rupskraan over de oprit van de buurwoning, die daardoor scheurde en verzakte. De buur eiste een volledige heraanleg.',
+    action: 'Via de burgerlijke aansprakelijkheid werd de schade aan de oprit van de buur gedekt. Na expertise werd een correcte vergoeding voor de heraanleg uitbetaald. De aannemer kon de werf afronden zonder zelf voor de schade op te draaien.',
+    image: '/images/cases/case-grondwerkers-4.jpg',
+  },
+];
+
+const faqItems = [
+  {
+    title: "Welke risico's heeft een grondwerker het meest?",
+    content: "De grootste risico's komen meestal uit 4 hoeken:\n\n• Aansprakelijkheid: geraakte nutsleidingen, verzakkingen, schade aan aanpalende panden of de openbare weg.\n\n• Machinepark: een dure graafmachine of kraan die uitvalt, legt meteen werven stil.\n\n• Werfrisico's: onvoorziene schade tijdens het graven, instabiele grond, meerdere partijen op de werf.\n\n• Mobiliteit & personeel: zonder transport en zonder ploeg sta je stil.\n\nDaarom is een basis met BA + ABR + machinebreuk + bestelwagen voor veel grondwerkers een logische start.",
+  },
+  {
+    title: 'Wat als ik een nutsleiding of kabel raak tijdens het graven?',
+    content: "Dat is een van de meest typische schadegevallen in grondwerk. De gevolgschade (herstel van de leiding, noodinterventie van de netbeheerder, gevolgschade voor derden) kan fors oplopen.\n\nDe burgerlijke aansprakelijkheid van je onderneming is hier het kernblok. We bekijken samen of je dekking aansluit bij het soort graafwerk dat je doet en de zones waarin je werkt.",
+  },
+  {
+    title: 'Moet ik graafwerken vooraf melden via KLIP?',
+    content: "In Vlaanderen vraag je voor graafwerken vooraf informatie op over kabels en leidingen via het KLIP (Kabel- en Leidinginformatieplatform). Dat is een wettelijke informatieplicht: je dient een planaanvraag in zodat de netbeheerders je de ligging van hun leidingen bezorgen.\n\nDie melding is geen verzekering, maar wel een belangrijke voorzorg. Of en hoe je die naleeft, kan meespelen in een schadedossier. Bij je intake bekijken we hoe jouw werkwijze zich verhoudt tot je dekking.",
+  },
+  {
+    title: 'Hoe verzeker ik mijn graafmachine of kraan?',
+    content: "Dat gebeurt typisch via machinebreuk (technische defecten, breuk) en eventueel via voertuig- of werfmateriaaldekking, afhankelijk van het type machine en waar hij ingezet wordt.\n\nWe stemmen de dekking af op de waarde van je machines, of ze ingeschreven zijn, en waar ze staan (werf, stelplaats, transport).",
+  },
+  {
+    title: 'Wat is het verschil tussen BA en ABR bij grondwerk?',
+    content: "BA (Burgerlijke Aansprakelijkheid) gaat vooral over schade die je aan anderen veroorzaakt: een geraakte leiding, een beschadigd buurpand, schade aan de openbare weg.\n\nABR (Alle Bouwplaats Risico's) focust op de werf zelf en de werken in uitvoering, zoals verzakkingen of onvoorziene schade tijdens het graven. In de praktijk vullen ze elkaar aan. Assurman helpt je kiezen wat in jouw situatie écht nodig is.",
+  },
+  {
+    title: 'Ik werk met onderaannemers en op de openbare weg. Wat betekent dat?',
+    content: "Werken op de openbare weg en met onderaannemers brengt extra aansprakelijkheidsvragen mee, bijvoorbeeld rond schade aan wegenis, signalisatie of derden.\n\nIn je intake geef je aan hoe je werkt. We bekijken daarna welke dekking en voorwaarden het best passen bij jouw type werven.",
+  },
+];
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(f => ({
+    "@type": "Question",
+    "name": f.title,
+    "acceptedAnswer": { "@type": "Answer", "text": f.content.replace(/\n/g, ' ') }
+  }))
+};
 ---
+
 <BaseLayout
-  title="Verzekeringen voor grondwerkers | Assurman"
-  description="Verzekeringen op maat van grondwerkers: aansprakelijkheid, materieel en werfrisico. Binnenkort online bij Assurman."
+  title="Verzekeringen voor grondwerkers in de bouw | Assurman"
+  description="Graafmachines, geraakte nutsleidingen, verzakkingen: grondwerk kent zware risico's. Assurman bouwt jouw verzekeringspakket op maat van de werf."
   canonical="/sectoren/grondwerkers/"
-  noindex={true}
+  schema={schema}
 >
-  <main style="min-height:72vh;display:flex;align-items:center;justify-content:center;background:#FBF8FF;padding:140px 24px 96px;">
-    <div style="max-width:680px;text-align:center;">
-      <span style="display:inline-block;font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Sector</span>
-      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,52px);color:#001F3F;line-height:1.1;margin:0 0 16px;">Grondwerkers</h1>
-      <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#3F5767;line-height:1.6;margin:0 0 32px;">Deze pagina is in opbouw. Binnenkort lees je hier alles over verzekeringen op maat van grondwerkers. Wil je nu al weten waar je dekking tekortschiet? Doe de gratis verzekeringsscan in 2 minuten.</p>
-      <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary--lg">{CTA_SCAN.hero}</a>
-      <p style="margin-top:28px;"><a href="/sectoren/" style="color:#3F5767;font-family:'Outfit',sans-serif;text-decoration:underline;">Alle sectoren bekijken</a></p>
+
+<style>
+  .gw-container { max-width: 1280px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
+  .gw-hero-content { max-width: 52%; padding-top: 40px; }
+  .gw-hero-img { position: absolute; top: 5%; right: 0; height: 90%; width: auto; max-width: 48%; z-index: 1; pointer-events: none; }
+  .gw-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .gw-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; }
+  .gw-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .gw-stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 48px; }
+  .gw-cards3-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .gw-process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 64px; }
+  .gw-testimonials-header { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-bottom: 64px; }
+  .gw-testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .gw-cert-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+  .gw-hero-btns { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+  .gw-cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+  .gw-final-btns { display: flex; gap: 24px; justify-content: center; margin-bottom: 80px; flex-wrap: wrap; }
+
+  .gw-btn-primary { display: inline-flex; align-items: center; gap: 10px; background: #E5A524; color: #001F3F; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 18px; padding: 18px 32px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .gw-btn-primary:hover { background: #E9C466; transform: translateY(-1px); }
+  .gw-btn-secondary { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: #001F3F; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 18px; padding: 16px 32px; border-radius: 8px; border: 2px solid rgba(213, 196, 174, 0.5); cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s; white-space: nowrap; }
+  .gw-btn-secondary:hover { border-color: #E5A524; background: rgba(229, 165, 36, 0.05); }
+  .gw-badge-pill { display: inline-flex; align-items: center; gap: 8px; background: #F5F2FF; border: 1px solid rgba(213, 196, 174, 0.2); border-radius: 9999px; padding: 6px 16px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #001F3F; }
+  .gw-section-label { font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 14px; letter-spacing: 1.4px; text-transform: uppercase; color: #E5A524; }
+  .gw-step-number { font-family: 'Open Sans', sans-serif; font-weight: 800; font-size: 80px; line-height: 1; color: rgba(229, 165, 36, 0.18); position: absolute; top: 0; left: -4px; user-select: none; pointer-events: none; }
+  .gw-insurance-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(2px); transition: background 0.2s, transform 0.2s; }
+  .gw-insurance-card:hover { background: rgba(255,255,255,0.1); transform: translateY(-4px); }
+  .gw-why-card { background: #FFFFFF; border-left: 4px solid #E5A524; box-shadow: 0px 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.2s, transform 0.2s; }
+  .gw-why-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+  .gw-testimonial-card { background: #FFFFFF; box-shadow: 0px 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.2s, transform 0.2s; }
+  .gw-testimonial-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+  @media (max-width: 1023px) {
+    .gw-hero-img { display: none; }
+    .gw-features-grid { grid-template-columns: repeat(2, 1fr); }
+    .gw-benefits-grid { grid-template-columns: repeat(2, 1fr); }
+    .gw-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .gw-process-grid { grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .gw-testimonials-header { grid-template-columns: 1fr; gap: 32px; }
+    .gw-testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+    .gw-intro-grid { grid-template-columns: 1fr; }
+    .gw-container { padding-left: 24px; padding-right: 24px; }
+  }
+  @media (max-width: 767px) {
+    .gw-container { padding-left: 15px; padding-right: 15px; }
+    .gw-hero-content { max-width: 100%; padding-top: 16px; }
+    .gw-features-grid { grid-template-columns: 1fr; gap: 12px; }
+    .gw-intro-grid { grid-template-columns: 1fr; gap: 24px; }
+    .gw-benefits-grid { grid-template-columns: 1fr; }
+    .gw-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .gw-cards3-grid { grid-template-columns: 1fr; }
+    .gw-process-grid { grid-template-columns: 1fr; gap: 32px; }
+    .gw-testimonials-header { grid-template-columns: 1fr; gap: 24px; }
+    .gw-testimonials-grid { grid-template-columns: 1fr; }
+    .gw-cert-grid { grid-template-columns: 1fr 1fr; }
+    .gw-btn-primary { font-size: 16px; padding: 16px 24px; }
+    .gw-btn-secondary { font-size: 16px; padding: 14px 24px; }
+    .gw-hero-btns { flex-direction: column; }
+    .gw-hero-btns a { width: 100%; justify-content: center; text-align: center; }
+    .gw-cta-btns { flex-direction: column; align-items: center; }
+    .gw-cta-btns a { width: 100%; max-width: 400px; justify-content: center; }
+    .gw-final-btns { flex-direction: column; align-items: center; }
+    .gw-final-btns a { width: 100%; max-width: 400px; justify-content: center; }
+    .gw-step-number { font-size: 56px; }
+    .gw-hero-section { display: flex; flex-direction: column; min-height: unset !important; }
+    .gw-waarom-mask-img,
+    .gw-cta-mask-img { width: 55% !important; opacity: 0.35 !important; }
+  }
+</style>
+
+<!-- SECTION 1: HERO -->
+<section class="gw-hero-section" style="padding-top:120px;background:#FFFFFF;position:relative;overflow:hidden;min-height:480px;">
+  <div class="gw-hero-img assurman-mask assurman-mask--hero">
+    <img src="/images/sectoren/grondwerkers-hero.jpg" alt="Grondwerker met graafmachine die een sleuf graaft op een bouwwerf" />
+  </div>
+  <div class="gw-container" style="padding-top:40px;padding-bottom:64px;position:relative;z-index:2;">
+    <div class="gw-hero-content">
+      <div class="gw-badge-pill" style="margin-bottom:20px;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Assurman • Bouwverzekeringen op maat
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">
+        Verzekeringen voor grondwerkers
+      </h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(22px,3.5vw,52px);line-height:1.1;letter-spacing:-1px;color:#E5A524;margin-bottom:20px;">
+        Stevig verzekerd, van eerste schop tot oplevering.
+      </p>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#001F3F;margin-bottom:28px;max-width:520px;">
+        Bij grondwerk zit het risico letterlijk onder de grond. Eén geraakte kabel, een verzakking, een dure graafmachine die uitvalt: de schade loopt snel op. Assurman is gespecialiseerd in verzekeringen op maat van grondwerkers en infrastructuuraannemers in Vlaanderen.
+      </p>
+      <div class="gw-hero-btns">
+        <a href={CTA_DESTINATIONS.scan} class="gw-btn-primary">
+          {CTA_SCAN.request}
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href={CTA_DESTINATIONS.afspraak} class="gw-btn-secondary">{CTA_AFSPRAAK.advisoryFull}</a>
+      </div>
+      <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#001F3F;opacity:0.75;">
+        Geen verplichting. We finaliseren je pakket samen na je intake.
+      </p>
     </div>
-  </main>
+  </div>
+</section>
+
+<!-- SECTION 2: KEY FEATURES STRIP -->
+<section style="background:#e5a52414;padding:48px 0;">
+  <div class="gw-container">
+    <p style="font-family:'Open Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#8B6A1A;text-align:center;margin:0 0 32px 0;">
+      Een goede verzekering begint bij:
+    </p>
+    <div class="gw-features-grid">
+      {[
+        { text: 'Specialist in\ngrondwerk & infrastructuur', iconPath: 'M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5M14 6a6 6 0 0 1 6 6v3M4 15v-3a6 6 0 0 1 6-6M3 15L21 15A1 1 0 0 1 22 16L22 18A1 1 0 0 1 21 19L3 19A1 1 0 0 1 2 18L2 16A1 1 0 0 1 3 15z' },
+        { text: 'Dure machines\ncorrect verzekerd', iconPath: 'm6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2' },
+        { text: 'Dekking voor\ngeraakte leidingen & kabels', iconPath: 'M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z' },
+        { text: 'Eén aanspreekpunt\nvoor je hele werf', iconPath: 'M3 6L21 6A1 1 0 0 1 22 7L22 13A1 1 0 0 1 21 14L3 14A1 1 0 0 1 2 13L2 7A1 1 0 0 1 3 6zM17 14v7M7 14v7M17 3v3M7 3v3M10 14L2.3 6.3M14 6L21.7 13.7M8 6L16 14' },
+      ].map((item) => (
+        <div style="display:flex;align-items:center;gap:20px;background:#FFFFFF;border:1px solid rgba(229,165,36,0.18);border-radius:12px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+          <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;"><path d={item.iconPath}/></svg>
+          <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#001F3F;line-height:1.45;white-space:pre-line;">{item.text}</div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: INTRO + POSITIONERING -->
+<section style="background:#FBF8FF;padding:80px 0;">
+  <div class="gw-container" style="max-width:1110px;">
+    <div class="gw-intro-grid">
+      <div style="padding-top:40px;padding-right:0;">
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3vw,41px);line-height:1.1;color:#001F3F;margin-bottom:16px;">
+          Waarom een grondwerker een specialist nodig heeft
+        </h2>
+        <div style="width:96px;height:6px;background:#E5A524;margin-bottom:24px;"></div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:20px;">
+          Grondwerk is geen standaard stiel. Je werkt met zware machines, in de buurt van ondergrondse nutsleidingen, vlak naast bestaande gebouwen en vaak op de openbare weg. Eén verkeerde graafbeweging kan een gasleiding, waterleiding of telecomkabel raken. De gevolgschade en de stilstand die daarbij komt kijken, zijn vaak veel groter dan de werken zelf.
+        </p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:32px;">
+          Daarom werkt Assurman niet met een one-size-fits-all polis. We bouwen een pakket op maat van jouw realiteit: type werken (graafwerk, funderingen, nutssleuven, afbraak), je machinepark, personeel, onderaannemers, de regio en je risicoprofiel. Zo betaal je voor wat je nodig hebt en sta je sterk als het misloopt.
+        </p>
+        <blockquote style="border-left:4px solid #E5A524;padding-left:24px;margin:0;">
+          <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;line-height:1.55;color:#001F3F;margin:0;">
+            "Onder de grond zie je het risico niet. Wij zorgen dat je er wel tegen beschermd bent."
+          </p>
+        </blockquote>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:20px;padding-top:40px;">
+        {[
+          { title: 'Graven nabij leidingen', text: 'Raak je een kabel of leiding, dan dekt de juiste aansprakelijkheid de gevolgschade en het herstel.', iconPath: 'M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01' },
+          { title: 'Zwaar machinepark', text: 'Machinebreuk en schade aan je graafmachine of kraan, zodat een defect je werf niet stillegt.', iconPath: 'M15 12l-9.373 9.373a1 1 0 0 1-3.001-3L12 9M18 15L22 11M21.5 11.5l-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5' },
+          { title: 'Werf & omgeving', text: 'Met ABR dek je verzakkingen, schade aan aanpalende panden en onvoorziene werfrisico\'s.', iconPath: 'M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z' },
+        ].map((card) => (
+          <div class="gw-why-card" style="padding:28px;display:flex;align-items:flex-start;gap:20px;">
+            <div style="background:rgba(229,165,36,0.1);border-radius:8px;padding:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;min-width:48px;height:48px;">
+              <svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={card.iconPath}/></svg>
+            </div>
+            <div>
+              <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#001F3F;margin-bottom:6px;">{card.title}</h3>
+              <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.4;color:#001F3F;margin:0;">{card.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: QUICK BENEFITS - Dark -->
+<section style="background:#3F5767;padding:80px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;top:50%;right:-110px;transform:translateY(-50%);pointer-events:none;">
+    <BrandChevron color="white" height="200px" direction="left" opacity={0.07} />
+  </div>
+  <div class="gw-container">
+    <div style="text-align:center;margin-bottom:48px;">
+      <p class="gw-section-label" style="margin-bottom:16px;">Wat grondwerkers waarderen</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1;color:#FFFFFF;margin:0;">
+        Wat grondwerkers vooral waarderen aan Assurman
+      </h2>
+    </div>
+    <div class="gw-benefits-grid">
+      {[
+        { title: 'Heldere dekking', text: 'Geen wollige taal. Je weet precies waarvoor je verzekerd bent en waarom.', iconPath: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M16 13H8M16 17H8M10 9H8' },
+        { title: 'Machine-expertise', text: 'We weten wat een graafmachine, kraan of rupsdumper kost en hoe je die correct verzekert.', iconPath: 'M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5M9 18h6M10 22h4' },
+        { title: 'Snelle intake', text: 'Na een audit van onze expert stemmen we alles af op jouw werven en machinepark.', iconPath: 'M10 2L14 2M12 14L15 11M4 14a8 8 0 1 0 16 0a8 8 0 1 0-16 0' },
+        { title: 'Bouw-expertise', text: 'We spreken jouw taal: sleuven, funderingen, nutsleidingen, KLIP, afbraak, grondverzet.', iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.106-3.105c.32-.322.863-.22.983.218a6 6 0 0 1-8.259 7.057l-7.91 7.91a1 1 0 0 1-2.999-3l7.91-7.91a6 6 0 0 1 7.057-8.259c.438.12.54.662.219.984z' },
+      ].map((item) => (
+        <div class="gw-insurance-card" style="padding:32px;display:flex;flex-direction:column;align-items:center;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);">
+          <div style="margin-bottom:20px;">
+            <svg width="44" height="44" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={item.iconPath}/></svg>
+          </div>
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#FFFFFF;margin-bottom:10px;">{item.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#CBD5E1;margin:0;">{item.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: INSURANCE CAROUSEL -->
+<InsuranceCarousel
+  client:visible
+  cards={insuranceCards}
+  sectionLabel="Het Grondwerkerspakket"
+  headline="Jouw grondwerkerspakket: de belangrijkste verzekeringen"
+  subheadline="Dit zijn de kernblokken voor de meeste grondwerkers. Daarna verfijnen we met extra modules waar nodig."
+/>
+
+<!-- SECTION 6: WAAROM KIEZEN -->
+<section style="background:#3F5767;padding:80px 0;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.07) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0;"></div>
+  <div class="assurman-mask assurman-mask--why gw-waarom-mask-img" style="position:absolute;top:0;right:-5px;width:380px;pointer-events:none;z-index:0;">
+    <img src="/images/sectoren/grondwerkers-why.jpg" alt="Grondwerker tijdens een werfcontrole">
+  </div>
+  <div class="gw-container" style="position:relative;z-index:1;">
+    <div style="text-align:center;margin-bottom:48px;">
+      <p class="gw-section-label" style="margin-bottom:16px;">Waarom Assurman</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.5vw,48px);line-height:1;color:#FFFFFF;margin:0 auto;max-width:762px;">
+        Waarom grondwerkers voor Assurman kiezen
+      </h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#CBD5E1;margin-top:16px;">
+        Omdat je een verzekeringspartner wil die de bouwsector begrijpt en snel schakelt.
+      </p>
+    </div>
+
+    <div class="gw-stats-grid">
+      {[
+        { label: 'Focus', value: 'Bouwsector', text: 'Geen algemene aanpak, maar afgestemd op jouw stiel.' },
+        { label: 'Maatwerk', value: 'Modulair pakket', text: 'Jij kiest: basis + opties. Niet te veel, niet te weinig.' },
+        { label: 'Efficiënt', value: 'Scan in 2 min', text: 'Start snel, ontdek of je correct en volledig bent beschermd.', href: CTA_DESTINATIONS.scan },
+        { label: 'Ondersteuning', value: 'Duidelijk contact', text: 'Je krijgt uitleg waar je iets aan hebt.' },
+      ].map((stat) => (
+        stat.href
+          ? <a href={stat.href} class="gw-insurance-card" style="padding:24px;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);background:#E9C466;text-decoration:none;display:block;">
+              <div style="font-family:'Open Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin-bottom:8px;">{stat.label}</div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#001F3F;margin-bottom:6px;">{stat.value}</div>
+              <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:13px;line-height:1.5;color:#001F3F;margin:0;">{stat.text}</p>
+            </a>
+          : <div class="gw-insurance-card" style="padding:24px;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);">
+              <div style="font-family:'Open Sans',sans-serif;font-weight:600;font-size:12px;letter-spacing:1.4px;text-transform:uppercase;color:#CBD5E1;margin-bottom:8px;">{stat.label}</div>
+              <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin-bottom:6px;">{stat.value}</div>
+              <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:13px;line-height:1.5;color:#CBD5E1;margin:0;">{stat.text}</p>
+            </div>
+      ))}
+    </div>
+
+    <div class="gw-cards3-grid">
+      {[
+        { title: 'Minder discussies, meer duidelijkheid', text: 'We leggen alles helder uit, geen verrassingen achteraf.' },
+        { title: 'Past bij kleine én groeiende teams', text: 'Eénmanszaak? Meerdere ploegen? We schalen je pakket mee met je bedrijf.' },
+        { title: 'Klaar voor echte werfrealiteit', text: "Van nutssleuven tot funderingen: we denken mee over risico's die typisch zijn voor grondwerk." },
+      ].map((card) => (
+        <div class="gw-insurance-card" style="padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 32px),calc(100% - 32px) 100%,0% 100%);">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;color:#FFFFFF;margin-bottom:10px;">{card.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#CBD5E1;margin:0;">{card.text}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: CASE CAROUSEL -->
+<CaseStudyCarousel client:visible cases={caseStudies} />
+
+<!-- SECTION 8: FAQ -->
+<FaqAccordion
+  client:visible
+  items={faqItems}
+  sectionLabel="Grondwerkersverzekeringen uitgelegd"
+  headline="In mensentaal"
+  subheadline="De vragen die grondwerkers het vaakst stellen, duidelijk beantwoord."
+/>
+
+<!-- SECTION 9: PROCESS -->
+<section style="background:#FFFFFF;padding:80px 0;">
+  <div class="gw-container">
+    <div style="text-align:center;margin-bottom:56px;">
+      <p class="gw-section-label" style="margin-bottom:16px;">Onze aanpak</p>
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,41px);line-height:1;color:#001F3F;margin:0 auto;max-width:720px;">
+        Onze aanpak: snel starten, slim verfijnen
+      </h2>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#001F3F;margin-top:16px;">
+        Je hoeft niet alles meteen perfect te weten. We begeleiden je stap voor stap.
+      </p>
+    </div>
+    <div class="gw-process-grid">
+      {[
+        { num: '01', title: 'Online scan (2 minuten)', text: 'Ben je voldoende beschermd? Doe de gratis scan en ontdek wat je grondwerk nodig heeft.' },
+        { num: '02', title: 'Risico-audit op maat', text: 'We checken je huidige polissen, je machinepark en je werfrealiteit grondig.' },
+        { num: '03', title: 'Voorstel met modules', text: 'Je krijgt een helder voorstel, afgestemd op je graafwerk, machines en aansprakelijkheid.' },
+        { num: '04', title: 'Afstemming & activatie', text: 'We leggen alles helder uit en zetten je dekking correct actief.' },
+      ].map((step) => (
+        <div style="position:relative;padding-top:56px;">
+          <span class="gw-step-number">{step.num}</span>
+          <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:18px;line-height:1.3;color:#001F3F;margin-bottom:10px;">{step.title}</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#001F3F;margin:0;">{step.text}</p>
+        </div>
+      ))}
+    </div>
+    <div style="max-width:480px;margin:0 auto;background:rgba(229,165,36,0.08);border:1px solid rgba(229,165,36,0.25);padding:32px 24px;text-align:center;clip-path:polygon(32px 0%,100% 0%,100% calc(100% - 32px),calc(100% - 32px) 100%,0% 100%,0% 32px);">
+      <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="opacity:0.4;margin-bottom:16px;display:block;margin-left:auto;margin-right:auto;"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>
+      <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:22px;color:#001F3F;margin-bottom:10px;">Geen gedoe. Wel controle.</h3>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#001F3F;margin:0;">Jij beslist. Wij zorgen dat je verzekering past bij jouw stiel.</p>
+    </div>
+  </div>
+</section>
+
+<div style="position:relative;z-index:10;height:0;pointer-events:none;">
+  <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);">
+    <BrandChevron color="white" height="80px" direction="down" />
+  </div>
+</div>
+<!-- SECTION 10: TUSSEN-CTA BAND -->
+<section style="background:#E9C466;padding:80px 0 80px;position:relative;overflow:hidden;">
+  <div class="assurman-mask assurman-mask--cta gw-cta-mask-img" style="position:absolute;top:0;right:-5px;width:380px;pointer-events:none;z-index:0;">
+    <img src="/images/sectoren/grondwerkers-cta.jpg" alt="Grondwerker rondt een werf af">
+  </div>
+  <div class="gw-container" style="text-align:center;position:relative;z-index:1;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">
+      Grondwerker in Vlaanderen?<br />Wij maken jouw pakket op maat.
+    </h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,2vw,22px);line-height:1.4;color:#3F5767;margin-bottom:32px;opacity:0.85;">
+      Start nu in 2 minuten of kies meteen voor advies.
+    </p>
+    <div class="gw-cta-btns">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">
+        {CTA_SCAN.requestNow}
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 11: TESTIMONIALS -->
+<section style="background:#F5F2FF;padding:80px 0;">
+  <div class="gw-container">
+    <div class="gw-testimonials-header">
+      <div style="display:flex;flex-direction:column;gap:28px;">
+        <div>
+          <p class="gw-section-label" style="margin-bottom:16px;">Klantenervaringen</p>
+          <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,41px);line-height:1;color:#001F3F;margin:0 0 16px;">Wat grondwerkers zeggen</h2>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#001F3F;margin:0;">
+            Ervaringen van klanten helpen je om met meer vertrouwen de juiste keuze te maken.
+          </p>
+        </div>
+        <div style="display:inline-flex;align-items:center;gap:16px;background:#FFFFFF;padding:18px 28px;box-shadow:0px 1px 2px rgba(0,0,0,0.05);align-self:flex-start;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 16px),calc(100% - 16px) 100%,0% 100%);">
+          <div style="display:flex;gap:4px;">
+            {[1,2,3,4,5].map(_ => <svg width="20" height="20" fill="#E5A524" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
+          </div>
+          <div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:#001F3F;line-height:1;">5/5</div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#001F3F;margin-top:4px;">op basis van klantfeedback</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#E5A524;padding:36px 32px;display:flex;flex-direction:column;gap:20px;clip-path:polygon(32px 0%,100% 0%,100% 100%,0% 100%,0% 32px);">
+        <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:24px;line-height:1.23;color:#001F3F;margin:0;">Sector Gecertificeerd</h3>
+        <div class="gw-cert-grid">
+          {['FSMA 0805.250.547', 'BZB-FEDAF'].map((badge) => (
+            <div style="background:#3F5767;padding:14px;display:flex;align-items:center;justify-content:center;">
+              <span style="font-family:'Open Sans',sans-serif;font-weight:700;font-size:12px;color:#FFFFFF;">{badge}</span>
+            </div>
+          ))}
+        </div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.5;color:rgba(40,25,0,0.8);margin:0;">
+          Als onafhankelijk makelaar werken we met alle maatschappijen om voor jou de beste voorwaarden te onderhandelen.
+        </p>
+      </div>
+    </div>
+
+    <div class="gw-testimonials-grid">
+      {[
+        { quote: 'Eindelijk een makelaar die snapt wat graafwerk inhoudt. Mijn machines en mijn aansprakelijkheid zitten nu goed.', name: 'Zaakvoerder, grondwerken (West-Vlaanderen)' },
+        { quote: 'De aanvraag ging vlot. Daarna hebben we het pakket echt afgestemd op mijn werven langs de openbare weg.', name: 'Grondwerker, Oost-Vlaanderen' },
+        { quote: 'Ik wou vooral zekerheid rond geraakte leidingen en mijn graafmachine. Alles helder uitgelegd, zonder gedoe.', name: 'Zelfstandig grondwerker' },
+      ].map((t) => (
+        <div class="gw-testimonial-card" style="padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);">
+          <div style="display:flex;gap:4px;margin-bottom:14px;">
+            {[1,2,3,4,5].map(_ => <svg width="16" height="16" fill="#E5A524" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
+          </div>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.55;color:#001F3F;margin-bottom:14px;font-style:italic;">"{t.quote}"</p>
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:#001F3F;margin:0;">{t.name}</p>
+        </div>
+      ))}
+    </div>
+
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:40px;">
+      {['Bouw-specialist', '100% op maat', 'Snel proces', 'Heldere voorwaarden'].map((badge) => (
+        <div class="gw-badge-pill">{badge}</div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section style="background:#F7F4EF;padding:56px 0;">
+  <div class="gw-container">
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;color:#7A6A55;text-align:center;letter-spacing:0.06em;text-transform:uppercase;margin-bottom:36px;">
+      Ondersteund door sterke verzekeringspartners
+    </p>
+    <PartnerSlider client:visible />
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section style="background:#3F5767;padding-top:96px;padding-bottom:0;position:relative;text-align:center;">
+  <div class="gw-container" style="position:relative;z-index:2;">
+    <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.5vw,48px);line-height:1.1;color:#FFFFFF;max-width:727px;margin:0 auto 20px;">
+      Ondernemen in de bouwsector zonder zorgen? Het kan!
+    </h2>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,2vw,22px);line-height:1.4;color:#CBD5E1;max-width:832px;margin:0 auto 40px;">
+      Start nu en doe je verzekeringen scan in 2 minuten of plan meteen een adviesgesprek met onze expert.
+    </p>
+    <div class="gw-final-btns">
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">
+        {CTA_SCAN.request}
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
+        {CTA_AFSPRAAK.advisory}
+      </a>
+    </div>
+    <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#CBD5E1;margin-bottom:64px;opacity:0.75;">
+      Geen verplichting. We helpen je kiezen wat écht nodig is.
+    </p>
+  </div>
+  <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;">
+    <polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" />
+  </svg>
+</section>
+
 </BaseLayout>

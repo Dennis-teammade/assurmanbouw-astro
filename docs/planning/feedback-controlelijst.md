@@ -303,3 +303,20 @@ Status pagina: **afgewerkt, op staging.** Enkel-product-pagina (standaard polis-
 | IP15 | Euro-scenario's in de **6 cases** zijn herkenbaar-fictieve illustraties; geen verzekeraarsnamen in de copy | Brand-voice-regel cases | Bevestig dat dit als illustratie volstaat. | 🔲 |
 
 Euro-bedragen in de 6 cases = herkenbaar-fictieve illustratie. Hero/band = echt beeld (`/images/verzekeringen/ipt-*`). Gespiegeld-consistent met de POZ-pagina (de tegenhanger). **Pensioencluster (8-11) volledig af; alle 18 databron-records nu live.**
+
+---
+
+## /sectoren/grondwerkers (Sectorpagina — sectorcluster 1/13)
+
+Status pagina: **afgewerkt, op staging** (met **placeholder-beelden** — echte foto's morgen). Gebouwd uit `briefs/sectoren/ruwbouw-cluster.md`, norm `sectorpaginas.md`, referentie `dakwerkers.astro`, prefix `gw-`. Polis-pakket: BA-onderneming, BA-10, ABR, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen. Build groen, 6 FAQ statisch + FAQPage-schema. Cases fictief-illustratief.
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| GW-1 | Fictieve cases + bedragen (€60.000 / €38.000 / €22.000 / €9.500) | Akkoord als illustratie? | 🔲 |
+| GW-2 | Polis-pakket: BA-onderneming, BA-10, ABR, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen | Pakket akkoord? | 🔲 |
+| GW-3 | BA-10 (tienjarige aansprakelijkheid) in het pakket | Terecht, of enkel bij funderings-/stabiliteitswerk? | 🔲 |
+| GW-4 | KLIP-formulering (FAQ 3): "wettelijke informatieplicht, planaanvraag via KLIP", geen termijn/cijfer | Akkoord met deze neutrale formulering? | 🔲 |
+| GW-5 | Geraakte leidingen / verzakking / schade aanpalend pand als "gedekt" gepresenteerd | Stellig houden of voorwaardelijker ("kan gedekt worden")? | 🔲 |
+| GW-FOTO | Placeholder-beelden (`/images/sectoren/grondwerkers-{hero,why,cta}.jpg` + `/images/cases/case-grondwerkers-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+
+Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
