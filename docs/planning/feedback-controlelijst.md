@@ -389,6 +389,24 @@ Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeho
 
 ---
 
+## /sectoren/zwembadinstallateurs (Sectorpagina — sectorcluster 13/13)
+
+Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/tuin-cluster.md`, prefix `zwb-`. Polis-pakket: BA-10, ABR, BA-onderneming, bedrijfsschade, rechtsbijstand, arbeidsongevallen. Build groen, 6 FAQ statisch + FAQPage-schema. Rode draad: tienjarige aansprakelijkheid op constructie + waterdichtheid (gebreken die zich laat tonen). **Tuin-cluster (10-13) compleet. Alle 13 sectorpagina's af.**
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| ZW-01 | Fictieve case scheur betonbad, €34.000, 2 jaar later → BA-10 | Valt waterdichtheids-/constructiegebrek bij zwembad onder tienjarige aansprakelijkheid? | 🔲 |
+| ZW-02 | Fictieve case lek technische ruimte (€12.500) → BA + bedrijfsschade | Akkoord als illustratie? | 🔲 |
+| ZW-03 | Fictieve case geschil waterdichtheid liner (€18.000) → rechtsbijstand | Bevestig dekking geschil waterdichtheid/afwerking (vrije advocaatkeuze). | 🔲 |
+| ZW-04 | Fictieve case storm beschadigt bad in aanbouw (€15.000) → ABR | Akkoord als illustratie? | 🔲 |
+| ZW-PAK | Polis-pakket: BA-10, ABR, BA-onderneming, **bedrijfsschade**, rechtsbijstand, arbeidsongevallen | Pakket akkoord? (brief: bedrijfsschade gekozen i.p.v. machinebreuk) | 🔲 |
+| ZW-BA10 | **BA-10-verplichting bij verbonden bouwwerk** — kwalitatief in FAQ | Is BA-10 verplicht voor zwembadwerken en onder welke voorwaarde (verbondenheid/stabiliteit)? | 🔲 |
+| ZW-FOTO | Placeholder-beelden (`/images/sectoren/zwembadinstallateurs-{hero,why,cta}.jpg` + `/images/cases/case-zwembadinstallateurs-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+
+Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
+
+---
+
 ## /sectoren/boomverzorgers (Sectorpagina — sectorcluster 12/13)
 
 Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd uit `briefs/sectoren/tuin-cluster.md`, prefix `bmv-`. Polis-pakket: BA-onderneming, arbeidsongevallen, gewaarborgd-inkomen, machinebreuk, bedrijfsvoertuigen, rechtsbijstand. Build groen, **7 FAQ** statisch + FAQPage-schema. Rode draad: hoogste fysieke risico (klimwerk) + schade door vallende takken → extra nadruk op mensen en inkomen.
