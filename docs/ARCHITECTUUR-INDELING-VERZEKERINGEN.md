@@ -13,7 +13,7 @@
 
 ---
 
-**Laatst bijgewerkt:** 2026-06-22
+**Laatst bijgewerkt:** 2026-06-23
 **Beheerd door:** Teammade
 **Project:** assurmanbouw.be
 **Definitieve indeling bevestigd door klant:** ❌ NEE — in afwachting van keuze A/B/C (zie §2)
@@ -266,6 +266,7 @@ correct in alle lijsten verschijnen.
 | Datum | Wijziging | Door |
 |---|---|---|
 | 2026-06-19 | Document aangemaakt. Werkindeling = optie B vastgelegd. 18 polissen + slugs + schema gedocumenteerd. Taxonomie nog niet klant-bevestigd. BA Onderneming/Uitbating open. | Teammade |
+| 2026-06-23 | Homepage verzekeringen-sectie omgebouwd naar **filterbare cards** (`index.astro`): filterbalk met 5 knoppen (Onze selectie · Aansprakelijkheid · Materieel · Mensen · Pensioen) gemapt op de optie-B-categorieën. Alle 18 polissen nu uit de databron (`verzekeringenPerCategorie`), niet langer hardcoded; default "Onze selectie" = 8 curated kaarten + overzichtskaart. Vanilla-JS toggle (geen island), alle kaarten statisch in HTML. Uniform 4-koloms grid; ingekorte home-titels + korte 1-zin home-kaartteksten (home-specifiek, ~2 regels) voor compacte uniforme cards; overzichtskaart altijd als laatste; iconen verbeterd (bouwhelm, auto, vlam). | Claude Code |
 | 2026-06-22 | Archiefpagina `/sectoren/` uitgebreid van 6 naar **alle 19 sectorkaarten**, gerubriceerd in de 4 clusters van het sectoren-mega-menu (Ruwbouw & infrastructuur, Afwerking & interieur, Technieken & installatie, Dak, tuin & buitenruimte) met sobere slate-categoriekoppen. Bestaande 6 kaarten ongewijzigd; 13 nieuwe met tags afgeleid uit het polis-pakket en beschrijving uit de hero-intro van elke sectorpagina. Kaart-component/styling onveranderd. Links genormaliseerd naar trailing slash. Kaarten blijven hardcoded in `index.astro` (geen `sectoren.ts`); gedeelde databron archief+mega-menu genoteerd als logische volgende stap. Build 101 pagina's groen. | Claude Code |
 | 2026-06-22 | Mega-menu herbouwd: hover-gestuurd mega-menu (desktop) + 2-niveau-accordeon (mobiel) op `Navigation.tsx`. Databron uitgebreid met `menuOmschrijving` (18 polissen) en `CATEGORIE_META` (icoon + subzin). Label `spullen-en-werk` gewijzigd "Je spullen & je werk" → "Materiaal & je werk". Categorie-iconen via lucide (shield-half=ShieldHalf, tools=Hammer, heart-handshake=HeartHandshake, pig-money=PiggyBank). Alle 18 polis-links + microbeschrijvingen statisch in HTML-bron (geen SEO-regressie). Sectoren-menu ongemoeid (19 items, aparte ronde). Build 101 pagina's groen. | Claude Code |
 | 2026-06-20 | STAP 3: databron geconsumeerd. 3 skeletons (vapz/poz/ipt). Helpers af (`verzekeringenPerCategorie`, `naarKaart`, `kaartenVoor`). Archief `/verzekeringen` herbouwd (4 rubrieken, lucide-iconen, badges vervallen). Mega-menu desktop + mobiel accordeon. 13 carousels omgeschakeld. 0 hardcoded lijsten over. Build 101 pagina's groen. | Claude Code |

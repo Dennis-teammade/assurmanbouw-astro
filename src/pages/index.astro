@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PartnerSlider from '../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../data/cta-labels';
+import { verzekeringenPerCategorie, verzekeringUrl } from '../data/verzekeringen';
 import BrandChevron from '../components/BrandChevron.astro';
 
 const schema = {
@@ -31,15 +32,73 @@ const SECTORS = [
   { label: 'Loodgieters', href: '/sectoren/loodgieters' },
 ];
 
-const INSURANCES = [
-  { title: 'BA Onderneming', text: 'Bescherming bij schade aan derden tijdens jouw werkzaamheden.', href: '/verzekeringen/ba-onderneming/', iconPath: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' },
-  { title: 'Arbeidsongevallen', text: 'Verplichte dekking voor jouw personeel bij werkgerelateerde ongevallen.', href: '/verzekeringen/arbeidsongevallen/', iconPath: 'M2 20h20M6 20V10l6-6 6 6v10M10 20v-5a2 2 0 0 1 4 0v5' },
-  { title: 'Bedrijfsvoertuigen', text: 'BA en omnium voor bestelwagens, vrachtwagens en werktuigen.', href: '/verzekeringen/bedrijfsvoertuigen/', iconPath: 'M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v5M16 17H8M12 17v4M17 21v-4' },
-  { title: 'Machinebreuk', text: 'Dekt schade aan jouw materieel en machines op de werf.', href: '/verzekeringen/machinebreuk', iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z' },
-  { title: 'BA-10', text: 'Tienjarige aansprakelijkheid voor aannemers en architecten.', href: '/verzekeringen/ba-10/', iconPath: 'M3 21h18M9 21V7l3-4 3 4v14M3 21V11l6-4M21 21V11l-6-4' },
-  { title: 'Rechtsbijstand', text: 'Juridische steun bij conflicten met klanten, leveranciers of overheid.', href: '/verzekeringen/rechtsbijstand', iconPath: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10zM9 12l2 2 4-4' },
-  { title: "Alle Bouwplaats Risico's", text: "Allesomvattende dekking voor schade aan werken in uitvoering.", href: '/verzekeringen/alle-bouwplaats-risicos/', iconPath: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5' },
+// Alle 18 polissen uit de centrale databron, in CATEGORIE_VOLGORDE.
+const verzGroepen = verzekeringenPerCategorie();
+const alleVerz = verzGroepen.flatMap((g) => g.items);
+
+// "Onze selectie" = curated home-set (Maaike), in deze exacte volgorde.
+// Slugs geverifieerd tegen src/data/verzekeringen.ts (BA-10 = 'ba-10').
+const HOME_SELECTIE = [
+  'ba-onderneming',
+  'ba-10',
+  'alle-bouwplaats-risicos',
+  'machinebreuk',
+  'brandverzekering',
+  'bedrijfsvoertuigen',
+  'arbeidsongevallen',
+  'rechtsbijstand',
 ];
+
+// Ingekorte home-titels (1 lijn). Enkel hier; databron-titels blijven ongewijzigd
+// (die gebruikt het mega-menu/archief). Slug niet in de map = databron-titel.
+const HOME_TITEL: Record<string, string> = {
+  'ba-10': 'BA-10',
+  'alle-bouwplaats-risicos': 'ABR',
+  'bedrijfsschade': 'Bedrijfsschade',
+  'vervoerde-goederen': 'Vervoerde goederen',
+};
+
+// Korte home-kaarttekst (1 zin, ~2 regels), in de stijl van het oorspronkelijke
+// home-voorbeeld. Home-specifiek; de databron-`korteBeschrijving` (kaartlengte)
+// blijft voor de detail-/archiefpagina's. Geen em-dashes, je/jij, geen cijfers.
+const HOME_TEKST: Record<string, string> = {
+  'ba-onderneming': 'Bescherming bij schade aan derden tijdens jouw werkzaamheden.',
+  'ba-10': 'Tienjarige aansprakelijkheid voor stabiliteit en soliditeit bij woningbouw.',
+  'alle-bouwplaats-risicos': 'Allesomvattende dekking voor schade aan werken in uitvoering.',
+  'ba-bestuurder': 'Beschermt je privévermogen bij bestuursfouten en aansprakelijkheid.',
+  'rechtsbijstand': 'Juridische steun bij conflicten met klanten, leveranciers of overheid.',
+  'brandverzekering': 'Dekt je gebouw, machines en stock tegen brand, storm en water.',
+  'machinebreuk': 'Dekt schade aan jouw materieel en machines op de werf.',
+  'bedrijfsschade': 'Vangt je omzetverlies op wanneer je zaak stilligt na schade.',
+  'vervoerde-goederen': 'Beschermt je materiaal en gereedschap tegen diefstal en schade onderweg.',
+  'bedrijfsvoertuigen': 'BA en omnium voor bestelwagens, vrachtwagens en werktuigen.',
+  'arbeidsongevallen': 'Verplichte dekking voor jouw personeel bij werkgerelateerde ongevallen.',
+  'gewaarborgd-inkomen': 'Een maandelijks vervangingsinkomen bij ziekte of ongeval.',
+  'bescherming-bedrijfsleider': 'Kapitaal voor je vennootschap bij uitval van een sleutelfiguur.',
+  'groepsverzekering': 'Fiscaalvriendelijk aanvullend pensioen opbouwen voor je personeel.',
+  'aanvullend-pensioen': 'Ontdek welke pensioenformule past bij jou als zelfstandige of werkgever.',
+  'vapz': 'De voordelige basisformule voor elke zelfstandige in hoofdberoep.',
+  'poz': 'Aanvullend pensioen voor zelfstandigen zonder vennootschap.',
+  'ipt': 'Aanvullend pensioen via je vennootschap als bedrijfsleider.',
+};
+
+// Polis-icoon-key (databron `icoon`) → SVG-path, zodat de kaarten statisch
+// blijven (geen React-island). Zelfde iconen-set als de carousels (ICON_MAP).
+const ICON_PATHS: Record<string, string> = {
+  shield: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z',
+  building2: 'M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18ZM6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2M10 6h4M10 10h4M10 14h4M10 18h4',
+  layers: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5',
+  'check-circle': 'M22 11.08V12a10 10 0 1 1-5.93-9.14M22 4 12 14.01l-3-3',
+  scale: 'm16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1zM2 16l3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1zM7 21h10M12 3v18M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2',
+  flame: 'M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z',
+  wrench: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z',
+  truck: 'M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2M15 18H9M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.624l-3.48-4.35A1 1 0 0 0 17.52 8H14M7 18a2 2 0 1 0 4 0 2 2 0 1 0-4 0zM17 18a2 2 0 1 0 4 0 2 2 0 1 0-4 0z',
+  car: 'M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2m14 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0m-9 0a2 2 0 1 0-4 0m4 0a2 2 0 1 1-4 0',
+  hardhat: 'M2 18a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1zM10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5M4 15v-3a6 6 0 0 1 6-6M14 6a6 6 0 0 1 6 6v3',
+  heart: 'M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z',
+  users: 'M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75',
+  'piggy-bank': 'M11 17h3v2a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-3a3.16 3.16 0 0 0 2-2h1a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1h-1a5 5 0 0 0-2-3V3a4 4 0 0 0-3.2 1.6l-.3.4H11a6 6 0 0 0-6 6v1a5 5 0 0 0 2 4v3a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1zM16 10h.01M2 8v1a2 2 0 0 0 2 2h1',
+};
 
 const WHY_ITEMS = [
   { title: 'Correct verzekerd', text: 'Geen standaard polissen. We analyseren jouw activiteit en kiezen dekking die past bij jouw beroep.', iconPath: 'M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z' },
@@ -65,8 +124,19 @@ const STEPS = [
 
 <style>
   .home-hero-img { position: absolute; top: 5%; right: -5px; height: 85%; width: auto; max-width: 48%; z-index: 1; pointer-events: none; }
-  .home-ins-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 16px; }
+  .home-ins-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .ins-card[hidden] { display: none; }
   .home-ins-row2 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+  /* Filterbalk verzekeringen-sectie (compact, op donkere slate-achtergrond) */
+  .ins-filterbar { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-bottom: 24px; }
+  .ins-filter { font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 14px; color: #CBD5E1; background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.16); border-radius: 8px; padding: 9px 18px; cursor: pointer; white-space: nowrap; transition: background .15s, color .15s, border-color .15s; }
+  .ins-filter:hover { border-color: #E9C466; color: #FFFFFF; }
+  .ins-filter.is-active { background: #E9C466; color: #001F3F; border-color: #E9C466; }
+  .ins-filter:focus-visible { outline: 2px solid #E9C466; outline-offset: 2px; }
+  @media (max-width: 640px) {
+    .ins-filterbar { flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start; -webkit-overflow-scrolling: touch; padding-bottom: 4px; }
+  }
   .home-why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
   .home-scan-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
   .home-steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; margin-bottom: 64px; }
@@ -223,47 +293,85 @@ const STEPS = [
       </p>
     </div>
 
-    <div class="home-ins-grid">
-      {INSURANCES.slice(0, 4).map((ins) => (
-        <a href={ins.href} class="ins-card">
-          <div style="margin-bottom:16px;">
-            <svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d={ins.iconPath} />
-            </svg>
-          </div>
-          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;color:#FFFFFF;margin-bottom:8px;line-height:1.2;">{ins.title}</h3>
-          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;color:#94A3B8;line-height:1.6;margin-bottom:20px;">{ins.text}</p>
-          <span style="display:inline-flex;align-items:center;gap:6px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:13px;color:#E5A524;">
-            Meer info
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </span>
-        </a>
-      ))}
+    <!-- Filterbalk (vervangt de losse cluster-knoppen) -->
+    <div class="ins-filterbar" role="group" aria-label="Filter verzekeringen op categorie">
+      <button type="button" class="ins-filter is-active" data-filter="selectie" aria-pressed="true">Onze selectie</button>
+      <button type="button" class="ins-filter" data-filter="aansprakelijkheid" aria-pressed="false">Aansprakelijkheid</button>
+      <button type="button" class="ins-filter" data-filter="spullen-en-werk" aria-pressed="false">Materieel</button>
+      <button type="button" class="ins-filter" data-filter="jij-en-je-mensen" aria-pressed="false">Mensen</button>
+      <button type="button" class="ins-filter" data-filter="pensioen-en-fiscaal" aria-pressed="false">Pensioen</button>
     </div>
 
-    <div class="home-ins-row2">
-      {INSURANCES.slice(4).map((ins) => (
-        <a href={ins.href} class="ins-card">
-          <div style="margin-bottom:16px;">
-            <svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
-              <path d={ins.iconPath} />
-            </svg>
-          </div>
-          <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;color:#FFFFFF;margin-bottom:8px;line-height:1.2;">{ins.title}</h3>
-          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;color:#94A3B8;line-height:1.6;margin-bottom:20px;">{ins.text}</p>
-          <span style="display:inline-flex;align-items:center;gap:6px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:13px;color:#E5A524;">
-            Meer info
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </span>
-        </a>
-      ))}
-      <div style="display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:32px;">
-        <a href="/verzekeringen" style="display:inline-flex;align-items:center;gap:10px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:16px;color:#E5A524;text-decoration:none;border-bottom:2px solid rgba(229,165,36,0.4);padding-bottom:4px;">
+    <div id="ins-grid" class="home-ins-grid">
+      {alleVerz.map((v) => {
+        const selIdx = HOME_SELECTIE.indexOf(v.slug);
+        const isSel = selIdx !== -1;
+        return (
+          <a
+            href={verzekeringUrl(v.slug)}
+            class="ins-card"
+            data-cat={v.categorie}
+            data-selectie={isSel ? '1' : undefined}
+            data-sel-order={isSel ? String(selIdx + 1) : undefined}
+            hidden={!isSel}
+            style={isSel ? `order:${selIdx + 1}` : undefined}
+          >
+            <div style="margin-bottom:16px;">
+              <svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                <path d={ICON_PATHS[v.icoon] ?? ICON_PATHS.shield} />
+              </svg>
+            </div>
+            <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;color:#FFFFFF;margin-bottom:8px;line-height:1.2;">{HOME_TITEL[v.slug] ?? v.titel}</h3>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;color:#94A3B8;line-height:1.6;margin-bottom:20px;">{HOME_TEKST[v.slug] ?? v.korteBeschrijving}</p>
+            <span style="display:inline-flex;align-items:center;gap:6px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:13px;color:#E5A524;">
+              Meer info
+              <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </span>
+          </a>
+        );
+      })}
+      <!-- Overzichtskaart: altijd zichtbaar, altijd laatste -->
+      <div data-overzicht style="order:99;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;padding:32px;">
+        <a href="/verzekeringen/" style="display:inline-flex;align-items:center;gap:10px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:16px;color:#E5A524;text-decoration:none;border-bottom:2px solid rgba(229,165,36,0.4);padding-bottom:4px;">
           Bekijk alle verzekeringen
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
       </div>
     </div>
+
+    <script is:inline>
+      (function () {
+        var grid = document.getElementById('ins-grid');
+        if (!grid) return;
+        var bar = document.querySelector('.ins-filterbar');
+        var buttons = Array.prototype.slice.call(bar.querySelectorAll('.ins-filter'));
+        var polis = Array.prototype.slice.call(grid.querySelectorAll('.ins-card[data-cat]'));
+        var overzicht = grid.querySelector('[data-overzicht]');
+        function apply(filter) {
+          buttons.forEach(function (b) {
+            var on = b.getAttribute('data-filter') === filter;
+            b.classList.toggle('is-active', on);
+            b.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+          polis.forEach(function (c) {
+            var show;
+            if (filter === 'selectie') {
+              show = c.hasAttribute('data-selectie');
+              c.style.order = show ? (c.getAttribute('data-sel-order') || '') : '';
+            } else {
+              show = c.getAttribute('data-cat') === filter;
+              c.style.order = '';
+            }
+            c.hidden = !show;
+          });
+          if (overzicht) overzicht.style.order = '99';
+        }
+        buttons.forEach(function (b) {
+          b.addEventListener('click', function () { apply(b.getAttribute('data-filter')); });
+        });
+        apply('selectie');
+      })();
+    </script>
   </div>
 </section>
 
