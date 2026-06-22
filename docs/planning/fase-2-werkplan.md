@@ -247,9 +247,29 @@ overlijdensdekking-beslissing na concurrentie-check, JSON-LD structured-data aud
    plafonneur, domotica, sanitair): samenvoegen of apart? Beslissen tijdens de research
    — dan zie je of het beroep genoeg eigen verhaal heeft. Bepaalt of ze in een latere
    scaffolding-ronde een eigen URL krijgen.
-2. **Overlijdensdekking:** samen met bescherming bedrijfsleider of apart? Na
-   concurrentie-check.
-3. **BA Uitbating en Brandverzekering:** eerst verifiëren of die al live staan voor we
+2. ~~**Overlijdensdekking:** samen met bescherming bedrijfsleider of apart?~~
+   **BESLIST (2026-06-23, na concurrentie-check): samenvoegen, geen aparte business-pagina.**
+   - *Opties:* (a) aparte `/verzekeringen/overlijdensdekking`-pagina; (b) opnemen als
+     waarborg binnen Bescherming bedrijfsleider (+ pensioenpolissen).
+   - *Motivatie:* de zakelijke/keyman-overlijdensdekking (vennootschap = begunstigde) is
+     al de kern van **Bescherming bedrijfsleider**; een aparte pagina dupliceert dat en
+     geeft dunne content. De concurrentie-check (Wikifin, Assuralia, FSMA) bevestigt dat
+     "overlijdensverzekering" in BE een koepel-/waarborgbegrip is met meerdere vormen
+     (pensioen, schuldsaldo, keyman), geen losstaand productpagina-item. De `overlijdens-
+     dekking.astro`-skeleton blijft geparkeerd. Een **aparte pagina is enkel later zinvol
+     voor de persoonlijke gezins-overlijdensdekking** (partner/kinderen = begunstigde), een
+     ander product, zoals de brief `bescherming-bedrijfsleider.md` al voorzag.
+3. ~~**Omzetverzekering:** aparte pagina?~~ **BESLIST (2026-06-23): niet als aparte
+   pagina; opgenomen als FAQ op Gewaarborgd inkomen.**
+   - *Opties:* (a) eigen pagina; (b) sub-onderdeel/FAQ van Gewaarborgd inkomen of
+     Bedrijfsschade; (c) parkeren.
+   - *Motivatie:* zelfde trigger als gewaarborgd inkomen (uitval van de zaakvoerder door
+     ziekte/ongeval), maar gericht op de vaste kosten van de vennootschap i.p.v. het
+     persoonlijke inkomen. Te dun voor een eigen pagina nu; daarom een **dedicated FAQ op
+     `gewaarborgd-inkomen.astro`** ("Wat is een omzetverzekering en heb ik die ook nodig?")
+     plus de bestaande kruislink vanuit Bedrijfsschade. Skeleton `omzetverzekering.astro`
+     blijft geparkeerd; eigen pagina pas bij aangetoonde zoekvraag.
+4. **BA Uitbating en Brandverzekering:** eerst verifiëren of die al live staan voor we
    ze scaffolden.
 
 ---
