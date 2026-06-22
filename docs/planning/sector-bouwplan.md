@@ -157,7 +157,7 @@ alles hieronder staat kwalitatief of als controlepunt.
 | FYT | Fytolicentie (gewasbescherming) | hoveniers | 🔲 |
 | ETW | ETW / European Tree Worker-certificaat | boomverzorgers | 🔲 |
 | BA10 | Reikwijdte tienjarige aansprakelijkheid (ba-10) | zwembad / chappers / grondwerk | 🔲 |
-| FOTO | Echte foto's geplaatst i.p.v. placeholder | alle 13 | 🔲 |
+| FOTO | Echte foto's geplaatst i.p.v. placeholder | alle 13 | ✅ (2026-06-22) |
 
 ---
 

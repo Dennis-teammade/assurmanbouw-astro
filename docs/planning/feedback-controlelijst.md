@@ -317,7 +317,7 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden** — echte 
 | GW-3 | BA-10 (tienjarige aansprakelijkheid) in het pakket | Terecht, of enkel bij funderings-/stabiliteitswerk? | 🔲 |
 | GW-4 | KLIP-formulering (FAQ 3): "wettelijke informatieplicht, planaanvraag via KLIP", geen termijn/cijfer | Akkoord met deze neutrale formulering? | 🔲 |
 | GW-5 | Geraakte leidingen / verzakking / schade aanpalend pand als "gedekt" gepresenteerd | Stellig houden of voorwaardelijker ("kan gedekt worden")? | 🔲 |
-| GW-FOTO | Placeholder-beelden (`/images/sectoren/grondwerkers-{hero,why,cta}.jpg` + `/images/cases/case-grondwerkers-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+| GW-FOTO | Placeholder-beelden (`/images/sectoren/grondwerkers-{hero,why,cta}.jpg` + `/images/cases/case-grondwerkers-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
 
@@ -333,7 +333,7 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | BS-2 | Polis-pakket: BA-onderneming, ABR, machinebreuk, bedrijfsvoertuigen, rechtsbijstand, arbeidsongevallen | Pakket akkoord? | 🔲 |
 | BS-3 | "Materiaal- en werfdekking" voor klinkers/kasseien op de werf | Dekt het pakket dit voldoende, of `vervoerde-goederen`/materiaalmodule expliciet toevoegen? | 🔲 |
 | BS-4 | Rechtsbijstand sterk benadrukt voor afwatering-/verzakkingsgeschillen | Akkoord met die framing? | 🔲 |
-| BS-FOTO | Placeholder-beelden (`/images/sectoren/bestraters-{hero,why,cta}.jpg` + `/images/cases/case-bestraters-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+| BS-FOTO | Placeholder-beelden (`/images/sectoren/bestraters-{hero,why,cta}.jpg` + `/images/cases/case-bestraters-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
 
@@ -349,7 +349,7 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | AS-2 | Polis-pakket: BA-onderneming, ABR, machinebreuk, bedrijfsvoertuigen, rechtsbijstand, arbeidsongevallen | Pakket akkoord? | 🔲 |
 | AS-3 | Schade aan wegmeubilair / boordstenen / nutsput als "gedekt" gepresenteerd | Stellig houden of voorwaardelijker? | 🔲 |
 | AS-4 | Asfalteermachine: dekking via machinebreuk als hoofdblok (vs. ingeschreven voertuig) | Klopt die aanname? | 🔲 |
-| AS-FOTO | Placeholder-beelden (`/images/sectoren/asfalteerders-{hero,why,cta}.jpg` + `/images/cases/case-asfalteerders-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+| AS-FOTO | Placeholder-beelden (`/images/sectoren/asfalteerders-{hero,why,cta}.jpg` + `/images/cases/case-asfalteerders-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
 
@@ -366,7 +366,7 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | ST-03 | Fictieve case kleurverschil gevelpleister (€11.000) → rechtsbijstand | Akkoord; uitkleuring minerale pleister hangt af van droogcondities? | 🔲 |
 | ST-04 | Fictieve case loslatend pleisterwerk badkamer (€7.800) → rechtsbijstand + BA | Akkoord; vochtbron in ondergrond verifiëren vóór toewijzing? | 🔲 |
 | ST-PAK | Polis-pakket: BA-onderneming, rechtsbijstand, ABR, bedrijfsvoertuigen, arbeidsongevallen, vervoerde-goederen | Pakket akkoord? | 🔲 |
-| ST-FOTO | Placeholder-beelden (`/images/sectoren/stukadoors-{hero,why,cta}.jpg` + `/images/cases/case-stukadoors-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+| ST-FOTO | Placeholder-beelden (`/images/sectoren/stukadoors-{hero,why,cta}.jpg` + `/images/cases/case-stukadoors-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
 
@@ -383,7 +383,7 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | VL-03 | Fictieve case breuk grootformaat bij transport (€9.000) → vervoerde-goederen | Akkoord; materiaalwaarde verzekerd tijdens vervoer naar de werf? | 🔲 |
 | VL-04 | Fictieve case beschadigde natuursteenplaat bij plaatsing (€7.500) → ABR/werfdekking | Akkoord; schade aan materiaal in uitvoering op de werf? | 🔲 |
 | VL-PAK | Polis-pakket: BA-onderneming, rechtsbijstand, vervoerde-goederen, bedrijfsvoertuigen, arbeidsongevallen, ABR | Pakket akkoord? | 🔲 |
-| VL-FOTO | Placeholder-beelden (`/images/sectoren/vloerders-tegelzetters-{hero,why,cta}.jpg` + `/images/cases/case-vloerders-tegelzetters-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+| VL-FOTO | Placeholder-beelden (`/images/sectoren/vloerders-tegelzetters-{hero,why,cta}.jpg` + `/images/cases/case-vloerders-tegelzetters-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
 
@@ -401,7 +401,7 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | ZW-04 | Fictieve case storm beschadigt bad in aanbouw (€15.000) → ABR | Akkoord als illustratie? | 🔲 |
 | ZW-PAK | Polis-pakket: BA-10, ABR, BA-onderneming, **bedrijfsschade**, rechtsbijstand, arbeidsongevallen | Pakket akkoord? (brief: bedrijfsschade gekozen i.p.v. machinebreuk) | 🔲 |
 | ZW-BA10 | **BA-10-verplichting bij verbonden bouwwerk** — kwalitatief in FAQ | Is BA-10 verplicht voor zwembadwerken en onder welke voorwaarde (verbondenheid/stabiliteit)? | 🔲 |
-| ZW-FOTO | Placeholder-beelden (`/images/sectoren/zwembadinstallateurs-{hero,why,cta}.jpg` + `/images/cases/case-zwembadinstallateurs-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+| ZW-FOTO | Placeholder-beelden (`/images/sectoren/zwembadinstallateurs-{hero,why,cta}.jpg` + `/images/cases/case-zwembadinstallateurs-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
 
@@ -419,7 +419,7 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | BV-04 | Fictieve case versnipperaar defect + kettingzaag gestolen (€6.300) → machinebreuk | Akkoord als illustratie? | 🔲 |
 | BV-PAK | Polis-pakket: BA-onderneming, arbeidsongevallen, gewaarborgd-inkomen, machinebreuk, bedrijfsvoertuigen, rechtsbijstand | Pakket akkoord (gewaarborgd-inkomen als kernblok)? | 🔲 |
 | BV-ETW | ETW (European Tree Worker)-certificaat — kwalitatief in FAQ, geen harde claim in copy | Speelt ETW mee in risicobeoordeling/premie en hoe formuleren? | 🔲 |
-| BV-FOTO | Placeholder-beelden (`/images/sectoren/boomverzorgers-{hero,why,cta}.jpg` + `/images/cases/case-boomverzorgers-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+| BV-FOTO | Placeholder-beelden (`/images/sectoren/boomverzorgers-{hero,why,cta}.jpg` + `/images/cases/case-boomverzorgers-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
 
@@ -437,7 +437,7 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | HO-04 | Fictieve case snoeischade haag buur (€2.700) → BA-onderneming | Akkoord als illustratie? | 🔲 |
 | HO-PAK | Polis-pakket: BA-onderneming, bedrijfsvoertuigen, machinebreuk, arbeidsongevallen, rechtsbijstand, vervoerde-goederen | Pakket akkoord? | 🔲 |
 | HO-FYT | Fytolicentie (gewasbescherming) — kwalitatief in FAQ, geen harde claim in copy | Geldt de fytolicentie-verplichting en hoe verwoorden we dit correct? | 🔲 |
-| HO-FOTO | Placeholder-beelden (`/images/sectoren/hoveniers-{hero,why,cta}.jpg` + `/images/cases/case-hoveniers-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+| HO-FOTO | Placeholder-beelden (`/images/sectoren/hoveniers-{hero,why,cta}.jpg` + `/images/cases/case-hoveniers-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
 
@@ -454,7 +454,7 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | TA-03 | Fictieve case defecte minigraver (€7.000) → machinebreuk | Akkoord als illustratie? | 🔲 |
 | TA-04 | Fictieve case storm beschadigt klinkers/beplanting (€11.000) → ABR | Akkoord; schade aan werk in uitvoering + materiaal op werf? | 🔲 |
 | TA-PAK | Polis-pakket: BA-onderneming, ABR, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen, rechtsbijstand | Pakket akkoord? | 🔲 |
-| TA-FOTO | Placeholder-beelden (`/images/sectoren/tuinaannemers-{hero,why,cta}.jpg` + `/images/cases/case-tuinaannemers-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+| TA-FOTO | Placeholder-beelden (`/images/sectoren/tuinaannemers-{hero,why,cta}.jpg` + `/images/cases/case-tuinaannemers-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
 
@@ -472,7 +472,7 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | HV-04 | Fictieve case dure warmtepomp beschadigd bij transport (€8.900) → vervoerde-goederen | Akkoord als illustratie? | 🔲 |
 | HV-PAK | Polis-pakket: BA-onderneming, vervoerde-goederen, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen, rechtsbijstand | Pakket akkoord? | 🔲 |
 | HV-FGAS | F-gassencertificaat (EU 517/2014) + erkenning koeltechnicus — kwalitatief in FAQ, geen artikelnummers in copy | Bevestig actuele formulering. | 🔲 |
-| HV-FOTO | Placeholder-beelden (`/images/sectoren/koeltechniek-hvac-{hero,why,cta}.jpg` + `/images/cases/case-koeltechniek-hvac-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+| HV-FOTO | Placeholder-beelden (`/images/sectoren/koeltechniek-hvac-{hero,why,cta}.jpg` + `/images/cases/case-koeltechniek-hvac-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
 
@@ -492,7 +492,7 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | ZP-BA10 | **BA-10 (tienjarige aansprakelijkheid) als eerste blok** ("verplicht bij werken aan woningen", Wet Peeters-Borsus) | Bevestig reikwijdte BA-10 voor PV-werk dat structuur/waterdichtheid raakt; geen artikelnummers in copy. | 🔲 |
 | ZP-RES | RESCert-installateur (drempel 5 kWc / datum 1-1-2026) — kwalitatief in FAQ, geen harde cijfers in copy | Bevestig exacte drempel/datum vóór hard in copy. | 🔲 |
 | ZP-AREI | AREI-keuring vóór ingebruikname — kwalitatief in FAQ | Bevestig actuele formulering. | 🔲 |
-| ZP-FOTO | Placeholder-beelden (`/images/sectoren/zonnepanelen-installateurs-{hero,why,cta}.jpg` + `/images/cases/case-zonnepanelen-installateurs-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+| ZP-FOTO | Placeholder-beelden (`/images/sectoren/zonnepanelen-installateurs-{hero,why,cta}.jpg` + `/images/cases/case-zonnepanelen-installateurs-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
 
@@ -509,7 +509,7 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | PA-03 | Fictieve case geschil over lak-/schuurresultaat (€8.500) → rechtsbijstand | Akkoord; glansgraad/strepen technisch laten beoordelen? | 🔲 |
 | PA-04 | Fictieve case defecte schuurmachine (€5.500) → machinebreuk | Akkoord; intern defect eigen materieel + stilstandrisico? | 🔲 |
 | PA-PAK | Polis-pakket: BA-onderneming, rechtsbijstand, vervoerde-goederen, machinebreuk, bedrijfsvoertuigen, arbeidsongevallen | Pakket akkoord? | 🔲 |
-| PA-FOTO | Placeholder-beelden (`/images/sectoren/parketzetters-{hero,why,cta}.jpg` + `/images/cases/case-parketzetters-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+| PA-FOTO | Placeholder-beelden (`/images/sectoren/parketzetters-{hero,why,cta}.jpg` + `/images/cases/case-parketzetters-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
 
@@ -526,6 +526,6 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | CH-03 | Fictieve case te vroeg belaste chape scheurt (€13.000) → rechtsbijstand | Akkoord; belasting door derden vóór uitharding documenteren? | 🔲 |
 | CH-04 | Fictieve case defecte chapepomp (€8.000) → machinebreuk | Akkoord als illustratie? | 🔲 |
 | CH-BA10 | **BA-10 (tienjarige aansprakelijkheid) in het kernpakket** (enige afwerkingsberoep met BA-10) | Akkoord dat chape onder de tienjarige valt (structureel deel vloeropbouw, vloerverwarming)? | 🔲 |
-| CH-FOTO | Placeholder-beelden (`/images/sectoren/chappers-{hero,why,cta}.jpg` + `/images/cases/case-chappers-1..4.jpg`) | Echte foto's plaatsen (1-op-1 overschrijven). | 🔲 |
+| CH-FOTO | Placeholder-beelden (`/images/sectoren/chappers-{hero,why,cta}.jpg` + `/images/cases/case-chappers-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.

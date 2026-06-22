@@ -1,0 +1,149 @@
+<div style="font-family: 'Outfit', system-ui, sans-serif; background: #FBF8FF; padding: 1rem 0;">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<div style="max-width: 360px; margin: 0 auto; background: #FFFFFF; border: 1px solid #E8E4F0; border-radius: 14px; overflow: hidden; box-shadow: 0 16px 36px -14px rgba(63,87,103,0.28);">
+
+  <div style="padding: 13px 16px; border-bottom: 1px solid #F0EDF6; display:flex; align-items:center; justify-content:space-between;">
+    <span style="font-size: 15px; font-weight: 700; color: #3F5767;">Verzekeringen</span>
+    <i class="ti ti-x" style="font-size: 19px; color: #9BA1AC;" aria-hidden="true"></i>
+  </div>
+
+  <div class="macc">
+
+    <div class="macc-cat">
+      <button class="macc-head" data-cat="aansprakelijkheid">
+        <span class="macc-ico"><i class="ti ti-shield-half" aria-hidden="true"></i></span>
+        <span class="macc-txt">
+          <span class="macc-title">Aansprakelijkheid</span>
+          <span class="macc-count">5 verzekeringen</span>
+        </span>
+        <i class="ti ti-chevron-down macc-chev" aria-hidden="true"></i>
+      </button>
+      <div class="macc-body">
+        <a href="#" class="macc-link">BA Onderneming</a>
+        <a href="#" class="macc-link">Tienjarige aansprakelijkheid (BA-10)</a>
+        <a href="#" class="macc-link">Alle Bouwplaatsrisico's (ABR)</a>
+        <a href="#" class="macc-link">BA Bestuurder</a>
+        <a href="#" class="macc-link">Rechtsbijstand</a>
+      </div>
+    </div>
+
+    <div class="macc-cat">
+      <button class="macc-head" data-cat="materiaal">
+        <span class="macc-ico"><i class="ti ti-tools" aria-hidden="true"></i></span>
+        <span class="macc-txt">
+          <span class="macc-title">Materiaal &amp; je werk</span>
+          <span class="macc-count">5 verzekeringen</span>
+        </span>
+        <i class="ti ti-chevron-down macc-chev" aria-hidden="true"></i>
+      </button>
+      <div class="macc-body">
+        <a href="#" class="macc-link">Brandverzekering</a>
+        <a href="#" class="macc-link">Machinebreuk</a>
+        <a href="#" class="macc-link">Bedrijfsschadeverzekering</a>
+        <a href="#" class="macc-link">Verzekering vervoerde goederen</a>
+        <a href="#" class="macc-link">Bedrijfsvoertuigen</a>
+      </div>
+    </div>
+
+    <div class="macc-cat">
+      <button class="macc-head" data-cat="mensen">
+        <span class="macc-ico"><i class="ti ti-heart-handshake" aria-hidden="true"></i></span>
+        <span class="macc-txt">
+          <span class="macc-title">Jij &amp; je mensen</span>
+          <span class="macc-count">3 verzekeringen</span>
+        </span>
+        <i class="ti ti-chevron-down macc-chev" aria-hidden="true"></i>
+      </button>
+      <div class="macc-body">
+        <a href="#" class="macc-link">Arbeidsongevallen</a>
+        <a href="#" class="macc-link">Gewaarborgd inkomen</a>
+        <a href="#" class="macc-link">Bescherming bedrijfsleider</a>
+      </div>
+    </div>
+
+    <div class="macc-cat">
+      <button class="macc-head" data-cat="pensioen">
+        <span class="macc-ico"><i class="ti ti-pig-money" aria-hidden="true"></i></span>
+        <span class="macc-txt">
+          <span class="macc-title">Pensioen &amp; fiscaal</span>
+          <span class="macc-count">5 verzekeringen</span>
+        </span>
+        <i class="ti ti-chevron-down macc-chev" aria-hidden="true"></i>
+      </button>
+      <div class="macc-body">
+        <a href="#" class="macc-link">Groepsverzekering</a>
+        <a href="#" class="macc-link">Aanvullend pensioen</a>
+        <a href="#" class="macc-link">VAPZ</a>
+        <a href="#" class="macc-link">POZ</a>
+        <a href="#" class="macc-link">IPT</a>
+      </div>
+    </div>
+
+  </div>
+
+  <a href="#" style="display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: #F9F5EC; border-top: 1px solid #F0E6CC; text-decoration: none;">
+    <span style="font-size: 12.5px; font-weight: 600; color: #3F5767;">Bekijk alle verzekeringen</span>
+    <i class="ti ti-arrow-right" style="font-size: 15px; color: #B89230;" aria-hidden="true"></i>
+  </a>
+
+</div>
+
+<div style="max-width:360px; margin: 10px auto 0; text-align:center; font-size:11px; color:#9BA1AC;">Tik op een categorie om de verzekeringen te tonen</div>
+</div>
+
+<style>
+.macc-cat { border-bottom: 1px solid #F4F1FA; }
+.macc-cat:last-child { border-bottom: none; }
+.macc-head {
+  width: 100%; display: flex; align-items: center; gap: 11px;
+  padding: 11px 16px; background: none; border: none; cursor: pointer;
+  text-align: left; font-family: 'Outfit', sans-serif;
+}
+.macc-ico {
+  width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
+  background: #ECEFF2; display: flex; align-items: center; justify-content: center;
+  transition: background .15s ease;
+}
+.macc-ico i { font-size: 18px; color: #3F5767; transition: color .15s ease; }
+.macc-head.open .macc-ico { background: #3F5767; }
+.macc-head.open .macc-ico i { color: #E9C466; }
+.macc-txt { flex: 1; display: flex; flex-direction: column; }
+.macc-title { font-size: 13.5px; font-weight: 600; color: #3F5767; line-height: 1.25; }
+.macc-count { font-size: 10.5px; color: #9BA1AC; line-height: 1.25; }
+.macc-chev { font-size: 17px; color: #C2C8D2; transition: transform .2s ease, color .15s ease; }
+.macc-head.open .macc-chev { transform: rotate(180deg); color: #3F5767; }
+.macc-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height .26s ease;
+}
+.macc-body.open { max-height: 320px; }
+.macc-link {
+  display: block; text-decoration: none;
+  font-size: 12.5px; color: #5A6573; font-weight: 500;
+  padding: 9px 16px 9px 61px;
+  border-top: 1px solid #F7F5FB;
+  transition: background .12s ease, color .12s ease;
+}
+.macc-link:active, .macc-link:hover { background: #FBF8FF; color: #3F5767; }
+</style>
+
+<script>
+(function(){
+  var heads = document.querySelectorAll('.macc-head');
+  heads.forEach(function(h){
+    h.addEventListener('click', function(){
+      var body = h.nextElementSibling;
+      var isOpen = h.classList.contains('open');
+      heads.forEach(function(other){
+        other.classList.remove('open');
+        other.nextElementSibling.classList.remove('open');
+      });
+      if(!isOpen){
+        h.classList.add('open');
+        body.classList.add('open');
+      }
+    });
+  });
+})();
+</script>

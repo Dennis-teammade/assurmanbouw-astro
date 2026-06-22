@@ -1,55 +1,174 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
-const sectors = [
+// Sectoren ingedeeld in 4 clusters (zelfde indeling als het sectoren-mega-menu).
+// Bestaande 6 kaarten (dakwerkers, aannemers, elektriciens, loodgieters, schilders,
+// schrijnwerkers) ongewijzigd overgenomen. 13 nieuwe kaarten: tags afgeleid uit het
+// polis-pakket van elke sectorpagina, beschrijving uit de hero-intro.
+const sectorGroepen = [
   {
-    slug: 'dakwerkers',
-    title: 'Dakwerkers',
-    description: 'Werken op hoogte, wisselende werven en duur materiaal. Verzekeringen afgestemd op dakwerkers in Vlaanderen.',
-    iconPath: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM9 22V12h6v10',
-    tags: ['BA Onderneming', 'ABR', 'Machinebreuk', 'Bedrijfsvoertuigen'],
+    key: 'ruwbouw',
+    label: 'Ruwbouw & infrastructuur',
+    sectors: [
+      {
+        slug: 'aannemers',
+        title: 'Algemene aannemers',
+        description: 'Eindverantwoordelijk op de werf. BA-10, arbeidsongevallen, voertuigen en machinebreuk op maat van bouwondernemers.',
+        iconPath: 'M2 20h20M5 20V8l7-5 7 5v12M9 20v-6h6v6',
+        tags: ['BA Onderneming', 'BA-10', 'Arbeidsongevallen', 'Rechtsbijstand'],
+      },
+      {
+        slug: 'grondwerkers',
+        title: 'Grondwerkers',
+        description: 'Graafwerk in onbekende grond, geraakte leidingen en zware machines. Verzekeringen op maat van grondwerkers in Vlaanderen.',
+        iconPath: 'm12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.84zM2 12l8.58 3.91a2 2 0 0 0 1.66 0L20.83 12M2 17l8.58 3.91a2 2 0 0 0 1.66 0L20.83 17',
+        tags: ['BA Onderneming', 'BA-10', 'ABR', 'Machinebreuk'],
+      },
+      {
+        slug: 'asfalteerders',
+        title: 'Asfalteerders',
+        description: 'Vlakheid, afwatering en dure asfalteermachines op wisselende werven. Verzekeringen op maat van asfalteerders in Vlaanderen.',
+        iconPath: 'M3 6L21 6A1 1 0 0 1 22 7L22 13A1 1 0 0 1 21 14L3 14A1 1 0 0 1 2 13L2 7A1 1 0 0 1 3 6zM17 14v7M7 14v7M17 3v3M7 3v3M10 14L2.3 6.3M14 6L21.7 13.7M8 6L16 14',
+        tags: ['BA Onderneming', 'ABR', 'Machinebreuk', 'Bedrijfsvoertuigen'],
+      },
+      {
+        slug: 'bestraters',
+        title: 'Bestraters & kasseileggers',
+        description: 'Verzakkings- en afwateringsdiscussies, klinkers en kasseien op de werf. Verzekeringen op maat van bestraters in Vlaanderen.',
+        iconPath: 'M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z',
+        tags: ['BA Onderneming', 'ABR', 'Machinebreuk', 'Bedrijfsvoertuigen'],
+      },
+    ],
   },
   {
-    slug: 'aannemers',
-    title: 'Algemene aannemers',
-    description: 'Eindverantwoordelijk op de werf. BA-10, arbeidsongevallen, voertuigen en machinebreuk op maat van bouwondernemers.',
-    iconPath: 'M2 20h20M5 20V8l7-5 7 5v12M9 20v-6h6v6',
-    tags: ['BA Onderneming', 'BA-10', 'Arbeidsongevallen', 'Rechtsbijstand'],
+    key: 'afwerking',
+    label: 'Afwerking & interieur',
+    sectors: [
+      {
+        slug: 'schilders',
+        title: 'Schilders',
+        description: 'Verfspetters, valrisico op ladders en klachtenprocedures. Verzekeringen voor schilders en afwerkingsbedrijven.',
+        iconPath: 'M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z',
+        tags: ['BA Onderneming', 'Arbeidsongevallen', 'Gereedschap', 'Rechtsbijstand'],
+      },
+      {
+        slug: 'schrijnwerkers',
+        title: 'Schrijnwerkers',
+        description: 'Dure machines, kostbaar hout en maatwerk voor klanten. Machinebreuk, BA en rechtsbijstand voor schrijnwerkers.',
+        iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z',
+        tags: ['BA Onderneming', 'Machinebreuk', 'Bedrijfsvoertuigen', 'Rechtsbijstand'],
+      },
+      {
+        slug: 'stukadoors',
+        title: 'Stukadoors',
+        description: 'Krimpscheuren, loslatend pleisterwerk en schade in bewoonde woningen. Verzekeringen op maat van stukadoors en plafonneurs in Vlaanderen.',
+        iconPath: 'M3 3h18v18H3zM3 9h18M3 15h18M9 3v6M15 9v6M9 15v6',
+        tags: ['BA Onderneming', 'Rechtsbijstand', 'ABR', 'Bedrijfsvoertuigen'],
+      },
+      {
+        slug: 'chappers',
+        title: 'Chappers',
+        description: 'Niet-vlakke chape, gevolgschade aan de afwerking en eigen pompen. Verzekeringen op maat van chappers en dekvloerleggers in Vlaanderen.',
+        iconPath: 'M3 3h18v18H3zM3 9h18M3 15h18',
+        tags: ['BA Onderneming', 'BA-10', 'Rechtsbijstand', 'Machinebreuk'],
+      },
+      {
+        slug: 'vloerders-tegelzetters',
+        title: 'Vloerders & tegelzetters',
+        description: 'Loskomende tegels, kleurverschil in natuursteen en duur breekbaar materiaal. Verzekeringen op maat van vloerders en tegelzetters in Vlaanderen.',
+        iconPath: 'M3 3h18v18H3zM9 3v18M15 3v18M3 9h18M3 15h18',
+        tags: ['BA Onderneming', 'Rechtsbijstand', 'Vervoerde goederen', 'Bedrijfsvoertuigen'],
+      },
+      {
+        slug: 'parketzetters',
+        title: 'Parketzetters',
+        description: 'Werkend hout door vocht, krasschade en geschillen over de afwerking. Verzekeringen op maat van parketzetters in Vlaanderen.',
+        iconPath: 'M4 4h16v16H4zM4 9h16M4 14h16',
+        tags: ['BA Onderneming', 'Rechtsbijstand', 'Vervoerde goederen', 'Machinebreuk'],
+      },
+    ],
   },
   {
-    slug: 'elektriciens',
-    title: 'Elektriciens',
-    description: 'Elektrische risico\'s, valgevaar en aansprakelijkheid bij fouten in de installatie. Modulair pakket voor elektriciens.',
-    iconPath: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
-    tags: ['BA Onderneming', 'Gereedschap', 'ABR', 'Rechtsbijstand'],
+    key: 'technieken',
+    label: 'Technieken & installatie',
+    sectors: [
+      {
+        slug: 'elektriciens',
+        title: 'Elektriciens',
+        description: 'Elektrische risico\'s, valgevaar en aansprakelijkheid bij fouten in de installatie. Modulair pakket voor elektriciens.',
+        iconPath: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
+        tags: ['BA Onderneming', 'Gereedschap', 'ABR', 'Rechtsbijstand'],
+      },
+      {
+        slug: 'loodgieters',
+        title: 'Loodgieters',
+        description: 'Waterschade, gasincidenten en aansprakelijkheid bij sanitaire en thermische werken. Bescherming op maat.',
+        iconPath: 'M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z',
+        tags: ['BA Onderneming', 'Machinebreuk', 'Bedrijfsvoertuigen', 'Rechtsbijstand'],
+      },
+      {
+        slug: 'zonnepanelen-installateurs',
+        title: 'Zonnepaneel-installateurs',
+        description: 'Dakdoorboringen, waterdichtheid en dure panelen en omvormers. Verzekeringen op maat van zonnepaneel-installateurs in Vlaanderen.',
+        iconPath: 'M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41M16 12a4 4 0 1 1-8 0 4 4 0 0 1 8 0z',
+        tags: ['BA-10', 'BA Onderneming', 'ABR', 'Vervoerde goederen'],
+      },
+      {
+        slug: 'koeltechniek-hvac',
+        title: 'Koeltechniek & HVAC',
+        description: 'Koelmiddel, waterschade door condens en dure warmtepompen en units. Verzekeringen op maat van koeltechniek en HVAC in Vlaanderen.',
+        iconPath: 'M2 12h20M12 2v20m6.36-15.36L5.64 18.36m12.72 0L5.64 5.64',
+        tags: ['BA Onderneming', 'Vervoerde goederen', 'Machinebreuk', 'Bedrijfsvoertuigen'],
+      },
+    ],
   },
   {
-    slug: 'loodgieters',
-    title: 'Loodgieters',
-    description: 'Waterschade, gasincidenten en aansprakelijkheid bij sanitaire en thermische werken. Bescherming op maat.',
-    iconPath: 'M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z',
-    tags: ['BA Onderneming', 'Machinebreuk', 'Bedrijfsvoertuigen', 'Rechtsbijstand'],
-  },
-  {
-    slug: 'schilders',
-    title: 'Schilders',
-    description: 'Verfspetters, valrisico op ladders en klachtenprocedures. Verzekeringen voor schilders en afwerkingsbedrijven.',
-    iconPath: 'M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z',
-    tags: ['BA Onderneming', 'Arbeidsongevallen', 'Gereedschap', 'Rechtsbijstand'],
-  },
-  {
-    slug: 'schrijnwerkers',
-    title: 'Schrijnwerkers',
-    description: 'Dure machines, kostbaar hout en maatwerk voor klanten. Machinebreuk, BA en rechtsbijstand voor schrijnwerkers.',
-    iconPath: 'M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z',
-    tags: ['BA Onderneming', 'Machinebreuk', 'Bedrijfsvoertuigen', 'Rechtsbijstand'],
+    key: 'buiten',
+    label: 'Dak, tuin & buitenruimte',
+    sectors: [
+      {
+        slug: 'dakwerkers',
+        title: 'Dakwerkers',
+        description: 'Werken op hoogte, wisselende werven en duur materiaal. Verzekeringen afgestemd op dakwerkers in Vlaanderen.',
+        iconPath: 'M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2zM9 22V12h6v10',
+        tags: ['BA Onderneming', 'ABR', 'Machinebreuk', 'Bedrijfsvoertuigen'],
+      },
+      {
+        slug: 'tuinaannemers',
+        title: 'Tuinaannemers',
+        description: 'Graafwerk, verzakkende terrassen en zware machines op de werf. Verzekeringen op maat van tuinaannemers in Vlaanderen.',
+        iconPath: 'M10 10v.2A3 3 0 0 1 8.9 16H5a3 3 0 0 1-1-5.8V10a3 3 0 0 1 6 0zM7 16v6M13 19v3M12 19h8.3a1 1 0 0 0 .7-1.7L18 14h.3a1 1 0 0 0 .7-1.7L16 9h.2a1 1 0 0 0 .8-1.7L13 3l-1.4 1.5',
+        tags: ['BA Onderneming', 'ABR', 'Machinebreuk', 'Bedrijfsvoertuigen'],
+      },
+      {
+        slug: 'hoveniers',
+        title: 'Hoveniers',
+        description: 'Schade bij de klant, gestolen materieel onderweg en gazon-discussies. Verzekeringen op maat van hoveniers in Vlaanderen.',
+        iconPath: 'M7 20h10M10 20c5.5-2.5.8-6.4 3-10M9.5 9.4c1.1.8 1.8 2.2 2.3 3.7-2 .4-3.5.4-4.8-.3-1.2-.6-2.3-1.9-3-4.2 2.8-.5 4.4 0 5.5.8zM14.1 6a7 7 0 0 0-1.1 4c1.9-.1 3.3-.6 4.3-1.4 1-1 1.6-2.3 1.7-4.6-2.7.1-4 1-4.9 2z',
+        tags: ['BA Onderneming', 'Bedrijfsvoertuigen', 'Machinebreuk', 'Arbeidsongevallen'],
+      },
+      {
+        slug: 'boomverzorgers',
+        title: 'Boomverzorgers',
+        description: 'Klimwerk op hoogte, vallende takken en bescherming van je inkomen. Verzekeringen op maat van boomverzorgers in Vlaanderen.',
+        iconPath: 'm17 14 3 3.3a1 1 0 0 1-.7 1.7H4.7a1 1 0 0 1-.7-1.7L7 14h-.3a1 1 0 0 1-.7-1.7L9 9h-.2A1 1 0 0 1 8 7.3L12 3l4 4.3a1 1 0 0 1-.8 1.7H15l3 3.3a1 1 0 0 1-.7 1.7H17zM12 22v-3',
+        tags: ['BA Onderneming', 'Arbeidsongevallen', 'Gewaarborgd inkomen', 'Machinebreuk'],
+      },
+      {
+        slug: 'zwembadinstallateurs',
+        title: 'Zwembadinstallateurs',
+        description: 'Waterdichtheid en constructiegebreken die jaren later kunnen opduiken. Verzekeringen op maat van zwembadinstallateurs in Vlaanderen.',
+        iconPath: 'M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1',
+        tags: ['BA-10', 'ABR', 'BA Onderneming', 'Bedrijfsschade'],
+      },
+    ],
   },
 ];
 ---
 
 <BaseLayout
   title="Sectoren | Bouwverzekeringen op maat | Assurman"
-  description="Assurman is gespecialiseerd in verzekeringen voor bouwondernemers: dakwerkers, aannemers, elektriciens, loodgieters, schilders en schrijnwerkers."
+  description="Assurman is gespecialiseerd in verzekeringen voor de bouwsector in Vlaanderen: van ruwbouw en afwerking tot technieken, dak, tuin en buitenruimte. Kies jouw sector."
   canonical="/sectoren"
 >
 
@@ -144,33 +263,41 @@ const sectors = [
       </p>
     </div>
 
-    <div class="sectors-grid">
-      {sectors.map((sector) => (
-        <a href={`/sectoren/${sector.slug}`} class="sector-card">
-          <!-- Icon -->
-          <div style="background:rgba(229,165,36,0.1);border-radius:8px;padding:14px;display:inline-flex;align-self:flex-start;margin-bottom:20px;">
-            <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={sector.iconPath}/></svg>
-          </div>
-          <!-- Title -->
-          <h2 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#001F3F;margin-bottom:10px;">{sector.title}</h2>
-          <!-- Gold accent bar -->
-          <div style="width:40px;height:3px;background:#E5A524;margin-bottom:14px;"></div>
-          <!-- Description -->
-          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#001F3F;margin:0;flex:1;">{sector.description}</p>
-          <!-- Tags -->
-          <div class="sector-tags">
-            {sector.tags.map((tag) => (
-              <span class="sector-tag">{tag}</span>
-            ))}
-          </div>
-          <!-- CTA -->
-          <div style="display:inline-flex;align-items:center;gap:8px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;margin-top:20px;">
-            Meer info
-            <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-          </div>
-        </a>
-      ))}
-    </div>
+    {sectorGroepen.map((groep) => (
+      <div style="margin-bottom:56px;">
+        <!-- Categorie-kop (sober, slate) -->
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(22px,2.5vw,30px);line-height:1.1;color:#3F5767;margin:0 0 6px;">{groep.label}</h2>
+        <div style="width:48px;height:3px;background:#E5A524;margin-bottom:24px;"></div>
+
+        <div class="sectors-grid">
+          {groep.sectors.map((sector) => (
+            <a href={`/sectoren/${sector.slug}/`} class="sector-card">
+              <!-- Icon -->
+              <div style="background:rgba(229,165,36,0.1);border-radius:8px;padding:14px;display:inline-flex;align-self:flex-start;margin-bottom:20px;">
+                <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={sector.iconPath}/></svg>
+              </div>
+              <!-- Title -->
+              <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#001F3F;margin-bottom:10px;">{sector.title}</h3>
+              <!-- Gold accent bar -->
+              <div style="width:40px;height:3px;background:#E5A524;margin-bottom:14px;"></div>
+              <!-- Description -->
+              <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.6;color:#001F3F;margin:0;flex:1;">{sector.description}</p>
+              <!-- Tags -->
+              <div class="sector-tags">
+                {sector.tags.map((tag) => (
+                  <span class="sector-tag">{tag}</span>
+                ))}
+              </div>
+              <!-- CTA -->
+              <div style="display:inline-flex;align-items:center;gap:8px;font-family:'Open Sans',sans-serif;font-weight:700;font-size:14px;color:#E5A524;margin-top:20px;">
+                Meer info
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    ))}
   </div>
 </section>
 

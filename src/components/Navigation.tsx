@@ -1,39 +1,98 @@
 import { useState, useRef, useEffect } from 'react';
-import { ChevronDown, Menu, X, ArrowRight } from 'lucide-react';
-import { verzekeringenPerCategorie, verzekeringUrl } from '../data/verzekeringen';
+import {
+  ChevronDown, ChevronRight, Menu, X, ArrowRight,
+  ShieldHalf, Hammer, HeartHandshake, PiggyBank,
+  BrickWall, PaintRoller, Zap, Trees,
+} from 'lucide-react';
+import { verzekeringenPerCategorie, verzekeringUrl, CATEGORIE_META } from '../data/verzekeringen';
+import type { LucideIcon } from 'lucide-react';
 
 // Verzekeringen-menu volledig uit de centrale databron (src/data/verzekeringen.ts).
 const verzekeringGroepen = verzekeringenPerCategorie();
 
-const sectovenItems = [
-  { label: 'Aannemers', to: '/sectoren/aannemers' },
-  { label: 'Dakwerkers', to: '/sectoren/dakwerkers' },
-  { label: 'Elektriciens', to: '/sectoren/elektriciens' },
-  { label: 'Loodgieters', to: '/sectoren/loodgieters' },
-  { label: 'Schilders', to: '/sectoren/schilders' },
-  { label: 'Schrijnwerkers', to: '/sectoren/schrijnwerkers' },
-  { label: 'Grondwerkers', to: '/sectoren/grondwerkers/' },
-  { label: 'Bestraters & kasseileggers', to: '/sectoren/bestraters/' },
-  { label: 'Stukadoors', to: '/sectoren/stukadoors/' },
-  { label: 'Chappers', to: '/sectoren/chappers/' },
-  { label: 'Vloerders & tegelzetters', to: '/sectoren/vloerders-tegelzetters/' },
-  { label: 'Parketzetters', to: '/sectoren/parketzetters/' },
-  { label: 'Zonnepaneel-installateurs', to: '/sectoren/zonnepanelen-installateurs/' },
-  { label: 'Koeltechniek & HVAC', to: '/sectoren/koeltechniek-hvac/' },
-  { label: 'Tuinaannemers', to: '/sectoren/tuinaannemers/' },
-  { label: 'Hoveniers', to: '/sectoren/hoveniers/' },
-  { label: 'Boomverzorgers', to: '/sectoren/boomverzorgers/' },
-  { label: 'Asfalteerders', to: '/sectoren/asfalteerders/' },
-  { label: 'Zwembadinstallateurs', to: '/sectoren/zwembadinstallateurs/' },
+// Categorie-iconen (CATEGORIE_META.icoon-keys) → lucide-react.
+// 'tools' bestaat niet in lucide; dichtstbijzijnde equivalent = Hammer
+// (Wrench is al de polis-icoon van machinebreuk).
+const CATEGORIE_ICON: Record<string, LucideIcon> = {
+  'shield-half': ShieldHalf,
+  'tools': Hammer,
+  'heart-handshake': HeartHandshake,
+  'pig-money': PiggyBank,
+};
+
+// Sectoren ingedeeld in 4 groepen (zelfde mega-menu-opmaak als Verzekeringen).
+const sectorGroepen = [
+  {
+    key: 'ruwbouw',
+    label: 'Ruwbouw & infrastructuur',
+    subzin: 'Grond, wegen en structuur',
+    icoon: 'wall',
+    items: [
+      { label: 'Aannemers', to: '/sectoren/aannemers/', omschrijving: 'Algemene coördinatie' },
+      { label: 'Grondwerkers', to: '/sectoren/grondwerkers/', omschrijving: 'Graafwerk en fundering' },
+      { label: 'Asfalteerders', to: '/sectoren/asfalteerders/', omschrijving: 'Wegen en verharding' },
+      { label: 'Bestraters & kasseileggers', to: '/sectoren/bestraters/', omschrijving: 'Opritten en pleinen' },
+    ],
+  },
+  {
+    key: 'afwerking',
+    label: 'Afwerking & interieur',
+    subzin: 'Binnen en oppervlakte',
+    icoon: 'paint',
+    items: [
+      { label: 'Schilders', to: '/sectoren/schilders/', omschrijving: 'Binnen en buiten' },
+      { label: 'Schrijnwerkers', to: '/sectoren/schrijnwerkers/', omschrijving: 'Maatwerk in hout' },
+      { label: 'Stukadoors', to: '/sectoren/stukadoors/', omschrijving: 'Pleister- en raapwerk' },
+      { label: 'Chappers', to: '/sectoren/chappers/', omschrijving: 'Dekvloeren' },
+      { label: 'Vloerders & tegelzetters', to: '/sectoren/vloerders-tegelzetters/', omschrijving: 'Vloer- en wandtegels' },
+      { label: 'Parketzetters', to: '/sectoren/parketzetters/', omschrijving: 'Houten vloeren' },
+    ],
+  },
+  {
+    key: 'technieken',
+    label: 'Technieken & installatie',
+    subzin: 'Elektriciteit, water, klimaat',
+    icoon: 'bolt',
+    items: [
+      { label: 'Elektriciens', to: '/sectoren/elektriciens/', omschrijving: 'Installatie en renovatie' },
+      { label: 'Loodgieters', to: '/sectoren/loodgieters/', omschrijving: 'Sanitair en leidingen' },
+      { label: 'Zonnepaneel-installateurs', to: '/sectoren/zonnepanelen-installateurs/', omschrijving: 'PV en omvormers' },
+      { label: 'Koeltechniek & HVAC', to: '/sectoren/koeltechniek-hvac/', omschrijving: 'Klimaat en verwarming' },
+    ],
+  },
+  {
+    key: 'buiten',
+    label: 'Dak, tuin & buitenruimte',
+    subzin: 'Boven en rond het gebouw',
+    icoon: 'trees',
+    items: [
+      { label: 'Dakwerkers', to: '/sectoren/dakwerkers/', omschrijving: 'Dak en dichting' },
+      { label: 'Tuinaannemers', to: '/sectoren/tuinaannemers/', omschrijving: 'Aanleg en onderhoud' },
+      { label: 'Hoveniers', to: '/sectoren/hoveniers/', omschrijving: 'Groen en beplanting' },
+      { label: 'Boomverzorgers', to: '/sectoren/boomverzorgers/', omschrijving: 'Snoei en vellen' },
+      { label: 'Zwembadinstallateurs', to: '/sectoren/zwembadinstallateurs/', omschrijving: 'Aanleg en techniek' },
+    ],
+  },
 ];
+
+// Sector-categorie-iconen (Tabler-keys uit de referentie) → lucide-react.
+const SECTOR_ICON: Record<string, LucideIcon> = {
+  'wall': BrickWall,
+  'paint': PaintRoller,
+  'bolt': Zap,
+  'trees': Trees,
+};
 
 export default function Navigation() {
   const [showVerzekeringen, setShowVerzekeringen] = useState(false);
+  const [activeVerzCat, setActiveVerzCat] = useState<string>(verzekeringGroepen[0]?.categorie ?? '');
   const [showSectoren, setShowSectoren] = useState(false);
+  const [activeSectorCat, setActiveSectorCat] = useState<string>(sectorGroepen[0]?.key ?? '');
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileVerzekeringen, setMobileVerzekeringen] = useState(false);
   const [mobileVerzCat, setMobileVerzCat] = useState<string | null>(null);
   const [mobileSectoren, setMobileSectoren] = useState(false);
+  const [mobileSectorCat, setMobileSectorCat] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [pathname, setPathname] = useState('');
 
@@ -97,53 +156,138 @@ export default function Navigation() {
           </a>
 
           <nav style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="desktop-nav">
-            <div style={{ position: 'relative' }} onMouseEnter={openVerzekeringen} onMouseLeave={closeVerzekeringen}>
-              <button className={`nav-dropdown-btn${isActive('/verzekeringen') ? ' active' : ''}`}>
+            <div
+              style={{ position: 'relative' }}
+              onMouseEnter={openVerzekeringen}
+              onMouseLeave={closeVerzekeringen}
+              onFocus={openVerzekeringen}
+              onBlur={closeVerzekeringen}
+            >
+              <button className={`nav-dropdown-btn${isActive('/verzekeringen') ? ' active' : ''}`} aria-haspopup="true" aria-expanded={showVerzekeringen}>
                 Verzekeringen
                 <ChevronDown size={15} style={{ transition: 'transform 0.2s', transform: showVerzekeringen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
               </button>
-              <div className={`nav-dropdown ${showVerzekeringen ? 'visible' : 'hidden'}`} style={{ minWidth: 760 }}>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 4, padding: '18px 18px 14px' }}>
-                  {verzekeringGroepen.map((groep) => (
-                    <div key={groep.categorie} style={{ minWidth: 0 }}>
-                      <p style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: 11, letterSpacing: '0.6px', textTransform: 'uppercase', color: '#E5A524', margin: '0 0 8px', paddingBottom: 6, borderBottom: '1px solid rgba(229,165,36,0.2)' }}>
-                        {groep.label}
-                      </p>
-                      {groep.items.map((v) => (
-                        <a
-                          key={v.slug}
-                          href={verzekeringUrl(v.slug)}
-                          className="nav-dropdown-item"
-                          style={{ padding: '6px 8px', borderBottom: 'none', borderRadius: 6, fontFamily: "'Outfit', sans-serif", fontSize: 13.5, lineHeight: 1.3 }}
-                          onClick={() => setShowVerzekeringen(false)}
+              <div className={`nav-dropdown ${showVerzekeringen ? 'visible' : 'hidden'}`} style={{ width: 680, padding: 0 }}>
+                <div className="vmm">
+                  <div className="vmm-left">
+                    {verzekeringGroepen.map((groep) => {
+                      const meta = CATEGORIE_META[groep.categorie];
+                      const Icon = CATEGORIE_ICON[meta.icoon] ?? ShieldHalf;
+                      const active = activeVerzCat === groep.categorie;
+                      return (
+                        <button
+                          key={groep.categorie}
+                          type="button"
+                          className={`vmm-cat${active ? ' active' : ''}`}
+                          aria-controls={`vmm-panel-${groep.categorie}`}
+                          onMouseEnter={() => setActiveVerzCat(groep.categorie)}
+                          onFocus={() => setActiveVerzCat(groep.categorie)}
+                          onClick={() => setActiveVerzCat(groep.categorie)}
                         >
-                          {v.titel}
-                        </a>
-                      ))}
-                    </div>
-                  ))}
+                          <span className="vmm-ico"><Icon size={17} /></span>
+                          <span className="vmm-txt">
+                            <span className="vmm-title">{groep.label}</span>
+                            <span className="vmm-sub">{meta.subzin}</span>
+                          </span>
+                          <ChevronRight size={15} className="vmm-arrow" />
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <div className="vmm-right">
+                    {verzekeringGroepen.map((groep) => (
+                      <div
+                        key={groep.categorie}
+                        id={`vmm-panel-${groep.categorie}`}
+                        role="region"
+                        aria-label={groep.label}
+                        style={{ display: activeVerzCat === groep.categorie ? 'block' : 'none' }}
+                      >
+                        <div className="vmm-grid">
+                          {groep.items.map((v) => (
+                            <a
+                              key={v.slug}
+                              href={verzekeringUrl(v.slug)}
+                              className="vmm-pol"
+                              onClick={() => setShowVerzekeringen(false)}
+                            >
+                              <span className="vmm-pol-t">{v.titel}</span>
+                              <span className="vmm-pol-d">{v.menuOmschrijving}</span>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <a href="/verzekeringen" className="nav-dropdown-all" onClick={() => setShowVerzekeringen(false)}>
-                  <ArrowRight size={14} />
-                  Alle verzekeringen bekijken
+                <a href="/verzekeringen/" className="vmm-foot" onClick={() => setShowVerzekeringen(false)}>
+                  <span className="vmm-foot-l">Bekijk alle verzekeringen</span>
+                  <span className="vmm-foot-r">Overzicht <ArrowRight size={15} /></span>
                 </a>
               </div>
             </div>
 
-            <div style={{ position: 'relative' }} onMouseEnter={openSectoren} onMouseLeave={closeSectoren}>
-              <button className={`nav-dropdown-btn${isActive('/sectoren') ? ' active' : ''}`}>
+            <div
+              style={{ position: 'relative' }}
+              onMouseEnter={openSectoren}
+              onMouseLeave={closeSectoren}
+              onFocus={openSectoren}
+              onBlur={closeSectoren}
+            >
+              <button className={`nav-dropdown-btn${isActive('/sectoren') ? ' active' : ''}`} aria-haspopup="true" aria-expanded={showSectoren}>
                 Sectoren
                 <ChevronDown size={15} style={{ transition: 'transform 0.2s', transform: showSectoren ? 'rotate(180deg)' : 'rotate(0deg)' }} />
               </button>
-              <div className={`nav-dropdown ${showSectoren ? 'visible' : 'hidden'}`}>
-                {sectovenItems.map((item) => (
-                  <a key={item.to} href={item.to} className="nav-dropdown-item" onClick={() => setShowSectoren(false)}>
-                    {item.label}
-                  </a>
-                ))}
-                <a href="/sectoren" className="nav-dropdown-all" onClick={() => setShowSectoren(false)}>
-                  <ArrowRight size={14} />
-                  Alle sectoren bekijken
+              <div className={`nav-dropdown ${showSectoren ? 'visible' : 'hidden'}`} style={{ width: 700, padding: 0 }}>
+                <div className="vmm" style={{ gridTemplateColumns: '256px 1fr' }}>
+                  <div className="vmm-left">
+                    {sectorGroepen.map((groep) => {
+                      const Icon = SECTOR_ICON[groep.icoon] ?? BrickWall;
+                      const active = activeSectorCat === groep.key;
+                      return (
+                        <button
+                          key={groep.key}
+                          type="button"
+                          className={`vmm-cat${active ? ' active' : ''}`}
+                          aria-controls={`vmm-sector-panel-${groep.key}`}
+                          onMouseEnter={() => setActiveSectorCat(groep.key)}
+                          onFocus={() => setActiveSectorCat(groep.key)}
+                          onClick={() => setActiveSectorCat(groep.key)}
+                        >
+                          <span className="vmm-ico"><Icon size={17} /></span>
+                          <span className="vmm-txt">
+                            <span className="vmm-title">{groep.label}</span>
+                            <span className="vmm-sub">{groep.subzin}</span>
+                          </span>
+                          <ChevronRight size={15} className="vmm-arrow" />
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <div className="vmm-right">
+                    {sectorGroepen.map((groep) => (
+                      <div
+                        key={groep.key}
+                        id={`vmm-sector-panel-${groep.key}`}
+                        role="region"
+                        aria-label={groep.label}
+                        style={{ display: activeSectorCat === groep.key ? 'block' : 'none' }}
+                      >
+                        <div className="vmm-grid">
+                          {groep.items.map((item) => (
+                            <a key={item.to} href={item.to} className="vmm-pol" onClick={() => setShowSectoren(false)}>
+                              <span className="vmm-pol-t">{item.label}</span>
+                              <span className="vmm-pol-d">{item.omschrijving}</span>
+                            </a>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <a href="/sectoren/" className="vmm-foot" onClick={() => setShowSectoren(false)}>
+                  <span className="vmm-foot-l">Bekijk alle sectoren</span>
+                  <span className="vmm-foot-r">Overzicht <ArrowRight size={15} /></span>
                 </a>
               </div>
             </div>
@@ -182,28 +326,36 @@ export default function Navigation() {
             </button>
             {mobileVerzekeringen && (
               <div>
-                {verzekeringGroepen.map((groep) => (
-                  <div key={groep.categorie}>
-                    <button
-                      className="mobile-section-btn"
-                      style={{ paddingLeft: 12, fontSize: 15 }}
-                      onClick={() => setMobileVerzCat(mobileVerzCat === groep.categorie ? null : groep.categorie)}
-                    >
-                      {groep.label}
-                      <ChevronDown size={15} style={{ transform: mobileVerzCat === groep.categorie ? 'rotate(180deg)' : 'rotate(0)', transition: 'transform 0.2s' }} />
-                    </button>
-                    {mobileVerzCat === groep.categorie && (
-                      <div>
+                {verzekeringGroepen.map((groep) => {
+                  const meta = CATEGORIE_META[groep.categorie];
+                  const Icon = CATEGORIE_ICON[meta.icoon] ?? ShieldHalf;
+                  const open = mobileVerzCat === groep.categorie;
+                  return (
+                    <div key={groep.categorie}>
+                      <button
+                        type="button"
+                        className={`vmacc-head${open ? ' open' : ''}`}
+                        aria-expanded={open}
+                        onClick={() => setMobileVerzCat(open ? null : groep.categorie)}
+                      >
+                        <span className="vmacc-ico"><Icon size={18} /></span>
+                        <span className="vmacc-txt">
+                          <span className="vmacc-title">{groep.label}</span>
+                          <span className="vmacc-count">{groep.items.length} verzekeringen</span>
+                        </span>
+                        <ChevronDown size={17} className="vmacc-chev" />
+                      </button>
+                      <div className={`vmacc-body${open ? ' open' : ''}`}>
                         {groep.items.map((v) => (
-                          <a key={v.slug} href={verzekeringUrl(v.slug)} className="mobile-sub-item" style={{ paddingLeft: 24 }} onClick={() => setMobileOpen(false)}>
+                          <a key={v.slug} href={verzekeringUrl(v.slug)} className="vmacc-link" onClick={() => setMobileOpen(false)}>
                             {v.titel}
                           </a>
                         ))}
                       </div>
-                    )}
-                  </div>
-                ))}
-                <a href="/verzekeringen" className="mobile-sub-item" style={{ color: '#E5A524' }} onClick={() => setMobileOpen(false)}>Alle verzekeringen →</a>
+                    </div>
+                  );
+                })}
+                <a href="/verzekeringen/" className="mobile-sub-item" style={{ color: '#E5A524', paddingLeft: 16 }} onClick={() => setMobileOpen(false)}>Alle verzekeringen →</a>
               </div>
             )}
 
@@ -213,10 +365,35 @@ export default function Navigation() {
             </button>
             {mobileSectoren && (
               <div>
-                {sectovenItems.map((item) => (
-                  <a key={item.to} href={item.to} className="mobile-sub-item" onClick={() => setMobileOpen(false)}>{item.label}</a>
-                ))}
-                <a href="/sectoren" className="mobile-sub-item" style={{ color: '#E5A524' }} onClick={() => setMobileOpen(false)}>Alle sectoren →</a>
+                {sectorGroepen.map((groep) => {
+                  const Icon = SECTOR_ICON[groep.icoon] ?? BrickWall;
+                  const open = mobileSectorCat === groep.key;
+                  return (
+                    <div key={groep.key}>
+                      <button
+                        type="button"
+                        className={`vmacc-head${open ? ' open' : ''}`}
+                        aria-expanded={open}
+                        onClick={() => setMobileSectorCat(open ? null : groep.key)}
+                      >
+                        <span className="vmacc-ico"><Icon size={18} /></span>
+                        <span className="vmacc-txt">
+                          <span className="vmacc-title">{groep.label}</span>
+                          <span className="vmacc-count">{groep.items.length} sectoren</span>
+                        </span>
+                        <ChevronDown size={17} className="vmacc-chev" />
+                      </button>
+                      <div className={`vmacc-body${open ? ' open' : ''}`}>
+                        {groep.items.map((item) => (
+                          <a key={item.to} href={item.to} className="vmacc-link" onClick={() => setMobileOpen(false)}>
+                            {item.label}
+                          </a>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
+                <a href="/sectoren/" className="mobile-sub-item" style={{ color: '#E5A524', paddingLeft: 16 }} onClick={() => setMobileOpen(false)}>Alle sectoren →</a>
               </div>
             )}
 

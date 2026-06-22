@@ -419,6 +419,78 @@ button[style*="background: #E5A524"]:hover { background: #E9C466 !important; }
 }
 .mobile-sub-item:hover { color: #E5A524; }
 
+/* --- Verzekeringen mega-menu (desktop) --- */
+.vmm { display: grid; grid-template-columns: 244px 1fr; }
+.vmm-left { padding: 8px; background: #FBFAFE; border-right: 1px solid #F0EDF6; }
+.vmm-cat {
+  width: 100%; display: flex; align-items: center; gap: 9px;
+  padding: 7px 9px; border-radius: 9px; cursor: pointer;
+  background: none; border: none; text-align: left;
+  font-family: 'Outfit', sans-serif; transition: background .15s ease;
+}
+.vmm-cat:hover, .vmm-cat.active { background: #FFFFFF; box-shadow: 0 2px 8px -4px rgba(63,87,103,0.18); }
+.vmm-cat:focus-visible { outline: 2px solid #E9C466; outline-offset: 2px; }
+.vmm-ico {
+  width: 32px; height: 32px; border-radius: 9px; flex-shrink: 0;
+  background: #ECEFF2; display: flex; align-items: center; justify-content: center;
+  transition: background .15s ease;
+}
+.vmm-ico svg { color: #3F5767; transition: color .15s ease; }
+.vmm-cat:hover .vmm-ico, .vmm-cat.active .vmm-ico { background: #3F5767; }
+.vmm-cat:hover .vmm-ico svg, .vmm-cat.active .vmm-ico svg { color: #E9C466; }
+.vmm-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.vmm-title { font-size: 14px; font-weight: 600; color: #3F5767; line-height: 1.2; }
+.vmm-sub { font-size: 12px; color: #9BA1AC; line-height: 1.25; }
+.vmm-arrow { color: #CBD2DC; opacity: 0; transform: translateX(-3px); transition: all .15s ease; flex-shrink: 0; }
+.vmm-cat:hover .vmm-arrow, .vmm-cat.active .vmm-arrow { opacity: 1; transform: translateX(0); color: #E9C466; }
+.vmm-right { padding: 12px 14px; }
+.vmm-grid { display: grid; grid-template-columns: 1fr 1fr; grid-auto-rows: 56px; align-content: start; gap: 6px; }
+.vmm-pol {
+  display: flex; flex-direction: column; justify-content: center; gap: 1px;
+  padding: 8px 11px; border-radius: 8px; text-decoration: none;
+  border: 1px solid #F0EDF6; background: #FFFFFF; transition: all .14s ease;
+}
+.vmm-pol:hover { border-color: #E9C466; background: #FFFDF6; }
+.vmm-pol:focus-visible { outline: 2px solid #E9C466; outline-offset: 2px; }
+.vmm-pol-t { font-size: 13px; font-weight: 600; color: #3F5767; line-height: 1.25; }
+.vmm-pol-d { font-size: 12px; color: #9BA1AC; line-height: 1.25; }
+.vmm-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 16px; background: #F9F5EC; border-top: 1px solid #F0E6CC; text-decoration: none;
+}
+.vmm-foot-l { font-size: 13.5px; font-weight: 600; color: #3F5767; }
+.vmm-foot-r { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600; color: #B89230; }
+
+/* --- Verzekeringen accordeon (mobiel) --- */
+.vmacc-head {
+  width: 100%; display: flex; align-items: center; gap: 11px;
+  padding: 11px 0; background: none; border: none; cursor: pointer;
+  text-align: left; font-family: 'Outfit', sans-serif;
+  border-top: 1px solid #F4F1FA;
+}
+.vmacc-ico {
+  width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
+  background: #ECEFF2; display: flex; align-items: center; justify-content: center;
+  transition: background .15s ease;
+}
+.vmacc-ico svg { color: #3F5767; transition: color .15s ease; }
+.vmacc-head.open .vmacc-ico { background: #3F5767; }
+.vmacc-head.open .vmacc-ico svg { color: #E9C466; }
+.vmacc-txt { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.vmacc-title { font-size: 14px; font-weight: 600; color: #3F5767; line-height: 1.25; }
+.vmacc-count { font-size: 12px; color: #9BA1AC; line-height: 1.25; }
+.vmacc-chev { color: #C2C8D2; transition: transform .2s ease, color .15s ease; flex-shrink: 0; }
+.vmacc-head.open .vmacc-chev { transform: rotate(180deg); color: #3F5767; }
+.vmacc-body { max-height: 0; overflow: hidden; transition: max-height .26s ease; }
+.vmacc-body.open { max-height: 360px; }
+.vmacc-link {
+  display: block; text-decoration: none;
+  font-size: 13.5px; color: #5A6573; font-weight: 500;
+  padding: 10px 16px 10px 45px; border-top: 1px solid #F7F5FB;
+  transition: background .12s ease, color .12s ease;
+}
+.vmacc-link:hover, .vmacc-link:active { background: #FBF8FF; color: #3F5767; }
+
 @media (max-width: 900px) {
   .desktop-nav { display: none !important; }
   .desktop-only { display: none !important; }
