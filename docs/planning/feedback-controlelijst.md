@@ -26,7 +26,7 @@ concurrentie-check (2026-06-23). Graag bevestigen.
 | SCOPE-OVL | **Overlijdensdekking: samenvoegen, geen aparte business-pagina.** Zit als waarborg in *Bescherming bedrijfsleider* (+ IPT/VAPZ/groepsverzekering). | (a) aparte pagina; (b) waarborg binnen Bescherming bedrijfsleider | De zakelijke/keyman-dekking (vennootschap = begunstigde) is al de kern van *Bescherming bedrijfsleider* → aparte pagina = duplicaat/dunne content. Concurrentie-check (Wikifin, Assuralia, FSMA): "overlijdensverzekering" is in BE een koepelbegrip met meerdere vormen (pensioen, schuldsaldo, keyman), geen losstaand productpagina-item. **Aparte pagina enkel later zinvol voor de persoonlijke gezins-overlijdensdekking** (partner/kinderen = begunstigde), een ander product. | 🔲 |
 | SCOPE-OMZ | **Omzetverzekering: geen eigen pagina; opgenomen als FAQ op Gewaarborgd inkomen.** | (a) eigen pagina; (b) FAQ/sub-onderdeel van Gewaarborgd inkomen of Bedrijfsschade; (c) parkeren | Zelfde trigger als gewaarborgd inkomen (uitval zaakvoerder door ziekte/ongeval), maar gericht op de vaste kosten van de vennootschap. Te dun voor een eigen pagina nu → dedicated FAQ op `gewaarborgd-inkomen.astro` + bestaande kruislink vanuit Bedrijfsschade. Eigen pagina pas bij aangetoonde zoekvraag. | 🔲 |
 
-Skeletons `overlijdensdekking.astro` en `omzetverzekering.astro` blijven geparkeerd (buiten de databron, niet in nav).
+De skeletons `overlijdensdekking.astro`, `omzetverzekering.astro` (en `ba-uitbating.astro`) zijn **verwijderd** (2026-06-23): buiten de databron, nergens gelinkt. Opnieuw aan te maken als een van deze keuzes wordt teruggedraaid.
 
 ---
 

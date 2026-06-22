@@ -258,7 +258,8 @@ overlijdensdekking-beslissing na concurrentie-check, JSON-LD structured-data aud
      (pensioen, schuldsaldo, keyman), geen losstaand productpagina-item. De `overlijdens-
      dekking.astro`-skeleton blijft geparkeerd. Een **aparte pagina is enkel later zinvol
      voor de persoonlijke gezins-overlijdensdekking** (partner/kinderen = begunstigde), een
-     ander product, zoals de brief `bescherming-bedrijfsleider.md` al voorzag.
+     ander product, zoals de brief `bescherming-bedrijfsleider.md` al voorzag. De
+     `overlijdensdekking.astro`-skeleton is verwijderd (2026-06-23, geen verwijzingen).
 3. ~~**Omzetverzekering:** aparte pagina?~~ **BESLIST (2026-06-23): niet als aparte
    pagina; opgenomen als FAQ op Gewaarborgd inkomen.**
    - *Opties:* (a) eigen pagina; (b) sub-onderdeel/FAQ van Gewaarborgd inkomen of
@@ -268,7 +269,7 @@ overlijdensdekking-beslissing na concurrentie-check, JSON-LD structured-data aud
      persoonlijke inkomen. Te dun voor een eigen pagina nu; daarom een **dedicated FAQ op
      `gewaarborgd-inkomen.astro`** ("Wat is een omzetverzekering en heb ik die ook nodig?")
      plus de bestaande kruislink vanuit Bedrijfsschade. Skeleton `omzetverzekering.astro`
-     blijft geparkeerd; eigen pagina pas bij aangetoonde zoekvraag.
+     verwijderd (2026-06-23, geen verwijzingen); eigen pagina pas bij aangetoonde zoekvraag.
 4. **BA Uitbating en Brandverzekering:** eerst verifiëren of die al live staan voor we
    ze scaffolden.
 

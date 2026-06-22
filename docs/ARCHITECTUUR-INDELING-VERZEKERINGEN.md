@@ -101,18 +101,18 @@ klant uiteindelijk A of C kiest.
 | 17 | POZ | `/verzekeringen/poz` | pensioen-en-fiscaal | 🔲 |
 | 18 | IPT | `/verzekeringen/ipt` | pensioen-en-fiscaal | 🔲 |
 
-> **Slug-noot:** VAPZ/POZ/IPT hebben sinds STAP 3 elk een skeleton-pagina
-> (`/verzekeringen/vapz/`, `/poz/`, `/ipt/`, status `skeleton`). De skeletons
-> `ba-uitbating`, `omzetverzekering` en
-> `overlijdensdekking` bestaan wél als bestand maar staan **buiten** de 18 (zie open punt
-> + §2-noot). Bestaande live-slugs ongewijzigd.
+> **Slug-noot:** VAPZ/POZ/IPT zijn intussen volwaardige live-pagina's. De voormalige
+> skeletons `ba-uitbating`, `omzetverzekering` en `overlijdensdekking` zijn
+> **verwijderd** (2026-06-23): ze stonden buiten de 18, werden nergens gelinkt en de
+> scope-beslissing is dat ze geen eigen pagina krijgen. Opnieuw aan te maken als de klant
+> alsnog een aparte pagina wil. Bestaande live-slugs ongewijzigd.
 
 ### Beslist — BA Onderneming / BA Uitbating
 
 **BA Onderneming en BA Uitbating = ÉÉN item** (blijft op 18). **BA Uitbating wordt
 voorlopig NIET opgenomen** (vooral voor handel/horeca, niet de bouwkern). De bestaande
-`ba-uitbating`-skeleton blijft als bestand staan maar is **niet** opgenomen in
-`verzekeringen.ts` en wordt voorlopig niet gebruikt. Te heropenen als de klant alsnog
+`ba-uitbating`-skeleton is **verwijderd** (2026-06-23, geen verwijzingen in de code) en
+was niet opgenomen in `verzekeringen.ts`. Te heropenen als de klant alsnog
 een aparte BA Uitbating-pagina wil → dan dit document bijwerken.
 
 ### Beslist — omzetverzekering & overlijdensdekking buiten de 18
@@ -128,7 +128,10 @@ Niet opgenomen in de databron (de 18 liggen vast). Bevinding bij de inhoudelijke
   bedrijfsleider en de pensioenpolissen (IPT/VAPZ/groepsverzekering), geen losstaand
   product in deze taxonomie. Terecht buiten de 18 als zelfstandige polis.
 
-Beide skeletons blijven als bestand staan, maar buiten de databron.
+Beide skeletons (`omzetverzekering`, `overlijdensdekking`) zijn **verwijderd** (2026-06-23):
+buiten de databron, nergens gelinkt, en de scope-beslissing is dat ze geen eigen pagina
+krijgen (omzetverzekering = FAQ op Gewaarborgd inkomen; overlijdensdekking = waarborg in
+Bescherming bedrijfsleider).
 
 ---
 
@@ -266,6 +269,7 @@ correct in alle lijsten verschijnen.
 | Datum | Wijziging | Door |
 |---|---|---|
 | 2026-06-19 | Document aangemaakt. Werkindeling = optie B vastgelegd. 18 polissen + slugs + schema gedocumenteerd. Taxonomie nog niet klant-bevestigd. BA Onderneming/Uitbating open. | Teammade |
+| 2026-06-23 | 3 ongebruikte skeleton-pagina's verwijderd: `ba-uitbating.astro`, `omzetverzekering.astro`, `overlijdensdekking.astro`. Eerst gecontroleerd: geen verwijzingen in code/nav/databron/sitemap. Build 101 → 98 pagina's. Opnieuw aan te maken als een scope-beslissing wordt teruggedraaid. | Claude Code |
 | 2026-06-23 | Open scope-beslissingen gesloten na onderzoek + concurrentie-check. **Overlijdensdekking**: samenvoegen (waarborg binnen Bescherming bedrijfsleider + pensioenpolissen), geen aparte business-pagina; een aparte pagina is enkel later zinvol voor de persoonlijke gezins-overlijdensdekking. **Omzetverzekering**: geen eigen pagina, opgenomen als dedicated FAQ op Gewaarborgd inkomen. Beide skeletons blijven geparkeerd. Vastgelegd in fase-2-werkplan §11 + feedback-controlelijst (SCOPE-OVL / SCOPE-OMZ). | Claude Code |
 | 2026-06-23 | `gerelateerde`-veld uitgebreid van 3 → **4 slugs per polis** (alle 18), zodat de "Gerelateerde verzekeringen"-carousel min. 4 kaarten toont en de slider zinvol blijft. Logisch gekozen, met enkele cross-cluster-links voor afwisseling; geen self-referenties. | Claude Code |
 | 2026-06-23 | Twee data-consistentie-ingrepen. (1) **Gerelateerde verzekeringen** op de 18 detailpagina's komen nu uit het databron-`gerelateerde`-veld via nieuwe helper `gerelateerdeKaarten(slug)` i.p.v. per pagina hardcoded → één bron van waarheid, divergenties weg. (2) **Elk sectorpakket** kreeg één kaart uit cluster pensioen & fiscaal toegevoegd, gespreid over de 5 polissen (vapz 5×, groepsverzekering 4×, aanvullend-pensioen 4×, ipt 3×, poz 3×) zodat pensioen op elke sectorpagina aan bod komt. | Claude Code |
