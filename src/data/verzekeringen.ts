@@ -334,3 +334,14 @@ export function kaartenVoor(slugs: string[]): ReturnType<typeof naarKaart>[] {
     .filter((v): v is Verzekering => Boolean(v))
     .map(naarKaart);
 }
+
+/**
+ * Carousel-kaarten met de GERELATEERDE verzekeringen van één polis, uit het
+ * `gerelateerde`-veld in de databron. Eén bron van waarheid voor de
+ * "Ook interessant / Gerelateerde verzekeringen"-carousel op de detailpagina's,
+ * i.p.v. per pagina een hardcoded lijst. Onbekende slug → lege lijst.
+ */
+export function gerelateerdeKaarten(slug: string): ReturnType<typeof naarKaart>[] {
+  const v = getVerzekering(slug);
+  return v ? kaartenVoor(v.gerelateerde) : [];
+}

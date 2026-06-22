@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { kaartenVoor } from '../../data/verzekeringen';
+import { gerelateerdeKaarten } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -29,7 +29,7 @@ const beroepTabs = [
   { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Je leeft van je machinepark: CNC, zagen en afkortinstallaties. Valt dat uit door brand, storm of machinebreuk, dan staat je maatwerk stil tot de vervangmachines geleverd zijn, soms maandenlang. Deze polis vergoedt net dat omzetverlies en je doorlopende kosten.' },
 ];
 
-const insuranceCards = kaartenVoor(['brandverzekering', 'machinebreuk', 'alle-bouwplaats-risicos', 'vervoerde-goederen']);
+const insuranceCards = gerelateerdeKaarten('bedrijfsschade');
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

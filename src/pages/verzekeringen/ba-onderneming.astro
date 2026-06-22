@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { kaartenVoor } from '../../data/verzekeringen';
+import { gerelateerdeKaarten } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -31,7 +31,7 @@ const beroepTabs = [
   { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Werk in het atelier én bij de klant. Toevertrouwd goed is voor schrijnwerkers vaak de duurste schadepost: beschadigde antieke kasten, verzaagde maatstukken. Stem je polis daarop af.' },
 ];
 
-const insuranceCards = kaartenVoor(['arbeidsongevallen', 'ba-10', 'rechtsbijstand', 'alle-bouwplaats-risicos']);
+const insuranceCards = gerelateerdeKaarten('ba-onderneming');
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

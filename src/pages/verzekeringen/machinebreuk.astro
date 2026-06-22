@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { kaartenVoor } from '../../data/verzekeringen';
+import { gerelateerdeKaarten } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -32,7 +32,7 @@ const beroepTabs = [
   { id: 'schrijnwerkers',label: 'Schrijnwerkers', link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Vlakschaafmachines, zaagbanken en stof-afzuigers staan meestal vast in je atelier. Eigen gebrek en warmlopen zijn de typische schadeoorzaken. Voor het werfmaterieel loont een aparte werfdekking.' },
 ];
 
-const insuranceCards = kaartenVoor(['ba-onderneming', 'bedrijfsvoertuigen', 'rechtsbijstand', 'arbeidsongevallen']);
+const insuranceCards = gerelateerdeKaarten('machinebreuk');
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

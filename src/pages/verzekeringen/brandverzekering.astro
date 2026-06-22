@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { kaartenVoor } from '../../data/verzekeringen';
+import { gerelateerdeKaarten } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -29,7 +29,7 @@ const beroepTabs = [
   { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Houtstof, machines en gestockeerd hout vormen samen een hoog brandrisico in je atelier. Een kortsluiting in een afzuiginstallatie of een oververhitte motor kan je CNC-machine, je voorraad en je hele werkplaats in de as leggen. De brandpolis vergoedt de heropbouw, de machines en het hout, terwijl bedrijfsschade je omzet overeind houdt terwijl je heropbouwt.' },
 ];
 
-const insuranceCards = kaartenVoor(['bedrijfsschade', 'machinebreuk', 'alle-bouwplaats-risicos']);
+const insuranceCards = gerelateerdeKaarten('brandverzekering');
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

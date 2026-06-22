@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { kaartenVoor } from '../../data/verzekeringen';
+import { gerelateerdeKaarten } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -30,7 +30,7 @@ const beroepTabs = [
   { id: 'schrijnwerkers',label: 'Schrijnwerkers', link: '/sectoren/schrijnwerkers', title: 'Voor schrijnwerkers',                text: 'Het VAPZ is je startpunt, ongeacht je statuut. We bekijken samen of een gewoon of een sociaal VAPZ het meeste oplevert en hoe je het later combineert met een POZ of IPT.' },
 ];
 
-const insuranceCards = kaartenVoor(['aanvullend-pensioen', 'poz', 'ipt', 'gewaarborgd-inkomen']);
+const insuranceCards = gerelateerdeKaarten('vapz');
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

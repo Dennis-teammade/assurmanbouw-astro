@@ -4,7 +4,7 @@ import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
 import BrandChevron from '../../components/BrandChevron.astro';
-import { kaartenVoor } from '../../data/verzekeringen';
+import { gerelateerdeKaarten } from '../../data/verzekeringen';
 
 const faqItems = [
   { q: 'Is een arbeidsongevallenverzekering verplicht vanaf mijn eerste werknemer?', a: 'Ja. In België moet je als werkgever in de privésector je eerste werknemer vanaf de eerste werkdag verzekeren tegen arbeidsongevallen.' },
@@ -34,7 +34,7 @@ const beroepTabs = [
 
 // Gerelateerde verzekeringen — afgeleid uit de centrale databron (src/data/verzekeringen.ts).
 // Selectie en volgorde bewust behouden; copy/iconen komen nu uit de databron.
-const insuranceCards = kaartenVoor(['ba-onderneming', 'bedrijfsvoertuigen', 'machinebreuk', 'ba-10', 'rechtsbijstand', 'alle-bouwplaats-risicos']);
+const insuranceCards = gerelateerdeKaarten('arbeidsongevallen');
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

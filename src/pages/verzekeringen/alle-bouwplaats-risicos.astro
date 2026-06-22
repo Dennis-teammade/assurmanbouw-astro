@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { kaartenVoor } from '../../data/verzekeringen';
+import { gerelateerdeKaarten } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -28,7 +28,7 @@ const beroepTabs = [
   { id: 'aannemers',     label: 'Algemene aannemers',link: '/sectoren/aannemers', title: 'Voor algemene aannemers',            text: 'Als hoofdaannemer op een groot project ben je verantwoordelijk voor de ABR-dekking van de volledige werf. Een globale polis voor alle partijen is de standaard bij projecten boven 500.000 euro. Ze vereenvoudigt de coordinatie en vermijdt gaten in de dekking.' },
 ];
 
-const insuranceCards = kaartenVoor(['ba-onderneming', 'machinebreuk', 'rechtsbijstand', 'arbeidsongevallen']);
+const insuranceCards = gerelateerdeKaarten('alle-bouwplaats-risicos');
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

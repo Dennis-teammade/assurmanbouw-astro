@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { kaartenVoor } from '../../data/verzekeringen';
+import { gerelateerdeKaarten } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -32,7 +32,7 @@ const beroepTabs = [
   { id: 'schrijnwerkers',label: 'Schrijnwerkers', link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Houten dragende structuren vallen onder BA-10 wanneer ze de stabiliteit van het gebouw bepalen. Niet-dragend binnen-schrijnwerk valt buiten de wettelijke verplichting. Beoordeel per project of je werk in scope ligt.' },
 ];
 
-const insuranceCards = kaartenVoor(['ba-onderneming', 'arbeidsongevallen', 'machinebreuk', 'rechtsbijstand']);
+const insuranceCards = gerelateerdeKaarten('ba-10');
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

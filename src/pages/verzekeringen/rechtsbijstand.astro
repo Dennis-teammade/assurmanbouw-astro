@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { kaartenVoor } from '../../data/verzekeringen';
+import { gerelateerdeKaarten } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -32,7 +32,7 @@ const beroepTabs = [
   { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Maatwerk leidt vaak tot interpretatiediscussies over "conform bestek". Geschillen rond opmaat-meubilair, ramen of trappen komen via expertise tot een oordeel: die expertise dekt de polis volledig.' },
 ];
 
-const insuranceCards = kaartenVoor(['ba-onderneming', 'machinebreuk', 'bedrijfsvoertuigen', 'arbeidsongevallen']);
+const insuranceCards = gerelateerdeKaarten('rechtsbijstand');
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

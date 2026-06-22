@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { kaartenVoor } from '../../data/verzekeringen';
+import { gerelateerdeKaarten } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -30,7 +30,7 @@ const beroepTabs = [
   { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Afkortzagen, frezen, freesmachines en maatwerk in panelen zijn kwetsbaar bij transport en aantrekkelijk voor dieven. De polis vergoedt zowel breukschade bij een ongeval als diefstal met braak uit je bestelwagen.' },
 ];
 
-const insuranceCards = kaartenVoor(['machinebreuk', 'bedrijfsvoertuigen', 'alle-bouwplaats-risicos']);
+const insuranceCards = gerelateerdeKaarten('vervoerde-goederen');
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

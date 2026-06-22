@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { kaartenVoor } from '../../data/verzekeringen';
+import { gerelateerdeKaarten } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -30,7 +30,7 @@ const beroepTabs = [
   { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Of je nu met arbeiders in het atelier of bedienden op kantoor werkt: we stemmen het plan af op je personeelsbestand en op wat sectoraal al geregeld is.' },
 ];
 
-const insuranceCards = kaartenVoor(['aanvullend-pensioen', 'ipt', 'vapz', 'gewaarborgd-inkomen']);
+const insuranceCards = gerelateerdeKaarten('groepsverzekering');
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

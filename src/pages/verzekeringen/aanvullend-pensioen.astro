@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { kaartenVoor } from '../../data/verzekeringen';
+import { gerelateerdeKaarten } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -37,7 +37,7 @@ const beroepTabs = [
   { id: 'schrijnwerkers',label: 'Schrijnwerkers', link: '/sectoren/schrijnwerkers', title: 'Voor schrijnwerkers',                text: 'Of je nu met een eenmanszaak of een vennootschap werkt: we stemmen de mix van VAPZ, POZ of IPT af op je statuut en je fiscale ruimte. Heb je personeel, dan komt de groepsverzekering erbij.' },
 ];
 
-const insuranceCards = kaartenVoor(['vapz', 'ipt', 'poz', 'groepsverzekering']);
+const insuranceCards = gerelateerdeKaarten('aanvullend-pensioen');
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",

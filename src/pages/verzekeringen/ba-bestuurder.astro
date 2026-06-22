@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { kaartenVoor } from '../../data/verzekeringen';
+import { gerelateerdeKaarten } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -30,7 +30,7 @@ const beroepTabs = [
   { id: 'schrijnwerkers',label: 'Schrijnwerkers',     link: '/sectoren/schrijnwerkers',title: 'Voor schrijnwerkers',                text: 'Bestuursbeslissingen rond bestellingen, voorschotten en leveringstermijnen kunnen tot claims van klanten of schuldeisers leiden, los van de aansprakelijkheid van de vennootschap zelf.' },
 ];
 
-const insuranceCards = kaartenVoor(['ba-onderneming', 'rechtsbijstand', 'ba-10', 'alle-bouwplaats-risicos']);
+const insuranceCards = gerelateerdeKaarten('ba-bestuurder');
 
 const schema = {
   "@context": "https://schema.org", "@type": "FAQPage",
