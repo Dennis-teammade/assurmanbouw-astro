@@ -198,8 +198,8 @@ const schemas = [articleSchema, breadcrumbSchema, ...(faqSchema ? [faqSchema] : 
 
 <ScrollProgress client:load />
 
-<!-- Nav clearance + compacte breadcrumb strip -->
-<div style="padding-top:110px;">
+<!-- Compacte breadcrumb strip — nav-clearance zit nu centraal op <main> (global.css) -->
+<div style="padding-top:16px;">
   <div style="border-bottom:1px solid rgba(0,31,63,0.1);padding:2px 0;">
     <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
       <Breadcrumbs

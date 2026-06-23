@@ -21,13 +21,19 @@ Verzin geen nieuwe sectie-volgorde.
 
 ## De 11 secties (sectie voor sectie)
 
-### 1. Hero — `background:#FFFFFF`
+### 1. Hero — `background:#FFFFFF`, `min-height:100vh`
 - **Doel:** beroep benoemen, gouden belofte-subzin, vertrouwen, 2 CTA's.
 - **Vast:** badge-pill ("Assurman • Bouwverzekeringen op maat"), H1 (Outfit 900,
   clamp 36-64px, navy), gouden subzin (Outfit 800, navy→gold), intro-alinea (Outfit
   400, navy), knoppenrij (primair scan + secundair afspraak), hero-disclaimer,
   hero-mask-foto rechts (`assurman-mask--hero`, verdwijnt < 1024px).
 - **Varieert:** beroepsnaam, H1-tekst, subzin, intro-copy, hero-afbeelding + alt.
+- **Layout (norm sinds D10 — NIET zelf afwijken):** de sectie heeft **geen** eigen
+  header-`padding-top`; de header-ruimte zit centraal op `<main>` (`--header-clear`).
+  Tekst-linkerkolom (`.dw-hero-content`) `padding-top: 100px`. Hero-foto flush tegen de
+  bovenrand (`top: 0; right: -5px`) met de gestandaardiseerde, content-onafhankelijke
+  maat `height: min(85vh, calc(48vw * 709 / 594)); width: auto` (géén losse `max-width`).
+  Identiek aan de verzekeringspagina's. Zie DECISIONS-LOG D10.
 
 ### 2. Key-features strip — `background:#e5a52414` (gold-strip)
 - **Doel:** 4 kernbeloftes in één oogopslag.

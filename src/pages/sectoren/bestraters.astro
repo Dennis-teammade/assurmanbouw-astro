@@ -100,8 +100,8 @@ const schema = {
 
 <style>
   .bst-container { max-width: 1280px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
-  .bst-hero-content { max-width: 52%; padding-top: 40px; }
-  .bst-hero-img { position: absolute; top: 5%; right: 0; height: 90%; width: auto; max-width: 48%; z-index: 1; pointer-events: none; }
+  .bst-hero-content { max-width: 52%; padding-top: 100px; }
+  .bst-hero-img { position: absolute; top: 0; right: -5px; height: min(85vh, calc(48vw * 709 / 594)); width: auto; z-index: 1; pointer-events: none; }
   .bst-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .bst-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; }
   .bst-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -168,11 +168,11 @@ const schema = {
 </style>
 
 <!-- SECTION 1: HERO -->
-<section class="bst-hero-section" style="padding-top:120px;background:#FFFFFF;position:relative;overflow:hidden;min-height:480px;">
+<section class="bst-hero-section" style="background:#FFFFFF;position:relative;overflow:hidden;min-height:100vh;">
   <div class="bst-hero-img assurman-mask assurman-mask--hero">
     <img src="/images/sectoren/bestraters-hero.jpg" alt="Bestrater die klinkers legt op een nieuwe oprit" />
   </div>
-  <div class="bst-container" style="padding-top:40px;padding-bottom:64px;position:relative;z-index:2;">
+  <div class="bst-container" style="padding-top:0;padding-bottom:64px;position:relative;z-index:2;">
     <div class="bst-hero-content">
       <div class="bst-badge-pill" style="margin-bottom:20px;">
         <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>

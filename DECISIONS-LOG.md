@@ -157,3 +157,52 @@ blijft ongebruikt); omzet/overlijden buiten de databron; VAPZ/POZ/IPT als 3 apar
 pagina's. Skeleton-copy is voorlopig (`// TODO`); badges op het archief vervielen (geen
 databron-veld). **Bron van waarheid + changelog: `docs/ARCHITECTUUR-INDELING-VERZEKERINGEN.md`**
 (levend document, bijwerken bij elke architectuurwijziging).
+
+## 2026-06-23
+
+### D10 — Centrale header-offset + gestandaardiseerde hero-afbeelding
+
+Aanleiding: na de utility-topbar werd de gedeelde header hoger; daardoor kwamen latente
+problemen boven (hero's begonnen achter de fixed header, breadcrumbs verdwenen op
+gids-/auteurpagina's, schuine home-foto piepte uit bij het shrinken). Oorzaak: er werd
+**nergens centraal** ruimte gereserveerd voor de fixed header; elke pagina loste het
+lokaal op met een eigen `padding-top` (110/120/140/180px). Gekozen route: **B — header
+blijft fixed, echte hoogte als CSS-variabele, één keer toegepast op `<main>`**.
+
+**Variabelen (`src/styles/tokens.css`):**
+- `--topbar-h: 34px` (utility-topbar; **0 op ≤900px** via media-query — topbar is daar verborgen)
+- `--nav-h: 100px` — hoofdnav expanded (logo 80 + 2×10 padding)
+- `--nav-h-shrunk: 68px` — hoofdnav shrunk (logo 56 + 2×6 padding)
+- `--header-clear: calc(var(--topbar-h) + var(--nav-h))` → **134px desktop / 100px mobiel**
+- `--hero-gap: 40px` — uniforme lucht header→eyebrow op de overige pagina-types
+
+> **`--nav-h` en `--nav-h-shrunk` zijn GEMETEN constanten**, niet uit CSS af te leiden:
+> ze spiegelen de inline logohoogte + padding in `Navigation.tsx`. Wijzigt iemand de
+> logohoogte of nav-padding daar, dan **moeten deze twee waarden mee**. Staat als comment
+> in tokens.css.
+
+**Toepassing (`src/styles/global.css`):**
+- `main { padding-top: var(--header-clear); }` — centrale reserve, geen per-pagina magic numbers meer.
+- `html { scroll-padding-top: calc(var(--nav-h-shrunk) + 16px); }` (=84px) — in-page ankers (`#id`) landen onder de header.
+- `header.site-header { top: var(--util-offset, var(--topbar-h)); }` — fallback nu via de variabele.
+- Alle lokale hero-`padding-top` (110/120/140/180) verwijderd; hero-lucht loopt via `--hero-gap`, breadcrumb-strips op 16px.
+- `StickyNav.tsx`: `top:72` → `var(--nav-h-shrunk)`, scroll-offset afgeleid i.p.v. `-80` (dode code, hygiëne).
+
+**Hero-afbeelding gestandaardiseerd (sector- én verzekeringspagina's).** Probleem: de
+afbeelding groeide mee met de content (sector `height:90%` van sectie; verzekering
+`height:85vh` was al beter maar `arbeidsongevallen` week af met `85%`). Plus: de combinatie
+`height + max-width:48%` vervormde de maskervorm op vierkante/staande schermen.
+
+Eén formule op **alle 19 sector- en 18 verzekering-hero-afbeeldingen**:
+```css
+top: 0; right: -5px;
+height: min(85vh, calc(48vw * 709 / 594));   /* 85vh, nooit breder dan 48vw */
+width: auto;                                  /* volgt uit aspect-ratio 594/709 */
+```
+- Beeldgrootte hangt aan het **scherm**, niet aan de content → op een gegeven viewport is élke pagina identiek (geverifieerd: sector = verzekering, aspect altijd 0.838 op 1280×760, 1440×900, 1920×1080, 1280×1024).
+- De losse `max-width:48%` verviel; de breedte-cap zit nu in de hoogte-`min()`, zodat de maskervorm **nooit** vervormt (ook niet op grote/vierkante schermen).
+- Sector-hero's: tekst-linkerkolom `padding-top: 100px`, afbeelding flush `top:0`, sectie `min-height: 480px → 100vh` (zoals verzekeringen, nodig zodat het 85vh-beeld niet wordt afgesneden). Verzekering-hero's: tekst `padding:100px 32px 80px`, afbeelding flush `top:0`.
+
+**Nog te doen (kleine design-ronde):** home + overzichtspagina's (`--left`-masker) staan
+nog op het oude model; die trekken we later gelijk. Mobiel (`display:none` ≤1023px op de
+hero-foto) ongemoeid.

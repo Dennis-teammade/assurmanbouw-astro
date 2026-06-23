@@ -32,6 +32,33 @@
   --font-display: 'Outfit', system-ui, sans-serif;
   --font-body:    'Open Sans', system-ui, sans-serif;
   --font-jakarta: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+  /* ============================================================
+     HEADER / LAYOUT-OFFSET
+     ─────────────────────────────────────────────────────────── */
+  /* De fixed header (utility-topbar + hoofdnav) reserveert geen ruimte in de
+     flow. We doen dat centraal: <main> krijgt padding-top = --header-clear
+     (zie global.css). Geen per-pagina magic numbers meer.
+
+     LET OP — GEMETEN CONSTANTEN, in sync houden met Navigation.tsx:
+       --nav-h        = 100px  → logo 80px + 2×10px padding (expanded state)
+       --nav-h-shrunk =  68px  → logo 56px + 2× 6px padding (scrolled/shrink state)
+     Deze waarden zijn niet uit de React-inline-styles af te leiden in CSS.
+     Wijzigt iemand de logohoogte of nav-padding in Navigation.tsx, pas deze
+     twee waarden hier mee aan. --topbar-h spiegelt UtilityTopbar.astro (34px,
+     verborgen ≤900px → zie de media-query onderaan dit bestand). */
+  --topbar-h:      34px;   /* utility-topbar hoogte (desktop); 0 op ≤900px */
+  --nav-h:        100px;   /* hoofdnav, expanded — sync met Navigation.tsx */
+  --nav-h-shrunk:  68px;   /* hoofdnav, shrunk — sync met Navigation.tsx */
+  --header-clear: calc(var(--topbar-h) + var(--nav-h)); /* 134px desktop / 100px mobiel */
+  --hero-gap:      40px;   /* uniforme lucht tussen header-onderkant en hero-titel */
+}
+
+/* Topbar is verborgen ≤900px (UtilityTopbar.astro). Zet --topbar-h dan op 0,
+   zodat --header-clear automatisch 100px wordt en <main> niet te veel reserveert.
+   Deze override staat bewust ná de :root-definitie zodat de cascade klopt. */
+@media (max-width: 900px) {
+  :root { --topbar-h: 0px; }
 }
 
 /* ============================================================

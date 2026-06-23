@@ -35,6 +35,20 @@ html, body {
   max-width: 100%;
 }
 
+/* Centrale header-offset: <main> reserveert exact de header-hoogte, zodat geen
+   enkele pagina nog een eigen padding-top als header-compensatie nodig heeft.
+   --header-clear = 134px desktop / 100px mobiel (zie tokens.css). */
+main {
+  padding-top: var(--header-clear);
+}
+
+/* In-page ankers (#id) landen onder de header i.p.v. erachter. Basis = de
+   shrunk-nav-hoogte (de header is geshrunkt zodra je in-page scrollt) + marge.
+   Centraal, geen per-anker magic numbers. */
+html {
+  scroll-padding-top: calc(var(--nav-h-shrunk) + 16px);
+}
+
 /* Responsive grid utilities */
 .rg-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
 .rg-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -507,7 +521,7 @@ header.site-header { top: 0; }
      volgt de onderrand van de topbar naar boven via --util-offset (34px → 0) en blijft
      daarna sticky op top:0. JS (Navigation.tsx) zet --util-offset bij het scrollen;
      fallback 34px geldt vóór hydratatie en bij scrollpositie 0. */
-  header.site-header { top: var(--util-offset, 34px); }
+  header.site-header { top: var(--util-offset, var(--topbar-h)); }
 }
 
 /* --- StickyNav island --- */

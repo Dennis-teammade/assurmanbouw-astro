@@ -34,6 +34,11 @@ toggles** (SEO-eis, CLAUDE.md §7) en gebruik islands alleen waar echt nodig.
   (`.brand-btn-primary--lg` scan + `.brand-btn-secondary` afspraak), hero-disclaimer,
   hero-mask rechts.
 - **Varieert:** polisnaam + copy.
+- **Layout (norm sinds D10 — NIET zelf afwijken):** geen eigen header-`padding-top`
+  (zit centraal op `<main>` via `--header-clear`). Tekst-inner `padding: 100px 32px 80px`.
+  Hero-foto flush tegen de bovenrand (`top: 0; right: -5px`), content-onafhankelijke maat
+  `height: min(85vh, calc(48vw * 709 / 594)); width: auto` (géén losse `max-width`).
+  Identiek aan de sectorpagina's. Zie DECISIONS-LOG D10.
 
 ### 2. Sticky sub-nav (`#ao-sticky-nav`) — `position:sticky; top:72px`
 - **Doel:** sectie-navigatie + scroll-spy.

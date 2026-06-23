@@ -40,14 +40,18 @@ export default function StickyNav({ navItems, heroSectionId = 'hero' }: Props) {
   const scrollTo = (id: string) => {
     const el = document.getElementById(id);
     if (!el) return;
-    const top = el.getBoundingClientRect().top + window.scrollY - 80;
+    // Offset = geshrunkte hoofdnav (--nav-h-shrunk) + deze sticky subnav-balk zelf.
+    // Afgeleid van de centrale header-variabele i.p.v. een los magic number (was -80).
+    const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h-shrunk')) || 68;
+    const offset = navH + 48; // ~48px = hoogte van de subnav-balk + marge
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
     window.scrollTo({ top, behavior: 'smooth' });
   };
 
   return (
     <div style={{
       position: 'sticky',
-      top: 72,
+      top: 'var(--nav-h-shrunk, 68px)',
       zIndex: 90,
       background: '#FFFFFF',
       borderBottom: '1px solid rgba(0,31,63,0.08)',

@@ -63,9 +63,9 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 </style>
 
 <style>
-  .abr-hero-img{position:absolute;top:5vh;right:-5px;height:85vh;width:auto;max-width:48%;z-index:1;pointer-events:none;}
+  .abr-hero-img{position:absolute;top:0;right:-5px;height:min(85vh,calc(48vw * 709 / 594));width:auto;z-index:1;pointer-events:none;}
   .abr-hero-content{max-width:620px;}
-  .abr-hero-inner{max-width:1280px;margin:0 auto;padding:64px 32px 80px;position:relative;z-index:2;}
+  .abr-hero-inner{max-width:1280px;margin:0 auto;padding:100px 32px 80px;position:relative;z-index:2;}
   .abr-hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
   .abr-watis-grid{display:grid;grid-template-columns:340px 1fr;gap:56px;align-items:flex-start;}
   .abr-wanneer-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
@@ -139,7 +139,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 <div style="font-family:'Outfit',sans-serif;color:#001F3F;background:#FFFFFF;">
 
 <!-- HERO -->
-<section id="abr-hero" style="background:#FFFFFF;padding-top:140px;position:relative;overflow:hidden;min-height:100vh;">
+<section id="abr-hero" style="background:#FFFFFF;position:relative;overflow:hidden;min-height:100vh;">
   <div class="abr-hero-img assurman-mask assurman-mask--hero">
     <img src="/verzekeringen-bouwsector-algemeen-hero.jpg" alt="Bouwwerf met Alle Bouwplaatsrisico's verzekering" />
   </div>

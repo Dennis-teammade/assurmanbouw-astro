@@ -100,8 +100,8 @@ const schema = {
 
 <style>
   .prk-container { max-width: 1280px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
-  .prk-hero-content { max-width: 52%; padding-top: 40px; }
-  .prk-hero-img { position: absolute; top: 5%; right: 0; height: 90%; width: auto; max-width: 48%; z-index: 1; pointer-events: none; }
+  .prk-hero-content { max-width: 52%; padding-top: 100px; }
+  .prk-hero-img { position: absolute; top: 0; right: -5px; height: min(85vh, calc(48vw * 709 / 594)); width: auto; z-index: 1; pointer-events: none; }
   .prk-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .prk-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; }
   .prk-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -168,11 +168,11 @@ const schema = {
 </style>
 
 <!-- SECTION 1: HERO -->
-<section class="prk-hero-section" style="padding-top:120px;background:#FFFFFF;position:relative;overflow:hidden;min-height:480px;">
+<section class="prk-hero-section" style="background:#FFFFFF;position:relative;overflow:hidden;min-height:100vh;">
   <div class="prk-hero-img assurman-mask assurman-mask--hero">
     <img src="/images/sectoren/parketzetters-hero.jpg" alt="Parketzetter legt een houten vloer" />
   </div>
-  <div class="prk-container" style="padding-top:40px;padding-bottom:64px;position:relative;z-index:2;">
+  <div class="prk-container" style="padding-top:0;padding-bottom:64px;position:relative;z-index:2;">
     <div class="prk-hero-content">
       <div class="prk-badge-pill" style="margin-bottom:20px;">
         <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
