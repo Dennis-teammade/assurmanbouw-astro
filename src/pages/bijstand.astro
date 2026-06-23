@@ -1,0 +1,257 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandChevron from '../components/BrandChevron.astro';
+import { CTA_DESTINATIONS } from '../data/cta-labels';
+
+// ── Bijstandspagina ──────────────────────────────────────────────────────────
+// Bestemming van de "Bijstand"-link in de utility-topbar. Opmaak in de sitestijl:
+// hero overgenomen van de sectorpagina's (referentie: src/pages/sectoren/dakwerkers.astro),
+// zonder afbeelding. Slate CTA-band met schuine onderrand, tab-sectie (data-tab-btn/
+// data-tab-content, alle inhoud server-side in de DOM) en de globale brand-knopklassen.
+//
+// Volgorde: hero -> bijstandsnummers (tabs) -> Europ Assistance app -> CTA-band.
+// Bijstandsnummers = door de klant aangeleverde databron (exact overgenomen).
+// tel:-href bevat enkel cijfers en een plus.
+
+const SCHADE_MELDEN_URL = 'https://www.mybroker.be/?o=53100'; // hergebruikt uit Footer.astro
+const EUROP_APP_URL = 'https://www.europ-assistance.be/nl/klantvoordelen-ea-app';
+
+const naOngeval = [
+  { naam: 'AG Insurance',                 nr: '+32 (0)78 15 30 00', tel: '+3278153000' },
+  { naam: 'AEDES (polis begint met MV)',  nr: '+32 (0)4 340 56 24', tel: '+3243405624' },
+  { naam: 'AEDES (polis begint met AV)',  nr: '+32 (0)2 642 45 04', tel: '+3226424504' },
+  { naam: 'Allianz Belgium',              nr: '+32 (0)2 773 61 04', tel: '+3227736104' },
+  { naam: 'AXA Belgium',                  nr: '+32 (0)78 15 00 02', tel: '+3278150002' },
+  { naam: 'Baloise',                      nr: '+32 (0)3 870 95 70', tel: '+3238709570' },
+  { naam: 'Piette & Partners',            nr: '+32 (0)78 15 01 82', tel: '+3278150182' },
+  { naam: 'Europ Assistance',            nr: '+32 (0)2 541 90 62', tel: '+3225419062' },
+  { naam: 'Vivium',                       nr: '+32 (0)2 406 30 00', tel: '+3224063000' },
+];
+
+const pechBelgie = [
+  { naam: 'AG Insurance',                  nr: '0800 55 505',        tel: '080055505' },
+  { naam: 'AEDES (polis begint met MV)',   nr: '+32 (0)4 340 56 24', tel: '+3243405624' },
+  { naam: 'AEDES (polis begint met AV)',   nr: '+32 (0)2 642 45 04', tel: '+3226424504' },
+  { naam: 'Allianz Belgium',               nr: '+32 (0)2 773 61 41', tel: '+3227736141' },
+  { naam: 'AXA Belgium',                   nr: '+32 (0)2 550 05 55', tel: '+3225000555' },
+  { naam: 'Baloise',                       nr: '0800 13 444',        tel: '080013444' },
+  { naam: 'Piette & Partners',             nr: '+32 (0)78 15 01 82', tel: '+3278150182' },
+  { naam: 'Europ Assistance',             nr: '+32 (0)2 533 75 75', tel: '+3225337575' },
+  { naam: 'Europese Verzekeringen',        nr: '+32 (0)3 253 64 15', tel: '+3232536415' },
+  { naam: 'Allianz Global Assistance',     nr: '+32 (0)2 290 61 00', tel: '+3222906100' },
+  { naam: 'World Royal Protection (AGA)',  nr: '+32 (0)2 290 65 00', tel: '+3222906500' },
+  { naam: 'Touring',                       nr: '070 344 377',        tel: '070344377' },
+  { naam: 'VAB',                           nr: '070 344 666',        tel: '070344666' },
+  { naam: 'Vivium',                        nr: '+32 (0)2 406 30 00', tel: '+3224063000' },
+];
+
+const pechBuitenland = [
+  { naam: 'AG Insurance',                  nr: '+32 (0)78 05 55 05', tel: '+3278055505' },
+  { naam: 'Allianz Belgium',               nr: '+32 (0)2 773 61 41', tel: '+3227736141' },
+  { naam: 'AXA Belgium',                   nr: '+32 (0)2 550 05 55', tel: '+3225000555' },
+  { naam: 'Baloise',                       nr: '+32 (0)3 870 95 70', tel: '+3238709570' },
+  { naam: 'Piette & Partners',             nr: '+32 (0)78 15 01 82', tel: '+3278150182' },
+  { naam: 'Europ Assistance',             nr: '+32 (0)2 533 75 75', tel: '+3225337575' },
+  { naam: 'Europese Verzekeringen',        nr: '+32 (0)3 253 64 15', tel: '+3232536415' },
+  { naam: 'Allianz Global Assistance',     nr: '+32 (0)2 290 61 00', tel: '+3222906100' },
+  { naam: 'World Royal Protection (AGA)',  nr: '+32 (0)2 290 65 00', tel: '+3222906500' },
+  { naam: 'Touring',                       nr: '+32 (0)2 233 23 45', tel: '+3222332345' },
+  { naam: 'VAB',                           nr: '+32 (0)70 34 46 66', tel: '+3270344666' },
+  { naam: 'Vivium',                        nr: '+32 (0)2 406 30 00', tel: '+3224063000' },
+];
+
+const tabs = [
+  { id: 'ongeval',    label: 'Na een ongeval',                rows: naOngeval },
+  { id: 'belgie',     label: 'Na pech, vanuit België',        rows: pechBelgie },
+  { id: 'buitenland', label: 'Na pech, vanuit het buitenland', rows: pechBuitenland },
+];
+
+const phoneIcon = `<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.88 13.5a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.79 2.82h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.9a16 16 0 0 0 6.18 6.18l1.24-1.24a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`;
+---
+
+<style>
+  .bs-container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .bs-help-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* CTA-band kaarten (op slate), schuine onderhoek zoals .ao-ins-card */
+  .bs-help-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 32px;
+    clip-path: polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);
+  }
+
+  /* Tabs: spiegelt .ao-tab-btn uit arbeidsongevallen.astro */
+  .bs-tab-row { display: flex; gap: 0; border-bottom: 2px solid rgba(0,31,63,0.12); margin-bottom: 32px; justify-content: center; flex-wrap: wrap; }
+  .bs-tab-btn { background: none; border: none; cursor: pointer; padding: 14px 24px; white-space: nowrap; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 15px; color: #64748b; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: color 0.2s, border-color 0.2s; }
+  .bs-tab-btn:hover, .bs-tab-btn.active { color: #E5A524; border-bottom-color: #E5A524; }
+
+  /* Nummerlijst-kaart */
+  .bs-num-card { background: #FFFFFF; border: 1px solid rgba(0,31,63,0.08); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,31,63,0.05); max-width: 760px; margin: 0 auto; }
+  .bs-num-row { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 24px; border-bottom: 1px solid rgba(0,31,63,0.08); }
+  .bs-num-row:last-child { border-bottom: none; }
+  .bs-num-name { font-family: 'Outfit', sans-serif; font-weight: 600; font-size: 16px; color: #001F3F; }
+  .bs-num-tel { display: inline-flex; align-items: center; gap: 8px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 16px; color: #E5A524; text-decoration: none; white-space: nowrap; transition: color 0.2s; }
+  .bs-num-tel:hover { color: #001F3F; }
+
+  @media (max-width: 1023px) {
+    .bs-container { padding: 0 24px; }
+  }
+  @media (max-width: 767px) {
+    .bs-container { padding: 0 15px; }
+    .bs-help-grid { grid-template-columns: 1fr; }
+    .bs-num-row { padding: 14px 16px; gap: 10px; }
+    .bs-num-name { font-size: 15px; }
+    .bs-num-tel { font-size: 15px; }
+  }
+</style>
+
+<BaseLayout
+  title="Bijstand bij pech en schade | Assurman"
+  description="Pech onderweg of schade op de werf? Vind snel het juiste bijstandsnummer van je verzekeraar, regel bijstand 24/7 via de Europ Assistance app of meld je schadegeval bij Assurman."
+  canonical="/bijstand/"
+>
+<div style="font-family:'Outfit',sans-serif;color:#001F3F;background:#FFFFFF;">
+
+  <!-- ═══ HERO (gecentreerd, sectoren-overzichtsstijl, zonder afbeelding) ═══ -->
+  <section style="background:#FFFFFF;padding-top:180px;padding-bottom:80px;position:relative;overflow:hidden;">
+    <div class="bs-container" style="text-align:center;position:relative;z-index:2;">
+      <div class="brand-badge-pill" style="margin-bottom:24px;display:inline-flex;">
+        <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+        Bijstandsnummers
+      </div>
+      <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,56px);line-height:1.08;letter-spacing:-1px;color:#001F3F;margin:0 0 16px;">Snel geholpen bij pech en schade</h1>
+      <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#3F5767;max-width:640px;margin:0 auto;">
+        Het juiste nummer snel gevonden. Kies je situatie en bel rechtstreeks het
+        bijstandsnummer van je verzekeraar. Op mobiel start je het gesprek met één tik.
+      </p>
+    </div>
+  </section>
+
+  <!-- ═══ BIJSTANDSNUMMERS (tabs, alle lijsten server-side in de DOM) ═══ -->
+  <section style="background:#F7F4EF;padding:80px 32px 96px;position:relative;overflow:hidden;">
+    <div style="max-width:1080px;margin:0 auto;">
+      <div class="bs-tab-row" role="tablist" aria-label="Bijstandsnummers per situatie">
+        {tabs.map((tab, i) => (
+          <button class={`bs-tab-btn${i === 0 ? ' active' : ''}`} role="tab" aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`bs-panel-${tab.id}`} data-tab-btn={tab.id}>{tab.label}</button>
+        ))}
+      </div>
+
+      {tabs.map((tab, i) => (
+        <div id={`bs-panel-${tab.id}`} role="tabpanel" aria-label={tab.label} data-tab-content={tab.id} style={`display:${i === 0 ? 'block' : 'none'};`}>
+          <div class="bs-num-card">
+            {tab.rows.map((row) => (
+              <div class="bs-num-row">
+                <span class="bs-num-name">{row.naam}</span>
+                <a class="bs-num-tel" href={`tel:${row.tel}`} aria-label={`Bel ${row.naam}`}>
+                  <Fragment set:html={phoneIcon} />
+                  {row.nr}
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <!-- 112-noot -->
+      <div style="max-width:760px;margin:32px auto 0;background:rgba(229,165,36,0.12);border:1px solid rgba(229,165,36,0.25);border-radius:10px;padding:18px 22px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">
+          Bij levensgevaar of een zwaar ongeval bel je altijd eerst <a href="tel:112" style="color:#001F3F;font-weight:700;text-decoration:none;">112</a>. De bijstandsnummers hierboven zijn bedoeld voor pech of schade, niet ter vervanging van de hulpdiensten. Twijfel je welk nummer voor jouw polis geldt? <a href="/contact/" style="color:#001F3F;font-weight:700;text-decoration:none;">Neem gerust contact met ons op</a>, dan zoeken we het samen uit.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ EUROP ASSISTANCE APP ═══ -->
+  <section style="background:#FFFFFF;padding:0 32px 96px;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+    <div style="max-width:1080px;margin:0 auto;padding-top:80px;">
+      <div style="background:#F5F2FF;border-radius:16px;padding:48px;text-align:center;max-width:760px;margin:0 auto;">
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Europ Assistance</span>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(26px,3vw,38px);line-height:1.1;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">Bijstand via de Europ Assistance app</h2>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.65;color:#3F5767;max-width:560px;margin:0 auto 32px;">
+          Heb je je bijstand lopen bij Europ Assistance? Dan regel je pechverhelping en
+          medische bijstand 24/7 via de app, waar je ook bent. Je dossier wordt meteen
+          geopend en een agent neemt snel contact op.
+        </p>
+        <a href={EUROP_APP_URL} target="_blank" rel="noopener noreferrer" class="brand-btn-primary">
+          Naar de Europ Assistance app
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CTA-BAND (full-width slate band met schuine onderrand) ═══ -->
+  <!-- Geen horizontale padding op de section: de wave-SVG onderaan moet over de volle
+       breedte lopen (anders springt de hoek in). De 32px zijmarge zit op de binnen-div. -->
+  <section style="background:#3F5767;position:relative;overflow:hidden;">
+    <div style="position:absolute;top:-25px;left:50%;transform:translateX(-50%);pointer-events:none;z-index:3;"><BrandChevron color="#E5A524" height="80px" direction="down" /></div>
+    <div style="max-width:1080px;margin:0 auto;padding:100px 32px 80px;position:relative;z-index:1;">
+      <div style="text-align:center;margin-bottom:48px;">
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Direct hulp nodig</span>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#FFFFFF;margin:0 0 16px;">Bereik snel de juiste hulp</h2>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#CBD5E1;max-width:560px;margin:0 auto;">
+          Bel ons tijdens de kantooruren voor advies en begeleiding, of meld je schadegeval
+          rechtstreeks in je dossier. We helpen je verder met de juiste stappen, of het nu
+          om pech, een ongeval of schade aan je materiaal gaat.
+        </p>
+      </div>
+
+      <div class="bs-help-grid">
+        <!-- Bel Assurman -->
+        <div class="bs-help-card">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin:0 0 10px;">Bel Assurman</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 24px;">
+            Onze adviseurs helpen je tijdens de kantooruren en begeleiden je bij de aangifte
+            van je schadegeval.
+          </p>
+          <a href={CTA_DESTINATIONS.tel} class="brand-btn-primary" aria-label="Bel Assurman">
+            <Fragment set:html={phoneIcon} />
+            {CTA_DESTINATIONS.telDisplay}
+          </a>
+        </div>
+
+        <!-- Schade online melden -->
+        <div class="bs-help-card">
+          <h3 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:20px;color:#FFFFFF;margin:0 0 10px;">Schade online melden</h3>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.65;color:#CBD5E1;margin:0 0 24px;">
+            Meld je schadegeval rechtstreeks in je dossier en volg de afhandeling op, waar
+            en wanneer het jou uitkomt.
+          </p>
+          <a href={SCHADE_MELDEN_URL} target="_blank" rel="noopener noreferrer" class="brand-btn-dark">
+            Schade melden
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <p style="font-family:'Open Sans',sans-serif;font-size:14px;line-height:1.65;color:rgba(250,242,242,0.85);margin:28px auto 0;text-align:center;max-width:680px;">
+        Heb je een pechverhelping of reisbijstand bij je polis? Het 24/7-bijstandsnummer
+        staat altijd op je polis en op je bijstandskaart. Houd dat bij de hand voor hulp
+        buiten de kantooruren.
+      </p>
+    </div>
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>
+  </section>
+
+</div>
+</BaseLayout>
+
+<script>
+  // Bijstandsnummers-tabs: spiegelt het patroon uit arbeidsongevallen.astro.
+  // Alle lijsten staan server-side in de DOM; hier wordt enkel zichtbaarheid getoggeld.
+  const tabBtns     = document.querySelectorAll<HTMLElement>('[data-tab-btn]');
+  const tabContents = document.querySelectorAll<HTMLElement>('[data-tab-content]');
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const t = btn.dataset.tabBtn!;
+      tabBtns.forEach(b => {
+        const on = b.dataset.tabBtn === t;
+        b.classList.toggle('active', on);
+        b.setAttribute('aria-selected', on ? 'true' : 'false');
+      });
+      tabContents.forEach(el => { el.style.display = el.dataset.tabContent === t ? 'block' : 'none'; });
+    });
+  });
+</script>

@@ -101,7 +101,18 @@ export default function Navigation() {
 
   useEffect(() => {
     setPathname(window.location.pathname);
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    // De utility-topbar (34px) is niet sticky: ze scrollt weg. De fixed hoofdnav volgt
+    // de onderrand van de topbar naar boven (34 → 0) en blijft daarna sticky op top:0.
+    // Op mobiel (<=900px) is de topbar verborgen; de media-query houdt de nav dan op 0.
+    const TOPBAR_H = 34;
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+      document.documentElement.style.setProperty(
+        '--util-offset',
+        Math.max(0, TOPBAR_H - window.scrollY) + 'px'
+      );
+    };
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -125,9 +136,8 @@ export default function Navigation() {
 
   return (
     <>
-      <header style={{
+      <header className="site-header" style={{
         position: 'fixed',
-        top: 0,
         left: 0,
         right: 0,
         zIndex: 100,
@@ -400,6 +410,11 @@ export default function Navigation() {
             <a href="/werkwijze" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Werkwijze</a>
             <a href="/gids/" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Kenniscentrum</a>
             <a href="/contact/" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Contact</a>
+            {/* Items uit de utility-topbar — die balk is op mobiel verborgen, dus hier
+                bereikbaar houden via het hamburger-menu. */}
+            <a href="/over-assurman/" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Over ons</a>
+            <a href="/bijstand/" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Bijstand</a>
+            <a href="/maak-afspraak/" className="mobile-nav-link" onClick={() => setMobileOpen(false)}>Maak afspraak</a>
 
             <div style={{ paddingTop: 20 }}>
               <a href="/gratis-verzekeringsscan/" className="nav-cta" style={{ display: 'inline-block' }} onClick={() => setMobileOpen(false)}>

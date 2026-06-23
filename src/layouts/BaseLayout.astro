@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/tokens.css';
+import UtilityTopbar from '../components/UtilityTopbar.astro';
 import Navigation from '../components/Navigation';
 import Footer from '../components/Footer.astro';
 
@@ -179,6 +180,7 @@ const schemaArray = schema
         </clipPath>
       </defs>
     </svg>
+    <UtilityTopbar />
     <Navigation client:load />
     <main>
       <slot />

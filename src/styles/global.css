@@ -491,6 +491,9 @@ button[style*="background: #E5A524"]:hover { background: #E9C466 !important; }
 }
 .vmacc-link:hover, .vmacc-link:active { background: #FBF8FF; color: #3F5767; }
 
+/* Mobiel/standaard: hoofdnav plakt op top:0 (geen topbar zichtbaar). */
+header.site-header { top: 0; }
+
 @media (max-width: 900px) {
   .desktop-nav { display: none !important; }
   .desktop-only { display: none !important; }
@@ -500,6 +503,11 @@ button[style*="background: #E5A524"]:hover { background: #E9C466 !important; }
 @media (min-width: 901px) {
   .mobile-menu { display: none !important; }
   .nav-inner { padding-left: 32px !important; padding-right: 32px !important; }
+  /* Desktop: de utility-topbar (34px) is niet sticky en scrollt weg. De fixed hoofdnav
+     volgt de onderrand van de topbar naar boven via --util-offset (34px → 0) en blijft
+     daarna sticky op top:0. JS (Navigation.tsx) zet --util-offset bij het scrollen;
+     fallback 34px geldt vóór hydratatie en bij scrollpositie 0. */
+  header.site-header { top: var(--util-offset, 34px); }
 }
 
 /* --- StickyNav island --- */

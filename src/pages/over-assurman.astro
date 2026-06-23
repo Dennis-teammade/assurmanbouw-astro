@@ -83,7 +83,7 @@ import PartnerSlider from '../components/ui/PartnerSlider';
         <!-- Rechts: stats -->
         <div class="oa-stats-grid">
           {[
-            {stat:'500+', label:'Bouwbedrijven verzekerd'},
+            {stat:'Bouw', label:'Met passie & expertise'},
             {stat:'15+',  label:'Jaar sectorervaring'},
             {stat:'20+',  label:'Verzekeringspartners'},
             {stat:'5/5',  label:'Klanttevredenheid'},
@@ -245,8 +245,35 @@ import PartnerSlider from '../components/ui/PartnerSlider';
     </div>
   </section>
 
+  <!-- ═══ KLANTERVARINGEN (zelfde reviews-sectie als op /werkwijze) ═══ -->
+  <section style="background:#FBF8FF;padding:100px 0 100px;">
+    <div class="oa-container">
+      <div style="text-align:center;margin-bottom:56px;">
+        <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:12px;">Klantervaringen</p>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3.2vw,42px);line-height:1.1;letter-spacing:-0.5px;color:#001F3F;margin:0 0 16px;">
+          Bouwprofessionals over hun samenwerking met Assurman
+        </h2>
+        <p style="font-family:'Outfit',sans-serif;font-size:18px;color:#64748B;max-width:560px;margin:0 auto;">
+          Niets zegt meer dan de ervaring van de mensen voor wie we elke dag werken. Lees hieronder hun eigen woorden.
+        </p>
+      </div>
+      <iframe
+        class="lc_reviews_widget"
+        src="https://reputationhub.site/reputation/widgets/review_widget/CZvuwnma5HR0BBq9wPYn?widgetId=69e88c0cc5c871fdf4cf5ef2"
+        frameborder="0"
+        scrolling="no"
+        style="min-width:100%;width:100%;display:block;border:none;"
+        title="Klantreviews Assurman"
+      ></iframe>
+      <script src="https://reputationhub.site/reputation/assets/review-widget.js" async></script>
+      <p style="font-family:'Open Sans',sans-serif;font-size:13px;color:#94A3B8;text-align:center;margin-top:24px;">
+        Reviews worden rechtstreeks getoond vanuit Google. Onbewerkt en geverifieerd.
+      </p>
+    </div>
+  </section>
+
   <!-- ═══ PARTNERS ═══ -->
-  <section style="background:#FFFFFF;padding:60px 0;border-top:1px solid rgba(0,31,63,0.07);">
+  <section style="background:#FFFFFF;padding:60px 0;">
     <div class="oa-container">
       <p style="text-align:center;font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#3F5767;margin:0 0 32px;">Onze verzekeringspartners</p>
       <PartnerSlider client:visible />

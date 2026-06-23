@@ -543,3 +543,19 @@ Status pagina: **afgewerkt, op staging** (met **placeholder-beelden**). Gebouwd 
 | CH-FOTO | Placeholder-beelden (`/images/sectoren/chappers-{hero,why,cta}.jpg` + `/images/cases/case-chappers-1..4.jpg`) | Echte foto's geplaatst (1-op-1 overschreven, 2026-06-22). | ✅ |
 
 Cases, bedragen en namen zijn fictief-illustratief. Beelden = voorlopige placeholders.
+
+---
+
+## /bijstand (Bijstand-skelet — bereikbaar via utility-topbar)
+
+Status pagina: **uitgewerkt, op staging.** Nieuwe pagina als bestemming van de "Bijstand"-link
+in de utility-topbar. Niet in de hoofdnav opgenomen (enkel topbar + hamburger-menu). Opmaak
+volledig in de verzekeringen-familie-stijl (referentie `arbeidsongevallen.astro`): badge-pill
+hero, slate hulp-band met schuine onderrand, tab-sectie met alle bijstandsnummers, Europ
+Assistance app-blok en 112-noot. Brand-voice je/jij.
+
+| Code | Wat we beslisten (staat zo op de pagina) | Te controleren / suggestie | Status |
+|---|---|---|---|
+| BIJ-1 | **Bijstandsnummers ingevuld uit de door de klant aangeleverde databron** (3 categorieën: na een ongeval, pech vanuit België, pech vanuit het buitenland). Elk nummer is een klikbare `tel:`-link. | Loop de lijst één keer na tegen de officiële verzekeraarsdocumenten vóór go-live (nummers wijzigen soms). | 🔲 |
+| BIJ-2 | **Europ Assistance app-blok** linkt naar `https://www.europ-assistance.be/nl/klantvoordelen-ea-app` (nieuw tab). | Bevestig dat dit de juiste app-landingspagina is voor de Assurman-klanten. | 🔲 |
+| BIJ-3 | **112-noot** onderaan de nummersectie: bij levensgevaar eerst 112, bijstandsnummers enkel voor pech/schade. | Akkoord met de formulering. | 🔲 |
