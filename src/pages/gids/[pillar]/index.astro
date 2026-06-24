@@ -250,9 +250,16 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
 
 <ScrollProgress client:load />
 
-<!-- Compacte breadcrumb strip — nav-clearance zit nu centraal op <main> (global.css) -->
-<div style="padding-top:16px;">
-  <div style="border-bottom:1px solid rgba(0,31,63,0.1);padding:2px 0;">
+<!-- ═══ 1. HERO ═══ -->
+<!-- Foto loopt van net onder de header (over de breadcrumb) naar beneden; breadcrumb
+     + tekst staan eroverheen (z-index:2). -->
+<div class="gp-hero-wrap" style="position:relative;overflow:hidden;background:#FFFFFF;">
+  <div class="gp-hero-img assurman-mask assurman-mask--hero">
+    <img src={pillar.data.heroImage} alt={pillar.data.title} />
+  </div>
+
+  <!-- Compacte breadcrumb strip over de foto -->
+  <div style="position:relative;z-index:2;padding-top:16px;">
     <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
       <Breadcrumbs
         items={[
@@ -263,14 +270,9 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
       />
     </div>
   </div>
-</div>
 
-<!-- ═══ 1. HERO ═══ -->
-<section class="gp-hero-section" style="background:#FFFFFF;padding-top:0;position:relative;overflow:hidden;min-height:540px;">
-  <div class="gp-hero-img assurman-mask assurman-mask--hero">
-    <img src={pillar.data.heroImage} alt={pillar.data.title} />
-  </div>
-  <div class="gp-hero-inner" style="max-width:1280px;margin:0 auto;padding:100px 32px 64px;position:relative;z-index:2;">
+  <section class="gp-hero-section" style="background:transparent;padding-top:0;position:relative;z-index:2;min-height:480px;">
+  <div class="gp-hero-inner" style="max-width:1280px;margin:0 auto;padding:60px 32px 64px;position:relative;">
     <div class="gp-hero-content">
 
       <!-- Section-label -->
@@ -296,7 +298,8 @@ const schemas = [articleSchema, breadcrumbSchema, ...(itemListSchema ? [itemList
 
     </div>
   </div>
-</section>
+  </section>
+</div>
 
 <!-- ═══ SECTIE 1: TLDR + TOC (links) | BRONNEN (rechts) ═══ -->
 <section style="background:#FFFFFF;padding:16px 0 40px;">

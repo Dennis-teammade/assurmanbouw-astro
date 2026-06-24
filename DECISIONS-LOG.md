@@ -250,7 +250,20 @@ en home-hero's stonden al op een letterlijke 100px en blijven gelijk.
 Daarnaast: **contact** en **werkwijze** hero-foto's van `top:5%` → `top:0` (flush onder de
 header i.p.v. met een gaatje/half achter de header). Beide live geverifieerd (foto-top = header-onderkant, tekst 100px).
 
-**Nog open (gids pillar/spoke):** deze templates renderen **niet lokaal** (lege
-content-collectie; content leeft op staging). Aanpassingen daar (pillar: 100px content +
-foto over de breadcrumb tegen de header; spoke: overtollige top-gap weg) gebeuren
-best-effort op de template en moeten op **staging** visueel bevestigd worden.
+**(Correctie in D13:** de aanname dat gids-content niet lokaal staat klopte niet —
+de content stáát in de repo en rendert lokaal. Pillar/spoke zijn alsnog live afgeregeld.)
+
+### D13 — Gids pillar (foto over breadcrumb) + spoke-gap = geneste-`<main>`-bug
+
+**Geneste `<main>` erfde de header-offset dubbel.** De spoke-content-kolom is een
+`<main class="gs-main">` (geneste main). De globale D10-regel `main { padding-top:
+--header-clear }` raakte die óók → 134px fantoom-gap boven de artikel-content (de "rare
+gap"). Fix: regel gescoped naar **`body > main`** (alleen de pagina-main, directe child
+van body). Geneste mains erven niets meer. Spoke-content staat nu op ~100px en lijnt met
+de sidebar. (De eerder gegokte `.gs-grid`-padding-verlaging is teruggedraaid naar 56px.)
+
+**Pillar — foto over de breadcrumb tegen de header.** Breadcrumb-strip + hero zitten nu in
+één `.gp-hero-wrap` (`position:relative`); de `.gp-hero-img` staat daar absoluut op `top:0`
+(= net onder de header) en loopt over de breadcrumb-band naar beneden. Breadcrumb + tekst
+liggen erover (`z-index:2`), hero-sectie-bg transparant zodat de foto rechts doorschijnt.
+Content-eyebrow op 100px van de header. Mobiel (`≤1023px`): foto verborgen, content 100px.

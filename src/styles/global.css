@@ -35,10 +35,12 @@ html, body {
   max-width: 100%;
 }
 
-/* Centrale header-offset: <main> reserveert exact de header-hoogte, zodat geen
-   enkele pagina nog een eigen padding-top als header-compensatie nodig heeft.
-   --header-clear = 134px desktop / 100px mobiel (zie tokens.css). */
-main {
+/* Centrale header-offset: de PAGINA-<main> (directe child van body) reserveert exact de
+   header-hoogte, zodat geen enkele pagina nog een eigen padding-top als header-compensatie
+   nodig heeft. --header-clear = 134px desktop / 100px mobiel (zie tokens.css).
+   LET OP: `body > main` (niet `main`) zodat geneste <main>-elementen (bv. de
+   content-kolom `.gs-main` op gids-spokes) deze offset NIET dubbel erven. */
+body > main {
   padding-top: var(--header-clear);
 }
 
