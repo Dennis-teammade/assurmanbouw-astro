@@ -51,7 +51,7 @@
   --nav-h:        100px;   /* hoofdnav, expanded — sync met Navigation.tsx */
   --nav-h-shrunk:  68px;   /* hoofdnav, shrunk — sync met Navigation.tsx */
   --header-clear: calc(var(--topbar-h) + var(--nav-h)); /* 134px desktop / 100px mobiel */
-  --hero-gap:      40px;   /* uniforme lucht tussen header-onderkant en hero-titel */
+  --hero-gap:     100px;   /* uniforme lucht tussen header-onderkant en hero-titel (zie D11) */
 }
 
 /* Topbar is verborgen ≤900px (UtilityTopbar.astro). Zet --topbar-h dan op 0,
