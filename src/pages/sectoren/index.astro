@@ -175,10 +175,33 @@ const sectorGroepen = [
 <style>
   .dw-container { max-width: 1280px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
 
-  /* Hero image */
-  .sectors-hero-img { position:absolute; top:0; left:-5px; height:100%; width:auto; z-index:1; pointer-events:none; }
+  /* Hero — één brede foto, links de linkerrand (--left + object-position:left),
+     rechts de rechterrand (--right + object-position:right). Niet gespiegeld.
+     Flanken schalen mee met de schermbreedte (vw) en de tekstkolom blijft binnen
+     het midden ertussen, zodat de tekst ALTIJD op wit staat, ongeacht het scherm. */
+  /* Flankbreedte als variabele; de sectiehoogte schaalt eruit mee (mask-aspect 430/519)
+     zodat de afbeelding ALTIJD volledig past en nooit onderaan afgekapt wordt. */
+  .sectors-hero { --flank-w: clamp(200px,26vw,560px); min-height: calc(var(--flank-w) * 519 / 430); }
+  .sectors-hero-img,
+  .sectors-hero-img-right { position:absolute; top:50%; width:var(--flank-w); z-index:1; pointer-events:none; }
+  .sectors-hero-img       { left:-5px;  transform:translateY(-50%); }
+  /* Rechts: div gespiegeld (mask wijst naar binnen), img tegengespiegeld (foto niet gespiegeld) */
+  .sectors-hero-img-right { right:-5px; transform:translateY(-50%) scaleX(-1); }
+  .sectors-hero-img > img       { object-position:left center; }
+  .sectors-hero-img-right > img { object-position:right center; transform:scaleX(-1); }
+  .sectors-hero-text { max-width: min(740px, calc(100vw - 2 * var(--flank-w) - 48px)); margin:0 auto; }
   .sectors-hero-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
-  @media (max-width:1023px) { .sectors-hero-img { display:none; } }
+  @media (max-width:1023px) {
+    .sectors-hero-img, .sectors-hero-img-right { display:none; }
+    .sectors-hero-text { max-width:680px; }
+  }
+
+  /* Sticky cluster-pills (zelfde patroon als de verzekeringspagina's: position:sticky top:72px) */
+  .sectors-sticky-bar   { position:sticky; top:72px; z-index:90; background:#FFFFFF; border-top:1px solid rgba(0,31,63,0.08); border-bottom:1px solid rgba(0,31,63,0.08); overflow:auto; }
+  .sectors-sticky-inner { max-width:1280px; margin:0 auto; padding:0 32px; display:flex; gap:0; justify-content:center; flex-wrap:wrap; }
+  .sectors-sticky-btn   { background:#F7F4EF; border:1px solid rgba(229,165,36,0.2); cursor:pointer; padding:7px 16px; margin:10px 5px; font-family:'Outfit',sans-serif; font-weight:600; font-size:14px; display:inline-flex; align-items:center; gap:8px; white-space:nowrap; border-radius:9999px; transition:background 0.2s,border-color 0.2s; color:#001F3F; }
+  .sectors-sticky-btn:hover, .sectors-sticky-btn.active { background:rgba(229,165,36,0.18); border-color:#E5A524; }
+  @media (max-width:767px) { .sectors-sticky-bar { display:none; } .sectors-sticky-inner { padding:0 15px; } }
   @media (max-width:767px) {
     .sectors-hero-btns { flex-direction:column; align-items:center; }
     .sectors-hero-btns a { width:100%; max-width:400px; justify-content:center; }
@@ -224,12 +247,16 @@ const sectorGroepen = [
 </style>
 
 <!-- HERO -->
-<section style="background:#FFFFFF;padding-top:var(--hero-gap);padding-bottom:80px;border-bottom:1px solid rgba(229,165,36,0.12);position:relative;overflow:hidden;min-height:480px;">
-  <!-- Background image — linksbovenhoek -->
+<section class="sectors-hero" style="background:#FFFFFF;padding-top:100px;padding-bottom:80px;position:relative;overflow:hidden;">
+  <!-- Eén brede foto: links toont de linkerrand, rechts de rechterrand (niet gespiegeld) -->
   <div class="sectors-hero-img assurman-mask assurman-mask--left">
-    <img src="/verzekeringen-bouwsector-Bedrijfsvoertuigen­verzekering-left.jpg" alt="" aria-hidden="true" />
+    <img src="/images/verzekeringen-voor-bouwsectoren.jpg" alt="" aria-hidden="true" />
   </div>
-  <div class="dw-container" style="text-align:center;position:relative;z-index:2;">
+  <div class="sectors-hero-img-right assurman-mask assurman-mask--left">
+    <img src="/images/verzekeringen-voor-bouwsectoren.jpg" alt="" aria-hidden="true" />
+  </div>
+  <div class="dw-container" style="position:relative;z-index:2;">
+   <div class="sectors-hero-text" style="text-align:center;">
     <div class="badge-pill" style="margin-bottom:24px;display:inline-flex;">
       <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
       Assurman • Specialist bouwverzekeringen
@@ -247,24 +274,35 @@ const sectorGroepen = [
       </a>
       <a href="/contact/" class="brand-btn-secondary">Plan een adviesgesprek</a>
     </div>
+   </div>
   </div>
 </section>
 
 <!-- SECTORS GRID -->
 <section style="background:#FFFFFF;padding:80px 0;">
   <div class="dw-container">
-    <div style="text-align:center;margin-bottom:56px;">
-      <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Kies jouw sector</p>
-      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.05;color:#001F3F;margin:0 auto;max-width:640px;">
-        Voor welke bouwprofessional zoek je informatie?
+    <div style="text-align:center;margin-bottom:40px;">
+      <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,48px);line-height:1.05;color:#001F3F;margin:0 auto;max-width:720px;">
+        Voor elk beroep de juiste bescherming
       </h2>
       <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#3F5767;margin:16px auto 0;max-width:560px;">
         Klik op je sector voor alle informatie over verplichte en aanbevolen verzekeringen, cases en veelgestelde vragen.
       </p>
     </div>
+  </div>
 
+  <!-- Sticky cluster-pills: blijven in beeld tijdens scrollen (patroon = verzekeringspagina's) -->
+  <nav id="sectors-sticky-nav" class="sectors-sticky-bar" aria-label="Sectorclusters">
+    <div class="sectors-sticky-inner">
+      {sectorGroepen.map((groep) => (
+        <button class="sectors-sticky-btn" data-sticky-btn={groep.key}>{groep.label}</button>
+      ))}
+    </div>
+  </nav>
+
+  <div class="dw-container" style="padding-top:56px;">
     {sectorGroepen.map((groep) => (
-      <div style="margin-bottom:56px;">
+      <div id={groep.key} style="margin-bottom:56px;scroll-margin-top:140px;">
         <!-- Categorie-kop (sober, slate) -->
         <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(22px,2.5vw,30px);line-height:1.1;color:#3F5767;margin:0 0 6px;">{groep.label}</h2>
         <div style="width:48px;height:3px;background:#E5A524;margin-bottom:24px;"></div>
@@ -353,5 +391,31 @@ const sectorGroepen = [
     <polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" />
   </svg>
 </section>
+
+<script>
+  // Sticky cluster-pills: klik = smooth-scroll naar het cluster; scroll = active-tracking.
+  const stickyBtns = document.querySelectorAll('[data-sticky-btn]');
+  const clusterIds = ['ruwbouw', 'afwerking', 'technieken', 'buiten'];
+  // Offset = geshrunkte header (~68) + de sticky pill-balk zelf (~50) + marge.
+  const SCROLL_OFFSET = 130;
+
+  stickyBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-sticky-btn');
+      const el = id ? document.getElementById(id) : null;
+      if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - SCROLL_OFFSET, behavior: 'smooth' });
+    });
+  });
+
+  window.addEventListener('scroll', () => {
+    for (let i = clusterIds.length - 1; i >= 0; i--) {
+      const el = document.getElementById(clusterIds[i]);
+      if (el && el.getBoundingClientRect().top <= 140) {
+        stickyBtns.forEach((b) => b.classList.toggle('active', b.getAttribute('data-sticky-btn') === clusterIds[i]));
+        break;
+      }
+    }
+  }, { passive: true });
+</script>
 
 </BaseLayout>

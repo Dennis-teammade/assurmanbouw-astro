@@ -206,3 +206,34 @@ width: auto;                                  /* volgt uit aspect-ratio 594/709 
 **Nog te doen (kleine design-ronde):** home + overzichtspagina's (`--left`-masker) staan
 nog op het oude model; die trekken we later gelijk. Mobiel (`display:none` ≤1023px op de
 hero-foto) ongemoeid.
+
+## 2026-06-24
+
+### D11 — Sectoren-overzicht hero herwerkt (dubbele foto) + sticky cluster-pills
+
+**Hero met één brede foto, links/rechts uitgesneden (niet gespiegeld).** `/sectoren/`
+toont één bron-foto (`public/images/verzekeringen-voor-bouwsectoren.jpg`, 1600×900) twee
+keer: links toont de **linkerrand** (`--left`-masker + `object-position:left`), rechts de
+**rechterrand** (`--left`-masker + `transform:scaleX(-1)` op de div zodat het masker naar
+binnen wijst, met de `<img>` tegengespiegeld zodat de **foto zelf niet gespiegeld** is +
+`object-position:right`). Een `--right`-clipPath bleek onbetrouwbaar te renderen; de
+scaleX-aanpak is de werkende keuze.
+
+**Responsief zonder clipping, tekst altijd op wit.** Flankbreedte = variabele
+`--flank-w: clamp(200px,26vw,560px)` (schaalt mee met de schermbreedte). De sectiehoogte
+volgt eruit: `min-height: calc(var(--flank-w) * 519 / 430)` (mask-aspect 430/519), zodat
+de foto **altijd volledig past en nooit onderaan afgekapt wordt**. De tekstkolom is
+begrensd tot het midden tussen de flanken (`max-width: min(740px, calc(100vw - 2*var(--flank-w) - 48px))`)
+→ de hero-tekst staat **op elk scherm op wit**, niet over de foto. Flanken verborgen ≤1023px.
+
+**Sticky cluster-pills** (zelfde patroon als de verzekeringspagina's): `position:sticky;
+top:72px`, 4 pills = de 4 sectorclusters, vanilla-JS smooth-scroll naar het cluster +
+scroll-spy active-state. Elk cluster-blok heeft een `id` + `scroll-margin-top`. Verborgen
+≤767px.
+
+**Tekst/diversen:** 100px tussen header en hero-content (zoals de detailpagina's);
+`border-bottom` onder de hero verwijderd; kop van de sectie eronder → *"Voor elk beroep de
+juiste bescherming"*; eyebrow "Kies jouw sector" verwijderd.
+
+**Volgt:** het verzekeringen-overzicht (`/verzekeringen/`) krijgt exact dezelfde hero-aanpak
+(bron-foto `public/images/verzekeringen-hero.jpg`).
