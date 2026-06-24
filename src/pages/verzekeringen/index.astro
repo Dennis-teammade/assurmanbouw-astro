@@ -19,21 +19,37 @@ const groepen = verzekeringenPerCategorie();
 >
   <!-- HERO -->
   <style>
-    .vz-hero-img { position:absolute; top:0; left:-5px; height:100%; width:auto; z-index:1; pointer-events:none; }
+    /* Hero — één brede foto, links de linkerrand, rechts de rechterrand (niet gespiegeld).
+       Zelfde aanpak als /sectoren/: flanken schalen mee (--flank-w), sectiehoogte volgt
+       zodat de foto nooit afgekapt wordt, en de tekstkolom blijft op wit (zie D11). */
+    .vz-hero { --flank-w: clamp(200px,26vw,560px); min-height: calc(var(--flank-w) * 519 / 430); }
+    .vz-hero-img,
+    .vz-hero-img-right { position:absolute; top:50%; width:var(--flank-w); z-index:1; pointer-events:none; }
+    .vz-hero-img       { left:-5px;  transform:translateY(-50%); }
+    .vz-hero-img-right { right:-5px; transform:translateY(-50%) scaleX(-1); }
+    .vz-hero-img > img       { object-position:left center; }
+    .vz-hero-img-right > img { object-position:right center; transform:scaleX(-1); }
+    .vz-hero-text { max-width: min(740px, calc(100vw - 2 * var(--flank-w) - 48px)); margin:0 auto; }
     .vz-hero-btns { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
-    @media (max-width:1023px) { .vz-hero-img { display:none; } }
+    @media (max-width:1023px) {
+      .vz-hero-img, .vz-hero-img-right { display:none; }
+      .vz-hero-text { max-width:680px; }
+    }
     @media (max-width:767px) {
       .vz-hero-btns { flex-direction:column; align-items:center; }
       .vz-hero-btns a { width:100%; max-width:400px; justify-content:center; }
     }
   </style>
-  <section style="background:#FFFFFF;padding-top:var(--hero-gap);padding-bottom:80px;position:relative;overflow:hidden;min-height:480px;">
-    <!-- Background image — linksbovenhoek, ondergeschikt -->
+  <section class="vz-hero" style="background:#FFFFFF;padding-top:100px;padding-bottom:80px;position:relative;overflow:hidden;">
+    <!-- Eén brede foto: links toont de linkerrand, rechts de rechterrand (niet gespiegeld) -->
     <div class="vz-hero-img assurman-mask assurman-mask--left">
-      <img src="/verzekeringen-bouwsector-arbeidsongevallenverzekering-left.jpg" alt="" aria-hidden="true" />
+      <img src="/images/verzekeringen-hero.jpg" alt="" aria-hidden="true" />
     </div>
-    <!-- Centered text content on top -->
-    <div style="max-width:900px;margin:0 auto;padding:0 32px;text-align:center;position:relative;z-index:2;">
+    <div class="vz-hero-img-right assurman-mask assurman-mask--left">
+      <img src="/images/verzekeringen-hero.jpg" alt="" aria-hidden="true" />
+    </div>
+    <!-- Tekstkolom blijft binnen het midden → altijd op wit -->
+    <div class="vz-hero-text" style="padding:0 32px;text-align:center;position:relative;z-index:2;">
       <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 20px;">Verzekeringen</p>
       <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,56px);line-height:1.08;letter-spacing:-1px;color:#001F3F;margin:0 0 20px;">Alle verzekeringen voor bouwprofessionals</h1>
       <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#3F5767;margin:0 0 36px;">Van de wettelijke verplichten tot de slimme aanvullingen. Assurman brengt je in één overzicht welke dekkingen je nodig hebt en waarom.</p>

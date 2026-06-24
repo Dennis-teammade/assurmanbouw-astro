@@ -235,5 +235,6 @@ scroll-spy active-state. Elk cluster-blok heeft een `id` + `scroll-margin-top`. 
 `border-bottom` onder de hero verwijderd; kop van de sectie eronder → *"Voor elk beroep de
 juiste bescherming"*; eyebrow "Kies jouw sector" verwijderd.
 
-**Volgt:** het verzekeringen-overzicht (`/verzekeringen/`) krijgt exact dezelfde hero-aanpak
-(bron-foto `public/images/verzekeringen-hero.jpg`).
+**Toegepast op het verzekeringen-overzicht** (`/verzekeringen/`): exact dezelfde hero-aanpak
+(dubbele foto, `--flank-w`, sectiehoogte-uit-flank, tekst-op-wit, 100px header→content)
+met bron-foto `public/images/verzekeringen-hero.jpg`.
