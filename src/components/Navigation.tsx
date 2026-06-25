@@ -1,8 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import {
-  ChevronDown, ChevronRight, Menu, X, ArrowRight,
+  ChevronDown, ChevronRight, Menu, X, ArrowRight, FileText,
   ShieldHalf, Hammer, HeartHandshake, PiggyBank,
   BrickWall, PaintRoller, Zap, Trees,
+  Shield, Wrench, Truck, Users, CheckCircle, Layers, Building2, Scale, Car, HardHat, Flame, Heart,
 } from 'lucide-react';
 import { verzekeringenPerCategorie, verzekeringUrl, CATEGORIE_META } from '../data/verzekeringen';
 import type { LucideIcon } from 'lucide-react';
@@ -83,6 +84,25 @@ const SECTOR_ICON: Record<string, LucideIcon> = {
   'trees': Trees,
 };
 
+// Polis-iconen voor het rechterpaneel: icoon-key uit verzekeringen.ts → lucide-react.
+// Zelfde keys als ICON_MAP in InsuranceCarousel.tsx (één visuele taal site-breed).
+const POLIS_ICON: Record<string, LucideIcon> = {
+  'shield': Shield,
+  'wrench': Wrench,
+  'truck': Truck,
+  'users': Users,
+  'zap': Zap,
+  'check-circle': CheckCircle,
+  'layers': Layers,
+  'building2': Building2,
+  'scale': Scale,
+  'car': Car,
+  'hardhat': HardHat,
+  'flame': Flame,
+  'heart': Heart,
+  'piggy-bank': PiggyBank,
+};
+
 export default function Navigation() {
   const [showVerzekeringen, setShowVerzekeringen] = useState(false);
   const [activeVerzCat, setActiveVerzCat] = useState<string>(verzekeringGroepen[0]?.categorie ?? '');
@@ -146,6 +166,7 @@ export default function Navigation() {
         transition: 'box-shadow 0.3s ease',
       }}>
         <div style={{
+          position: 'relative',
           maxWidth: 1280,
           margin: '0 auto',
           padding: scrolled ? '6px 15px' : '10px 15px',
@@ -167,7 +188,7 @@ export default function Navigation() {
 
           <nav style={{ display: 'flex', alignItems: 'center', gap: 32 }} className="desktop-nav">
             <div
-              style={{ position: 'relative' }}
+              style={{ position: 'static' }}
               onMouseEnter={openVerzekeringen}
               onMouseLeave={closeVerzekeringen}
               onFocus={openVerzekeringen}
@@ -177,7 +198,7 @@ export default function Navigation() {
                 Verzekeringen
                 <ChevronDown size={15} style={{ transition: 'transform 0.2s', transform: showVerzekeringen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
               </button>
-              <div className={`nav-dropdown ${showVerzekeringen ? 'visible' : 'hidden'}`} style={{ width: 680, padding: 0 }}>
+              <div className={`nav-dropdown ${showVerzekeringen ? 'visible' : 'hidden'}`} style={{ padding: 0 }}>
                 <div className="vmm">
                   <div className="vmm-left">
                     {verzekeringGroepen.map((groep) => {
@@ -211,34 +232,41 @@ export default function Navigation() {
                         id={`vmm-panel-${groep.categorie}`}
                         role="region"
                         aria-label={groep.label}
-                        style={{ display: activeVerzCat === groep.categorie ? 'block' : 'none' }}
+                        className={`vmm-panel${activeVerzCat === groep.categorie ? ' active' : ''}`}
                       >
+                        <h3 className="vmm-head">Verzekeringen rond {groep.label.toLowerCase()}</h3>
                         <div className="vmm-grid">
-                          {groep.items.map((v) => (
-                            <a
-                              key={v.slug}
-                              href={verzekeringUrl(v.slug)}
-                              className="vmm-pol"
-                              onClick={() => setShowVerzekeringen(false)}
-                            >
-                              <span className="vmm-pol-t">{v.titel}</span>
-                              <span className="vmm-pol-d">{v.menuOmschrijving}</span>
-                            </a>
-                          ))}
+                          {groep.items.map((v) => {
+                            const PolIcon = POLIS_ICON[v.icoon] ?? Shield;
+                            return (
+                              <a
+                                key={v.slug}
+                                href={verzekeringUrl(v.slug)}
+                                className="vmm-pol"
+                                onClick={() => setShowVerzekeringen(false)}
+                              >
+                                <span className="vmm-pol-ico"><PolIcon size={22} color="#E5A524" /></span>
+                                <span className="vmm-pol-txt">
+                                  <span className="vmm-pol-t">{v.titel}</span>
+                                  <span className="vmm-pol-d">{v.menuOmschrijving}</span>
+                                </span>
+                              </a>
+                            );
+                          })}
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
                 <a href="/verzekeringen/" className="vmm-foot" onClick={() => setShowVerzekeringen(false)}>
-                  <span className="vmm-foot-l">Bekijk alle verzekeringen</span>
+                  <span className="vmm-foot-l"><FileText size={17} />Bekijk alle verzekeringen</span>
                   <span className="vmm-foot-r">Overzicht <ArrowRight size={15} /></span>
                 </a>
               </div>
             </div>
 
             <div
-              style={{ position: 'relative' }}
+              style={{ position: 'static' }}
               onMouseEnter={openSectoren}
               onMouseLeave={closeSectoren}
               onFocus={openSectoren}
@@ -248,8 +276,8 @@ export default function Navigation() {
                 Sectoren
                 <ChevronDown size={15} style={{ transition: 'transform 0.2s', transform: showSectoren ? 'rotate(180deg)' : 'rotate(0deg)' }} />
               </button>
-              <div className={`nav-dropdown ${showSectoren ? 'visible' : 'hidden'}`} style={{ width: 700, padding: 0 }}>
-                <div className="vmm" style={{ gridTemplateColumns: '256px 1fr' }}>
+              <div className={`nav-dropdown ${showSectoren ? 'visible' : 'hidden'}`} style={{ padding: 0 }}>
+                <div className="vmm">
                   <div className="vmm-left">
                     {sectorGroepen.map((groep) => {
                       const Icon = SECTOR_ICON[groep.icoon] ?? BrickWall;
@@ -281,13 +309,16 @@ export default function Navigation() {
                         id={`vmm-sector-panel-${groep.key}`}
                         role="region"
                         aria-label={groep.label}
-                        style={{ display: activeSectorCat === groep.key ? 'block' : 'none' }}
+                        className={`vmm-panel${activeSectorCat === groep.key ? ' active' : ''}`}
                       >
+                        <h3 className="vmm-head">{groep.label}</h3>
                         <div className="vmm-grid">
                           {groep.items.map((item) => (
                             <a key={item.to} href={item.to} className="vmm-pol" onClick={() => setShowSectoren(false)}>
-                              <span className="vmm-pol-t">{item.label}</span>
-                              <span className="vmm-pol-d">{item.omschrijving}</span>
+                              <span className="vmm-pol-txt">
+                                <span className="vmm-pol-t">{item.label}</span>
+                                <span className="vmm-pol-d">{item.omschrijving}</span>
+                              </span>
                             </a>
                           ))}
                         </div>
@@ -296,7 +327,7 @@ export default function Navigation() {
                   </div>
                 </div>
                 <a href="/sectoren/" className="vmm-foot" onClick={() => setShowSectoren(false)}>
-                  <span className="vmm-foot-l">Bekijk alle sectoren</span>
+                  <span className="vmm-foot-l"><FileText size={17} />Bekijk alle sectoren</span>
                   <span className="vmm-foot-r">Overzicht <ArrowRight size={15} /></span>
                 </a>
               </div>
