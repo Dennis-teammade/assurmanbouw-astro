@@ -1,0 +1,196 @@
+---
+// ── LAB: sectorpagina + hero-deco ────────────────────────────────────────────
+// Geïsoleerde sandbox: de eerste 3 secties van een sectorpagina (dakwerkers),
+// met de hero-deco van /lab/home (v1 concentrische mask-banden) toegepast op de hero.
+// Doel: zien hoe de banden ogen op een echte sectorpagina + testen wat er gebeurt
+// aan de sectie-overgang (hero → key-features → intro), waar een band wordt afgesneden.
+//
+// BASELINE: eerst exact zoals uitgewerkt (banden afgesneden op de sectiegrens), zodat
+// we kunnen vergelijken zodra we ze laten doorlopen. Route: /lab/sector · noindex.
+//
+// Secties 1-3 + dw-*-CSS zijn 1-op-1 overgenomen uit src/pages/sectoren/dakwerkers.astro.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
+---
+
+<style>
+  /* ── dw-*-klassen (secties 1-3), overgenomen uit dakwerkers.astro ── */
+  .dw-container { max-width: 1280px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
+  .dw-hero-content { max-width: 52%; padding-top: 100px; }
+  /* Foto-sizing EXACT als /lab/home: breedte-gestuurd (clamp), losgekoppeld van de
+     viewport-hoogte. Best practice — reageert op schermbreedte, niet op -hoogte. */
+  .dw-hero-img { position: absolute; top: 0; right: -5px; width: clamp(420px, 33vw, 620px); height: auto; z-index: 1; pointer-events: none; }
+  .dw-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .dw-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; }
+  .dw-hero-btns { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+  .dw-btn-primary { display: inline-flex; align-items: center; gap: 10px; background: #E5A524; color: #001F3F; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 18px; padding: 18px 32px; border-radius: 8px; border: none; cursor: pointer; text-decoration: none; transition: background 0.2s, transform 0.15s; white-space: nowrap; }
+  .dw-btn-primary:hover { background: #E9C466; transform: translateY(-1px); }
+  .dw-btn-secondary { display: inline-flex; align-items: center; gap: 10px; background: transparent; color: #001F3F; font-family: 'Open Sans', sans-serif; font-weight: 700; font-size: 18px; padding: 16px 32px; border-radius: 8px; border: 2px solid rgba(213, 196, 174, 0.5); cursor: pointer; text-decoration: none; transition: border-color 0.2s, background 0.2s; white-space: nowrap; }
+  .dw-btn-secondary:hover { border-color: #E5A524; background: rgba(229, 165, 36, 0.05); }
+  .dw-badge-pill { display: inline-flex; align-items: center; gap: 8px; background: #F5F2FF; border: 1px solid rgba(213, 196, 174, 0.2); border-radius: 9999px; padding: 6px 16px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #001F3F; }
+  .dw-why-card { background: #FFFFFF; border-left: 4px solid #E5A524; box-shadow: 0px 1px 2px rgba(0,0,0,0.05); transition: box-shadow 0.2s, transform 0.2s; }
+  .dw-why-card:hover { box-shadow: 0 8px 24px rgba(0,0,0,0.1); transform: translateY(-2px); }
+
+  @media (max-width: 1023px) {
+    .dw-hero-img { display: none; }
+    .dw-features-grid { grid-template-columns: repeat(2, 1fr); }
+    .dw-intro-grid { grid-template-columns: 1fr; }
+    .dw-container { padding-left: 24px; padding-right: 24px; }
+  }
+  @media (max-width: 767px) {
+    .dw-container { padding-left: 15px; padding-right: 15px; }
+    .dw-hero-content { max-width: 100%; padding-top: 16px; }
+    .dw-features-grid { grid-template-columns: 1fr; gap: 12px; }
+    .dw-intro-grid { grid-template-columns: 1fr; gap: 24px; }
+    .dw-btn-primary { font-size: 16px; padding: 16px 24px; }
+    .dw-btn-secondary { font-size: 16px; padding: 14px 24px; }
+    .dw-hero-btns { flex-direction: column; }
+    .dw-hero-btns a { width: 100%; justify-content: center; text-align: center; }
+    .dw-hero-section { display: flex; flex-direction: column; min-height: unset !important; }
+  }
+
+  /* ── Hero-deco (v1) — concentrische mask-banden rond de sector-foto ──
+     --photo-w gelijkgezet aan de ECHTE sector-foto-breedte (min(85vh→breedte, 48vw)),
+     zodat de banden de echte foto omsluiten. Verder identiek aan /lab/home. */
+  .dw-hero-section { --photo-w: clamp(420px, 33vw, 620px); }
+  .hero-deco {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    --hd-avail: calc(100vw + 5px - var(--photo-w) - max(664px, calc(50vw + 24px)));
+    --hd-room: clamp(0px, calc(var(--hd-avail) - 46px), 640px);
+  }
+  .hd-layer {
+    position: absolute; aspect-ratio: 594 / 709; height: auto;
+    width: calc(var(--photo-w) + 2 * var(--infl));
+    top: calc(0px - var(--infl) * 709 / 594);
+    right: calc(-5px - var(--infl));
+  }
+  .hd-layer svg { width: 100%; height: 100%; display: block; }
+  .hd-l1 { --infl: calc(0.30 * var(--hd-room)); filter: drop-shadow(3px 8px 13px rgba(0,31,63,0.10)); animation-delay: 0.70s; }
+  .hd-l2 { --infl: calc(0.60 * var(--hd-room)); filter: drop-shadow(3px 8px 13px rgba(0,31,63,0.10)); animation-delay: 1.00s; }
+  .hd-l3 { --infl: calc(1.00 * var(--hd-room)); animation-delay: 1.30s; }
+
+  /* Entry-animatie + CTA-aandachtstrekker (identiek aan /lab/home). */
+  @keyframes hd-reveal { from { opacity: 0; transform: translateX(34px); } to { opacity: 1; transform: translateX(0); } }
+  .hd-layer { animation-name: hd-reveal; animation-duration: 1.2s; animation-timing-function: ease-out; animation-fill-mode: both; }
+  @keyframes cta-attn { 0%, 100% { background-color: #E5A524; } 50% { background-color: #E9C466; } }
+  .lab-cta { animation: cta-attn 1.6s ease-in-out 2.6s 5; }
+  @media (prefers-reduced-motion: reduce) { .hd-layer { animation-name: none; } .lab-cta { animation: none; } }
+
+  @media (max-width: 1023px) { .hero-deco { display: none; } }
+</style>
+
+<BaseLayout
+  title="LAB · Sector + hero-deco (test) | Assurman"
+  description="Interne testomgeving. Niet voor publicatie."
+  canonical="/lab/sector"
+  noindex={true}
+>
+  <!-- Gedeelde mask-path-definitie (1×) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <path id="hd-mask" d="M9.03614 396.947C5.84744 391.129 3.16018 382.359 5.22461 370.57L65.9356 23.9121C65.9356 23.9117 65.9354 23.9102 65.9356 23.9092C65.936 23.9068 65.9366 23.9026 65.9375 23.8975C65.9394 23.8869 65.9423 23.8702 65.9463 23.8486C65.9544 23.8054 65.9674 23.7404 65.9844 23.6553C66.0183 23.4848 66.0699 23.2331 66.1426 22.9121C66.2881 22.2696 66.516 21.3494 66.8418 20.2441C67.4939 18.0319 68.5379 15.0876 70.1074 12.1484C73.2557 6.2531 78.4429 0.500001 86.7168 0.500001L589.499 0.500007L589.5 24.5674L589.5 592.965C589.5 593.01 589.498 593.077 589.496 593.166C589.492 593.344 589.484 593.608 589.469 593.947C589.437 594.625 589.375 595.605 589.249 596.805C588.997 599.207 588.493 602.486 587.487 605.998C585.47 613.041 581.465 620.918 573.531 624.639L416.905 698.107L416.904 698.107C416.903 698.108 416.9 698.11 416.896 698.111C416.89 698.114 416.879 698.12 416.865 698.126C416.836 698.139 416.792 698.158 416.733 698.184C416.616 698.234 416.438 698.309 416.207 698.399C415.744 698.581 415.063 698.828 414.198 699.09C412.467 699.614 410.001 700.192 407.073 700.41C401.221 700.846 393.531 699.841 386.135 694.079L15.8994 405.627L15.8984 405.626C15.8972 405.625 15.8954 405.623 15.8926 405.621C15.8865 405.616 15.8763 405.608 15.8633 405.598C15.8374 405.577 15.7979 405.544 15.7461 405.501C15.6419 405.413 15.4873 405.28 15.291 405.102C14.8984 404.744 14.3386 404.204 13.6777 403.481C12.3558 402.036 10.6321 399.859 9.03614 396.947Z"/>
+  </defs></svg>
+
+  <!-- SECTION 1: HERO (met deco) — hoogte = viewport minus header (best practice) -->
+  <section class="dw-hero-section" style="background:#FFFFFF;position:relative;overflow:hidden;min-height:calc(100vh - var(--header-clear));">
+    <div class="hero-deco">
+      <div class="hd-layer hd-l3"><svg viewBox="0 0 594 709" aria-hidden="true"><use href="#hd-mask" fill="#CBD5E1" fill-opacity="0.6"/></svg></div>
+      <div class="hd-layer hd-l2"><svg viewBox="0 0 594 709" aria-hidden="true"><use href="#hd-mask" fill="#F7F4EF" fill-opacity="0.9"/></svg></div>
+      <div class="hd-layer hd-l1"><svg viewBox="0 0 594 709" aria-hidden="true"><use href="#hd-mask" fill="#E5A524" fill-opacity="0.09"/></svg></div>
+    </div>
+    <div class="dw-hero-img assurman-mask assurman-mask--hero">
+      <img src="/assurman-verzekeringen-bouwsector-dakwerker-hero.jpg" alt="Dakwerker aan het werk op een hellend dak" />
+    </div>
+    <div class="dw-container" style="padding-top:0;padding-bottom:64px;position:relative;z-index:2;">
+      <div class="dw-hero-content">
+        <div class="dw-badge-pill" style="margin-bottom:20px;">
+          <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+          Assurman • Bouwverzekeringen op maat
+        </div>
+        <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">
+          Verzekeringen voor dakwerkers
+        </h1>
+        <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(22px,3.5vw,52px);line-height:1.1;letter-spacing:-1px;color:#E5A524;margin-bottom:20px;">
+          Veilig op de werf, op hoogte en onderweg.
+        </p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#001F3F;margin-bottom:28px;max-width:520px;">
+          Als dakwerker neem je elke dag risico's: valgevaar, schade aan eigendom, werfschade, materiaalverlies en discussies over aansprakelijkheid. Assurman is gespecialiseerd in verzekeringen op maat van bouwondernemers in Vlaanderen.
+        </p>
+        <div class="dw-hero-btns">
+          <a href={CTA_DESTINATIONS.scan} class="dw-btn-primary lab-cta">
+            {CTA_SCAN.request}
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href={CTA_DESTINATIONS.afspraak} class="dw-btn-secondary">{CTA_AFSPRAAK.advisoryFull}</a>
+        </div>
+        <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#001F3F;opacity:0.75;">
+          Geen verplichting. We finaliseren je pakket samen na je intake.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: KEY FEATURES STRIP -->
+  <section style="background:#e5a52414;padding:48px 0;">
+    <div class="dw-container">
+      <p style="font-family:'Open Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#8B6A1A;text-align:center;margin:0 0 32px 0;">
+        Een goede verzekering begint bij:
+      </p>
+      <div class="dw-features-grid">
+        {[
+          { text: 'Specialist in\ndakwerkers & bouw', iconPath: 'M10 10V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v5M14 6a6 6 0 0 1 6 6v3M4 15v-3a6 6 0 0 1 6-6M3 15L21 15A1 1 0 0 1 22 16L22 18A1 1 0 0 1 21 19L3 19A1 1 0 0 1 2 18L2 16A1 1 0 0 1 3 15z' },
+          { text: 'Modulair pakket:\nenkel wat nodig is', iconPath: 'm6 14 1.5-2.9A2 2 0 0 1 9.24 10H20a2 2 0 0 1 1.94 2.5l-1.54 6a2 2 0 0 1-1.95 1.5H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h3.9a2 2 0 0 1 1.69.9l.81 1.2a2 2 0 0 0 1.67.9H18a2 2 0 0 1 2 2v2' },
+          { text: 'Duidelijke uitleg,\nsnelle service', iconPath: 'M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z' },
+          { text: 'Dekking voor werf\n+ materiaal + mobiliteit', iconPath: 'M3 6L21 6A1 1 0 0 1 22 7L22 13A1 1 0 0 1 21 14L3 14A1 1 0 0 1 2 13L2 7A1 1 0 0 1 3 6zM17 14v7M7 14v7M17 3v3M7 3v3M10 14L2.3 6.3M14 6L21.7 13.7M8 6L16 14' },
+        ].map((item) => (
+          <div style="display:flex;align-items:center;gap:20px;background:#FFFFFF;border:1px solid rgba(229,165,36,0.18);border-radius:12px;padding:20px 24px;box-shadow:0 1px 4px rgba(0,0,0,0.05);">
+            <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;"><path d={item.iconPath}/></svg>
+            <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#001F3F;line-height:1.45;white-space:pre-line;">{item.text}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3: INTRO + POSITIONERING -->
+  <section style="background:#FBF8FF;padding:80px 0;">
+    <div class="dw-container" style="max-width:1110px;">
+      <div class="dw-intro-grid">
+        <div style="padding-top:40px;padding-right:0;">
+          <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3vw,41px);line-height:1.1;color:#001F3F;margin-bottom:16px;">
+            Waarom een dakwerker een specialist nodig heeft
+          </h2>
+          <div style="width:96px;height:6px;background:#E5A524;margin-bottom:24px;"></div>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:20px;">
+            Dakwerken is geen "standaard beroep". Je werkt vaak op hoogte, met warmtebronnen, waterdichting, zware materialen en wisselende werven. Eén fout, één onverwachte windstoot, één losliggende tegel of één misverstand met een opdrachtgever kan al leiden tot schadeclaims of werkonderbreking.
+          </p>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(16px,1.5vw,20px);line-height:1.6;color:#001F3F;margin-bottom:32px;">
+            Daarom werkt Assurman niet met een one-size-fits-all polis. We bouwen een pakket op maat van jouw realiteit: type werven (nieuwbouw/renovatie), onderaannemers, personeel, materiaalwaarde, bestelwagen, regio en risicoprofiel.
+          </p>
+          <blockquote style="border-left:4px solid #E5A524;padding-left:24px;margin:0;">
+            <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;line-height:1.55;color:#001F3F;margin:0;">
+              "Het doel is simpel: jij bouwt verder, wij zorgen dat je beschermd bent."
+            </p>
+          </blockquote>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:20px;padding-top:40px;">
+          {[
+            { title: 'Werken op Hoogte', text: 'Specifieke clausules voor valbeveiliging en schade aan derden door vallende materialen.', iconPath: 'M18 9L12 3L6 9M12 3v14M5 21h14' },
+            { title: 'Werfschade & Aansprakelijkheid', text: "Met BA + ABR dek je de risico's die dakwerkers het vaakst tegenkomen op de werf.", iconPath: 'M21.73 18l-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3M12 9v4M12 17h.01' },
+            { title: 'Materiaal & Mobiliteit', text: 'Bescherming voor gereedschap, machines en bestelwagen zodat je nooit stilstaat.', iconPath: 'M15 12l-9.373 9.373a1 1 0 0 1-3.001-3L12 9M18 15L22 11M21.5 11.5l-1.914-1.914A2 2 0 0 1 19 8.172v-.344a2 2 0 0 0-.586-1.414l-1.657-1.657A6 6 0 0 0 12.516 3H9l1.243 1.243A6 6 0 0 1 12 8.485V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5' },
+          ].map((card) => (
+            <div class="dw-why-card" style="padding:28px;display:flex;align-items:flex-start;gap:20px;">
+              <div style="background:rgba(229,165,36,0.1);border-radius:8px;padding:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;min-width:48px;height:48px;">
+                <svg width="20" height="20" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d={card.iconPath}/></svg>
+              </div>
+              <div>
+                <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:20px;line-height:1.27;color:#001F3F;margin-bottom:6px;">{card.title}</h3>
+                <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:16px;line-height:1.4;color:#001F3F;margin:0;">{card.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

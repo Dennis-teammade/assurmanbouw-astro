@@ -1,0 +1,187 @@
+---
+// ── LAB: verzekeringspagina + hero-deco ──────────────────────────────────────
+// Eerste secties van een verzekeringspagina (arbeidsongevallen), met de hero-deco
+// van /lab/home toegepast op de hero. Verzekeringen hebben GEEN gekleurde band onder
+// de hero (anders dan sectoren): hier is het hero (wit) → "Wat is het" (wit) =
+// WIT-OP-WIT. Net de situatie waar een afgesneden vorm "in het niets" lijkt te stoppen.
+//
+// Route: /lab/verzekering · noindex · niet in de nav.
+// Secties + ao-*-CSS 1-op-1 uit src/pages/verzekeringen/arbeidsongevallen.astro.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
+---
+
+<style>
+  /* ── ao-*-klassen (overgenomen uit arbeidsongevallen.astro) ── */
+  .ao-container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
+  .ao-hero-content { max-width: 620px; }
+  .ao-hero-inner { max-width: 1280px; margin: 0 auto; padding: 100px 32px 80px; position: relative; z-index: 2; }
+  .ao-hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+  .ao-watis-grid { display: grid; grid-template-columns: 340px 1fr; gap: 56px; align-items: flex-start; }
+  .ao-verplicht-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  .ao-badge-pill { display: inline-flex; align-items: center; gap: 8px; background: #F5F2FF; border: 1px solid rgba(213, 196, 174, 0.2); border-radius: 9999px; padding: 6px 16px; font-family: 'Outfit', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: #001F3F; }
+  /* Foto-sizing EXACT als /lab/home (breedte-gestuurd, niet hoogte) */
+  .ao-hero-img { position: absolute; top: 0; right: -5px; width: clamp(420px, 33vw, 620px); height: auto; z-index: 1; pointer-events: none; }
+
+  @media (max-width: 1023px) {
+    .ao-hero-img, .hero-deco { display: none; }
+    .ao-container { padding: 0 24px; }
+    .ao-watis-grid { grid-template-columns: 1fr; gap: 32px; }
+    .ao-verplicht-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 767px) {
+    .ao-container { padding: 0 15px; }
+    .ao-hero-content { max-width: 100%; }
+    .ao-hero-btns { flex-direction: column; }
+    .ao-hero-btns a { width: 100%; justify-content: center; text-align: center; }
+    .ao-watis-grid { grid-template-columns: 1fr; gap: 24px; }
+    .ao-verplicht-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Hero-deco (v1) — banden lopen DOOR over de sectiegrens (optie 2) ──
+     De deco zit op een wrapper (.hero-flow) rond hero + sectie 2, met overflow:hidden
+     op de wrapper i.p.v. de hero. Zo wordt de vorm pas onderaan sectie 2 begrensd (of
+     eindigt ze natuurlijk in haar punt), niet hard afgekapt op de hero-grens.
+     De secties zijn transparant + z-index:1 zodat de deco (z-index:0) erachter doorloopt;
+     de witte achtergrond zit op de wrapper. */
+  .hero-flow { position: relative; z-index: 0; background: #FFFFFF; overflow: hidden; --photo-w: clamp(420px, 33vw, 620px); }
+  .hero-deco {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    --hd-avail: calc(100vw + 5px - var(--photo-w) - max(652px, calc(50vw + 12px)));
+    --hd-room: clamp(0px, calc(var(--hd-avail) - 46px), 640px);
+  }
+  .hd-layer {
+    position: absolute; aspect-ratio: 594 / 709; height: auto;
+    width: calc(var(--photo-w) + 2 * var(--infl));
+    top: calc(0px - var(--infl) * 709 / 594);
+    right: calc(-5px - var(--infl));
+  }
+  .hd-layer svg { width: 100%; height: 100%; display: block; }
+  .hd-l1 { --infl: calc(0.30 * var(--hd-room)); filter: drop-shadow(3px 8px 13px rgba(0,31,63,0.10)); animation-delay: 0.70s; }
+  .hd-l2 { --infl: calc(0.60 * var(--hd-room)); filter: drop-shadow(3px 8px 13px rgba(0,31,63,0.10)); animation-delay: 1.00s; }
+  .hd-l3 { --infl: calc(1.00 * var(--hd-room)); animation-delay: 1.30s; }
+
+  /* Entry-animatie + CTA-aandachtstrekker (identiek aan /lab/home). */
+  @keyframes hd-reveal { from { opacity: 0; transform: translateX(34px); } to { opacity: 1; transform: translateX(0); } }
+  .hd-layer { animation-name: hd-reveal; animation-duration: 1.2s; animation-timing-function: ease-out; animation-fill-mode: both; }
+  @keyframes cta-attn { 0%, 100% { background-color: #E5A524; } 50% { background-color: #E9C466; } }
+  .lab-cta { animation: cta-attn 1.6s ease-in-out 2.6s 5; }
+  @media (prefers-reduced-motion: reduce) { .hd-layer { animation-name: none; } .lab-cta { animation: none; } }
+</style>
+
+<BaseLayout
+  title="LAB · Verzekering + hero-deco (test) | Assurman"
+  description="Interne testomgeving. Niet voor publicatie."
+  canonical="/lab/verzekering"
+  noindex={true}
+>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <path id="hd-mask" d="M9.03614 396.947C5.84744 391.129 3.16018 382.359 5.22461 370.57L65.9356 23.9121C65.9356 23.9117 65.9354 23.9102 65.9356 23.9092C65.936 23.9068 65.9366 23.9026 65.9375 23.8975C65.9394 23.8869 65.9423 23.8702 65.9463 23.8486C65.9544 23.8054 65.9674 23.7404 65.9844 23.6553C66.0183 23.4848 66.0699 23.2331 66.1426 22.9121C66.2881 22.2696 66.516 21.3494 66.8418 20.2441C67.4939 18.0319 68.5379 15.0876 70.1074 12.1484C73.2557 6.2531 78.4429 0.500001 86.7168 0.500001L589.499 0.500007L589.5 24.5674L589.5 592.965C589.5 593.01 589.498 593.077 589.496 593.166C589.492 593.344 589.484 593.608 589.469 593.947C589.437 594.625 589.375 595.605 589.249 596.805C588.997 599.207 588.493 602.486 587.487 605.998C585.47 613.041 581.465 620.918 573.531 624.639L416.905 698.107L416.904 698.107C416.903 698.108 416.9 698.11 416.896 698.111C416.89 698.114 416.879 698.12 416.865 698.126C416.836 698.139 416.792 698.158 416.733 698.184C416.616 698.234 416.438 698.309 416.207 698.399C415.744 698.581 415.063 698.828 414.198 699.09C412.467 699.614 410.001 700.192 407.073 700.41C401.221 700.846 393.531 699.841 386.135 694.079L15.8994 405.627L15.8984 405.626C15.8972 405.625 15.8954 405.623 15.8926 405.621C15.8865 405.616 15.8763 405.608 15.8633 405.598C15.8374 405.577 15.7979 405.544 15.7461 405.501C15.6419 405.413 15.4873 405.28 15.291 405.102C14.8984 404.744 14.3386 404.204 13.6777 403.481C12.3558 402.036 10.6321 399.859 9.03614 396.947Z"/>
+  </defs></svg>
+
+  <!-- WRAPPER: hero + sectie 2; de deco loopt DOOR over de sectiegrens -->
+  <div class="hero-flow">
+
+    <!-- Deco spant hero + sectie 2 (overflow zit op de wrapper, niet op de hero) -->
+    <div class="hero-deco">
+      <div class="hd-layer hd-l3"><svg viewBox="0 0 594 709" aria-hidden="true"><use href="#hd-mask" fill="#CBD5E1" fill-opacity="0.6"/></svg></div>
+      <div class="hd-layer hd-l2"><svg viewBox="0 0 594 709" aria-hidden="true"><use href="#hd-mask" fill="#F7F4EF" fill-opacity="0.9"/></svg></div>
+      <div class="hd-layer hd-l1"><svg viewBox="0 0 594 709" aria-hidden="true"><use href="#hd-mask" fill="#E5A524" fill-opacity="0.09"/></svg></div>
+    </div>
+
+    <!-- HERO — transparant, deco loopt erachter door -->
+    <section class="ao-hero" style="background:transparent;position:relative;z-index:1;min-height:calc(100vh - var(--header-clear));">
+    <div class="ao-hero-img assurman-mask assurman-mask--hero">
+      <img src="/verzekeringen-bouwsector-arbeidsongevallenverzekering-hero.jpg" alt="Bouwprofessional bij arbeidsongeval op de werf" />
+    </div>
+    <div class="ao-hero-inner">
+      <div class="ao-hero-content">
+        <div class="ao-badge-pill" style="margin-bottom:20px;">
+          <span style="width:8px;height:8px;background:#E5A524;border-radius:50%;flex-shrink:0;"></span>
+          Assurman • Bouwverzekeringen op maat
+        </div>
+        <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,5vw,64px);line-height:1.05;letter-spacing:-1.5px;color:#001F3F;margin-bottom:8px;">Arbeidsongevallen&#x2011;<br />verzekering</h1>
+        <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;letter-spacing:-1px;color:#E5A524;margin-bottom:20px;">Verplicht. Essentieel. Op maat van de bouw.</p>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#001F3F;margin-bottom:28px;max-width:520px;">Heb je personeel in dienst in de bouwsector? Dan is een arbeidsongevallenverzekering in België geen extra optie, maar een wettelijke verplichting vanaf je eerste werknemer.</p>
+        <div class="ao-hero-btns">
+          <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg lab-cta">
+            {CTA_SCAN.hero}
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.advisory}</a>
+        </div>
+        <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#001F3F;opacity:0.75;">Geen verplichting. We finaliseren je pakket samen na je intake.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WAT IS HET (transparant — deco loopt hier door vanuit de hero) -->
+  <section id="watis" style="background:transparent;position:relative;z-index:1;padding:96px 32px;">
+    <div class="ao-container">
+      <div class="ao-watis-grid">
+        <div style="background:#3F5767;padding:32px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);">
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">In het kort</span>
+          <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:16px;">
+            {[
+              {t:'<strong style="color:#FFFFFF;">Wettelijk verplicht</strong> vanaf je eerste werknemer, ook bij een Dimona van één dag.'},
+              {t:'Dekt werknemers <strong style="color:#FFFFFF;">op de werf én op woon-werkverkeer</strong>.'},
+              {t:'Vergoeding begrensd tot <strong style="color:#FFFFFF;">€ 58.096,10 (2026)</strong>.'},
+              {t:'Aangifte bij de verzekeraar binnen <strong style="color:#FFFFFF;">8 dagen</strong>, ernstige ongevallen onmiddellijk.'},
+              {t:'Niet verzekerd zijn = <strong style="color:#FFFFFF;">strafrechtelijke gevolgen</strong> en alle kosten verhaalbaar.'},
+            ].map(item=>(
+              <li style="display:flex;gap:12px;align-items:flex-start;">
+                <svg style="flex-shrink:0;margin-top:3px;" width="16" height="16" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                <span style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;line-height:1.55;color:#CBD5E1;" set:html={item.t}></span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Wat is het?</span>
+          <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,3.5vw,48px);line-height:1.05;letter-spacing:-0.5px;color:#001F3F;margin:0 0 24px;">Een wettelijke basisbescherming voor je personeel</h2>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 20px;">Een arbeidsongevallenverzekering beschermt werknemers wanneer zij het slachtoffer worden van een ongeval tijdens het werk of op de normale weg van en naar het werk. Het gaat dus niet alleen over ongevallen op de werf zelf, maar ook over woon-werkverkeer.</p>
+          <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.65;color:#001F3F;margin:0 0 36px;">Voor bouwbedrijven is dat cruciaal. Een val van een ladder, een ongeval met materiaal, een misstap op een stelling, een incident bij laden en lossen of een verkeersongeval onderweg naar een werf: het zijn allemaal situaties waarin deze verzekering relevant kan worden.</p>
+          <div style="display:flex;gap:20px;background:rgba(229,165,36,0.07);border:1px solid rgba(229,165,36,0.22);border-radius:10px;padding:24px;">
+            <svg style="flex-shrink:0;margin-top:2px;" width="22" height="22" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <div>
+              <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:16px;color:#001F3F;margin:0 0 6px;">Wettelijke basis</p>
+              <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#3F5767;margin:0;">De verplichting is vastgelegd in de <strong>Arbeidsongevallenwet van 10 april 1971</strong>. Toezicht en schadebeheer gebeuren via <strong>Fedris</strong> (Federaal agentschap voor beroepsrisico's).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  </div><!-- /.hero-flow -->
+
+  <!-- IS HET VERPLICHT (gold-strip) -->
+  <section id="verplicht" style="background:#e5a52414;padding:96px 32px;">
+    <div style="max-width:1280px;margin:0 auto;">
+      <div style="text-align:center;margin-bottom:64px;">
+        <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Is het verplicht?</span>
+        <p style="font-family:'Outfit',sans-serif;font-weight:500;font-size:18px;color:#64748b;margin-bottom:8px;">Is een arbeidsongevallenverzekering verplicht in België?</p>
+        <div style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(72px,12vw,128px);line-height:0.9;color:#001F3F;letter-spacing:-4px;">Ja.</div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:600;font-size:20px;color:#3F5767;margin-top:12px;">Vanaf de eerste werkdag van je eerste werknemer.</p>
+      </div>
+      <div class="ao-verplicht-grid">
+        {[
+          {icon:'ft', title:'RSZ ≠ dekking',             text:'Een RSZ-inschrijving betekent niet dat je automatisch verzekerd bent. De polis staat los daarvan en moet apart afgesloten worden.'},
+          {icon:'cl', title:'Geen retroactief effect',   text:'Dekking kan niet achteraf ingaan. De polis moet actief zijn vóór de eerste werkdag van de werknemer.'},
+          {icon:'us', title:'Ook deeltijds & tijdelijk', text:'De verplichting geldt voor alle werknemers onder arbeidsovereenkomst: voltijds, deeltijds, interim, seizoenswerk.'},
+          {icon:'sh', title:'Ook tijdens proefperiode',  text:'Zelfs tijdens een proeftermijn of bij een Dimona van één dag moet er dekking zijn.'},
+        ].map(card=>(
+          <div style="background:#FFFFFF;padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);box-shadow:0 2px 8px rgba(0,31,63,0.05);">
+            <div style="background:rgba(229,165,36,0.1);border-radius:10px;padding:12px;display:inline-flex;margin-bottom:18px;">
+              {card.icon==='ft'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>}
+              {card.icon==='cl'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>}
+              {card.icon==='us'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>}
+              {card.icon==='sh'&&<svg width="28" height="28" fill="none" stroke="#E5A524" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>}
+            </div>
+            <h3 style="font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:#001F3F;margin:0 0 10px;">{card.title}</h3>
+            <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;line-height:1.65;color:#64748b;margin:0;">{card.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

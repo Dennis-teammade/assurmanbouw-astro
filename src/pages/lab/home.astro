@@ -1,0 +1,132 @@
+---
+// ── LAB: home-hero testomgeving ──────────────────────────────────────────────
+// Geïsoleerde sandbox om de homepage-hero met deco te testen, zonder de echte
+// homepage (src/pages/index.astro) te raken. Route: /lab/home · noindex · niet in nav.
+//
+// Nu: hero (met concentrische mask-deco, v1-kleuren) + de ECHTE 2de home-sectie
+// (de slate icon-boxes-strip), zodat we de overgang hero → sectie 2 exact zien.
+//
+// Foto-breedte vloeiend (--photo-w: clamp), losgekoppeld van de sectiehoogte.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CTA_SCAN, CTA_DESTINATIONS } from '../../data/cta-labels';
+---
+
+<style>
+  /* ── Hero-basis ───────────────────────────────────────────── */
+  .lab-hero { position: relative; overflow: hidden; min-height: 680px; background: #FFFFFF; --photo-w: clamp(420px, 33vw, 620px); }
+  .home-hero-img { position: absolute; top: 0; right: -5px; width: var(--photo-w); height: auto; z-index: 1; pointer-events: none; }
+  .home-hero-inner { max-width: 1280px; margin: 0 auto; padding: 100px 32px 80px; position: relative; z-index: 2; }
+  .home-hero-btns { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 32px; }
+
+  /* ── Concentrische mask-deco rond de foto (vloeiend met de beschikbare ruimte) ── */
+  .hero-deco {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    --hd-avail: calc(100vw + 5px - var(--photo-w) - max(652px, calc(50vw + 12px)));
+    --hd-room: clamp(0px, calc(var(--hd-avail) - 46px), 640px);
+  }
+  .hd-layer {
+    position: absolute; aspect-ratio: 594 / 709; height: auto;
+    width: calc(var(--photo-w) + 2 * var(--infl));
+    top: calc(0px - var(--infl) * 709 / 594);
+    right: calc(-5px - var(--infl));
+  }
+  .hd-layer svg { width: 100%; height: 100%; display: block; }
+  .hd-l1 { --infl: calc(0.30 * var(--hd-room)); filter: drop-shadow(3px 8px 13px rgba(0,31,63,0.10)); animation-delay: 0.70s; }
+  .hd-l2 { --infl: calc(0.60 * var(--hd-room)); filter: drop-shadow(3px 8px 13px rgba(0,31,63,0.10)); animation-delay: 1.00s; }
+  .hd-l3 { --infl: calc(1.00 * var(--hd-room)); animation-delay: 1.30s; }
+
+  /* Entry-animatie: de foto laadt normaal; na ~0,7s verschijnen de banden één voor één,
+     van rechts naar links (subtiele slide) en klein → groot (front → back). Duur 1,2s. */
+  @keyframes hd-reveal { from { opacity: 0; transform: translateX(34px); } to { opacity: 1; transform: translateX(0); } }
+  /* Longhand (geen shorthand) zodat de per-laag animation-delay niet gereset wordt. */
+  .hd-layer { animation-name: hd-reveal; animation-duration: 1.2s; animation-timing-function: ease-out; animation-fill-mode: both; }
+
+  /* CTA-aandachtstrekker: net NA de laatste vorm (~2,5s) faadt de oranje knop een paar
+     keer traag tussen normaal (#E5A524) en hover (#E9C466). Subtiel, geen strobe/grow. */
+  @keyframes cta-attn { 0%, 100% { background-color: #E5A524; } 50% { background-color: #E9C466; } }
+  .lab-cta { animation: cta-attn 1.6s ease-in-out 2.6s 5; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hd-layer { animation-name: none; }
+    .lab-cta { animation: none; }
+  }
+
+  @media (max-width: 1023px) { .home-hero-img, .hero-deco { display: none; } }
+  @media (max-width: 767px) {
+    .home-hero-btns { flex-direction: column; }
+    .home-hero-btns a { width: 100%; justify-content: center; text-align: center; }
+  }
+
+  /* ── Home-sectie 2: icon-boxes-strip (1-op-1 uit index.astro) ── */
+  .home-icon-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  @media (max-width: 767px) { .home-icon-grid { grid-template-columns: 1fr; gap: 12px; } }
+  @media (min-width: 768px) and (max-width: 1023px) { .home-icon-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>
+
+<BaseLayout
+  title="LAB · Home-hero (test) | Assurman"
+  description="Interne testomgeving voor de homepage-hero. Niet voor publicatie."
+  canonical="/lab/home"
+  noindex={true}
+>
+  <!-- Gedeelde mask-path-definitie (1×) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <path id="hd-mask" d="M9.03614 396.947C5.84744 391.129 3.16018 382.359 5.22461 370.57L65.9356 23.9121C65.9356 23.9117 65.9354 23.9102 65.9356 23.9092C65.936 23.9068 65.9366 23.9026 65.9375 23.8975C65.9394 23.8869 65.9423 23.8702 65.9463 23.8486C65.9544 23.8054 65.9674 23.7404 65.9844 23.6553C66.0183 23.4848 66.0699 23.2331 66.1426 22.9121C66.2881 22.2696 66.516 21.3494 66.8418 20.2441C67.4939 18.0319 68.5379 15.0876 70.1074 12.1484C73.2557 6.2531 78.4429 0.500001 86.7168 0.500001L589.499 0.500007L589.5 24.5674L589.5 592.965C589.5 593.01 589.498 593.077 589.496 593.166C589.492 593.344 589.484 593.608 589.469 593.947C589.437 594.625 589.375 595.605 589.249 596.805C588.997 599.207 588.493 602.486 587.487 605.998C585.47 613.041 581.465 620.918 573.531 624.639L416.905 698.107L416.904 698.107C416.903 698.108 416.9 698.11 416.896 698.111C416.89 698.114 416.879 698.12 416.865 698.126C416.836 698.139 416.792 698.158 416.733 698.184C416.616 698.234 416.438 698.309 416.207 698.399C415.744 698.581 415.063 698.828 414.198 699.09C412.467 699.614 410.001 700.192 407.073 700.41C401.221 700.846 393.531 699.841 386.135 694.079L15.8994 405.627L15.8984 405.626C15.8972 405.625 15.8954 405.623 15.8926 405.621C15.8865 405.616 15.8763 405.608 15.8633 405.598C15.8374 405.577 15.7979 405.544 15.7461 405.501C15.6419 405.413 15.4873 405.28 15.291 405.102C14.8984 404.744 14.3386 404.204 13.6777 403.481C12.3558 402.036 10.6321 399.859 9.03614 396.947Z"/>
+  </defs></svg>
+
+  <!-- ════════ HERO (met concentrische deco) ════════ -->
+  <section class="lab-hero">
+    <div class="hero-deco">
+      <div class="hd-layer hd-l3"><svg viewBox="0 0 594 709" aria-hidden="true"><use href="#hd-mask" fill="#CBD5E1" fill-opacity="0.6"/></svg></div>
+      <div class="hd-layer hd-l2"><svg viewBox="0 0 594 709" aria-hidden="true"><use href="#hd-mask" fill="#F7F4EF" fill-opacity="0.9"/></svg></div>
+      <div class="hd-layer hd-l1"><svg viewBox="0 0 594 709" aria-hidden="true"><use href="#hd-mask" fill="#E5A524" fill-opacity="0.09"/></svg></div>
+    </div>
+    <div class="home-hero-img assurman-mask assurman-mask--hero">
+      <img src="/verzekeringen-bouwsector-home-hero.jpg" alt="Vakman in de bouwsector" />
+    </div>
+    <div class="home-hero-inner">
+      <div style="max-width:620px;">
+        <span class="brand-section-label">Erkend verzekeringsmakelaar, Bouwsector</span>
+        <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(40px,5vw,64px);line-height:1.08;color:#001F3F;margin:20px 0 0;">
+          Verzekeringen op maat <span style="color:#E5A524;">voor de bouwsector</span>
+        </h1>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:20px;line-height:1.6;color:#001F3F;margin:24px 0 40px;max-width:540px;">
+          Als erkend verzekeringsmakelaar kennen we de risico's van jouw beroep van binnen en buiten.
+          Wij vergelijken, adviseren en regelen, zodat jij je volledig kan concentreren op jouw werk.
+        </p>
+        <div class="home-hero-btns">
+          <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg lab-cta">
+            {CTA_SCAN.full}
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="/werkwijze" class="brand-btn-secondary">Hoe werkt het?</a>
+        </div>
+        <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:15px;color:#7A6A55;line-height:1.6;">
+          We werken samen een pakket op maat uit zonder verplichtingen.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ HOME-SECTIE 2: ICON BOXES STRIP (slate) — uit index.astro ════════ -->
+  <section style="background:#3F5767;padding:56px 0;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 32px;">
+      <p style="font-family:'Open Sans',sans-serif;font-weight:600;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;text-align:center;margin-bottom:32px;">
+        Een goede verzekering in de bouwsector begint bij:
+      </p>
+      <div class="home-icon-grid">
+        {[
+          { text: 'Specialist in\nbouwprofessionals',             iconPath: 'M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z' },
+          { text: 'Modulair pakket:\nenkel wat nodig is',          iconPath: 'M12 22a10 10 0 1 1 0-20 10 10 0 0 1 0 20zM12 18a6 6 0 1 1 0-12 6 6 0 0 1 0 12zM12 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4z' },
+          { text: 'Duidelijke uitleg,\nsnelle service',            iconPath: 'M9 12l2 2 4-4m6 2a9 9 0 1 1-18 0 9 9 0 0 1 18 0z' },
+          { text: 'Dekking werf, personen,\nmateriaal & mobiliteit', iconPath: 'M5 17H3a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v5M16 17H8M12 17v4M17 21v-4' },
+        ].map((item) => (
+          <div style="display:flex;align-items:center;gap:20px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:24px 28px;">
+            <svg width="36" height="36" fill="none" stroke="#E5A524" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" style="flex-shrink:0;"><path d={item.iconPath}/></svg>
+            <div style="font-family:'Outfit',sans-serif;font-weight:600;font-size:15px;color:#FFFFFF;line-height:1.45;white-space:pre-line;">{item.text}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
