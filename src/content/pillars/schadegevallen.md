@@ -17,7 +17,7 @@ sectors:
   - "loodgieters"
   - "schilders"
   - "schrijnwerkers"
-publishDate: "2026-05-08"
+publishDate: "2026-03-27"
 author: "benoit-keerman"
 readingTime: 16
 targetAudience: "Alle bouwondernemers"

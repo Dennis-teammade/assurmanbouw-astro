@@ -21,7 +21,7 @@ sectors:
   - "loodgieters"
   - "schilders"
   - "schrijnwerkers"
-publishDate: "2026-05-08"
+publishDate: "2026-04-14"
 author: "benoit-keerman"
 readingTime: 10
 targetAudience: "Aannemers, sloopwerkers, grondwerkers, metsers en algemene bouwbedrijven"

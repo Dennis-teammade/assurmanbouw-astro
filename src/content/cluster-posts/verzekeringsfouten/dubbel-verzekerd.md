@@ -15,7 +15,7 @@ secondaryKeywords:
 targetAudience: "Bouwbedrijven met meerdere polissen"
 readingTime: 9
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-06-02"
 category: "Verzekeringsfouten"
 heroImage: "/images/kenniscentrum/c5-1-dubbel-verzekerd.jpg"
 heroImageAlt: "Bouwondernemer met meerdere verzekeringspolissen op tafel, illustratie dubbele dekking"

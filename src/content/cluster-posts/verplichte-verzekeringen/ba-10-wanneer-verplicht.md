@@ -17,7 +17,7 @@ category: "Verplichte verzekeringen"
 author: "benoit-keerman"
 targetAudience: "Aannemers, ruwbouwers, dakwerkers"
 readingTime: 9
-publishDate: "2026-05-08"
+publishDate: "2026-03-06"
 heroImage: "/images/kenniscentrum/c2-2-ba-10-wanneer-verplicht.jpg"
 heroImageAlt: "Aannemer en architect bekijken bouwplannen op werf met dakconstructie in aanbouw"
 sectors:

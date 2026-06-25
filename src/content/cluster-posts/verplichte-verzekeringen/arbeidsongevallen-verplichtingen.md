@@ -17,7 +17,7 @@ category: "Verplichte verzekeringen"
 author: "benoit-keerman"
 targetAudience: "Werkgevers in de bouw"
 readingTime: 9
-publishDate: "2026-05-08"
+publishDate: "2026-03-04"
 heroImage: "/images/kenniscentrum/c2-1-arbeidsongevallen-verplichtingen.jpg"
 heroImageAlt: "Bouwwerknemer met helm en veiligheidsharnas op steiger, symbool voor arbeidsongevallenverzekering"
 midContentImage: "/images/kenniscentrum/c2-1-arbeidsongevallen-verplichtingen-2.jpg"

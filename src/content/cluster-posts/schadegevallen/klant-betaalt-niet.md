@@ -21,7 +21,7 @@ sectors:
   - "loodgieters"
   - "schilders"
   - "schrijnwerkers"
-publishDate: "2026-05-08"
+publishDate: "2026-04-22"
 author: "benoit-keerman"
 readingTime: 10
 targetAudience: "Zelfstandigen en KMO's in de bouwsector die wachten op betaling na oplevering"

@@ -19,7 +19,7 @@ sectors:
   - "loodgieters"
   - "schilders"
   - "schrijnwerkers"
-publishDate: "2026-05-08"
+publishDate: "2026-02-18"
 author: "benoit-keerman"
 readingTime: 9
 targetAudience: "Bouwondernemers die hun eerste werknemer aanwerven"

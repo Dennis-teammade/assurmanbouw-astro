@@ -21,7 +21,7 @@ sectors:
   - "loodgieters"
   - "schilders"
   - "schrijnwerkers"
-publishDate: "2026-05-08"
+publishDate: "2026-04-13"
 author: "benoit-keerman"
 readingTime: 11
 targetAudience: "Dakwerkers, loodgieters, algemene aannemers en bouwbedrijven die werken hebben opgeleverd"

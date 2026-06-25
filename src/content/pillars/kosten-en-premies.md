@@ -12,7 +12,7 @@ secondaryKeywords:
 targetAudience: "Alle bouwondernemers (zelfstandigen zonder personeel, KMO met enkele werknemers, middelgrote aannemers)"
 readingTime: 18
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-04-29"
 category: "Kosten en premies"
 heroImage: "/images/kenniscentrum/c4-p-kosten-verzekeringen.jpg"
 heroImageAlt: "Bouwondernemer berekent verzekeringspremies aan keukentafel met polissen en laptop"

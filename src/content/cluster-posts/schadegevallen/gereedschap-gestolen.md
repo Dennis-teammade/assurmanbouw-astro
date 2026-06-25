@@ -19,7 +19,7 @@ sectors:
   - "loodgieters"
   - "schilders"
   - "schrijnwerkers"
-publishDate: "2026-05-08"
+publishDate: "2026-04-06"
 author: "benoit-keerman"
 readingTime: 9
 targetAudience: "Loodgieters, elektriciens, kleine zelfstandigen met bestelwagen"

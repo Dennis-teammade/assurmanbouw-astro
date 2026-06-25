@@ -17,7 +17,7 @@ category: "Verplichte verzekeringen"
 author: "benoit-keerman"
 targetAudience: "Aannemers met onderaannemers + onderaannemers zelf"
 readingTime: 10
-publishDate: "2026-05-08"
+publishDate: "2026-03-23"
 heroImage: "/images/kenniscentrum/c2-6-onderaannemer-of-zelfstandige.jpg"
 heroImageAlt: "Hoofdaannemer en onderaannemer op werf, contractuele en juridische verhouding"
 sectors:

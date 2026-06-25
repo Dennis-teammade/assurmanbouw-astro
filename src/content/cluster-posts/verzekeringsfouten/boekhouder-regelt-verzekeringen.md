@@ -16,7 +16,7 @@ secondaryKeywords:
 targetAudience: "Bouwondernemers die verzekeringen via boekhouder hebben"
 readingTime: 9
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-06-23"
 category: "Verzekeringsfouten"
 heroImage: "/images/kenniscentrum/c5-7-boekhouder-regelt-verzekeringen.jpg"
 heroImageAlt: "Bouwondernemer aan tafel met boekhouder, polisdossier en cijfers, beslissingsmoment verzekeringen"

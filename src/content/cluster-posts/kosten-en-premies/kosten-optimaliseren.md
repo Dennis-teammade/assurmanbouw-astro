@@ -15,7 +15,7 @@ secondaryKeywords:
 targetAudience: "Bouwondernemers met bestaande polissen"
 readingTime: 10
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-05-25"
 category: "Kosten en premies"
 heroImage: "/images/kenniscentrum/c4-7-kosten-optimaliseren.jpg"
 heroImageAlt: "Bouwondernemer en makelaar bekijken polissen samen, illustratie verzekering optimaliseren"

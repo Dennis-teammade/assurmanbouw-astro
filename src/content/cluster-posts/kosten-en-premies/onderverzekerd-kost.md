@@ -15,7 +15,7 @@ secondaryKeywords:
 targetAudience: "Bouwondernemers met oudere polissen"
 readingTime: 10
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-05-26"
 category: "Kosten en premies"
 heroImage: "/images/kenniscentrum/c4-8-onderverzekerd-kost.jpg"
 heroImageAlt: "Bouwondernemer bekijkt verzekeringspolis met zorgelijke blik aan bureau, illustratie onderverzekering"

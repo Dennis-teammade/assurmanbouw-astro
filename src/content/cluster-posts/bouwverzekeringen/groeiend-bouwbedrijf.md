@@ -19,7 +19,7 @@ sectors:
   - "loodgieters"
   - "schilders"
   - "schrijnwerkers"
-publishDate: "2026-05-08"
+publishDate: "2026-02-12"
 author: "benoit-keerman"
 readingTime: 10
 targetAudience: "Groeiende bouwbedrijven met 10 tot 25 medewerkers"

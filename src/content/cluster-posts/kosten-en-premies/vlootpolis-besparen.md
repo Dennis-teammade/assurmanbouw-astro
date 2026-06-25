@@ -15,7 +15,7 @@ secondaryKeywords:
 targetAudience: "Bouwbedrijven met meerdere voertuigen"
 readingTime: 9
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-05-13"
 category: "Kosten en premies"
 heroImage: "/images/kenniscentrum/c4-4-vlootpolis-besparen.jpg"
 heroImageAlt: "Vier bestelwagens van bouwbedrijf naast elkaar geparkeerd op terrein, illustratie vlootpolis"

@@ -15,7 +15,7 @@ secondaryKeywords:
 targetAudience: "Bouwondernemers"
 readingTime: 10
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-05-07"
 category: "Kosten en premies"
 heroImage: "/images/kenniscentrum/c4-2-premie-ba-onderneming.jpg"
 heroImageAlt: "Bouwondernemer berekent premie BA Onderneming aan bureau met polis en rekenmachine"

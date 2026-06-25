@@ -19,7 +19,7 @@ sectors:
   - "loodgieters"
   - "schilders"
   - "schrijnwerkers"
-publishDate: "2026-05-08"
+publishDate: "2026-02-13"
 author: "benoit-keerman"
 readingTime: 9
 targetAudience: "Zelfstandigen zonder personeel in de bouw (eenmanszaak of solo-vennootschap)"

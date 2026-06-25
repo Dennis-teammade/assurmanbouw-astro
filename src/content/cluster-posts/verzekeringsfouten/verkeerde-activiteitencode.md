@@ -16,7 +16,7 @@ secondaryKeywords:
 targetAudience: "Bouwbedrijven met bestaande polis"
 readingTime: 9
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-06-15"
 category: "Verzekeringsfouten"
 heroImage: "/images/kenniscentrum/c5-4-verkeerde-activiteitencode.jpg"
 heroImageAlt: "Aannemer bekijkt verzekeringspolis op kantoor, NACEBEL-code en premieberekening"

@@ -25,7 +25,7 @@ relatedInsurances:
   - "bedrijfsvoertuigen"
   - "rechtsbijstand"
   - "machinebreuk"
-publishDate: "2026-05-08"
+publishDate: "2026-02-02"
 author: "benoit-keerman"
 readingTime: 18
 spokes:

@@ -19,7 +19,7 @@ sectors:
   - "loodgieters"
   - "schilders"
   - "schrijnwerkers"
-publishDate: "2026-05-08"
+publishDate: "2026-02-09"
 author: "benoit-keerman"
 readingTime: 10
 targetAudience: "Kleine bouwondernemers met 1 tot 5 werknemers"

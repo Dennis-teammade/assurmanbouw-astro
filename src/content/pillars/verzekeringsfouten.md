@@ -13,7 +13,7 @@ secondaryKeywords:
 targetAudience: "Zelfstandige bouwondernemers en KMO-zaakvoerders in de Belgische bouwsector"
 readingTime: 16
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-05-29"
 category: "Verzekeringsfouten"
 heroImage: "/images/kenniscentrum/c5-p-verzekeringsfouten.jpg"
 heroImageAlt: "Bouwondernemer bekijkt een polis aan de keukentafel met een aannemer-laptop ernaast"

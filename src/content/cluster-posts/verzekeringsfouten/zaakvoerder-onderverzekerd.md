@@ -16,7 +16,7 @@ secondaryKeywords:
 targetAudience: "Zaakvoerders bouwbedrijven (zelfstandigen, BV-zaakvoerders)"
 readingTime: 10
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-06-10"
 category: "Verzekeringsfouten"
 heroImage: "/images/kenniscentrum/c5-3-zaakvoerder-onderverzekerd.jpg"
 heroImageAlt: "Zaakvoerder bouwbedrijf op werf met laptop en helm, persoonlijke verzekeringssituatie"

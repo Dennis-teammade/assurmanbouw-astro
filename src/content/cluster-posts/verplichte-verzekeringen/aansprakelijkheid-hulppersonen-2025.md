@@ -17,7 +17,7 @@ category: "Verplichte verzekeringen"
 author: "benoit-keerman"
 targetAudience: "Alle bouwondernemers"
 readingTime: 10
-publishDate: "2026-05-08"
+publishDate: "2026-03-26"
 heroImage: "/images/kenniscentrum/c2-7-aansprakelijkheid-hulppersonen-2025.jpg"
 heroImageAlt: "Bouwteam op werf met onderaannemers, juridische context Boek 6 BW 2025"
 sectors:

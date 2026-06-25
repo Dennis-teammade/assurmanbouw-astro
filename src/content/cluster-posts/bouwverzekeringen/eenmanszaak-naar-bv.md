@@ -19,7 +19,7 @@ sectors:
   - "loodgieters"
   - "schilders"
   - "schrijnwerkers"
-publishDate: "2026-05-08"
+publishDate: "2026-02-26"
 author: "benoit-keerman"
 readingTime: 10
 targetAudience: "Bouwondernemers in transitie van eenmanszaak naar BV"

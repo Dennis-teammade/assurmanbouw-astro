@@ -17,7 +17,7 @@ category: "Verplichte verzekeringen"
 author: "benoit-keerman"
 targetAudience: "Iedereen met bedrijfsvoertuigen"
 readingTime: 8
-publishDate: "2026-05-08"
+publishDate: "2026-03-11"
 heroImage: "/images/kenniscentrum/c2-3-ba-auto-bedrijfsvoertuigen.jpg"
 heroImageAlt: "Bouwbedrijf bestelwagen met aanhangwagen en mini-graafmachine die naar werf rijden"
 midContentImage: "/images/kenniscentrum/c2-3-ba-auto-bedrijfsvoertuigen-2.jpg"

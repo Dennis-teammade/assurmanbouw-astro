@@ -17,7 +17,7 @@ category: "Verplichte verzekeringen"
 author: "benoit-keerman"
 targetAudience: "Aannemers, architecten, bouwactoren"
 readingTime: 10
-publishDate: "2026-05-08"
+publishDate: "2026-03-16"
 heroImage: "/images/kenniscentrum/c2-4-wet-peeters-borsus.jpg"
 heroImageAlt: "Architect en aannemer bekijken plannen op werf, juridische context tienjarige aansprakelijkheid"
 sectors:

@@ -15,7 +15,7 @@ secondaryKeywords:
 targetAudience: "Loodgieters, elektriciens, kleine bouwbedrijven"
 readingTime: 9
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-06-17"
 category: "Verzekeringsfouten"
 heroImage: "/images/kenniscentrum/c5-5-vergeten-gereedschap.jpg"
 heroImageAlt: "Open laadruimte van bestelwagen met loodgietergereedschap, illustratie inhoud verzekering"

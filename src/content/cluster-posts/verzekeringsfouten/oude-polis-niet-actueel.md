@@ -16,7 +16,7 @@ secondaryKeywords:
 targetAudience: "Bouwondernemers met oudere polissen"
 readingTime: 9
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-06-26"
 category: "Verzekeringsfouten"
 heroImage: "/images/kenniscentrum/c5-8-oude-polis-niet-actueel.jpg"
 heroImageAlt: "Aannemer doorbladert oude polisdossiers op kantoor, polisreview en update"

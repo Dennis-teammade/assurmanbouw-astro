@@ -15,7 +15,7 @@ secondaryKeywords:
 targetAudience: "Alle bouwondernemers"
 readingTime: 10
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-06-05"
 category: "Verzekeringsfouten"
 heroImage: "/images/kenniscentrum/c5-2-klassieke-onderverzekeringen.jpg"
 heroImageAlt: "Bouwondernemer bekijkt zorgelijk een verzekeringspolis op werf, illustratie onderverzekering"

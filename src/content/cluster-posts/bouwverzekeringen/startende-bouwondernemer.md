@@ -24,7 +24,7 @@ relatedInsurances:
   - "bedrijfsvoertuigen"
   - "rechtsbijstand"
   - "ba-10"
-publishDate: "2026-05-08"
+publishDate: "2026-02-05"
 author: "benoit-keerman"
 readingTime: 9
 targetAudience: "Starters in de bouw (eerste BTW-nummer tot 2 jaar actief)"

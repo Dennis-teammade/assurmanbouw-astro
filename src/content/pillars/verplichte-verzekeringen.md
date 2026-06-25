@@ -14,7 +14,7 @@ category: "Verplichte verzekeringen"
 author: "benoit-keerman"
 targetAudience: "Alle bouwondernemers"
 readingTime: 16
-publishDate: "2026-05-08"
+publishDate: "2026-03-02"
 heroImage: "/images/kenniscentrum/c2-p-verplichte-verzekeringen-1.jpg"
 heroImageAlt: "Bouwondernemer op werf controleert verzekeringsdocumenten en attesten"
 hubIntro: >-

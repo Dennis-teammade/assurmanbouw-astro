@@ -17,7 +17,7 @@ category: "Verplichte verzekeringen"
 author: "benoit-keerman"
 targetAudience: "Bouwheren én aannemers"
 readingTime: 9
-publishDate: "2026-05-08"
+publishDate: "2026-03-18"
 heroImage: "/images/kenniscentrum/c2-5-attesten-bouwheer.jpg"
 heroImageAlt: "Bouwheer en aannemer ondertekenen documenten op werf, verzekeringsattest BA-10 controle"
 sectors:

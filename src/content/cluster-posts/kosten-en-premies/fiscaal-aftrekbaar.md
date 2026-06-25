@@ -15,7 +15,7 @@ secondaryKeywords:
 targetAudience: "Alle bouwondernemers"
 readingTime: 10
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-05-15"
 category: "Kosten en premies"
 heroImage: "/images/kenniscentrum/c4-5-fiscaal-aftrekbaar.jpg"
 heroImageAlt: "Bouwondernemer en boekhouder bekijken samen verzekeringsfacturen voor fiscale aftrek"

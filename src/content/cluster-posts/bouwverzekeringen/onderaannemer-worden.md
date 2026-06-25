@@ -19,7 +19,7 @@ sectors:
   - "loodgieters"
   - "schilders"
   - "schrijnwerkers"
-publishDate: "2026-05-08"
+publishDate: "2026-02-23"
 author: "benoit-keerman"
 readingTime: 10
 targetAudience: "Onderaannemers en zelfstandigen die in onderaanneming werken"

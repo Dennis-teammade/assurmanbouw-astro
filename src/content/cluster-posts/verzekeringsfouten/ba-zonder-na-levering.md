@@ -15,7 +15,7 @@ secondaryKeywords:
 targetAudience: "Loodgieters, elektriciens, dakwerkers"
 readingTime: 9
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-06-19"
 category: "Verzekeringsfouten"
 heroImage: "/images/kenniscentrum/c5-6-ba-zonder-na-levering.jpg"
 heroImageAlt: "Lekkage in plafond met loodgieter die schade vaststelt, illustratie schade na oplevering"

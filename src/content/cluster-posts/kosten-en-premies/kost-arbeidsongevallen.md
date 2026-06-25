@@ -15,7 +15,7 @@ secondaryKeywords:
 targetAudience: "Werkgevers in de bouw"
 readingTime: 10
 author: "benoit-keerman"
-publishDate: "2026-05-08"
+publishDate: "2026-05-04"
 category: "Kosten en premies"
 heroImage: "/images/kenniscentrum/c4-1-kost-arbeidsongevallen.jpg"
 heroImageAlt: "Bouwarbeider op werf met werfhelm, illustratie arbeidsongevallenverzekering"
