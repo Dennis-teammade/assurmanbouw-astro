@@ -4,6 +4,7 @@ import {
   ShieldHalf, Hammer, HeartHandshake, PiggyBank,
   BrickWall, PaintRoller, Zap, Trees,
   Shield, Wrench, Truck, Users, CheckCircle, Layers, Building2, Scale, Car, HardHat, Flame, Heart,
+  Shovel, Construction, LayoutGrid, Brush, AlignJustify, Droplets, Sun, Snowflake, Sprout, Leaf, TreeDeciduous, Waves, House,
 } from 'lucide-react';
 import { verzekeringenPerCategorie, verzekeringUrl, CATEGORIE_META } from '../data/verzekeringen';
 import type { LucideIcon } from 'lucide-react';
@@ -29,10 +30,10 @@ const sectorGroepen = [
     subzin: 'Grond, wegen en structuur',
     icoon: 'wall',
     items: [
-      { label: 'Aannemers', to: '/sectoren/aannemers/', omschrijving: 'Algemene coördinatie' },
-      { label: 'Grondwerkers', to: '/sectoren/grondwerkers/', omschrijving: 'Graafwerk en fundering' },
-      { label: 'Asfalteerders', to: '/sectoren/asfalteerders/', omschrijving: 'Wegen en verharding' },
-      { label: 'Bestraters & kasseileggers', to: '/sectoren/bestraters/', omschrijving: 'Opritten en pleinen' },
+      { label: 'Aannemers', to: '/sectoren/aannemers/', omschrijving: 'Algemene coördinatie', icoon: 'hard-hat' },
+      { label: 'Grondwerkers', to: '/sectoren/grondwerkers/', omschrijving: 'Graafwerk en fundering', icoon: 'shovel' },
+      { label: 'Asfalteerders', to: '/sectoren/asfalteerders/', omschrijving: 'Wegen en verharding', icoon: 'construction' },
+      { label: 'Bestraters & kasseileggers', to: '/sectoren/bestraters/', omschrijving: 'Opritten en pleinen', icoon: 'brick-wall' },
     ],
   },
   {
@@ -41,12 +42,12 @@ const sectorGroepen = [
     subzin: 'Binnen en oppervlakte',
     icoon: 'paint',
     items: [
-      { label: 'Schilders', to: '/sectoren/schilders/', omschrijving: 'Binnen en buiten' },
-      { label: 'Schrijnwerkers', to: '/sectoren/schrijnwerkers/', omschrijving: 'Maatwerk in hout' },
-      { label: 'Stukadoors', to: '/sectoren/stukadoors/', omschrijving: 'Pleister- en raapwerk' },
-      { label: 'Chappers', to: '/sectoren/chappers/', omschrijving: 'Dekvloeren' },
-      { label: 'Vloerders & tegelzetters', to: '/sectoren/vloerders-tegelzetters/', omschrijving: 'Vloer- en wandtegels' },
-      { label: 'Parketzetters', to: '/sectoren/parketzetters/', omschrijving: 'Houten vloeren' },
+      { label: 'Schilders', to: '/sectoren/schilders/', omschrijving: 'Binnen en buiten', icoon: 'paint-roller' },
+      { label: 'Schrijnwerkers', to: '/sectoren/schrijnwerkers/', omschrijving: 'Maatwerk in hout', icoon: 'hammer' },
+      { label: 'Stukadoors', to: '/sectoren/stukadoors/', omschrijving: 'Pleister- en raapwerk', icoon: 'brush' },
+      { label: 'Chappers', to: '/sectoren/chappers/', omschrijving: 'Dekvloeren', icoon: 'layers' },
+      { label: 'Vloerders & tegelzetters', to: '/sectoren/vloerders-tegelzetters/', omschrijving: 'Vloer- en wandtegels', icoon: 'layout-grid' },
+      { label: 'Parketzetters', to: '/sectoren/parketzetters/', omschrijving: 'Houten vloeren', icoon: 'align-justify' },
     ],
   },
   {
@@ -55,10 +56,10 @@ const sectorGroepen = [
     subzin: 'Elektriciteit, water, klimaat',
     icoon: 'bolt',
     items: [
-      { label: 'Elektriciens', to: '/sectoren/elektriciens/', omschrijving: 'Installatie en renovatie' },
-      { label: 'Loodgieters', to: '/sectoren/loodgieters/', omschrijving: 'Sanitair en leidingen' },
-      { label: 'Zonnepaneel-installateurs', to: '/sectoren/zonnepanelen-installateurs/', omschrijving: 'PV en omvormers' },
-      { label: 'Koeltechniek & HVAC', to: '/sectoren/koeltechniek-hvac/', omschrijving: 'Klimaat en verwarming' },
+      { label: 'Elektriciens', to: '/sectoren/elektriciens/', omschrijving: 'Installatie en renovatie', icoon: 'zap' },
+      { label: 'Loodgieters', to: '/sectoren/loodgieters/', omschrijving: 'Sanitair en leidingen', icoon: 'droplets' },
+      { label: 'Zonnepaneel-installateurs', to: '/sectoren/zonnepanelen-installateurs/', omschrijving: 'PV en omvormers', icoon: 'sun' },
+      { label: 'Koeltechniek & HVAC', to: '/sectoren/koeltechniek-hvac/', omschrijving: 'Klimaat en verwarming', icoon: 'snowflake' },
     ],
   },
   {
@@ -67,11 +68,11 @@ const sectorGroepen = [
     subzin: 'Boven en rond het gebouw',
     icoon: 'trees',
     items: [
-      { label: 'Dakwerkers', to: '/sectoren/dakwerkers/', omschrijving: 'Dak en dichting' },
-      { label: 'Tuinaannemers', to: '/sectoren/tuinaannemers/', omschrijving: 'Aanleg en onderhoud' },
-      { label: 'Hoveniers', to: '/sectoren/hoveniers/', omschrijving: 'Groen en beplanting' },
-      { label: 'Boomverzorgers', to: '/sectoren/boomverzorgers/', omschrijving: 'Snoei en vellen' },
-      { label: 'Zwembadinstallateurs', to: '/sectoren/zwembadinstallateurs/', omschrijving: 'Aanleg en techniek' },
+      { label: 'Dakwerkers', to: '/sectoren/dakwerkers/', omschrijving: 'Dak en dichting', icoon: 'house' },
+      { label: 'Tuinaannemers', to: '/sectoren/tuinaannemers/', omschrijving: 'Aanleg en onderhoud', icoon: 'sprout' },
+      { label: 'Hoveniers', to: '/sectoren/hoveniers/', omschrijving: 'Groen en beplanting', icoon: 'leaf' },
+      { label: 'Boomverzorgers', to: '/sectoren/boomverzorgers/', omschrijving: 'Snoei en vellen', icoon: 'tree-deciduous' },
+      { label: 'Zwembadinstallateurs', to: '/sectoren/zwembadinstallateurs/', omschrijving: 'Aanleg en techniek', icoon: 'waves' },
     ],
   },
 ];
@@ -101,6 +102,29 @@ const POLIS_ICON: Record<string, LucideIcon> = {
   'flame': Flame,
   'heart': Heart,
   'piggy-bank': PiggyBank,
+};
+
+// Per-beroep iconen voor het Sectoren-rechterpaneel (logisch passend bij de stiel).
+const SECTOR_POLIS_ICON: Record<string, LucideIcon> = {
+  'hard-hat': HardHat,
+  'shovel': Shovel,
+  'construction': Construction,
+  'brick-wall': BrickWall,
+  'paint-roller': PaintRoller,
+  'hammer': Hammer,
+  'brush': Brush,
+  'layers': Layers,
+  'layout-grid': LayoutGrid,
+  'align-justify': AlignJustify,
+  'zap': Zap,
+  'droplets': Droplets,
+  'sun': Sun,
+  'snowflake': Snowflake,
+  'house': House,
+  'sprout': Sprout,
+  'leaf': Leaf,
+  'tree-deciduous': TreeDeciduous,
+  'waves': Waves,
 };
 
 export default function Navigation() {
@@ -313,14 +337,18 @@ export default function Navigation() {
                       >
                         <h3 className="vmm-head">{groep.label}</h3>
                         <div className="vmm-grid">
-                          {groep.items.map((item) => (
-                            <a key={item.to} href={item.to} className="vmm-pol" onClick={() => setShowSectoren(false)}>
-                              <span className="vmm-pol-txt">
-                                <span className="vmm-pol-t">{item.label}</span>
-                                <span className="vmm-pol-d">{item.omschrijving}</span>
-                              </span>
-                            </a>
-                          ))}
+                          {groep.items.map((item) => {
+                            const SecIcon = SECTOR_POLIS_ICON[item.icoon] ?? Building2;
+                            return (
+                              <a key={item.to} href={item.to} className="vmm-pol" onClick={() => setShowSectoren(false)}>
+                                <span className="vmm-pol-ico"><SecIcon size={22} color="#E5A524" /></span>
+                                <span className="vmm-pol-txt">
+                                  <span className="vmm-pol-t">{item.label}</span>
+                                  <span className="vmm-pol-d">{item.omschrijving}</span>
+                                </span>
+                              </a>
+                            );
+                          })}
                         </div>
                       </div>
                     ))}

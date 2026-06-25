@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { verzekeringenPerCategorie, verzekeringUrl } from '../../data/verzekeringen';
 import { Shield, Building2, Layers, CheckCircle, Scale, Flame, Wrench, Truck, Car, HardHat, Heart, Users, PiggyBank } from 'lucide-react';
+import { CTA_DESTINATIONS, CTA_SCAN, CTA_AFSPRAAK } from '../../data/cta-labels';
 
 const ICON_COMP: Record<string, any> = {
   shield: Shield, building2: Building2, layers: Layers, 'check-circle': CheckCircle, scale: Scale,
@@ -54,11 +55,11 @@ const groepen = verzekeringenPerCategorie();
       <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,56px);line-height:1.08;letter-spacing:-1px;color:#001F3F;margin:0 0 20px;">Alle verzekeringen voor bouwprofessionals</h1>
       <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.6;color:#3F5767;margin:0 0 36px;">Van de wettelijke verplichten tot de slimme aanvullingen. Assurman brengt je in één overzicht welke dekkingen je nodig hebt en waarom.</p>
       <div class="vz-hero-btns">
-        <a href="/gratis-verzekeringsscan/" class="brand-btn-primary brand-btn-primary--lg">
-          Gratis scan aanvragen
+        <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
+          {CTA_SCAN.hero}
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-        <a href="/maak-afspraak" class="brand-btn-secondary">Afspraak maken</a>
+        <a href={CTA_DESTINATIONS.afspraak} class="brand-btn-secondary">{CTA_AFSPRAAK.hero}</a>
       </div>
     </div>
   </section>
@@ -166,12 +167,12 @@ const groepen = verzekeringenPerCategorie();
         In 2 minuten zie je waar je dekking tekortschiet en welke verzekeringen je mist. Gratis, vrijblijvend en zonder verplichtingen.
       </p>
       <div style="display:flex;gap:24px;justify-content:center;margin-bottom:80px;flex-wrap:wrap;">
-        <a href="/gratis-verzekeringsscan/" style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">
-          Start gratis scan
+        <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">
+          {CTA_SCAN.band}
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-        <a href="/maak-afspraak" style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
-          Afspraak maken
+        <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
+          {CTA_AFSPRAAK.band}
         </a>
       </div>
       <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#CBD5E1;opacity:0.75;margin-bottom:0;">

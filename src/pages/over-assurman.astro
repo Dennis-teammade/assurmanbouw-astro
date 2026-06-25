@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ScrollProgress from '../components/islands/ScrollProgress';
 import PartnerSlider from '../components/ui/PartnerSlider';
+import { CTA_DESTINATIONS, CTA_SCAN, CTA_AFSPRAAK } from '../data/cta-labels';
 ---
 
 <style>
@@ -74,8 +75,8 @@ import PartnerSlider from '../components/ui/PartnerSlider';
           <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin:0 0 16px;">Over ons</p>
           <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(36px,4.5vw,64px);line-height:1.05;letter-spacing:-1px;color:#001F3F;margin:0 0 24px;">Specialist in bouwverzekeringen</h1>
           <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:#3F5767;margin:0 0 32px;">Assurman is een onafhankelijke verzekeringsmakelaar met meer dan 15 jaar ervaring in de bouwsector. We werken voor bouwprofessionals in West- en Oost-Vlaanderen: van zelfstandige dakwerker tot aannemersbedrijf met meerdere ploegen.</p>
-          <a href="/gratis-verzekeringsscan/" style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:17px;padding:16px 32px;border-radius:8px;text-decoration:none;">
-            Start gratis scan
+          <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:17px;padding:16px 32px;border-radius:8px;text-decoration:none;">
+            {CTA_SCAN.hero}
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </a>
         </div>
@@ -287,11 +288,11 @@ import PartnerSlider from '../components/ui/PartnerSlider';
       <h2 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);line-height:1.1;color:#FFFFFF;margin:0 0 20px;">Maak kennis met Assurman</h2>
       <p style="font-family:'Open Sans',sans-serif;font-size:18px;line-height:1.7;color:rgba(255,255,255,0.75);max-width:560px;margin:0 auto 40px;">Start met de gratis risicoscan of plan een afspraak. Geen verplichtingen, wel expertise.</p>
       <div class="oa-cta-btns">
-        <a href="/gratis-verzekeringsscan/" style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:17px;padding:18px 36px;border-radius:8px;text-decoration:none;">
-          Gratis scan starten
+        <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:17px;padding:18px 36px;border-radius:8px;text-decoration:none;">
+          {CTA_SCAN.band}
           <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-        <a href="/maak-afspraak" style="display:inline-flex;align-items:center;gap:10px;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:17px;padding:18px 36px;border-radius:8px;text-decoration:none;">Afspraak maken</a>
+        <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:10px;background:transparent;border:2px solid rgba(255,255,255,0.3);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:17px;padding:18px 36px;border-radius:8px;text-decoration:none;">{CTA_AFSPRAAK.band}</a>
       </div>
     </div>
     <svg viewBox="0 0 1440 60" preserveAspectRatio="none" style="display:block;width:100%;height:60px;"><polygon points="0,60 1440,20 1440,60" fill="#FFFFFF" /></svg>

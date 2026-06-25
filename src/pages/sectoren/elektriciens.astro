@@ -1,5 +1,6 @@
 ﻿---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { CTA_DESTINATIONS, CTA_SCAN, CTA_AFSPRAAK } from '../../data/cta-labels';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
@@ -173,11 +174,11 @@ const schema = {
         Als elektricien werk je op wisselende werven, in bewoonde panden en met technische installaties. Elektrische risico's, valgevaar en aansprakelijkheid bij fouten in de installatie. Assurman verzekert elektriciens op maat.
       </p>
       <div class="dw-hero-btns">
-        <a href="/gratis-verzekeringsscan/" class="dw-btn-primary">
-          Vraag een scan aan
+        <a href={CTA_DESTINATIONS.scan} class="dw-btn-primary">
+          {CTA_SCAN.request}
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
-        <a href="/contact/" class="dw-btn-secondary">Plan een adviesgesprek</a>
+        <a href={CTA_DESTINATIONS.contact} class="dw-btn-secondary">{CTA_AFSPRAAK.advisoryFull}</a>
       </div>
       <p style="font-family:'Open Sans',sans-serif;font-weight:400;font-size:14px;color:#001F3F;opacity:0.75;">
         Geen verplichting. We finaliseren je pakket samen na je intake.
@@ -404,12 +405,12 @@ const schema = {
       Start nu in 2 minuten of kies meteen voor advies.
     </p>
     <div class="dw-cta-btns">
-      <a href="/gratis-verzekeringsscan/" style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">
-        Vraag nu een scan aan
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:12px;background:#3F5767;color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;">
+        {CTA_SCAN.requestNow}
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <a href="/contact/" style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.25);color:#3F5767;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;border:2px solid rgba(63,87,103,0.3);">
-        Plan een adviesgesprek
+      <a href={CTA_DESTINATIONS.contact} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.25);color:#3F5767;font-family:'Open Sans',sans-serif;font-weight:700;font-size:18px;padding:18px 40px;border-radius:10px;text-decoration:none;border:2px solid rgba(63,87,103,0.3);">
+        {CTA_AFSPRAAK.advisoryFull}
       </a>
     </div>
   </div>
@@ -497,12 +498,12 @@ const schema = {
       Start nu en doe je verzekeringen scan in 2 minuten of plan meteen een adviesgesprek met onze expert.
     </p>
     <div class="dw-final-btns">
-      <a href="/gratis-verzekeringsscan/" style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">
-        Vraag een scan aan
+      <a href={CTA_DESTINATIONS.scan} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;box-shadow:0px 10px 15px -3px rgba(0,0,0,0.1);">
+        {CTA_SCAN.request}
         <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <a href="/contact/" style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
-        Plan adviesgesprek
+      <a href={CTA_DESTINATIONS.contact} style="display:inline-flex;align-items:center;gap:12px;background:rgba(255,255,255,0.1);color:#FFFFFF;font-family:'Open Sans',sans-serif;font-weight:700;font-size:20px;padding:20px 40px;border-radius:8px;text-decoration:none;border:1px solid rgba(255,255,255,0.2);">
+        {CTA_AFSPRAAK.advisory}
       </a>
     </div>
     <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#CBD5E1;margin-bottom:64px;opacity:0.75;">

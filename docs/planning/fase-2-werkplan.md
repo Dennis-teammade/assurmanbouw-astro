@@ -243,10 +243,11 @@ overlijdensdekking-beslissing na concurrentie-check, JSON-LD structured-data aud
 
 ## 11. Openstaande beslissingen
 
-1. **Integratie-beroepen** (timmerman, behanger, glaszetter, keukeninstallateur,
-   plafonneur, domotica, sanitair): samenvoegen of apart? Beslissen tijdens de research
-   — dan zie je of het beroep genoeg eigen verhaal heeft. Bepaalt of ze in een latere
-   scaffolding-ronde een eigen URL krijgen.
+1. ~~**Integratie-beroepen** (timmerman, behanger, glaszetter, keukeninstallateur,
+   plafonneur, domotica, sanitair): samenvoegen of apart?~~ **BESLIST (2026-06-26,
+   Dennis): blijft zoals nu — geen eigen pagina's. Deze beroepen zijn geïntegreerd op
+   verschillende plekken in de bestaande sectorpagina's (zie de integratie-tabel in §4).
+   Geen extra scaffolding-ronde nodig.**
 2. ~~**Overlijdensdekking:** samen met bescherming bedrijfsleider of apart?~~
    **BESLIST (2026-06-23, na concurrentie-check): samenvoegen, geen aparte business-pagina.**
    - *Opties:* (a) aparte `/verzekeringen/overlijdensdekking`-pagina; (b) opnemen als
