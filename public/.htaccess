@@ -1,0 +1,6 @@
+# Assurmanbouw - serverconfig (Hostinger / Apache)
+#
+# Custom 404: Astro bouwt /404.html, maar Apache serveert die niet
+# automatisch bij een onbekende URL. Zonder onderstaande regel toont
+# de host zijn eigen generieke 404-pagina.
+ErrorDocument 404 /404.html
