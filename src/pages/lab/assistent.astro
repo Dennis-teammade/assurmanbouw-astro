@@ -228,9 +228,10 @@ const CONTACT_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/CZvuwnma5HR0
   </svg>
 </section>
 
-<!-- AI-ASSISTENT WIDGET (GHL) — test voor Benoit, sticky rechteronderhoek.
-     is:inline: Astro mag dit script niet bundelen; het moet exact zo in de HTML
-     staan als GHL het aanlevert (loader leest zijn eigen data-attributen). -->
+{/* AI-assistent, sticky rechteronderhoek. Astro-commentaar (accolades), zodat
+    dit niet in de paginabron terechtkomt en de klant geen systeemnamen leest.
+    is:inline: Astro mag dit script niet bundelen, het moet exact zo in de HTML
+    staan als de leverancier het aanlevert. */}
 <script is:inline src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a6784ae603bdf77b7e2cd66"></script>
 
 </BaseLayout>

@@ -14,8 +14,8 @@ const SCAN_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/CZvuwnma5HR0BBq
 ---
 
 <BaseLayout
-  title="LAB · Verzekeringsscan (test) | Assurman"
-  description="Interne testomgeving voor de nieuwe native verzekeringsscan. Niet voor publicatie."
+  title="Verzekeringsscan | Assurman"
+  description="De bijgewerkte verzekeringsscan: 19 beroepen, 18 verzekeringen, vragen op maat van je stiel."
   canonical="/lab/verzekeringsscan"
   noindex={true}
 >
@@ -24,7 +24,7 @@ const SCAN_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/CZvuwnma5HR0BBq
   <div style="max-width:900px;margin:0 auto;padding:0 32px;">
 
     <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;text-align:center;margin:0 0 20px;">
-      Gratis &amp; vrijblijvend · LAB-versie
+      Gratis en vrijblijvend
     </p>
 
     <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,56px);line-height:1.08;letter-spacing:-1px;color:#001F3F;text-align:center;margin:0 0 56px;">
@@ -35,7 +35,7 @@ const SCAN_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/CZvuwnma5HR0BBq
       {/* debug: toont op het resultaatscherm een grijze regel met de exacte
           verzendstatus (verstuurd / overgeslagen / mislukt + reden). Weghalen
           zodra de scan naar /gratis-verzekeringsscan/ promoveert. */}
-      <VerzekeringsScan client:load webhookUrl={SCAN_WEBHOOK} debug={true} />
+      <VerzekeringsScan client:load webhookUrl={SCAN_WEBHOOK} debug={false} />
     </div>
 
   </div>
