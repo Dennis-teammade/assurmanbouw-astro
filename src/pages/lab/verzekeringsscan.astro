@@ -1,0 +1,44 @@
+---
+// ── LAB: native verzekeringsscan (fase 2) ────────────────────────────────────
+// Vervangt de GHL AI Studio-iframe (huidige /gratis-verzekeringsscan/) door een
+// native React-island, gebouwd op de eigen 19-sectoren + 18-verzekeringen-databron
+// (zie src/data/scan.ts). Route: /lab/verzekeringsscan · noindex · niet in nav.
+//
+// GHL-koppeling: zelfde patroon als D7 (ContactForm.tsx) — client-side POST naar
+// de GHL inbound webhook (aangeleverd door Dennis, 2026-07-27). Veldcontract en
+// workflow-checklist: docs/planning/scan-ghl-veldcontract.md.
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import VerzekeringsScan from '../../components/islands/VerzekeringsScan';
+
+const SCAN_WEBHOOK = 'https://services.leadconnectorhq.com/hooks/CZvuwnma5HR0BBq9wPYn/webhook-trigger/56016b1e-a641-4949-961c-a08930cb1774';
+---
+
+<BaseLayout
+  title="LAB · Verzekeringsscan (test) | Assurman"
+  description="Interne testomgeving voor de nieuwe native verzekeringsscan. Niet voor publicatie."
+  canonical="/lab/verzekeringsscan"
+  noindex={true}
+>
+
+<section style="background:#F9FAFB;padding-top:var(--hero-gap);padding-bottom:80px;min-height:100vh;">
+  <div style="max-width:900px;margin:0 auto;padding:0 32px;">
+
+    <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;text-align:center;margin:0 0 20px;">
+      Gratis &amp; vrijblijvend · LAB-versie
+    </p>
+
+    <h1 style="font-family:'Outfit',sans-serif;font-weight:900;font-size:clamp(32px,5vw,56px);line-height:1.08;letter-spacing:-1px;color:#001F3F;text-align:center;margin:0 0 56px;">
+      Ontdek in 2 minuten<br />waar jouw dekking tekortschiet
+    </h1>
+
+    <div style="background:#FFFFFF;border-radius:16px;box-shadow:0 2px 20px rgba(0,31,63,0.06);padding:40px 32px;">
+      {/* debug: toont op het resultaatscherm een grijze regel met de exacte
+          verzendstatus (verstuurd / overgeslagen / mislukt + reden). Weghalen
+          zodra de scan naar /gratis-verzekeringsscan/ promoveert. */}
+      <VerzekeringsScan client:load webhookUrl={SCAN_WEBHOOK} debug={true} />
+    </div>
+
+  </div>
+</section>
+
+</BaseLayout>
