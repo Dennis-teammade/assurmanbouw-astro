@@ -13,6 +13,15 @@
 > voor review/goedkeuring. Nooit rechtstreeks naar `main`/productie; pas na goedkeuring
 > gaat het van staging naar productie. Volledige regel: zie `CLAUDE.md` (top + §9).
 
+> **📞 Update 11/8/2026 — telefoongesprek Maaike.** Goedgekeurd om door te trekken:
+> hero-aanpassingen (incl. extra kleur) site-breed + vouw-fix verzekeringspagina's.
+> Beslist: cases-sectie **verbergen** bij sectoren zonder echte case (conditioneel
+> renderen, per sector aanzetten zodra een echte case binnenkomt); fictieve cases weg.
+> Wachten op: concrete schraplijst cijfers (Benoit belt terug) en nieuwe reeks
+> **werf-foto's** (eerdere 196 waren portretten). Indeling overzichtspagina = **optie A**.
+> Details: `clients\assurman\docs\FEEDBACK-MAAIKE-2026-08-06.md` (sectie "Stand na
+> telefoongesprek") en `INDELING-VERZEKERINGEN-OPTIES-ABC.md`.
+
 ## Normen (bestaan al — niet hier, maar in de gids)
 
 | Paginatype | Norm-pagina | Gids |

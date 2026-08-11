@@ -7,6 +7,7 @@ import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
 import BrandChevron from '../../components/BrandChevron.astro';
+import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'alle-bouwplaats-risicos', 'machinebreuk', 'bedrijfsvoertuigen', 'rechtsbijstand', 'arbeidsongevallen', 'vapz']);
 
@@ -101,7 +102,7 @@ const schema = {
 <style>
   .bst-container { max-width: 1280px; margin: 0 auto; padding-left: 32px; padding-right: 32px; }
   .bst-hero-content { max-width: 52%; padding-top: 100px; }
-  .bst-hero-img { position: absolute; top: 0; right: -5px; height: min(85vh, calc(48vw * 709 / 594)); width: auto; z-index: 1; pointer-events: none; }
+  .bst-hero-img { position: absolute; top: 0; right: -5px; width: clamp(420px, 33vw, 620px); height: auto; z-index: 1; pointer-events: none; }
   .bst-features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
   .bst-intro-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: flex-start; }
   .bst-benefits-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
@@ -168,7 +169,8 @@ const schema = {
 </style>
 
 <!-- SECTION 1: HERO -->
-<section class="bst-hero-section" style="background:#FFFFFF;position:relative;overflow:hidden;min-height:100vh;">
+<section class="bst-hero-section" style="background:#FFFFFF;position:relative;overflow:hidden;min-height:calc(100vh - var(--header-clear));--photo-w:clamp(420px, 33vw, 620px);">
+  <HeroDeco containerOffset="max(664px, calc(50vw + 24px))" />
   <div class="bst-hero-img assurman-mask assurman-mask--hero">
     <img src="/images/sectoren/bestraters-hero.jpg" alt="Bestrater die klinkers legt op een nieuwe oprit" />
   </div>
@@ -188,7 +190,7 @@ const schema = {
         Een oprit, terras of openbare verharding moet jaren meegaan zonder verzakking of waterplas. Eén discussie over de afwatering of een verzakte klinker kan al leiden tot een herstelclaim. Assurman is gespecialiseerd in verzekeringen op maat van bestraters en kasseileggers in Vlaanderen.
       </p>
       <div class="bst-hero-btns">
-        <a href={CTA_DESTINATIONS.scan} class="bst-btn-primary">
+        <a href={CTA_DESTINATIONS.scan} class="bst-btn-primary hero-cta">
           {CTA_SCAN.request}
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>

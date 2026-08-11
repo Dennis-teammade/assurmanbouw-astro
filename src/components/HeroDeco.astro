@@ -1,0 +1,58 @@
+---
+// ── Hero-deco: concentrische mask-banden achter de hero-foto ─────────────────
+// Goedgekeurd door Maaike op 11/8/2026; 1-op-1 overgenomen uit de lab-pagina's
+// (/lab/home, /lab/sector, /lab/verzekering).
+//
+// Plaatsing: als eerste kind van de hero-sectie. De hero levert:
+//   - position:relative en --photo-w (breedte hero-foto, clamp(420px, 33vw, 620px))
+//   - home/sector: overflow:hidden op de hero → banden stoppen op de sectiegrens
+//   - verzekeringen: GEEN overflow op de hero + z-index:1, en de secties eronder
+//     transparant + position:relative + z-index:1 → banden lopen natuurlijk door
+//     over de sectiegrens (lost wit-op-wit op) en eindigen in hun punt.
+//     (Een clippende wrapper rond hero + sectie 2 zoals in /lab/verzekering kan
+//     hier niet: de sticky sectienav zou zijn plakbereik verliezen.)
+//
+// containerOffset = de ruimte die de tekstkolom links minimaal inneemt; bepaalt
+// hoever de banden mogen uitdijen voor ze de tekst raken. Sectorpagina's hebben
+// een iets bredere kolom (max(664px, 50vw+24px)) dan home/verzekeringen (default).
+interface Props {
+  containerOffset?: string;
+}
+const { containerOffset = 'max(652px, calc(50vw + 12px))' } = Astro.props;
+---
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <path id="hd-mask" d="M9.03614 396.947C5.84744 391.129 3.16018 382.359 5.22461 370.57L65.9356 23.9121C65.9356 23.9117 65.9354 23.9102 65.9356 23.9092C65.936 23.9068 65.9366 23.9026 65.9375 23.8975C65.9394 23.8869 65.9423 23.8702 65.9463 23.8486C65.9544 23.8054 65.9674 23.7404 65.9844 23.6553C66.0183 23.4848 66.0699 23.2331 66.1426 22.9121C66.2881 22.2696 66.516 21.3494 66.8418 20.2441C67.4939 18.0319 68.5379 15.0876 70.1074 12.1484C73.2557 6.2531 78.4429 0.500001 86.7168 0.500001L589.499 0.500007L589.5 24.5674L589.5 592.965C589.5 593.01 589.498 593.077 589.496 593.166C589.492 593.344 589.484 593.608 589.469 593.947C589.437 594.625 589.375 595.605 589.249 596.805C588.997 599.207 588.493 602.486 587.487 605.998C585.47 613.041 581.465 620.918 573.531 624.639L416.905 698.107L416.904 698.107C416.903 698.108 416.9 698.11 416.896 698.111C416.89 698.114 416.879 698.12 416.865 698.126C416.836 698.139 416.792 698.158 416.733 698.184C416.616 698.234 416.438 698.309 416.207 698.399C415.744 698.581 415.063 698.828 414.198 699.09C412.467 699.614 410.001 700.192 407.073 700.41C401.221 700.846 393.531 699.841 386.135 694.079L15.8994 405.627L15.8984 405.626C15.8972 405.625 15.8954 405.623 15.8926 405.621C15.8865 405.616 15.8763 405.608 15.8633 405.598C15.8374 405.577 15.7979 405.544 15.7461 405.501C15.6419 405.413 15.4873 405.28 15.291 405.102C14.8984 404.744 14.3386 404.204 13.6777 403.481C12.3558 402.036 10.6321 399.859 9.03614 396.947Z"/>
+</defs></svg>
+
+<div class="hero-deco" style={`--hd-offset: ${containerOffset};`}>
+  <div class="hd-layer hd-l3"><svg viewBox="0 0 594 709" aria-hidden="true"><use href="#hd-mask" fill="#CBD5E1" fill-opacity="0.6"/></svg></div>
+  <div class="hd-layer hd-l2"><svg viewBox="0 0 594 709" aria-hidden="true"><use href="#hd-mask" fill="#F7F4EF" fill-opacity="0.9"/></svg></div>
+  <div class="hd-layer hd-l1"><svg viewBox="0 0 594 709" aria-hidden="true"><use href="#hd-mask" fill="#E5A524" fill-opacity="0.09"/></svg></div>
+</div>
+
+<style>
+  .hero-deco {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    --hd-avail: calc(100vw + 5px - var(--photo-w) - var(--hd-offset));
+    --hd-room: clamp(0px, calc(var(--hd-avail) - 46px), 640px);
+  }
+  .hd-layer {
+    position: absolute; aspect-ratio: 594 / 709; height: auto;
+    width: calc(var(--photo-w) + 2 * var(--infl));
+    top: calc(0px - var(--infl) * 709 / 594);
+    right: calc(-5px - var(--infl));
+  }
+  .hd-layer svg { width: 100%; height: 100%; display: block; }
+  .hd-l1 { --infl: calc(0.30 * var(--hd-room)); filter: drop-shadow(3px 8px 13px rgba(0,31,63,0.10)); animation-delay: 0.70s; }
+  .hd-l2 { --infl: calc(0.60 * var(--hd-room)); filter: drop-shadow(3px 8px 13px rgba(0,31,63,0.10)); animation-delay: 1.00s; }
+  .hd-l3 { --infl: calc(1.00 * var(--hd-room)); animation-delay: 1.30s; }
+
+  /* Entry-animatie: na ~0,7s verschijnen de banden één voor één, van rechts naar
+     links, klein → groot (front → back). Longhand zodat de delay niet reset. */
+  @keyframes hd-reveal { from { opacity: 0; transform: translateX(34px); } to { opacity: 1; transform: translateX(0); } }
+  .hd-layer { animation-name: hd-reveal; animation-duration: 1.2s; animation-timing-function: ease-out; animation-fill-mode: both; }
+
+  @media (prefers-reduced-motion: reduce) { .hd-layer { animation-name: none; } }
+  @media (max-width: 1023px) { .hero-deco { display: none; } }
+</style>

@@ -5,6 +5,7 @@ import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_DESTINATIONS } from '../../data/cta-labels';
 import BrandChevron from '../../components/BrandChevron.astro';
+import HeroDeco from '../../components/HeroDeco.astro';
 
 const faqItems = [
   { q: 'Wat is een groepsverzekering?', a: 'Een groepsverzekering is een aanvullend pensioen dat je als werkgever afsluit voor je werknemers. Jij stort de bijdragen bij een verzekeraar, die het kapitaal opbouwt en bij pensionering uitkeert aan je werknemer. Het hoort bij de tweede pensioenpijler.' },
@@ -65,7 +66,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 </style>
 
 <style>
-  .gv-hero-img{position:absolute;top:0;right:-5px;height:min(85vh,calc(48vw * 709 / 594));width:auto;z-index:1;pointer-events:none;}
+  .gv-hero-img{position:absolute;top:0;right:-5px;width:clamp(420px, 33vw, 620px);height:auto;z-index:1;pointer-events:none;}
   .gv-hero-content{max-width:620px;}
   .gv-hero-inner{max-width:1280px;margin:0 auto;padding:100px 32px 80px;position:relative;z-index:2;}
   .gv-hero-btns{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:32px;}
@@ -141,7 +142,8 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 <div style="font-family:'Outfit',sans-serif;color:#001F3F;background:#FFFFFF;">
 
 <!-- HERO -->
-<section id="gv-hero" style="background:#FFFFFF;position:relative;overflow:hidden;min-height:100vh;">
+<section id="gv-hero" style="background:transparent;position:relative;z-index:1;min-height:calc(100vh - var(--header-clear));--photo-w:clamp(420px, 33vw, 620px);">
+  <HeroDeco />
   <div class="gv-hero-img assurman-mask assurman-mask--hero">
     <img src="/images/verzekeringen/groepsverzekering-hero.jpg" alt="Bouwteam met een groepsverzekering als aanvullend pensioen" />
   </div>
@@ -155,7 +157,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
       <p style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(20px,2.5vw,34px);line-height:1.1;color:#E5A524;margin-bottom:20px;">Bouw een aanvullend pensioen op voor je werknemers.</p>
       <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(15px,1.5vw,18px);line-height:1.65;color:#001F3F;margin-bottom:28px;max-width:520px;">Met een groepsverzekering geef je je werknemers een aanvullend pensioen bovenop hun wettelijke pensioen. Het is fiscaal veel voordeliger dan cash loon en helpt je goed personeel binden in een sector waar vakmensen schaars zijn. Voor je arbeiders loopt er al een sectoraal plan via Constructiv.</p>
       <div class="gv-hero-btns">
-        <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg">
+        <a href={CTA_DESTINATIONS.scan} class="brand-btn-primary brand-btn-primary--lg hero-cta">
           {CTA_SCAN.hero}
           <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </a>
@@ -179,7 +181,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 </nav>
 
 <!-- WAT IS HET -->
-<section id="watis" style="background:#FFFFFF;padding:96px 32px;">
+<section id="watis" style="background:transparent;position:relative;z-index:1;padding:96px 32px;">
   <div class="gv-container">
     <div class="gv-watis-grid">
       <div style="background:#3F5767;padding:32px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 28px),calc(100% - 28px) 100%,0% 100%);">
@@ -218,7 +220,7 @@ const svgArr18   = `<svg width="18" height="18" fill="none" stroke="currentColor
 </section>
 
 <!-- IS HET VERPLICHT -->
-<section id="verplicht" style="background:#e5a52414;padding:96px 32px;">
+<section id="verplicht" style="background:#e5a52414;position:relative;z-index:1;padding:96px 32px;">
   <div style="max-width:1280px;margin:0 auto;">
     <div style="text-align:center;margin-bottom:64px;">
       <span style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;display:block;margin-bottom:12px;">Is het verplicht?</span>

@@ -627,6 +627,14 @@ header.site-header { top: 0; }
 }
 
 
+/* --- Hero-deco-uitrol (goedgekeurd 11/8/2026, uit /lab) --- */
+
+/* CTA-aandachtstrekker: net na de laatste deco-band (~2,5s) faadt de gouden knop
+   een paar keer traag tussen normaal en hover. Subtiel, geen strobe/grow. */
+@keyframes cta-attn { 0%, 100% { background-color: #E5A524; } 50% { background-color: #E9C466; } }
+.hero-cta { animation: cta-attn 1.6s ease-in-out 2.6s 5; }
+@media (prefers-reduced-motion: reduce) { .hero-cta { animation: none; } }
+
 /* Assurman foto-masks — gebruik via class="assurman-mask assurman-mask--<variant>" */
 .assurman-mask {
   display: block;
