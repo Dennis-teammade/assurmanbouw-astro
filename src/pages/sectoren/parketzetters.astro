@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -11,48 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'rechtsbijstand', 'vervoerde-goederen', 'machinebreuk', 'bedrijfsvoertuigen', 'arbeidsongevallen', 'vapz']);
 
-const caseStudies = [
-  {
-    category: 'PARKET',
-    title: 'Werkend parket door vochtprobleem: €17.000 herstelclaim',
-    businessName: 'Parket Vansteenkiste',
-    ownerName: 'Lieven Vansteenkiste',
-    cityName: 'Kortrijk',
-    description: 'Enkele maanden na plaatsing begon een massieve parketvloer te werken en kieren te vertonen. De bouwheer stelde de parketzetter aansprakelijk en eiste een nieuwe vloer.',
-    action: 'Via de rechtsbijstand werd een vochtexpertise uitgevoerd op de ondergrond en het binnenklimaat. Daaruit bleek dat een te hoge restvochtigheid van de ondergrond meespeelde. De aansprakelijkheid werd gedeeld en de financiële impact voor de parketzetter bleef beperkt.',
-    image: '/images/cases/case-parketzetters-1.jpg',
-  },
-  {
-    category: 'PARKET',
-    title: 'Krasschade aan bestaande afwerking bij plaatsing kost €6.500',
-    businessName: 'Houtvloer De Clercq',
-    ownerName: 'Sofie De Clercq',
-    cityName: 'Brugge',
-    description: 'Tijdens het binnenbrengen en leggen van parket in een bewoonde woning raakte een bestaande trap en plint beschadigd. De klant vroeg herstel van de schade.',
-    action: 'De schade aan de eigendom van de klant viel onder de BA-onderneming. De verzekeraar regelde het herstel van de beschadigde trap en plint. Het project werd zonder verder conflict afgerond.',
-    image: '/images/cases/case-parketzetters-2.jpg',
-  },
-  {
-    category: 'AFWERKING',
-    title: 'Geschil over lakresultaat na schuren: €8.500 in het geding',
-    businessName: 'Parket & Lak Mortier',
-    ownerName: 'Jürgen Mortier',
-    cityName: 'Oostende',
-    description: 'Na het schuren en lakken van een parketvloer klaagde de klant over zichtbare strepen en een ongelijkmatige glansgraad. Hij weigerde de eindfactuur te betalen.',
-    action: 'Via de rechtsbijstand werd het lakresultaat technisch beoordeeld op uitvoering en op factoren zoals stof en droogcondities. Na bemiddeling kwam er een gedeeltelijke herwerking en een betalingsregeling. Een dure procedure werd vermeden.',
-    image: '/images/cases/case-parketzetters-3.jpg',
-  },
-  {
-    category: 'MACHINES',
-    title: 'Defecte parketschuurmachine legt werven stil: €5.500 schade',
-    businessName: 'Schuurwerken Tytgat',
-    ownerName: 'Pieter Tytgat',
-    cityName: 'Veurne',
-    description: 'Een dure bandschuurmachine viel uit door een interne breuk midden in een drukke periode. Naast de herstelkosten dreigde planningverlies omdat het werk stillag.',
-    action: 'Via de machinebreukdekking werd de herstelling snel afgehandeld en een vervangtoestel geregeld. De geplande werven liepen slechts beperkt vertraging op.',
-    image: '/images/cases/case-parketzetters-4.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -362,7 +326,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

@@ -24,23 +24,12 @@ const caseStudies = [
   },
   {
     category: 'SCHRIJNWERKEN & TIMMERWERK',
-    title: 'CNC-machine defect midden in productie: €12.000 herstelling',
-    businessName: 'Timmerbedrijf Claeys',
-    ownerName: 'Rik Claeys',
-    cityName: 'Roeselare',
-    description: 'Een CNC-freesmachine viel uit vlak voor de deadline van een groot project. Herstelling was noodzakelijk maar duur en tijdrovend.',
-    action: 'De machinebreukverzekering dekte de herstellingskosten volledig. Een vervangingsmachine werd tijdelijk gehuurd. Het project liep minimale vertraging op.',
+    title: 'Formaatzaag stuk: machine mocht meteen hersteld worden, dossier rond in vier werkdagen',
+    businessName: 'Verstraete Hout',
+    cityName: 'Tielt',
+    description: 'De formaatzaag ging stuk. Zonder die machine ligt de productie stil, dus wachten op een expertise was geen optie.',
+    action: 'De machine mocht meteen hersteld worden. De enige voorwaarde was dat de kapotte onderdelen beschikbaar bleven voor nazicht. Het dossier werd afgesloten in vier werkdagen.',
     image: '/images/cases/case-schrijnwerkers-2.jpg',
-  },
-  {
-    category: 'SCHRIJNWERKEN & TIMMERWERK',
-    title: 'Klant betwist maatvoering van inbouwkast',
-    businessName: 'Interior Wood bvba',
-    ownerName: 'Sara Puts',
-    cityName: 'Wetteren',
-    description: 'Na levering van een inbouwkast beweerde de klant dat de maten niet overeenstemden met de bestelling en eiste volledig herstel of terugbetaling.',
-    action: 'Via rechtsbijstand werd een expert aangesteld. De expert bevestigde dat de kast conform de getekende plannen was gemaakt. De klant trok zijn eis in.',
-    image: '/images/cases/case-schrijnwerkers-3.jpg',
   },
 ];
 
@@ -158,7 +147,7 @@ const schema = {
 <section class="dw-hero-section" style="background:#FFFFFF;position:relative;overflow:hidden;min-height:calc(100vh - var(--header-clear));--photo-w:clamp(420px, 33vw, 620px);">
   <HeroDeco containerOffset="max(664px, calc(50vw + 24px))" />
   <div class="dw-hero-img assurman-mask assurman-mask--hero">
-    <img src="/verzekeringen-bouwsector-schrijnwerkers-hero.jpg" alt="Schrijnwerker aan het werk" />
+    <img src="/images/sectoren/schrijnwerkers-hero-demeyer.webp" alt="Schrijnwerker aan het werk" />
   </div>
   <div class="dw-container" style="padding-top:0;padding-bottom:64px;position:relative;z-index:2;">
     <div class="dw-hero-content">
@@ -299,7 +288,7 @@ const schema = {
   <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.07) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0;"></div>
   <!-- right:-4px compenseert de speling in de mask-path; voorkomt zichtbare strook rechts -->
   <div class="assurman-mask assurman-mask--why dw-waarom-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:0;">
-    <img src="/verzekeringen-bouwsector-schrijnwerkers-why.jpg" alt="Schrijnwerker in atelier">
+    <img src="/images/sectoren/schrijnwerkers-why-demeyer.webp" alt="Schrijnwerker in atelier">
   </div>
   <div class="dw-container" style="position:relative;z-index:1;">
     <div style="text-align:center;margin-bottom:48px;">
@@ -349,7 +338,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion
@@ -403,7 +392,7 @@ const schema = {
 <section style="background:#E9C466;padding:80px 0 80px;position:relative;overflow:hidden;">
   <!-- right:-4px compenseert de speling in de mask-path; voorkomt zichtbare strook rechts -->
   <div class="assurman-mask assurman-mask--cta dw-cta-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:0;">
-    <img src="/verzekeringen-bouwsector-schrijnwerkers-cta.jpg" alt="Schrijnwerker bij plaatsing">
+    <img src="/images/sectoren/schrijnwerkers-cta-demeyer.webp" alt="Schrijnwerker bij plaatsing">
   </div>
   <div class="dw-container" style="text-align:center;position:relative;z-index:1;">
     <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">

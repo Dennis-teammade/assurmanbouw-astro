@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -11,48 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'ba-10', 'rechtsbijstand', 'machinebreuk', 'bedrijfsvoertuigen', 'arbeidsongevallen', 'poz']);
 
-const caseStudies = [
-  {
-    category: 'DEKVLOEREN',
-    title: 'Niet-vlakke chape dwingt herstel van tegelwerk: €16.500 schade',
-    businessName: 'Chape Centraal',
-    ownerName: 'Davy Lambrecht',
-    cityName: 'Aalst',
-    description: 'Na het leggen van de tegels bleek de vloer op verschillende plaatsen niet vlak. De tegelzetter wees naar de chape als oorzaak. De bouwheer eiste herstel van zowel de chape als het tegelwerk.',
-    action: 'Via de rechtsbijstand en BA-onderneming werd een expert aangesteld die de vlakheidsmetingen en de uitvoering beoordeelde. De aansprakelijkheid werd verdeeld op basis van de meetresultaten. De verzekering nam het toegewezen deel van de herstelkosten op zich.',
-    image: '/images/cases/case-chappers-1.jpg',
-  },
-  {
-    category: 'VLOERVERWARMING',
-    title: 'Vochtprobleem onder vloerverwarming leidt tot €22.000 gevolgschade',
-    businessName: 'Dekvloer De Backer',
-    ownerName: 'Tom De Backer',
-    cityName: 'Sint-Niklaas',
-    description: 'Een parketvloer kwam los doordat de chape rond de vloerverwarming nog te veel restvocht bevatte bij de afwerking. De claim betrof zowel het parket als het uitbreken en heraanleggen.',
-    action: 'De rechtsbijstand liet een vochtexpertise uitvoeren. Omdat de aansprakelijkheidsvraag complex was (droogtijd versus opvolging door derden), werd onderhandeld over een gedeelde regeling. De financiële impact voor de chapper bleef beperkt.',
-    image: '/images/cases/case-chappers-2.jpg',
-  },
-  {
-    category: 'DEKVLOEREN',
-    title: 'Te vroeg belaste chape scheurt: €13.000 in het geding',
-    businessName: 'EgaalChape',
-    ownerName: 'Kris Vanhecke',
-    cityName: 'Dendermonde',
-    description: 'Een verse chape werd door andere aannemers betreden en belast voordat ze voldoende was uitgehard. Er ontstonden scheuren en de bouwheer stelde de chapper aansprakelijk.',
-    action: 'Via de rechtsbijstand werd aangetoond dat de chape vroegtijdig en zonder toestemming was belast door derden. De aansprakelijkheid werd afgewend en de herstelkosten kwamen niet voor rekening van de chapper.',
-    image: '/images/cases/case-chappers-3.jpg',
-  },
-  {
-    category: 'MACHINES',
-    title: 'Defecte chapepomp legt planning stil: €8.000 schade en stilstand',
-    businessName: 'Chapewerken Verstraete',
-    ownerName: 'Ann Verstraete',
-    cityName: 'Ninove',
-    description: 'Een dure chapepomp gaf er midden in een reeks werven de brui aan door een interne breuk. Naast de herstelkosten dreigde planningverlies omdat geen alternatief direct beschikbaar was.',
-    action: 'Via de machinebreukdekking werd de herstelling van de pomp snel afgehandeld. Er kon een vervangoplossing geregeld worden zodat de geplande werven slechts enkele dagen vertraging opliepen.',
-    image: '/images/cases/case-chappers-4.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -362,7 +326,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

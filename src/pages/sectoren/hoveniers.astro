@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -11,48 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'bedrijfsvoertuigen', 'machinebreuk', 'arbeidsongevallen', 'rechtsbijstand', 'vervoerde-goederen', 'vapz']);
 
-const caseStudies = [
-  {
-    category: 'TUINONDERHOUD',
-    title: 'Steenworp van maaier verbrijzelt autoruit klant, €3.200 schade',
-    businessName: 'Groen & Net',
-    ownerName: 'Tom Verhaeghe',
-    cityName: 'Deinze',
-    description: 'Tijdens het maaien van een oprit sprong een steentje van onder de maaier weg en verbrijzelde de achterruit van de geparkeerde wagen van de klant. De klant eiste meteen vergoeding.',
-    action: 'De BA-verzekering ving de schade aan het voertuig van de klant op. De zaakvoerder kon de situatie kalm afhandelen en de klant behouden, zonder zelf voor de rekening op te draaien.',
-    image: '/images/cases/case-hoveniers-1.jpg',
-  },
-  {
-    category: 'TUINONDERHOUD',
-    title: 'Bosmaaier en kettingzaag gestolen uit bestelwagen, €4.800',
-    businessName: 'TuinFris',
-    ownerName: 'Nele Dewulf',
-    cityName: 'Waregem',
-    description: 'Tijdens een onderhoudsronde werd de bestelwagen opengebroken terwijl de zaakvoerder in een tuin werkte. Een bosmaaier, kettingzaag en handgereedschap waren in één klap weg.',
-    action: 'Via de dekking voor vervoerde goederen en machinebreuk werd het gestolen materieel vergoed. Binnen enkele dagen lag er nieuw gereedschap klaar en kon de planning grotendeels gerespecteerd worden.',
-    image: '/images/cases/case-hoveniers-2.jpg',
-  },
-  {
-    category: 'TUINONDERHOUD',
-    title: 'Aangelegd gazon slaat niet aan, klant betwist factuur van €5.500',
-    businessName: 'Het Groene Pad',
-    ownerName: 'Jurgen Claes',
-    cityName: 'Geraardsbergen',
-    description: 'Een nieuw aangelegd gazon kleurde na enkele weken bruin en kwam niet goed op. De klant weigerde de eindfactuur te betalen en eiste een volledige heraanleg op kosten van de hovenier.',
-    action: 'Met rechtsbijstand werd de discussie onderbouwd met een onafhankelijke beoordeling van de grond en het onderhoud na aanleg. Er werd een redelijk compromis bereikt en de juridische kosten werden gedekt.',
-    image: '/images/cases/case-hoveniers-3.jpg',
-  },
-  {
-    category: 'TUINONDERHOUD',
-    title: 'Snoeischade aan haag van de buur leidt tot €2.700 claim',
-    businessName: 'Hovenij De Wilg',
-    ownerName: 'Annick Peeters',
-    cityName: 'Zottegem',
-    description: 'Bij snoeiwerk in een tuin werd per vergissing een stuk van de aanpalende haag van de buur te ver teruggezet. De buur eiste een vergoeding voor de aangetaste afscherming.',
-    action: 'De BA-verzekering ving de schade aan de eigendom van de buur op. Rechtsbijstand begeleidde de afhandeling zodat de zaak vlot en zonder verdere escalatie werd geregeld.',
-    image: '/images/cases/case-hoveniers-4.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -362,7 +326,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

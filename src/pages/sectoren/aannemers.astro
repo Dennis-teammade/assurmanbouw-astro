@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import BrandChevron from '../../components/BrandChevron.astro';
@@ -11,48 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'ba-10', 'arbeidsongevallen', 'bedrijfsvoertuigen', 'machinebreuk', 'rechtsbijstand', 'groepsverzekering']);
 
-const caseStudies = [
-  {
-    category: 'ALGEMENE AANNEMING',
-    title: 'Onderaannemer veroorzaakt schade van €28.000: wie betaalt?',
-    businessName: 'Bouwbedrijf Vlaeminck',
-    ownerName: 'Vincent Vlaeminck',
-    cityName: 'Beernem',
-    description: 'Een algemene aannemer was bezig met een halfopen woning. Tijdens de uitvoering veroorzaakte een onderaannemer (loodgieter) waterschade aan de pas geplaatste afwerking: vloeren, pleisterwerk en gipskarton. De bouwheer stelde de algemene aannemer in gebreke voor de volledige schade.',
-    action: 'Via de BA Onderneming opende Assurman het dossier. Een schade-expert bracht de aansprakelijkheid in kaart: de loodgieter had een fout begaan, maar de algemene aannemer was hoofdverantwoordelijk tegenover de bouwheer. De BA-polis kwam tussen voor de schadeclaim, terwijl rechtsbijstand verhaal haalde op de onderaannemer en zijn verzekeraar.',
-    image: '/images/cases/case-aannemers-1.jpg',
-  },
-  {
-    category: 'ALGEMENE AANNEMING',
-    title: 'Materiaalschade tijdens uitvoering kost €18.000 aan verloren materialen',
-    businessName: 'Bouwteam De Cock',
-    ownerName: 'Jeroen De Cock',
-    cityName: 'Gent',
-    description: 'Tijdens renovatie van een rijwoning werden geleverde materialen zwaar beschadigd door een onverwachte storm.',
-    action: 'Via de ABR-dekking werd de schade snel afgehandeld. Nieuwe leveringen werden versneld georganiseerd en het project liep slechts enkele dagen vertraging op.',
-    image: '/images/cases/case-aannemers-2.jpg',
-  },
-  {
-    category: 'ALGEMENE AANNEMING',
-    title: 'Inbraak op werf: €14.000 aan professioneel materieel gestolen',
-    businessName: 'Constructo bvba',
-    ownerName: 'Koen Vermeersch',
-    cityName: 'Kortrijk',
-    description: 'Een aannemer werd getroffen door een gerichte diefstal op de werf. Dieven namen alle essentiële machines mee.',
-    action: 'Dankzij de machinebreukverzekering kon binnen 48 uur een vervangingsorder geplaatst worden. De zaakvoerder verloor slechts één dag werk.',
-    image: '/images/cases/case-aannemers-3.jpg',
-  },
-  {
-    category: 'ALGEMENE AANNEMING',
-    title: 'Bouwheer eist herstel na discussie over tienjarige aansprakelijkheid',
-    businessName: 'Ruwbouw Partners NV',
-    ownerName: 'Stefan Hoste',
-    cityName: 'Roeselare',
-    description: 'Na oplevering van een woning ontstond een geschil over stabiliteitsgebreken. De bouwheer beriep zich op de tienjarige aansprakelijkheid.',
-    action: 'Via de BA-10-polis kon een expert worden ingeschakeld. Na bemiddeling werd een compromis bereikt. De verzekering dekte de expert- en herstelkosten volledig.',
-    image: '/images/cases/case-aannemers-4.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -359,7 +323,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

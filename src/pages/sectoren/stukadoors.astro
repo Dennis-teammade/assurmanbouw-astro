@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -11,48 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'rechtsbijstand', 'alle-bouwplaats-risicos', 'bedrijfsvoertuigen', 'arbeidsongevallen', 'vervoerde-goederen', 'vapz']);
 
-const caseStudies = [
-  {
-    category: 'PLEISTERWERK',
-    title: 'Krimpscheuren in nieuwe wanden leiden tot €14.000 herstelclaim',
-    businessName: 'Plamuur & Plafond',
-    ownerName: 'Wim Dewulf',
-    cityName: 'Tielt',
-    description: 'Enkele weken na oplevering verschenen haarscheuren in verschillende gepleisterde wanden van een nieuwbouwwoning. De klant weet dit aan slecht uitgevoerd werk en eiste een volledige herstelbeurt op kosten van de stukadoor.',
-    action: 'Via de rechtsbijstand werd een onafhankelijke expert ingeschakeld die de droogomstandigheden, het ondergrondtype en de uitvoering beoordeelde. De expertise toonde dat de scheurvorming deels te wijten was aan een te snel ingezette verwarming. Op basis daarvan werd een gedeelde regeling bereikt en bleef de financiële impact voor de stukadoor beperkt.',
-    image: '/images/cases/case-stukadoors-1.jpg',
-  },
-  {
-    category: 'PLEISTERWERK',
-    title: 'Waterschade aan klantvloer tijdens pleisterwerk kost €9.500',
-    businessName: 'Strak Stucwerk',
-    ownerName: 'Nadia Vermeersch',
-    cityName: 'Lokeren',
-    description: 'Tijdens het opmengen van pleister liep water over een net geplaatste parketvloer in een bewoonde woning. Het parket trok krom en moest deels vervangen worden.',
-    action: 'De schade aan de eigendom van de klant viel onder de BA-onderneming. De verzekeraar nam de vervangingskosten van het beschadigde parket op zich. De relatie met de klant bleef goed en het project werd zonder verder conflict afgerond.',
-    image: '/images/cases/case-stukadoors-2.jpg',
-  },
-  {
-    category: 'GEVELPLEISTER',
-    title: 'Discussie over kleurverschil in gevelpleister: €11.000 in het geding',
-    businessName: 'GevelFijn',
-    ownerName: 'Bert Maes',
-    cityName: 'Deinze',
-    description: 'Na het afwerken van een buitengevel met sierpleister klaagde de bouwheer over zichtbare kleurverschillen tussen verschillende vlakken. Hij weigerde de laatste schijf te betalen en dreigde met herstel door derden.',
-    action: 'Via de rechtsbijstand werd technisch advies ingewonnen over de invloed van droogomstandigheden op de uitkleuring van minerale pleister. Na bemiddeling werd een deeltoegeving gedaan en kwam er een betalingsregeling. Een dure procedure werd vermeden.',
-    image: '/images/cases/case-stukadoors-3.jpg',
-  },
-  {
-    category: 'PLEISTERWERK',
-    title: 'Loslatend pleisterwerk in badkamer leidt tot €7.800 geschil',
-    businessName: 'Plafonneerwerken Cools',
-    ownerName: 'Steven Cools',
-    cityName: 'Eeklo',
-    description: 'In een gerenoveerde badkamer kwam de pleisterlaag op enkele plaatsen los. De klant stelde de stukadoor aansprakelijk, terwijl onduidelijk was of het vochtprobleem van de ondergrond kwam.',
-    action: 'De rechtsbijstand liet de oorzaak technisch onderzoeken. De expertise wees op een vochtbron achter de wand die niet door de stukadoor was veroorzaakt. De aansprakelijkheid werd afgewend en de herstelkosten kwamen niet voor rekening van de onderneming.',
-    image: '/images/cases/case-stukadoors-4.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -362,7 +326,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

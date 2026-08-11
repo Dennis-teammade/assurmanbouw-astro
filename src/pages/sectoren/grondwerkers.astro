@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -11,48 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'ba-10', 'alle-bouwplaats-risicos', 'machinebreuk', 'bedrijfsvoertuigen', 'arbeidsongevallen', 'groepsverzekering']);
 
-const caseStudies = [
-  {
-    category: 'GRONDWERK',
-    title: 'Geraakte gasleiding tijdens sleufwerk leidt tot €60.000 gevolgschade',
-    businessName: 'Grondwerken De Backer',
-    ownerName: 'Wim De Backer',
-    cityName: 'Roeselare',
-    description: 'Tijdens het graven van een sleuf voor nutsleidingen raakte de kraan een niet correct ingetekende gasleiding. De straat moest afgesloten worden en de netbeheerder eiste vergoeding voor het noodherstel.',
-    action: 'Via de BA-onderneming werd de aansprakelijkheid onderzocht en de gevolgschade aan de netbeheerder vergoed. De verzekering nam de herstel- en expertisekosten op zich. Het dossier werd afgehandeld zonder dat de zaakvoerder zelf voor de volledige rekening opdraaide.',
-    image: '/images/cases/case-grondwerkers-1.jpg',
-  },
-  {
-    category: 'GRONDWERK',
-    title: 'Verzakking beschadigt aanpalend pand: €38.000 herstelkosten',
-    businessName: 'Aardewerk Vlaanderen',
-    ownerName: 'Koen Maes',
-    cityName: 'Aalst',
-    description: 'Bij een uitgraving voor een nieuwe kelder ontstond een verzakking waardoor scheuren verschenen in de gevel van het buurpand. De buur stelde de aannemer aansprakelijk voor de herstelling.',
-    action: "Via de ABR-dekking (Alle Bouwplaats Risico's) en de aansprakelijkheid werd de schade aan het aanpalend pand opgevangen. Een expert stelde de oorzaak vast en de herstelwerken aan de buurwoning werden gedekt. Het conflict met de buur escaleerde niet verder.",
-    image: '/images/cases/case-grondwerkers-2.jpg',
-  },
-  {
-    category: 'MACHINESCHADE',
-    title: 'Hydraulische breuk legt graafmachine stil: €22.000 herstel',
-    businessName: 'Grondwerken Vandenberghe',
-    ownerName: 'Stijn Vandenberghe',
-    cityName: 'Brugge',
-    description: 'Op een lopende werf viel de hoofdgraafmachine uit door een plotse hydraulische breuk. Zonder die machine lag de planning van meerdere werven stil.',
-    action: 'Dankzij de machinebreukverzekering werd de herstelling snel goedgekeurd en vergoed. Er kon meteen een herstelling ingepland worden, waardoor de stilstand beperkt bleef en de andere werven niet in het gedrang kwamen.',
-    image: '/images/cases/case-grondwerkers-3.jpg',
-  },
-  {
-    category: 'GRONDWERK',
-    title: 'Beschadigde oprit van buur tijdens afbraakwerken kost €9.500',
-    businessName: 'De Clerck Grond- en Afbraakwerken',
-    ownerName: 'Tom De Clerck',
-    cityName: 'Sint-Niklaas',
-    description: 'Tijdens afbraakwerken reed de rupskraan over de oprit van de buurwoning, die daardoor scheurde en verzakte. De buur eiste een volledige heraanleg.',
-    action: 'Via de burgerlijke aansprakelijkheid werd de schade aan de oprit van de buur gedekt. Na expertise werd een correcte vergoeding voor de heraanleg uitbetaald. De aannemer kon de werf afronden zonder zelf voor de schade op te draaien.',
-    image: '/images/cases/case-grondwerkers-4.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -362,7 +326,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

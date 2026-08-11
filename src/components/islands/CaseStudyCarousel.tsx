@@ -19,6 +19,11 @@ interface Props {
 export default function CaseStudyCarousel({ cases }: Props) {
   const [current, setCurrent] = useState(0);
 
+  // Geen echte klantverhalen voor deze sector? Dan tonen we de sectie niet.
+  // Afspraak met Maaike (11/8/2026): liever geen sectie dan verzonnen voorbeelden.
+  // De pagina's renderen deze island ook al conditioneel; dit is de vangnet-guard.
+  if (!cases || cases.length === 0) return null;
+
   const next = () => setCurrent(p => (p + 1) % cases.length);
   const prev = () => setCurrent(p => (p - 1 + cases.length) % cases.length);
   const c = cases[current];

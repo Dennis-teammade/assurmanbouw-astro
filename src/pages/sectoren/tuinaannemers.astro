@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -11,48 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'alle-bouwplaats-risicos', 'machinebreuk', 'bedrijfsvoertuigen', 'arbeidsongevallen', 'rechtsbijstand', 'groepsverzekering']);
 
-const caseStudies = [
-  {
-    category: 'TUINAANLEG',
-    title: 'Verzakt terras na natte winter leidt tot €22.000 herstelclaim',
-    businessName: 'Groentuin Aanleg',
-    ownerName: 'Wim Dhondt',
-    cityName: 'Aalst',
-    description: 'Een ruim terras in keramische tegels begon na de eerste natte winter zichtbaar te verzakken aan één zijde. De klant weet dit aan een fout in de onderbouw en eiste volledige heraanleg.',
-    action: 'Via de BA-verzekering en rechtsbijstand werd een onafhankelijk expert ingeschakeld die de fundering en afwatering beoordeelde. Na bemiddeling werd een gedeeld herstel afgesproken. De verzekering dekte de juridische kosten en een deel van de werken, zodat het conflict niet escaleerde.',
-    image: '/images/cases/case-tuinaannemers-1.jpg',
-  },
-  {
-    category: 'TUINAANLEG',
-    title: 'Geraakte nutsleiding bij graafwerk kost €9.500 aan herstel en stilstand',
-    businessName: 'Buiten in Balans',
-    ownerName: 'Karen Lievens',
-    cityName: 'Lokeren',
-    description: 'Tijdens het graven van een fundering voor een oprit werd een niet correct ingetekende waterleiding geraakt. De straat liep blank en de nutsmaatschappij stuurde een factuur voor het herstel.',
-    action: 'De BA-verzekering ving de schade aan derden op en rechtsbijstand begeleidde de discussie over de aansprakelijkheid en de plannen van de nutsleidingen. De zaakvoerder kon doorwerken zonder dat de factuur zijn marge opat.',
-    image: '/images/cases/case-tuinaannemers-2.jpg',
-  },
-  {
-    category: 'TUINAANLEG',
-    title: 'Defecte minigraver legt totaalproject 6 dagen stil, €7.000 impact',
-    businessName: 'TuinTotaal West',
-    ownerName: 'Bert Vanhecke',
-    cityName: 'Tielt',
-    description: 'Midden in een totaaltuinproject viel de minigraver uit met een hydraulisch defect. Zonder de machine lag het grondwerk volledig stil en liep de planning van de klant in het gedrang.',
-    action: 'Via de machinebreukdekking werd de herstelling snel afgehandeld en kon een vervangmachine ingezet worden. Het project liep beperkte vertraging op in plaats van weken, en de afgesproken opleverdatum bleef grotendeels overeind.',
-    image: '/images/cases/case-tuinaannemers-3.jpg',
-  },
-  {
-    category: 'TUINAANLEG',
-    title: 'Storm beschadigt geleverde klinkers en beplanting op de werf, €11.000',
-    businessName: 'De Groene Hand',
-    ownerName: 'Sofie Maes',
-    cityName: 'Dendermonde',
-    description: 'Geleverde sierklinkers, boordstenen en plantgoed lagen klaar op de werf in afwachting van plaatsing toen een onverwachte storm en wateroverlast een groot deel onbruikbaar maakten.',
-    action: 'Via de ABR-dekking werd de schade aan de werken in uitvoering en de materialen op de werf vergoed. Nieuwe leveringen werden versneld geregeld en het project liep slechts enkele dagen vertraging op.',
-    image: '/images/cases/case-tuinaannemers-4.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -362,7 +326,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -11,48 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-10', 'ba-onderneming', 'alle-bouwplaats-risicos', 'vervoerde-goederen', 'bedrijfsvoertuigen', 'arbeidsongevallen', 'ipt']);
 
-const caseStudies = [
-  {
-    category: 'ZONNEPANELEN',
-    title: 'Waterinsijpeling na dakdoorboring leidt tot €38.000 schadeclaim',
-    businessName: 'ZonDak Solar',
-    ownerName: 'Wim Declercq',
-    cityName: 'Roeselare',
-    description: 'Enkele maanden na de plaatsing van een installatie op een hellend dak meldde de klant vochtplekken op het plafond. Het water bleek binnen te dringen via een dakdoorvoer die bij de montage was aangebracht. De klant eiste herstel van de waterschade aan dak, isolatie en afwerking.',
-    action: 'Via de BA Na Levering kon een expert de oorzaak vaststellen en werd de schade aan het binnenwerk en de dakdichting vergoed. De installateur moest niet zelf opdraaien voor de volledige herstelkost en het geschil escaleerde niet tot een procedure.',
-    image: '/images/cases/case-zonnepanelen-installateurs-1.jpg',
-  },
-  {
-    category: 'ZONNEPANELEN',
-    title: 'Brand door oververhitte connector kost €52.000 aan gebouwschade',
-    businessName: 'Helios Technics',
-    ownerName: 'Kevin Maes',
-    cityName: 'Aalst',
-    description: 'In een PV-installatie ontstond brand door een slecht gecrimpte connector bij de omvormer. Het vuur beschadigde het dak en een deel van de zolderverdieping. De gebouweigenaar stelde de installateur aansprakelijk voor de uitvoeringsfout.',
-    action: 'De BA-verzekering van de onderneming dekte de gebouwschade aan derden en de juridische beoordeling van de aansprakelijkheid. De installateur kon doorwerken zonder dat de claim zijn bedrijf in gevaar bracht.',
-    image: '/images/cases/case-zonnepanelen-installateurs-2.jpg',
-  },
-  {
-    category: 'ZONNEPANELEN',
-    title: 'Paneel valt en breekt tijdens montage: €9.500 materiaal- en gevolgschade',
-    businessName: 'Sunfix bvba',
-    ownerName: 'Tom Vanhauwaert',
-    cityName: 'Brugge',
-    description: 'Tijdens het ophijsen van panelen op een plat dak gleed een pakket panelen los. Twee panelen braken en bij de val raakte ook een dakkoepel van het gebouw beschadigd.',
-    action: 'De gebroken panelen werden via de materiaaldekking vergoed en de schade aan de dakkoepel van de klant viel onder de BA Uitbating. Nieuwe panelen werden versneld besteld zodat het project amper vertraging opliep.',
-    image: '/images/cases/case-zonnepanelen-installateurs-3.jpg',
-  },
-  {
-    category: 'ZONNEPANELEN',
-    title: 'Geschil over opbrengstgarantie loopt uit op juridische betwisting',
-    businessName: 'Volt & Co',
-    ownerName: 'Niels Sap',
-    cityName: 'Gent',
-    description: 'Een klant claimde dat de installatie de beloofde jaaropbrengst niet haalde en eiste een schadevergoeding. Er ontstond discussie over schaduwval, het paneeltype en wat er precies in de offerte was beloofd.',
-    action: 'Via de rechtsbijstand werd een onafhankelijke expert ingeschakeld die de offerte, de plaatsing en de meetgegevens analyseerde. Na bemiddeling werd een redelijke regeling getroffen en bleven de juridische kosten gedekt.',
-    image: '/images/cases/case-zonnepanelen-installateurs-4.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -362,7 +326,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

@@ -13,34 +13,13 @@ const insuranceCards = kaartenVoor(['ba-onderneming', 'bedrijfsvoertuigen', 'mac
 
 const caseStudies = [
   {
-    category: 'SCHADEAFHANDELING',
-    title: 'Twee aanrijdingen kort na elkaar: schadeteam pakt aan',
+    category: 'ELEKTRICITEIT & INSTALLATIE',
+    title: 'Twee aanrijdingen aan het gebouw, maar de hersteller wilde er maar één aanpakken',
     businessName: 'Prolectro',
-    ownerName: '',
     cityName: 'Beernem',
-    description: "In korte tijd reden twee verschillende transportfirma's ons gebouw aan toen ze hun lading kwamen lossen. De schades werden doorgegeven en alles verliep vlot, tot de hersteller slechts één schade wilde aanpakken.",
-    action: 'Het schadeteam van Assurman nam contact op met de aannemer en wees hem op zijn plichten zoals vastgelegd tijdens de expertise. Beide schades werden correct hersteld.',
+    description: 'Op korte tijd reden twee verschillende transportfirma’s ons gebouw aan bij het lossen van hun lading. De schades werden doorgegeven en alles verliep vlot, tot de hersteller moest langskomen: die wilde er maar één van beide aanpakken.',
+    action: 'Het schadeteam van Assurman nam contact op met de aannemer en wees hem op zijn verplichtingen zoals vastgelegd tijdens de expertise. Beide schades werden hersteld.',
     image: '/images/cases/case-elektriciens-1.jpg',
-  },
-  {
-    category: 'ELEKTRICITEITSWERKEN',
-    title: 'Diefstal van meetapparatuur: €8.500 verlies op één nacht',
-    businessName: 'Voltec Services',
-    ownerName: 'Jonas Baert',
-    cityName: 'Brugge',
-    description: 'Een elektricien verloor al zijn gespecialiseerde meetapparatuur bij een inbraak in zijn bestelwagen. Het materiaal was essentieel voor zijn dagelijkse werkzaamheden.',
-    action: 'De gereedschapverzekering dekte de volledige schade. Nieuwe apparatuur werd besteld en geleverd binnen 3 werkdagen. De elektricien kon zijn planning grotendeels nakomen.',
-    image: '/images/cases/case-elektriciens-2.jpg',
-  },
-  {
-    category: 'ELEKTRICITEITSWERKEN',
-    title: 'Geschil over keuring bij nieuwbouwproject',
-    businessName: 'Elektro Verbeke',
-    ownerName: 'Pieter Verbeke',
-    cityName: 'Kortrijk',
-    description: 'Een bouwheer weigerde te betalen omdat hij beweerde dat de elektrische installatie niet conform was. De elektricien betwistte dit en moest juridische stappen overwegen.',
-    action: 'Rechtsbijstand dekte de kosten van een onafhankelijke expert en advocate. Na het expertiseverslag werd de elektricien grotendeels in het gelijk gesteld en ontving hij zijn openstaand saldo.',
-    image: '/images/cases/case-elektriciens-3.jpg',
   },
 ];
 
@@ -343,7 +322,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

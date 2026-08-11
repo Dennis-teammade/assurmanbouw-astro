@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -11,48 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-10', 'alle-bouwplaats-risicos', 'ba-onderneming', 'bedrijfsschade', 'rechtsbijstand', 'arbeidsongevallen', 'aanvullend-pensioen']);
 
-const caseStudies = [
-  {
-    category: 'ZWEMBADBOUW',
-    title: 'Scheur in betonbad veroorzaakt lek, €34.000 herstel twee jaar na oplevering',
-    businessName: 'AquaBouw Vlaanderen',
-    ownerName: 'Geert Dewaele',
-    cityName: 'Roeselare',
-    description: 'Twee jaar na de oplevering ontstond een scheur in de betonkuip waardoor het bad water verloor. De klant stelde de installateur aansprakelijk voor een constructiegebrek en eiste volledig herstel.',
-    action: 'Via de tienjarige aansprakelijkheid (BA-10) werd het constructiegebrek beoordeeld door een expert en werd het herstel grotendeels gedekt. Rechtsbijstand begeleidde de discussie over de oorzaak, zodat de zaakvoerder niet zelf voor de volledige factuur stond.',
-    image: '/images/cases/case-zwembadinstallateurs-1.jpg',
-  },
-  {
-    category: 'ZWEMBADBOUW',
-    title: 'Lek in technische ruimte richt €12.500 waterschade aan',
-    businessName: 'PoolTech West',
-    ownerName: 'Hannelore Vlaeminck',
-    cityName: 'Izegem',
-    description: 'Een lekkende koppeling in de technische ruimte zorgde voor wateroverlast die de pompinstallatie en een deel van de afwerking aantastte. De klant claimde herstel en gederfd gebruik van het zwembad.',
-    action: 'De BA-verzekering ving de schade op en met de bedrijfsschadedekking werd de impact van de stilstand verzacht. Het herstel werd snel georganiseerd, zodat het bad weer in gebruik kon worden genomen.',
-    image: '/images/cases/case-zwembadinstallateurs-2.jpg',
-  },
-  {
-    category: 'ZWEMBADBOUW',
-    title: 'Geschil over waterdichtheid liner blokkeert eindfactuur van €18.000',
-    businessName: 'Zwembaden De Meyer',
-    ownerName: 'Frank De Meyer',
-    cityName: 'Waregem',
-    description: 'Na de aanleg betwistte de klant de waterdichtheid van de afwerking en hield een groot deel van de eindfactuur in tot er volgens hem een sluitende oplossing was.',
-    action: 'Met rechtsbijstand werd een onafhankelijke beoordeling van de waterdichtheid en de afwerking opgestart. Op basis daarvan werd een redelijk compromis bereikt en werden de juridische kosten gedekt.',
-    image: '/images/cases/case-zwembadinstallateurs-3.jpg',
-  },
-  {
-    category: 'ZWEMBADBOUW',
-    title: 'Storm beschadigt zwembad in aanbouw en geleverd materiaal, €15.000',
-    businessName: 'BlueLine Pools',
-    ownerName: 'Steven Carlier',
-    cityName: 'Kortrijk',
-    description: 'Tijdens de ruwbouwfase van een zwembad zorgde een hevige storm met wateroverlast voor schade aan de kuip in uitvoering en aan geleverde technische installaties die klaar lagen op de werf.',
-    action: 'Via de ABR-dekking werd de schade aan de werken in uitvoering en de materialen op de werf vergoed. Nieuwe leveringen werden versneld geregeld zodat het project beperkt vertraging opliep.',
-    image: '/images/cases/case-zwembadinstallateurs-4.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -362,7 +326,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -11,48 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'arbeidsongevallen', 'gewaarborgd-inkomen', 'machinebreuk', 'bedrijfsvoertuigen', 'rechtsbijstand', 'vapz']);
 
-const caseStudies = [
-  {
-    category: 'BOOMVERZORGING',
-    title: 'Vallende tak beschadigt dak van de buur, €16.000 herstelclaim',
-    businessName: 'Boomzorg Vandeput',
-    ownerName: 'Dirk Vandeput',
-    cityName: 'Hasselt',
-    description: 'Bij het inkorten van een grote beuk brak een zware tak anders af dan voorzien en kwam op het dak van de aanpalende woning terecht. Dakpannen en een dakgoot raakten zwaar beschadigd.',
-    action: 'De BA-verzekering ving de schade aan de eigendom van de buur op. Rechtsbijstand begeleidde de afhandeling met de buur en hun verzekeraar, zodat het herstel vlot werd geregeld en de zaakvoerder zijn reputatie behield.',
-    image: '/images/cases/case-boomverzorgers-1.jpg',
-  },
-  {
-    category: 'BOOMVERZORGING',
-    title: 'Klimongeval legt zaakvoerder 5 maanden plat, inkomen weg',
-    businessName: 'Arbo Climb',
-    ownerName: 'Stijn Goossens',
-    cityName: 'Genk',
-    description: 'Tijdens een kroonreductie viel de zaakvoerder ongelukkig en liep een ernstige beenbreuk op. Maandenlang klimwerk was onmogelijk en de inkomsten vielen grotendeels stil.',
-    action: 'De arbeidsongevallendekking ving de medische kosten op en het gewaarborgd inkomen zorgde voor een maandelijks vervangingsinkomen. Daardoor bleven de vaste lasten en het gezinsbudget overeind tijdens het herstel.',
-    image: '/images/cases/case-boomverzorgers-2.jpg',
-  },
-  {
-    category: 'BOOMVERZORGING',
-    title: 'Velling beschadigt serre op naburig perceel, €8.900',
-    businessName: 'De Boomklever',
-    ownerName: 'Liesbeth Maes',
-    cityName: 'Sint-Truiden',
-    description: 'Een geplande velling van een aangetaste populier liep mis door een onverwachte windvlaag. De boom kwam deels op de serre van het naburige perceel terecht en vernielde een groot deel van de constructie en de beplanting erin.',
-    action: 'Via de BA-verzekering werd de schade aan het naburige perceel vergoed. Rechtsbijstand hielp de aansprakelijkheid correct af te bakenen, zodat het geschil zonder escalatie werd opgelost.',
-    image: '/images/cases/case-boomverzorgers-3.jpg',
-  },
-  {
-    category: 'BOOMVERZORGING',
-    title: 'Versnipperaar valt uit en kettingzaag gestolen, €6.300 impact',
-    businessName: 'TreeCare Limburg',
-    ownerName: 'Pieter Aerts',
-    cityName: 'Tongeren',
-    description: 'Een hydraulisch defect legde de versnipperaar stil midden in een grote snoeiopdracht, en kort daarna werd een professionele kettingzaag uit de aanhanger gestolen. De combinatie zette de planning onder druk.',
-    action: 'Via de machinebreukdekking werden de herstelling en het gestolen materieel afgehandeld. Met vervangmateriaal kon de opdracht doorgaan en bleef de vertraging beperkt.',
-    image: '/images/cases/case-boomverzorgers-4.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -366,7 +330,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

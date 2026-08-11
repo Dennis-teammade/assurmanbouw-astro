@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -11,48 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'alle-bouwplaats-risicos', 'bedrijfsvoertuigen', 'machinebreuk', 'rechtsbijstand', 'arbeidsongevallen', 'groepsverzekering']);
 
-const caseStudies = [
-  {
-    category: 'DAKWERKEN',
-    title: 'Waterinsijpeling na herstelwerken leidt tot €45.000 schadeclaim',
-    businessName: 'DakPro Renovaties',
-    ownerName: 'Peter Vermeulen',
-    cityName: 'Kortrijk',
-    description: 'Na voltooiing van een dakrestauratie ontstond een geschil over de afwerking van de aansluitingen met de gevel. De klant claimde dat afspraken niet correct waren nageleefd en eiste kostenloos herstel.',
-    action: "Via de BA-verzekering kon een juridische expert worden ingeschakeld die de communicatie, plannen en foto's analyseerde. Na bemiddeling werd een compromis bereikt waarbij een deel van de werken werd uitgevoerd. De verzekering dekte de juridische kosten en een deel van de herstelwerken. Het conflict escaleerde niet verder.",
-    image: '/images/cases/case-dakwerkers-1.jpg',
-  },
-  {
-    category: 'DAKWERKEN',
-    title: 'Materiaalschade tijdens uitvoering kost €18.000 aan verloren dakpannen en isolatie',
-    businessName: 'Dacappo West-Vlaanderen',
-    ownerName: 'Johan De Smet',
-    cityName: 'Brugge',
-    description: "Tijdens renovatie van een industrieel gebouw werden geleverde dakpannen en isolatiemateriaal zwaar beschadigd door een onverwachte storm. De materialen lagen tijdelijk op de werf in afwachting van installatie.",
-    action: "Via de ABR-dekking (Alle Bouwplaats Risico's) werd de schade aan materialen snel afgehandeld. Nieuwe leveringen werden versneld georganiseerd en het project liep slechts enkele dagen vertraging op.",
-    image: '/images/cases/case-dakwerkers-2.jpg',
-  },
-  {
-    category: 'DAKWERKEN',
-    title: 'Inbraak in bestelwagen: €12.000 aan professioneel gereedschap gestolen',
-    businessName: 'VandeDak bvba',
-    ownerName: 'Marc Claeys',
-    cityName: 'Gent',
-    description: 'Een eenmanszaak gespecialiseerd in dakherstellingen werd getroffen door een gerichte diefstal. De bestelwagen stond geparkeerd op de oprit thuis. Dieven forceerden de deuren en namen alle essentiële gereedschappen mee.',
-    action: 'Dankzij de gereedschapverzekering kon binnen 48 uur een vervangingsorder geplaatst worden bij leveranciers. De verzekering dekte vrijwel de volledige schade. De zaakvoerder verloor slechts één dag werk en kon zijn afspraken grotendeels nakomen.',
-    image: '/images/cases/case-dakwerkers-3.jpg',
-  },
-  {
-    category: 'DAKWERKEN',
-    title: 'Klant eist herstel na discussie over geveldichting bij renovatieproject',
-    businessName: 'TopDak Solutions',
-    ownerName: 'Stefaan Hoste',
-    cityName: 'Roeselare',
-    description: "Na voltooiing van een dakrestauratie ontstond een geschil over de afwerking van de aansluitingen met de gevel. De klant claimde dat afspraken niet correct waren nageleefd en eiste kostenloos herstel.",
-    action: "Via de BA-verzekering kon een juridische expert worden ingeschakeld die de communicatie, plannen en foto's analyseerde. Na bemiddeling werd een compromis bereikt waarbij een deel van de werken werd uitgevoerd.",
-    image: '/images/cases/case-dakwerkers-4.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -363,7 +327,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

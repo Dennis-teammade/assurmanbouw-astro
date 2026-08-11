@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -11,48 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'rechtsbijstand', 'vervoerde-goederen', 'bedrijfsvoertuigen', 'arbeidsongevallen', 'alle-bouwplaats-risicos', 'poz']);
 
-const caseStudies = [
-  {
-    category: 'TEGELWERK',
-    title: 'Loskomende vloertegels in woonkamer: €15.500 herstelclaim',
-    businessName: 'Tegelhuis Vandamme',
-    ownerName: 'Geert Vandamme',
-    cityName: 'Roeselare',
-    description: 'Enkele maanden na oplevering kwamen verschillende vloertegels los en klonken andere hol bij aankloppen. De bouwheer eiste dat de volledige vloer opnieuw gelegd werd.',
-    action: 'Via de rechtsbijstand en BA-onderneming werd een expert aangesteld die de lijmlaag en de ondergrond beoordeelde. Op basis van de bevindingen werd de aansprakelijkheid bepaald en nam de verzekering het toegewezen deel van de herstelkosten op zich.',
-    image: '/images/cases/case-vloerders-tegelzetters-1.jpg',
-  },
-  {
-    category: 'NATUURSTEEN',
-    title: 'Discussie over kleurverschil in natuursteen: €12.000 in het geding',
-    businessName: 'SteenStijl',
-    ownerName: 'Isabelle Goossens',
-    cityName: 'Gent',
-    description: 'Na het leggen van een natuurstenen vloer klaagde de klant over duidelijke kleur- en structuurverschillen tussen de platen. Hij weigerde een deel van de factuur te betalen.',
-    action: 'Via de rechtsbijstand werd technisch advies ingewonnen over de natuurlijke variatie die eigen is aan natuursteen. Na bemiddeling kwam er een betalingsregeling waarbij de natuurlijke aard van het materiaal werd erkend. Een procedure werd vermeden.',
-    image: '/images/cases/case-vloerders-tegelzetters-2.jpg',
-  },
-  {
-    category: 'MATERIAAL',
-    title: 'Breuk van grootformaat tegels tijdens transport: €9.000 schade',
-    businessName: 'Vloeren Coppens',
-    ownerName: 'Rik Coppens',
-    cityName: 'Lokeren',
-    description: 'Een set dure grootformaat keramische platen brak tijdens het vervoer naar de werf. De levering moest opnieuw besteld worden, met planningverlies tot gevolg.',
-    action: 'Via de dekking voor vervoerde goederen werd de waarde van de gebroken platen vergoed. Een nieuwe levering werd versneld geregeld zodat het project slechts beperkt vertraging opliep.',
-    image: '/images/cases/case-vloerders-tegelzetters-3.jpg',
-  },
-  {
-    category: 'TEGELWERK',
-    title: 'Beschadigde natuursteenplaat bij plaatsing kost €7.500',
-    businessName: 'Tegel & Natuursteen Peeters',
-    ownerName: 'Marleen Peeters',
-    cityName: 'Wetteren',
-    description: 'Tijdens het inpassen van een dure natuursteenplaat ontstond een barst. Het stuk was op maat besteld en kon niet zomaar vervangen worden zonder extra kosten en wachttijd.',
-    action: 'De schade aan het materiaal in uitvoering werd binnen de werfdekking opgevangen. Er kon een nieuwe plaat besteld worden en het project werd zonder verder conflict afgewerkt.',
-    image: '/images/cases/case-vloerders-tegelzetters-4.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -362,7 +326,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

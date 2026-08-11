@@ -13,34 +13,13 @@ const insuranceCards = kaartenVoor(['ba-onderneming', 'bedrijfsvoertuigen', 'mac
 
 const caseStudies = [
   {
-    category: 'GEWAARBORGD INKOMEN',
-    title: 'Val van stelling: levenslang werkonbekwaam, verzekeraar wilde uitkering stopzetten',
-    businessName: 'Schilder',
-    ownerName: 'B. Opsomer',
+    category: 'SCHILDER- & DECORATIEWERK',
+    title: 'Val van een stelling: gewaarborgd inkomen werd stopgezet, en met succes betwist',
+    businessName: 'B. Opsomer',
     cityName: 'Ruiselede',
-    description: 'Na een zwaar arbeidsongeval, een val van een stelling met twee gebroken benen, ben ik voor de rest van mijn leven werkonbekwaam in de sector. Op een stelling klimmen is geen optie meer.',
-    action: 'De maatschappij waar mijn gewaarborgd inkomen liep, wilde de uitkering stopzetten. Benoit betwistte de stopzetting en zorgde ervoor dat ik nu weer op beide oren kan slapen.',
+    description: 'Na een zwaar arbeidsongeval met een val van een stelling en twee gebroken benen, besliste de maatschappij van het gewaarborgd inkomen om de uitkering stop te zetten. Werken op een stelling zit er nooit meer in, dus die uitkering is blijvend nodig.',
+    action: 'Benoit betwistte de stopzetting en kreeg gelijk. De begeleiding stopte niet bij de afhandeling van het ongeval zelf, maar liep door tot het dossier definitief geregeld was.',
     image: '/images/cases/case-schilders-1.jpg',
-  },
-  {
-    category: 'SCHILDERWERKEN',
-    title: 'Val van ladder: ernstig arbeidsongeval op werf',
-    businessName: 'Schildersbedrijf Maes',
-    ownerName: 'Dirk Maes',
-    cityName: 'Knesselare',
-    description: 'Een medewerker viel van een ladder tijdens het schilderen van een gevel. Hij liep een gebroken arm op en was 6 weken arbeidsongeschikt.',
-    action: 'De arbeidsongevallenverzekering dekte de medische kosten, hospitalisatie en arbeidsongeschiktheidsvergoeding volledig. De zaakvoerder hoefde niets persoonlijk bij te dragen.',
-    image: '/images/cases/case-schilders-2.jpg',
-  },
-  {
-    category: 'SCHILDERWERKEN',
-    title: 'Klacht over kleurschakering: discussie over herstel',
-    businessName: 'Kleurwerk bvba',
-    ownerName: 'Maya Claes',
-    cityName: 'Kortrijk',
-    description: 'Een klant beweerde dat de uitgevoerde kleur niet overeenkwam met de gekozen staal. Hij eiste volledig herstel op kosten van de schilder.',
-    action: 'Via rechtsbijstand werd een expert aangesteld. De expert stelde vast dat de kleur conform was aan de bestelling. De klant trok zijn eis in en de zaak werd buitengerechtelijk afgehandeld.',
-    image: '/images/cases/case-schilders-3.jpg',
   },
 ];
 
@@ -352,7 +331,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

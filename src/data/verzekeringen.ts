@@ -37,11 +37,18 @@ export interface Verzekering {
   status: 'live' | 'skeleton';
 }
 
+/**
+ * Groepslabels volgens OPTIE A, gekozen door Maaike (mail 6/8/2026, bevestigd 11/8).
+ * Logica: "wat sluit je samen af", zoals zij het zelf voorstelde.
+ * De sleutels blijven ongewijzigd om de bestaande data en URL's niet te breken;
+ * enkel de zichtbare labels en de indeling volgen optie A.
+ * Achtergrond: clients\assurman\docs\INDELING-VERZEKERINGEN-OPTIES-ABC.md
+ */
 export const CATEGORIE_LABELS: Record<VerzekeringCategorie, string> = {
-  'aansprakelijkheid': 'Aansprakelijkheid',
-  'spullen-en-werk': 'Materiaal & je werk',
-  'jij-en-je-mensen': 'Jij & je mensen',
-  'pensioen-en-fiscaal': 'Pensioen & fiscaal',
+  'aansprakelijkheid': 'Op de werf',
+  'spullen-en-werk': 'Gebouw & materieel',
+  'jij-en-je-mensen': 'Personeel & jezelf beschermen',
+  'pensioen-en-fiscaal': 'Pensioen & fiscaal opbouwen',
 };
 
 /**
@@ -50,9 +57,9 @@ export const CATEGORIE_LABELS: Record<VerzekeringCategorie, string> = {
  * shield-half, tools, heart-handshake, pig-money.
  */
 export const CATEGORIE_META: Record<VerzekeringCategorie, { icoon: string; subzin: string }> = {
-  'aansprakelijkheid':   { icoon: 'shield-half',     subzin: 'Als er iets misgaat' },
-  'spullen-en-werk':     { icoon: 'tools',           subzin: 'Materieel en gebouw' },
-  'jij-en-je-mensen':    { icoon: 'heart-handshake', subzin: 'Inkomen en bescherming' },
+  'aansprakelijkheid':   { icoon: 'shield-half',     subzin: 'Aansprakelijkheid op de werf' },
+  'spullen-en-werk':     { icoon: 'tools',           subzin: 'Materieel, gebouw en wagens' },
+  'jij-en-je-mensen':    { icoon: 'heart-handshake', subzin: 'Je mensen en jezelf' },
   'pensioen-en-fiscaal': { icoon: 'pig-money',       subzin: 'Opbouwen met voordeel' },
 };
 
@@ -114,17 +121,6 @@ export const VERZEKERINGEN: Verzekering[] = [
     bullets: ['Beschermt je privévermogen', 'Dekt de verdedigingskosten', 'Ook gewezen en feitelijke bestuurders', 'Cruciaal sinds Boek 6 BW'],
     icoon: 'check-circle',
     gerelateerde: ['ba-onderneming', 'rechtsbijstand', 'bescherming-bedrijfsleider', 'gewaarborgd-inkomen'],
-    status: 'live',
-  },
-  {
-    slug: 'rechtsbijstand',
-    titel: 'Rechtsbijstand',
-    categorie: 'aansprakelijkheid',
-    menuOmschrijving: 'Bij geschillen',
-    korteBeschrijving: 'Vrije advocaatkeuze en dekking van juridische kosten bij geschillen, factuurincasso, arbeidsconflicten en contractbetwistingen.',
-    bullets: ['Hulp bij contractgeschillen en betwiste oplevering', 'Incasso bij onbetaalde facturen', 'Verdediging bij arbeidsrechtelijke conflicten'],
-    icoon: 'scale',
-    gerelateerde: ['ba-onderneming', 'ba-10', 'alle-bouwplaats-risicos', 'ba-bestuurder'],
     status: 'live',
   },
 
@@ -217,6 +213,19 @@ export const VERZEKERINGEN: Verzekering[] = [
     bullets: ['Kapitaal voor de vennootschap, niet voor het gezin', 'Vangt overlijden én langdurige uitval op', 'Vrij besteedbaar: vervanger, omzet of krediet', 'Premie in principe aftrekbaar (art. 49 WIB92)'],
     icoon: 'users',
     gerelateerde: ['gewaarborgd-inkomen', 'aanvullend-pensioen', 'groepsverzekering', 'ba-bestuurder'],
+    status: 'live',
+  },
+  {
+    slug: 'rechtsbijstand',
+    titel: 'Rechtsbijstand',
+    // Optie A (Maaike): rechtsbijstand hoort bij "Personeel & jezelf beschermen",
+    // niet bij de werf-aansprakelijkheden. Zij ziet het als een polis op zich.
+    categorie: 'jij-en-je-mensen',
+    menuOmschrijving: 'Bij geschillen',
+    korteBeschrijving: 'Vrije advocaatkeuze en dekking van juridische kosten bij geschillen, factuurincasso, arbeidsconflicten en contractbetwistingen.',
+    bullets: ['Hulp bij contractgeschillen en betwiste oplevering', 'Incasso bij onbetaalde facturen', 'Verdediging bij arbeidsrechtelijke conflicten'],
+    icoon: 'scale',
+    gerelateerde: ['ba-onderneming', 'ba-10', 'alle-bouwplaats-risicos', 'ba-bestuurder'],
     status: 'live',
   },
 

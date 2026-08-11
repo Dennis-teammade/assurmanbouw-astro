@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import BrandChevron from '../../components/BrandChevron.astro';
@@ -11,38 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'bedrijfsvoertuigen', 'machinebreuk', 'rechtsbijstand', 'alle-bouwplaats-risicos', 'arbeidsongevallen', 'ipt']);
 
-const caseStudies = [
-  {
-    category: 'SANITAIR & VERWARMING',
-    title: 'Waterleiding gesprongen na installatie: €22.000 schade aan parket',
-    businessName: 'Hydro Install bvba',
-    ownerName: 'Thomas Pieters',
-    cityName: 'Aalter',
-    description: 'Na het plaatsen van een nieuwe badkamer spatte een koppeling los. De waterschade trof de volledig vernieuwde badkamer en het parket van de hal.',
-    action: 'De BA-verzekering handelde de schade af na expertise. De loodgieter moest niets zelf bijbetalen. De klant werd volledig vergoed.',
-    image: '/images/cases/case-loodgieters-1.jpg',
-  },
-  {
-    category: 'SANITAIR & VERWARMING',
-    title: 'Gaslek door foutieve fitting bij renovatie',
-    businessName: 'Sanitair De Groote',
-    ownerName: 'Nico De Groote',
-    cityName: 'Gent',
-    description: 'Na een renovatie van de verwarmingsinstallatie werd een gaslek ontdekt. De bewoners werden geëvacueerd en er dreigde een ernstige situatie.',
-    action: 'Via de BA-polis werd de schade onderzocht en werd het slachtoffer vergoed. De oorzaak bleek een fabricagefout aan een koppeling. De verzekeraar verhuurde zich op de leverancier.',
-    image: '/images/cases/case-loodgieters-2.jpg',
-  },
-  {
-    category: 'SANITAIR & VERWARMING',
-    title: 'Diefstal perstang en video-inspectie camera: €7.200',
-    businessName: 'Loodgieter Maes',
-    ownerName: 'Bram Maes',
-    cityName: 'Kortrijk',
-    description: 'Een loodgieter verloor zijn duurste uitrusting door inbraak in zijn bestelwagen.',
-    action: 'De machinebreukverzekering vergoedde het materiaal volledig. Vervanging werd binnen de week geregeld.',
-    image: '/images/cases/case-loodgieters-3.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -349,7 +323,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

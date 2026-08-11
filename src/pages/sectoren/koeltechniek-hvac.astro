@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
 import CaseStudyCarousel from '../../components/islands/CaseStudyCarousel';
+import type { CaseStudy } from '../../components/islands/CaseStudyCarousel';
 import FaqAccordion from '../../components/islands/FaqAccordion';
 import PartnerSlider from '../../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../../data/cta-labels';
@@ -11,48 +12,11 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'vervoerde-goederen', 'machinebreuk', 'bedrijfsvoertuigen', 'arbeidsongevallen', 'rechtsbijstand', 'aanvullend-pensioen']);
 
-const caseStudies = [
-  {
-    category: 'KOELTECHNIEK & HVAC',
-    title: 'Koelmiddellek na installatie leidt tot €16.000 herstel- en gevolgschade',
-    businessName: 'Klimaat Coolservice',
-    ownerName: 'Bart Wauters',
-    cityName: 'Hasselt',
-    description: 'Na de plaatsing van een airco-installatie in een winkelpand ontstond een lek in het koelmiddelcircuit. De installatie viel uit en de klant claimde naast het herstel ook de schade door het stilvallen van de koeling tijdens een warme periode.',
-    action: 'De BA Na Levering dekte de gevolgschade die aan de uitvoeringsfout werd toegeschreven. Een expert beoordeelde de oorzaak en de installateur kon het geschil afronden zonder zelf de volledige kost te dragen.',
-    image: '/images/cases/case-koeltechniek-hvac-1.jpg',
-  },
-  {
-    category: 'KOELTECHNIEK & HVAC',
-    title: 'Geschil over verkeerd gedimensioneerde warmtepomp loopt op tot €22.000',
-    businessName: 'WarmteWise',
-    ownerName: 'Dieter Cools',
-    cityName: 'Leuven',
-    description: 'Een klant stelde dat de geplaatste warmtepomp de woning onvoldoende verwarmde en eiste vervanging plus schadevergoeding. Er ontstond discussie over de berekende warmtebehoefte en wat er in de offerte was afgesproken.',
-    action: 'Via de rechtsbijstand werd een onafhankelijke expert ingeschakeld die de dimensionering en de offerte beoordeelde. Na bemiddeling kwam er een regeling en bleven de juridische kosten gedekt.',
-    image: '/images/cases/case-koeltechniek-hvac-2.jpg',
-  },
-  {
-    category: 'KOELTECHNIEK & HVAC',
-    title: 'Waterschade door lekkende condensafvoer veroorzaakt €13.500 aan plafondschade',
-    businessName: 'Aircomfort bvba',
-    ownerName: 'Sven Peeters',
-    cityName: 'Mechelen',
-    description: 'Bij een binnenunit kwam de condensafvoer los waardoor water in het plafond en de gipswanden van de verdieping eronder liep. De gebouweigenaar stelde de installateur aansprakelijk voor de waterschade.',
-    action: 'De BA Uitbating dekte de waterschade aan het gebouw van de klant. De claim werd snel afgehandeld en het conflict liep niet uit op een procedure.',
-    image: '/images/cases/case-koeltechniek-hvac-3.jpg',
-  },
-  {
-    category: 'KOELTECHNIEK & HVAC',
-    title: 'Dure warmtepomp beschadigd bij transport en plaatsing: €8.900',
-    businessName: 'Thermflow Technics',
-    ownerName: 'Glenn Verhulst',
-    cityName: 'Antwerpen',
-    description: 'Bij het lossen en hijsen van een buitenunit op een platdak viel de warmtepomp van de pallet en raakte de behuizing en het lamellenpakket beschadigd. De unit was niet meer bruikbaar.',
-    action: 'Via de verzekering voor vervoerde goederen werd de beschadigde unit vergoed. Een vervangende unit werd versneld geleverd zodat het project nauwelijks vertraging opliep.',
-    image: '/images/cases/case-koeltechniek-hvac-4.jpg',
-  },
-];
+// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
+// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
+// zetten we die hier en verschijnt de sectie automatisch weer.
+// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
+const caseStudies: CaseStudy[] = [];
 
 const faqItems = [
   {
@@ -362,7 +326,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion

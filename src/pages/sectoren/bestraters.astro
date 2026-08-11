@@ -13,44 +13,13 @@ const insuranceCards = kaartenVoor(['ba-onderneming', 'alle-bouwplaats-risicos',
 
 const caseStudies = [
   {
-    category: 'BESTRATING',
-    title: 'Geschil over afwatering oprit leidt tot €16.000 herstelclaim',
-    businessName: 'Bestratingen Devos',
-    ownerName: 'Bart Devos',
-    cityName: 'Kortrijk',
-    description: 'Na de aanleg van een grote oprit klaagde de klant dat het water richting de garage liep in plaats van naar de straat. De klant eiste een volledige heraanleg met aangepaste helling.',
-    action: 'Via de rechtsbijstand kon een onafhankelijke expert de helling en de afwatering nameten. Na bemiddeling werd een compromis bereikt waarbij een deel van het werk werd aangepast. De verzekering dekte de juridische kosten en een deel van de herstelwerken. Het conflict escaleerde niet verder.',
-    image: '/images/cases/case-bestraters-1.jpg',
-  },
-  {
-    category: 'BESTRATING',
-    title: 'Verzakte klinkers op openbare verharding: €12.500 herstel',
-    businessName: 'Kasseiwerken West',
-    ownerName: 'Geert Lefebvre',
-    cityName: 'Ieper',
-    description: 'Enkele maanden na de oplevering van een stuk openbare verharding verzakten klinkers door een probleem met de ondergrond. De opdrachtgever stelde de aannemer aansprakelijk voor het herstel.',
-    action: 'Via de aansprakelijkheid en ABR werd de oorzaak onderzocht en het herstel gedekt. De verzakte zone werd opnieuw aangelegd zonder dat de aannemer de volledige kost zelf droeg. De relatie met de opdrachtgever bleef behouden.',
-    image: '/images/cases/case-bestraters-2.jpg',
-  },
-  {
-    category: 'DIEFSTAL',
-    title: 'Kasseien en materiaal van werf gestolen: €8.000 schade',
-    businessName: 'Bestratingen Vermeersch',
-    ownerName: 'Niels Vermeersch',
-    cityName: 'Gent',
-    description: "Op een lopende werf werd 's nachts een voorraad natuurstenen kasseien en materiaal gestolen. De levering lag klaar voor plaatsing de volgende ochtend.",
-    action: 'Dankzij de materiaal- en werfdekking kon snel een nieuwe levering geregeld worden. De verzekering dekte vrijwel de volledige schade, waardoor de werf slechts enkele dagen vertraging opliep.',
-    image: '/images/cases/case-bestraters-3.jpg',
-  },
-  {
-    category: 'MACHINESCHADE',
-    title: 'Defecte minigraver legt terrasaanleg stil: €7.500 herstel',
-    businessName: 'Tuinverhardingen Claus',
-    ownerName: 'Pieter Claus',
-    cityName: 'Dendermonde',
-    description: 'Tijdens de aanleg van een terras viel de minigraver uit door een technisch defect aan de hydraulica. Zonder die machine kon het grondwerk voor het terras niet verder.',
-    action: 'Via de machinebreukverzekering werd de herstelling snel goedgekeurd en vergoed. Er kon meteen een herstelling ingepland worden, waardoor de stilstand op de werf beperkt bleef.',
-    image: '/images/cases/case-bestraters-4.jpg',
+    category: 'BESTRATING & KASSEIWERK',
+    title: 'Container beschadigt de afsluiting van de buren tijdens het optrekken',
+    businessName: 'Moelaert en Zonen BVBA',
+    cityName: 'Oedelem',
+    description: 'Bij het optrekken van een container raakte de afsluiting van de buren beschadigd. Zo’n voorval kan een werf lang vergiftigen, zeker als de buren zich niet gehoord voelen.',
+    action: 'De mensen werden snel vergoed volgens het bestek. Daardoor konden we zonder wrevel blijven verder werken op de werf.',
+    image: '/images/cases/case-bestraters-moelaert-container.webp',
   },
 ];
 
@@ -362,7 +331,7 @@ const schema = {
 </section>
 
 <!-- SECTION 7: CASE CAROUSEL -->
-<CaseStudyCarousel client:visible cases={caseStudies} />
+{caseStudies.length > 0 && <CaseStudyCarousel client:visible cases={caseStudies} />}
 
 <!-- SECTION 8: FAQ -->
 <FaqAccordion
