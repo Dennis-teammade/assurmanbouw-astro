@@ -618,6 +618,10 @@ header.site-header { top: 0; }
   overflow: hidden;
   clip-path: polygon(0% 0%, 100% 0%, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0% 100%);
   min-height: 200px;
+  /* Vaste 3:2-verhouding: de fotokolom mag de rijhoogte nooit bepalen. Zonder dit
+     rekt een staande klantfoto (telefoonfoto) de kaart uit en blijft er honderden
+     pixels wit naast de tekst staan. Ideale bronfoto: 1600x1067 (3:2, liggend). */
+  aspect-ratio: 3 / 2;
 }
 @media (max-width: 767px) {
   .case-grid { grid-template-columns: 1fr; }

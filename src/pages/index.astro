@@ -295,7 +295,17 @@ const STEPS = [
       </p>
     </div>
 
-    <!-- Filterbalk (vervangt de losse cluster-knoppen) -->
+    <!-- Filterbalk (vervangt de losse cluster-knoppen)
+
+         BEWUSTE AFWIJKING (vastgelegd 11/8/2026, Dennis): de labels hieronder zijn KORTER
+         dan de groepskoppen op /verzekeringen/ en in het menu ("Op de werf", "Gebouw &
+         materieel", "Personeel & jezelf beschermen", "Pensioen & fiscaal opbouwen").
+         Reden: vijf knoppen naast elkaar in één balk; de volledige labels passen niet.
+
+         De INDELING is wel identiek: data-filter gebruikt dezelfde categorie-sleutels als
+         verzekeringen.ts, dus elke groep bevat exact dezelfde polissen als op de
+         overzichtspagina (optie A, incl. rechtsbijstand onder 'jij-en-je-mensen').
+         Niet "gelijktrekken" zonder overleg. -->
     <div class="ins-filterbar" role="group" aria-label="Filter verzekeringen op categorie">
       <button type="button" class="ins-filter is-active" data-filter="selectie" aria-pressed="true">Onze selectie</button>
       <button type="button" class="ins-filter" data-filter="aansprakelijkheid" aria-pressed="false">Aansprakelijkheid</button>
