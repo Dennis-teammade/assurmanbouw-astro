@@ -11,6 +11,10 @@ import { CTA_DESTINATIONS, CTA_SCAN, CTA_AFSPRAAK } from '../data/cta-labels';
   .oa-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
   .oa-story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
   .oa-values-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  /* ── Op de werf (beeldblok) ── */
+  .oa-werf-grid { display: grid; grid-template-columns: 7fr 5fr; gap: 64px; align-items: center; }
+  .oa-werf-foto { margin: 0; clip-path: polygon(48px 0%, 100% 0%, 100% 100%, 0% 100%, 0% 48px); }
+  .oa-werf-foto img { display: block; width: 100%; height: auto; aspect-ratio: 1600 / 1000; object-fit: cover; }
   /* ── Team rows ── */
   .oa-team-row { display: flex; gap: 28px; justify-content: center; margin-bottom: 28px; flex-wrap: wrap; }
   .oa-team-row:last-child { margin-bottom: 0; }
@@ -47,6 +51,7 @@ import { CTA_DESTINATIONS, CTA_SCAN, CTA_AFSPRAAK } from '../data/cta-labels';
     .oa-container { padding: 0 24px; }
     .oa-hero-grid { grid-template-columns: 1fr; gap: 40px; }
     .oa-story-grid { grid-template-columns: 1fr; gap: 40px; }
+    .oa-werf-grid { grid-template-columns: 1fr; gap: 40px; }
     .oa-values-grid { grid-template-columns: repeat(2, 1fr); }
   }
   @media (max-width: 639px) {
@@ -128,6 +133,28 @@ import { CTA_DESTINATIONS, CTA_SCAN, CTA_AFSPRAAK } from '../data/cta-labels';
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ OP DE WERF (werffoto's uit Drive, geleverd 12/8/2026) ═══ -->
+  <section style="background:#3F5767;padding:100px 0;position:relative;overflow:hidden;">
+    <div style="position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,255,255,0.07) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;"></div>
+    <div class="oa-container" style="position:relative;">
+      <div class="oa-werf-grid">
+        <figure class="oa-werf-foto">
+          <img src="/images/werfbezoek/over-assurman-werf.webp" alt="Benoit Keerman van Assurman in overleg in een ruwbouw" width="1600" height="1000" loading="lazy" decoding="async" />
+        </figure>
+        <div>
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;letter-spacing:1.4px;text-transform:uppercase;color:#E9C466;margin:0 0 12px;">Op de werf</p>
+          <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,3.5vw,44px);line-height:1.1;color:#FFFFFF;margin:0 0 24px;">Waar jij werkt, daar praten we</h2>
+          <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.7;color:#CBD5E1;margin:0 0 20px;">Je verzekering moet kloppen met wat er op je werf gebeurt, niet met wat er in een standaardpakket staat. Daarom houden we het gesprek graag concreet.</p>
+          <p style="font-family:'Open Sans',sans-serif;font-size:17px;line-height:1.7;color:#CBD5E1;margin:0 0 32px;">Is een afspraak zinvol, dan plannen we die samen: op kantoor of bij jou op de werf.</p>
+          <a href={CTA_DESTINATIONS.afspraak} style="display:inline-flex;align-items:center;gap:10px;background:#E5A524;color:#001F3F;font-family:'Open Sans',sans-serif;font-weight:700;font-size:17px;padding:18px 36px;border-radius:8px;text-decoration:none;">
+            {CTA_AFSPRAAK.band}
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
       </div>
     </div>
   </section>
