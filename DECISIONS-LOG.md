@@ -61,7 +61,7 @@ Vanaf 2026-06-03 is **`fase-2`** de werkbranch voor doorlopend werk:
 
 `feedback-maaike-mei26` is uitgewerkt en gemerged in main, niet langer actief.
 
-**Staging Basic Auth**: gebruiker `Maaike`, wachtwoord `klopklop`. Hash apache MD5 (`$apr1$...`). `.htaccess` + `.htpasswd` staan in `staging-auth/` (gitignored, manueel uploaden naar Hostinger). `.htaccess` verwijst naar absoluut Hostinger-pad `/home/u434701396/domains/onlineprojecten.be/public_html/assurbouw/.htpasswd`.
+**Staging Basic Auth**: gebruiker `Maaike`, wachtwoord in `C:/teammade/.secrets/assurman.env` (`ASSURBOUW_STAGING_BASIC_AUTH_*`). Sinds 21/9/2026 uploadt `clients/assurman/scripts/staging-sync.mjs` automatisch `staging-auth/.htaccess` + `.htpasswd` in de plaats van `dist/.htaccess`, zodat een upload de beveiliging niet meer wist (dat gebeurde sinds `public/.htaccess` op 30/6 bijkwam). Hash apache MD5 (`$apr1$...`). `.htaccess` + `.htpasswd` staan in `staging-auth/` (gitignored, manueel uploaden naar Hostinger). `.htaccess` verwijst naar absoluut Hostinger-pad `/home/u434701396/domains/onlineprojecten.be/public_html/assurbouw/.htpasswd`.
 
 ### D7 — Native formulieren: gedeeld React-island, client-side POST naar GHL webhook
 **Vervangt** de twee trage `teammade.ai/widget/form/...`-iframes op `/contact/` en `/maak-afspraak/`.
