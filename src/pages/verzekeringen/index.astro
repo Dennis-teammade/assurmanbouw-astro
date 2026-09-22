@@ -25,9 +25,9 @@ const groepen = verzekeringenPerCategorie();
        zodat de foto nooit afgekapt wordt, en de tekstkolom blijft op wit (zie D11). */
     .vz-hero { --flank-w: clamp(200px,26vw,560px); min-height: calc(var(--flank-w) * 519 / 430); }
     .vz-hero-img,
-    .vz-hero-img-right { position:absolute; top:50%; width:var(--flank-w); z-index:1; pointer-events:none; }
-    .vz-hero-img       { left:-5px;  transform:translateY(-50%); }
-    .vz-hero-img-right { right:-5px; transform:translateY(-50%) scaleX(-1); }
+    .vz-hero-img-right { position:absolute; top:0; width:var(--flank-w); z-index:1; pointer-events:none; }
+    .vz-hero-img       { left:-5px;  transform:none; }
+    .vz-hero-img-right { right:-5px; transform:scaleX(-1); }
     .vz-hero-img > img       { object-position:left center; }
     .vz-hero-img-right > img { object-position:right center; transform:scaleX(-1); }
     .vz-hero-text { max-width: min(740px, calc(100vw - 2 * var(--flank-w) - 48px)); margin:0 auto; }

@@ -184,10 +184,10 @@ const sectorGroepen = [
      zodat de afbeelding ALTIJD volledig past en nooit onderaan afgekapt wordt. */
   .sectors-hero { --flank-w: clamp(200px,26vw,560px); min-height: calc(var(--flank-w) * 519 / 430); }
   .sectors-hero-img,
-  .sectors-hero-img-right { position:absolute; top:50%; width:var(--flank-w); z-index:1; pointer-events:none; }
-  .sectors-hero-img       { left:-5px;  transform:translateY(-50%); }
+  .sectors-hero-img-right { position:absolute; top:0; width:var(--flank-w); z-index:1; pointer-events:none; }
+  .sectors-hero-img       { left:-5px;  transform:none; }
   /* Rechts: div gespiegeld (mask wijst naar binnen), img tegengespiegeld (foto niet gespiegeld) */
-  .sectors-hero-img-right { right:-5px; transform:translateY(-50%) scaleX(-1); }
+  .sectors-hero-img-right { right:-5px; transform:scaleX(-1); }
   .sectors-hero-img > img       { object-position:left center; }
   .sectors-hero-img-right > img { object-position:right center; transform:scaleX(-1); }
   .sectors-hero-text { max-width: min(740px, calc(100vw - 2 * var(--flank-w) - 48px)); margin:0 auto; }
