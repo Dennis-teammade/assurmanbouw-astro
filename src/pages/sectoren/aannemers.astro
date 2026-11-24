@@ -1,4 +1,4 @@
-﻿---
+---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
@@ -12,11 +12,29 @@ import HeroDeco from '../../components/HeroDeco.astro';
 
 const insuranceCards = kaartenVoor(['ba-onderneming', 'ba-10', 'arbeidsongevallen', 'bedrijfsvoertuigen', 'machinebreuk', 'rechtsbijstand', 'groepsverzekering']);
 
-// Nog geen echt klantverhaal voor deze sector. Afspraak met Maaike (11/8/2026):
-// liever geen sectie dan verzonnen voorbeelden. Zodra er een echte case binnenkomt,
-// zetten we die hier en verschijnt de sectie automatisch weer.
-// Aanleveren via de gedeelde sheet (zie clients/assurman/docs/FEEDBACK-MAAIKE-2026-08-06.md).
-const caseStudies: CaseStudy[] = [];
+// Echte klantverhalen, aangeleverd door Maaike: Verdonck (feedbacktool 21/5/2026, draad 6315) en
+// Brandt (gedeelde sheet CASES-OVERZICHT-MAAIKE, 6/10/2026). Geen bedragen verzinnen: alleen wat zij gaf.
+// Brandt: eigen foto van de ingestorte stal (Drive, testimonials). Verdonck: nog geen klantfoto, tot dan een echte werffoto van Assurman (geen stock).
+const caseStudies: CaseStudy[] = [
+  {
+    category: 'ALGEMENE AANNEMING',
+    title: 'Grond zakt in en breekt een waterleiding: Assurman neemt de nazorg volledig op zich',
+    businessName: 'Alg. Bouwonderneming Verdonck BVBA',
+    cityName: 'Beernem',
+    description: 'Bij het plaatsen van een regenput begon de natte grond rond de put in te zakken. Daaronder liep nog een oude asbesthoudende waterleiding, die door het gewicht van de grond barstte. Er volgde een ingebrekestelling en een serieuze factuur van de watermaatschappij.',
+    action: 'Assurman nam de nazorg van de schade volledig op zich. De aannemer kon met een gerust hart verder werken.',
+    image: '/images/werfbezoek/werfbezoek-ruwbouw-deuropening.webp',
+  },
+  {
+    category: 'ALGEMENE AANNEMING',
+    title: 'Stal ingestort en volgens de polis niet gedekt: Benoit vindt toch een vergoeding',
+    businessName: 'Bouwwerken Brandt BV',
+    cityName: 'Beernem',
+    description: 'Toen de varkensstal instortte, leek het een financiële ramp te worden. De vorige makelaar had het dossier niet correct opgevolgd, waardoor de schade volgens de polis niet verzekerd leek.',
+    action: 'Benoit beet zich vast in het dossier, ploos de algemene voorwaarden grondig uit en vond toch een oplossing: de schadevergoeding werd uitbetaald. "Je voelt dat hij niet zomaar een verzekering verkoopt, maar echt naast zijn klanten staat wanneer het moeilijk wordt."',
+    image: '/images/cases/brandt-varkensstal.webp',
+  },
+];
 
 const faqItems = [
   {
@@ -132,7 +150,7 @@ const schema = {
 <section class="dw-hero-section" style="background:#FFFFFF;position:relative;overflow:hidden;min-height:calc(100vh - var(--header-clear));--photo-w:clamp(420px, 33vw, 620px);">
   <HeroDeco containerOffset="max(664px, calc(50vw + 24px))" />
   <div class="dw-hero-img assurman-mask assurman-mask--hero">
-    <img src="/verzekeringen-bouwsector-aannemers-hero.jpg" alt="Aannemer aan het werk" />
+    <img src="/images/sectoren/aannemers-hero-klant.webp" alt="Kraan legt een breedplaatvloer op een werf van een aannemer" />
   </div>
   <div class="dw-container" style="padding-top:0;padding-bottom:64px;position:relative;z-index:2;">
     <div class="dw-hero-content">
@@ -377,7 +395,7 @@ const schema = {
 <section style="background:#E9C466;padding:80px 0 80px;position:relative;overflow:hidden;">
   <!-- right:-4px compenseert de speling in de mask-path; voorkomt zichtbare strook rechts -->
   <div class="assurman-mask assurman-mask--cta dw-cta-mask-img" style="position:absolute;top:0;right:-4px;width:380px;pointer-events:none;z-index:0;">
-    <img src="/images/sectoren/aannemers-cta-werfbezoek.webp" alt="Benoit Keerman van Assurman in overleg in een ruwbouw">
+    <img src="/images/werfbezoek/cta-D.webp" alt="Benoit Keerman van Assurman in overleg op een bouwperceel">
   </div>
   <div class="dw-container" style="text-align:center;position:relative;z-index:1;">
     <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(28px,4vw,56px);line-height:1.15;color:#FFFFFF;margin-bottom:16px;">
