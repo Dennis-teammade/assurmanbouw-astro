@@ -6,7 +6,7 @@
 
 export const GOOGLE_SCORE = '5,0';
 export const GOOGLE_AANTAL = 104;
-export const GOOGLE_REVIEWS_URL = 'https://search.google.com/local/reviews?placeid=ChIJTQ37U6lEw0cRpxSRr5Nlc88';
+export const GOOGLE_REVIEWS_URL = 'https://www.google.com/maps?cid=14948403273152926887';
 
 export interface GoogleReview {
   quote: string;
