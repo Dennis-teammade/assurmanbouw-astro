@@ -1,4 +1,5 @@
 ---
+import { reviewsVoor, GOOGLE_REVIEWS_URL, GOOGLE_AANTAL } from '../../data/google-reviews';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { kaartenVoor } from '../../data/verzekeringen';
 import InsuranceCarousel from '../../components/islands/InsuranceCarousel';
@@ -408,9 +409,9 @@ const schema = {
       <div style="display:flex;flex-direction:column;gap:28px;">
         <div>
           <p class="bmv-section-label" style="margin-bottom:16px;">Klantenervaringen</p>
-          <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,41px);line-height:1;color:#001F3F;margin:0 0 16px;">Wat boomverzorgers zeggen</h2>
+          <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:clamp(26px,3vw,41px);line-height:1;color:#001F3F;margin:0 0 16px;">Wat klanten over Assurman zeggen</h2>
           <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#001F3F;margin:0;">
-            Ervaringen van klanten helpen je om met meer vertrouwen de juiste keuze te maken.
+            Echte reviews van klanten op Google. Niet allemaal uit de bouw, wel allemaal over hoe wij werken.
           </p>
         </div>
         <div style="display:inline-flex;align-items:center;gap:16px;background:#FFFFFF;padding:18px 28px;box-shadow:0px 1px 2px rgba(0,0,0,0.05);align-self:flex-start;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 16px),calc(100% - 16px) 100%,0% 100%);">
@@ -419,7 +420,7 @@ const schema = {
           </div>
           <div>
             <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:28px;color:#001F3F;line-height:1;">5/5</div>
-            <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#001F3F;margin-top:4px;">op basis van klantfeedback</div>
+            <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#001F3F;margin-top:4px;"><a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">{GOOGLE_AANTAL} reviews op Google</a></div>
           </div>
         </div>
       </div>
@@ -440,17 +441,13 @@ const schema = {
     </div>
 
     <div class="bmv-testimonials-grid">
-      {[
-        { quote: 'Eindelijk een makelaar die het risico van klimwerk echt snapt. Helder en snel geregeld.', name: 'Zaakvoerder, boomverzorging (Limburg)' },
-        { quote: 'Ik wou vooral mijn aansprakelijkheid en mijn inkomen goed gedekt zien. Precies op maat gezet.', name: 'Boomverzorger, Vlaams-Brabant' },
-        { quote: 'De aanvraag ging vlot en het pakket houdt rekening met hoe zwaar mijn werk fysiek is.', name: 'Zelfstandig boomverzorger' },
-      ].map((t) => (
+      {reviewsVoor(3).map((t) => (
         <div class="bmv-testimonial-card" style="padding:28px;clip-path:polygon(0% 0%,100% 0%,100% calc(100% - 24px),calc(100% - 24px) 100%,0% 100%);">
           <div style="display:flex;gap:4px;margin-bottom:14px;">
             {[1,2,3,4,5].map(_ => <svg width="16" height="16" fill="#E5A524" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>)}
           </div>
           <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:17px;line-height:1.55;color:#001F3F;margin-bottom:14px;font-style:italic;">"{t.quote}"</p>
-          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:#001F3F;margin:0;">{t.name}</p>
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:13px;color:#001F3F;margin:0;">{t.name} <span style="font-weight:400;">· <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">bekijk op Google</a></span></p>
         </div>
       ))}
     </div>

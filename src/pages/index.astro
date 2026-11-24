@@ -1,4 +1,5 @@
 ---
+import { reviewsVoor, GOOGLE_REVIEWS_URL, GOOGLE_AANTAL } from '../data/google-reviews';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PartnerSlider from '../components/ui/PartnerSlider';
 import { CTA_SCAN, CTA_AFSPRAAK, CTA_BEL, CTA_DESTINATIONS } from '../data/cta-labels';
@@ -484,11 +485,9 @@ const STEPS = [
     <div class="home-test-header">
       <div>
         <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:#E5A524;margin-bottom:16px;">Klantenervaringen</p>
-        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:41px;line-height:1;color:#001F3F;margin:0 0 16px;">
-          Wat ondernemers in de bouw zeggen
-        </h2>
+        <h2 style="font-family:'Outfit',sans-serif;font-weight:800;font-size:41px;line-height:1;color:#001F3F;margin:0 0 16px;">Wat klanten over Assurman zeggen</h2>
         <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.6;color:#001F3F;margin:0;">
-          Ervaringen van klanten helpen je om met meer vertrouwen de juiste keuze te maken.
+          Echte reviews van klanten op Google. Niet allemaal uit de bouw, wel allemaal over hoe wij werken.
         </p>
       </div>
       <div style="display:flex;justify-content:flex-end;">
@@ -499,17 +498,13 @@ const STEPS = [
             ))}
           </div>
           <div style="font-family:'Outfit',sans-serif;font-weight:800;font-size:36px;color:#001F3F;line-height:1;margin-bottom:8px;">5/5</div>
-          <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#001F3F;line-height:1.4;">op basis van 103<br />klantfeedback</div>
+          <div style="font-family:'Outfit',sans-serif;font-weight:400;font-size:14px;color:#001F3F;line-height:1.4;"><a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">{GOOGLE_AANTAL} reviews<br />op Google</a></div>
         </div>
       </div>
     </div>
 
     <div class="home-test-grid">
-      {[
-        { quote: 'Eindelijk iemand die snapt wat een werf inhoudt. Duidelijk uitgelegd en snel geregeld.', name: 'Zaakvoerder bouwbedrijf, West-Vlaanderen' },
-        { quote: 'Offerte-aanvraag ging vlot. Daarna hebben we het pakket echt op maat gezet voor onze activiteiten.', name: 'Aannemer, Oost-Vlaanderen' },
-        { quote: 'Ik wou vooral zekerheid rond materiaal en bestelwagens. Alles helder uitgelegd, zonder gedoe.', name: 'Zelfstandig elektricien, Beernem' },
-      ].map((t) => (
+      {reviewsVoor(0).map((t) => (
         <div class="test-card">
           <div style="display:flex;gap:4px;margin-bottom:16px;">
             {[1,2,3,4,5].map(_ => (
@@ -517,7 +512,7 @@ const STEPS = [
             ))}
           </div>
           <p style="font-family:'Outfit',sans-serif;font-weight:400;font-size:18px;line-height:1.55;color:#001F3F;margin-bottom:16px;font-style:italic;">"{t.quote}"</p>
-          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:#001F3F;margin:0;">{t.name}</p>
+          <p style="font-family:'Outfit',sans-serif;font-weight:700;font-size:14px;color:#001F3F;margin:0;">{t.name} <span style="font-weight:400;">· <a href={GOOGLE_REVIEWS_URL} target="_blank" rel="noopener" style="color:inherit;text-decoration:underline;">bekijk op Google</a></span></p>
         </div>
       ))}
     </div>
